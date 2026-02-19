@@ -1,14 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg: #030303;
   --surface: rgba(255, 255, 255, 0.03);
   --surface-hover: rgba(255, 255, 255, 0.08);
-  --accent: #059669;
-  --accent-gradient: linear-gradient(135deg, #059669, #047857);
-  --success: #10b981;
-  --error: #ff3b30;
-  --warning: #ff9500;
-  --text: #f5f5f7;
-  --subtext: #86868b;
+  --accent: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.3);
+  --text: #ffffff;
+  --text-muted: #88888b;
+  --border: rgba(255, 255, 255, 0.08);
 
   /* Tajwid Colors */
   --ghunnah: #34c759;
@@ -18,125 +20,85 @@
   --madd-lazim: #af52de;
   --ikhfa: #ff9f0a;
   --idgham-ghunnah: #ff2d55;
-  --idgham-no-ghunnah: #8e8e93;
-  --iqlab: #ff375f;
-  --izhar: #c7c7cc;
   --qalqalah: #ff3b30;
+  --iqlab: #ff375f;
   --ham-wasl: #555555;
-
-  --border: rgba(255, 255, 255, 0.08);
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html,
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-::selection {
-  background-color: var(--accent);
-  color: white;
-}
-
-body {
-  background-image:
-    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.04) 0px, transparent 50%);
-  background-attachment: fixed;
-}
-
-/* Glassmorphism utility */
-.glass {
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--border);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Animations */
-@keyframes pulse-soft {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
+@layer base {
+  * {
+    box-sizing: border-box;
   }
-  50% {
-    opacity: 0.8;
-    transform: scale(0.98);
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-outfit), system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%);
   }
 }
 
-/* Tajwid Classes */
-.tajwid-madd-tabii {
-  color: var(--madd-tabii);
-  text-decoration: underline dotted rgba(100, 210, 255, 0.4);
+@layer components {
+  .glass {
+    background: var(--surface);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border);
+  }
+
+  .direction-rtl {
+    direction: rtl;
+  }
 }
-.tajwid-madd-munfasil {
-  color: var(--madd-munfasil);
-  text-decoration: underline dotted rgba(0, 122, 255, 0.4);
-}
-.tajwid-madd-muttasil {
-  color: var(--madd-muttasil);
-  text-decoration: underline dotted rgba(88, 86, 214, 0.4);
-}
-.tajwid-madd-lazim {
-  color: var(--madd-lazim);
-  text-decoration: underline dotted rgba(175, 82, 222, 0.4);
-}
-.tajwid-ghunnah {
-  color: var(--ghunnah);
-  text-decoration: underline dotted rgba(52, 199, 89, 0.4);
-}
-.tajwid-ikhfa {
-  color: var(--ikhfa);
-  text-decoration: underline dotted rgba(255, 159, 10, 0.4);
-}
-.tajwid-idgham-ghunnah {
-  color: var(--idgham-ghunnah);
-  text-decoration: underline dotted rgba(255, 45, 85, 0.4);
-}
-.tajwid-qalqalah {
-  color: var(--qalqalah);
-  text-decoration: underline double rgba(255, 59, 48, 0.4);
-}
-.tajwid-iqlab {
-  color: var(--iqlab);
-  text-decoration: underline wavy rgba(255, 55, 95, 0.5);
-  font-weight: 600;
-}
-.tajwid-ham-wasl {
-  color: var(--ham-wasl);
-  opacity: 0.6;
+
+@layer utilities {
+  .tajwid-madda-normal,
+  .tajwid-madd-tabii {
+    color: var(--madd-tabii);
+    text-decoration: underline dotted;
+  }
+  .tajwid-madda-permissible,
+  .tajwid-madd-munfasil {
+    color: var(--madd-munfasil);
+    text-decoration: underline dotted;
+  }
+  .tajwid-madda-necessary,
+  .tajwid-madd-muttasil {
+    color: var(--madd-muttasil);
+    text-decoration: underline dotted;
+  }
+  .tajwid-madda-compulsory,
+  .tajwid-madd-lazim {
+    color: var(--madd-lazim);
+    text-decoration: underline dotted;
+  }
+  .tajwid-ghunnah {
+    color: var(--ghunnah);
+    text-decoration: underline dotted;
+  }
+  .tajwid-ikhfa {
+    color: var(--ikhfa);
+    text-decoration: underline dotted;
+  }
+  .tajwid-idgham-with-ghunnah,
+  .tajwid-idgham-ghunnah {
+    color: var(--idgham-ghunnah);
+    text-decoration: underline dotted;
+  }
+  .tajwid-qalqalah {
+    color: var(--qalqalah);
+    text-decoration: underline double;
+  }
+  .tajwid-iqlab {
+    color: var(--iqlab);
+    font-weight: 700;
+    text-decoration: underline wavy;
+  }
 }
