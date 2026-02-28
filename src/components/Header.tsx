@@ -28,7 +28,9 @@ export default function Header({ onLangClick, onDuoClick, isDuoActive }: HeaderP
 
       <div className="flex items-center gap-2 md:gap-4">
         <button 
+          type="button"
           onClick={onDuoClick}
+          aria-label="Ouvrir le mode Duo"
           className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
             isDuoActive 
               ? "bg-emerald-500 border-emerald-400 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]" 
@@ -40,17 +42,28 @@ export default function Header({ onLangClick, onDuoClick, isDuoActive }: HeaderP
         </button>
 
         <button 
+          type="button"
           onClick={onLangClick}
+          aria-label="Changer de langue"
           className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
         >
           <Languages size={20} />
         </button>
 
-        <button className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors">
+        <button
+          type="button"
+          aria-label="Ajouter aux favoris"
+          className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
+        >
           <Heart size={20} />
         </button>
 
-        <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors ml-2">
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label="Paramètres"
+          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors ml-2"
+        >
           <Settings size={20} className="text-zinc-400" />
         </div>
       </div>

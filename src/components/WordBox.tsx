@@ -19,6 +19,15 @@ export default function WordBox({ arabic, transliteration, isActive, isCorrect, 
       whileHover={{ y: -4, backgroundColor: "rgba(255, 255, 255, 0.08)" }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isActive}
       className={`
         relative flex flex-col items-center p-4 md:p-6 rounded-[20px] transition-all duration-300 cursor-pointer min-w-[100px]
         ${isActive ? "ring-2 ring-emerald-500 bg-white/5 shadow-[0_0_30px_rgba(16,185,129,0.15)]" : "bg-white/[0.02]"}

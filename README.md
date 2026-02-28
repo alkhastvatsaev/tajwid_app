@@ -29,10 +29,26 @@ This app is ready for zero-config deployment on **Vercel**:
 
 ## Development
 
+Vous pouvez lancer l'application de deux manières :
+
+### 1. Via le script automatique (Recommandé)
+
+Double-cliquez sur `run.command` à la racine du projet ou lancez :
+
+```bash
+./run.command
+```
+
+Ce script s'occupe d'installer les dépendances, de libérer le port 3000 et d'ouvrir le navigateur automatiquement.
+
+### 2. Manuellement
+
 ```bash
 npm install
 npm run dev
 ```
+
+Puis ouvrez [http://localhost:3000](http://localhost:3000).
 
 ## Legacy Files
 

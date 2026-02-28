@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  turbopack: {},
+  turbopack: {
+    root: path.join(__dirname),
+  },
   // Ensure we can use PeerJS in the browser
   webpack: (config, { isServer }) => {
     if (!isServer) {
