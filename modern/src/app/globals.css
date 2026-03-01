@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-outfit: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-amiri: ui-serif, Georgia, "Times New Roman", Times, serif;
+
+  --bg: #030303;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --accent: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.3);
+  --text: #ffffff;
+  --text-muted: #88888b;
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* Tajwid Colors */
+  --ghunnah: #34c759;
+  --madd-tabii: #64d2ff;
+  --madd-munfasil: #007aff;
+  --madd-muttasil: #5856d6;
+  --madd-lazim: #af52de;
+  --ikhfa: #ff9f0a;
+  --idgham-ghunnah: #ff2d55;
+  --qalqalah: #ff3b30;
+  --iqlab: #ff375f;
+  --ham-wasl: #555555;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-outfit);
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%);
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--surface);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border);
+  }
+
+  .direction-rtl {
+    direction: rtl;
+  }
+}
+
+@layer utilities {
+  .tajwid-madda-normal,
+  .tajwid-madd-tabii {
+    color: var(--madd-tabii);
+    text-decoration: underline dotted;
+  }
+  .tajwid-madda-permissible,
+  .tajwid-madd-munfasil {
+    color: var(--madd-munfasil);
+    text-decoration: underline dotted;
+  }
+  .tajwid-madda-necessary,
+  .tajwid-madd-muttasil {
+    color: var(--madd-muttasil);
+    text-decoration: underline dotted;
+  }
+  .tajwid-madda-compulsory,
+  .tajwid-madd-lazim {
+    color: var(--madd-lazim);
+    text-decoration: underline dotted;
+  }
+  .tajwid-ghunnah {
+    color: var(--ghunnah);
+    text-decoration: underline dotted;
+  }
+  .tajwid-ikhfa {
+    color: var(--ikhfa);
+    text-decoration: underline dotted;
+  }
+  .tajwid-idgham-with-ghunnah,
+  .tajwid-idgham-ghunnah {
+    color: var(--idgham-ghunnah);
+    text-decoration: underline dotted;
+  }
+  .tajwid-qalqalah {
+    color: var(--qalqalah);
+    text-decoration: underline double;
+  }
+  .tajwid-iqlab {
+    color: var(--iqlab);
+    font-weight: 700;
+    text-decoration: underline wavy;
+  }
+}

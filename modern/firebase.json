@@ -1,0 +1,35 @@
+{
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "firestore": {
+
+    "database": "(default)",
+    "location": "eur3",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Tajwid AI",
+        "supportEmail": "alkhastvatsaev@gmail.com"
+      }
+    }
+  }
+}

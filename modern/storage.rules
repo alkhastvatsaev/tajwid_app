@@ -1,0 +1,15 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Les utilisateurs ne peuvent enregistrer et lire que leurs propres vocaux
+    match /recordings/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Anonymes peuvent uploader si besoin (fallback)
+    match /recordings/anon/{allPaths=**} {
+      allow write: if true;
+      allow read: if false;
+    }
+  }
+}

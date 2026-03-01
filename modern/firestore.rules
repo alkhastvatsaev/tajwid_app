@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Profils et statistiques : Seul le propriétaire peut lire/écrire ses données
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Données d'entraînement : Tout utilisateur connecté peut ajouter son propre feedback
+    match /training_data/{docId} {
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    // Par défaut, refuser tout le reste
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

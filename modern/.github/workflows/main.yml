@@ -1,0 +1,33 @@
+name: Multi-Platform CI/CD
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint Check
+        run: npm run lint
+
+      - name: Build Project
+        run: npm run build
+
+  # Note: Actual deployment to Vercel is best handled via Vercel's native GitHub integration.
+  # This workflow ensures your code is "Production Ready" before Vercel even tries to build it.
+  # Recruiters LOVE seeing green checkmarks on your GitHub commits!
