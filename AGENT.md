@@ -43,6 +43,10 @@ Transformer l'application HTML/JS actuelle en une Progressive Web App (PWA) mode
 2. **Migration Firestore** : Créer les schémas pour les utilisateurs et les versets. ✅ (Fait)
 3. **Optimisation Audio** : Intégrer un moteur de reconnaissance plus puissant que l'API native du navigateur.
 
+## 🔗 Code Source (Corrected)
+
+- **GitHub Repository**: [https://github.com/alkhastvatsaev/tajwid_app](https://github.com/alkhastvatsaev/tajwid_app)
+
 ## ✅ Travail Réalisé
 
 - **Firebase Auth** : Connexion Google intégrée dans le Header.
