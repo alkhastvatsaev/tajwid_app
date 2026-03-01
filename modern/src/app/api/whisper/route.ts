@@ -2,10 +2,6 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { Readable } from "stream";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function POST(req: Request) {
   try {
     if (!process.env.OPENAI_API_KEY) {
@@ -14,6 +10,10 @@ export async function POST(req: Request) {
         { status: 500 },
       );
     }
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     const formData = await req.formData();
     const audioFile = formData.get("file") as Blob;
