@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 const ElevenLabs = require("elevenlabs-node");
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
   try {
     const { text, voiceId = "pNInz6obpg8n9Y99P0AY" } = await req.json(); // Default voice
