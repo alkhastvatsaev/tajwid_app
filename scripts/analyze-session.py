@@ -57,21 +57,25 @@ def _last_token(transcript: str) -> str:
     return parts[-1] if parts else ""
 
 
-def _transcript_has_expected(transcript: str, expected: str) -> bool:
-    """True si le mot attendu (ou forme proche) apparaît déjà dans le transcript STT."""
+def _transcript_has_expected(transcript: str, expected: str, last_n: int = 4) -> bool:
+    """True si le mot attendu apparaît dans les *derniers* tokens STT (pas tout le cumul)."""
     if not expected:
         return False
     exp = _norm_light(expected)
     if not exp:
         return False
     toks = [_norm_light(t) for t in re.split(r"\s+", transcript or "") if t]
+    toks = toks[-last_n:] if len(toks) > last_n else toks
     if exp in toks:
         return True
-    # sans ال
     exp2 = exp[2:] if exp.startswith("ال") and len(exp) > 4 else exp
     for t in toks:
         t2 = t[2:] if t.startswith("ال") and len(t) > 4 else t
-        if t == exp or t2 == exp2 or t.endswith(exp) or exp.endswith(t2) and len(t2) >= 3:
+        if len(t2) < 3 and len(exp2) >= 3:
+            continue
+        if t == exp or t2 == exp2:
+            return True
+        if len(exp2) >= 4 and (t2 == exp2 or t.endswith(exp2) or exp2.endswith(t2) and len(t2) >= 4):
             return True
     return False
 
