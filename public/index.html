@@ -4419,14 +4419,46 @@
             || '';
 
         const canonical = verseData.map(w => normalize(w.ar)).filter(Boolean);
+        const N = Math.max(canonical.length, 1);
+
+        // WER honnête : boxes validées + compteurs live (pas le buffer Chrome cumulatif)
+        const matchedIdx = new Set();
+        matches.forEach(m => {
+            if (typeof m.index === 'number') matchedIdx.add(m.index);
+        });
+        let nCorrectBoxes = 0;
+        for (let i = 0; i < verseData.length; i++) {
+            if (document.getElementById(`box-${i}`)?.classList.contains('correct') || matchedIdx.has(i)) nCorrectBoxes++;
+        }
+        nCorrectBoxes = Math.min(N, Math.max(nCorrectBoxes, matchedIdx.size));
+        const nMissedLive = Math.max(0, tarteelStats.missed || 0, N - nCorrectBoxes);
+        const nExtraLive = Math.max(0, tarteelStats.extra || 0);
+
+        // Buffer align = diagnostic seulement (souvent gonflé par STT cumulatif)
         const recited = String(finalRaw).split(/\s+/).map(w => normalize(w)).filter(w => w && !STT_FILLERS.has(w));
         const alignment = (canonical.length || recited.length) ? alignWords(recited, canonical) : [];
-        const nCorrect = alignment.filter(a => a.status === TARTEEL_STATUS.CORRECT).length;
-        const nMissed = alignment.filter(a => a.status === TARTEEL_STATUS.MISSED).length;
-        const nExtra = alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length;
-        const N = Math.max(canonical.length, 1);
-        const werProxyPct = Math.round(((nMissed + nExtra) / N) * 1000) / 10;
-        const wordAccuracyPct = Math.round((nCorrect / N) * 1000) / 10;
+        const nCorrectBuf = alignment.filter(a => a.status === TARTEEL_STATUS.CORRECT).length;
+        const nMissedBuf = alignment.filter(a => a.status === TARTEEL_STATUS.MISSED).length;
+        const nExtraBuf = alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length;
+        const werBufferInflatedPct = Math.round(((nMissedBuf + nExtraBuf) / N) * 1000) / 10;
+
+        // Si juge Whisper post-ayah dispo → WER de référence Tarteel-like
+        let werProxyPct;
+        let wordAccuracyPct;
+        let nCorrect = nCorrectBoxes;
+        let nMissed = nMissedLive;
+        let nExtra = nExtraLive;
+        const wj = sessionDiagnostics.whisperJudge;
+        if (wj && typeof wj.correct === 'number') {
+            nCorrect = wj.correct;
+            nMissed = wj.missed || 0;
+            nExtra = wj.extra || 0;
+            werProxyPct = Math.round(((nMissed + nExtra) / N) * 1000) / 10;
+            wordAccuracyPct = Math.round((nCorrect / N) * 1000) / 10;
+        } else {
+            werProxyPct = Math.round(((nMissedLive + nExtraLive) / N) * 1000) / 10;
+            wordAccuracyPct = Math.round((nCorrectBoxes / N) * 1000) / 10;
+        }
 
         const reasonHist = {};
         matches.forEach(m => {
@@ -4507,12 +4539,17 @@
             next: 'Garder couleurs Quran.com pour l’enseignement ; ne pas prétendre détecter le tajweed en STT.'
         });
         if ((sessionDiagnostics.engine || (typeof VOICE_ENGINE !== 'undefined' ? VOICE_ENGINE : 'webspeech')) === 'webspeech') {
+            const hybridOn = typeof VOICE_PERF !== 'undefined' && VOICE_PERF.enabled && VOICE_PERF.postAyahWhisperJudge;
             gaps.push({
                 id: 'engine',
-                severity: 'bad',
-                title: 'Moteur ≠ Tarteel',
-                detail: TARTEEL_TARGETS.engineNote,
-                next: 'Le matching word-level est déjà là ; le gros gain = ASR Quranique (WER ~5.7% HF / ~4% Riva).'
+                severity: hybridOn ? 'warn' : 'bad',
+                title: hybridOn ? 'Hybride Web Speech + Whisper juge' : 'Moteur ≠ Tarteel',
+                detail: hybridOn
+                    ? 'Live = Web Speech ; verdict post-ayah = Groq Whisper (proche Tarteel sur le jugement).'
+                    : TARTEEL_TARGETS.engineNote,
+                next: hybridOn
+                    ? 'Surveiller whisperJudge dans Voice Lab ; si WER juge >10%, passer au modèle tarteel-ai/whisper-base-ar-quran.'
+                    : 'Le matching word-level est déjà là ; le gros gain = ASR Quranique (WER ~5.7% HF / ~4% Riva).'
             });
         }
 
@@ -4540,9 +4577,13 @@
                 sessionMs,
                 medianInterMatchMs: medianInterMatchMs != null ? Math.round(medianInterMatchMs) : null,
                 werProxyPct,
+                werBufferInflatedPct,
+                werSource: wj ? 'whisper_judge' : 'live_boxes',
                 wordAccuracyPct,
                 alignment: { correct: nCorrect, missed: nMissed, extra: nExtra },
+                alignmentBuffer: { correct: nCorrectBuf, missed: nMissedBuf, extra: nExtraBuf },
                 tarteelLive: { ...tarteelStats },
+                whisperJudge: wj || null,
                 reasonHist,
                 errorTypes,
                 manualOverrides,
@@ -4613,7 +4654,7 @@
                     <div class="vl-label">Overrides manuels</div>
                 </div>
             </div>
-            <p style="margin:0 0 8px; opacity:0.85;"><strong>Engine</strong>: ${report.engine} · <strong>Mode</strong>: ${report.sttMode} · <strong>Ref</strong>: ${report.ref || '—'}</p>
+            <p style="margin:0 0 8px; opacity:0.85;"><strong>Engine</strong>: ${report.engine} · <strong>Mode</strong>: ${report.sttMode} · <strong>Ref</strong>: ${report.ref || '—'} · <strong>WER src</strong>: ${m.werSource || '—'}</p>
             <p style="margin:0 0 8px; opacity:0.85;"><strong>Match reasons</strong>: ${reasons}</p>
             <p style="margin:0 0 6px; font-weight:600;">Écarts vs Tarteel</p>
             <ul class="voice-lab-list">${gapHtml || '<li>Pas assez de données — récitez un verset puis rouvrez.</li>'}</ul>
