@@ -1940,17 +1940,20 @@
     <div id="live-assistant">
         <div class="assistant-header">
             <div class="pulse-red"></div>
-            <span id="txt-assistant-title">Analyse en direct</span>
+            <span id="txt-assistant-title">Suivi de récitation</span>
+        </div>
+        <div id="txt-assistant-layer" style="font-size:0.55rem; color:var(--subtext); line-height:1.35; margin:14px 0 4px; opacity:0.85;">
+            Couche : texte STT + durée sonore (pas un juge tajwīd complet)
         </div>
         
         <div class="assistant-section">
-            <div class="assistant-label" id="txt-assistant-target">Cible</div>
+            <div class="assistant-label" id="txt-assistant-target">Mot cible</div>
             <div class="assistant-val target" id="assistant-target-word">...</div>
             <div style="font-size: 0.7rem; color: var(--accent); margin-top: 2px;" id="assistant-target-translit"></div>
         </div>
 
         <div class="assistant-section">
-            <div class="assistant-label" id="txt-assistant-heard">Vous dites</div>
+            <div class="assistant-label" id="txt-assistant-heard">Dictée (STT)</div>
             <div class="assistant-val heard" id="assistant-heard-word">...</div>
         </div>
 
@@ -2217,14 +2220,14 @@
 
     const translations = {
         fr: {
-            start: "Touchez pour commencer",
+            start: "Touchez pour démarrer le suivi",
             download: "Télécharger ma récitation",
             legMadd: "Allonger", legGhunnah: "Nez", legIkhfa: "Cacher",
             warnMadd: "Allongez ! 2 temps",
             warnGhunnah: "Nez ! (Ghunnah)",
             warnIkhfa: "Cacher ! (Ikhfā’)",
             warnQalqalah: "Rebond ! (Qalqalah)",
-            statusListen: "L'IA vous écoute",
+            statusListen: "Suivi actif (texte + son)",
             statusMic: "Veuillez autoriser le micro",
             restart: "Recommencer",
             dailyLabel: "Verset du Jour",
@@ -2245,11 +2248,14 @@
             modalUnderstood: "Compris",
             reportBtn: "Rapport Technique",
             reportSent: "Rapport envoyé au serveur !",
-            assistantTitle: "Analyse en direct",
-            assistantTarget: "Cible",
-            assistantHeard: "Vous dites",
-            hintRepeat: "Réessayez : la prononciation est différente.",
+            assistantTitle: "Suivi de récitation",
+            assistantTarget: "Mot cible",
+            assistantHeard: "Dictée (STT)",
+            assistantLayer: "Couche : texte STT + durée sonore (pas un juge tajwīd complet)",
+            hintRepeat: "Réessayez : la dictée ou le son ne suffisent pas.",
             hintAlmost: "Presque ! Articulez un peu plus.",
+            hintNeedSound: "Son trop court ou silence — continuez à réciter.",
+            hintNeedMadd: "Allongez davantage (contrôle durée / madd).",
             summaryTitle: "Bilan de Récitation",
             summaryFluidity: "Fluidité",
             summaryMistakes: "Alertes",
@@ -2281,14 +2287,14 @@
             }
         },
         en: {
-            start: "Tap to Start",
+            start: "Tap to start tracking",
             download: "Download Recitation",
             legMadd: "Prolong", legGhunnah: "Nasal", legIkhfa: "Hide",
             warnMadd: "Prolong! 2 counts",
             warnGhunnah: "Nose! (Ghunnah)",
             warnIkhfa: "Hide! (Ikhfā’)",
             warnQalqalah: "Bounce! (Qalqalah)",
-            statusListen: "AI is listening",
+            statusListen: "Tracking on (text + sound)",
             statusMic: "Please allow microphone",
             restart: "Restart",
             dailyLabel: "Verse of the Day",
@@ -2309,11 +2315,14 @@
             modalUnderstood: "Understood",
             reportBtn: "Technical Report",
             reportSent: "Report sent to server!",
-            assistantTitle: "Live Analysis",
-            assistantTarget: "Target",
-            assistantHeard: "You say",
-            hintRepeat: "Try again: pronunciation is different.",
+            assistantTitle: "Recitation tracking",
+            assistantTarget: "Target word",
+            assistantHeard: "Dictation (STT)",
+            assistantLayer: "Layer: STT text + sound duration (not a full tajwīd judge)",
+            hintRepeat: "Try again: dictation or sound is not enough.",
             hintAlmost: "Almost! Articulate a bit more.",
+            hintNeedSound: "Sound too short or silence — keep reciting.",
+            hintNeedMadd: "Lengthen more (duration / madd check).",
             summaryTitle: "Recitation Summary",
             summaryFluidity: "Fluidity",
             summaryMistakes: "Mistakes",
@@ -2345,14 +2354,14 @@
             }
         },
         ru: {
-            start: "Нажмите, чтобы начать",
+            start: "Нажмите для отслеживания",
             download: "Скачать чтение",
             legMadd: "Тянуть", legGhunnah: "Нос", legIkhfa: "Скрыть",
             warnMadd: "Тяните! 2 счета",
             warnGhunnah: "В нос! (Гунна)",
             warnIkhfa: "Скрывайте! (Ихфа)",
             warnQalqalah: "Толчок! (Калькаля)",
-            statusListen: "ИИ слушает",
+            statusListen: "Слежение (текст + звук)",
             statusMic: "Разрешите микрофон",
             restart: "Начать сначала",
             dailyLabel: "Аят дня",
@@ -2373,11 +2382,14 @@
             modalUnderstood: "Понятно",
             reportBtn: "Технический отчет",
             reportSent: "Отчет отправлен!",
-            assistantTitle: "Анализ в реальном времени",
-            assistantTarget: "Цель",
-            assistantHeard: "Вы говорити",
-            hintRepeat: "Попробуйте еще раз: произношение отличается.",
+            assistantTitle: "Отслеживание чтения",
+            assistantTarget: "Целевое слово",
+            assistantHeard: "Диктовка (STT)",
+            assistantLayer: "Слой: текст STT + длительность звука (не полный судья таджвида)",
+            hintRepeat: "Ещё раз: диктовки или звука недостаточно.",
             hintAlmost: "Почти! Артикулируйте немного четче.",
+            hintNeedSound: "Слишком коротко или тишина — продолжайте.",
+            hintNeedMadd: "Удлините больше (проверка длительности / мадд).",
             summaryTitle: "Итоги чтения",
             summaryFluidity: "Беглость",
             summaryMistakes: "Ошибки",
@@ -2442,6 +2454,7 @@
         if (document.getElementById('txt-assistant-title')) document.getElementById('txt-assistant-title').innerText = t.assistantTitle;
         if (document.getElementById('txt-assistant-target')) document.getElementById('txt-assistant-target').innerText = t.assistantTarget;
         if (document.getElementById('txt-assistant-heard')) document.getElementById('txt-assistant-heard').innerText = t.assistantHeard;
+        if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
         if (document.getElementById('txt-expert-title')) {
             const icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/><path d="M12 2L2 7L12 12L22 7L12 2Z"/></svg>';
             document.getElementById('txt-expert-title').innerHTML = icon + t.expertTitle;
@@ -2786,9 +2799,10 @@
             `;
             box.dataset.hasRule = ruleType ? 'true' : 'false';
             box.dataset.ruleType = ruleType ? ruleType.split('-')[0] : "";
+            box.dataset.ruleFull = ruleType || "";
             container.appendChild(box);
 
-            newVerseData.push({ ar: cleanText });
+            newVerseData.push({ ar: cleanText, ruleType: ruleType || "" });
             metaIdx++;
         });
 
@@ -2997,6 +3011,7 @@
             // Succès : on cache l'overlay et on marque comme enregistrant
             isRecording = true;
             lastMatchedFingerprint = '';
+            voiceEnergyRing = [];
             if (overlay) overlay.style.display = 'none';
             document.getElementById('live-assistant')?.classList.add('visible');
             resetUI();
@@ -3100,6 +3115,69 @@
     }
 
     let easedVol = 0;
+    // Ring buffer énergie (C3) — decision: seuil FFT ~12 = « voisé » empirique micro conversation
+    const VOICE_RING_MAX = 90; // ~1.5s à ~60 Hz d’échantillons trackVolume
+    let voiceEnergyRing = [];
+
+    function pushVoiceSample(energy) {
+        voiceEnergyRing.push({ t: performance.now(), e: energy });
+        if (voiceEnergyRing.length > VOICE_RING_MAX) voiceEnergyRing.shift();
+    }
+
+    function getRecentVoicedMs(windowMs) {
+        const now = performance.now();
+        const cutoff = now - windowMs;
+        const samples = voiceEnergyRing.filter(s => s.t >= cutoff);
+        if (samples.length < 2) return 0;
+        // Decision: énergie moyenne > 12 ≈ parole (pas silence / bruit faible)
+        const VOICE_THRESH = 12;
+        let voiced = 0;
+        for (let i = 1; i < samples.length; i++) {
+            if (samples[i].e >= VOICE_THRESH || samples[i - 1].e >= VOICE_THRESH) {
+                voiced += samples[i].t - samples[i - 1].t;
+            }
+        }
+        return voiced;
+    }
+
+    /**
+     * PronunciationJudge (C3 hybrid + hook C4)
+     * mode: 'local-acoustic' | 'mock' | 'external'
+     * external: stub — activer avec endpoint+clé (voir SOLUTION.md §3)
+     */
+    const PronunciationJudge = {
+        mode: 'local-acoustic',
+        evaluate({ expectedAr, ruleType, transcriptToken }) {
+            if (this.mode === 'mock') {
+                return { ok: true, layer: 'mock', voicedMs: getRecentVoicedMs(1200), minMs: 0 };
+            }
+            if (this.mode === 'external') {
+                // Point de branchement net — pas d’API fournie → refuse soft + log
+                console.warn('PronunciationJudge.external non configuré — fallback local-acoustic');
+            }
+            const target = normalize(expectedAr || '');
+            const len = Math.max(1, target.length);
+            // Decision: base 160ms + 45ms/lettre ; madd augmente selon beats tagués
+            let minMs = 160 + len * 45;
+            let reasonKey = 'hintNeedSound';
+            if (ruleType && ruleType.indexOf('madd') === 0) {
+                const beats = ruleType.includes('lazim') ? 6 : (ruleType.includes('munfasil') || ruleType.includes('muttasil') ? 4 : 2);
+                // ~110ms par temps de madd (approximation pédagogique, pas un métronome certifié)
+                minMs = Math.max(minMs, 280 + beats * 110);
+                reasonKey = 'hintNeedMadd';
+            } else if (ruleType && ruleType.indexOf('ghunnah') === 0) {
+                minMs = Math.max(minMs, 300);
+            }
+            const voicedMs = getRecentVoicedMs(1400);
+            if (voicedMs < Math.min(90, minMs * 0.35)) {
+                return { ok: false, layer: 'local-acoustic', voicedMs, minMs, reasonKey: 'hintNeedSound' };
+            }
+            if (voicedMs < minMs) {
+                return { ok: false, layer: 'local-acoustic', voicedMs, minMs, reasonKey };
+            }
+            return { ok: true, layer: 'local-acoustic', voicedMs, minMs };
+        }
+    };
 
     function trackVolume() {
         if (!isRecording || !analyser) return;
@@ -3115,6 +3193,7 @@
         let sum = 0;
         for (let v of data) sum += v;
         const targetVol = sum / data.length;
+        pushVoiceSample(targetVol);
         
         // Let's smooth the movement (easing)
         easedVol += (targetVol - easedVol) * 0.2;
@@ -3340,6 +3419,28 @@
             if (!verdict.ok) continue;
 
             const target = normalize(verseData[tempIdx].ar);
+            const ruleFull = verseData[tempIdx].ruleType || document.getElementById(`box-${tempIdx}`)?.dataset?.ruleFull || "";
+            // C3 gate: texte OK ne suffit pas — il faut du son mesurable (durée)
+            const acoustic = PronunciationJudge.evaluate({
+                expectedAr: verseData[tempIdx].ar,
+                ruleType: ruleFull,
+                transcriptToken: hWord
+            });
+            if (!acoustic.ok) {
+                sessionDiagnostics.errors.push({
+                    time: new Date().toISOString(),
+                    type: 'acoustic_gate',
+                    expected: target,
+                    heard: hWord,
+                    voicedMs: acoustic.voicedMs,
+                    minMs: acoustic.minMs,
+                    layer: acoustic.layer
+                });
+                const msg = translations[currentLang][acoustic.reasonKey] || translations[currentLang].hintNeedSound;
+                showAssistantFeedback(msg);
+                continue;
+            }
+
             const isMaddMissed = false;
 
             sessionDiagnostics.matches.push({
@@ -3348,6 +3449,7 @@
                 heard: hWord,
                 index: tempIdx,
                 reason: verdict.reason,
+                acoustic: { voicedMs: acoustic.voicedMs, minMs: acoustic.minMs, layer: acoustic.layer },
                 time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
                 maddMissed: isMaddMissed
             });
