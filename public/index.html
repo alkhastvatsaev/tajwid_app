@@ -3473,6 +3473,11 @@
             isRecording = true;
             lastMatchedFingerprint = '';
             voiceEnergyRing = [];
+            wordEnteredAt = performance.now();
+            lastBurstAtIdx = -1;
+            lastEnergyCommitAt = 0;
+            wasVoiced = false;
+            lastSilenceAt = 0;
             whisperRecording = false;
             whisperBusy = false;
             resetTarteelStats();
@@ -3544,12 +3549,15 @@
             recognition.lang = 'ar-SA';
             recognition.continuous = true;
             recognition.interimResults = true;
-            recognition.maxAlternatives = (datasetOptIn || mistakeTestMode) ? 5 : 3;
+            recognition.maxAlternatives = (VOICE_PERF.enabled || datasetOptIn || mistakeTestMode) ? 5 : 3;
 
             // Grammaire JSGF biaise Chrome vers les bons mots Coran → faux verts si fautes volontaires
             const useGrammar = !mistakeTestMode && !datasetOptIn;
             if (useGrammar && verseData && verseData.length > 0) {
-                const normalizedWords = verseData.map(w => w.ar).filter(Boolean).join(' | ');
+                const slice = VOICE_PERF.dynamicGrammar
+                    ? verseData.slice(0, VOICE_PERF.grammarRemain)
+                    : verseData;
+                const normalizedWords = slice.map(w => w.ar).filter(Boolean).join(' | ');
                 const grammar = `#JSGF V1.0; grammar quran; public <ayah> = ${normalizedWords} ;`;
                 const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
                 if (SpeechGrammarList) {
@@ -3599,7 +3607,26 @@
                     if (datasetSttEvents.length > 2500) datasetSttEvents.shift();
                 }
                 if (!cleanFull) return;
-                const result = checkWordStream(cleanFull);
+                let result = checkWordStream(cleanFull);
+                // Idée 2+11 : alternatives Chrome (souvent غيري / اهدينا en #2–#3)
+                if (VOICE_PERF.enabled && VOICE_PERF.useAlts && !result.matched && !result.deduped) {
+                    const variants = buildAltTranscripts(resultRows);
+                    for (const v of variants) {
+                        if (!v.text || v.text === cleanFull) continue;
+                        if (typeof v.conf === 'number' && v.conf < VOICE_PERF.confMinSoft && stuckMsNow() < VOICE_PERF.falseRejectMs) continue;
+                        const r2 = checkWordStream(v.text, { silentDiag: true });
+                        if (r2 && r2.matched) {
+                            result = r2;
+                            sessionDiagnostics.errors.push({
+                                time: new Date().toISOString(),
+                                type: 'alt_match',
+                                conf: v.conf,
+                                text: v.text.slice(-80)
+                            });
+                            break;
+                        }
+                    }
+                }
                 updateAssistantHeard(cleanFull, result);
             };
 
@@ -3752,6 +3779,22 @@
             ghost.style.opacity = easedVol > 5 ? Math.min(0.02 + easedVol / 300, 0.08) : 0;
         }
 
+        // Idée 5 : commit sur chute d’énergie (fin de mot)
+        if (VOICE_PERF.enabled && VOICE_PERF.energyCommit && isRecording) {
+            const voicedNow = targetVol >= VOICE_PERF.energyThresh;
+            if (voicedNow) {
+                wasVoiced = true;
+                lastSilenceAt = 0;
+            } else if (wasVoiced) {
+                if (!lastSilenceAt) lastSilenceAt = now;
+                if (now - lastSilenceAt >= VOICE_PERF.energySilenceMs) {
+                    wasVoiced = false;
+                    lastSilenceAt = 0;
+                    try { tryEnergyCommit(); } catch (e) { console.warn('energy commit', e); }
+                }
+            }
+        }
+
         requestAnimationFrame(trackVolume);
     }
 
@@ -3797,13 +3840,40 @@
     const STT_WINDOW = STT_MODE === 'strict' ? 2 : 12; // whisper auto: phrases entières
     let lastMatchedFingerprint = '';
 
+    // Voice Perf v1 — checkpoint: tag checkpoint/voice-half-working-20260810
+    // Aligné tajwid : refuse سراط/ملك/بلا/نستني ; soft STT seulement hors mode fautes + stuck/énergie.
+    const VOICE_PERF = {
+        enabled: true,
+        useAlts: true,
+        falseRejectMs: 2800,
+        energyCommit: true,
+        energySilenceMs: 300,
+        energyThresh: 12,
+        dynamicGrammar: true,
+        grammarRemain: 3,
+        stuckBurstMs: 8000,
+        postAyahWhisperJudge: true,
+        personalAliases: true,
+        prefixCommit: true,
+        confMinSoft: 0.35
+    };
+    let wordEnteredAt = 0;
+    let lastEnergyCommitAt = 0;
+    let lastBurstAtIdx = -1;
+    let lastSilenceAt = 0;
+    let wasVoiced = false;
+    let personalAliasMap = {};
+    try {
+        personalAliasMap = JSON.parse(localStorage.getItem('tajwid-personal-aliases') || '{}') || {};
+    } catch (e) { personalAliasMap = {}; }
+
     const FATIHA_LEXICON = {
-        'اهدنا': { aliases: ['اهدنا', 'هدنا', 'اهدينا'], forbid: [] },
+        'اهدنا': { aliases: ['اهدنا', 'هدنا', 'اهدينا', 'يهدينا'], forbid: [] },
         'العالمين': { aliases: ['العالمين', 'عالمين'], forbid: [] },
         'المستقيم': { aliases: ['المستقيم', 'مستقيم'], forbid: [] },
         'المغضوب': { aliases: ['المغضوب', 'مغضوب'], forbid: [] },
         'الحمد': { aliases: ['الحمد', 'حمد'], forbid: ['حيمد', 'الحيمد', 'همد', 'الحيمدو'] },
-        'الرحمن': { aliases: ['الرحمن', 'رحمن'], forbid: [] },
+        'الرحمن': { aliases: ['الرحمن', 'رحمن', 'الرحمان', 'رحمان'], forbid: [] },
         'الرحيم': { aliases: ['الرحيم', 'رحيم'], forbid: [] },
         'الله': { aliases: ['الله', 'لله'], forbid: ['ال'] },
         'لله': { aliases: ['لله', 'الله'], forbid: ['ال'] },
@@ -3817,15 +3887,34 @@
         'واياك': { aliases: ['واياك', 'وايا'], forbid: [] },
         'نعبد': { aliases: ['نعبد'], forbid: [] },
         'غير': { aliases: ['غير', 'غوير', 'غيري', 'غويري'], forbid: [] },
-        'عليهم': { aliases: ['عليهم', 'عليهيم'], forbid: ['هم'] },
+        'عليهم': { aliases: ['عليهم', 'عليهيم', 'عليه'], forbid: ['هم'] },
         'ولا': { aliases: ['ولا'], forbid: [] },
-        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] },
-        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات'] },
-        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات'] },
-        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين'] },
+        'الذين': { aliases: ['الذين', 'الذین', 'الذي'], forbid: [] },
+        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات', 'سيرات', 'سي'] },
+        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات', 'سيرات', 'سي'] },
+        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين', 'دول'] },
         'لضالين': { aliases: ['لضالين', 'الضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
-        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
+        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين', 'نستني'] },
         'انعمت': { aliases: ['انعمت'], forbid: ['ان', 'نعم', 'انعم'] }
+    };
+
+    // Soft STT (Chrome hallucinations) — JAMAIS en mistakeTestMode ; jamais confusions tajwid.
+    const HARD_WORD_PROFILES = {
+        'نستعين': { softAliases: ['نسيت', 'نستمع'], minPrefix: 4, allowPrefix: true },
+        'اهدنا': { softAliases: ['اهدينا', 'يهدينا', 'ايه'], minPrefix: 3, allowPrefix: true },
+        'الصراط': { softAliases: [], minPrefix: 4, allowPrefix: true },
+        'صراط': { softAliases: [], minPrefix: 3, allowPrefix: true },
+        'انعمت': { softAliases: [], minPrefix: 5, allowPrefix: false },
+        'غير': { softAliases: ['غيري', 'غويري'], minPrefix: 3, allowPrefix: false },
+        'عليهم': { softAliases: ['عليهيم'], minPrefix: 4, allowPrefix: true },
+        'العالمين': { softAliases: ['عالون', 'عالم'], minPrefix: 4, allowPrefix: true },
+        'المستقيم': { softAliases: ['مستقيم', 'قام'], minPrefix: 4, allowPrefix: true },
+        'الضالين': { softAliases: ['الضال'], minPrefix: 5, allowPrefix: true },
+        'مالك': { softAliases: [], minPrefix: 4, allowPrefix: false },
+        'نعبد': { softAliases: [], minPrefix: 3, allowPrefix: true },
+        'الذين': { softAliases: ['الذي'], minPrefix: 3, allowPrefix: true },
+        'اياك': { softAliases: [], minPrefix: 3, allowPrefix: false },
+        'ولا': { softAliases: [], minPrefix: 3, allowPrefix: false }
     };
 
     function editDistance(a, b) {
@@ -3847,7 +3936,41 @@
     }
 
     function getLexiconEntry(targetNorm) {
-        return FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
+        const base = FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
+        const personal = (VOICE_PERF.personalAliases && personalAliasMap[targetNorm]) || [];
+        if (!personal.length) return base;
+        return {
+            aliases: [...(base.aliases || []), ...personal],
+            forbid: base.forbid || []
+        };
+    }
+
+    function learnPersonalAlias(targetNorm, heardNorm) {
+        if (!VOICE_PERF.personalAliases || !targetNorm || !heardNorm) return;
+        if (mistakeTestMode) return;
+        if (isConfusableReject(heardNorm, targetNorm)) return;
+        if (hasVowelLetterMismatch(heardNorm, targetNorm) && !isAlifOrthographyVariant(heardNorm, targetNorm)) return;
+        const cur = personalAliasMap[targetNorm] || [];
+        if (cur.includes(heardNorm) || normalize(targetNorm) === heardNorm) return;
+        if (cur.length >= 6) return;
+        personalAliasMap[targetNorm] = [...cur, heardNorm];
+        try { localStorage.setItem('tajwid-personal-aliases', JSON.stringify(personalAliasMap)); } catch (e) {}
+    }
+
+    function getHardProfile(targetNorm) {
+        return HARD_WORD_PROFILES[targetNorm] || null;
+    }
+
+    function stuckMsNow() {
+        if (!wordEnteredAt) return 0;
+        return Math.max(0, performance.now() - wordEnteredAt);
+    }
+
+    function markWordEntered(idx) {
+        wordEnteredAt = performance.now();
+        if (idx !== lastBurstAtIdx) {
+            // nouveau mot → burst autorisé à nouveau
+        }
     }
 
     function isConfusableReject(hNorm, targetNorm) {
@@ -3887,13 +4010,16 @@
         return a.replace(/ا/g, '') === b.replace(/ا/g, '');
     }
 
-    function matchFatihaWord(hWord, expectedAr) {
+    function matchFatihaWord(hWord, expectedAr, opts) {
+        const soft = !!(opts && opts.soft);
+        const allowPrefix = !!(opts && opts.allowPrefix);
         const hNorm = normalize(hWord);
         const target = normalize(expectedAr);
         if (!hNorm || !target) return { ok: false, reason: 'empty' };
         if (STT_FILLERS.has(hNorm)) return { ok: false, reason: 'filler' };
 
         const lex = getLexiconEntry(target);
+        const profile = getHardProfile(target);
         const forbid = (lex.forbid || []).map(f => normalize(f)).filter(Boolean);
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
@@ -3901,6 +4027,12 @@
         const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
         // Alias AVANT vowel_mismatch (sinon غيري bloqué alors qu’il est whitelist)
         if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
+
+        // Soft STT aliases (Chrome) — hors mode fautes uniquement
+        if (soft && !mistakeTestMode && profile && profile.softAliases) {
+            const softs = profile.softAliases.map(a => normalize(a)).filter(Boolean);
+            if (softs.includes(hNorm)) return { ok: true, reason: 'soft_stt' };
+        }
 
         // Session 201254 : الرحمان vs الرحمن bloqué par vowel_mismatch
         if (isAlifOrthographyVariant(hNorm, target)) {
@@ -3922,6 +4054,17 @@
             if (hasVowelLetterMismatch(hNoAl, tNoAl)) return { ok: false, reason: 'vowel_mismatch' };
             if (hNoAl === tNoAl) {
                 return { ok: true, reason: 'liaison' };
+            }
+        }
+
+        // Préfixe progressif (idée 8) — mot dur, hors fautes, avec voiced/soft gate côté appelant
+        if (allowPrefix && !mistakeTestMode && VOICE_PERF.prefixCommit && profile && profile.allowPrefix) {
+            const minP = profile.minPrefix || 4;
+            if (hNorm.length >= minP && target.startsWith(hNorm) && hNorm.length >= Math.ceil(target.length * 0.55)) {
+                return { ok: true, reason: 'prefix_progress' };
+            }
+            if (hNoAl.length >= minP && tNoAl.startsWith(hNoAl) && hNoAl.length >= Math.ceil(tNoAl.length * 0.55)) {
+                return { ok: true, reason: 'prefix_progress' };
             }
         }
 
@@ -3953,6 +4096,163 @@
         }
 
         return { ok: false, reason: 'miss' };
+    }
+
+    function buildAltTranscripts(resultRows) {
+        const fulls = [];
+        if (!resultRows || !resultRows.length) return fulls;
+        let primary = '';
+        resultRows.forEach(r => {
+            primary += ((r.alts && r.alts[0] && r.alts[0].transcript) || '') + ' ';
+        });
+        primary = primary.trim();
+        if (primary) fulls.push({ text: primary, conf: resultRows[resultRows.length - 1]?.alts?.[0]?.confidence });
+        const startRi = Math.max(0, resultRows.length - 2);
+        for (let ri = startRi; ri < resultRows.length; ri++) {
+            const alts = resultRows[ri].alts || [];
+            for (let a = 1; a < Math.min(alts.length, 5); a++) {
+                let s = '';
+                for (let i = 0; i < resultRows.length; i++) {
+                    const pick = (i === ri) ? resultRows[i].alts[a] : resultRows[i].alts[0];
+                    s += ((pick && pick.transcript) || '') + ' ';
+                }
+                s = s.trim();
+                if (s && s !== primary) fulls.push({ text: s, conf: alts[a]?.confidence });
+            }
+        }
+        // Prefere confiances hautes
+        fulls.sort((a, b) => (b.conf || 0) - (a.conf || 0));
+        return fulls;
+    }
+
+    function refreshDynamicGrammar() {
+        if (!VOICE_PERF.enabled || !VOICE_PERF.dynamicGrammar || mistakeTestMode || datasetOptIn) return;
+        if (!recognition || !verseData || !verseData.length) return;
+        const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
+        if (!SpeechGrammarList) return;
+        const remain = verseData.slice(currentIdx, currentIdx + VOICE_PERF.grammarRemain).map(w => w.ar).filter(Boolean);
+        if (!remain.length) return;
+        try {
+            const grammar = `#JSGF V1.0; grammar quran; public <ayah> = ${remain.join(' | ')} ;`;
+            const list = new SpeechGrammarList();
+            list.addFromString(grammar, 1);
+            recognition.grammars = list;
+        } catch (e) { console.warn('dynamic grammar', e); }
+    }
+
+    function tryAcceptToken(hWord, reasonTag, soft) {
+        if (!verseData[currentIdx]) return false;
+        const box = document.getElementById(`box-${currentIdx}`);
+        if (box?.classList.contains('correct')) return false;
+        const opts = soft ? { soft: true, allowPrefix: true } : { allowPrefix: stuckMsNow() >= VOICE_PERF.falseRejectMs };
+        const verdict = matchFatihaWord(hWord, verseData[currentIdx].ar, opts);
+        if (!verdict.ok) return false;
+        const target = normalize(verseData[currentIdx].ar);
+        sessionDiagnostics.matches.push({
+            expected: target,
+            expectedRaw: verseData[currentIdx].ar,
+            heard: hWord,
+            index: currentIdx,
+            reason: reasonTag || verdict.reason,
+            energy: typeof getInstantVoiceEnergy === 'function' ? Math.round(getInstantVoiceEnergy() * 10) / 10 : null,
+            ms: sessionDiagnostics.startTime ? Math.round(performance.now() - sessionDiagnostics.startTime) : null,
+            time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + 's',
+            maddMissed: false,
+            mistakeTestMode: !!mistakeTestMode,
+            voicePerf: true
+        });
+        learnPersonalAlias(target, normalize(hWord));
+        processMatchedWord(currentIdx, false);
+        currentIdx++;
+        markWordEntered(currentIdx);
+        refreshDynamicGrammar();
+        updateAssistantWords();
+        hideAssistantFeedback();
+        if (currentIdx >= verseData.length) finishVerse();
+        const progress = (currentIdx / verseData.length) * 100;
+        const progressEl = document.getElementById('session-progress');
+        if (progressEl) progressEl.style.width = progress + '%';
+        return true;
+    }
+
+    function tryFalseRejectRescue(heardTokens) {
+        if (!VOICE_PERF.enabled || mistakeTestMode) return false;
+        if (stuckMsNow() < VOICE_PERF.falseRejectMs) return false;
+        if (!verseData[currentIdx]) return false;
+        const tokens = (heardTokens || []).slice(-8);
+        for (let t = tokens.length - 1; t >= 0; t--) {
+            if (tryAcceptToken(tokens[t], 'false_reject_rescue', true)) return true;
+        }
+        return false;
+    }
+
+    function tryEnergyCommit() {
+        if (!VOICE_PERF.enabled || !VOICE_PERF.energyCommit || mistakeTestMode || !isRecording) return;
+        if (!verseData[currentIdx]) return;
+        const now = performance.now();
+        if (now - lastEnergyCommitAt < 400) return;
+        const heard = sessionDiagnostics.heard || [];
+        if (!heard.length) return;
+        const last = heard[heard.length - 1];
+        const tokens = String(last.raw || '').split(/\s+/).filter(Boolean).slice(-6);
+        lastEnergyCommitAt = now;
+        for (let t = tokens.length - 1; t >= 0; t--) {
+            if (tryAcceptToken(tokens[t], 'energy_commit', true)) return;
+            if (tryAcceptToken(tokens[t], 'energy_commit', false)) return;
+        }
+    }
+
+    async function maybeStuckWhisperBurst() {
+        if (!VOICE_PERF.enabled || mistakeTestMode || !isRecording) return;
+        if (VOICE_ENGINE !== 'webspeech') return;
+        if (stuckMsNow() < VOICE_PERF.stuckBurstMs) return;
+        if (lastBurstAtIdx === currentIdx || whisperBusy || whisperRecording) return;
+        lastBurstAtIdx = currentIdx;
+        sessionDiagnostics.errors.push({
+            time: new Date().toISOString(),
+            type: 'whisper_burst_attempt',
+            idx: currentIdx,
+            expected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : null
+        });
+        try {
+            startWhisperClipAuto();
+            setTimeout(() => {
+                if (whisperRecording) stopWhisperClipAndVerify(true);
+            }, 1600);
+        } catch (e) { console.warn('burst whisper', e); }
+    }
+
+    async function runPostAyahWhisperJudge() {
+        if (!VOICE_PERF.enabled || !VOICE_PERF.postAyahWhisperJudge) return;
+        if (!audioChunks || audioChunks.length < 2) return;
+        try {
+            const mime = datasetMimeType || 'audio/webm';
+            const blob = new Blob(audioChunks.slice(-Math.min(audioChunks.length, 40)), { type: mime });
+            if (blob.size < 800) return;
+            const audioBase64 = await blobToBase64(blob);
+            const res = await fetch(getTranscribeUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ audioBase64, mimeType: mime })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || data.detail || ('HTTP ' + res.status));
+            const text = (data.text || '').trim();
+            const recited = text.split(/\s+/).map(w => normalize(w)).filter(w => w && !STT_FILLERS.has(w));
+            const canonical = verseData.map(w => normalize(w.ar)).filter(Boolean);
+            const alignment = alignWords(recited, canonical);
+            sessionDiagnostics.whisperJudge = {
+                text,
+                missed: alignment.filter(a => a.status === TARTEEL_STATUS.MISSED).length,
+                extra: alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length,
+                correct: alignment.filter(a => a.status === TARTEEL_STATUS.CORRECT).length,
+                alignmentSample: alignment.slice(0, 40)
+            };
+            console.log('post-ayah whisper judge', sessionDiagnostics.whisperJudge);
+        } catch (e) {
+            console.warn('post-ayah whisper judge', e);
+            sessionDiagnostics.errors.push({ time: new Date().toISOString(), type: 'whisper_judge_fail', detail: String(e.message || e) });
+        }
     }
 
     // --- Tarteel-style word alignment (IqraAI / SequenceMatcher) ---
@@ -4371,7 +4671,9 @@
         }
     }
 
-    function checkWordStream(transcript) {
+    function checkWordStream(transcript, streamOpts) {
+        const silentDiag = !!(streamOpts && streamOpts.silentDiag);
+        const softGate = !!(VOICE_PERF.enabled && !mistakeTestMode && stuckMsNow() >= Math.min(1200, VOICE_PERF.falseRejectMs));
         const rawHeard = transcript.toLowerCase();
         const cleanRaw = rawHeard.replace(/[\u200B-\u200D\uFEFF\u200E\u200F]/g, " ");
         const heard = cleanRaw.split(/\s+/).filter(w => w.length > 0);
@@ -4385,12 +4687,14 @@
             return { matched: false, text: transcript, deduped: true };
         }
 
-        sessionDiagnostics.heard.push({
-            time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
-            raw: transcript,
-            currentIdx: currentIdx,
-            normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : "FIN"
-        });
+        if (!silentDiag) {
+            sessionDiagnostics.heard.push({
+                time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
+                raw: transcript,
+                currentIdx: currentIdx,
+                normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : "FIN"
+            });
+        }
 
         // Stream cumulatif Chrome : scanner depuis l’index courant (pas seulement la fin)
         // Sinon الرحمن déjà passé dans le buffer n’est plus dans la fenêtre et force le manuel
@@ -4407,12 +4711,15 @@
                 continue;
             }
 
-            let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar);
+            let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar, {
+                soft: softGate,
+                allowPrefix: softGate && VOICE_PERF.prefixCommit
+            });
             // Chrome omet parfois أنعمت / اهدنا : si le mot SUIVANT match, on saute 1 cible
             if (!verdict.ok && !mistakeTestMode && tempIdx + 1 < verseData.length) {
                 const curLen = normalize(verseData[tempIdx].ar).length;
                 if (curLen >= 4) {
-                    const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar);
+                    const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar, { soft: softGate });
                     if (nextVerdict.ok) {
                         sessionDiagnostics.matches.push({
                             expected: normalize(verseData[tempIdx].ar),
@@ -4474,6 +4781,7 @@
                 mistakeTestMode: !!mistakeTestMode
             });
 
+            learnPersonalAlias(target, hNorm);
             processMatchedWord(tempIdx, isMaddMissed);
             tempIdx++;
             matched++;
@@ -4481,6 +4789,8 @@
 
         if (matched > 0) {
             currentIdx = tempIdx;
+            markWordEntered(currentIdx);
+            refreshDynamicGrammar();
             lastMatchedFingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
             updateAssistantWords();
             hideAssistantFeedback();
@@ -4493,6 +4803,14 @@
 
             return { matched: true, text: transcript };
         }
+
+        // Idée 3 : faux-refus différé (STT a le mot / soft alias, bloqué trop longtemps)
+        if (tryFalseRejectRescue(heard)) {
+            lastMatchedFingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
+            return { matched: true, text: transcript, rescued: true };
+        }
+
+        maybeStuckWhisperBurst();
         
         return { matched: false, text: transcript };
     }
@@ -4682,6 +5000,13 @@
             }, 600);
         } catch (e) { console.warn('voice lab', e); }
 
+        // Idée 6 : juge Whisper post-ayah (n’annule pas les verts Web Speech)
+        try {
+            runPostAyahWhisperJudge().then(() => {
+                try { buildTarteelGapAnalysis(); } catch (e2) {}
+            });
+        } catch (e) { console.warn('whisper judge launch', e); }
+
         const shouldSaveDataset = datasetOptIn;
         const stopRecPromise = new Promise((resolve) => {
             if (mediaRec && mediaRec.state !== 'inactive') {
@@ -4779,6 +5104,11 @@
             datasetOptIn: true,
             mistakeTestMode: !!mistakeTestMode,
             grammarDisabled: !!(mistakeTestMode || datasetOptIn),
+            voicePerf: VOICE_PERF.enabled ? {
+                version: 1,
+                flags: { ...VOICE_PERF }
+            } : null,
+            whisperJudge: sessionDiagnostics.whisperJudge || null,
             expected: sessionDiagnostics.expected || [],
             expectedRaw: sessionDiagnostics.expectedRaw || [],
             matches,
