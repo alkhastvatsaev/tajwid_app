@@ -3695,6 +3695,10 @@
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
 
+        const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
+        // Alias AVANT vowel_mismatch (sinon غيري bloqué alors qu’il est whitelist)
+        if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
+
         // Session 201254 : الرحمان vs الرحمن bloqué par vowel_mismatch
         if (isAlifOrthographyVariant(hNorm, target)) {
             return { ok: true, reason: 'alif_ortho' };
@@ -3705,15 +3709,15 @@
         if (hNorm.length < 2) return { ok: false, reason: 'too_short' };
         if (target.length >= 4 && hNorm.length <= 2) return { ok: false, reason: 'too_short' };
 
-        const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
-        if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
-
         const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
         const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
         if (hNoAl.length >= 3 && tNoAl.length >= 3) {
+            if (aliases.includes(hNoAl) || aliases.includes('ال' + hNoAl)) {
+                return { ok: true, reason: 'liaison_alias' };
+            }
             if (isAlifOrthographyVariant(hNoAl, tNoAl)) return { ok: true, reason: 'alif_ortho_liaison' };
             if (hasVowelLetterMismatch(hNoAl, tNoAl)) return { ok: false, reason: 'vowel_mismatch' };
-            if (aliases.includes(hNoAl) || hNoAl === tNoAl || aliases.includes('ال' + hNoAl)) {
+            if (hNoAl === tNoAl) {
                 return { ok: true, reason: 'liaison' };
             }
         }
