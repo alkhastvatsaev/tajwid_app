@@ -3555,19 +3555,24 @@
 
     function normalize(text) {
         if (!text) return "";
-        // 1. Nettoyage HTML et codes invisibles
+        // 1. Nettoyage HTML et codes invisibles (RTL marks inclus)
         let clean = text.replace(/<[^>]*>/g, '') 
                         .replace(/[\u200B-\u200D\uFEFF\u200E\u200F\u061C\u202A-\u202E\u2066-\u2069]/g, "");
         
-        // 2. Décomposition et suppression des diacritiques coraniques
+        // 2. Décomposition NFD (combinantes latines)
         let normalized = clean.normalize('NFD')
                               .replace(/[\u0300-\u036f]/g, "");
 
-        // 3. Suppression de TOUT ce qui n'est pas une lettre de base
-        // Inclut voyelles, signes de pause, tajwid, et Alif Khanjariyah
-        normalized = normalized.replace(/[\u064B-\u065F\u0670\u0671\u06D6-\u06ED\u08D4-\u08E2\u0640]/g, "");
+        // 3. Alif wasla + alif dagger (ـٰ) → ا AVANT strip (sinon ٱلرحمن→لرحمن, مَـٰلِك→ملك)
+        // Decision issue session fatiha-20260810-195453 : 17/29 manuels à cause de ça
+        normalized = normalized
+            .replace(/\u0671/g, 'ا')  // ٱ wasla
+            .replace(/\u0670/g, 'ا'); // ٰ dagger / khanjariyah
 
-        // 4. Standardisation totale des Alifs et graphies
+        // 4. Harakat / signes pause / tatweel (sans \u0670 \u0671 déjà convertis)
+        normalized = normalized.replace(/[\u064B-\u065F\u06D6-\u06ED\u08D4-\u08E2\u0640]/g, "");
+
+        // 5. Standardisation alifs / graphies
         normalized = normalized.replace(/[أإآٱءٲٳٴۥۦ]/g, 'ا')
                                .replace(/ى/g, 'ي')
                                .replace(/ة/g, 'ه');
@@ -3591,14 +3596,7 @@
     let lastMatchedFingerprint = '';
 
     const FATIHA_LEXICON = {
-        'انعمت': { aliases: ['انعمت'], forbid: ['ان', 'نعم', 'انعم'] },
-        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين'] },
-        'لضالين': { aliases: ['لضالين', 'الضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
-        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات'] },
-        'الصراط': { aliases: ['الصراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات'] },
-        'اياك': { aliases: ['اياك'], forbid: ['يا', 'اك'] },
-        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
-        'اهدنا': { aliases: ['اهدنا', 'هدنا'], forbid: [] },
+        'اهدنا': { aliases: ['اهدنا', 'هدنا', 'اهدينا'], forbid: [] },
         'العالمين': { aliases: ['العالمين', 'عالمين'], forbid: [] },
         'المستقيم': { aliases: ['المستقيم', 'مستقيم'], forbid: [] },
         'المغضوب': { aliases: ['المغضوب', 'مغضوب'], forbid: [] },
@@ -3606,17 +3604,26 @@
         'الرحمن': { aliases: ['الرحمن', 'رحمن'], forbid: [] },
         'الرحيم': { aliases: ['الرحيم', 'رحيم'], forbid: [] },
         'الله': { aliases: ['الله', 'لله'], forbid: ['ال'] },
+        'لله': { aliases: ['لله', 'الله'], forbid: ['ال'] },
         'بسم': { aliases: ['بسم', 'باسم'], forbid: ['سم'] },
         'رب': { aliases: ['رب'], forbid: [] },
         // Jamais alias « ملك » — confond miliki / maliki
         'مالك': { aliases: ['مالك'], forbid: ['ملك', 'مليك', 'ميلك', 'ملكي'] },
         'يوم': { aliases: ['يوم'], forbid: [] },
         'الدين': { aliases: ['الدين', 'دين'], forbid: [] },
+        'اياك': { aliases: ['اياك'], forbid: ['يا', 'اك'] },
+        'واياك': { aliases: ['واياك', 'وايا'], forbid: [] },
         'نعبد': { aliases: ['نعبد'], forbid: [] },
-        'غير': { aliases: ['غير'], forbid: [] },
+        'غير': { aliases: ['غير', 'غوير'], forbid: [] },
         'عليهم': { aliases: ['عليهم', 'عليهيم'], forbid: ['هم'] },
         'ولا': { aliases: ['ولا'], forbid: [] },
-        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] }
+        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] },
+        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات'] },
+        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات'] },
+        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين'] },
+        'لضالين': { aliases: ['لضالين', 'الضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
+        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
+        'انعمت': { aliases: ['انعمت'], forbid: ['ان', 'نعم', 'انعم'] }
     };
 
     function editDistance(a, b) {
@@ -3700,7 +3707,7 @@
         }
 
         const dist = editDistance(hNorm, target);
-        const maxDist = target.length >= 6 ? 2 : (target.length >= 4 ? 1 : 0);
+        const maxDist = target.length >= 6 ? 2 : (target.length >= 3 ? 1 : 0);
         if (dist > 0 && dist <= maxDist) {
             // near ne doit pas contourner une faute voyelle déjà filtrée ; double check
             if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
@@ -3759,7 +3766,9 @@
             normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : "FIN"
         });
 
-        const start = Math.max(0, heard.length - STT_WINDOW);
+        // Stream cumulatif Chrome : scanner depuis l’index courant (pas seulement la fin)
+        // Sinon الرحمن déjà passé dans le buffer n’est plus dans la fenêtre et force le manuel
+        const start = Math.max(0, tempIdx);
         for (let i = start; i < heard.length && tempIdx < verseData.length; i++) {
             const hWord = heard[i];
             const hNorm = normalize(hWord);
