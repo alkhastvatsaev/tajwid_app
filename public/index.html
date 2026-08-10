@@ -277,6 +277,38 @@
             opacity: 0.9;
         }
 
+        /* Tarteel-style mistake detection */
+        .word-box.missed {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            opacity: 0.95;
+        }
+        .word-box.extra-hint {
+            outline: 2px solid rgba(245, 158, 11, 0.55);
+        }
+        .tarteel-error-bar {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: var(--subtext);
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            opacity: 0.95;
+        }
+        .tarteel-error-bar .tarteel-count {
+            font-weight: 600;
+            color: #ef4444;
+        }
+        .tarteel-error-bar .tarteel-extra-count {
+            font-weight: 600;
+            color: #f59e0b;
+        }
+        .assistant-feedback.extra {
+            color: #b45309;
+            background: rgba(245, 158, 11, 0.12);
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+
         /* Tajwid Styling - User Defined Scheme */
         .madda_normal { 
             color: var(--madd-tabii); 
@@ -1716,6 +1748,11 @@
         html[data-theme="blue"] .word-box.correct {
             background: rgba(37, 99, 235, 0.08);
         }
+        html[data-theme="light"] .word-box.missed,
+        html[data-theme="blue"] .word-box.missed {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+        }
         html[data-theme="light"] .verse-marker,
         html[data-theme="blue"] .verse-marker {
             background: #F3F4F6;
@@ -1842,6 +1879,23 @@
             <button id="report-diag-btn" style="position:relative; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); padding:10px 20px; border-radius:100px; font-size: 0.8rem; cursor:pointer; backdrop-filter:blur(10px);" onclick="manualReport()">
                 <span id="report-btn-text">Rapport Technique</span>
             </button>
+            <button id="voice-lab-btn" type="button" onclick="openVoiceLab()" style="position:relative; background:rgba(5,150,105,0.25); color:white; border:1px solid rgba(5,150,105,0.45); padding:10px 20px; border-radius:100px; font-size: 0.8rem; cursor:pointer; backdrop-filter:blur(10px);">
+                <span id="txt-voice-lab-btn">Voice Lab · Tarteel</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Voice Lab: analyse écart vs Tarteel -->
+    <div id="voice-lab-modal" class="modal-overlay" onclick="closeVoiceLab()" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(18px); z-index:5200; display:none; align-items:center; justify-content:center; padding:16px;">
+        <div class="tajwid-modal" style="max-width:560px; width:100%; max-height:88vh; overflow:auto; text-align:left;" onclick="event.stopPropagation()">
+            <div class="modal-tag" style="background:linear-gradient(135deg,#059669,#0ea5e9)">Voice Lab</div>
+            <div class="modal-title" id="txt-voice-lab-title" style="font-size:1.35rem;">Analyse vocale vs Tarteel</div>
+            <p class="modal-desc" id="txt-voice-lab-desc" style="margin-bottom:14px;">Métriques de session pour fermer l’écart avec Tarteel (WER ~4 %, latence &lt;200 ms, word-level).</p>
+            <div id="voice-lab-body" style="font-size:0.78rem; line-height:1.45; color:var(--text);"></div>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;">
+                <button class="close-modal" type="button" onclick="downloadVoiceLabJson()" style="flex:1; min-width:140px;">Export JSON</button>
+                <button class="close-modal" type="button" onclick="closeVoiceLab()" style="flex:1; min-width:140px; background:transparent; border:1px solid rgba(255,255,255,0.2);">Fermer</button>
+            </div>
         </div>
     </div>
 
@@ -1873,6 +1927,52 @@
             opacity: 0.6; 
             background: transparent;
             border: 1px solid rgba(255,255,255,0.1);
+        }
+        #voice-lab-btn {
+            width: auto;
+            opacity: 0.95;
+        }
+        .voice-lab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 10px 0 14px;
+        }
+        .voice-lab-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+        .voice-lab-card .vl-val {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .voice-lab-card .vl-label {
+            font-size: 0.65rem;
+            color: var(--subtext);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-top: 2px;
+        }
+        .voice-lab-card.ok .vl-val { color: #34c759; }
+        .voice-lab-card.warn .vl-val { color: #f59e0b; }
+        .voice-lab-card.bad .vl-val { color: #ef4444; }
+        .voice-lab-list {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+        .voice-lab-list li { margin-bottom: 6px; }
+        .voice-lab-mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.68rem;
+            background: rgba(0,0,0,0.25);
+            border-radius: 8px;
+            padding: 8px 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
     </style>
 
@@ -1990,6 +2090,11 @@
         </div>
 
         <button type="button" id="whisper-rec-btn" disabled style="display:none">Écoute continue</button>
+
+        <div class="tarteel-error-bar" id="tarteel-error-bar" aria-live="polite">
+            <span><span id="txt-tarteel-errors">Erreurs</span>: <span class="tarteel-count" id="tarteel-missed-count">0</span></span>
+            <span><span id="txt-tarteel-extras">En trop</span>: <span class="tarteel-extra-count" id="tarteel-extra-count">0</span></span>
+        </div>
 
         <div id="assistant-feedback-box" class="assistant-feedback"></div>
     </div>
@@ -2322,6 +2427,13 @@
             summaryFluidity: "Fluidité",
             summaryMistakes: "Alertes",
             maddMissed: "Madd oublié",
+            tarteelErrors: "Erreurs",
+            tarteelExtras: "En trop",
+            tarteelMissedWord: "Mot manqué (non récité)",
+            tarteelExtraWord: "Mot en trop — hors ayah",
+            voiceLabBtn: "Voice Lab · Tarteel",
+            voiceLabTitle: "Analyse vocale vs Tarteel",
+            voiceLabDesc: "Métriques de session pour fermer l’écart avec Tarteel (WER ~4 %, latence <200 ms, word-level).",
             expertTitle: "Analyse Tajwid",
             expertLegend: "Légende des Règles",
             legend: {
@@ -2401,6 +2513,13 @@
             summaryFluidity: "Fluidity",
             summaryMistakes: "Mistakes",
             maddMissed: "Madd missed",
+            tarteelErrors: "Errors",
+            tarteelExtras: "Extra",
+            tarteelMissedWord: "Missed word (not recited)",
+            tarteelExtraWord: "Extra word — not in ayah",
+            voiceLabBtn: "Voice Lab · Tarteel",
+            voiceLabTitle: "Voice analysis vs Tarteel",
+            voiceLabDesc: "Session metrics to close the gap with Tarteel (WER ~4%, latency <200ms, word-level).",
             expertTitle: "Tajwid Analysis",
             expertLegend: "Rule Legend",
             legend: {
@@ -2480,6 +2599,13 @@
             summaryFluidity: "Беглость",
             summaryMistakes: "Ошибки",
             maddMissed: "Мадд пропущен",
+            tarteelErrors: "Ошибки",
+            tarteelExtras: "Лишние",
+            tarteelMissedWord: "Пропущенное слово",
+            tarteelExtraWord: "Лишнее слово — вне аята",
+            voiceLabBtn: "Voice Lab · Tarteel",
+            voiceLabTitle: "Голосовой анализ vs Tarteel",
+            voiceLabDesc: "Метрики сессии, чтобы догнать Tarteel (WER ~4%, задержка <200 мс).",
             expertTitle: "Анализ Таджвида",
             expertLegend: "Легенда Правил",
             legend: {
@@ -2541,6 +2667,11 @@
         if (document.getElementById('txt-assistant-target')) document.getElementById('txt-assistant-target').innerText = t.assistantTarget;
         if (document.getElementById('txt-assistant-heard')) document.getElementById('txt-assistant-heard').innerText = t.assistantHeard;
         if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
+        if (document.getElementById('txt-tarteel-errors') && t.tarteelErrors) document.getElementById('txt-tarteel-errors').innerText = t.tarteelErrors;
+        if (document.getElementById('txt-tarteel-extras') && t.tarteelExtras) document.getElementById('txt-tarteel-extras').innerText = t.tarteelExtras;
+        if (document.getElementById('txt-voice-lab-btn') && t.voiceLabBtn) document.getElementById('txt-voice-lab-btn').innerText = t.voiceLabBtn;
+        if (document.getElementById('txt-voice-lab-title') && t.voiceLabTitle) document.getElementById('txt-voice-lab-title').innerText = t.voiceLabTitle;
+        if (document.getElementById('txt-voice-lab-desc') && t.voiceLabDesc) document.getElementById('txt-voice-lab-desc').innerText = t.voiceLabDesc;
         if (document.getElementById('txt-dataset-optin') && t.datasetOptIn) {
             document.getElementById('txt-dataset-optin').innerText = t.datasetOptIn;
         }
@@ -3342,8 +3473,14 @@
             isRecording = true;
             lastMatchedFingerprint = '';
             voiceEnergyRing = [];
+            wordEnteredAt = performance.now();
+            lastBurstAtIdx = -1;
+            lastEnergyCommitAt = 0;
+            wasVoiced = false;
+            lastSilenceAt = 0;
             whisperRecording = false;
             whisperBusy = false;
+            resetTarteelStats();
             if (overlay) overlay.style.display = 'none';
             document.getElementById('live-assistant')?.classList.add('visible');
             resetUI();
@@ -3412,12 +3549,15 @@
             recognition.lang = 'ar-SA';
             recognition.continuous = true;
             recognition.interimResults = true;
-            recognition.maxAlternatives = (datasetOptIn || mistakeTestMode) ? 5 : 3;
+            recognition.maxAlternatives = (VOICE_PERF.enabled || datasetOptIn || mistakeTestMode) ? 5 : 3;
 
             // Grammaire JSGF biaise Chrome vers les bons mots Coran → faux verts si fautes volontaires
             const useGrammar = !mistakeTestMode && !datasetOptIn;
             if (useGrammar && verseData && verseData.length > 0) {
-                const normalizedWords = verseData.map(w => w.ar).filter(Boolean).join(' | ');
+                const slice = VOICE_PERF.dynamicGrammar
+                    ? verseData.slice(0, VOICE_PERF.grammarRemain)
+                    : verseData;
+                const normalizedWords = slice.map(w => w.ar).filter(Boolean).join(' | ');
                 const grammar = `#JSGF V1.0; grammar quran; public <ayah> = ${normalizedWords} ;`;
                 const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
                 if (SpeechGrammarList) {
@@ -3467,7 +3607,26 @@
                     if (datasetSttEvents.length > 2500) datasetSttEvents.shift();
                 }
                 if (!cleanFull) return;
-                const result = checkWordStream(cleanFull);
+                let result = checkWordStream(cleanFull);
+                // Idée 2+11 : alternatives Chrome (souvent غيري / اهدينا en #2–#3)
+                if (VOICE_PERF.enabled && VOICE_PERF.useAlts && !result.matched && !result.deduped) {
+                    const variants = buildAltTranscripts(resultRows);
+                    for (const v of variants) {
+                        if (!v.text || v.text === cleanFull) continue;
+                        if (typeof v.conf === 'number' && v.conf < VOICE_PERF.confMinSoft && stuckMsNow() < VOICE_PERF.falseRejectMs) continue;
+                        const r2 = checkWordStream(v.text, { silentDiag: true });
+                        if (r2 && r2.matched) {
+                            result = r2;
+                            sessionDiagnostics.errors.push({
+                                time: new Date().toISOString(),
+                                type: 'alt_match',
+                                conf: v.conf,
+                                text: v.text.slice(-80)
+                            });
+                            break;
+                        }
+                    }
+                }
                 updateAssistantHeard(cleanFull, result);
             };
 
@@ -3620,6 +3779,22 @@
             ghost.style.opacity = easedVol > 5 ? Math.min(0.02 + easedVol / 300, 0.08) : 0;
         }
 
+        // Idée 5 : commit sur chute d’énergie (fin de mot)
+        if (VOICE_PERF.enabled && VOICE_PERF.energyCommit && isRecording) {
+            const voicedNow = targetVol >= VOICE_PERF.energyThresh;
+            if (voicedNow) {
+                wasVoiced = true;
+                lastSilenceAt = 0;
+            } else if (wasVoiced) {
+                if (!lastSilenceAt) lastSilenceAt = now;
+                if (now - lastSilenceAt >= VOICE_PERF.energySilenceMs) {
+                    wasVoiced = false;
+                    lastSilenceAt = 0;
+                    try { tryEnergyCommit(); } catch (e) { console.warn('energy commit', e); }
+                }
+            }
+        }
+
         requestAnimationFrame(trackVolume);
     }
 
@@ -3665,13 +3840,40 @@
     const STT_WINDOW = STT_MODE === 'strict' ? 2 : 12; // whisper auto: phrases entières
     let lastMatchedFingerprint = '';
 
+    // Voice Perf v1 — checkpoint: tag checkpoint/voice-half-working-20260810
+    // Aligné tajwid : refuse سراط/ملك/بلا/نستني ; soft STT seulement hors mode fautes + stuck/énergie.
+    const VOICE_PERF = {
+        enabled: true,
+        useAlts: true,
+        falseRejectMs: 2800,
+        energyCommit: true,
+        energySilenceMs: 300,
+        energyThresh: 12,
+        dynamicGrammar: true,
+        grammarRemain: 3,
+        stuckBurstMs: 8000,
+        postAyahWhisperJudge: true,
+        personalAliases: true,
+        prefixCommit: true,
+        confMinSoft: 0.35
+    };
+    let wordEnteredAt = 0;
+    let lastEnergyCommitAt = 0;
+    let lastBurstAtIdx = -1;
+    let lastSilenceAt = 0;
+    let wasVoiced = false;
+    let personalAliasMap = {};
+    try {
+        personalAliasMap = JSON.parse(localStorage.getItem('tajwid-personal-aliases') || '{}') || {};
+    } catch (e) { personalAliasMap = {}; }
+
     const FATIHA_LEXICON = {
-        'اهدنا': { aliases: ['اهدنا', 'هدنا', 'اهدينا'], forbid: [] },
+        'اهدنا': { aliases: ['اهدنا', 'هدنا', 'اهدينا', 'يهدينا'], forbid: [] },
         'العالمين': { aliases: ['العالمين', 'عالمين'], forbid: [] },
         'المستقيم': { aliases: ['المستقيم', 'مستقيم'], forbid: [] },
         'المغضوب': { aliases: ['المغضوب', 'مغضوب'], forbid: [] },
         'الحمد': { aliases: ['الحمد', 'حمد'], forbid: ['حيمد', 'الحيمد', 'همد', 'الحيمدو'] },
-        'الرحمن': { aliases: ['الرحمن', 'رحمن'], forbid: [] },
+        'الرحمن': { aliases: ['الرحمن', 'رحمن', 'الرحمان', 'رحمان'], forbid: [] },
         'الرحيم': { aliases: ['الرحيم', 'رحيم'], forbid: [] },
         'الله': { aliases: ['الله', 'لله'], forbid: ['ال'] },
         'لله': { aliases: ['لله', 'الله'], forbid: ['ال'] },
@@ -3685,15 +3887,34 @@
         'واياك': { aliases: ['واياك', 'وايا'], forbid: [] },
         'نعبد': { aliases: ['نعبد'], forbid: [] },
         'غير': { aliases: ['غير', 'غوير', 'غيري', 'غويري'], forbid: [] },
-        'عليهم': { aliases: ['عليهم', 'عليهيم'], forbid: ['هم'] },
+        'عليهم': { aliases: ['عليهم', 'عليهيم', 'عليه'], forbid: ['هم'] },
         'ولا': { aliases: ['ولا'], forbid: [] },
-        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] },
-        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات'] },
-        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات'] },
-        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين'] },
+        'الذين': { aliases: ['الذين', 'الذین', 'الذي'], forbid: [] },
+        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات', 'سيرات', 'سي'] },
+        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات', 'سيرات', 'سي'] },
+        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين', 'دول'] },
         'لضالين': { aliases: ['لضالين', 'الضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
-        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
+        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين', 'نستني'] },
         'انعمت': { aliases: ['انعمت'], forbid: ['ان', 'نعم', 'انعم'] }
+    };
+
+    // Soft STT (Chrome hallucinations) — JAMAIS en mistakeTestMode ; jamais confusions tajwid.
+    const HARD_WORD_PROFILES = {
+        'نستعين': { softAliases: ['نسيت', 'نستمع'], minPrefix: 4, allowPrefix: true },
+        'اهدنا': { softAliases: ['اهدينا', 'يهدينا', 'ايه'], minPrefix: 3, allowPrefix: true },
+        'الصراط': { softAliases: [], minPrefix: 4, allowPrefix: true },
+        'صراط': { softAliases: [], minPrefix: 3, allowPrefix: true },
+        'انعمت': { softAliases: [], minPrefix: 5, allowPrefix: false },
+        'غير': { softAliases: ['غيري', 'غويري'], minPrefix: 3, allowPrefix: false },
+        'عليهم': { softAliases: ['عليهيم'], minPrefix: 4, allowPrefix: true },
+        'العالمين': { softAliases: ['عالون', 'عالم'], minPrefix: 4, allowPrefix: true },
+        'المستقيم': { softAliases: ['مستقيم', 'قام'], minPrefix: 4, allowPrefix: true },
+        'الضالين': { softAliases: ['الضال'], minPrefix: 5, allowPrefix: true },
+        'مالك': { softAliases: [], minPrefix: 4, allowPrefix: false },
+        'نعبد': { softAliases: [], minPrefix: 3, allowPrefix: true },
+        'الذين': { softAliases: ['الذي'], minPrefix: 3, allowPrefix: true },
+        'اياك': { softAliases: [], minPrefix: 3, allowPrefix: false },
+        'ولا': { softAliases: [], minPrefix: 3, allowPrefix: false }
     };
 
     function editDistance(a, b) {
@@ -3715,7 +3936,41 @@
     }
 
     function getLexiconEntry(targetNorm) {
-        return FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
+        const base = FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
+        const personal = (VOICE_PERF.personalAliases && personalAliasMap[targetNorm]) || [];
+        if (!personal.length) return base;
+        return {
+            aliases: [...(base.aliases || []), ...personal],
+            forbid: base.forbid || []
+        };
+    }
+
+    function learnPersonalAlias(targetNorm, heardNorm) {
+        if (!VOICE_PERF.personalAliases || !targetNorm || !heardNorm) return;
+        if (mistakeTestMode) return;
+        if (isConfusableReject(heardNorm, targetNorm)) return;
+        if (hasVowelLetterMismatch(heardNorm, targetNorm) && !isAlifOrthographyVariant(heardNorm, targetNorm)) return;
+        const cur = personalAliasMap[targetNorm] || [];
+        if (cur.includes(heardNorm) || normalize(targetNorm) === heardNorm) return;
+        if (cur.length >= 6) return;
+        personalAliasMap[targetNorm] = [...cur, heardNorm];
+        try { localStorage.setItem('tajwid-personal-aliases', JSON.stringify(personalAliasMap)); } catch (e) {}
+    }
+
+    function getHardProfile(targetNorm) {
+        return HARD_WORD_PROFILES[targetNorm] || null;
+    }
+
+    function stuckMsNow() {
+        if (!wordEnteredAt) return 0;
+        return Math.max(0, performance.now() - wordEnteredAt);
+    }
+
+    function markWordEntered(idx) {
+        wordEnteredAt = performance.now();
+        if (idx !== lastBurstAtIdx) {
+            // nouveau mot → burst autorisé à nouveau
+        }
     }
 
     function isConfusableReject(hNorm, targetNorm) {
@@ -3755,13 +4010,16 @@
         return a.replace(/ا/g, '') === b.replace(/ا/g, '');
     }
 
-    function matchFatihaWord(hWord, expectedAr) {
+    function matchFatihaWord(hWord, expectedAr, opts) {
+        const soft = !!(opts && opts.soft);
+        const allowPrefix = !!(opts && opts.allowPrefix);
         const hNorm = normalize(hWord);
         const target = normalize(expectedAr);
         if (!hNorm || !target) return { ok: false, reason: 'empty' };
         if (STT_FILLERS.has(hNorm)) return { ok: false, reason: 'filler' };
 
         const lex = getLexiconEntry(target);
+        const profile = getHardProfile(target);
         const forbid = (lex.forbid || []).map(f => normalize(f)).filter(Boolean);
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
@@ -3769,6 +4027,12 @@
         const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
         // Alias AVANT vowel_mismatch (sinon غيري bloqué alors qu’il est whitelist)
         if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
+
+        // Soft STT aliases (Chrome) — hors mode fautes uniquement
+        if (soft && !mistakeTestMode && profile && profile.softAliases) {
+            const softs = profile.softAliases.map(a => normalize(a)).filter(Boolean);
+            if (softs.includes(hNorm)) return { ok: true, reason: 'soft_stt' };
+        }
 
         // Session 201254 : الرحمان vs الرحمن bloqué par vowel_mismatch
         if (isAlifOrthographyVariant(hNorm, target)) {
@@ -3790,6 +4054,17 @@
             if (hasVowelLetterMismatch(hNoAl, tNoAl)) return { ok: false, reason: 'vowel_mismatch' };
             if (hNoAl === tNoAl) {
                 return { ok: true, reason: 'liaison' };
+            }
+        }
+
+        // Préfixe progressif (idée 8) — mot dur, hors fautes, avec voiced/soft gate côté appelant
+        if (allowPrefix && !mistakeTestMode && VOICE_PERF.prefixCommit && profile && profile.allowPrefix) {
+            const minP = profile.minPrefix || 4;
+            if (hNorm.length >= minP && target.startsWith(hNorm) && hNorm.length >= Math.ceil(target.length * 0.55)) {
+                return { ok: true, reason: 'prefix_progress' };
+            }
+            if (hNoAl.length >= minP && tNoAl.startsWith(hNoAl) && hNoAl.length >= Math.ceil(tNoAl.length * 0.55)) {
+                return { ok: true, reason: 'prefix_progress' };
             }
         }
 
@@ -3823,6 +4098,561 @@
         return { ok: false, reason: 'miss' };
     }
 
+    function buildAltTranscripts(resultRows) {
+        const fulls = [];
+        if (!resultRows || !resultRows.length) return fulls;
+        let primary = '';
+        resultRows.forEach(r => {
+            primary += ((r.alts && r.alts[0] && r.alts[0].transcript) || '') + ' ';
+        });
+        primary = primary.trim();
+        if (primary) fulls.push({ text: primary, conf: resultRows[resultRows.length - 1]?.alts?.[0]?.confidence });
+        const startRi = Math.max(0, resultRows.length - 2);
+        for (let ri = startRi; ri < resultRows.length; ri++) {
+            const alts = resultRows[ri].alts || [];
+            for (let a = 1; a < Math.min(alts.length, 5); a++) {
+                let s = '';
+                for (let i = 0; i < resultRows.length; i++) {
+                    const pick = (i === ri) ? resultRows[i].alts[a] : resultRows[i].alts[0];
+                    s += ((pick && pick.transcript) || '') + ' ';
+                }
+                s = s.trim();
+                if (s && s !== primary) fulls.push({ text: s, conf: alts[a]?.confidence });
+            }
+        }
+        // Prefere confiances hautes
+        fulls.sort((a, b) => (b.conf || 0) - (a.conf || 0));
+        return fulls;
+    }
+
+    function refreshDynamicGrammar() {
+        if (!VOICE_PERF.enabled || !VOICE_PERF.dynamicGrammar || mistakeTestMode || datasetOptIn) return;
+        if (!recognition || !verseData || !verseData.length) return;
+        const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
+        if (!SpeechGrammarList) return;
+        const remain = verseData.slice(currentIdx, currentIdx + VOICE_PERF.grammarRemain).map(w => w.ar).filter(Boolean);
+        if (!remain.length) return;
+        try {
+            const grammar = `#JSGF V1.0; grammar quran; public <ayah> = ${remain.join(' | ')} ;`;
+            const list = new SpeechGrammarList();
+            list.addFromString(grammar, 1);
+            recognition.grammars = list;
+        } catch (e) { console.warn('dynamic grammar', e); }
+    }
+
+    function tryAcceptToken(hWord, reasonTag, soft) {
+        if (!verseData[currentIdx]) return false;
+        const box = document.getElementById(`box-${currentIdx}`);
+        if (box?.classList.contains('correct')) return false;
+        const opts = soft ? { soft: true, allowPrefix: true } : { allowPrefix: stuckMsNow() >= VOICE_PERF.falseRejectMs };
+        const verdict = matchFatihaWord(hWord, verseData[currentIdx].ar, opts);
+        if (!verdict.ok) return false;
+        const target = normalize(verseData[currentIdx].ar);
+        sessionDiagnostics.matches.push({
+            expected: target,
+            expectedRaw: verseData[currentIdx].ar,
+            heard: hWord,
+            index: currentIdx,
+            reason: reasonTag || verdict.reason,
+            energy: typeof getInstantVoiceEnergy === 'function' ? Math.round(getInstantVoiceEnergy() * 10) / 10 : null,
+            ms: sessionDiagnostics.startTime ? Math.round(performance.now() - sessionDiagnostics.startTime) : null,
+            time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + 's',
+            maddMissed: false,
+            mistakeTestMode: !!mistakeTestMode,
+            voicePerf: true
+        });
+        learnPersonalAlias(target, normalize(hWord));
+        processMatchedWord(currentIdx, false);
+        currentIdx++;
+        markWordEntered(currentIdx);
+        refreshDynamicGrammar();
+        updateAssistantWords();
+        hideAssistantFeedback();
+        if (currentIdx >= verseData.length) finishVerse();
+        const progress = (currentIdx / verseData.length) * 100;
+        const progressEl = document.getElementById('session-progress');
+        if (progressEl) progressEl.style.width = progress + '%';
+        return true;
+    }
+
+    function tryFalseRejectRescue(heardTokens) {
+        if (!VOICE_PERF.enabled || mistakeTestMode) return false;
+        if (stuckMsNow() < VOICE_PERF.falseRejectMs) return false;
+        if (!verseData[currentIdx]) return false;
+        const tokens = (heardTokens || []).slice(-8);
+        for (let t = tokens.length - 1; t >= 0; t--) {
+            if (tryAcceptToken(tokens[t], 'false_reject_rescue', true)) return true;
+        }
+        return false;
+    }
+
+    function tryEnergyCommit() {
+        if (!VOICE_PERF.enabled || !VOICE_PERF.energyCommit || mistakeTestMode || !isRecording) return;
+        if (!verseData[currentIdx]) return;
+        const now = performance.now();
+        if (now - lastEnergyCommitAt < 400) return;
+        const heard = sessionDiagnostics.heard || [];
+        if (!heard.length) return;
+        const last = heard[heard.length - 1];
+        const tokens = String(last.raw || '').split(/\s+/).filter(Boolean).slice(-6);
+        lastEnergyCommitAt = now;
+        for (let t = tokens.length - 1; t >= 0; t--) {
+            if (tryAcceptToken(tokens[t], 'energy_commit', true)) return;
+            if (tryAcceptToken(tokens[t], 'energy_commit', false)) return;
+        }
+    }
+
+    async function maybeStuckWhisperBurst() {
+        if (!VOICE_PERF.enabled || mistakeTestMode || !isRecording) return;
+        if (VOICE_ENGINE !== 'webspeech') return;
+        if (stuckMsNow() < VOICE_PERF.stuckBurstMs) return;
+        if (lastBurstAtIdx === currentIdx || whisperBusy || whisperRecording) return;
+        lastBurstAtIdx = currentIdx;
+        sessionDiagnostics.errors.push({
+            time: new Date().toISOString(),
+            type: 'whisper_burst_attempt',
+            idx: currentIdx,
+            expected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : null
+        });
+        try {
+            startWhisperClipAuto();
+            setTimeout(() => {
+                if (whisperRecording) stopWhisperClipAndVerify(true);
+            }, 1600);
+        } catch (e) { console.warn('burst whisper', e); }
+    }
+
+    async function runPostAyahWhisperJudge() {
+        if (!VOICE_PERF.enabled || !VOICE_PERF.postAyahWhisperJudge) return;
+        if (!audioChunks || audioChunks.length < 2) return;
+        try {
+            const mime = datasetMimeType || 'audio/webm';
+            const blob = new Blob(audioChunks.slice(-Math.min(audioChunks.length, 40)), { type: mime });
+            if (blob.size < 800) return;
+            const audioBase64 = await blobToBase64(blob);
+            const res = await fetch(getTranscribeUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ audioBase64, mimeType: mime })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || data.detail || ('HTTP ' + res.status));
+            const text = (data.text || '').trim();
+            const recited = text.split(/\s+/).map(w => normalize(w)).filter(w => w && !STT_FILLERS.has(w));
+            const canonical = verseData.map(w => normalize(w.ar)).filter(Boolean);
+            const alignment = alignWords(recited, canonical);
+            sessionDiagnostics.whisperJudge = {
+                text,
+                missed: alignment.filter(a => a.status === TARTEEL_STATUS.MISSED).length,
+                extra: alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length,
+                correct: alignment.filter(a => a.status === TARTEEL_STATUS.CORRECT).length,
+                alignmentSample: alignment.slice(0, 40)
+            };
+            console.log('post-ayah whisper judge', sessionDiagnostics.whisperJudge);
+        } catch (e) {
+            console.warn('post-ayah whisper judge', e);
+            sessionDiagnostics.errors.push({ time: new Date().toISOString(), type: 'whisper_judge_fail', detail: String(e.message || e) });
+        }
+    }
+
+    // --- Tarteel-style word alignment (IqraAI / SequenceMatcher) ---
+    const TARTEEL_STATUS = { CORRECT: 'correct', MISSED: 'missed', EXTRA: 'extra' };
+    let tarteelStats = { missed: 0, extra: 0 };
+    let lastTarteelExtraFp = '';
+
+    function alignWords(recitedWords, canonicalWords) {
+        const recList = Array.isArray(recitedWords) ? recitedWords.slice() : String(recitedWords || '').split(/\s+/).filter(Boolean);
+        const canList = Array.isArray(canonicalWords) ? canonicalWords.slice() : String(canonicalWords || '').split(/\s+/).filter(Boolean);
+        if (!recList.length && !canList.length) return [];
+
+        const n = canList.length;
+        const m = recList.length;
+        const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+        for (let i = n - 1; i >= 0; i--) {
+            for (let j = m - 1; j >= 0; j--) {
+                if (canList[i] === recList[j]) dp[i][j] = 1 + dp[i + 1][j + 1];
+                else dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+            }
+        }
+        const alignment = [];
+        let i = 0, j = 0;
+        while (i < n && j < m) {
+            if (canList[i] === recList[j]) {
+                alignment.push({ word: canList[i], status: TARTEEL_STATUS.CORRECT, canonical: canList[i] });
+                i++; j++;
+            } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+                alignment.push({ word: canList[i], status: TARTEEL_STATUS.MISSED, canonical: canList[i] });
+                i++;
+            } else {
+                alignment.push({ word: recList[j], status: TARTEEL_STATUS.EXTRA, canonical: null });
+                j++;
+            }
+        }
+        while (i < n) {
+            alignment.push({ word: canList[i], status: TARTEEL_STATUS.MISSED, canonical: canList[i] });
+            i++;
+        }
+        while (j < m) {
+            alignment.push({ word: recList[j], status: TARTEEL_STATUS.EXTRA, canonical: null });
+            j++;
+        }
+        return alignment;
+    }
+
+    function resetTarteelStats() {
+        tarteelStats = { missed: 0, extra: 0 };
+        lastTarteelExtraFp = '';
+        const missEl = document.getElementById('tarteel-missed-count');
+        const extraEl = document.getElementById('tarteel-extra-count');
+        if (missEl) missEl.innerText = '0';
+        if (extraEl) extraEl.innerText = '0';
+        document.querySelectorAll('.word-box.missed, .word-box.extra-hint').forEach((el) => {
+            el.classList.remove('missed', 'extra-hint');
+        });
+        const fb = document.getElementById('assistant-feedback-box');
+        if (fb) fb.classList.remove('extra');
+    }
+
+    function updateTarteelErrorUI() {
+        const missEl = document.getElementById('tarteel-missed-count');
+        const extraEl = document.getElementById('tarteel-extra-count');
+        if (missEl) missEl.innerText = String(tarteelStats.missed);
+        if (extraEl) extraEl.innerText = String(tarteelStats.extra);
+    }
+
+    function recordTarteelExtra(heardWord) {
+        const hNorm = normalize(heardWord);
+        if (!hNorm || hNorm.length < 3 || STT_FILLERS.has(hNorm)) return false;
+        const fp = hNorm + '#' + currentIdx;
+        if (fp === lastTarteelExtraFp) return false;
+        lastTarteelExtraFp = fp;
+        tarteelStats.extra += 1;
+        updateTarteelErrorUI();
+        const active = document.getElementById(`box-${currentIdx}`);
+        if (active) {
+            active.classList.add('extra-hint');
+            setTimeout(() => active.classList.remove('extra-hint'), 900);
+        }
+        const fb = document.getElementById('assistant-feedback-box');
+        if (fb) fb.classList.add('extra');
+        showAssistantFeedback(translations[currentLang]?.tarteelExtraWord || 'Mot en trop');
+        sessionDiagnostics.errors.push({
+            time: new Date().toISOString(),
+            type: 'tarteel_extra',
+            heard: hNorm,
+            currentIdx: currentIdx
+        });
+        return true;
+    }
+
+    function markMissedRemainingBoxes() {
+        let added = 0;
+        for (let i = 0; i < verseData.length; i++) {
+            const box = document.getElementById(`box-${i}`);
+            if (!box) continue;
+            if (box.classList.contains('correct')) continue;
+            box.classList.remove('active');
+            if (!box.classList.contains('missed')) {
+                box.classList.add('missed');
+                added++;
+            }
+        }
+        if (added > 0) {
+            tarteelStats.missed += added;
+            updateTarteelErrorUI();
+            sessionDiagnostics.errors.push({
+                time: new Date().toISOString(),
+                type: 'tarteel_missed_batch',
+                count: added
+            });
+        }
+        return added;
+    }
+
+    function applyTarteelFinishAnalysis(finalTranscript) {
+        markMissedRemainingBoxes();
+        const raw = (finalTranscript || '').trim();
+        if (!raw || !verseData.length) {
+            updateTarteelErrorUI();
+            return;
+        }
+        const recited = raw.split(/\s+/).map(w => normalize(w)).filter(w => w && !STT_FILLERS.has(w));
+        const canonical = verseData.map(w => normalize(w.ar)).filter(Boolean);
+        const alignment = alignWords(recited, canonical);
+        const extraFromAlign = alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length;
+        if (extraFromAlign > tarteelStats.extra) {
+            tarteelStats.extra = extraFromAlign;
+        }
+        updateTarteelErrorUI();
+        sessionDiagnostics.tarteel = {
+            missed: tarteelStats.missed,
+            extra: tarteelStats.extra,
+            alignmentSample: alignment.slice(0, 40)
+        };
+    }
+
+    // --- Voice Lab: écart vs cibles Tarteel (WER / latence / word-level) ---
+    const TARTEEL_TARGETS = {
+        werPct: 4,
+        latencyMs: 200,
+        latencyWarnMs: 300,
+        matchAccuracyPct: 98,
+        wordLevel: true,
+        letterLevel: false,
+        engineNote: 'Quran ASR (NeMo/Riva) — pas Web Speech généraliste'
+    };
+    let lastVoiceLabReport = null;
+
+    function median(nums) {
+        if (!nums || !nums.length) return null;
+        const a = nums.slice().sort((x, y) => x - y);
+        const mid = Math.floor(a.length / 2);
+        return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+    }
+
+    function buildTarteelGapAnalysis() {
+        const matches = sessionDiagnostics.matches || [];
+        const heard = sessionDiagnostics.heard || [];
+        const errors = sessionDiagnostics.errors || [];
+        const finalRaw = sessionDiagnostics.final_transcription
+            || (heard.length ? heard[heard.length - 1].raw : '')
+            || '';
+
+        const canonical = verseData.map(w => normalize(w.ar)).filter(Boolean);
+        const recited = String(finalRaw).split(/\s+/).map(w => normalize(w)).filter(w => w && !STT_FILLERS.has(w));
+        const alignment = (canonical.length || recited.length) ? alignWords(recited, canonical) : [];
+        const nCorrect = alignment.filter(a => a.status === TARTEEL_STATUS.CORRECT).length;
+        const nMissed = alignment.filter(a => a.status === TARTEEL_STATUS.MISSED).length;
+        const nExtra = alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length;
+        const N = Math.max(canonical.length, 1);
+        const werProxyPct = Math.round(((nMissed + nExtra) / N) * 1000) / 10;
+        const wordAccuracyPct = Math.round((nCorrect / N) * 1000) / 10;
+
+        const reasonHist = {};
+        matches.forEach(m => {
+            const r = m.reason || (String(m.heard || '').includes('MANUAL') ? 'manual' : 'unknown');
+            reasonHist[r] = (reasonHist[r] || 0) + 1;
+        });
+
+        const matchMs = matches.map(m => m.ms).filter(v => typeof v === 'number' && v >= 0);
+        const deltas = [];
+        for (let i = 1; i < matchMs.length; i++) deltas.push(matchMs[i] - matchMs[i - 1]);
+        const medianInterMatchMs = median(deltas);
+        const sessionMs = sessionDiagnostics.startTime
+            ? Math.round(performance.now() - sessionDiagnostics.startTime)
+            : null;
+
+        const errorTypes = {};
+        errors.forEach(e => {
+            const t = e.type || 'unknown';
+            errorTypes[t] = (errorTypes[t] || 0) + 1;
+        });
+
+        const manualOverrides = errors.filter(e => e.type === 'validation_failure_manual_override').length;
+        const vowelMismatches = errors.filter(e => e.type === 'pronunciation_mismatch').length
+            + (matches.filter(m => m.reason === 'vowel_mismatch').length);
+        const sttOmitSkips = matches.filter(m => m.reason === 'stt_omit_skip').length;
+
+        const gaps = [];
+        if (werProxyPct > TARTEEL_TARGETS.werPct) {
+            gaps.push({
+                id: 'wer',
+                severity: werProxyPct > 20 ? 'bad' : 'warn',
+                title: 'WER proxy trop haut',
+                detail: `~${werProxyPct}% vs cible Tarteel ~${TARTEEL_TARGETS.werPct}%. Web Speech ar-SA n’est pas un ASR Coran fine-tuné.`,
+                next: 'Brancher tarteel-ai/whisper-base-ar-quran (ou Groq ar) derrière le même alignWords.'
+            });
+        }
+        if (medianInterMatchMs != null && medianInterMatchMs > TARTEEL_TARGETS.latencyWarnMs) {
+            gaps.push({
+                id: 'latency',
+                severity: 'warn',
+                title: 'Latence inter-mots élevée',
+                detail: `Médiane ~${Math.round(medianInterMatchMs)} ms entre validations (cible UX Tarteel <${TARTEEL_TARGETS.latencyMs} ms, pénible >${TARTEEL_TARGETS.latencyWarnMs} ms).`,
+                next: 'Garder Web Speech pour le streaming ; Whisper seulement en vérification asynchrone.'
+            });
+        }
+        if (manualOverrides > 0) {
+            gaps.push({
+                id: 'manual',
+                severity: manualOverrides >= 2 ? 'bad' : 'warn',
+                title: 'Overrides manuels',
+                detail: `${manualOverrides} validation(s) manuelle(s) = faux négatifs STT/matching.`,
+                next: 'Exporter JSON Voice Lab + enrichir FATIHA_LEXICON / aliases pour ces mots.'
+            });
+        }
+        if ((tarteelStats.missed || nMissed) > 0 || (tarteelStats.extra || nExtra) > 0) {
+            gaps.push({
+                id: 'word_level',
+                severity: 'warn',
+                title: 'Erreurs word-level (Tarteel-style)',
+                detail: `missed=${Math.max(tarteelStats.missed || 0, nMissed)} extra=${Math.max(tarteelStats.extra || 0, nExtra)}.`,
+                next: 'Comparer alignmentSample au mushaf ; Tarteel affiche missed/incorrect/extra en live.'
+            });
+        }
+        if (sttOmitSkips > 0) {
+            gaps.push({
+                id: 'stt_omit',
+                severity: 'warn',
+                title: 'Mots sautés par STT',
+                detail: `${sttOmitSkips} stt_omit_skip — Chrome a omis un mot du buffer.`,
+                next: 'ASR Coran réduit ces omissions ; en interim, élargir la fenêtre sans fausse acceptation.'
+            });
+        }
+        gaps.push({
+            id: 'letter_tajweed',
+            severity: 'warn',
+            title: 'Pas de letter-level / tajweed audio',
+            detail: 'Comme Tarteel public (encore) : pas de fatha/damma/kasra ni règles tajweed via audio.',
+            next: 'Garder couleurs Quran.com pour l’enseignement ; ne pas prétendre détecter le tajweed en STT.'
+        });
+        if ((sessionDiagnostics.engine || (typeof VOICE_ENGINE !== 'undefined' ? VOICE_ENGINE : 'webspeech')) === 'webspeech') {
+            gaps.push({
+                id: 'engine',
+                severity: 'bad',
+                title: 'Moteur ≠ Tarteel',
+                detail: TARTEEL_TARGETS.engineNote,
+                next: 'Le matching word-level est déjà là ; le gros gain = ASR Quranique (WER ~5.7% HF / ~4% Riva).'
+            });
+        }
+
+        const scoreParts = [
+            werProxyPct <= TARTEEL_TARGETS.werPct ? 30 : Math.max(0, 30 - (werProxyPct - TARTEEL_TARGETS.werPct)),
+            (medianInterMatchMs == null || medianInterMatchMs <= TARTEEL_TARGETS.latencyMs) ? 25 : (medianInterMatchMs <= TARTEEL_TARGETS.latencyWarnMs ? 15 : 5),
+            manualOverrides === 0 ? 20 : Math.max(0, 20 - manualOverrides * 8),
+            wordAccuracyPct >= TARTEEL_TARGETS.matchAccuracyPct ? 25 : Math.round(wordAccuracyPct * 0.25)
+        ];
+        const tarteelParityScore = Math.max(0, Math.min(100, Math.round(scoreParts.reduce((a, b) => a + b, 0))));
+
+        const report = {
+            schema: 'tajwid-voice-lab-v1',
+            generatedAt: new Date().toISOString(),
+            ref: sessionDiagnostics.ref || VERSES_LIBRARY[activeVerseIdx]?.ref || null,
+            engine: sessionDiagnostics.engine || (typeof VOICE_ENGINE !== 'undefined' ? VOICE_ENGINE : 'webspeech'),
+            sttMode: typeof STT_MODE !== 'undefined' ? STT_MODE : null,
+            browser: navigator.userAgent,
+            targets: { ...TARTEEL_TARGETS },
+            metrics: {
+                totalWords: verseData.length,
+                wordsCompleted: currentIdx,
+                matchesCount: matches.length,
+                heardEvents: heard.length,
+                sessionMs,
+                medianInterMatchMs: medianInterMatchMs != null ? Math.round(medianInterMatchMs) : null,
+                werProxyPct,
+                wordAccuracyPct,
+                alignment: { correct: nCorrect, missed: nMissed, extra: nExtra },
+                tarteelLive: { ...tarteelStats },
+                reasonHist,
+                errorTypes,
+                manualOverrides,
+                vowelMismatchSignals: vowelMismatches,
+                sttOmitSkips,
+                finalTranscription: finalRaw,
+                alignmentSample: alignment.slice(0, 60)
+            },
+            gaps,
+            tarteelParityScore,
+            recommendations: gaps.map(g => ({ id: g.id, next: g.next, severity: g.severity }))
+        };
+        lastVoiceLabReport = report;
+        sessionDiagnostics.voiceLab = report;
+        return report;
+    }
+
+    function voiceLabCardClass(ok, warn) {
+        if (ok) return 'ok';
+        if (warn) return 'warn';
+        return 'bad';
+    }
+
+    function renderVoiceLab(report) {
+        const body = document.getElementById('voice-lab-body');
+        if (!body || !report) return;
+        const m = report.metrics;
+        const werOk = m.werProxyPct <= TARTEEL_TARGETS.werPct;
+        const werWarn = m.werProxyPct <= 15;
+        const lat = m.medianInterMatchMs;
+        const latOk = lat == null || lat <= TARTEEL_TARGETS.latencyMs;
+        const latWarn = lat == null || lat <= TARTEEL_TARGETS.latencyWarnMs;
+        const accOk = m.wordAccuracyPct >= TARTEEL_TARGETS.matchAccuracyPct;
+        const accWarn = m.wordAccuracyPct >= 85;
+        const scoreOk = report.tarteelParityScore >= 75;
+        const scoreWarn = report.tarteelParityScore >= 50;
+
+        const gapHtml = (report.gaps || []).map(g =>
+            `<li><strong>[${g.severity}] ${g.title}</strong><br>${g.detail}<br><em>→ ${g.next}</em></li>`
+        ).join('');
+
+        const reasons = Object.entries(m.reasonHist || {}).map(([k, v]) => `${k}:${v}`).join(' · ') || '—';
+
+        body.innerHTML = `
+            <div class="voice-lab-grid">
+                <div class="voice-lab-card ${voiceLabCardClass(scoreOk, scoreWarn)}">
+                    <div class="vl-val">${report.tarteelParityScore}/100</div>
+                    <div class="vl-label">Parity score</div>
+                </div>
+                <div class="voice-lab-card ${voiceLabCardClass(werOk, werWarn)}">
+                    <div class="vl-val">${m.werProxyPct}%</div>
+                    <div class="vl-label">WER proxy (cible ${TARTEEL_TARGETS.werPct}%)</div>
+                </div>
+                <div class="voice-lab-card ${voiceLabCardClass(accOk, accWarn)}">
+                    <div class="vl-val">${m.wordAccuracyPct}%</div>
+                    <div class="vl-label">Accuracy mots</div>
+                </div>
+                <div class="voice-lab-card ${voiceLabCardClass(latOk, latWarn)}">
+                    <div class="vl-val">${lat == null ? '—' : lat + ' ms'}</div>
+                    <div class="vl-label">Latence inter-mots</div>
+                </div>
+                <div class="voice-lab-card">
+                    <div class="vl-val">${m.alignment.missed}/${m.alignment.extra}</div>
+                    <div class="vl-label">Missed / Extra</div>
+                </div>
+                <div class="voice-lab-card ${m.manualOverrides ? 'warn' : 'ok'}">
+                    <div class="vl-val">${m.manualOverrides}</div>
+                    <div class="vl-label">Overrides manuels</div>
+                </div>
+            </div>
+            <p style="margin:0 0 8px; opacity:0.85;"><strong>Engine</strong>: ${report.engine} · <strong>Mode</strong>: ${report.sttMode} · <strong>Ref</strong>: ${report.ref || '—'}</p>
+            <p style="margin:0 0 8px; opacity:0.85;"><strong>Match reasons</strong>: ${reasons}</p>
+            <p style="margin:0 0 6px; font-weight:600;">Écarts vs Tarteel</p>
+            <ul class="voice-lab-list">${gapHtml || '<li>Pas assez de données — récitez un verset puis rouvrez.</li>'}</ul>
+            <p style="margin:12px 0 6px; font-weight:600;">Transcript final</p>
+            <div class="voice-lab-mono">${(m.finalTranscription || '—').replace(/</g, '&lt;')}</div>
+        `;
+    }
+
+    function openVoiceLab() {
+        const report = buildTarteelGapAnalysis();
+        renderVoiceLab(report);
+        const modal = document.getElementById('voice-lab-modal');
+        if (modal) modal.style.display = 'flex';
+        console.log('Voice Lab report', report);
+    }
+
+    function closeVoiceLab() {
+        const modal = document.getElementById('voice-lab-modal');
+        if (modal) modal.style.display = 'none';
+    }
+
+    function downloadVoiceLabJson() {
+        const report = lastVoiceLabReport || buildTarteelGapAnalysis();
+        const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `voice_lab_tarteel_${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        try {
+            fetch('/log', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'voice_lab', report })
+            }).catch(() => {});
+        } catch (e) {}
+    }
+
     async function goToNextVerse() {
         const currentRef = VERSES_LIBRARY[activeVerseIdx].ref;
         const match = currentRef.match(/\[(\d+):(\d+)\]/);
@@ -3841,7 +4671,9 @@
         }
     }
 
-    function checkWordStream(transcript) {
+    function checkWordStream(transcript, streamOpts) {
+        const silentDiag = !!(streamOpts && streamOpts.silentDiag);
+        const softGate = !!(VOICE_PERF.enabled && !mistakeTestMode && stuckMsNow() >= Math.min(1200, VOICE_PERF.falseRejectMs));
         const rawHeard = transcript.toLowerCase();
         const cleanRaw = rawHeard.replace(/[\u200B-\u200D\uFEFF\u200E\u200F]/g, " ");
         const heard = cleanRaw.split(/\s+/).filter(w => w.length > 0);
@@ -3855,12 +4687,14 @@
             return { matched: false, text: transcript, deduped: true };
         }
 
-        sessionDiagnostics.heard.push({
-            time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
-            raw: transcript,
-            currentIdx: currentIdx,
-            normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : "FIN"
-        });
+        if (!silentDiag) {
+            sessionDiagnostics.heard.push({
+                time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
+                raw: transcript,
+                currentIdx: currentIdx,
+                normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : "FIN"
+            });
+        }
 
         // Stream cumulatif Chrome : scanner depuis l’index courant (pas seulement la fin)
         // Sinon الرحمن déjà passé dans le buffer n’est plus dans la fenêtre et force le manuel
@@ -3877,12 +4711,15 @@
                 continue;
             }
 
-            let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar);
+            let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar, {
+                soft: softGate,
+                allowPrefix: softGate && VOICE_PERF.prefixCommit
+            });
             // Chrome omet parfois أنعمت / اهدنا : si le mot SUIVANT match, on saute 1 cible
             if (!verdict.ok && !mistakeTestMode && tempIdx + 1 < verseData.length) {
                 const curLen = normalize(verseData[tempIdx].ar).length;
                 if (curLen >= 4) {
-                    const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar);
+                    const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar, { soft: softGate });
                     if (nextVerdict.ok) {
                         sessionDiagnostics.matches.push({
                             expected: normalize(verseData[tempIdx].ar),
@@ -3944,6 +4781,7 @@
                 mistakeTestMode: !!mistakeTestMode
             });
 
+            learnPersonalAlias(target, hNorm);
             processMatchedWord(tempIdx, isMaddMissed);
             tempIdx++;
             matched++;
@@ -3951,6 +4789,8 @@
 
         if (matched > 0) {
             currentIdx = tempIdx;
+            markWordEntered(currentIdx);
+            refreshDynamicGrammar();
             lastMatchedFingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
             updateAssistantWords();
             hideAssistantFeedback();
@@ -3963,13 +4803,24 @@
 
             return { matched: true, text: transcript };
         }
+
+        // Idée 3 : faux-refus différé (STT a le mot / soft alias, bloqué trop longtemps)
+        if (tryFalseRejectRescue(heard)) {
+            lastMatchedFingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
+            return { matched: true, text: transcript, rescued: true };
+        }
+
+        maybeStuckWhisperBurst();
         
         return { matched: false, text: transcript };
     }
 
     function hideAssistantFeedback() {
         const fb = document.getElementById('assistant-feedback-box');
-        if (fb) fb.style.display = 'none';
+        if (fb) {
+            fb.style.display = 'none';
+            fb.classList.remove('extra');
+        }
     }
 
     function showAssistantFeedback(msg) {
@@ -4020,12 +4871,20 @@
             const isSkeletonMatch = getRootSkeleton(latestHeard) === getRootSkeleton(target);
 
             if (latestHeard && latestHeard !== target && !isSkeletonMatch) {
-                // Si la différence est petite
-                const diffLength = Math.abs(latestHeard.length - target.length);
-                if (diffLength <= 2) {
-                    showAssistantFeedback(translations[currentLang].hintAlmost);
+                // Tarteel-style: mot clairement hors cible → extra (ambre)
+                const verdict = verseData[currentIdx]
+                    ? matchFatihaWord(words[words.length - 1] || '', verseData[currentIdx].ar)
+                    : { ok: false, reason: 'miss' };
+                if (!verdict.ok && latestHeard.length >= 3 && (verdict.reason === 'miss' || verdict.reason === 'reject' || verdict.reason === 'confusable' || verdict.reason === 'vowel_mismatch')) {
+                    recordTarteelExtra(words[words.length - 1] || latestHeard);
                 } else {
-                    showAssistantFeedback(translations[currentLang].hintRepeat);
+                    // Si la différence est petite
+                    const diffLength = Math.abs(latestHeard.length - target.length);
+                    if (diffLength <= 2) {
+                        showAssistantFeedback(translations[currentLang].hintAlmost);
+                    } else {
+                        showAssistantFeedback(translations[currentLang].hintRepeat);
+                    }
                 }
                 
                 // On ajoute l'erreur au diagnostic
@@ -4042,7 +4901,7 @@
     function processMatchedWord(idx, maddMissed = false) {
         const box = document.getElementById(`box-${idx}`);
         if (box?.classList.contains('correct')) return;
-        box?.classList.remove('active');
+        box?.classList.remove('active', 'missed', 'extra-hint');
         box?.classList.add('correct');
         
         // --- GHOST WORD TRANSITION ---
@@ -4132,6 +4991,21 @@
             : "";
         sessionDiagnostics.final_transcription = finalRaw;
         sessionDiagnostics.endTime = new Date().toISOString();
+
+        try { applyTarteelFinishAnalysis(finalRaw); } catch (e) { console.warn('tarteel finish', e); }
+        try {
+            buildTarteelGapAnalysis();
+            setTimeout(() => {
+                try { openVoiceLab(); } catch (err) { console.warn('voice lab open', err); }
+            }, 600);
+        } catch (e) { console.warn('voice lab', e); }
+
+        // Idée 6 : juge Whisper post-ayah (n’annule pas les verts Web Speech)
+        try {
+            runPostAyahWhisperJudge().then(() => {
+                try { buildTarteelGapAnalysis(); } catch (e2) {}
+            });
+        } catch (e) { console.warn('whisper judge launch', e); }
 
         const shouldSaveDataset = datasetOptIn;
         const stopRecPromise = new Promise((resolve) => {
@@ -4230,6 +5104,11 @@
             datasetOptIn: true,
             mistakeTestMode: !!mistakeTestMode,
             grammarDisabled: !!(mistakeTestMode || datasetOptIn),
+            voicePerf: VOICE_PERF.enabled ? {
+                version: 1,
+                flags: { ...VOICE_PERF }
+            } : null,
+            whisperJudge: sessionDiagnostics.whisperJudge || null,
             expected: sessionDiagnostics.expected || [],
             expectedRaw: sessionDiagnostics.expectedRaw || [],
             matches,
@@ -4323,6 +5202,7 @@
         
         // On recharge le verset proprement (reset l'UI et le currentIdx)
         loadVerse(activeVerseIdx);
+        resetTarteelStats();
         
         audioChunks = [];
         setTimeout(startRecognition, 300);
@@ -4393,9 +5273,12 @@
         }
 
         // 3. Rapport final consolidé
+        let voiceLab = null;
+        try { voiceLab = buildTarteelGapAnalysis(); } catch (e) { console.warn('voiceLab in report', e); }
         return {
             ...sessionDiagnostics,
             analysis_summary: analysis,
+            voice_lab: voiceLab,
             vocal_recording_base64: audioBase64,
             generated_at: new Date().toISOString(),
             browser: navigator.userAgent
@@ -4404,7 +5287,7 @@
 
     async function sendDiagnosticReport(fullReport) {
         try {
-            await fetch('http://localhost:8000/log', {
+            await fetch('/log', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(fullReport)
