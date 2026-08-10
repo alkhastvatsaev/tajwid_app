@@ -1,0 +1,25 @@
+---
+description: Mémoire musculaire — édition du monolite que tu as écrit
+globs: public/index.html
+alwaysApply: false
+---
+
+# Tu édites TON monolite
+
+Fichier : `public/index.html` — seule app prod. Relire [`docs/APP-MAP.md`](../../docs/APP-MAP.md) §3–4 avant tout patch matching/voix.
+
+## Contrats que TU as définis
+
+- `verseData[i].ar` = texte arabe du mot ; matching via `normalize` + `getRootSkeleton`
+- Classes Quran.com → `dataset.ruleType` (`madda_normal` → `madd-tabii`, etc.)
+- Boot : 112→113→114→1 ; **pas** de `?ref=`
+- Duo Peer IDs : `vatsaev-tajwid-user1|user2`
+- « IA Import » → `fetchVerseFromAPI` → quran.com
+
+## Ne touche pas sans demande nommée
+
+`normalize` · `checkWordStream` · `loadVerse` · `startRecognition` · `initDuoMode`
+
+## Style de patch
+
+Diff minimal. Garde console.log / setTimeout / try-catch. Explique + test manuel attendu.

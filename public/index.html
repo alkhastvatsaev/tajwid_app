@@ -682,7 +682,17 @@
             font-size: 0.8rem;
         }
 
-        #download-btn { display: none !important; }
+        #download-btn {
+            display: none;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            text-align: center;
+            margin: 12px 0 20px;
+        }
+        #download-btn.visible {
+            display: block;
+        }
 
         /* Smart Progress Line below Header */
         .smart-progress-bar {
@@ -3011,6 +3021,7 @@
         if (restartBtn) {
             restartBtn.classList.add('visible');
         }
+        document.getElementById('download-btn')?.classList.add('visible');
     }
 
 
@@ -3018,6 +3029,7 @@
     function restartRecitation() {
         document.body.classList.remove('celebration-mode');
         document.getElementById('restart-btn')?.classList.remove('visible');
+        document.getElementById('download-btn')?.classList.remove('visible');
         
         // On recharge le verset proprement (reset l'UI et le currentIdx)
         loadVerse(activeVerseIdx);

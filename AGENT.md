@@ -1,5 +1,3 @@
-# TAJWID — Base Next.js PWA
+# AGENT.md
 
-Stack active : Next.js 16 (App Router) + PWA (Serwist) + PeerJS Duo + Web Speech.
-
-Legacy HTML archivé dans `old/legacy-spa/`.
+Voir **[`AGENTS.md`](AGENTS.md)** (contrat Cursor) et **[`docs/APP-MAP.md`](docs/APP-MAP.md)** (mémoire d’auteur complète).
