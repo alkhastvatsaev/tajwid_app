@@ -3720,10 +3720,11 @@
 
     function isConfusableReject(hNorm, targetNorm) {
         const pairs = [
-            ['سراط', 'صراط'], ['السراط', 'الصراط'], ['ساراط', 'صراط'],
-            ['ظالين', 'ضالين'], ['الظالين', 'الضالين'], ['دالين', 'ضالين'],
+            ['سراط', 'صراط'], ['السراط', 'الصراط'], ['ساراط', 'صراط'], ['سيرات', 'صراط'], ['سيراط', 'صراط'],
+            ['ظالين', 'ضالين'], ['الظالين', 'الضالين'], ['دالين', 'ضالين'], ['دول', 'ضالين'],
             ['ملك', 'مالك'], ['مليك', 'مالك'], ['ميلك', 'مالك'],
-            ['حيمد', 'حمد'], ['الحيمد', 'الحمد']
+            ['حيمد', 'حمد'], ['الحيمد', 'الحمد'],
+            ['بلا', 'ولا'], ['نستني', 'نستعين']
         ];
         for (const [bad, good] of pairs) {
             const b = normalize(bad);
@@ -3792,8 +3793,14 @@
             }
         }
 
+        // Mode test fautes : pas de near/root (évite بلا→ولا, نستني→نستعين)
+        if (mistakeTestMode) {
+            return { ok: false, reason: 'miss_strict' };
+        }
+
         const dist = editDistance(hNorm, target);
-        const maxDist = target.length >= 6 ? 2 : (target.length >= 3 ? 1 : 0);
+        // Serré : longueur 3 exacte seulement ; 5–7 → 1 ; ≥8 → 2
+        const maxDist = target.length >= 8 ? 2 : (target.length >= 5 ? 1 : 0);
         if (dist > 0 && dist <= maxDist) {
             if (hasVowelLetterMismatch(hNorm, target) && !isAlifOrthographyVariant(hNorm, target)) {
                 return { ok: false, reason: 'vowel_mismatch' };
