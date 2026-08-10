@@ -1,71 +1,103 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mic, Heart, Settings, Languages, Users } from "lucide-react";
+import { Mic, Heart, Languages, Users, BookOpen, BarChart3 } from "lucide-react";
 
 interface HeaderProps {
   onLangClick: () => void;
   onDuoClick: () => void;
+  onFavoriteClick: () => void;
+  onBrowserClick: () => void;
+  onStatsClick: () => void;
   isDuoActive: boolean;
+  isFavorite: boolean;
+  langLabel: string;
 }
 
-export default function Header({ onLangClick, onDuoClick, isDuoActive }: HeaderProps) {
+export default function Header({
+  onLangClick,
+  onDuoClick,
+  onFavoriteClick,
+  onBrowserClick,
+  onStatsClick,
+  isDuoActive,
+  isFavorite,
+  langLabel,
+}: HeaderProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-black/20 backdrop-blur-xl border-b border-white/5">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="flex items-center gap-3"
-      >
-        <div className="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)]">
-          <Mic className="text-white w-5 h-5" />
+    <header
+      className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-3 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/5"
+      style={{ paddingTop: "calc(var(--safe-top) + 12px)" }}
+    >
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center">
+          <Mic className="text-white w-5 h-5" aria-hidden />
         </div>
         <div>
-          <h1 className="text-sm font-bold tracking-[0.2em] text-white/90 uppercase">Tajwid AI</h1>
-          <p className="text-[10px] text-emerald-500/80 font-medium uppercase tracking-widest">Mastery Engine</p>
+          <h1 className="text-sm font-bold tracking-[0.2em] text-white/90 uppercase">
+            Tajwid
+          </h1>
+          <p className="text-[10px] text-emerald-500/80 font-medium uppercase tracking-widest">
+            Practice
+          </p>
         </div>
-      </motion.div>
+      </div>
 
-      <div className="flex items-center gap-2 md:gap-4">
-        <button 
+      <div className="flex items-center gap-1.5 md:gap-2">
+        <button
+          type="button"
+          onClick={onBrowserClick}
+          aria-label="Choisir une sourate"
+          className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
+        >
+          <BookOpen size={18} />
+        </button>
+        <button
+          type="button"
+          onClick={onStatsClick}
+          aria-label="Statistiques"
+          className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
+        >
+          <BarChart3 size={18} />
+        </button>
+        <button
           type="button"
           onClick={onDuoClick}
-          aria-label="Ouvrir le mode Duo"
-          className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
-            isDuoActive 
-              ? "bg-emerald-500 border-emerald-400 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]" 
+          aria-label="Mode Duo"
+          className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all ${
+            isDuoActive
+              ? "bg-emerald-600 border-emerald-500 text-white"
               : "bg-white/5 border-white/10 text-zinc-400 hover:text-white"
           }`}
         >
           <Users size={16} />
-          <span className="hidden md:inline text-xs font-bold uppercase tracking-wider">Mode Duo</span>
+          <span className="hidden md:inline text-xs font-bold uppercase tracking-wider">
+            Duo
+          </span>
         </button>
-
-        <button 
+        <button
           type="button"
           onClick={onLangClick}
           aria-label="Changer de langue"
-          className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
+          className="px-3 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-bold uppercase tracking-wider hover:text-white transition-colors"
         >
-          <Languages size={20} />
+          <span className="inline-flex items-center gap-1.5">
+            <Languages size={14} />
+            {langLabel}
+          </span>
         </button>
-
         <button
           type="button"
-          aria-label="Ajouter aux favoris"
-          className="p-2.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-colors"
+          onClick={onFavoriteClick}
+          aria-label="Favori"
+          aria-pressed={isFavorite}
+          className={`p-2.5 rounded-full border transition-colors ${
+            isFavorite
+              ? "bg-rose-500/20 border-rose-500/40 text-rose-400"
+              : "bg-white/5 border-white/10 text-zinc-400 hover:text-white"
+          }`}
         >
-          <Heart size={20} />
+          <Heart size={18} fill={isFavorite ? "currentColor" : "none"} />
         </button>
-
-        <div
-          role="button"
-          tabIndex={0}
-          aria-label="Paramètres"
-          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors ml-2"
-        >
-          <Settings size={20} className="text-zinc-400" />
-        </div>
       </div>
     </header>
   );

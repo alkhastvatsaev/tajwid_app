@@ -10,65 +10,80 @@ export interface Verse {
   words: Word[];
 }
 
-export const fetchVerseData = async (ref: string): Promise<Verse> => {
-  const [chapter, ayah] = ref.split(':');
-  
-  // Fetch from Quran.com API v4
-  const response = await fetch(
-    `https://api.quran.com/api/v4/verses/by_key/${ref}?words=true&fields=text_uthmani_tajweed`
-  );
-  
-  if (!response.ok) {
-    throw new Error('Failed to fetch verse data');
-  }
-  
-  const data = await response.json();
-  const verse = data.verse;
-  
-  // Get Chapter Name
-  const chapterRes = await fetch(`https://api.quran.com/api/v4/chapters/${chapter}`);
-  const chapterData = await chapterRes.json();
-  const chapterName = chapterData.chapter.name_simple;
+type QuranWord = {
+  char_type_name?: string;
+  text_uthmani?: string;
+  text_imlaei?: string;
+  text_uthmani_tajweed?: string;
+  transliteration?: { text?: string };
+};
 
-  const words: Word[] = verse.words
-    .filter((w: any) => w.char_type_name === 'word')
-    .map((w: any) => ({
-      text: w.text_uthmani || w.text_imlaei,
-      transliteration: w.transliteration.text,
-      tajwid: w.text_uthmani_tajweed || ""
+type VersePayload = {
+  verse_key?: string;
+  words?: QuranWord[];
+};
+
+function mapWords(words: QuranWord[] | undefined): Word[] {
+  return (words || [])
+    .filter((w) => w.char_type_name === "word")
+    .map((w) => ({
+      text: w.text_uthmani || w.text_imlaei || "",
+      transliteration: w.transliteration?.text || "",
+      tajwid: w.text_uthmani_tajweed || "",
     }));
+}
+
+export const fetchVerseData = async (ref: string): Promise<Verse> => {
+  const [chapter] = ref.split(":");
+
+  const response = await fetch(
+    `https://api.quran.com/api/v4/verses/by_key/${ref}?words=true&fields=text_uthmani_tajweed`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch verse data");
+  }
+
+  const data = (await response.json()) as { verse: VersePayload };
+  const verse = data.verse;
+
+  const chapterRes = await fetch(
+    `https://api.quran.com/api/v4/chapters/${chapter}`,
+  );
+  const chapterData = (await chapterRes.json()) as {
+    chapter: { name_simple: string };
+  };
+  const chapterName = chapterData.chapter.name_simple;
 
   return {
     ref,
     title: chapterName,
-    words
+    words: mapWords(verse.words),
   };
 };
 
 export const fetchChapterData = async (chapterId: string): Promise<Verse[]> => {
   const response = await fetch(
-    `https://api.quran.com/api/v4/verses/by_chapter/${chapterId}?words=true&fields=text_uthmani_tajweed&per_page=50`
+    `https://api.quran.com/api/v4/verses/by_chapter/${chapterId}?words=true&fields=text_uthmani_tajweed&per_page=50`,
   );
-  
+
   if (!response.ok) {
-    throw new Error('Failed to fetch chapter data');
+    throw new Error("Failed to fetch chapter data");
   }
-  
-  const data = await response.json();
-  
-  const chapterRes = await fetch(`https://api.quran.com/api/v4/chapters/${chapterId}`);
-  const chapterData = await chapterRes.json();
+
+  const data = (await response.json()) as { verses: VersePayload[] };
+
+  const chapterRes = await fetch(
+    `https://api.quran.com/api/v4/chapters/${chapterId}`,
+  );
+  const chapterData = (await chapterRes.json()) as {
+    chapter: { name_simple: string };
+  };
   const chapterName = chapterData.chapter.name_simple;
 
-  return data.verses.map((v: any) => ({
-    ref: v.verse_key,
+  return data.verses.map((v) => ({
+    ref: v.verse_key || `${chapterId}:0`,
     title: chapterName,
-    words: v.words
-      .filter((w: any) => w.char_type_name === 'word')
-      .map((w: any) => ({
-        text: w.text_uthmani || w.text_imlaei,
-        transliteration: w.transliteration.text,
-        tajwid: w.text_uthmani_tajweed || ""
-      }))
+    words: mapWords(v.words),
   }));
 };

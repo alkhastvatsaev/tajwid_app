@@ -1,12 +1,17 @@
 import type { NextConfig } from "next";
+import withSerwistInit from "@serwist/next";
 import path from "path";
 
+const withSerwist = withSerwistInit({
+  swSrc: "src/app/sw.ts",
+  swDest: "public/sw.js",
+  disable: process.env.NODE_ENV === "development",
+});
+
 const nextConfig: NextConfig = {
-  /* config options here */
   turbopack: {
     root: path.join(__dirname),
   },
-  // Ensure we can use PeerJS in the browser
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -18,4 +23,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSerwist(nextConfig);
