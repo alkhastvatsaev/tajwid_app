@@ -2996,7 +2996,7 @@
 
             // Succès : on cache l'overlay et on marque comme enregistrant
             isRecording = true;
-            lastStreamFingerprint = '';
+            lastMatchedFingerprint = '';
             if (overlay) overlay.style.display = 'none';
             document.getElementById('live-assistant')?.classList.add('visible');
             resetUI();
@@ -3055,40 +3055,13 @@
 
             recognition.onresult = event => {
                 let full = '';
-                let lastFinal = '';
-                let lastConf = 1;
                 for (let i = 0; i < event.results.length; ++i) {
-                    const piece = event.results[i][0].transcript;
-                    full += piece + ' ';
-                    if (event.results[i].isFinal) {
-                        lastFinal = piece;
-                        const c = event.results[i][0].confidence;
-                        if (typeof c === 'number' && c > 0) lastConf = c;
-                    }
+                    full += event.results[i][0].transcript + ' ';
                 }
                 const cleanFull = full.trim();
                 if (!cleanFull) return;
 
-                // Interim : feedback UI seulement (évite validations trop tôt)
-                const lastRes = event.results[event.results.length - 1];
-                if (!lastRes.isFinal) {
-                    updateAssistantHeard(cleanFull, { matched: false, text: cleanFull, interim: true });
-                    return;
-                }
-
-                if (STT_STRICT && lastConf > 0 && lastConf < STT_MIN_CONFIDENCE) {
-                    console.warn('STT_STRICT: confidence trop basse', lastConf, lastFinal);
-                    sessionDiagnostics.errors.push({
-                        time: new Date().toISOString(),
-                        type: 'low_confidence',
-                        confidence: lastConf,
-                        heard: lastFinal
-                    });
-                    updateAssistantHeard(cleanFull, { matched: false, text: cleanFull, lowConfidence: true });
-                    showAssistantFeedback((translations[currentLang].hintRepeat || 'Réessayez') + ` (${Math.round(lastConf * 100)}%)`);
-                    return;
-                }
-
+                // Mode balanced : on matche aussi les interim (sinon Chrome finalise trop tard / jamais)
                 const result = checkWordStream(cleanFull);
                 updateAssistantHeard(cleanFull, result);
             };
@@ -3196,42 +3169,41 @@
         return root.replace(/(.)\1+/g, '$1');
     }
 
-    // === Phase 1.5 STT — mode STRICT (anti faux-positifs) ===
-    // Recherche agent-reach : Web Speech ≠ professeur de tajwīd.
-    // SOTA = forced alignment + GOP / ASR phonétique (wav2vec, TajweedAI hybrid).
-    // En attendant la couche audio : exact/alias + confidence + finals only.
-    const STT_STRICT = true;
-    const STT_MIN_CONFIDENCE = 0.72;
+    // === STT matching — mode BALANCED (strict trop dur sur Web Speech) ===
+    // Web Speech : confidence souvent 0, finals rares → ne pas bloquer dessus.
+    // Anti-faux-positifs : pas de squelette court, forbid confusions, edit ≤2.
+    // API Whisper/Groq = prochaine étape si besoin qualité « professeur ».
+    const STT_MODE = 'balanced'; // 'strict' | 'balanced' | 'legacy'
     const STT_FILLERS = new Set(['امين', 'آمين', 'يا', 'و', 'ثم', 'اه', 'ام']);
-    const STT_WINDOW = STT_STRICT ? 2 : 5;
-    let lastStreamFingerprint = '';
+    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 4;
+    let lastMatchedFingerprint = '';
 
-    // Clés = normalize(arabe). Aliases volontaires uniquement (pas de squelette large).
     const FATIHA_LEXICON = {
-        'انعمت': { aliases: ['انعمت', 'انعمات'], minRootLen: 5, forbid: ['ان', 'انعم', 'نعم'] },
-        'الضالين': { aliases: ['الضالين', 'لضالين'], minRootLen: 5, forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'الضال', 'ضالين'] },
-        'لضالين': { aliases: ['لضالين', 'الضالين'], minRootLen: 5, forbid: ['الدال', 'ظالين', 'الظالين', 'الضال'] },
-        'صراط': { aliases: ['صراط'], minRootLen: 4, forbid: ['سراط', 'السراط'] },
-        'الصراط': { aliases: ['الصراط'], minRootLen: 4, forbid: ['سراط', 'السراط'] },
-        'اياك': { aliases: ['اياك'], minRootLen: 3, forbid: ['يا', 'اك'] },
-        'نستعين': { aliases: ['نستعين'], minRootLen: 5, forbid: ['نستع', 'تعين'] },
-        'اهدنا': { aliases: ['اهدنا'], minRootLen: 4, forbid: ['هدنا', 'اهد'] },
-        'العالمين': { aliases: ['العالمين'], minRootLen: 5, forbid: ['عالمين', 'العلمين'] },
-        'المستقيم': { aliases: ['المستقيم'], minRootLen: 5, forbid: ['مستقيم'] },
-        'المغضوب': { aliases: ['المغضوب'], minRootLen: 5, forbid: ['مغضوب'] },
-        'الحمد': { aliases: ['الحمد'], minRootLen: 4, forbid: ['حمد'] },
-        'الرحمن': { aliases: ['الرحمن'], minRootLen: 4, forbid: ['رحمن'] },
-        'الرحيم': { aliases: ['الرحيم'], minRootLen: 4, forbid: ['رحيم'] },
-        'الله': { aliases: ['الله'], minRootLen: 3, forbid: ['لاه', 'ال'] },
-        'بسم': { aliases: ['بسم'], minRootLen: 3, forbid: ['سم'] },
-        'رب': { aliases: ['رب'], minRootLen: 2, forbid: [] },
-        'مالك': { aliases: ['مالك'], minRootLen: 3, forbid: ['ملك'] },
-        'يوم': { aliases: ['يوم'], minRootLen: 2, forbid: [] },
-        'الدين': { aliases: ['الدين'], minRootLen: 3, forbid: ['دين'] },
-        'نعبد': { aliases: ['نعبد'], minRootLen: 3, forbid: [] },
-        'غير': { aliases: ['غير'], minRootLen: 2, forbid: [] },
-        'عليهم': { aliases: ['عليهم'], minRootLen: 4, forbid: ['علي', 'هم'] },
-        'ولا': { aliases: ['ولا'], minRootLen: 2, forbid: ['لا'] }
+        'انعمت': { aliases: ['انعمت', 'انعمات'], forbid: ['ان', 'نعم'] },
+        'الضالين': { aliases: ['الضالين', 'لضالين', 'ضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين'] },
+        'لضالين': { aliases: ['لضالين', 'الضالين', 'ضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
+        'صراط': { aliases: ['صراط', 'الصراط'], forbid: ['سراط', 'السراط'] },
+        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط'] },
+        'اياك': { aliases: ['اياك', 'اياك'], forbid: ['يا', 'اك'] },
+        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
+        'اهدنا': { aliases: ['اهدنا', 'هدنا'], forbid: [] },
+        'العالمين': { aliases: ['العالمين', 'عالمين'], forbid: [] },
+        'المستقيم': { aliases: ['المستقيم', 'مستقيم'], forbid: [] },
+        'المغضوب': { aliases: ['المغضوب', 'مغضوب'], forbid: [] },
+        'الحمد': { aliases: ['الحمد', 'حمد'], forbid: [] },
+        'الرحمن': { aliases: ['الرحمن', 'رحمن'], forbid: [] },
+        'الرحيم': { aliases: ['الرحيم', 'رحيم'], forbid: [] },
+        'الله': { aliases: ['الله', 'لله'], forbid: ['ال'] },
+        'بسم': { aliases: ['بسم', 'باسم'], forbid: ['سم'] },
+        'رب': { aliases: ['رب'], forbid: [] },
+        'مالك': { aliases: ['مالك', 'ملك'], forbid: [] },
+        'يوم': { aliases: ['يوم'], forbid: [] },
+        'الدين': { aliases: ['الدين', 'دين'], forbid: [] },
+        'نعبد': { aliases: ['نعبد'], forbid: [] },
+        'غير': { aliases: ['غير'], forbid: [] },
+        'عليهم': { aliases: ['عليهم', 'عليهيم'], forbid: ['هم'] },
+        'ولا': { aliases: ['ولا'], forbid: [] },
+        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] }
     };
 
     function editDistance(a, b) {
@@ -3253,18 +3225,15 @@
     }
 
     function getLexiconEntry(targetNorm) {
-        if (FATIHA_LEXICON[targetNorm]) return FATIHA_LEXICON[targetNorm];
-        return { aliases: [], minRootLen: Math.max(3, getRootSkeleton(targetNorm).length), forbid: [] };
+        return FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
     }
 
     function isConfusableReject(hNorm, targetNorm) {
         const pairs = [
             ['سراط', 'صراط'], ['السراط', 'الصراط'],
-            ['ظالين', 'ضالين'], ['الظالين', 'الضالين'], ['دالين', 'ضالين'],
-            ['ت', 'ط'], // weak signal only if full word swap — handled by distance
+            ['ظالين', 'ضالين'], ['الظالين', 'الضالين'], ['دالين', 'ضالين']
         ];
         for (const [bad, good] of pairs) {
-            if (bad.length < 2) continue;
             const b = normalize(bad);
             const g = normalize(good);
             if ((hNorm === b || hNorm.endsWith(b)) && (targetNorm === g || targetNorm.endsWith(g) || targetNorm.includes('ضال') || targetNorm.includes('صراط'))) {
@@ -3285,33 +3254,33 @@
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
 
-        // Trop court vs cible → refuse (empêche « ان » / « يا » / bribes)
-        if (hNorm.length + 1 < target.length && hNorm.length < 4) {
-            return { ok: false, reason: 'too_short' };
-        }
+        // Bribes trop courtes (ex. « ان » pour أنعمت)
+        if (hNorm.length < 2) return { ok: false, reason: 'too_short' };
+        if (target.length >= 4 && hNorm.length <= 2) return { ok: false, reason: 'too_short' };
 
         const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
         if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
 
-        // STRICT : une seule lettre d’écart max, mots assez longs — PAS de squelette اوي
-        if (STT_STRICT) {
-            if (target.length >= 4 && editDistance(hNorm, target) === 1) {
-                return { ok: true, reason: 'near1' };
-            }
-            // Liaison ال uniquement si le corps est exact
-            const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
-            const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
-            if (hNoAl.length >= 3 && (hNoAl === tNoAl || aliases.includes(hNoAl) || aliases.includes('ال' + hNoAl))) {
-                return { ok: true, reason: 'liaison_exact' };
-            }
-            return { ok: false, reason: 'strict_miss' };
+        const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
+        const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
+        if (hNoAl.length >= 3 && (aliases.includes(hNoAl) || hNoAl === tNoAl || aliases.includes('ال' + hNoAl))) {
+            return { ok: true, reason: 'liaison' };
         }
 
-        // Mode souple (legacy) — squelette
-        const hRoot = getRootSkeleton(hNorm);
-        const tRoot = getRootSkeleton(target);
-        const minRoot = lex.minRootLen || 2;
-        if (hRoot === tRoot && hRoot.length >= minRoot) return { ok: true, reason: 'root' };
+        const dist = editDistance(hNorm, target);
+        const maxDist = target.length >= 6 ? 2 : (target.length >= 4 ? 1 : 0);
+        if (dist > 0 && dist <= maxDist) return { ok: true, reason: 'near' + dist };
+
+        // Balanced : squelette seulement si longueurs proches (évite l’ancien laxisme)
+        if (STT_MODE !== 'strict') {
+            const hRoot = getRootSkeleton(hNorm);
+            const tRoot = getRootSkeleton(target);
+            const lenOk = hNorm.length >= Math.ceil(target.length * 0.7);
+            if (hRoot.length >= 3 && hRoot === tRoot && lenOk) {
+                return { ok: true, reason: 'root_safe' };
+            }
+        }
+
         return { ok: false, reason: 'miss' };
     }
 
@@ -3342,10 +3311,10 @@
         let tempIdx = currentIdx;
 
         const fingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
-        if (fingerprint === lastStreamFingerprint) {
+        // Ne dédupliquer que les succès déjà consommés (sinon un interim raté bloque le final)
+        if (fingerprint === lastMatchedFingerprint) {
             return { matched: false, text: transcript, deduped: true };
         }
-        lastStreamFingerprint = fingerprint;
 
         sessionDiagnostics.heard.push({
             time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
@@ -3371,7 +3340,6 @@
             if (!verdict.ok) continue;
 
             const target = normalize(verseData[tempIdx].ar);
-            // Phase 1: pas de faux « Madd oublié » sur variante STT (voir AUDIT-STT)
             const isMaddMissed = false;
 
             sessionDiagnostics.matches.push({
@@ -3391,6 +3359,7 @@
 
         if (matched > 0) {
             currentIdx = tempIdx;
+            lastMatchedFingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
             updateAssistantWords();
             hideAssistantFeedback();
             
