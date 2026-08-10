@@ -1975,7 +1975,7 @@
             <span id="txt-assistant-title">Vérification Whisper</span>
         </div>
         <div id="txt-assistant-layer" style="font-size:0.55rem; color:var(--subtext); line-height:1.35; margin:14px 0 4px; opacity:0.85;">
-            Mot par mot via Groq Whisper (pas Chrome STT)
+            Écoute continue Whisper — validation auto mot à mot
         </div>
         
         <div class="assistant-section">
@@ -1989,7 +1989,7 @@
             <div class="assistant-val heard" id="assistant-heard-word">...</div>
         </div>
 
-        <button type="button" id="whisper-rec-btn" onclick="toggleWhisperRecord()">Appuyer : dire ce mot</button>
+        <button type="button" id="whisper-rec-btn" disabled>Écoute continue — récitez</button>
 
         <div id="assistant-feedback-box" class="assistant-feedback"></div>
     </div>
@@ -2285,12 +2285,14 @@
             assistantTitle: "Vérification Whisper",
             assistantTarget: "Mot cible",
             assistantHeard: "Vous avez dit",
-            assistantLayer: "Mot par mot via Groq Whisper (pas Chrome STT)",
-            whisperHold: "Appuyer : dire ce mot",
-            whisperRecording: "Parlez… puis appuyez pour envoyer",
+            assistantLayer: "Écoute continue Whisper — validation auto mot à mot",
+            whisperHold: "Écoute continue — récitez",
+            whisperListening: "Écoute continue — récitez",
+            whisperHearing: "Je vous écoute…",
+            whisperRecording: "Je vous écoute…",
             whisperChecking: "Analyse Whisper…",
-            whisperFail: "Échec Whisper — réessayez",
-            whisperMiss: "Pas le bon mot — réessayez",
+            whisperFail: "Échec Whisper — continuez",
+            whisperMiss: "Pas encore le bon mot — continuez",
             hintRepeat: "Réessayez : la dictée ou le son ne suffisent pas.",
             hintAlmost: "Presque ! Articulez un peu plus.",
             hintNeedSound: "Son trop court ou silence — continuez à réciter.",
@@ -2358,11 +2360,13 @@
             assistantTarget: "Target word",
             assistantHeard: "You said",
             assistantLayer: "Word-by-word via Groq Whisper (not Chrome STT)",
-            whisperHold: "Tap: say this word",
-            whisperRecording: "Speak… then tap to send",
+            whisperHold: "Continuous listen — recite",
+            whisperListening: "Continuous listen — recite",
+            whisperHearing: "Listening…",
+            whisperRecording: "Listening…",
             whisperChecking: "Whisper analyzing…",
-            whisperFail: "Whisper failed — try again",
-            whisperMiss: "Wrong word — try again",
+            whisperFail: "Whisper failed — keep going",
+            whisperMiss: "Not the right word yet — continue",
             hintRepeat: "Try again: dictation or sound is not enough.",
             hintAlmost: "Almost! Articulate a bit more.",
             hintNeedSound: "Sound too short or silence — keep reciting.",
@@ -2430,11 +2434,13 @@
             assistantTarget: "Целевое слово",
             assistantHeard: "Вы сказали",
             assistantLayer: "Слово за словом через Groq Whisper (не Chrome STT)",
-            whisperHold: "Нажать: сказать слово",
-            whisperRecording: "Говорите… затем нажмите",
+            whisperHold: "Слушаю непрерывно — читайте",
+            whisperListening: "Слушаю непрерывно — читайте",
+            whisperHearing: "Слушаю…",
+            whisperRecording: "Слушаю…",
             whisperChecking: "Анализ Whisper…",
-            whisperFail: "Ошибка Whisper — ещё раз",
-            whisperMiss: "Не то слово — ещё раз",
+            whisperFail: "Ошибка Whisper — продолжайте",
+            whisperMiss: "Ещё не то слово — продолжайте",
             hintRepeat: "Ещё раз: диктовки или звука недостаточно.",
             hintAlmost: "Почти! Артикулируйте немного четче.",
             hintNeedSound: "Слишком коротко или тишина — продолжайте.",
@@ -2505,8 +2511,9 @@
         if (document.getElementById('txt-assistant-heard')) document.getElementById('txt-assistant-heard').innerText = t.assistantHeard;
         if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
         const whisperBtnLang = document.getElementById('whisper-rec-btn');
-        if (whisperBtnLang && t.whisperHold && !whisperBtnLang.classList.contains('recording') && !whisperBtnLang.disabled) {
-            whisperBtnLang.innerText = t.whisperHold;
+        if (whisperBtnLang && (t.whisperListening || t.whisperHold) && !whisperBtnLang.classList.contains('recording')) {
+            whisperBtnLang.innerText = t.whisperListening || t.whisperHold;
+            whisperBtnLang.disabled = true;
         }
         if (document.getElementById('txt-expert-title')) {
             const icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/><path d="M12 2L2 7L12 12L22 7L12 2Z"/></svg>';
@@ -3015,14 +3022,21 @@
         startRecognition();
     }
 
-    // === Vérification mot-par-mot via Groq Whisper (plus Chrome STT en primaire) ===
+    // === Whisper continu : VAD → clip → Groq → validation auto (sans bouton) ===
     const VOICE_ENGINE = 'whisper'; // 'whisper' | 'webspeech'
+    const WHISPER_VAD_THRESH = 14;
+    const WHISPER_SILENCE_MS = 520;
+    const WHISPER_MIN_SPEECH_MS = 280;
+    const WHISPER_MAX_CLIP_MS = 12000;
     let whisperMediaRec = null;
     let whisperChunks = [];
     let whisperMime = 'audio/webm';
     let whisperRecording = false;
     let whisperBusy = false;
     let whisperStartedAt = 0;
+    let whisperLastVoiceAt = 0;
+    let whisperVadTimer = null;
+    let whisperAutoOn = false;
 
     function getTranscribeUrl() {
         const host = location.hostname;
@@ -3032,20 +3046,29 @@
         return '/api/transcribe';
     }
 
+    function getInstantVoiceEnergy() {
+        if (!analyser) return 0;
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) sum += data[i];
+        return sum / data.length;
+    }
+
     function setWhisperBtnState(state) {
         const btn = document.getElementById('whisper-rec-btn');
         if (!btn) return;
         const t = translations[currentLang] || translations.fr;
         btn.classList.remove('recording');
-        btn.disabled = false;
-        if (state === 'idle') {
-            btn.innerText = t.whisperHold || 'Appuyer : dire ce mot';
+        btn.disabled = true; // auto mode : pas de clic requis
+        btn.style.cursor = 'default';
+        if (state === 'idle' || state === 'listening') {
+            btn.innerText = t.whisperListening || 'Écoute continue — récitez';
         } else if (state === 'recording') {
             btn.classList.add('recording');
-            btn.innerText = t.whisperRecording || 'Parlez…';
+            btn.innerText = t.whisperHearing || 'Je vous écoute…';
         } else if (state === 'checking') {
-            btn.disabled = true;
-            btn.innerText = t.whisperChecking || 'Analyse…';
+            btn.innerText = t.whisperChecking || 'Analyse Whisper…';
         }
     }
 
@@ -3062,50 +3085,106 @@
         });
     }
 
-    async function toggleWhisperRecord() {
-        if (VOICE_ENGINE !== 'whisper' || !isRecording || whisperBusy) return;
-        if (!whisperRecording) {
-            await startWhisperClip();
-        } else {
-            await stopWhisperClipAndVerify();
+    function stopWhisperAutoLoop() {
+        whisperAutoOn = false;
+        if (whisperVadTimer) {
+            clearInterval(whisperVadTimer);
+            whisperVadTimer = null;
+        }
+        if (whisperMediaRec && whisperMediaRec.state !== 'inactive') {
+            try { whisperMediaRec.onstop = null; whisperMediaRec.stop(); } catch (e) {}
+        }
+        whisperMediaRec = null;
+        whisperRecording = false;
+        whisperChunks = [];
+    }
+
+    function startWhisperAutoLoop() {
+        stopWhisperAutoLoop();
+        whisperAutoOn = true;
+        setWhisperBtnState('listening');
+        hideAssistantFeedback();
+        showAssistantFeedback(translations[currentLang]?.whisperListening || 'Écoute continue — récitez');
+        whisperVadTimer = setInterval(() => {
+            if (!whisperAutoOn || !isRecording || VOICE_ENGINE !== 'whisper') return;
+            tickWhisperVad();
+        }, 80);
+    }
+
+    function tickWhisperVad() {
+        if (whisperBusy) return;
+        const e = getInstantVoiceEnergy();
+        const now = performance.now();
+        const voiced = e >= WHISPER_VAD_THRESH;
+
+        if (voiced) {
+            whisperLastVoiceAt = now;
+            if (!whisperRecording) {
+                startWhisperClipAuto();
+            } else if (now - whisperStartedAt > WHISPER_MAX_CLIP_MS) {
+                // Clip trop long → coupe et envoie
+                stopWhisperClipAndVerify(true);
+            }
+            return;
+        }
+
+        // Silence
+        if (whisperRecording && whisperLastVoiceAt && (now - whisperLastVoiceAt) >= WHISPER_SILENCE_MS) {
+            const speechMs = whisperLastVoiceAt - whisperStartedAt;
+            if (speechMs >= WHISPER_MIN_SPEECH_MS) {
+                stopWhisperClipAndVerify(true);
+            } else {
+                // Bribe trop courte : jeter
+                try { whisperMediaRec?.stop(); } catch (err) {}
+                whisperMediaRec = null;
+                whisperRecording = false;
+                whisperChunks = [];
+                setWhisperBtnState('listening');
+            }
         }
     }
 
-    async function startWhisperClip() {
-        if (!currentStream) {
-            showAssistantFeedback(translations[currentLang]?.statusMic || 'Micro requis');
-            return;
-        }
+    // Legacy no-op (bouton désactivé en auto)
+    async function toggleWhisperRecord() {
+        return;
+    }
+
+    function pickWhisperMime() {
         const formats = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/aac', 'audio/ogg'];
-        whisperMime = '';
         for (const f of formats) {
-            if (window.MediaRecorder && MediaRecorder.isTypeSupported(f)) { whisperMime = f; break; }
+            if (window.MediaRecorder && MediaRecorder.isTypeSupported(f)) return f;
         }
+        return '';
+    }
+
+    function startWhisperClipAuto() {
+        if (!currentStream || whisperRecording || whisperBusy) return;
+        const mime = pickWhisperMime();
         try {
             whisperChunks = [];
             whisperMediaRec = new MediaRecorder(
                 currentStream,
-                whisperMime ? { mimeType: whisperMime, audioBitsPerSecond: 96000 } : { audioBitsPerSecond: 96000 }
+                mime ? { mimeType: mime, audioBitsPerSecond: 96000 } : { audioBitsPerSecond: 96000 }
             );
-            whisperMime = whisperMediaRec.mimeType || whisperMime || 'audio/webm';
-            whisperMediaRec.ondataavailable = (e) => {
-                if (e.data && e.data.size > 0) whisperChunks.push(e.data);
+            whisperMime = whisperMediaRec.mimeType || mime || 'audio/webm';
+            whisperMediaRec.ondataavailable = (ev) => {
+                if (ev.data && ev.data.size > 0) whisperChunks.push(ev.data);
             };
-            whisperMediaRec.start(200);
+            whisperMediaRec.start(120);
             whisperRecording = true;
             whisperStartedAt = performance.now();
+            whisperLastVoiceAt = whisperStartedAt;
             setWhisperBtnState('recording');
-            hideAssistantFeedback();
         } catch (err) {
-            console.error('whisper MediaRecorder', err);
-            showAssistantFeedback(translations[currentLang]?.whisperFail || 'Échec enregistrement');
+            console.error('whisper auto start', err);
+            whisperRecording = false;
         }
     }
 
-    async function stopWhisperClipAndVerify() {
+    async function stopWhisperClipAndVerify(fromVad) {
         if (!whisperMediaRec || whisperMediaRec.state === 'inactive') {
             whisperRecording = false;
-            setWhisperBtnState('idle');
+            if (fromVad) setWhisperBtnState('listening');
             return;
         }
         const elapsed = performance.now() - whisperStartedAt;
@@ -3113,18 +3192,15 @@
         setWhisperBtnState('checking');
 
         const blob = await new Promise((resolve) => {
-            whisperMediaRec.onstop = () => {
-                resolve(new Blob(whisperChunks, { type: whisperMime }));
-            };
+            whisperMediaRec.onstop = () => resolve(new Blob(whisperChunks, { type: whisperMime }));
             try { whisperMediaRec.stop(); } catch (e) { resolve(new Blob([])); }
         });
         whisperRecording = false;
         whisperMediaRec = null;
 
-        if (elapsed < 350 || !blob || blob.size < 800) {
+        if (elapsed < WHISPER_MIN_SPEECH_MS || !blob || blob.size < 600) {
             whisperBusy = false;
-            setWhisperBtnState('idle');
-            showAssistantFeedback(translations[currentLang]?.hintNeedSound || 'Trop court');
+            setWhisperBtnState('listening');
             return;
         }
 
@@ -3136,43 +3212,38 @@
                 body: JSON.stringify({ audioBase64, mimeType: whisperMime })
             });
             const data = await res.json().catch(() => ({}));
-            if (!res.ok) {
-                throw new Error(data.detail || data.error || ('HTTP ' + res.status));
-            }
+            if (!res.ok) throw new Error(data.detail || data.error || ('HTTP ' + res.status));
             const text = (data.text || '').trim();
             const heardEl = document.getElementById('assistant-heard-word');
             if (heardEl) {
                 heardEl.innerText = text || '—';
                 heardEl.classList.remove('match');
             }
-
             sessionDiagnostics.heard.push({
                 time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + 's',
                 raw: text,
-                engine: 'groq-whisper',
+                engine: 'groq-whisper-auto',
                 currentIdx: currentIdx,
                 normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : 'FIN'
             });
 
-            if (!text) {
-                showAssistantFeedback(translations[currentLang]?.whisperMiss || 'Rien entendu');
-            } else {
+            if (text) {
                 const result = checkWordStream(text);
                 if (result && result.matched) {
                     if (heardEl) heardEl.classList.add('match');
                     hideAssistantFeedback();
                 } else {
-                    showAssistantFeedback(translations[currentLang]?.whisperMiss || 'Pas le bon mot');
+                    showAssistantFeedback(translations[currentLang]?.whisperMiss || 'Pas encore le bon mot');
                 }
                 updateAssistantHeard(text, result);
             }
         } catch (err) {
-            console.error('whisper verify', err);
+            console.error('whisper auto verify', err);
             showAssistantFeedback((translations[currentLang]?.whisperFail || 'Échec') + ' — ' + (err.message || ''));
             sessionDiagnostics.errors.push({ time: new Date().toISOString(), type: 'whisper_fail', detail: String(err.message || err) });
         } finally {
             whisperBusy = false;
-            setWhisperBtnState('idle');
+            if (isRecording && whisperAutoOn) setWhisperBtnState('listening');
         }
     }
 
@@ -3252,7 +3323,7 @@
                 if (ghost && verseData[currentIdx]) {
                     ghost.innerText = verseData[currentIdx].ar;
                 }
-                showAssistantFeedback(translations[currentLang]?.whisperHold || 'Appuyer : dire ce mot');
+                startWhisperAutoLoop();
                 return;
             }
 
@@ -3475,7 +3546,7 @@
     // Limite : si Chrome écrit déjà le BON mot malgré la faute → impossible en texte seul.
     const STT_MODE = 'balanced'; // 'strict' | 'balanced' | 'legacy'
     const STT_FILLERS = new Set(['امين', 'آمين', 'يا', 'و', 'ثم', 'اه', 'ام']);
-    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 4;
+    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 12; // whisper auto: phrases entières
     let lastMatchedFingerprint = '';
 
     const FATIHA_LEXICON = {
@@ -3892,6 +3963,7 @@
         sessionDiagnostics.endTime = new Date().toISOString();
 
         isRecording = false;
+        stopWhisperAutoLoop();
         recognition?.stop();
         mediaRec?.stop();
         cleanupMic();
