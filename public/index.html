@@ -1972,10 +1972,10 @@
     <div id="live-assistant">
         <div class="assistant-header">
             <div class="pulse-red"></div>
-            <span id="txt-assistant-title">Vérification Whisper</span>
+            <span id="txt-assistant-title">Suivi de récitation</span>
         </div>
         <div id="txt-assistant-layer" style="font-size:0.55rem; color:var(--subtext); line-height:1.35; margin:14px 0 4px; opacity:0.85;">
-            Écoute continue Whisper — validation auto mot à mot
+            Mot par mot en temps réel (Chrome)
         </div>
         
         <div class="assistant-section">
@@ -1989,7 +1989,7 @@
             <div class="assistant-val heard" id="assistant-heard-word">...</div>
         </div>
 
-        <button type="button" id="whisper-rec-btn" disabled>Écoute continue — récitez</button>
+        <button type="button" id="whisper-rec-btn" disabled style="display:none">Écoute continue</button>
 
         <div id="assistant-feedback-box" class="assistant-feedback"></div>
     </div>
@@ -2261,7 +2261,7 @@
             warnGhunnah: "Nez ! (Ghunnah)",
             warnIkhfa: "Cacher ! (Ikhfā’)",
             warnQalqalah: "Rebond ! (Qalqalah)",
-            statusListen: "Whisper actif — mot par mot",
+            statusListen: "Suivi actif — récitez",
             statusMic: "Veuillez autoriser le micro",
             restart: "Recommencer",
             dailyLabel: "Verset du Jour",
@@ -2282,10 +2282,10 @@
             modalUnderstood: "Compris",
             reportBtn: "Rapport Technique",
             reportSent: "Rapport envoyé au serveur !",
-            assistantTitle: "Vérification Whisper",
+            assistantTitle: "Suivi de récitation",
             assistantTarget: "Mot cible",
-            assistantHeard: "Vous avez dit",
-            assistantLayer: "Écoute continue Whisper — validation auto mot à mot",
+            assistantHeard: "Vous dites",
+            assistantLayer: "Suivi temps réel (Chrome). Whisper réservé pour plus tard.",
             whisperHold: "Écoute continue — récitez",
             whisperListening: "Écoute continue — récitez",
             whisperHearing: "Je vous écoute…",
@@ -2293,7 +2293,7 @@
             whisperChecking: "Analyse Whisper…",
             whisperFail: "Échec Whisper — continuez",
             whisperMiss: "Pas encore le bon mot — continuez",
-            hintRepeat: "Réessayez : la dictée ou le son ne suffisent pas.",
+            hintRepeat: "Réessayez : articulez un peu plus clairement.",
             hintAlmost: "Presque ! Articulez un peu plus.",
             hintNeedSound: "Son trop court ou silence — continuez à réciter.",
             hintNeedMadd: "Allongez davantage (contrôle durée / madd).",
@@ -2335,7 +2335,7 @@
             warnGhunnah: "Nose! (Ghunnah)",
             warnIkhfa: "Hide! (Ikhfā’)",
             warnQalqalah: "Bounce! (Qalqalah)",
-            statusListen: "Whisper on — word by word",
+            statusListen: "Tracking on — recite",
             statusMic: "Please allow microphone",
             restart: "Restart",
             dailyLabel: "Verse of the Day",
@@ -2356,10 +2356,10 @@
             modalUnderstood: "Understood",
             reportBtn: "Technical Report",
             reportSent: "Report sent to server!",
-            assistantTitle: "Whisper check",
+            assistantTitle: "Recitation tracking",
             assistantTarget: "Target word",
-            assistantHeard: "You said",
-            assistantLayer: "Word-by-word via Groq Whisper (not Chrome STT)",
+            assistantHeard: "You say",
+            assistantLayer: "Real-time tracking (Chrome). Whisper saved for later.",
             whisperHold: "Continuous listen — recite",
             whisperListening: "Continuous listen — recite",
             whisperHearing: "Listening…",
@@ -3023,7 +3023,7 @@
     }
 
     // === Whisper continu : VAD → clip → Groq → validation auto (sans bouton) ===
-    const VOICE_ENGINE = 'whisper'; // 'whisper' | 'webspeech'
+    const VOICE_ENGINE = 'webspeech'; // 'whisper' = latence trop forte en continu ; webspeech = suivi temps réel
     const WHISPER_VAD_THRESH = 14;
     const WHISPER_SILENCE_MS = 520;
     const WHISPER_MIN_SPEECH_MS = 280;
@@ -3736,9 +3736,9 @@
 
             const target = normalize(verseData[tempIdx].ar);
             const ruleFull = verseData[tempIdx].ruleType || document.getElementById(`box-${tempIdx}`)?.dataset?.ruleFull || "";
-            // Whisper : l’audio vient déjà d’un clip utilisateur — pas de 2e gate durée
-            let acoustic = { ok: true, layer: 'whisper', voicedMs: 0, minMs: 0 };
-            if (typeof VOICE_ENGINE === 'undefined' || VOICE_ENGINE !== 'whisper') {
+            // Gate durée désactivé sur le suivi temps réel (évite faux refus + latence ressentie)
+            let acoustic = { ok: true, layer: 'webspeech', voicedMs: 0, minMs: 0 };
+            if (false && (typeof VOICE_ENGINE === 'undefined' || VOICE_ENGINE !== 'whisper')) {
                 acoustic = PronunciationJudge.evaluate({
                     expectedAr: verseData[tempIdx].ar,
                     ruleType: ruleFull,
