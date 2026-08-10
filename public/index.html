@@ -1430,33 +1430,53 @@
         html[data-theme="light"] .theme-toggle-btn .icon-sun { display: block; }
         html[data-theme="light"] .theme-toggle-btn .icon-moon { display: none; }
 
-        /* Light theme surface overrides (hardcoded dark rgba / white text) */
+        /* Light theme — full surface / contrast coverage */
         html[data-theme="light"] body {
             background-image:
-                radial-gradient(at 0% 0%, rgba(4, 120, 87, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.06) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(4, 120, 87, 0.07) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%);
         }
         html[data-theme="light"] body.celebration-mode {
             background-color: #ECFDF5;
             background-image: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
         }
+
+        /* Text that was hardcoded white (NOT on accent fills) */
         html[data-theme="light"] .daily-ref,
         html[data-theme="light"] #start-overlay p,
         html[data-theme="light"] .surah-name,
         html[data-theme="light"] .modal-title,
         html[data-theme="light"] .duo-choice-card h2,
         html[data-theme="light"] .duo-name,
-        html[data-theme="light"] .v-btn.active,
         html[data-theme="light"] .profile-btn,
         html[data-theme="light"] .heart-btn,
         html[data-theme="light"] .lang-menu-btn:hover,
         html[data-theme="light"] .lang-options .lang-btn:hover,
         html[data-theme="light"] .v-btn:hover,
         html[data-theme="light"] .expert-title,
-        html[data-theme="light"] .assistant-val.target,
-        html[data-theme="light"] .assistant-val.heard {
+        html[data-theme="light"] .rule-word,
+        html[data-theme="light"] .legend-letters,
+        html[data-theme="light"] .assistant-val,
+        html[data-theme="light"] .btn-duo,
+        html[data-theme="light"] .search-box,
+        html[data-theme="light"] #duo-selector-overlay h1,
+        html[data-theme="light"] #txt-stats-goal {
             color: var(--text);
         }
+
+        /* Keep white / on-accent on filled controls */
+        html[data-theme="light"] .v-btn.active,
+        html[data-theme="light"] .lang-options .lang-btn.active,
+        html[data-theme="light"] .manual-validate-btn,
+        html[data-theme="light"] .expert-toggle,
+        html[data-theme="light"] .close-modal,
+        html[data-theme="light"] #restart-btn,
+        html[data-theme="light"] #download-btn button,
+        html[data-theme="light"] .rule-badge,
+        html[data-theme="light"] .legend-label {
+            color: var(--on-accent) !important;
+        }
+
         html[data-theme="light"] .verse-selector,
         html[data-theme="light"] .daily-card,
         html[data-theme="light"] .stat-card,
@@ -1464,53 +1484,133 @@
         html[data-theme="light"] .duo-panel,
         html[data-theme="light"] .search-box,
         html[data-theme="light"] .lang-selector,
-        html[data-theme="light"] .mini-lang-selector {
+        html[data-theme="light"] .lang-options,
+        html[data-theme="light"] .tajwid-modal,
+        html[data-theme="light"] .summary-card,
+        html[data-theme="light"] .surah-card,
+        html[data-theme="light"] .rule-item,
+        html[data-theme="light"] .legend-item {
             background: var(--surface);
             border-color: var(--border);
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
         }
-        html[data-theme="light"] #start-overlay,
+        html[data-theme="light"] .verse-selector {
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+        }
+        html[data-theme="light"] .lang-options {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+        }
+        html[data-theme="light"] .tajwid-modal {
+            background: #FFFFFF;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+        }
+        html[data-theme="light"] .daily-card:hover,
+        html[data-theme="light"] .surah-card:hover,
+        html[data-theme="light"] .duo-choice-card:hover,
+        html[data-theme="light"] .rule-item:hover,
+        html[data-theme="light"] .v-btn:hover {
+            background: var(--surface-hover);
+        }
+        html[data-theme="light"] .lang-options .lang-btn:hover {
+            background: var(--surface-hover);
+        }
+
+        html[data-theme="light"] .profile-btn,
+        html[data-theme="light"] .lang-menu-btn,
+        html[data-theme="light"] .theme-toggle-btn {
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        html[data-theme="light"] .btn-duo {
+            background: var(--surface-hover);
+            border-color: var(--border);
+        }
+        html[data-theme="light"] .btn-duo:hover {
+            color: var(--on-accent) !important;
+        }
+
+        /* Overlays: opaque boot screen, translucent modals */
+        html[data-theme="light"] #start-overlay {
+            background: var(--bg) !important;
+        }
         html[data-theme="light"] #duo-selector-overlay,
         html[data-theme="light"] #modal-overlay,
         html[data-theme="light"] .modal-overlay {
             background: var(--overlay-scrim) !important;
         }
+
         html[data-theme="light"] #expert-panel,
         html[data-theme="light"] #live-assistant {
             background: var(--panel-bg);
             border-color: var(--border);
             box-shadow: -10px 0 40px rgba(15, 23, 42, 0.08);
         }
+        html[data-theme="light"] #expert-panel {
+            border-left-color: var(--border);
+        }
+        html[data-theme="light"] .expert-legend {
+            border-top-color: var(--border);
+        }
+        html[data-theme="light"] .assistant-val {
+            background: var(--surface-hover);
+        }
+
         html[data-theme="light"] .word-box {
             box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
         }
         html[data-theme="light"] .word-box:hover {
             border-color: #D1D5DB;
         }
+        html[data-theme="light"] .word-box.correct {
+            background: rgba(5, 150, 105, 0.08);
+        }
         html[data-theme="light"] .verse-marker {
             background: #F3F4F6;
             border-color: var(--border);
             box-shadow: none;
         }
-        html[data-theme="light"] .smart-progress-bar {
+        html[data-theme="light"] .verse-marker:hover {
             background: #E5E7EB;
         }
+        html[data-theme="light"] .smart-progress-bar,
         html[data-theme="light"] .progress-container {
             background: #E5E7EB;
+        }
+        html[data-theme="light"] .tajwid-warning {
+            background: rgba(255, 255, 255, 0.95);
+            color: #C2410C;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        html[data-theme="light"] #restart-btn:hover {
+            background: #047857;
         }
         html[data-theme="light"] #report-diag-btn {
             background: var(--surface-hover) !important;
             color: var(--text) !important;
             border-color: var(--border) !important;
         }
+        html[data-theme="light"] #txt-browser-close,
+        html[data-theme="light"] #txt-import-cancel,
+        html[data-theme="light"] .close-modal[style*="transparent"] {
+            background: transparent !important;
+            color: var(--text) !important;
+            border: 1px solid var(--border) !important;
+        }
         html[data-theme="light"] #ghost-word-container {
             color: var(--accent);
-            opacity: 0.06;
+            opacity: 0.08;
         }
-        html[data-theme="light"] h1[style*="color: white"],
-        html[data-theme="light"] [style*="color:white"],
-        html[data-theme="light"] [style*="color: white"] {
-            color: var(--text) !important;
+        html[data-theme="light"] .loading-spinner {
+            border-color: var(--border);
+            border-top-color: var(--accent);
+        }
+        html[data-theme="light"] .search-box::placeholder {
+            color: var(--subtext);
         }
     </style>
     <script>
