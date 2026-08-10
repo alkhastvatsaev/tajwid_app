@@ -136,17 +136,19 @@ Fonctions critiques (ne pas casser sans tests) :
 - `FATIHA_ONLY` : boot sur sourate 1 seulement, header ayah 1–7, import/browser/daily coupés.
 - Objectif : surface de test = ~7 āyāt, vocabulaire fermé.
 
-### Phase 1 — Moteur texte « Fātiḥah-proof » (**shippé**)
+### Phase 1.5 → 1.6 — Mode `balanced` (ship)
 
-Implémenté dans `public/index.html` :
+Le mode `strict` (finals only + confidence ≥ 0.72) **cassait** la validation : Chrome renvoie souvent `confidence=0` et peu de `isFinal`.
 
-1. **`FATIHA_LEXICON`** + `matchFatihaWord` (aliases, `minRootLen`, `forbid`)
-2. **Fenêtre** `STT_WINDOW=5` + skip fillers + fingerprint anti-doublon
-3. **Idempotence** via `processMatchedWord` + boxes `.correct`
-4. **Confusions** ص/س و ض/ظ refusées
-5. **`ان` seul** ne valide plus *anʿamta* (minRoot / forbid)
-6. **Live assistant** réaffiché (`.visible`)
-7. **maddMissed** désactivé en Phase 1 (plus de faux positifs texte)
+`STT_MODE = 'balanced'` :
+- match interim + final
+- aliases STT courants
+- edit distance 1–2 selon longueur
+- squelette seulement si longueur ≥ 70 % de la cible
+- forbid confusions ص/س ض/ظ
+- fingerprint uniquement après succès
+
+**API performante ?** Utile pour la couche professeur (Whisper/Groq/NeMo Coran + GOP), pas obligatoire pour revalider le tracking. Brancher une API = prochaine étape si balanced reste insuffisant.
 
 ### Phase 2 — Feedback tajwīd textuel honnête
 
