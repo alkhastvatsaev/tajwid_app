@@ -2035,6 +2035,11 @@
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
             </div>
             <p id="txt-start" style="font-weight: 500;">Touchez pour commencer</p>
+
+            <label id="dataset-optin-label" onclick="event.stopPropagation();" style="display:flex; align-items:flex-start; gap:10px; max-width:280px; text-align:left; font-size:0.72rem; line-height:1.35; color:var(--subtext); cursor:pointer; user-select:none;">
+                <input type="checkbox" id="dataset-optin" onclick="event.stopPropagation();" style="margin-top:3px; accent-color:var(--accent); flex-shrink:0;">
+                <span id="txt-dataset-optin">J’accepte d’enregistrer cette Fātiḥah (audio) pour améliorer l’app — uniquement si coché</span>
+            </label>
             
             <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); openDuoSelector()">MODE DUO</button>
 
@@ -2236,6 +2241,9 @@
     let recognition = null;
     let mediaRec = null;
     let audioChunks = [];
+    let datasetOptIn = false;
+    let datasetMimeType = 'audio/webm';
+    let datasetSaveInFlight = false;
     let currentStream = null;
     let sessionDiagnostics = {
         ref: "",
@@ -2286,6 +2294,10 @@
             assistantTarget: "Mot cible",
             assistantHeard: "Vous dites",
             assistantLayer: "Suivi temps réel (Chrome). Whisper réservé pour plus tard.",
+            datasetOptIn: "J’accepte d’enregistrer cette Fātiḥah (audio) pour améliorer l’app — uniquement si coché",
+            datasetSaved: "Enregistrement sauvegardé (téléchargement + cloud)",
+            datasetSaveFail: "Téléchargé localement — envoi cloud échoué",
+            datasetNoAudio: "Opt-in actif mais aucun audio capturé",
             whisperHold: "Écoute continue — récitez",
             whisperListening: "Écoute continue — récitez",
             whisperHearing: "Je vous écoute…",
@@ -2360,6 +2372,10 @@
             assistantTarget: "Target word",
             assistantHeard: "You say",
             assistantLayer: "Real-time tracking (Chrome). Whisper saved for later.",
+            datasetOptIn: "I agree to record this Fātiḥah (audio) to improve the app — only if checked",
+            datasetSaved: "Recording saved (download + cloud)",
+            datasetSaveFail: "Downloaded locally — cloud upload failed",
+            datasetNoAudio: "Opt-in on but no audio captured",
             whisperHold: "Continuous listen — recite",
             whisperListening: "Continuous listen — recite",
             whisperHearing: "Listening…",
@@ -2434,6 +2450,10 @@
             assistantTarget: "Целевое слово",
             assistantHeard: "Вы сказали",
             assistantLayer: "Слово за словом через Groq Whisper (не Chrome STT)",
+            datasetOptIn: "Согласен записать эту Фатиху (аудио) для улучшения приложения — только если отмечено",
+            datasetSaved: "Запись сохранена (скачивание + облако)",
+            datasetSaveFail: "Скачано локально — облако не удалось",
+            datasetNoAudio: "Opt-in включён, но аудио нет",
             whisperHold: "Слушаю непрерывно — читайте",
             whisperListening: "Слушаю непрерывно — читайте",
             whisperHearing: "Слушаю…",
@@ -2510,6 +2530,9 @@
         if (document.getElementById('txt-assistant-target')) document.getElementById('txt-assistant-target').innerText = t.assistantTarget;
         if (document.getElementById('txt-assistant-heard')) document.getElementById('txt-assistant-heard').innerText = t.assistantHeard;
         if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
+        if (document.getElementById('txt-dataset-optin') && t.datasetOptIn) {
+            document.getElementById('txt-dataset-optin').innerText = t.datasetOptIn;
+        }
         const whisperBtnLang = document.getElementById('whisper-rec-btn');
         if (whisperBtnLang && (t.whisperListening || t.whisperHold) && !whisperBtnLang.classList.contains('recording')) {
             whisperBtnLang.innerText = t.whisperListening || t.whisperHold;
@@ -3283,6 +3306,7 @@
             }
             console.log("Stream prêt");
 
+            datasetOptIn = !!document.getElementById('dataset-optin')?.checked;
             sessionDiagnostics = {
                 ref: VERSES_LIBRARY[activeVerseIdx]?.ref || "Inconnu",
                 expected: verseData.map(w => normalize(w.ar)),
@@ -3290,7 +3314,8 @@
                 matches: [],
                 errors: [],
                 startTime: performance.now(),
-                engine: VOICE_ENGINE
+                engine: VOICE_ENGINE,
+                datasetOptIn: datasetOptIn
             };
 
             isRecording = true;
@@ -3319,6 +3344,21 @@
             }
 
             if (VOICE_ENGINE === 'whisper') {
+                // Même en mode whisper : enregistrement session si opt-in dataset
+                try {
+                    const formats = ['audio/webm', 'audio/mp4', 'audio/aac', 'audio/ogg'];
+                    let mimeType = '';
+                    for (const f of formats) {
+                        if (MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
+                    }
+                    mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: 64000 } : { audioBitsPerSecond: 64000 });
+                    datasetMimeType = mediaRec.mimeType || mimeType || 'audio/webm';
+                    audioChunks = [];
+                    mediaRec.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+                    mediaRec.start(1000);
+                } catch (mrErr) {
+                    console.warn("MediaRecorder non supporté:", mrErr);
+                }
                 const ghost = document.getElementById('ghost-word-container');
                 if (ghost && verseData[currentIdx]) {
                     ghost.innerText = verseData[currentIdx].ar;
@@ -3334,6 +3374,7 @@
                     if (MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
                 }
                 mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: 64000 } : { audioBitsPerSecond: 64000 });
+                datasetMimeType = mediaRec.mimeType || mimeType || 'audio/webm';
                 audioChunks = [];
                 mediaRec.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
                 mediaRec.start(1000);
@@ -3962,11 +4003,27 @@
         sessionDiagnostics.final_transcription = finalRaw;
         sessionDiagnostics.endTime = new Date().toISOString();
 
+        const shouldSaveDataset = datasetOptIn;
+        const stopRecPromise = new Promise((resolve) => {
+            if (mediaRec && mediaRec.state !== 'inactive') {
+                mediaRec.onstop = () => resolve();
+                try { mediaRec.stop(); } catch (e) { resolve(); }
+            } else {
+                resolve();
+            }
+        });
+
         isRecording = false;
         stopWhisperAutoLoop();
         recognition?.stop();
-        mediaRec?.stop();
-        cleanupMic();
+
+        stopRecPromise.then(() => {
+            cleanupMic();
+            if (shouldSaveDataset) {
+                saveDatasetRecording().catch((err) => console.error('dataset save', err));
+            }
+        });
+
         document.getElementById('live-assistant')?.classList.remove('visible');
         markAsCompleted(VERSES_LIBRARY[activeVerseIdx].ref);
         document.body.classList.add('celebration-mode');
@@ -3977,7 +4034,115 @@
         document.getElementById('download-btn')?.classList.add('visible');
     }
 
+    function datasetStamp() {
+        const d = new Date();
+        const p = (n) => String(n).padStart(2, '0');
+        return `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
+    }
 
+    function triggerBrowserDownload(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+
+    function getSaveRecitationUrl() {
+        const host = location.hostname;
+        if (host === 'localhost' || host === '127.0.0.1') {
+            return 'https://tajwid-app-vatsaev.vercel.app/api/save-recitation';
+        }
+        return '/api/save-recitation';
+    }
+
+    async function blobToBase64Raw(blob) {
+        const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(String(reader.result || ''));
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+        const i = dataUrl.indexOf(',');
+        return i >= 0 ? dataUrl.slice(i + 1) : dataUrl;
+    }
+
+    async function saveDatasetRecording() {
+        if (datasetSaveInFlight) return;
+        const t = translations[currentLang] || translations.fr;
+        if (!audioChunks.length) {
+            showAssistantFeedback(t.datasetNoAudio || 'Aucun audio');
+            return;
+        }
+        datasetSaveInFlight = true;
+        const stamp = datasetStamp();
+        const mime = datasetMimeType || 'audio/webm';
+        const ext = mime.includes('mp4') ? 'mp4' : (mime.includes('ogg') ? 'ogg' : 'webm');
+        const audioBlob = new Blob(audioChunks, { type: mime });
+        const meta = {
+            consent: true,
+            ref: VERSES_LIBRARY[activeVerseIdx]?.ref || sessionDiagnostics.ref || '',
+            timestamp: new Date().toISOString(),
+            engine: sessionDiagnostics.engine || VOICE_ENGINE,
+            expected: sessionDiagnostics.expected || [],
+            matches: sessionDiagnostics.matches || [],
+            heard: sessionDiagnostics.heard || [],
+            errors: sessionDiagnostics.errors || [],
+            userAgent: navigator.userAgent,
+            mimeType: mime
+        };
+        const metaBlob = new Blob([JSON.stringify(meta, null, 2)], { type: 'application/json' });
+
+        // 1) Téléchargement local appareil
+        triggerBrowserDownload(audioBlob, `fatiha-${stamp}.${ext}`);
+        triggerBrowserDownload(metaBlob, `fatiha-${stamp}.json`);
+
+        let cloudOk = false;
+        let localOk = false;
+        try {
+            const audioBase64 = await blobToBase64Raw(audioBlob);
+            const payload = { audioBase64, mimeType: mime, meta };
+
+            // 2) Cloud Vercel Blob
+            try {
+                const res = await fetch(getSaveRecitationUrl(), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json().catch(() => ({}));
+                cloudOk = res.ok && data.ok;
+                if (!res.ok) console.warn('save-recitation', data);
+            } catch (e) {
+                console.warn('save-recitation network', e);
+            }
+
+            // 3) Dossier recordings/ si serveur local
+            const host = location.hostname;
+            if (host === 'localhost' || host === '127.0.0.1') {
+                try {
+                    const resL = await fetch('/save-recording', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const dataL = await resL.json().catch(() => ({}));
+                    localOk = resL.ok && dataL.ok;
+                } catch (e) {
+                    console.warn('save-recording local', e);
+                }
+            }
+
+            if (cloudOk || localOk) {
+                alert(t.datasetSaved || 'Enregistrement sauvegardé');
+            } else {
+                alert(t.datasetSaveFail || 'Téléchargé localement — envoi cloud échoué');
+            }
+        } finally {
+            datasetSaveInFlight = false;
+        }
+    }
 
     function restartRecitation() {
         document.body.classList.remove('celebration-mode');
