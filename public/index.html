@@ -277,6 +277,38 @@
             opacity: 0.9;
         }
 
+        /* Tarteel-style mistake detection */
+        .word-box.missed {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            opacity: 0.95;
+        }
+        .word-box.extra-hint {
+            outline: 2px solid rgba(245, 158, 11, 0.55);
+        }
+        .tarteel-error-bar {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: var(--subtext);
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            opacity: 0.95;
+        }
+        .tarteel-error-bar .tarteel-count {
+            font-weight: 600;
+            color: #ef4444;
+        }
+        .tarteel-error-bar .tarteel-extra-count {
+            font-weight: 600;
+            color: #f59e0b;
+        }
+        .assistant-feedback.extra {
+            color: #b45309;
+            background: rgba(245, 158, 11, 0.12);
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+
         /* Tajwid Styling - User Defined Scheme */
         .madda_normal { 
             color: var(--madd-tabii); 
@@ -1716,6 +1748,11 @@
         html[data-theme="blue"] .word-box.correct {
             background: rgba(37, 99, 235, 0.08);
         }
+        html[data-theme="light"] .word-box.missed,
+        html[data-theme="blue"] .word-box.missed {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+        }
         html[data-theme="light"] .verse-marker,
         html[data-theme="blue"] .verse-marker {
             background: #F3F4F6;
@@ -1990,6 +2027,11 @@
         </div>
 
         <button type="button" id="whisper-rec-btn" disabled style="display:none">Écoute continue</button>
+
+        <div class="tarteel-error-bar" id="tarteel-error-bar" aria-live="polite">
+            <span><span id="txt-tarteel-errors">Erreurs</span>: <span class="tarteel-count" id="tarteel-missed-count">0</span></span>
+            <span><span id="txt-tarteel-extras">En trop</span>: <span class="tarteel-extra-count" id="tarteel-extra-count">0</span></span>
+        </div>
 
         <div id="assistant-feedback-box" class="assistant-feedback"></div>
     </div>
@@ -2322,6 +2364,10 @@
             summaryFluidity: "Fluidité",
             summaryMistakes: "Alertes",
             maddMissed: "Madd oublié",
+            tarteelErrors: "Erreurs",
+            tarteelExtras: "En trop",
+            tarteelMissedWord: "Mot manqué (non récité)",
+            tarteelExtraWord: "Mot en trop — hors ayah",
             expertTitle: "Analyse Tajwid",
             expertLegend: "Légende des Règles",
             legend: {
@@ -2401,6 +2447,10 @@
             summaryFluidity: "Fluidity",
             summaryMistakes: "Mistakes",
             maddMissed: "Madd missed",
+            tarteelErrors: "Errors",
+            tarteelExtras: "Extra",
+            tarteelMissedWord: "Missed word (not recited)",
+            tarteelExtraWord: "Extra word — not in ayah",
             expertTitle: "Tajwid Analysis",
             expertLegend: "Rule Legend",
             legend: {
@@ -2480,6 +2530,10 @@
             summaryFluidity: "Беглость",
             summaryMistakes: "Ошибки",
             maddMissed: "Мадд пропущен",
+            tarteelErrors: "Ошибки",
+            tarteelExtras: "Лишние",
+            tarteelMissedWord: "Пропущенное слово",
+            tarteelExtraWord: "Лишнее слово — вне аята",
             expertTitle: "Анализ Таджвида",
             expertLegend: "Легенда Правил",
             legend: {
@@ -2541,6 +2595,8 @@
         if (document.getElementById('txt-assistant-target')) document.getElementById('txt-assistant-target').innerText = t.assistantTarget;
         if (document.getElementById('txt-assistant-heard')) document.getElementById('txt-assistant-heard').innerText = t.assistantHeard;
         if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
+        if (document.getElementById('txt-tarteel-errors') && t.tarteelErrors) document.getElementById('txt-tarteel-errors').innerText = t.tarteelErrors;
+        if (document.getElementById('txt-tarteel-extras') && t.tarteelExtras) document.getElementById('txt-tarteel-extras').innerText = t.tarteelExtras;
         if (document.getElementById('txt-dataset-optin') && t.datasetOptIn) {
             document.getElementById('txt-dataset-optin').innerText = t.datasetOptIn;
         }
@@ -3344,6 +3400,7 @@
             voiceEnergyRing = [];
             whisperRecording = false;
             whisperBusy = false;
+            resetTarteelStats();
             if (overlay) overlay.style.display = 'none';
             document.getElementById('live-assistant')?.classList.add('visible');
             resetUI();
@@ -3823,6 +3880,142 @@
         return { ok: false, reason: 'miss' };
     }
 
+    // --- Tarteel-style word alignment (IqraAI / SequenceMatcher) ---
+    const TARTEEL_STATUS = { CORRECT: 'correct', MISSED: 'missed', EXTRA: 'extra' };
+    let tarteelStats = { missed: 0, extra: 0 };
+    let lastTarteelExtraFp = '';
+
+    function alignWords(recitedWords, canonicalWords) {
+        const recList = Array.isArray(recitedWords) ? recitedWords.slice() : String(recitedWords || '').split(/\s+/).filter(Boolean);
+        const canList = Array.isArray(canonicalWords) ? canonicalWords.slice() : String(canonicalWords || '').split(/\s+/).filter(Boolean);
+        if (!recList.length && !canList.length) return [];
+
+        const n = canList.length;
+        const m = recList.length;
+        const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+        for (let i = n - 1; i >= 0; i--) {
+            for (let j = m - 1; j >= 0; j--) {
+                if (canList[i] === recList[j]) dp[i][j] = 1 + dp[i + 1][j + 1];
+                else dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+            }
+        }
+        const alignment = [];
+        let i = 0, j = 0;
+        while (i < n && j < m) {
+            if (canList[i] === recList[j]) {
+                alignment.push({ word: canList[i], status: TARTEEL_STATUS.CORRECT, canonical: canList[i] });
+                i++; j++;
+            } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+                alignment.push({ word: canList[i], status: TARTEEL_STATUS.MISSED, canonical: canList[i] });
+                i++;
+            } else {
+                alignment.push({ word: recList[j], status: TARTEEL_STATUS.EXTRA, canonical: null });
+                j++;
+            }
+        }
+        while (i < n) {
+            alignment.push({ word: canList[i], status: TARTEEL_STATUS.MISSED, canonical: canList[i] });
+            i++;
+        }
+        while (j < m) {
+            alignment.push({ word: recList[j], status: TARTEEL_STATUS.EXTRA, canonical: null });
+            j++;
+        }
+        return alignment;
+    }
+
+    function resetTarteelStats() {
+        tarteelStats = { missed: 0, extra: 0 };
+        lastTarteelExtraFp = '';
+        const missEl = document.getElementById('tarteel-missed-count');
+        const extraEl = document.getElementById('tarteel-extra-count');
+        if (missEl) missEl.innerText = '0';
+        if (extraEl) extraEl.innerText = '0';
+        document.querySelectorAll('.word-box.missed, .word-box.extra-hint').forEach((el) => {
+            el.classList.remove('missed', 'extra-hint');
+        });
+        const fb = document.getElementById('assistant-feedback-box');
+        if (fb) fb.classList.remove('extra');
+    }
+
+    function updateTarteelErrorUI() {
+        const missEl = document.getElementById('tarteel-missed-count');
+        const extraEl = document.getElementById('tarteel-extra-count');
+        if (missEl) missEl.innerText = String(tarteelStats.missed);
+        if (extraEl) extraEl.innerText = String(tarteelStats.extra);
+    }
+
+    function recordTarteelExtra(heardWord) {
+        const hNorm = normalize(heardWord);
+        if (!hNorm || hNorm.length < 3 || STT_FILLERS.has(hNorm)) return false;
+        const fp = hNorm + '#' + currentIdx;
+        if (fp === lastTarteelExtraFp) return false;
+        lastTarteelExtraFp = fp;
+        tarteelStats.extra += 1;
+        updateTarteelErrorUI();
+        const active = document.getElementById(`box-${currentIdx}`);
+        if (active) {
+            active.classList.add('extra-hint');
+            setTimeout(() => active.classList.remove('extra-hint'), 900);
+        }
+        const fb = document.getElementById('assistant-feedback-box');
+        if (fb) fb.classList.add('extra');
+        showAssistantFeedback(translations[currentLang]?.tarteelExtraWord || 'Mot en trop');
+        sessionDiagnostics.errors.push({
+            time: new Date().toISOString(),
+            type: 'tarteel_extra',
+            heard: hNorm,
+            currentIdx: currentIdx
+        });
+        return true;
+    }
+
+    function markMissedRemainingBoxes() {
+        let added = 0;
+        for (let i = 0; i < verseData.length; i++) {
+            const box = document.getElementById(`box-${i}`);
+            if (!box) continue;
+            if (box.classList.contains('correct')) continue;
+            box.classList.remove('active');
+            if (!box.classList.contains('missed')) {
+                box.classList.add('missed');
+                added++;
+            }
+        }
+        if (added > 0) {
+            tarteelStats.missed += added;
+            updateTarteelErrorUI();
+            sessionDiagnostics.errors.push({
+                time: new Date().toISOString(),
+                type: 'tarteel_missed_batch',
+                count: added
+            });
+        }
+        return added;
+    }
+
+    function applyTarteelFinishAnalysis(finalTranscript) {
+        markMissedRemainingBoxes();
+        const raw = (finalTranscript || '').trim();
+        if (!raw || !verseData.length) {
+            updateTarteelErrorUI();
+            return;
+        }
+        const recited = raw.split(/\s+/).map(w => normalize(w)).filter(w => w && !STT_FILLERS.has(w));
+        const canonical = verseData.map(w => normalize(w.ar)).filter(Boolean);
+        const alignment = alignWords(recited, canonical);
+        const extraFromAlign = alignment.filter(a => a.status === TARTEEL_STATUS.EXTRA).length;
+        if (extraFromAlign > tarteelStats.extra) {
+            tarteelStats.extra = extraFromAlign;
+        }
+        updateTarteelErrorUI();
+        sessionDiagnostics.tarteel = {
+            missed: tarteelStats.missed,
+            extra: tarteelStats.extra,
+            alignmentSample: alignment.slice(0, 40)
+        };
+    }
+
     async function goToNextVerse() {
         const currentRef = VERSES_LIBRARY[activeVerseIdx].ref;
         const match = currentRef.match(/\[(\d+):(\d+)\]/);
@@ -3969,7 +4162,10 @@
 
     function hideAssistantFeedback() {
         const fb = document.getElementById('assistant-feedback-box');
-        if (fb) fb.style.display = 'none';
+        if (fb) {
+            fb.style.display = 'none';
+            fb.classList.remove('extra');
+        }
     }
 
     function showAssistantFeedback(msg) {
@@ -4020,12 +4216,20 @@
             const isSkeletonMatch = getRootSkeleton(latestHeard) === getRootSkeleton(target);
 
             if (latestHeard && latestHeard !== target && !isSkeletonMatch) {
-                // Si la différence est petite
-                const diffLength = Math.abs(latestHeard.length - target.length);
-                if (diffLength <= 2) {
-                    showAssistantFeedback(translations[currentLang].hintAlmost);
+                // Tarteel-style: mot clairement hors cible → extra (ambre)
+                const verdict = verseData[currentIdx]
+                    ? matchFatihaWord(words[words.length - 1] || '', verseData[currentIdx].ar)
+                    : { ok: false, reason: 'miss' };
+                if (!verdict.ok && latestHeard.length >= 3 && (verdict.reason === 'miss' || verdict.reason === 'reject' || verdict.reason === 'confusable' || verdict.reason === 'vowel_mismatch')) {
+                    recordTarteelExtra(words[words.length - 1] || latestHeard);
                 } else {
-                    showAssistantFeedback(translations[currentLang].hintRepeat);
+                    // Si la différence est petite
+                    const diffLength = Math.abs(latestHeard.length - target.length);
+                    if (diffLength <= 2) {
+                        showAssistantFeedback(translations[currentLang].hintAlmost);
+                    } else {
+                        showAssistantFeedback(translations[currentLang].hintRepeat);
+                    }
                 }
                 
                 // On ajoute l'erreur au diagnostic
@@ -4042,7 +4246,7 @@
     function processMatchedWord(idx, maddMissed = false) {
         const box = document.getElementById(`box-${idx}`);
         if (box?.classList.contains('correct')) return;
-        box?.classList.remove('active');
+        box?.classList.remove('active', 'missed', 'extra-hint');
         box?.classList.add('correct');
         
         // --- GHOST WORD TRANSITION ---
@@ -4132,6 +4336,8 @@
             : "";
         sessionDiagnostics.final_transcription = finalRaw;
         sessionDiagnostics.endTime = new Date().toISOString();
+
+        try { applyTarteelFinishAnalysis(finalRaw); } catch (e) { console.warn('tarteel finish', e); }
 
         const shouldSaveDataset = datasetOptIn;
         const stopRecPromise = new Promise((resolve) => {
@@ -4323,6 +4529,7 @@
         
         // On recharge le verset proprement (reset l'UI et le currentIdx)
         loadVerse(activeVerseIdx);
+        resetTarteelStats();
         
         audioChunks = [];
         setTimeout(startRecognition, 300);
