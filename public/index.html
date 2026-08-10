@@ -3157,23 +3157,28 @@
             }
             const target = normalize(expectedAr || '');
             const len = Math.max(1, target.length);
-            // Decision: base 160ms + 45ms/lettre ; madd augmente selon beats tagués
-            let minMs = 160 + len * 45;
-            let reasonKey = 'hintNeedSound';
-            if (ruleType && ruleType.indexOf('madd') === 0) {
-                const beats = ruleType.includes('lazim') ? 6 : (ruleType.includes('munfasil') || ruleType.includes('muttasil') ? 4 : 2);
-                // ~110ms par temps de madd (approximation pédagogique, pas un métronome certifié)
-                minMs = Math.max(minMs, 280 + beats * 110);
-                reasonKey = 'hintNeedMadd';
-            } else if (ruleType && ruleType.indexOf('ghunnah') === 0) {
-                minMs = Math.max(minMs, 300);
-            }
             const voicedMs = getRecentVoicedMs(1400);
-            if (voicedMs < Math.min(90, minMs * 0.35)) {
-                return { ok: false, layer: 'local-acoustic', voicedMs, minMs, reasonKey: 'hintNeedSound' };
+            // Anti-silence uniquement (évite de bloquer toute la Fātiḥah)
+            if (voicedMs < 70) {
+                return { ok: false, layer: 'local-acoustic', voicedMs, minMs: 70, reasonKey: 'hintNeedSound' };
             }
-            if (voicedMs < minMs) {
-                return { ok: false, layer: 'local-acoustic', voicedMs, minMs, reasonKey };
+            // Durée stricte seulement sur madd / ghunnah (pas sur chaque mot)
+            let minMs = 70;
+            let reasonKey = 'hintNeedSound';
+            const isMadd = ruleType && ruleType.indexOf('madd') === 0;
+            const isGhunnah = ruleType && ruleType.indexOf('ghunnah') === 0;
+            if (isMadd) {
+                const beats = ruleType.includes('lazim') ? 6 : (ruleType.includes('munfasil') || ruleType.includes('muttasil') ? 4 : 2);
+                minMs = Math.max(220, 180 + beats * 90);
+                reasonKey = 'hintNeedMadd';
+                if (voicedMs < minMs) {
+                    return { ok: false, layer: 'local-acoustic', voicedMs, minMs, reasonKey };
+                }
+            } else if (isGhunnah) {
+                minMs = Math.max(220, 120 + len * 20);
+                if (voicedMs < minMs) {
+                    return { ok: false, layer: 'local-acoustic', voicedMs, minMs, reasonKey: 'hintNeedSound' };
+                }
             }
             return { ok: true, layer: 'local-acoustic', voicedMs, minMs };
         }
@@ -3248,13 +3253,12 @@
         return root.replace(/(.)\1+/g, '$1');
     }
 
-    // Matching lexical EXACT — les fautes de voyelles (himdu/hamdu, miliki/maliki)
-    // passaient via root_safe (retrait اوي) et near/editDistance. Plus maintenant.
-    // Limite connue : si Chrome réécrit déjà le BON orthographe malgré la faute,
-    // seul un modèle phonétique peut refuser (voir SOLUTION.md).
-    const STT_MODE = 'exact';
+    // Balanced + garde voyelles : Chrome STT n’écrit presque jamais l’orthographe exacte.
+    // root_safe / near restent, mais vowel_mismatch bloque himdu/miliki AVANT.
+    // Limite : si Chrome écrit déjà le BON mot malgré la faute → impossible en texte seul.
+    const STT_MODE = 'balanced'; // 'strict' | 'balanced' | 'legacy'
     const STT_FILLERS = new Set(['امين', 'آمين', 'يا', 'و', 'ثم', 'اه', 'ام']);
-    const STT_WINDOW = 4;
+    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 4;
     let lastMatchedFingerprint = '';
 
     const FATIHA_LEXICON = {
@@ -3264,28 +3268,45 @@
         'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات'] },
         'الصراط': { aliases: ['الصراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات'] },
         'اياك': { aliases: ['اياك'], forbid: ['يا', 'اك'] },
-        'نستعين': { aliases: ['نستعين'], forbid: ['تعين'] },
-        'اهدنا': { aliases: ['اهدنا'], forbid: [] },
-        'العالمين': { aliases: ['العالمين'], forbid: [] },
-        'المستقيم': { aliases: ['المستقيم'], forbid: [] },
-        'المغضوب': { aliases: ['المغضوب'], forbid: [] },
-        // Decision: pas d’alias « حمد » seul — trop permissif
-        'الحمد': { aliases: ['الحمد'], forbid: ['حيمد', 'الحيمد', 'همد', 'الحيمدو'] },
-        'الرحمن': { aliases: ['الرحمن'], forbid: [] },
-        'الرحيم': { aliases: ['الرحيم'], forbid: [] },
+        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
+        'اهدنا': { aliases: ['اهدنا', 'هدنا'], forbid: [] },
+        'العالمين': { aliases: ['العالمين', 'عالمين'], forbid: [] },
+        'المستقيم': { aliases: ['المستقيم', 'مستقيم'], forbid: [] },
+        'المغضوب': { aliases: ['المغضوب', 'مغضوب'], forbid: [] },
+        'الحمد': { aliases: ['الحمد', 'حمد'], forbid: ['حيمد', 'الحيمد', 'همد', 'الحيمدو'] },
+        'الرحمن': { aliases: ['الرحمن', 'رحمن'], forbid: [] },
+        'الرحيم': { aliases: ['الرحيم', 'رحيم'], forbid: [] },
         'الله': { aliases: ['الله', 'لله'], forbid: ['ال'] },
-        'بسم': { aliases: ['بسم'], forbid: ['سم'] },
+        'بسم': { aliases: ['بسم', 'باسم'], forbid: ['سم'] },
         'رب': { aliases: ['رب'], forbid: [] },
-        // Decision: « ملك » ≠ « مالك » (miliki/maliki) — JAMAIS alias
-        'مالك': { aliases: ['مالك'], forbid: ['ملك', 'مليك', 'ميلك', 'ملكي', 'مالكي'] },
+        // Jamais alias « ملك » — confond miliki / maliki
+        'مالك': { aliases: ['مالك'], forbid: ['ملك', 'مليك', 'ميلك', 'ملكي'] },
         'يوم': { aliases: ['يوم'], forbid: [] },
-        'الدين': { aliases: ['الدين'], forbid: [] },
+        'الدين': { aliases: ['الدين', 'دين'], forbid: [] },
         'نعبد': { aliases: ['نعبد'], forbid: [] },
         'غير': { aliases: ['غير'], forbid: [] },
-        'عليهم': { aliases: ['عليهم'], forbid: ['هم'] },
+        'عليهم': { aliases: ['عليهم', 'عليهيم'], forbid: ['هم'] },
         'ولا': { aliases: ['ولا'], forbid: [] },
-        'الذين': { aliases: ['الذين'], forbid: [] }
+        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] }
     };
+
+    function editDistance(a, b) {
+        if (a === b) return 0;
+        if (!a.length) return b.length;
+        if (!b.length) return a.length;
+        const row = new Array(b.length + 1);
+        for (let j = 0; j <= b.length; j++) row[j] = j;
+        for (let i = 1; i <= a.length; i++) {
+            let prev = i - 1, cur = i;
+            for (let j = 1; j <= b.length; j++) {
+                const next = (a[i - 1] === b[j - 1]) ? prev : Math.min(prev, cur, row[j]) + 1;
+                prev = row[j];
+                row[j] = next;
+                cur = next;
+            }
+        }
+        return row[b.length];
+    }
 
     function getLexiconEntry(targetNorm) {
         return FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
@@ -3302,20 +3323,20 @@
             const b = normalize(bad);
             const g = normalize(good);
             if (!b || !g) continue;
-            if ((hNorm === b || hNorm.includes(b)) && (targetNorm === g || targetNorm.endsWith(g) || targetNorm.includes(g))) {
+            // Exact / endsWith seulement — includes('ملك') dans 'مالك' est faux, mais rester prudent
+            if ((hNorm === b || hNorm.endsWith(b)) && (targetNorm === g || targetNorm.endsWith(g) || targetNorm.includes(g))) {
                 return true;
             }
         }
         return false;
     }
 
-    /** Refuse les substitutions de lettres de prolongation ا/و/ي (fautes de voyelle longues). */
+    /** Refuse substitutions ا/و/ي quand le squelette consonantique est identique (himdu/hamdu). */
     function hasVowelLetterMismatch(hNorm, target) {
         const V = /[اوي]/g;
         const hV = (hNorm.match(V) || []).join('');
         const tV = (target.match(V) || []).join('');
         if (hV === tV) return false;
-        // Si les consonnes hors اوي sont égales mais les voyelles-lettres diffèrent → faute type himdu/hamdu
         const hC = hNorm.replace(V, '');
         const tC = target.replace(V, '');
         return hC === tC && hV !== tV;
@@ -3331,6 +3352,7 @@
         const forbid = (lex.forbid || []).map(f => normalize(f)).filter(Boolean);
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
+        // Avant near/root_safe — sinon himdu/miliki repassent
         if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
 
         if (hNorm.length < 2) return { ok: false, reason: 'too_short' };
@@ -3339,16 +3361,33 @@
         const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
         if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
 
-        // Liaison ال : corps EXACT uniquement (pas de near / pas de squelette)
         const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
         const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
         if (hNoAl.length >= 3 && tNoAl.length >= 3) {
-            if (hNoAl === tNoAl) return { ok: true, reason: 'liaison_exact' };
-            if (aliases.includes(hNoAl) || aliases.includes('ال' + hNoAl)) return { ok: true, reason: 'liaison_alias' };
             if (hasVowelLetterMismatch(hNoAl, tNoAl)) return { ok: false, reason: 'vowel_mismatch' };
+            if (aliases.includes(hNoAl) || hNoAl === tNoAl || aliases.includes('ال' + hNoAl)) {
+                return { ok: true, reason: 'liaison' };
+            }
         }
 
-        // STT_MODE exact : aucun editDistance, aucun root_safe
+        const dist = editDistance(hNorm, target);
+        const maxDist = target.length >= 6 ? 2 : (target.length >= 4 ? 1 : 0);
+        if (dist > 0 && dist <= maxDist) {
+            // near ne doit pas contourner une faute voyelle déjà filtrée ; double check
+            if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
+            return { ok: true, reason: 'near' + dist };
+        }
+
+        if (STT_MODE !== 'strict') {
+            const hRoot = getRootSkeleton(hNorm);
+            const tRoot = getRootSkeleton(target);
+            const lenOk = hNorm.length >= Math.ceil(target.length * 0.7);
+            if (hRoot.length >= 3 && hRoot === tRoot && lenOk) {
+                if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
+                return { ok: true, reason: 'root_safe' };
+            }
+        }
+
         return { ok: false, reason: 'miss' };
     }
 
