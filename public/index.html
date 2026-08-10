@@ -1370,6 +1370,38 @@
         .assistant-val.heard.match {
             border-left-color: var(--success);
         }
+        #whisper-rec-btn {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: var(--accent);
+            color: #fff;
+            transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.35);
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        #whisper-rec-btn:active { transform: scale(0.98); }
+        #whisper-rec-btn.recording {
+            background: #ff453a;
+            box-shadow: 0 8px 24px rgba(255, 69, 58, 0.4);
+            animation: whisperPulse 1.1s ease-in-out infinite;
+        }
+        #whisper-rec-btn:disabled {
+            opacity: 0.55;
+            cursor: wait;
+            animation: none;
+        }
+        @keyframes whisperPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
         .assistant-feedback {
             font-size: 0.75rem;
             color: #ff453a;
@@ -1940,10 +1972,10 @@
     <div id="live-assistant">
         <div class="assistant-header">
             <div class="pulse-red"></div>
-            <span id="txt-assistant-title">Suivi de récitation</span>
+            <span id="txt-assistant-title">Vérification Whisper</span>
         </div>
         <div id="txt-assistant-layer" style="font-size:0.55rem; color:var(--subtext); line-height:1.35; margin:14px 0 4px; opacity:0.85;">
-            Couche : texte STT + durée sonore (pas un juge tajwīd complet)
+            Mot par mot via Groq Whisper (pas Chrome STT)
         </div>
         
         <div class="assistant-section">
@@ -1953,9 +1985,11 @@
         </div>
 
         <div class="assistant-section">
-            <div class="assistant-label" id="txt-assistant-heard">Dictée (STT)</div>
+            <div class="assistant-label" id="txt-assistant-heard">Vous avez dit</div>
             <div class="assistant-val heard" id="assistant-heard-word">...</div>
         </div>
+
+        <button type="button" id="whisper-rec-btn" onclick="toggleWhisperRecord()">Appuyer : dire ce mot</button>
 
         <div id="assistant-feedback-box" class="assistant-feedback"></div>
     </div>
@@ -2220,14 +2254,14 @@
 
     const translations = {
         fr: {
-            start: "Touchez pour démarrer le suivi",
+            start: "Touchez pour démarrer la vérification",
             download: "Télécharger ma récitation",
             legMadd: "Allonger", legGhunnah: "Nez", legIkhfa: "Cacher",
             warnMadd: "Allongez ! 2 temps",
             warnGhunnah: "Nez ! (Ghunnah)",
             warnIkhfa: "Cacher ! (Ikhfā’)",
             warnQalqalah: "Rebond ! (Qalqalah)",
-            statusListen: "Suivi actif (texte + son)",
+            statusListen: "Whisper actif — mot par mot",
             statusMic: "Veuillez autoriser le micro",
             restart: "Recommencer",
             dailyLabel: "Verset du Jour",
@@ -2248,10 +2282,15 @@
             modalUnderstood: "Compris",
             reportBtn: "Rapport Technique",
             reportSent: "Rapport envoyé au serveur !",
-            assistantTitle: "Suivi de récitation",
+            assistantTitle: "Vérification Whisper",
             assistantTarget: "Mot cible",
-            assistantHeard: "Dictée (STT)",
-            assistantLayer: "Couche : texte STT + durée sonore (pas un juge tajwīd complet)",
+            assistantHeard: "Vous avez dit",
+            assistantLayer: "Mot par mot via Groq Whisper (pas Chrome STT)",
+            whisperHold: "Appuyer : dire ce mot",
+            whisperRecording: "Parlez… puis appuyez pour envoyer",
+            whisperChecking: "Analyse Whisper…",
+            whisperFail: "Échec Whisper — réessayez",
+            whisperMiss: "Pas le bon mot — réessayez",
             hintRepeat: "Réessayez : la dictée ou le son ne suffisent pas.",
             hintAlmost: "Presque ! Articulez un peu plus.",
             hintNeedSound: "Son trop court ou silence — continuez à réciter.",
@@ -2294,7 +2333,7 @@
             warnGhunnah: "Nose! (Ghunnah)",
             warnIkhfa: "Hide! (Ikhfā’)",
             warnQalqalah: "Bounce! (Qalqalah)",
-            statusListen: "Tracking on (text + sound)",
+            statusListen: "Whisper on — word by word",
             statusMic: "Please allow microphone",
             restart: "Restart",
             dailyLabel: "Verse of the Day",
@@ -2315,10 +2354,15 @@
             modalUnderstood: "Understood",
             reportBtn: "Technical Report",
             reportSent: "Report sent to server!",
-            assistantTitle: "Recitation tracking",
+            assistantTitle: "Whisper check",
             assistantTarget: "Target word",
-            assistantHeard: "Dictation (STT)",
-            assistantLayer: "Layer: STT text + sound duration (not a full tajwīd judge)",
+            assistantHeard: "You said",
+            assistantLayer: "Word-by-word via Groq Whisper (not Chrome STT)",
+            whisperHold: "Tap: say this word",
+            whisperRecording: "Speak… then tap to send",
+            whisperChecking: "Whisper analyzing…",
+            whisperFail: "Whisper failed — try again",
+            whisperMiss: "Wrong word — try again",
             hintRepeat: "Try again: dictation or sound is not enough.",
             hintAlmost: "Almost! Articulate a bit more.",
             hintNeedSound: "Sound too short or silence — keep reciting.",
@@ -2361,7 +2405,7 @@
             warnGhunnah: "В нос! (Гунна)",
             warnIkhfa: "Скрывайте! (Ихфа)",
             warnQalqalah: "Толчок! (Калькаля)",
-            statusListen: "Слежение (текст + звук)",
+            statusListen: "Whisper — слово за словом",
             statusMic: "Разрешите микрофон",
             restart: "Начать сначала",
             dailyLabel: "Аят дня",
@@ -2382,10 +2426,15 @@
             modalUnderstood: "Понятно",
             reportBtn: "Технический отчет",
             reportSent: "Отчет отправлен!",
-            assistantTitle: "Отслеживание чтения",
+            assistantTitle: "Проверка Whisper",
             assistantTarget: "Целевое слово",
-            assistantHeard: "Диктовка (STT)",
-            assistantLayer: "Слой: текст STT + длительность звука (не полный судья таджвида)",
+            assistantHeard: "Вы сказали",
+            assistantLayer: "Слово за словом через Groq Whisper (не Chrome STT)",
+            whisperHold: "Нажать: сказать слово",
+            whisperRecording: "Говорите… затем нажмите",
+            whisperChecking: "Анализ Whisper…",
+            whisperFail: "Ошибка Whisper — ещё раз",
+            whisperMiss: "Не то слово — ещё раз",
             hintRepeat: "Ещё раз: диктовки или звука недостаточно.",
             hintAlmost: "Почти! Артикулируйте немного четче.",
             hintNeedSound: "Слишком коротко или тишина — продолжайте.",
@@ -2455,6 +2504,10 @@
         if (document.getElementById('txt-assistant-target')) document.getElementById('txt-assistant-target').innerText = t.assistantTarget;
         if (document.getElementById('txt-assistant-heard')) document.getElementById('txt-assistant-heard').innerText = t.assistantHeard;
         if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
+        const whisperBtnLang = document.getElementById('whisper-rec-btn');
+        if (whisperBtnLang && t.whisperHold && !whisperBtnLang.classList.contains('recording') && !whisperBtnLang.disabled) {
+            whisperBtnLang.innerText = t.whisperHold;
+        }
         if (document.getElementById('txt-expert-title')) {
             const icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/><path d="M12 2L2 7L12 12L22 7L12 2Z"/></svg>';
             document.getElementById('txt-expert-title').innerHTML = icon + t.expertTitle;
@@ -2962,25 +3015,187 @@
         startRecognition();
     }
 
-    // === Reconnaissance vocale + audio optimisés ===
+    // === Vérification mot-par-mot via Groq Whisper (plus Chrome STT en primaire) ===
+    const VOICE_ENGINE = 'whisper'; // 'whisper' | 'webspeech'
+    let whisperMediaRec = null;
+    let whisperChunks = [];
+    let whisperMime = 'audio/webm';
+    let whisperRecording = false;
+    let whisperBusy = false;
+    let whisperStartedAt = 0;
+
+    function getTranscribeUrl() {
+        const host = location.hostname;
+        if (host === 'localhost' || host === '127.0.0.1') {
+            return 'https://tajwid-app-vatsaev.vercel.app/api/transcribe';
+        }
+        return '/api/transcribe';
+    }
+
+    function setWhisperBtnState(state) {
+        const btn = document.getElementById('whisper-rec-btn');
+        if (!btn) return;
+        const t = translations[currentLang] || translations.fr;
+        btn.classList.remove('recording');
+        btn.disabled = false;
+        if (state === 'idle') {
+            btn.innerText = t.whisperHold || 'Appuyer : dire ce mot';
+        } else if (state === 'recording') {
+            btn.classList.add('recording');
+            btn.innerText = t.whisperRecording || 'Parlez…';
+        } else if (state === 'checking') {
+            btn.disabled = true;
+            btn.innerText = t.whisperChecking || 'Analyse…';
+        }
+    }
+
+    function blobToBase64(blob) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const s = String(reader.result || '');
+                const i = s.indexOf(',');
+                resolve(i >= 0 ? s.slice(i + 1) : s);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+    }
+
+    async function toggleWhisperRecord() {
+        if (VOICE_ENGINE !== 'whisper' || !isRecording || whisperBusy) return;
+        if (!whisperRecording) {
+            await startWhisperClip();
+        } else {
+            await stopWhisperClipAndVerify();
+        }
+    }
+
+    async function startWhisperClip() {
+        if (!currentStream) {
+            showAssistantFeedback(translations[currentLang]?.statusMic || 'Micro requis');
+            return;
+        }
+        const formats = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/aac', 'audio/ogg'];
+        whisperMime = '';
+        for (const f of formats) {
+            if (window.MediaRecorder && MediaRecorder.isTypeSupported(f)) { whisperMime = f; break; }
+        }
+        try {
+            whisperChunks = [];
+            whisperMediaRec = new MediaRecorder(
+                currentStream,
+                whisperMime ? { mimeType: whisperMime, audioBitsPerSecond: 96000 } : { audioBitsPerSecond: 96000 }
+            );
+            whisperMime = whisperMediaRec.mimeType || whisperMime || 'audio/webm';
+            whisperMediaRec.ondataavailable = (e) => {
+                if (e.data && e.data.size > 0) whisperChunks.push(e.data);
+            };
+            whisperMediaRec.start(200);
+            whisperRecording = true;
+            whisperStartedAt = performance.now();
+            setWhisperBtnState('recording');
+            hideAssistantFeedback();
+        } catch (err) {
+            console.error('whisper MediaRecorder', err);
+            showAssistantFeedback(translations[currentLang]?.whisperFail || 'Échec enregistrement');
+        }
+    }
+
+    async function stopWhisperClipAndVerify() {
+        if (!whisperMediaRec || whisperMediaRec.state === 'inactive') {
+            whisperRecording = false;
+            setWhisperBtnState('idle');
+            return;
+        }
+        const elapsed = performance.now() - whisperStartedAt;
+        whisperBusy = true;
+        setWhisperBtnState('checking');
+
+        const blob = await new Promise((resolve) => {
+            whisperMediaRec.onstop = () => {
+                resolve(new Blob(whisperChunks, { type: whisperMime }));
+            };
+            try { whisperMediaRec.stop(); } catch (e) { resolve(new Blob([])); }
+        });
+        whisperRecording = false;
+        whisperMediaRec = null;
+
+        if (elapsed < 350 || !blob || blob.size < 800) {
+            whisperBusy = false;
+            setWhisperBtnState('idle');
+            showAssistantFeedback(translations[currentLang]?.hintNeedSound || 'Trop court');
+            return;
+        }
+
+        try {
+            const audioBase64 = await blobToBase64(blob);
+            const res = await fetch(getTranscribeUrl(), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ audioBase64, mimeType: whisperMime })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                throw new Error(data.detail || data.error || ('HTTP ' + res.status));
+            }
+            const text = (data.text || '').trim();
+            const heardEl = document.getElementById('assistant-heard-word');
+            if (heardEl) {
+                heardEl.innerText = text || '—';
+                heardEl.classList.remove('match');
+            }
+
+            sessionDiagnostics.heard.push({
+                time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + 's',
+                raw: text,
+                engine: 'groq-whisper',
+                currentIdx: currentIdx,
+                normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : 'FIN'
+            });
+
+            if (!text) {
+                showAssistantFeedback(translations[currentLang]?.whisperMiss || 'Rien entendu');
+            } else {
+                const result = checkWordStream(text);
+                if (result && result.matched) {
+                    if (heardEl) heardEl.classList.add('match');
+                    hideAssistantFeedback();
+                } else {
+                    showAssistantFeedback(translations[currentLang]?.whisperMiss || 'Pas le bon mot');
+                }
+                updateAssistantHeard(text, result);
+            }
+        } catch (err) {
+            console.error('whisper verify', err);
+            showAssistantFeedback((translations[currentLang]?.whisperFail || 'Échec') + ' — ' + (err.message || ''));
+            sessionDiagnostics.errors.push({ time: new Date().toISOString(), type: 'whisper_fail', detail: String(err.message || err) });
+        } finally {
+            whisperBusy = false;
+            setWhisperBtnState('idle');
+        }
+    }
+
+    // === Reconnaissance vocale + audio (Whisper primaire / WebSpeech secours) ===
     async function startRecognition() {
-        console.log("startRecognition invoked");
+        console.log("startRecognition invoked", VOICE_ENGINE);
         
         if (isRecording) return;
         
         const overlay = document.getElementById('start-overlay');
         const startTxt = document.getElementById('txt-start');
         
-        // 1. Vérification du contexte sécurisé (requis pour le micro)
         if (window.location.protocol === 'http:' && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
             alert("⚠️ ACCÈS MICRO BLOQUÉ : Le microphone nécessite une connexion sécurisée (HTTPS) ou 'localhost'.\nSi vous testez sur un autre appareil via l'IP, le micro ne fonctionnera pas sans HTTPS.");
             return;
         }
 
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SpeechRecognition) {
-            alert("Votre navigateur ne supporte pas la reconnaissance vocale. Utilisez Chrome ou Safari.");
-            return;
+        if (VOICE_ENGINE === 'webspeech') {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Votre navigateur ne supporte pas la reconnaissance vocale. Utilisez Chrome ou Safari.");
+                return;
+            }
         }
 
         if (startTxt) startTxt.innerText = translations[currentLang]?.statusMic || "Autorisation micro...";
@@ -2995,32 +3210,31 @@
                 stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 currentStream = stream;
             }
-            console.log("Stream prêt pour la reconnaissance");
+            console.log("Stream prêt");
 
-
-            // Initialisation diagnostic
             sessionDiagnostics = {
                 ref: VERSES_LIBRARY[activeVerseIdx]?.ref || "Inconnu",
                 expected: verseData.map(w => normalize(w.ar)),
                 heard: [],
                 matches: [],
                 errors: [],
-                startTime: performance.now()
+                startTime: performance.now(),
+                engine: VOICE_ENGINE
             };
 
-            // Succès : on cache l'overlay et on marque comme enregistrant
             isRecording = true;
             lastMatchedFingerprint = '';
             voiceEnergyRing = [];
+            whisperRecording = false;
+            whisperBusy = false;
             if (overlay) overlay.style.display = 'none';
             document.getElementById('live-assistant')?.classList.add('visible');
             resetUI();
             updateAssistantWords();
+            setWhisperBtnState('idle');
 
             const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) {
-                console.error("AudioContext not supported");
-            } else {
+            if (AudioContext) {
                 audioCtx = new AudioContext();
                 if (audioCtx.state === 'suspended') {
                     await audioCtx.resume();
@@ -3033,15 +3247,21 @@
                 trackVolume();
             }
 
+            if (VOICE_ENGINE === 'whisper') {
+                const ghost = document.getElementById('ghost-word-container');
+                if (ghost && verseData[currentIdx]) {
+                    ghost.innerText = verseData[currentIdx].ar;
+                }
+                showAssistantFeedback(translations[currentLang]?.whisperHold || 'Appuyer : dire ce mot');
+                return;
+            }
 
-            // MediaRecorder pour sauvegarde optionnelle
             try {
                 const formats = ['audio/webm', 'audio/mp4', 'audio/aac', 'audio/ogg'];
                 let mimeType = '';
                 for (const f of formats) {
                     if (MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
                 }
-                
                 mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: 64000 } : { audioBitsPerSecond: 64000 });
                 audioChunks = [];
                 mediaRec.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
@@ -3050,7 +3270,7 @@
                 console.warn("MediaRecorder non supporté:", mrErr);
             }
 
-            // Speech Recognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             recognition = new SpeechRecognition();
             recognition.lang = 'ar-SA';
             recognition.continuous = true;
@@ -3075,8 +3295,6 @@
                 }
                 const cleanFull = full.trim();
                 if (!cleanFull) return;
-
-                // Mode balanced : on matche aussi les interim (sinon Chrome finalise trop tard / jamais)
                 const result = checkWordStream(cleanFull);
                 updateAssistantHeard(cleanFull, result);
             };
@@ -3095,7 +3313,6 @@
 
             recognition.start();
 
-            // Update ghost word for the first word
             const ghost = document.getElementById('ghost-word-container');
             if (ghost && verseData[currentIdx]) {
                 ghost.innerText = verseData[currentIdx].ar;
@@ -3448,25 +3665,28 @@
 
             const target = normalize(verseData[tempIdx].ar);
             const ruleFull = verseData[tempIdx].ruleType || document.getElementById(`box-${tempIdx}`)?.dataset?.ruleFull || "";
-            // C3 gate: texte OK ne suffit pas — il faut du son mesurable (durée)
-            const acoustic = PronunciationJudge.evaluate({
-                expectedAr: verseData[tempIdx].ar,
-                ruleType: ruleFull,
-                transcriptToken: hWord
-            });
-            if (!acoustic.ok) {
-                sessionDiagnostics.errors.push({
-                    time: new Date().toISOString(),
-                    type: 'acoustic_gate',
-                    expected: target,
-                    heard: hWord,
-                    voicedMs: acoustic.voicedMs,
-                    minMs: acoustic.minMs,
-                    layer: acoustic.layer
+            // Whisper : l’audio vient déjà d’un clip utilisateur — pas de 2e gate durée
+            let acoustic = { ok: true, layer: 'whisper', voicedMs: 0, minMs: 0 };
+            if (typeof VOICE_ENGINE === 'undefined' || VOICE_ENGINE !== 'whisper') {
+                acoustic = PronunciationJudge.evaluate({
+                    expectedAr: verseData[tempIdx].ar,
+                    ruleType: ruleFull,
+                    transcriptToken: hWord
                 });
-                const msg = translations[currentLang][acoustic.reasonKey] || translations[currentLang].hintNeedSound;
-                showAssistantFeedback(msg);
-                continue;
+                if (!acoustic.ok) {
+                    sessionDiagnostics.errors.push({
+                        time: new Date().toISOString(),
+                        type: 'acoustic_gate',
+                        expected: target,
+                        heard: hWord,
+                        voicedMs: acoustic.voicedMs,
+                        minMs: acoustic.minMs,
+                        layer: acoustic.layer
+                    });
+                    const msg = translations[currentLang][acoustic.reasonKey] || translations[currentLang].hintNeedSound;
+                    showAssistantFeedback(msg);
+                    continue;
+                }
             }
 
             const isMaddMissed = false;
@@ -4062,6 +4282,7 @@
 
 
     window.startRecognition = startRecognition;
+    window.toggleWhisperRecord = toggleWhisperRecord;
 </script>
 </body>
 </html>
