@@ -86,8 +86,7 @@ module.exports = async function handler(req, res) {
     if (!audioBase64) {
       return res.status(400).json({ error: 'audioBase64 required' });
     }
-    // Vercel body ~4.5MB; leave headroom
-    if (audioBase64.length > 5_500_000) {
+    if (audioBase64.length > 10_000_000) {
       return res.status(413).json({ error: 'audio too large' });
     }
 
