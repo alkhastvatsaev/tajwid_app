@@ -1,25 +1,30 @@
-# TAJWID AI - Legacy Version
+# TAJWID — Next.js PWA
 
-Version originale de l'application (Python + HTML).
+Apprentissage du Tajwid avec reconnaissance vocale (Web Speech), mode Duo P2P, et installation PWA.
 
-### 🚀 Déploiement Production
+Production : déployé via Vercel (app Next.js, Root Directory = racine du repo).
 
-La version de base (Legacy) est déployée ici :
-👉 **[tajwid-legacy.vercel.app](https://tajwid-legacy.vercel.app)**
-
----
-
-## Lancement Local (Legacy version)
-
-Double-cliquez sur `run.command` ou lancez :
+## Lancement local
 
 ```bash
-python3 server.py
+npm install
+npm run dev
 ```
 
-L'application sera disponible sur [http://localhost:8000](http://localhost:8000).
+Ou double-cliquez `run.command`.
 
----
+Ouvrez [http://localhost:3000](http://localhost:3000).
 
-_Note: La version moderne (Next.js) est conservée dans le dossier `/modern`._
-_Elle est déployée séparément sur [tajwid-app-vatsaev.vercel.app](https://tajwid-app-vatsaev.vercel.app)._
+## Fonctionnalités V1
+
+- Versets Tajwid colorés (API Quran.com)
+- Feedback vocal en direct (Web Speech API — Chrome / Safari)
+- Favoris & versets complétés (`localStorage`)
+- i18n FR / EN / RU
+- Mode Duo avec code de salle (PeerJS)
+- Installable (PWA : manifest + service worker)
+
+## Legacy
+
+L’ancien monolite HTML est archivé dans `old/legacy-spa/`.
+Le serveur Python `server.py` n’est plus requis pour l’app.

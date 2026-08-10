@@ -4,6 +4,9 @@ node_modules/
 out/
 build/
 dist/
+public/sw.js
+public/swe-worker*
+public/sw.js.map
 
 # Env & Secrets
 .env
@@ -20,7 +23,6 @@ yarn-error.log*
 Thumbs.db
 
 # App Specific
-# modern/  <-- Don't ignore this, it's the main project now!
 .agent/
 __pycache__/
 *.py[cod]
