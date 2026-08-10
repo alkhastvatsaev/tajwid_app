@@ -3248,60 +3248,44 @@
         return root.replace(/(.)\1+/g, '$1');
     }
 
-    // === STT matching — mode BALANCED (strict trop dur sur Web Speech) ===
-    // Web Speech : confidence souvent 0, finals rares → ne pas bloquer dessus.
-    // Anti-faux-positifs : pas de squelette court, forbid confusions, edit ≤2.
-    // API Whisper/Groq = prochaine étape si besoin qualité « professeur ».
-    const STT_MODE = 'balanced'; // 'strict' | 'balanced' | 'legacy'
+    // Matching lexical EXACT — les fautes de voyelles (himdu/hamdu, miliki/maliki)
+    // passaient via root_safe (retrait اوي) et near/editDistance. Plus maintenant.
+    // Limite connue : si Chrome réécrit déjà le BON orthographe malgré la faute,
+    // seul un modèle phonétique peut refuser (voir SOLUTION.md).
+    const STT_MODE = 'exact';
     const STT_FILLERS = new Set(['امين', 'آمين', 'يا', 'و', 'ثم', 'اه', 'ام']);
-    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 4;
+    const STT_WINDOW = 4;
     let lastMatchedFingerprint = '';
 
     const FATIHA_LEXICON = {
-        'انعمت': { aliases: ['انعمت', 'انعمات'], forbid: ['ان', 'نعم'] },
-        'الضالين': { aliases: ['الضالين', 'لضالين', 'ضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين'] },
-        'لضالين': { aliases: ['لضالين', 'الضالين', 'ضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
-        'صراط': { aliases: ['صراط', 'الصراط'], forbid: ['سراط', 'السراط'] },
-        'الصراط': { aliases: ['الصراط', 'صراط'], forbid: ['سراط', 'السراط'] },
-        'اياك': { aliases: ['اياك', 'اياك'], forbid: ['يا', 'اك'] },
-        'نستعين': { aliases: ['نستعين', 'نستعينو'], forbid: ['تعين'] },
-        'اهدنا': { aliases: ['اهدنا', 'هدنا'], forbid: [] },
-        'العالمين': { aliases: ['العالمين', 'عالمين'], forbid: [] },
-        'المستقيم': { aliases: ['المستقيم', 'مستقيم'], forbid: [] },
-        'المغضوب': { aliases: ['المغضوب', 'مغضوب'], forbid: [] },
-        'الحمد': { aliases: ['الحمد', 'حمد'], forbid: [] },
-        'الرحمن': { aliases: ['الرحمن', 'رحمن'], forbid: [] },
-        'الرحيم': { aliases: ['الرحيم', 'رحيم'], forbid: [] },
+        'انعمت': { aliases: ['انعمت'], forbid: ['ان', 'نعم', 'انعم'] },
+        'الضالين': { aliases: ['الضالين', 'لضالين'], forbid: ['الدال', 'ظالين', 'الظالين', 'دالين', 'ضالين'] },
+        'لضالين': { aliases: ['لضالين', 'الضالين'], forbid: ['الدال', 'ظالين', 'الظالين'] },
+        'صراط': { aliases: ['صراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'سرات'] },
+        'الصراط': { aliases: ['الصراط'], forbid: ['سراط', 'السراط', 'ساراط', 'صارات', 'السرات'] },
+        'اياك': { aliases: ['اياك'], forbid: ['يا', 'اك'] },
+        'نستعين': { aliases: ['نستعين'], forbid: ['تعين'] },
+        'اهدنا': { aliases: ['اهدنا'], forbid: [] },
+        'العالمين': { aliases: ['العالمين'], forbid: [] },
+        'المستقيم': { aliases: ['المستقيم'], forbid: [] },
+        'المغضوب': { aliases: ['المغضوب'], forbid: [] },
+        // Decision: pas d’alias « حمد » seul — trop permissif
+        'الحمد': { aliases: ['الحمد'], forbid: ['حيمد', 'الحيمد', 'همد', 'الحيمدو'] },
+        'الرحمن': { aliases: ['الرحمن'], forbid: [] },
+        'الرحيم': { aliases: ['الرحيم'], forbid: [] },
         'الله': { aliases: ['الله', 'لله'], forbid: ['ال'] },
-        'بسم': { aliases: ['بسم', 'باسم'], forbid: ['سم'] },
+        'بسم': { aliases: ['بسم'], forbid: ['سم'] },
         'رب': { aliases: ['رب'], forbid: [] },
-        'مالك': { aliases: ['مالك', 'ملك'], forbid: [] },
+        // Decision: « ملك » ≠ « مالك » (miliki/maliki) — JAMAIS alias
+        'مالك': { aliases: ['مالك'], forbid: ['ملك', 'مليك', 'ميلك', 'ملكي', 'مالكي'] },
         'يوم': { aliases: ['يوم'], forbid: [] },
-        'الدين': { aliases: ['الدين', 'دين'], forbid: [] },
+        'الدين': { aliases: ['الدين'], forbid: [] },
         'نعبد': { aliases: ['نعبد'], forbid: [] },
         'غير': { aliases: ['غير'], forbid: [] },
-        'عليهم': { aliases: ['عليهم', 'عليهيم'], forbid: ['هم'] },
+        'عليهم': { aliases: ['عليهم'], forbid: ['هم'] },
         'ولا': { aliases: ['ولا'], forbid: [] },
-        'الذين': { aliases: ['الذين', 'الذین'], forbid: [] }
+        'الذين': { aliases: ['الذين'], forbid: [] }
     };
-
-    function editDistance(a, b) {
-        if (a === b) return 0;
-        if (!a.length) return b.length;
-        if (!b.length) return a.length;
-        const row = new Array(b.length + 1);
-        for (let j = 0; j <= b.length; j++) row[j] = j;
-        for (let i = 1; i <= a.length; i++) {
-            let prev = i - 1, cur = i;
-            for (let j = 1; j <= b.length; j++) {
-                const next = (a[i - 1] === b[j - 1]) ? prev : Math.min(prev, cur, row[j]) + 1;
-                prev = row[j];
-                row[j] = next;
-                cur = next;
-            }
-        }
-        return row[b.length];
-    }
 
     function getLexiconEntry(targetNorm) {
         return FATIHA_LEXICON[targetNorm] || { aliases: [], forbid: [] };
@@ -3309,17 +3293,32 @@
 
     function isConfusableReject(hNorm, targetNorm) {
         const pairs = [
-            ['سراط', 'صراط'], ['السراط', 'الصراط'],
-            ['ظالين', 'ضالين'], ['الظالين', 'الضالين'], ['دالين', 'ضالين']
+            ['سراط', 'صراط'], ['السراط', 'الصراط'], ['ساراط', 'صراط'],
+            ['ظالين', 'ضالين'], ['الظالين', 'الضالين'], ['دالين', 'ضالين'],
+            ['ملك', 'مالك'], ['مليك', 'مالك'], ['ميلك', 'مالك'],
+            ['حيمد', 'حمد'], ['الحيمد', 'الحمد']
         ];
         for (const [bad, good] of pairs) {
             const b = normalize(bad);
             const g = normalize(good);
-            if ((hNorm === b || hNorm.endsWith(b)) && (targetNorm === g || targetNorm.endsWith(g) || targetNorm.includes('ضال') || targetNorm.includes('صراط'))) {
+            if (!b || !g) continue;
+            if ((hNorm === b || hNorm.includes(b)) && (targetNorm === g || targetNorm.endsWith(g) || targetNorm.includes(g))) {
                 return true;
             }
         }
         return false;
+    }
+
+    /** Refuse les substitutions de lettres de prolongation ا/و/ي (fautes de voyelle longues). */
+    function hasVowelLetterMismatch(hNorm, target) {
+        const V = /[اوي]/g;
+        const hV = (hNorm.match(V) || []).join('');
+        const tV = (target.match(V) || []).join('');
+        if (hV === tV) return false;
+        // Si les consonnes hors اوي sont égales mais les voyelles-lettres diffèrent → faute type himdu/hamdu
+        const hC = hNorm.replace(V, '');
+        const tC = target.replace(V, '');
+        return hC === tC && hV !== tV;
     }
 
     function matchFatihaWord(hWord, expectedAr) {
@@ -3329,37 +3328,27 @@
         if (STT_FILLERS.has(hNorm)) return { ok: false, reason: 'filler' };
 
         const lex = getLexiconEntry(target);
-        const forbid = (lex.forbid || []).map(f => normalize(f));
+        const forbid = (lex.forbid || []).map(f => normalize(f)).filter(Boolean);
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
+        if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
 
-        // Bribes trop courtes (ex. « ان » pour أنعمت)
         if (hNorm.length < 2) return { ok: false, reason: 'too_short' };
         if (target.length >= 4 && hNorm.length <= 2) return { ok: false, reason: 'too_short' };
 
         const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
         if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
 
+        // Liaison ال : corps EXACT uniquement (pas de near / pas de squelette)
         const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
         const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
-        if (hNoAl.length >= 3 && (aliases.includes(hNoAl) || hNoAl === tNoAl || aliases.includes('ال' + hNoAl))) {
-            return { ok: true, reason: 'liaison' };
+        if (hNoAl.length >= 3 && tNoAl.length >= 3) {
+            if (hNoAl === tNoAl) return { ok: true, reason: 'liaison_exact' };
+            if (aliases.includes(hNoAl) || aliases.includes('ال' + hNoAl)) return { ok: true, reason: 'liaison_alias' };
+            if (hasVowelLetterMismatch(hNoAl, tNoAl)) return { ok: false, reason: 'vowel_mismatch' };
         }
 
-        const dist = editDistance(hNorm, target);
-        const maxDist = target.length >= 6 ? 2 : (target.length >= 4 ? 1 : 0);
-        if (dist > 0 && dist <= maxDist) return { ok: true, reason: 'near' + dist };
-
-        // Balanced : squelette seulement si longueurs proches (évite l’ancien laxisme)
-        if (STT_MODE !== 'strict') {
-            const hRoot = getRootSkeleton(hNorm);
-            const tRoot = getRootSkeleton(target);
-            const lenOk = hNorm.length >= Math.ceil(target.length * 0.7);
-            if (hRoot.length >= 3 && hRoot === tRoot && lenOk) {
-                return { ok: true, reason: 'root_safe' };
-            }
-        }
-
+        // STT_MODE exact : aucun editDistance, aucun root_safe
         return { ok: false, reason: 'miss' };
     }
 
