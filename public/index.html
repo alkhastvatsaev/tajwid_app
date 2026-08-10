@@ -4645,7 +4645,7 @@
         a.click();
         URL.revokeObjectURL(url);
         try {
-            fetch('http://localhost:8000/log', {
+            fetch('/log', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ type: 'voice_lab', report })
@@ -5287,7 +5287,7 @@
 
     async function sendDiagnosticReport(fullReport) {
         try {
-            await fetch('http://localhost:8000/log', {
+            await fetch('/log', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(fullReport)

@@ -102,6 +102,6 @@ async def save_recording(request: Request):
     }
 
 if __name__ == "__main__":
-    print("SERVEUR DE DIAGNOSTIC DÉMARRÉ sur http://localhost:8000")
+    print("SERVEUR DE DIAGNOSTIC DÉMARRÉ sur http://localhost:3000")
     print(f"Enregistrements opt-in → {RECORDINGS_DIR}")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=3000)
