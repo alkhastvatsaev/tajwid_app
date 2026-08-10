@@ -78,6 +78,38 @@
             --on-accent: #ffffff;
         }
 
+        html[data-theme="blue"] {
+            --bg: #F4F8FC;
+            --surface: #FFFFFF;
+            --surface-hover: #E8F1FA;
+            --accent: #1D4ED8;
+            --accent-gradient: linear-gradient(135deg, #2563EB, #1D4ED8);
+            --success: #059669;
+            --error: #DC2626;
+            --warning: #D97706;
+            --text: #0B1220;
+            --subtext: #64748B;
+            --border: #D6E3F0;
+            --ghunnah: #15803D;
+            --madd-tabii: #0369A1;
+            --madd-munfasil: #1D4ED8;
+            --madd-muttasil: #4338CA;
+            --madd-lazim: #6D28D9;
+            --ikhfa: #C2410C;
+            --idgham-ghunnah: #BE123C;
+            --idgham-no-ghunnah: #57534E;
+            --iqlab: #E11D48;
+            --izhar: #57534E;
+            --qalqalah: #DC2626;
+            --ham-wasl: #9CA3AF;
+            --madd-fari: var(--madd-munfasil);
+            --idgham: var(--idgham-ghunnah);
+            --madd: var(--madd-tabii);
+            --overlay-scrim: rgba(15, 23, 42, 0.45);
+            --panel-bg: rgba(255, 255, 255, 0.96);
+            --on-accent: #ffffff;
+        }
+
         @keyframes meshGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -1261,7 +1293,7 @@
 
         /* Live Assistant Panel */
         #live-assistant {
-            display: none !important; /* Hiding panel as requested */
+            display: none;
             position: fixed;
             bottom: calc(100px + env(safe-area-inset-bottom));
             right: 20px;
@@ -1280,7 +1312,7 @@
             opacity: 0;
         }
         #live-assistant.visible {
-            display: flex;
+            display: flex !important;
             transform: translateY(0);
             opacity: 1;
         }
@@ -1411,11 +1443,11 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 69, 58, 0); }
         }
 
-        /* Theme toggle */
+        /* Theme toggle — always blue switch */
         .theme-toggle-btn {
-            background: transparent;
-            border: none;
-            color: var(--subtext);
+            background: rgba(37, 99, 235, 0.12);
+            border: 1px solid rgba(37, 99, 235, 0.4);
+            color: #2563EB;
             padding: 8px 10px;
             border-radius: 12px;
             cursor: pointer;
@@ -1424,13 +1456,19 @@
             justify-content: center;
             transition: 0.2s;
         }
-        .theme-toggle-btn:hover { background: var(--surface-hover); color: var(--text); }
-        .theme-toggle-btn .icon-sun { display: none; }
-        .theme-toggle-btn .icon-moon { display: block; }
+        .theme-toggle-btn:hover {
+            background: rgba(37, 99, 235, 0.2);
+            color: #1D4ED8;
+            border-color: #2563EB;
+        }
+        .theme-toggle-btn .icon-sun,
+        .theme-toggle-btn .icon-moon,
+        .theme-toggle-btn .icon-blue { display: none; }
+        html:not([data-theme="light"]):not([data-theme="blue"]) .theme-toggle-btn .icon-moon { display: block; }
         html[data-theme="light"] .theme-toggle-btn .icon-sun { display: block; }
-        html[data-theme="light"] .theme-toggle-btn .icon-moon { display: none; }
+        html[data-theme="blue"] .theme-toggle-btn .icon-blue { display: block; }
 
-        /* Light theme — full surface / contrast coverage */
+        /* Shared light surfaces (green + blue) */
         html[data-theme="light"] body {
             background-image:
                 radial-gradient(at 0% 0%, rgba(4, 120, 87, 0.07) 0px, transparent 50%),
@@ -1440,8 +1478,16 @@
             background-color: #ECFDF5;
             background-image: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
         }
+        html[data-theme="blue"] body {
+            background-image:
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
+        }
+        html[data-theme="blue"] body.celebration-mode {
+            background-color: #EFF6FF;
+            background-image: radial-gradient(circle at center, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+        }
 
-        /* Text that was hardcoded white (NOT on accent fills) */
         html[data-theme="light"] .daily-ref,
         html[data-theme="light"] #start-overlay p,
         html[data-theme="light"] .surah-name,
@@ -1460,11 +1506,29 @@
         html[data-theme="light"] .btn-duo,
         html[data-theme="light"] .search-box,
         html[data-theme="light"] #duo-selector-overlay h1,
-        html[data-theme="light"] #txt-stats-goal {
+        html[data-theme="light"] #txt-stats-goal,
+        html[data-theme="blue"] .daily-ref,
+        html[data-theme="blue"] #start-overlay p,
+        html[data-theme="blue"] .surah-name,
+        html[data-theme="blue"] .modal-title,
+        html[data-theme="blue"] .duo-choice-card h2,
+        html[data-theme="blue"] .duo-name,
+        html[data-theme="blue"] .profile-btn,
+        html[data-theme="blue"] .heart-btn,
+        html[data-theme="blue"] .lang-menu-btn:hover,
+        html[data-theme="blue"] .lang-options .lang-btn:hover,
+        html[data-theme="blue"] .v-btn:hover,
+        html[data-theme="blue"] .expert-title,
+        html[data-theme="blue"] .rule-word,
+        html[data-theme="blue"] .legend-letters,
+        html[data-theme="blue"] .assistant-val,
+        html[data-theme="blue"] .btn-duo,
+        html[data-theme="blue"] .search-box,
+        html[data-theme="blue"] #duo-selector-overlay h1,
+        html[data-theme="blue"] #txt-stats-goal {
             color: var(--text);
         }
 
-        /* Keep white / on-accent on filled controls */
         html[data-theme="light"] .v-btn.active,
         html[data-theme="light"] .lang-options .lang-btn.active,
         html[data-theme="light"] .manual-validate-btn,
@@ -1473,7 +1537,16 @@
         html[data-theme="light"] #restart-btn,
         html[data-theme="light"] #download-btn button,
         html[data-theme="light"] .rule-badge,
-        html[data-theme="light"] .legend-label {
+        html[data-theme="light"] .legend-label,
+        html[data-theme="blue"] .v-btn.active,
+        html[data-theme="blue"] .lang-options .lang-btn.active,
+        html[data-theme="blue"] .manual-validate-btn,
+        html[data-theme="blue"] .expert-toggle,
+        html[data-theme="blue"] .close-modal,
+        html[data-theme="blue"] #restart-btn,
+        html[data-theme="blue"] #download-btn button,
+        html[data-theme="blue"] .rule-badge,
+        html[data-theme="blue"] .legend-label {
             color: var(--on-accent) !important;
         }
 
@@ -1489,20 +1562,36 @@
         html[data-theme="light"] .summary-card,
         html[data-theme="light"] .surah-card,
         html[data-theme="light"] .rule-item,
-        html[data-theme="light"] .legend-item {
+        html[data-theme="light"] .legend-item,
+        html[data-theme="blue"] .verse-selector,
+        html[data-theme="blue"] .daily-card,
+        html[data-theme="blue"] .stat-card,
+        html[data-theme="blue"] .duo-choice-card,
+        html[data-theme="blue"] .duo-panel,
+        html[data-theme="blue"] .search-box,
+        html[data-theme="blue"] .lang-selector,
+        html[data-theme="blue"] .lang-options,
+        html[data-theme="blue"] .tajwid-modal,
+        html[data-theme="blue"] .summary-card,
+        html[data-theme="blue"] .surah-card,
+        html[data-theme="blue"] .rule-item,
+        html[data-theme="blue"] .legend-item {
             background: var(--surface);
             border-color: var(--border);
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
         }
-        html[data-theme="light"] .verse-selector {
+        html[data-theme="light"] .verse-selector,
+        html[data-theme="blue"] .verse-selector {
             background: rgba(255, 255, 255, 0.92);
             box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
         }
-        html[data-theme="light"] .lang-options {
+        html[data-theme="light"] .lang-options,
+        html[data-theme="blue"] .lang-options {
             background: rgba(255, 255, 255, 0.98);
             box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
         }
-        html[data-theme="light"] .tajwid-modal {
+        html[data-theme="light"] .tajwid-modal,
+        html[data-theme="blue"] .tajwid-modal {
             background: #FFFFFF;
             box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
         }
@@ -1510,76 +1599,109 @@
         html[data-theme="light"] .surah-card:hover,
         html[data-theme="light"] .duo-choice-card:hover,
         html[data-theme="light"] .rule-item:hover,
-        html[data-theme="light"] .v-btn:hover {
+        html[data-theme="light"] .v-btn:hover,
+        html[data-theme="blue"] .daily-card:hover,
+        html[data-theme="blue"] .surah-card:hover,
+        html[data-theme="blue"] .duo-choice-card:hover,
+        html[data-theme="blue"] .rule-item:hover,
+        html[data-theme="blue"] .v-btn:hover {
             background: var(--surface-hover);
         }
-        html[data-theme="light"] .lang-options .lang-btn:hover {
+        html[data-theme="light"] .lang-options .lang-btn:hover,
+        html[data-theme="blue"] .lang-options .lang-btn:hover {
             background: var(--surface-hover);
         }
 
         html[data-theme="light"] .profile-btn,
         html[data-theme="light"] .lang-menu-btn,
-        html[data-theme="light"] .theme-toggle-btn {
+        html[data-theme="blue"] .profile-btn,
+        html[data-theme="blue"] .lang-menu-btn {
             background: var(--surface-hover);
             border: 1px solid var(--border);
             color: var(--text);
         }
-        html[data-theme="light"] .btn-duo {
+        html[data-theme="light"] .theme-toggle-btn,
+        html[data-theme="blue"] .theme-toggle-btn {
+            background: rgba(37, 99, 235, 0.14);
+            border: 1px solid rgba(37, 99, 235, 0.45);
+            color: #2563EB;
+        }
+        html[data-theme="light"] .btn-duo,
+        html[data-theme="blue"] .btn-duo {
             background: var(--surface-hover);
             border-color: var(--border);
         }
-        html[data-theme="light"] .btn-duo:hover {
+        html[data-theme="light"] .btn-duo:hover,
+        html[data-theme="blue"] .btn-duo:hover {
             color: var(--on-accent) !important;
         }
 
-        /* Overlays: opaque boot screen, translucent modals */
-        html[data-theme="light"] #start-overlay {
+        html[data-theme="light"] #start-overlay,
+        html[data-theme="blue"] #start-overlay {
             background: var(--bg) !important;
         }
         html[data-theme="light"] #duo-selector-overlay,
         html[data-theme="light"] #modal-overlay,
-        html[data-theme="light"] .modal-overlay {
+        html[data-theme="light"] .modal-overlay,
+        html[data-theme="blue"] #duo-selector-overlay,
+        html[data-theme="blue"] #modal-overlay,
+        html[data-theme="blue"] .modal-overlay {
             background: var(--overlay-scrim) !important;
         }
 
         html[data-theme="light"] #expert-panel,
-        html[data-theme="light"] #live-assistant {
+        html[data-theme="light"] #live-assistant,
+        html[data-theme="blue"] #expert-panel,
+        html[data-theme="blue"] #live-assistant {
             background: var(--panel-bg);
             border-color: var(--border);
             box-shadow: -10px 0 40px rgba(15, 23, 42, 0.08);
         }
-        html[data-theme="light"] #expert-panel {
+        html[data-theme="light"] #expert-panel,
+        html[data-theme="blue"] #expert-panel {
             border-left-color: var(--border);
         }
-        html[data-theme="light"] .expert-legend {
+        html[data-theme="light"] .expert-legend,
+        html[data-theme="blue"] .expert-legend {
             border-top-color: var(--border);
         }
-        html[data-theme="light"] .assistant-val {
+        html[data-theme="light"] .assistant-val,
+        html[data-theme="blue"] .assistant-val {
             background: var(--surface-hover);
         }
 
-        html[data-theme="light"] .word-box {
+        html[data-theme="light"] .word-box,
+        html[data-theme="blue"] .word-box {
             box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
         }
-        html[data-theme="light"] .word-box:hover {
+        html[data-theme="light"] .word-box:hover,
+        html[data-theme="blue"] .word-box:hover {
             border-color: #D1D5DB;
         }
         html[data-theme="light"] .word-box.correct {
             background: rgba(5, 150, 105, 0.08);
         }
-        html[data-theme="light"] .verse-marker {
+        html[data-theme="blue"] .word-box.correct {
+            background: rgba(37, 99, 235, 0.08);
+        }
+        html[data-theme="light"] .verse-marker,
+        html[data-theme="blue"] .verse-marker {
             background: #F3F4F6;
             border-color: var(--border);
             box-shadow: none;
         }
-        html[data-theme="light"] .verse-marker:hover {
+        html[data-theme="light"] .verse-marker:hover,
+        html[data-theme="blue"] .verse-marker:hover {
             background: #E5E7EB;
         }
         html[data-theme="light"] .smart-progress-bar,
-        html[data-theme="light"] .progress-container {
+        html[data-theme="light"] .progress-container,
+        html[data-theme="blue"] .smart-progress-bar,
+        html[data-theme="blue"] .progress-container {
             background: #E5E7EB;
         }
-        html[data-theme="light"] .tajwid-warning {
+        html[data-theme="light"] .tajwid-warning,
+        html[data-theme="blue"] .tajwid-warning {
             background: rgba(255, 255, 255, 0.95);
             color: #C2410C;
             border: 1px solid var(--border);
@@ -1589,27 +1711,37 @@
         html[data-theme="light"] #restart-btn:hover {
             background: #047857;
         }
-        html[data-theme="light"] #report-diag-btn {
+        html[data-theme="blue"] #restart-btn:hover {
+            background: #1E40AF;
+        }
+        html[data-theme="light"] #report-diag-btn,
+        html[data-theme="blue"] #report-diag-btn {
             background: var(--surface-hover) !important;
             color: var(--text) !important;
             border-color: var(--border) !important;
         }
         html[data-theme="light"] #txt-browser-close,
         html[data-theme="light"] #txt-import-cancel,
-        html[data-theme="light"] .close-modal[style*="transparent"] {
+        html[data-theme="light"] .close-modal[style*="transparent"],
+        html[data-theme="blue"] #txt-browser-close,
+        html[data-theme="blue"] #txt-import-cancel,
+        html[data-theme="blue"] .close-modal[style*="transparent"] {
             background: transparent !important;
             color: var(--text) !important;
             border: 1px solid var(--border) !important;
         }
-        html[data-theme="light"] #ghost-word-container {
+        html[data-theme="light"] #ghost-word-container,
+        html[data-theme="blue"] #ghost-word-container {
             color: var(--accent);
             opacity: 0.08;
         }
-        html[data-theme="light"] .loading-spinner {
+        html[data-theme="light"] .loading-spinner,
+        html[data-theme="blue"] .loading-spinner {
             border-color: var(--border);
             border-top-color: var(--accent);
         }
-        html[data-theme="light"] .search-box::placeholder {
+        html[data-theme="light"] .search-box::placeholder,
+        html[data-theme="blue"] .search-box::placeholder {
             color: var(--subtext);
         }
     </style>
@@ -1617,6 +1749,7 @@
         (function () {
             try {
                 var t = localStorage.getItem('tajwid_theme') || 'dark';
+                if (t !== 'light' && t !== 'blue') t = 'dark';
                 document.documentElement.setAttribute('data-theme', t);
             } catch (e) {}
         })();
@@ -1644,9 +1777,10 @@
             </div>
         </div>
 
-        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme(event)" title="Thème" aria-label="Basculer le thème clair / sombre">
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme(event)" title="Thème" aria-label="Cycle thème sombre / vert / bleu">
             <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="icon-blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
         </button>
 
         <button class="profile-btn" onclick="openStatsModal()">
@@ -2415,6 +2549,31 @@
         return num.toString().split('').map(digit => arabicDigits[digit] || digit).join('');
     }
 
+    // Mode focus : Al-Fātiḥah uniquement (entraînement règles + STT)
+    const FATIHA_ONLY = true;
+    const FATIHA_SURAH = 1;
+    const FATIHA_AYAH_COUNT = 7;
+
+    function parseSurahNum(ref) {
+        if (!ref) return null;
+        const s = String(ref).trim();
+        if (s.includes(':')) return parseInt(s.split(':')[0], 10);
+        if (s.includes('-') && !s.includes(':')) return parseInt(s.split('-')[0], 10);
+        const n = parseInt(s, 10);
+        return Number.isFinite(n) ? n : null;
+    }
+
+    function assertFatihaOnly(ref) {
+        if (!FATIHA_ONLY) return true;
+        const n = parseSurahNum(ref);
+        if (n !== FATIHA_SURAH) {
+            console.warn('FATIHA_ONLY: refus de charger la sourate', ref);
+            alert('Mode focus Al-Fātiḥah : les autres sourates sont temporairement masquées.');
+            return false;
+        }
+        return true;
+    }
+
     // === API Quran.com avec tajwid natif ===
     async function fetchVerseFromAPI(surah, ayah) {
         let ref = "";
@@ -2435,6 +2594,7 @@
         
         if (!ref) return;
         if (ref.includes('-') && !isFullSurah) ref = ref.split('-')[0];
+        if (!assertFatihaOnly(ref)) return;
 
         const loader = document.getElementById('import-loader');
         if (loader) loader.style.display = 'block';
@@ -2756,6 +2916,9 @@
     // === Daily Verse Logic ===
     let dailyVerse = null;
     function getDailyVerseRef() {
+        if (FATIHA_ONLY) {
+            return { sNum: FATIHA_SURAH, aNum: 1, name: SURAHS_LIST[0] };
+        }
         const d = new Date();
         const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
         const random = (s) => {
@@ -2833,6 +2996,7 @@
 
             // Succès : on cache l'overlay et on marque comme enregistrant
             isRecording = true;
+            lastStreamFingerprint = '';
             if (overlay) overlay.style.display = 'none';
             document.getElementById('live-assistant')?.classList.add('visible');
             resetUI();
@@ -2890,8 +3054,8 @@
 
             recognition.onresult = event => {
                 let transcript = '';
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    transcript += event.results[i][0].transcript;
+                for (let i = 0; i < event.results.length; ++i) {
+                    transcript += event.results[i][0].transcript + ' ';
                 }
                 const cleanTranscript = transcript.trim();
                 if (cleanTranscript) {
@@ -3003,12 +3167,106 @@
         return root.replace(/(.)\1+/g, '$1');
     }
 
+    // === Phase 1 STT — lexique Fātiḥah + matching fenêtre (docs/AUDIT-STT.md) ===
+    const STT_FILLERS = new Set(['امين', 'آمين', 'يا', 'و', 'ثم', 'اه']);
+    const STT_WINDOW = 5;
+    let lastStreamFingerprint = '';
+
+    // Clés = normalize(arabe). Aliases / forbid / minRootLen pour Fātiḥah.
+    const FATIHA_LEXICON = {
+        'انعمت': { aliases: ['انعمت', 'انعمات', 'انعم'], minRootLen: 3, forbid: ['ان'] },
+        'الضالين': { aliases: ['الضالين', 'لضالين', 'ضالين', 'الضال'], minRootLen: 3, forbid: ['الدال', 'ظالين', 'الظالين', 'دالين'] },
+        'لضالين': { aliases: ['لضالين', 'الضالين', 'ضالين', 'الضال'], minRootLen: 3, forbid: ['الدال', 'ظالين', 'الظالين'] },
+        'صراط': { aliases: ['صراط', 'الصراط'], minRootLen: 3, forbid: ['سراط', 'السراط'] },
+        'الصراط': { aliases: ['الصراط', 'صراط'], minRootLen: 3, forbid: ['سراط', 'السراط'] },
+        'اياك': { aliases: ['اياك', 'اياك'], minRootLen: 2, forbid: [] },
+        'نستعين': { aliases: ['نستعين', 'نستعينو', 'نستعین'], minRootLen: 4, forbid: [] },
+        'اهدنا': { aliases: ['اهدنا', 'هدنا'], minRootLen: 3, forbid: [] },
+        'العالمين': { aliases: ['العالمين', 'عالمين', 'العلمين'], minRootLen: 4, forbid: [] },
+        'المستقيم': { aliases: ['المستقيم', 'مستقيم'], minRootLen: 4, forbid: [] },
+        'المغضوب': { aliases: ['المغضوب', 'مغضوب'], minRootLen: 4, forbid: [] },
+        'الحمد': { aliases: ['الحمد', 'حمد'], minRootLen: 3, forbid: [] },
+        'الرحمن': { aliases: ['الرحمن', 'رحمن'], minRootLen: 3, forbid: [] },
+        'الرحيم': { aliases: ['الرحيم', 'رحيم'], minRootLen: 3, forbid: [] }
+    };
+
+    function getLexiconEntry(targetNorm) {
+        if (FATIHA_LEXICON[targetNorm]) return FATIHA_LEXICON[targetNorm];
+        const tRoot = getRootSkeleton(targetNorm);
+        return {
+            aliases: [],
+            minRootLen: Math.max(2, Math.min(4, tRoot.length)),
+            forbid: []
+        };
+    }
+
+    function isConfusableReject(hNorm, targetNorm) {
+        const pairs = [
+            ['سراط', 'صراط'],
+            ['السراط', 'الصراط'],
+            ['ظالين', 'ضالين'],
+            ['الظالين', 'الضالين'],
+            ['دالين', 'ضالين']
+        ];
+        for (const [bad, good] of pairs) {
+            const b = normalize(bad);
+            const g = normalize(good);
+            if ((hNorm === b || hNorm.endsWith(b)) && (targetNorm === g || targetNorm.endsWith(g) || targetNorm.includes('ضال') || targetNorm.includes('صراط'))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function matchFatihaWord(hWord, expectedAr) {
+        const hNorm = normalize(hWord);
+        const target = normalize(expectedAr);
+        if (!hNorm || !target) return { ok: false, reason: 'empty' };
+
+        if (STT_FILLERS.has(hNorm) || STT_FILLERS.has(hWord)) {
+            return { ok: false, reason: 'filler' };
+        }
+
+        const lex = getLexiconEntry(target);
+        const forbid = (lex.forbid || []).map(f => normalize(f));
+        if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
+        if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
+
+        const aliases = [target, ...(lex.aliases || [])].map(a => normalize(a)).filter(Boolean);
+        if (aliases.includes(hNorm)) return { ok: true, reason: 'exact' };
+
+        const hRoot = getRootSkeleton(hNorm);
+        const tRoot = getRootSkeleton(target);
+        const minRoot = lex.minRootLen || 2;
+
+        if (hRoot === tRoot && hRoot.length >= minRoot) return { ok: true, reason: 'root' };
+
+        const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
+        const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
+        if (hNoAl.length > 1 && tNoAl.length > 1) {
+            const hR = getRootSkeleton(hNoAl);
+            const tR = getRootSkeleton(tNoAl);
+            if (hR === tR && hR.length >= minRoot) return { ok: true, reason: 'liaison' };
+        }
+
+        for (const a of aliases) {
+            const aRoot = getRootSkeleton(a);
+            if (hRoot === aRoot && hRoot.length >= minRoot) return { ok: true, reason: 'alias' };
+        }
+
+        return { ok: false, reason: 'miss' };
+    }
+
     async function goToNextVerse() {
         const currentRef = VERSES_LIBRARY[activeVerseIdx].ref;
         const match = currentRef.match(/\[(\d+):(\d+)\]/);
         if (match) {
             const surah = parseInt(match[1]);
             const nextAyah = parseInt(match[2]) + 1;
+            if (FATIHA_ONLY && (surah !== FATIHA_SURAH || nextAyah > FATIHA_AYAH_COUNT)) {
+                console.warn('FATIHA_ONLY: fin de Al-Fātiḥah');
+                return;
+            }
             document.body.classList.remove('celebration-mode');
             document.getElementById('next-verse-btn').style.display = 'none';
             document.getElementById('restart-btn').classList.remove('visible');
@@ -3025,7 +3283,12 @@
         let matched = 0;
         let tempIdx = currentIdx;
 
-        // Diagnostic log
+        const fingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
+        if (fingerprint === lastStreamFingerprint) {
+            return { matched: false, text: transcript, deduped: true };
+        }
+        lastStreamFingerprint = fingerprint;
+
         sessionDiagnostics.heard.push({
             time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
             raw: transcript,
@@ -3033,50 +3296,39 @@
             normalizedExpected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : "FIN"
         });
 
-        for (let i = 0; i < heard.length && tempIdx < verseData.length; i++) {
+        const start = Math.max(0, heard.length - STT_WINDOW);
+        for (let i = start; i < heard.length && tempIdx < verseData.length; i++) {
             const hWord = heard[i];
             const hNorm = normalize(hWord);
-            const hRoot = getRootSkeleton(hNorm);
-            
-            const target = normalize(verseData[tempIdx].ar);
-            const tRoot = getRootSkeleton(target);
+            if (!hNorm || STT_FILLERS.has(hNorm)) continue;
 
-            // LOGIQUE DE LIAISON ET DE SQUELETTE :
-            // 1. Correspondance exacte (Alhamdulillah)
-            // 2. Correspondance racine (Ihdina == Ihdiyna) car les Alifs/Yas varient en STT
-            // 3. Correspondance de liaison (Al-Hamdu == Hamdu)
-            
-            const isExact = (hNorm === target);
-            const isRootMatch = (hRoot === tRoot && hRoot.length > 0);
-            
-            // Flexibilité sur l'article défini (Liaison)
-            const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
-            const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
-            const isLiaisonMatch = (hNoAl.length > 1 && tNoAl.length > 1 && getRootSkeleton(hNoAl) === getRootSkeleton(tNoAl));
-
-            // Tolérances spécifiques pour les mots difficiles
-            const isAnamtaTolerance = (target === "انعمت" && (hNorm === "ان" || hNorm === "انعم"));
-            const isDhallinTolerance = (target === "لضالين" && (hNorm === "الدال" || hNorm === "الضال"));
-
-            if (isExact || isRootMatch || isLiaisonMatch || isAnamtaTolerance || isDhallinTolerance) {
-                // Détection d'un Madd "oublié" 
-                // Si le squelette matche mais pas le mot exact, et qu'il y a un Madd attendu
-                const box = document.getElementById(`box-${tempIdx}`);
-                const isMaddMissed = !isExact && box?.dataset.ruleType === 'madd';
-
-                sessionDiagnostics.matches.push({
-                    expected: target,
-                    expectedRaw: verseData[tempIdx].ar,
-                    heard: hWord,
-                    index: tempIdx,
-                    time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
-                    maddMissed: isMaddMissed
-                });
-
-                processMatchedWord(tempIdx, isMaddMissed);
+            const boxAlready = document.getElementById(`box-${tempIdx}`);
+            if (boxAlready?.classList.contains('correct')) {
                 tempIdx++;
-                matched++;
+                i--;
+                continue;
             }
+
+            const verdict = matchFatihaWord(hWord, verseData[tempIdx].ar);
+            if (!verdict.ok) continue;
+
+            const target = normalize(verseData[tempIdx].ar);
+            // Phase 1: pas de faux « Madd oublié » sur variante STT (voir AUDIT-STT)
+            const isMaddMissed = false;
+
+            sessionDiagnostics.matches.push({
+                expected: target,
+                expectedRaw: verseData[tempIdx].ar,
+                heard: hWord,
+                index: tempIdx,
+                reason: verdict.reason,
+                time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
+                maddMissed: isMaddMissed
+            });
+
+            processMatchedWord(tempIdx, isMaddMissed);
+            tempIdx++;
+            matched++;
         }
 
         if (matched > 0) {
@@ -3084,7 +3336,6 @@
             updateAssistantWords();
             hideAssistantFeedback();
             
-            // Re-adding the completion check
             if (currentIdx >= verseData.length) finishVerse();
 
             const progress = (currentIdx / verseData.length) * 100;
@@ -3094,7 +3345,6 @@
             return { matched: true, text: transcript };
         }
         
-        // If we heard something but no match, it might be an error
         return { matched: false, text: transcript };
     }
 
@@ -3400,6 +3650,10 @@
     }
 
     function openImportModal() {
+        if (FATIHA_ONLY) {
+            alert('Mode focus Al-Fātiḥah : import d’autres sourates désactivé.');
+            return;
+        }
         const modal = document.getElementById('import-modal');
         if (modal) {
             modal.style.display = 'flex';
@@ -3413,6 +3667,7 @@
     }
 
     function openQuranBrowser() {
+        if (FATIHA_ONLY) return; // navigation via sélecteur ayah 1–7
         const modal = document.getElementById('quran-modal');
         if (modal) {
             modal.style.display = 'flex';
@@ -3432,8 +3687,9 @@
         
         grid.innerHTML = SURAHS_LIST.map((name, i) => {
             const sNum = i + 1;
+            if (FATIHA_ONLY && sNum !== FATIHA_SURAH) return '';
             const isFav = favorites.some(ref => ref.startsWith(`${sNum}:`));
-            if (name.toLowerCase().includes(query) || sNum.toString() === query) {
+            if (FATIHA_ONLY || name.toLowerCase().includes(query) || sNum.toString() === query) {
                 return `
                     <div class="surah-card" onclick="fetchVerseFromAPI('${sNum}:1')">
                         <div class="surah-num">${sNum}</div>
@@ -3451,8 +3707,21 @@
         const container = document.getElementById('v-btns-container');
         const verse = VERSES_LIBRARY[activeVerseIdx];
         if (!verse || !container) return;
+
+        if (FATIHA_ONLY) {
+            let ayahBtns = '';
+            const fullActive = (verse.ref || '').includes('[1-');
+            for (let a = 1; a <= FATIHA_AYAH_COUNT; a++) {
+                const isActive = !fullActive && (verse.ref || '').includes(`[1:${a}]`);
+                ayahBtns += `<button class="v-btn${isActive ? ' active' : ''}" onclick="fetchVerseFromAPI(1, ${a})">${a}</button>`;
+            }
+            container.innerHTML = `
+                <button class="v-btn${fullActive ? ' active' : ''}" onclick="fetchVerseFromAPI('1')" title="Al-Fātiḥah complète">الفاتحة</button>
+                ${ayahBtns}
+            `;
+            return;
+        }
         
-        // Bouton fusionné : Livre + Texte du verset
         container.innerHTML = `
             <button class="v-btn active" onclick="openQuranBrowser()" style="display:flex; align-items:center; gap:8px;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -3467,20 +3736,28 @@
     }
 
     function applyTheme(theme) {
-        const next = theme === 'light' ? 'light' : 'dark';
+        const allowed = { dark: 1, light: 1, blue: 1 };
+        const next = allowed[theme] ? theme : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         try { localStorage.setItem('tajwid_theme', next); } catch (e) {}
         const btn = document.getElementById('theme-toggle-btn');
         if (btn) {
-            btn.setAttribute('aria-pressed', next === 'light' ? 'true' : 'false');
-            btn.title = next === 'light' ? 'Thème sombre' : 'Thème clair';
+            const labels = {
+                dark: 'Thème vert',
+                light: 'Thème bleu',
+                blue: 'Thème sombre'
+            };
+            btn.title = labels[next] || 'Thème';
+            btn.setAttribute('aria-label', 'Thème actuel : ' + next + '. Cliquer pour changer.');
         }
     }
 
     function toggleTheme(event) {
         if (event) event.stopPropagation();
+        const order = ['dark', 'light', 'blue'];
         const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        applyTheme(current === 'light' ? 'dark' : 'light');
+        const idx = order.indexOf(current);
+        applyTheme(order[(idx + 1) % order.length]);
     }
 
     // Fermer les menus au clic ailleurs
@@ -3503,7 +3780,12 @@
         const savedLang = localStorage.getItem('tajwid_lang') || 'fr';
         setLanguage(savedLang);
         updateStatsUI();
-        initDailyVerse(); 
+        if (FATIHA_ONLY) {
+            const dailyCard = document.getElementById('daily-verse-card');
+            if (dailyCard) dailyCard.style.display = 'none';
+        } else {
+            initDailyVerse();
+        }
 
         // Listeners robustes
         const startOverlay = document.getElementById('start-overlay');
@@ -3515,7 +3797,7 @@
         }
 
         const dailyCard = document.getElementById('daily-verse-card');
-        if (dailyCard) {
+        if (dailyCard && !FATIHA_ONLY) {
             dailyCard.addEventListener('click', (e) => {
                 e.stopPropagation();
                 console.log("Daily card clicked");
@@ -3523,13 +3805,18 @@
             });
         }
 
-        // Chargement initial (Fatihah + dernières Sourates)
+        // Chargement initial — mode focus Al-Fātiḥah
         try {
-            await fetchVerseFromAPI('112'); // Al-Ikhlas
-            await fetchVerseFromAPI('113'); // Al-Falaq
-            await fetchVerseFromAPI('114'); // An-Nas
-            await fetchVerseFromAPI('1');   // Al-Fatihah (en dernier pour être l'active)
-            console.log("Initial surahs loaded: 1, 112, 113, 114");
+            if (FATIHA_ONLY) {
+                await fetchVerseFromAPI('1');
+                console.log("FATIHA_ONLY: Al-Fātiḥah loaded");
+            } else {
+                await fetchVerseFromAPI('112');
+                await fetchVerseFromAPI('113');
+                await fetchVerseFromAPI('114');
+                await fetchVerseFromAPI('1');
+                console.log("Initial surahs loaded: 1, 112, 113, 114");
+            }
         } catch (e) {
             console.error("Initial load failed:", e);
         }
