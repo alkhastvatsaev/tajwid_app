@@ -9,8 +9,55 @@
 
 ## Verdict
 
-Le STT actuel est un **matcheur lexical tolérant** sur Web Speech `ar-SA`. Il est bon pour « avancer mot à mot » sur Fātiḥah, **insuffisant pour du tajwīd infaillible** : il ne mesure ni durée de madd, ni ghunnah, ni qalqalah, ni tafkhīm.  
-Rendre la reconnaissance « infaillible » = **deux couches** : (A) texte robuste Fātiḥah-first, (B) analyse audio pour les règles non textuelles.
+Web Speech seul **ne peut pas** jouer le rôle d’un professeur de tajwīd (30 ans).  
+Cause des faux positifs constatés : (1) le moteur **réécrit** souvent ce que tu dis vers le « bon » arabe, (2) notre ancien match **squelette اوي** acceptait trop.  
+
+**Ship Phase 1.5 (`STT_STRICT`)** : exact/alias + 1 edit max + finals only + confidence ≥ 0.72 + plus de squelette.  
+**Pour du vrai niveau professeur** : couche audio (forced alignment + GOP / classifieurs de règle) — voir § Recherche.
+
+---
+
+## Recherche agent-reach (GitHub + papers) — meilleures approches
+
+Utilisé : `gh` search/API + arXiv/OpenReview (août 2026).
+
+### Ce que font les systèmes sérieux
+
+| Approche | Idée | Repos / refs | Niveau « professeur » |
+|----------|------|--------------|------------------------|
+| **GOP** (Goodness of Pronunciation) | Forced alignment → score phonème vs modèle | [tbright17/kaldi-dnn-ali-gop](https://github.com/tbright17/kaldi-dnn-ali-gop), [jimbozhang/kaldi-gop](https://github.com/jimbozhang/kaldi-gop) | Élevé (CAPT classique) |
+| **Hybrid ASR + classifieur règle** | ASR aligne le mot, CNN/MLP juge *une* règle (ex. qalqalah) | TajweedAI (OpenReview) | Élevé par règle |
+| **ASR phonétique Coran (QPS)** | Alphabet phonétique tajwīd + CTC multi-niveau | arXiv:2509.00094 (Quran MDM) | Très élevé |
+| **Forced alignment Coran** | HMM/HTK affinés madd/ghunnah | IEEE Access 2023 (phoneme segmentation) | Prérequis durée |
+| **Whisper / wav2vec fine-tuné Coran** | Transcript + compare | [AsemBadr01/Makhraj](https://github.com/AsemBadr01/Makhraj), wav2vec2 QuranRecite | Moyen (toujours texte) |
+| **Fuzzy text (Tarteel-like)** | Whisper + Levenshtein pour *tracking* | [yayaiu6/Real-Time-Quran…](https://github.com/yayaiu6/Real-Time-Quran-recitation-tracker-System) | Tracking, **pas** qualité tajwīd |
+| **Ahkam DL** | Classif règles de base sur audio | [malayyoub/Ahkam-Al-Tajweed](https://github.com/malayyoub/Ahkam-Al-Tajweed) | Moyen |
+| **Phonemizer** | Cible IPA/tajwīd pour scoring | [Hetchy/Quranic-Phonemizer](https://github.com/Hetchy/Quranic-Phonemizer) | Outil, pas juge |
+
+### Architecture cible « professeur » (recommandée pour TAJWID)
+
+```
+Micro
+  ├─ (A) Tracker position : ASR (Web Speech court terme → Whisper/NeMo Coran)
+  │      → mot courant indexé (Fātiḥah)
+  └─ (B) Juge tajwīd : sur le segment audio du mot
+         1. Forced align (timestamps)
+         2. GOP / posterior phonèmes  → lettres confuses ص/س ض/د
+         3. Durée voyelle             → madd 2/4/6
+         4. Classifieurs              → ghunnah, qalqalah, ikhfāʾ
+         → verdict : OK | erreur typée | « répète »
+```
+
+Web Speech reste utile pour (A) seulement. **Jamais** comme juge final.
+
+### Pourquoi « je dis faux et ça valide »
+
+1. Chrome `ar-SA` mappe vers des mots du Coran / arabe courant (LM bias).  
+2. Match `getRootSkeleton` (retrait ا و ي) → beaucoup de fautes collapsaient.  
+3. Interim results + fenêtre large → avances anticipées.
+
+Mitigation textuelle (1.5) : `STT_STRICT`, finals only, confidence, Levenshtein ≤1, lexicon sans squelette.  
+Mitigation réelle : (B) audio.
 
 ---
 
@@ -21,14 +68,13 @@ getUserMedia
   → AudioContext/analyser (aura UI seulement)
   → MediaRecorder (export optionnel)
   → SpeechRecognition continuous + interimResults, lang=ar-SA
-       → onresult transcript
-            → checkWordStream
-                 → normalize / getRootSkeleton / liaisons / 2 tolérances
-                      → processMatchedWord (± maddMissed heuristique)
+       → onresult (final + confidence si STRICT)
+            → checkWordStream → matchFatihaWord (exact / near1)
+                 → processMatchedWord
 ```
 
 Fonctions critiques (ne pas casser sans tests) :  
-`normalize` · `getRootSkeleton` · `checkWordStream` · `startRecognition` · `loadVerse` · `processMatchedWord`
+`normalize` · `getRootSkeleton` · `matchFatihaWord` · `checkWordStream` · `startRecognition` · `loadVerse` · `processMatchedWord`
 
 ---
 
