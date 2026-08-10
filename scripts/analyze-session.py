@@ -70,6 +70,11 @@ def analyze(path: Path) -> dict:
         "ref": data.get("ref"),
         "engine": data.get("engine"),
         "timestamp": data.get("timestamp"),
+        "schemaVersion": data.get("schemaVersion"),
+        "mistakeTestMode": bool(data.get("mistakeTestMode")),
+        "summary": data.get("summary"),
+        "sttEvents": len(data.get("sttEvents") or []),
+        "voiceSamples": len(data.get("voiceEnergy") or []),
         "total": len(matches),
         "auto": len(auto),
         "manual": len(manual),
@@ -91,6 +96,16 @@ def print_report(r: dict) -> None:
     print(f"Ref     : {r['ref']} | engine={r['engine']} | {r['timestamp']}")
     print("-" * 60)
     print(f"Score   : {r['auto']}/{r['total']} auto ({r['auto_rate_pct']}%)  |  manuel={r['manual']}")
+    if r.get("summary"):
+        s = r["summary"]
+        print(f"Summary : sttEvents={s.get('sttEvents')} voiceSamples={s.get('voiceSamples')} "
+              f"eAvg={s.get('voiceEnergyAvg')} durationMs={s.get('durationMs')}")
+    else:
+        print(f"Rich    : sttEvents={r.get('sttEvents')} voiceSamples={r.get('voiceSamples')}")
+    if r.get("mistakeTestMode"):
+        print("MODE    : test fautes volontaires (grammar off)")
+    if r.get("schemaVersion"):
+        print(f"Schema  : v{r.get('schemaVersion')}")
     print(f"Raisons : {r['reasons']}")
     print(f"Events  : heard={r['heard_events']} errors={r['errors']}")
     print("-" * 60)

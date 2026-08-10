@@ -2038,7 +2038,11 @@
 
             <label id="dataset-optin-label" onclick="event.stopPropagation();" style="display:flex; align-items:flex-start; gap:10px; max-width:280px; text-align:left; font-size:0.72rem; line-height:1.35; color:var(--subtext); cursor:pointer; user-select:none;">
                 <input type="checkbox" id="dataset-optin" onclick="event.stopPropagation();" style="margin-top:3px; accent-color:var(--accent); flex-shrink:0;">
-                <span id="txt-dataset-optin">J’accepte d’enregistrer cette Fātiḥah (audio) pour améliorer l’app — uniquement si coché</span>
+                <span id="txt-dataset-optin">J’accepte d’enregistrer cette Fātiḥah (audio + télémétrie riche) pour améliorer l’app</span>
+            </label>
+            <label id="mistake-test-label" onclick="event.stopPropagation();" style="display:flex; align-items:flex-start; gap:10px; max-width:280px; text-align:left; font-size:0.72rem; line-height:1.35; color:var(--subtext); cursor:pointer; user-select:none;">
+                <input type="checkbox" id="mistake-test-optin" onclick="event.stopPropagation();" style="margin-top:3px; accent-color:#ff453a; flex-shrink:0;">
+                <span id="txt-mistake-test">Mode test fautes (désactive la grammaire STT qui « corrige » tes voyelles)</span>
             </label>
             
             <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); openDuoSelector()">MODE DUO</button>
@@ -2242,8 +2246,12 @@
     let mediaRec = null;
     let audioChunks = [];
     let datasetOptIn = false;
+    let mistakeTestMode = false;
     let datasetMimeType = 'audio/webm';
     let datasetSaveInFlight = false;
+    let datasetVoiceLog = []; // télémétrie énergie dense (session)
+    const DATASET_VOICE_MAX = 6000; // ~100s @ 60 Hz
+    let datasetSttEvents = []; // chaque onresult riche
     let currentStream = null;
     let sessionDiagnostics = {
         ref: "",
@@ -2294,8 +2302,9 @@
             assistantTarget: "Mot cible",
             assistantHeard: "Vous dites",
             assistantLayer: "Suivi temps réel (Chrome). Whisper réservé pour plus tard.",
-            datasetOptIn: "J’accepte d’enregistrer cette Fātiḥah (audio) pour améliorer l’app — uniquement si coché",
-            datasetSaved: "Enregistrement sauvegardé (téléchargement + cloud)",
+            datasetOptIn: "J’accepte d’enregistrer cette Fātiḥah (audio + télémétrie riche) pour améliorer l’app",
+            mistakeTest: "Mode test fautes (désactive la grammaire STT qui « corrige » tes voyelles)",
+            datasetSaved: "Enregistrement riche sauvegardé (téléchargement + cloud)",
             datasetSaveFail: "Téléchargé localement — envoi cloud échoué",
             datasetNoAudio: "Opt-in actif mais aucun audio capturé",
             whisperHold: "Écoute continue — récitez",
@@ -2372,8 +2381,9 @@
             assistantTarget: "Target word",
             assistantHeard: "You say",
             assistantLayer: "Real-time tracking (Chrome). Whisper saved for later.",
-            datasetOptIn: "I agree to record this Fātiḥah (audio) to improve the app — only if checked",
-            datasetSaved: "Recording saved (download + cloud)",
+            datasetOptIn: "I agree to record this Fātiḥah (rich audio + telemetry) to improve the app",
+            mistakeTest: "Intentional-error test mode (disables STT grammar that “corrects” vowels)",
+            datasetSaved: "Rich recording saved (download + cloud)",
             datasetSaveFail: "Downloaded locally — cloud upload failed",
             datasetNoAudio: "Opt-in on but no audio captured",
             whisperHold: "Continuous listen — recite",
@@ -2450,8 +2460,9 @@
             assistantTarget: "Целевое слово",
             assistantHeard: "Вы сказали",
             assistantLayer: "Слово за словом через Groq Whisper (не Chrome STT)",
-            datasetOptIn: "Согласен записать эту Фатиху (аудио) для улучшения приложения — только если отмечено",
-            datasetSaved: "Запись сохранена (скачивание + облако)",
+            datasetOptIn: "Согласен записать эту Фатиху (аудио + телеметрия) для улучшения приложения",
+            mistakeTest: "Режим теста ошибок (отключает грамматику STT, которая «исправляет» гласные)",
+            datasetSaved: "Богатая запись сохранена (скачивание + облако)",
             datasetSaveFail: "Скачано локально — облако не удалось",
             datasetNoAudio: "Opt-in включён, но аудио нет",
             whisperHold: "Слушаю непрерывно — читайте",
@@ -2532,6 +2543,9 @@
         if (document.getElementById('txt-assistant-layer') && t.assistantLayer) document.getElementById('txt-assistant-layer').innerText = t.assistantLayer;
         if (document.getElementById('txt-dataset-optin') && t.datasetOptIn) {
             document.getElementById('txt-dataset-optin').innerText = t.datasetOptIn;
+        }
+        if (document.getElementById('txt-mistake-test') && t.mistakeTest) {
+            document.getElementById('txt-mistake-test').innerText = t.mistakeTest;
         }
         const whisperBtnLang = document.getElementById('whisper-rec-btn');
         if (whisperBtnLang && (t.whisperListening || t.whisperHold) && !whisperBtnLang.classList.contains('recording')) {
@@ -3307,15 +3321,22 @@
             console.log("Stream prêt");
 
             datasetOptIn = !!document.getElementById('dataset-optin')?.checked;
+            mistakeTestMode = !!document.getElementById('mistake-test-optin')?.checked;
+            datasetVoiceLog = [];
+            datasetSttEvents = [];
             sessionDiagnostics = {
+                schemaVersion: 3,
                 ref: VERSES_LIBRARY[activeVerseIdx]?.ref || "Inconnu",
                 expected: verseData.map(w => normalize(w.ar)),
+                expectedRaw: verseData.map(w => w.ar),
                 heard: [],
                 matches: [],
                 errors: [],
                 startTime: performance.now(),
                 engine: VOICE_ENGINE,
-                datasetOptIn: datasetOptIn
+                datasetOptIn: datasetOptIn,
+                mistakeTestMode: mistakeTestMode,
+                richTelemetry: true
             };
 
             isRecording = true;
@@ -3351,11 +3372,13 @@
                     for (const f of formats) {
                         if (MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
                     }
-                    mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: 64000 } : { audioBitsPerSecond: 64000 });
+                    const bits = datasetOptIn ? 128000 : 64000;
+                    const sliceMs = datasetOptIn ? 100 : 1000;
+                    mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: bits } : { audioBitsPerSecond: bits });
                     datasetMimeType = mediaRec.mimeType || mimeType || 'audio/webm';
                     audioChunks = [];
                     mediaRec.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
-                    mediaRec.start(1000);
+                    mediaRec.start(sliceMs);
                 } catch (mrErr) {
                     console.warn("MediaRecorder non supporté:", mrErr);
                 }
@@ -3373,11 +3396,13 @@
                 for (const f of formats) {
                     if (MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
                 }
-                mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: 64000 } : { audioBitsPerSecond: 64000 });
+                const bits = datasetOptIn ? 128000 : 64000;
+                const sliceMs = datasetOptIn ? 100 : 1000;
+                mediaRec = new MediaRecorder(stream, mimeType ? { mimeType, audioBitsPerSecond: bits } : { audioBitsPerSecond: bits });
                 datasetMimeType = mediaRec.mimeType || mimeType || 'audio/webm';
                 audioChunks = [];
                 mediaRec.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
-                mediaRec.start(1000);
+                mediaRec.start(sliceMs);
             } catch (mrErr) {
                 console.warn("MediaRecorder non supporté:", mrErr);
             }
@@ -3387,9 +3412,11 @@
             recognition.lang = 'ar-SA';
             recognition.continuous = true;
             recognition.interimResults = true;
-            recognition.maxAlternatives = 3;
+            recognition.maxAlternatives = (datasetOptIn || mistakeTestMode) ? 5 : 3;
 
-            if (verseData && verseData.length > 0) {
+            // Grammaire JSGF biaise Chrome vers les bons mots Coran → faux verts si fautes volontaires
+            const useGrammar = !mistakeTestMode && !datasetOptIn;
+            if (useGrammar && verseData && verseData.length > 0) {
                 const normalizedWords = verseData.map(w => w.ar).filter(Boolean).join(' | ');
                 const grammar = `#JSGF V1.0; grammar quran; public <ayah> = ${normalizedWords} ;`;
                 const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
@@ -3401,11 +3428,44 @@
             }
 
             recognition.onresult = event => {
+                const t0 = performance.now();
+                const startT = sessionDiagnostics.startTime || t0;
                 let full = '';
+                const resultRows = [];
                 for (let i = 0; i < event.results.length; ++i) {
-                    full += event.results[i][0].transcript + ' ';
+                    const row = event.results[i];
+                    const alts = [];
+                    const nAlt = Math.min(row.length || 1, recognition.maxAlternatives || 3);
+                    for (let a = 0; a < nAlt; a++) {
+                        const alt = row[a];
+                        if (!alt) continue;
+                        alts.push({
+                            transcript: alt.transcript,
+                            confidence: typeof alt.confidence === 'number' ? Math.round(alt.confidence * 1000) / 1000 : null
+                        });
+                    }
+                    resultRows.push({
+                        i,
+                        isFinal: !!row.isFinal,
+                        alts
+                    });
+                    full += (row[0] ? row[0].transcript : '') + ' ';
                 }
                 const cleanFull = full.trim();
+                if (datasetOptIn || mistakeTestMode) {
+                    const energy = getInstantVoiceEnergy ? getInstantVoiceEnergy() : 0;
+                    datasetSttEvents.push({
+                        ms: Math.round(t0 - startT),
+                        idx: currentIdx,
+                        expected: verseData[currentIdx] ? normalize(verseData[currentIdx].ar) : null,
+                        expectedRaw: verseData[currentIdx] ? verseData[currentIdx].ar : null,
+                        transcript: cleanFull,
+                        results: resultRows.slice(-6),
+                        energy: Math.round(energy * 10) / 10,
+                        mistakeTestMode
+                    });
+                    if (datasetSttEvents.length > 2500) datasetSttEvents.shift();
+                }
                 if (!cleanFull) return;
                 const result = checkWordStream(cleanFull);
                 updateAssistantHeard(cleanFull, result);
@@ -3449,8 +3509,18 @@
     let voiceEnergyRing = [];
 
     function pushVoiceSample(energy) {
-        voiceEnergyRing.push({ t: performance.now(), e: energy });
+        const now = performance.now();
+        voiceEnergyRing.push({ t: now, e: energy });
         if (voiceEnergyRing.length > VOICE_RING_MAX) voiceEnergyRing.shift();
+        if (datasetOptIn && isRecording) {
+            const start = sessionDiagnostics.startTime || now;
+            datasetVoiceLog.push({
+                ms: Math.round(now - start),
+                e: Math.round(energy * 10) / 10,
+                idx: currentIdx
+            });
+            if (datasetVoiceLog.length > DATASET_VOICE_MAX) datasetVoiceLog.shift();
+        }
     }
 
     function getRecentVoicedMs(windowMs) {
@@ -3802,7 +3872,7 @@
 
             let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar);
             // Chrome omet parfois أنعمت / اهدنا : si le mot SUIVANT match, on saute 1 cible
-            if (!verdict.ok && tempIdx + 1 < verseData.length) {
+            if (!verdict.ok && !mistakeTestMode && tempIdx + 1 < verseData.length) {
                 const curLen = normalize(verseData[tempIdx].ar).length;
                 if (curLen >= 4) {
                     const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar);
@@ -3860,8 +3930,11 @@
                 index: tempIdx,
                 reason: verdict.reason,
                 acoustic: { voicedMs: acoustic.voicedMs, minMs: acoustic.minMs, layer: acoustic.layer },
+                energy: typeof getInstantVoiceEnergy === 'function' ? Math.round(getInstantVoiceEnergy() * 10) / 10 : null,
+                ms: sessionDiagnostics.startTime ? Math.round(performance.now() - sessionDiagnostics.startTime) : null,
                 time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
-                maddMissed: isMaddMissed
+                maddMissed: isMaddMissed,
+                mistakeTestMode: !!mistakeTestMode
             });
 
             processMatchedWord(tempIdx, isMaddMissed);
@@ -4130,17 +4203,59 @@
         const mime = datasetMimeType || 'audio/webm';
         const ext = mime.includes('mp4') ? 'mp4' : (mime.includes('ogg') ? 'ogg' : 'webm');
         const audioBlob = new Blob(audioChunks, { type: mime });
+        const matches = sessionDiagnostics.matches || [];
+        const autoN = matches.filter(m => m.reason && m.reason !== 'manual' && !String(m.heard || '').includes('MANUAL')).length;
+        const manualN = matches.length - autoN;
+        const voice = datasetVoiceLog || [];
+        let eMin = null, eMax = null, eSum = 0, voicedN = 0;
+        for (const s of voice) {
+            if (eMin === null || s.e < eMin) eMin = s.e;
+            if (eMax === null || s.e > eMax) eMax = s.e;
+            eSum += s.e;
+            if (s.e >= 12) voicedN++;
+        }
         const meta = {
+            schemaVersion: 3,
             consent: true,
             ref: VERSES_LIBRARY[activeVerseIdx]?.ref || sessionDiagnostics.ref || '',
             timestamp: new Date().toISOString(),
             engine: sessionDiagnostics.engine || VOICE_ENGINE,
+            datasetOptIn: true,
+            mistakeTestMode: !!mistakeTestMode,
+            grammarDisabled: !!(mistakeTestMode || datasetOptIn),
             expected: sessionDiagnostics.expected || [],
-            matches: sessionDiagnostics.matches || [],
+            expectedRaw: sessionDiagnostics.expectedRaw || [],
+            matches,
             heard: sessionDiagnostics.heard || [],
             errors: sessionDiagnostics.errors || [],
-            userAgent: navigator.userAgent,
-            mimeType: mime
+            sttEvents: datasetSttEvents || [],
+            voiceEnergy: voice,
+            audio: {
+                mimeType: mime,
+                bitsPerSecond: datasetOptIn ? 128000 : 64000,
+                timesliceMs: datasetOptIn ? 100 : 1000,
+                chunks: audioChunks.length,
+                bytesApprox: audioBlob.size
+            },
+            summary: {
+                wordsTotal: matches.length,
+                auto: autoN,
+                manual: manualN,
+                autoRatePct: matches.length ? Math.round(1000 * autoN / matches.length) / 10 : 0,
+                sttEvents: (datasetSttEvents || []).length,
+                voiceSamples: voice.length,
+                voiceEnergyMin: eMin,
+                voiceEnergyMax: eMax,
+                voiceEnergyAvg: voice.length ? Math.round((eSum / voice.length) * 10) / 10 : null,
+                voicedSamplePct: voice.length ? Math.round(1000 * voicedN / voice.length) / 10 : null,
+                durationMs: sessionDiagnostics.startTime ? Math.round(performance.now() - sessionDiagnostics.startTime) : null
+            },
+            env: {
+                userAgent: navigator.userAgent,
+                lang: currentLang,
+                online: navigator.onLine,
+                hardwareConcurrency: navigator.hardwareConcurrency || null
+            }
         };
         const metaBlob = new Blob([JSON.stringify(meta, null, 2)], { type: 'application/json' });
 
