@@ -3678,6 +3678,12 @@
         return hC === tC && hV !== tV;
     }
 
+    /** Variante madd orthographique : الرحمان ↔ الرحمن (seul ا diffère). */
+    function isAlifOrthographyVariant(a, b) {
+        if (!a || !b || a === b) return false;
+        return a.replace(/ا/g, '') === b.replace(/ا/g, '');
+    }
+
     function matchFatihaWord(hWord, expectedAr) {
         const hNorm = normalize(hWord);
         const target = normalize(expectedAr);
@@ -3688,7 +3694,12 @@
         const forbid = (lex.forbid || []).map(f => normalize(f)).filter(Boolean);
         if (forbid.includes(hNorm)) return { ok: false, reason: 'reject' };
         if (isConfusableReject(hNorm, target)) return { ok: false, reason: 'reject' };
-        // Avant near/root_safe — sinon himdu/miliki repassent
+
+        // Session 201254 : الرحمان vs الرحمن bloqué par vowel_mismatch
+        if (isAlifOrthographyVariant(hNorm, target)) {
+            return { ok: true, reason: 'alif_ortho' };
+        }
+
         if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
 
         if (hNorm.length < 2) return { ok: false, reason: 'too_short' };
@@ -3700,6 +3711,7 @@
         const hNoAl = hNorm.startsWith('ال') ? hNorm.substring(2) : hNorm;
         const tNoAl = target.startsWith('ال') ? target.substring(2) : target;
         if (hNoAl.length >= 3 && tNoAl.length >= 3) {
+            if (isAlifOrthographyVariant(hNoAl, tNoAl)) return { ok: true, reason: 'alif_ortho_liaison' };
             if (hasVowelLetterMismatch(hNoAl, tNoAl)) return { ok: false, reason: 'vowel_mismatch' };
             if (aliases.includes(hNoAl) || hNoAl === tNoAl || aliases.includes('ال' + hNoAl)) {
                 return { ok: true, reason: 'liaison' };
@@ -3709,8 +3721,9 @@
         const dist = editDistance(hNorm, target);
         const maxDist = target.length >= 6 ? 2 : (target.length >= 3 ? 1 : 0);
         if (dist > 0 && dist <= maxDist) {
-            // near ne doit pas contourner une faute voyelle déjà filtrée ; double check
-            if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
+            if (hasVowelLetterMismatch(hNorm, target) && !isAlifOrthographyVariant(hNorm, target)) {
+                return { ok: false, reason: 'vowel_mismatch' };
+            }
             return { ok: true, reason: 'near' + dist };
         }
 
@@ -3719,7 +3732,9 @@
             const tRoot = getRootSkeleton(target);
             const lenOk = hNorm.length >= Math.ceil(target.length * 0.7);
             if (hRoot.length >= 3 && hRoot === tRoot && lenOk) {
-                if (hasVowelLetterMismatch(hNorm, target)) return { ok: false, reason: 'vowel_mismatch' };
+                if (hasVowelLetterMismatch(hNorm, target) && !isAlifOrthographyVariant(hNorm, target)) {
+                    return { ok: false, reason: 'vowel_mismatch' };
+                }
                 return { ok: true, reason: 'root_safe' };
             }
         }
@@ -3781,7 +3796,29 @@
                 continue;
             }
 
-            const verdict = matchFatihaWord(hWord, verseData[tempIdx].ar);
+            let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar);
+            // Chrome omet parfois أنعمت / اهدنا : si le mot SUIVANT match, on saute 1 cible
+            if (!verdict.ok && tempIdx + 1 < verseData.length) {
+                const curLen = normalize(verseData[tempIdx].ar).length;
+                if (curLen >= 4) {
+                    const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar);
+                    if (nextVerdict.ok) {
+                        sessionDiagnostics.matches.push({
+                            expected: normalize(verseData[tempIdx].ar),
+                            expectedRaw: verseData[tempIdx].ar,
+                            heard: '[stt_omit]',
+                            index: tempIdx,
+                            reason: 'stt_omit_skip',
+                            time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + 's',
+                            maddMissed: false
+                        });
+                        processMatchedWord(tempIdx, false);
+                        tempIdx++;
+                        matched++;
+                        verdict = nextVerdict;
+                    }
+                }
+            }
             if (!verdict.ok) continue;
 
             const target = normalize(verseData[tempIdx].ar);
