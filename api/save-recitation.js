@@ -39,14 +39,15 @@ function stripDataUrl(b64) {
 async function putToVercelBlob(pathname, buffer, contentType, token) {
   const url = new URL('https://vercel.com/api/blob');
   url.searchParams.set('pathname', pathname);
-  url.searchParams.set('access', 'private');
-  url.searchParams.set('addRandomSuffix', 'true');
 
   const res = await fetch(url.toString(), {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
-      'x-api-version': '7',
+      'x-api-version': '12',
+      'x-vercel-blob-access': 'private',
+      'x-add-random-suffix': '1',
+      'x-content-type': contentType || 'application/octet-stream',
       'Content-Type': contentType || 'application/octet-stream',
     },
     body: buffer,
