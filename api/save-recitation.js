@@ -3,20 +3,11 @@
  * Body JSON: { audioBase64, mimeType, meta }
  * → Vercel Blob (privé) sous recitations/fatiha/
  */
-const ALLOWED_ORIGINS = new Set([
-  'https://tajwid-app-vatsaev.vercel.app',
-  'http://localhost:8000',
-  'http://127.0.0.1:8000',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-]);
-
 function setCors(req, res) {
+  // Opt-in dataset POST, pas de cookies : * évite les échecs preview / tunnel / localhost.
   const origin = req.headers.origin || '';
-  if (ALLOWED_ORIGINS.has(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
-  }
+  res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }

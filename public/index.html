@@ -5095,11 +5095,8 @@
     }
 
     function getSaveRecitationUrl() {
-        const host = location.hostname;
-        if (host === 'localhost' || host === '127.0.0.1') {
-            return 'https://tajwid-app-vatsaev.vercel.app/api/save-recitation';
-        }
-        return '/api/save-recitation';
+        // Toujours l’API prod : preview / tunnel n’ont pas /api, et CORS est ouvert sur cet endpoint.
+        return 'https://tajwid-app-vatsaev.vercel.app/api/save-recitation';
     }
 
     async function blobToBase64Raw(blob) {
@@ -5192,6 +5189,7 @@
 
         let cloudOk = false;
         let localOk = false;
+        let cloudDetail = '';
         try {
             const audioBase64 = await blobToBase64Raw(audioBlob);
             const payload = { audioBase64, mimeType: mime, meta };
@@ -5205,8 +5203,12 @@
                 });
                 const data = await res.json().catch(() => ({}));
                 cloudOk = res.ok && data.ok;
-                if (!res.ok) console.warn('save-recitation', data);
+                if (!res.ok) {
+                    cloudDetail = data.detail || data.error || ('HTTP ' + res.status);
+                    console.warn('save-recitation', data);
+                }
             } catch (e) {
+                cloudDetail = e.message || String(e);
                 console.warn('save-recitation network', e);
             }
 
@@ -5229,7 +5231,7 @@
             if (cloudOk || localOk) {
                 alert(t.datasetSaved || 'Enregistrement sauvegardé');
             } else {
-                alert(t.datasetSaveFail || 'Téléchargé localement — envoi cloud échoué');
+                alert((t.datasetSaveFail || 'Téléchargé localement — envoi cloud échoué') + (cloudDetail ? '\n' + cloudDetail : ''));
             }
         } finally {
             datasetSaveInFlight = false;
