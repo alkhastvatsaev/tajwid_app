@@ -772,19 +772,22 @@
             position: relative;
             display: flex;
             align-items: center;
-            margin: 0 5px;
+            margin: 0;
         }
         .lang-menu-btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             color: var(--subtext);
-            padding: 8px;
-            border-radius: 12px;
-            display: flex;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 10px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
+            flex-shrink: 0;
+            transition: 0.2s;
         }
         .lang-menu-btn:hover { background: var(--surface-hover); color: white; }
         
@@ -832,6 +835,8 @@
             transform: translateX(-50%);
             display: flex;
             align-items: center;
+            gap: 4px;
+            width: max-content;
             background: rgba(30, 30, 30, 0.5);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -840,8 +845,13 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            max-width: 90vw;
+            max-width: calc(100vw - 24px);
             transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #v-btns-container {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
         }
         .verse-selector.dock-hidden {
             opacity: 0;
@@ -859,20 +869,30 @@
             background: none;
             border: none;
             color: var(--subtext);
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 10px 16px;
-            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Amiri', serif;
+            height: 36px;
+            padding: 0 14px;
+            border-radius: 100px;
             cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            letter-spacing: 0;
+            text-transform: none;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
         .v-btn:hover { color: white; background: rgba(255,255,255,0.05); }
         .v-btn.active {
             background: var(--accent);
             color: white;
-            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+            box-shadow: 0 2px 10px rgba(29, 78, 216, 0.28);
+        }
+        .v-btn.active:hover {
+            background: var(--accent);
+            color: white;
         }
         .v-btn.completed::after {
             content: '';
@@ -886,34 +906,42 @@
 
         /* Favorites & Stats */
         .heart-btn {
-            background: none;
-            border: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             color: var(--subtext);
-            font-size: 1.2rem;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            margin: 0;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 5px;
-            display: flex;
+            flex-shrink: 0;
+            transition: 0.2s;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
         }
-        .heart-btn.active { color: #ff375f; transform: scale(1.1); }
-        .heart-btn:hover { transform: scale(1.2); }
+        .heart-btn.active { color: #ff375f; background: rgba(255, 55, 95, 0.12); border-color: rgba(255, 55, 95, 0.28); }
+        .heart-btn:hover { background: var(--surface-hover); }
+        .heart-btn.active:hover { background: rgba(255, 55, 95, 0.16); }
 
         .profile-btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            color: var(--subtext);
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            margin: 0;
+            border-radius: 10px;
             cursor: pointer;
-            margin-left: 10px;
-            display: flex;
+            flex-shrink: 0;
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            transition: 0.2s;
         }
+        .profile-btn svg { width: 18px; height: 18px; }
 
         .stats-grid {
             display: grid;
@@ -984,12 +1012,12 @@
         /* Smart Progress Line below Header */
         .smart-progress-bar {
             position: fixed;
-            top: calc(70px + env(safe-area-inset-top));
+            top: calc(58px + env(safe-area-inset-top));
             left: 50%;
             transform: translateX(-50%);
-            width: 140px;
-            height: 3px;
-            background: rgba(255,255,255,0.05);
+            width: 96px;
+            height: 2px;
+            background: transparent;
             border-radius: 100px;
             overflow: hidden;
             z-index: 900;
@@ -1488,16 +1516,17 @@
             .arabic-word { font-size: 2rem; }
             .word-box { min-width: 70px; padding: 10px 12px; }
             .verse-selector { 
-                width: calc(100% - 20px); 
+                width: max-content;
+                max-width: calc(100% - 16px);
                 padding: 4px;
-                gap: 2px;
+                gap: 4px;
             }
-            .v-btn-add, .heart-btn { display: none; } /* Hide on mobile to save space */
-            .mini-lang-selector { margin: 0 2px; }
+            .v-btn-add { display: none; }
+            .mini-lang-selector { margin: 0; }
             .mini-lang-selector .lang-btn { padding: 6px 8px; font-size: 0.55rem; }
             .v-btn-book { margin-right: 2px; }
-            .profile-btn { margin-left: 2px; padding: 4px 8px; gap: 4px; }
-            .v-btn { padding: 8px 10px; font-size: 0.6rem; }
+            .profile-btn { margin: 0; padding: 0; }
+            .v-btn { height: 36px; padding: 0 12px; font-size: 0.8rem; }
             #restart-btn { 
                 padding: 12px 25px; 
                 font-size: 0.8rem; 
@@ -1897,11 +1926,24 @@
 
         html[data-theme="light"] .profile-btn,
         html[data-theme="light"] .lang-menu-btn,
+        html[data-theme="light"] .heart-btn,
         html[data-theme="blue"] .profile-btn,
-        html[data-theme="blue"] .lang-menu-btn {
+        html[data-theme="blue"] .lang-menu-btn,
+        html[data-theme="blue"] .heart-btn {
             background: var(--surface-hover);
             border: 1px solid var(--border);
             color: var(--text);
+        }
+        html[data-theme="light"] .heart-btn.active,
+        html[data-theme="blue"] .heart-btn.active {
+            color: #E11D48;
+            background: rgba(225, 29, 72, 0.1);
+            border-color: rgba(225, 29, 72, 0.25);
+        }
+        html[data-theme="light"] .v-btn.active:hover,
+        html[data-theme="blue"] .v-btn.active:hover {
+            background: var(--accent);
+            color: var(--on-accent) !important;
         }
         html[data-theme="light"] .theme-toggle-btn,
         html[data-theme="blue"] .theme-toggle-btn {
@@ -1980,11 +2022,13 @@
         html[data-theme="blue"] .verse-marker:hover {
             background: #E5E7EB;
         }
-        html[data-theme="light"] .smart-progress-bar,
         html[data-theme="light"] .progress-container,
-        html[data-theme="blue"] .smart-progress-bar,
         html[data-theme="blue"] .progress-container {
             background: #E5E7EB;
+        }
+        html[data-theme="light"] .smart-progress-bar,
+        html[data-theme="blue"] .smart-progress-bar {
+            background: transparent;
         }
         html[data-theme="light"] .tajwid-warning,
         html[data-theme="blue"] .tajwid-warning {
