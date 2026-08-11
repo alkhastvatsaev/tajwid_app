@@ -29,3 +29,14 @@ __pycache__/
 *$py.class
 recordings/
 diagnostic_report.json
+.venv/
+.vercel/
+twa/android/
+twa/app/
+twa/android.keystore
+twa/*.apk
+twa/*.aab
+twa/keystore-password.txt
+twa/.gradle/
+twa/gradle/
+twa/gradlew*

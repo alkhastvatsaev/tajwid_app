@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.tilmidh.twa",
+      "sha256_cert_fingerprints": [
+        "1A:A4:F5:0A:63:3C:C9:BE:BC:BD:BC:B1:CE:D2:2A:20:9D:AF:6E:0D:2F:3E:85:3F:12:CE:72:1D:89:CC:C6:23"
+      ]
+    }
+  }
+]

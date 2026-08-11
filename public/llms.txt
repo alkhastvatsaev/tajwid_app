@@ -1,0 +1,32 @@
+# Tilmidh
+
+> Word-by-word Quran tajwid trainer. Recite; the microphone checks each Arabic word; the box turns green. Free training tool, not an ijazah.
+
+Site: https://tilmidh.app/
+Privacy: https://tilmidh.app/privacy
+
+## Product
+
+Tilmidh (تلميذ, "student") is a mobile-first web app. Text is Uthmani tajweed from Quran.com v4. Speech is the browser Web Speech API (ar-SA), not a cloud LLM. Matching is tolerant on vowels. Duo mode (imam / ṭālib) uses PeerJS with no accounts.
+
+Pedagogical boot: Ikhlāṣ (112), Falaq (113), Nās (114), then Al-Fātiḥah (1). Deep link `/?ref=112:1` loads that verse after boot.
+
+## Indexable pages
+
+- https://tilmidh.app/en — English landing
+- https://tilmidh.app/apprendre-tajwid — learn tajwid with a mic (FR)
+- https://tilmidh.app/tajwid-microphone — recitation checker (FR)
+- https://tilmidh.app/id — Indonesian landing
+- https://tilmidh.app/regle/qalqalah
+- https://tilmidh.app/regle/ghunnah
+- https://tilmidh.app/regle/idgham
+- https://tilmidh.app/regle/ikhfa
+- https://tilmidh.app/regle/madd
+- https://tilmidh.app/sourate/1 — Al-Fātiḥah
+- https://tilmidh.app/sourate/112 — Ikhlāṣ
+- https://tilmidh.app/sourate/113 — Falaq
+- https://tilmidh.app/sourate/114 — Nās
+
+## Do not claim
+
+Not scholar-certified. Not an ijazah. Not a replacement for a muqriʾ. Not Tarteel, not Learn Quran Tajwid, not Quran.com.

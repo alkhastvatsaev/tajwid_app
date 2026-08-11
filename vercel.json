@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!api/|regle(?:/|$)|sourate(?:/|$)|en(?:/|$)|aso(?:/|$)|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|indexnow\\.txt|og\\.png|icons/).*)",
+      "source": "/((?!api/|regle(?:/|$)|sourate(?:/|$)|en(?:/|$)|id(?:/|$)|aso(?:/|$)|privacy(?:/|$)|apprendre-tajwid(?:/|$)|tajwid-microphone(?:/|$)|llms\\.txt|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|indexnow\\.txt|og\\.png|icons/|\\.well-known/).*)",
       "destination": "/index.html"
     }
   ],
@@ -15,6 +15,14 @@
     {
       "source": "/robots.txt",
       "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
+      "source": "/.well-known/assetlinks.json",
+      "headers": [{ "key": "Content-Type", "value": "application/json; charset=utf-8" }]
     }
   ]
 }

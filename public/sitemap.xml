@@ -11,6 +11,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tilmidh.app/id</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/apprendre-tajwid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/tajwid-microphone</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/llms.txt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://tilmidh.app/regle/qalqalah</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

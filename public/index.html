@@ -699,6 +699,39 @@
             cursor: pointer;
             padding: 0;
         }
+        #rate-tilmidh-banner {
+            position: fixed;
+            bottom: calc(160px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%) translateY(12px);
+            z-index: 2502;
+            display: none;
+            opacity: 0;
+            background: #111;
+            color: #fff;
+            border: 1px solid #059669;
+            border-radius: 100px;
+            padding: 12px 22px;
+            font-family: Outfit, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            max-width: 90vw;
+        }
+        #rate-tilmidh-banner.visible {
+            display: block;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        #rate-tilmidh-banner a, #rate-tilmidh-banner button {
+            background: none;
+            border: none;
+            color: #34d399;
+            font: inherit;
+            cursor: pointer;
+            padding: 0 4px;
+            text-decoration: none;
+        }
 
         /* Essential Apple Activation Overlay */
         #start-overlay {
@@ -2071,6 +2104,7 @@
         <div class="bottom-controls">
             <button id="restart-btn" class="visible" style="display:none; background:var(--success); color:white; border:none; padding:14px 35px; border-radius:100px; font-weight:600; cursor:pointer;" onclick="restartRecitation()">Recommencer</button>
             <div id="install-pwa-banner"></div>
+            <div id="rate-tilmidh-banner"></div>
             <button id="report-diag-btn" style="position:relative; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); padding:10px 20px; border-radius:100px; font-size: 0.8rem; cursor:pointer; backdrop-filter:blur(10px);" onclick="manualReport()">
                 <span id="report-btn-text">Rapport Technique</span>
             </button>
@@ -5302,6 +5336,7 @@
         }
         document.getElementById('download-btn')?.classList.add('visible');
         offerPwaInstall();
+        offerRatePrompt();
     }
 
     let deferredInstallPrompt = null;
@@ -5332,6 +5367,28 @@
         } catch (e) {
             console.warn('pwa install', e);
         }
+    }
+    function offerRatePrompt() {
+        try {
+            if (localStorage.getItem('tajwid_rate_dismissed') === '1') return;
+            const banner = document.getElementById('rate-tilmidh-banner');
+            if (!banner) return;
+            banner.innerHTML = 'Ça t’a aidé ? <a href="https://tilmidh.app/" target="_blank" rel="noopener">Partage Tilmidh</a> · <button type="button" id="rate-tilmidh-dismiss">Plus tard</button>';
+            banner.classList.add('visible');
+            document.getElementById('rate-tilmidh-dismiss').onclick = () => {
+                localStorage.setItem('tajwid_rate_dismissed', '1');
+                banner.classList.remove('visible');
+            };
+        } catch (e) {
+            console.warn('rate prompt', e);
+        }
+    }
+    try {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw-tilmidh.js').catch((err) => console.warn('sw', err));
+        }
+    } catch (e) {
+        console.warn('sw register', e);
     }
 
     function datasetStamp() {
