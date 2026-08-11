@@ -460,6 +460,7 @@
         }
 
         .stt-feedback {
+            display: none !important;
             font-size: 0.7rem;
             color: var(--accent);
             min-height: 15px;
@@ -753,6 +754,19 @@
             z-index: 1000;
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             max-width: 90vw;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .verse-selector.dock-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(-18px);
+        }
+        .smart-progress-bar {
+            transition: opacity 0.4s ease;
+        }
+        .verse-selector.dock-hidden ~ .smart-progress-bar {
+            opacity: 0;
+            pointer-events: none;
         }
         .v-btn {
             background: none;
@@ -5703,6 +5717,29 @@
         } catch (e) {
             console.error("Initial load failed:", e);
         }
+
+        let dockHideTimer = null;
+        const armDockHide = () => {
+            const dock = document.getElementById('verse-selector');
+            if (!dock) return;
+            dock.classList.remove('dock-hidden');
+            clearTimeout(dockHideTimer);
+            dockHideTimer = setTimeout(() => {
+                if (document.getElementById('lang-options')?.classList.contains('active')) {
+                    armDockHide();
+                    return;
+                }
+                if (dock.matches(':hover')) {
+                    armDockHide();
+                    return;
+                }
+                dock.classList.add('dock-hidden');
+            }, 3000);
+        };
+        window.addEventListener('mousemove', armDockHide);
+        window.addEventListener('touchstart', armDockHide, { passive: true });
+        window.addEventListener('keydown', armDockHide);
+        armDockHide();
     });
 
     // === NEW DUO MODE LOGIC (User 1 & User 2) ===
