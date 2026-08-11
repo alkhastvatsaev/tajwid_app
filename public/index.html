@@ -243,21 +243,46 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translateY(calc(-50% + 14px));
-            transition: opacity 0.48s ease, transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.48s;
+            transform-origin: center center;
+            transform: translateY(calc(-50% + 24vh)) scale(0.5);
+            transition: opacity 0.58s ease, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.58s;
+            will-change: transform, opacity;
         }
         .ayah-line.active-ayah {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            transform: translateY(-50%);
+            transform: translateY(-50%) scale(1);
+            z-index: 3;
+        }
+        .ayah-line.ayah-prev {
+            opacity: 0.55;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateY(calc(-50% - 22vh)) scale(0.5);
+            z-index: 2;
+        }
+        .ayah-line.ayah-next {
+            opacity: 0.55;
+            visibility: visible;
+            pointer-events: none;
+            transform: translateY(calc(-50% + 22vh)) scale(0.5);
+            z-index: 2;
+        }
+        .ayah-line.ayah-exit {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(calc(-50% - 38vh)) scale(0.4);
             z-index: 1;
         }
         @media (prefers-reduced-motion: reduce) {
             .ayah-line {
                 transition: none;
-                transform: translateY(-50%);
             }
+            .ayah-line.active-ayah { transform: translateY(-50%) scale(1); }
+            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); }
+            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); }
         }
         #verse-container::-webkit-scrollbar { display: none; }
 
@@ -3570,7 +3595,10 @@
 
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                container.querySelector('.ayah-line')?.classList.add('active-ayah');
+                const first = container.querySelector('.ayah-line');
+                first?.classList.add('active-ayah');
+                const nxt = first?.nextElementSibling;
+                if (nxt && nxt.classList.contains('ayah-line')) nxt.classList.add('ayah-next');
             });
         });
         
@@ -5518,8 +5546,19 @@
         if (line && !line.querySelector('.word-box:not(.correct)')) {
             const nextLine = line.nextElementSibling;
             if (nextLine && nextLine.classList.contains('ayah-line')) {
+                const prevLine = line.previousElementSibling;
+                if (prevLine && prevLine.classList.contains('ayah-line')) {
+                    prevLine.classList.remove('ayah-prev');
+                    prevLine.classList.add('ayah-exit');
+                }
                 line.classList.remove('active-ayah');
+                line.classList.add('ayah-prev');
+                nextLine.classList.remove('ayah-next');
                 nextLine.classList.add('active-ayah');
+                const upcoming = nextLine.nextElementSibling;
+                if (upcoming && upcoming.classList.contains('ayah-line')) {
+                    upcoming.classList.add('ayah-next');
+                }
                 switchedAyah = true;
             }
         }
