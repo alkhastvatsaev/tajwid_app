@@ -827,7 +827,7 @@
 
         .v-btn-add { display: none; }
 
-        /* Verses Selector - Premium Floating Island */
+        /* Verses Selector — liquid glass (port CSS du LiquidButton, pas React) */
         .verse-selector {
             position: fixed;
             top: calc(15px + env(safe-area-inset-top));
@@ -837,16 +837,60 @@
             align-items: center;
             gap: 4px;
             width: max-content;
-            background: rgba(30, 30, 30, 0.5);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            isolation: isolate;
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
             padding: 4px;
             border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.45);
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             max-width: calc(100vw - 24px);
+            overflow: visible;
+            box-shadow:
+                0 0 6px rgba(0, 0, 0, 0.03),
+                0 2px 6px rgba(0, 0, 0, 0.08),
+                inset 3px 3px 0.5px -3px rgba(0, 0, 0, 0.9),
+                inset -3px -3px 0.5px -3px rgba(0, 0, 0, 0.85),
+                inset 1px 1px 1px -0.5px rgba(0, 0, 0, 0.6),
+                inset -1px -1px 1px -0.5px rgba(0, 0, 0, 0.6),
+                inset 0 0 6px 6px rgba(0, 0, 0, 0.12),
+                inset 0 0 2px 2px rgba(0, 0, 0, 0.06),
+                0 0 12px rgba(255, 255, 255, 0.15);
             transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .verse-selector::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            box-shadow:
+                inset 3px 3px 0.5px -3px rgba(255, 255, 255, 0.65),
+                inset -2px -2px 0.5px -2px rgba(255, 255, 255, 0.2);
+        }
+        .verse-selector::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            overflow: hidden;
+            backdrop-filter: url("#container-glass");
+            -webkit-backdrop-filter: url("#container-glass");
+        }
+        .verse-selector > * {
+            position: relative;
+            z-index: 1;
+        }
+        .dock-glass-svg {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
         #v-btns-container {
             display: flex;
@@ -1895,8 +1939,26 @@
         }
         html[data-theme="light"] .verse-selector,
         html[data-theme="blue"] .verse-selector {
-            background: rgba(255, 255, 255, 0.92);
-            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow:
+                0 0 6px rgba(0, 0, 0, 0.03),
+                0 2px 6px rgba(0, 0, 0, 0.08),
+                inset 3px 3px 0.5px -3px rgba(0, 0, 0, 0.9),
+                inset -3px -3px 0.5px -3px rgba(0, 0, 0, 0.85),
+                inset 1px 1px 1px -0.5px rgba(0, 0, 0, 0.6),
+                inset -1px -1px 1px -0.5px rgba(0, 0, 0, 0.6),
+                inset 0 0 6px 6px rgba(0, 0, 0, 0.12),
+                inset 0 0 2px 2px rgba(0, 0, 0, 0.06),
+                0 0 12px rgba(255, 255, 255, 0.15);
+        }
+        html[data-theme="light"] .verse-selector .lang-menu-btn,
+        html[data-theme="light"] .verse-selector .heart-btn,
+        html[data-theme="blue"] .verse-selector .lang-menu-btn,
+        html[data-theme="blue"] .verse-selector .heart-btn {
+            background: rgba(255, 255, 255, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
         }
         html[data-theme="light"] .lang-options,
         html[data-theme="blue"] .lang-options {
@@ -2091,6 +2153,17 @@
 
 
 
+    <svg class="dock-glass-svg" aria-hidden="true" focusable="false">
+        <defs>
+            <filter id="container-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence" />
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="14" xChannelSelector="R" yChannelSelector="B" result="displaced" />
+                <feGaussianBlur in="displaced" stdDeviation="2" result="finalBlur" />
+                <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+            </filter>
+        </defs>
+    </svg>
     <div class="verse-selector" id="verse-selector">
         <div id="v-btns-container" style="display: flex;"></div>
         
