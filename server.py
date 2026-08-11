@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import json
@@ -100,6 +100,19 @@ async def save_recording(request: Request):
         "metaFile": meta_name,
         "dir": "recordings",
     }
+
+@app.get("/{path:path}")
+async def public_static(path: str):
+    root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public")
+    candidate = os.path.normpath(os.path.join(root, path))
+    if not candidate.startswith(root):
+        return HTMLResponse("Not found", status_code=404)
+    if os.path.isfile(candidate):
+        return FileResponse(candidate)
+    html = candidate + ".html"
+    if os.path.isfile(html):
+        return FileResponse(html)
+    return HTMLResponse("Not found", status_code=404)
 
 if __name__ == "__main__":
     print("SERVEUR DE DIAGNOSTIC DÉMARRÉ sur http://localhost:3000")

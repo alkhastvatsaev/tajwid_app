@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tilmidh — word-by-word tajwid trainer</title>
+    <meta name="description" content="Recite Quran word by word. The mic checks each word. Tajwid colors, Fātiḥah, Ikhlāṣ, Duo. Free training tool — not an ijazah.">
+    <link rel="canonical" href="https://tilmidh.app/en">
+    <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
+    <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
+    <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/">
+    <meta name="theme-color" content="#059669">
+    <meta property="og:title" content="Tilmidh — word-by-word tajwid trainer">
+    <meta property="og:description" content="Recite Quran. The mic checks each word. Free training tool, not an ijazah.">
+    <meta property="og:url" content="https://tilmidh.app/en">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://tilmidh.app/og.png">
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
+        body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        header { padding: 1.1rem 1.4rem; border-bottom: 2px solid var(--accent); background: #fff; }
+        header a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
+        h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 1rem; }
+        .ar { font-family: Amiri, serif; font-size: 1.65rem; direction: rtl; text-align: right; }
+        .cta { display: inline-block; margin: 1.4rem 0; padding: 0.9rem 1.35rem; background: var(--accent); color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; }
+        nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
+        nav a { color: var(--accent); }
+        footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
+    </style>
+</head>
+<body>
+    <header><a href="/">Tilmidh تلميذ</a> · <a href="/">FR</a></header>
+    <main>
+        <h1>Tilmidh — word-by-word tajwid trainer</h1>
+        <p>Tilmidh (تلميذ, “student”) is a free web trainer: you recite, the microphone checks each Arabic word, the box turns green, you move on. Tajwid colors come from Quran.com (Uthmani tajweed). It is a practice tool, not an ijazah, not scholar-certified, not a replacement for a teacher.</p>
+        <p class="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+        <p>Boot order is pedagogical: Ikhlāṣ, Falaq, Nās, then Al-Fātiḥah. Short surahs first so qalqalah, ghunnah, ikhfa and madd show up before the prayer-critical Fātiḥah. A <code>?ref=112:1</code> link loads that verse <em>after</em> the boot — Google can point at a rule page, the rule page points at the mic.</p>
+        <p>Install it on your phone (Add to Home Screen / Chrome install prompt after you finish a verse). Duo mode lets an imam and a ṭālib share the same line over PeerJS — no account. Speech recognition is the browser’s Web Speech API in <code>ar-SA</code>, not a cloud model. Matching is tolerant on vowels so you are not punished for every haraka the engine drops.</p>
+        <p>Start with Fātiḥah or Ikhlāṣ. Recite one word. Wait for green. If it stays grey, repeat that word only. Then read the French rule pages if you want the explanation: qalqalah, ghunnah, idgham, ikhfa, madd. Russian UI exists inside the trainer; this landing is English. Always check a muqriʾ for length of madd and real ijazah.</p>
+        <a class="cta" href="/?ref=1">Open the mic on Al-Fātiḥah</a>
+        <nav>
+            <a href="/sourate/1">Al-Fātiḥah</a>
+            <a href="/sourate/112">Ikhlāṣ</a>
+            <a href="/regle/qalqalah">Qalqalah (FR)</a>
+            <a href="/regle/ghunnah">Ghunnah (FR)</a>
+        </nav>
+        <footer>
+            <p>Tilmidh is a recitation training tool. Quran text from Quran.com. Not an ijazah, not a scholarly certificate, not a substitute for a teacher. Verify with a muqriʾ.</p>
+        </footer>
+    </main>
+</body>
+</html>
