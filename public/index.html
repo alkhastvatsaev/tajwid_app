@@ -973,8 +973,13 @@
             justify-content: center;
             cursor: pointer;
             color: white;
-            transition: 0.3s;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
             box-shadow: -5px 0 20px rgba(5, 150, 105, 0.3);
+        }
+        #expert-panel.chrome-hidden:not(.open) .expert-toggle {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(18px);
         }
         .expert-title {
             font-size: 1.4rem;
@@ -5719,21 +5724,31 @@
         }
 
         let dockHideTimer = null;
-        const armDockHide = () => {
+        let lastDockX = null;
+        let lastDockY = null;
+        const armDockHide = (e) => {
             const dock = document.getElementById('verse-selector');
             if (!dock) return;
+            if (e && e.type === 'mousemove') {
+                if (lastDockX !== null && Math.hypot(e.clientX - lastDockX, e.clientY - lastDockY) < 8) {
+                    return;
+                }
+                lastDockX = e.clientX;
+                lastDockY = e.clientY;
+            }
             dock.classList.remove('dock-hidden');
+            const expert = document.getElementById('expert-panel');
+            expert?.classList.remove('chrome-hidden');
             clearTimeout(dockHideTimer);
             dockHideTimer = setTimeout(() => {
                 if (document.getElementById('lang-options')?.classList.contains('active')) {
                     armDockHide();
                     return;
                 }
-                if (dock.matches(':hover')) {
-                    armDockHide();
-                    return;
-                }
                 dock.classList.add('dock-hidden');
+                if (!expert?.classList.contains('open')) {
+                    expert?.classList.add('chrome-hidden');
+                }
             }, 3000);
         };
         window.addEventListener('mousemove', armDockHide);
