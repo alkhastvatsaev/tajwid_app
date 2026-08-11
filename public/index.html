@@ -976,7 +976,8 @@
         #txt-start,
         #dataset-optin-label,
         #mistake-test-label,
-        #start-overlay {
+        #start-overlay,
+        #theme-toggle-btn {
             display: none !important;
         }
 
@@ -2032,9 +2033,8 @@
     <script>
         (function () {
             try {
-                var t = localStorage.getItem('tajwid_theme') || 'dark';
-                if (t !== 'light' && t !== 'blue') t = 'dark';
-                document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.setAttribute('data-theme', 'blue');
+                try { localStorage.setItem('tajwid_theme', 'blue'); } catch (e2) {}
                 if (localStorage.getItem('tajwid_hide_translit') === '1') {
                     document.documentElement.setAttribute('data-hide-translit', 'true');
                 }
@@ -5733,15 +5733,9 @@
         if (!verse || !container) return;
 
         if (FATIHA_ONLY) {
-            let ayahBtns = '';
             const fullActive = (verse.ref || '').includes('[1-');
-            for (let a = 1; a <= FATIHA_AYAH_COUNT; a++) {
-                const isActive = !fullActive && (verse.ref || '').includes(`[1:${a}]`);
-                ayahBtns += `<button class="v-btn${isActive ? ' active' : ''}" onclick="fetchVerseFromAPI(1, ${a})">${a}</button>`;
-            }
             container.innerHTML = `
                 <button class="v-btn${fullActive ? ' active' : ''}" onclick="fetchVerseFromAPI('1')" title="Al-Fātiḥah complète">الفاتحة</button>
-                ${ayahBtns}
             `;
             return;
         }
@@ -5816,10 +5810,10 @@
     window.addEventListener('DOMContentLoaded', async () => {
         console.log("DOMContentLoaded");
         try {
-            applyTheme(localStorage.getItem('tajwid_theme') || 'dark');
+            applyTheme('blue');
             applyTranslitVisibility(localStorage.getItem('tajwid_hide_translit') === '1');
         } catch (e) {
-            applyTheme('dark');
+            applyTheme('blue');
         }
         const savedLang = localStorage.getItem('tajwid_lang') || 'fr';
         setLanguage(savedLang);
