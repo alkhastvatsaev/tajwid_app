@@ -2,7 +2,7 @@
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>TAJWID-VATSAEV</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/peerjs@1.5.0/dist/peerjs.min.js"></script>
@@ -116,7 +116,26 @@
             100% { background-position: 0% 50%; }
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        input, textarea {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+        html, body {
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            overscroll-behavior: none;
+        }
         
         body {
             background-color: var(--bg);
@@ -128,10 +147,10 @@
             display: flex; 
             flex-direction: column; 
             align-items: center;
-            min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             padding: calc(var(--safe-top) + 20px) 20px var(--safe-bottom);
-            overflow-x: hidden;
+            overflow: hidden;
+            touch-action: manipulation;
             transition: background 1s ease;
         }
         
@@ -148,6 +167,8 @@
             justify-content: flex-start;
             align-items: center;
             position: relative;
+            height: 100%;
+            overflow: hidden;
             padding-top: calc(100px + env(safe-area-inset-top)); /* Clear the fixed header */
             padding-bottom: calc(180px + env(safe-area-inset-bottom)); /* Clear bottom buttons & home bar */
         }
@@ -173,15 +194,48 @@
 
         #verse-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            flex-wrap: nowrap;
             justify-content: center;
-            align-content: flex-start; 
-            gap: 25px 12px;
+            align-items: stretch;
+            gap: 32px;
             width: 100%;
+            min-height: calc(100dvh - 280px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
             padding: 40px 10px; 
             direction: rtl;
             position: relative;
             z-index: 5;
+        }
+        .ayah-line {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 25px 12px;
+            width: 100%;
+            direction: rtl;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(calc(-50% + 14px));
+            transition: opacity 0.48s ease, transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.48s;
+        }
+        .ayah-line.active-ayah {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ayah-line {
+                transition: none;
+                transform: translateY(-50%);
+            }
         }
         #verse-container::-webkit-scrollbar { display: none; }
 
@@ -191,19 +245,19 @@
             align-items: center;
             padding: 12px 16px;
             border-radius: 18px;
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: transparent;
+            border: 1px solid transparent;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             min-width: 80px;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: none;
         }
 
         .word-box:hover {
-            background: var(--surface-hover);
+            background: transparent;
             transform: translateY(-2px);
-            border-color: rgba(255,255,255,0.15);
+            border-color: transparent;
         }
 
         /* Premium Verse Number Styling */
@@ -234,10 +288,10 @@
         }
 
         .word-box.active {
-            border-color: var(--accent);
-            background: var(--surface-hover);
+            border-color: transparent;
+            background: transparent;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.2);
+            box-shadow: none;
         }
         
         /* Manual Validation Button */
@@ -272,14 +326,18 @@
         }
 
         .word-box.correct {
-            border-color: var(--success);
-            background: rgba(52, 199, 89, 0.05);
-            opacity: 0.9;
+            border-color: transparent;
+            background: transparent;
+        }
+        .word-box.correct .arabic-word,
+        .word-box.correct .arabic-word * {
+            color: #E8EBF0;
+            text-decoration-color: #E8EBF0;
         }
 
         /* Tarteel-style mistake detection */
         .word-box.missed {
-            border-color: #ef4444;
+            border-color: transparent;
             background: rgba(239, 68, 68, 0.1);
             opacity: 0.95;
         }
@@ -371,6 +429,16 @@
             margin-top: 6px;
             opacity: 0.7;
             transition: 0.3s;
+        }
+        html[data-hide-translit="true"] .translit-container {
+            display: none;
+        }
+        .translit-toggle-btn .icon-translit-off { display: none; }
+        html[data-hide-translit="true"] .translit-toggle-btn .icon-translit-on { display: none; }
+        html[data-hide-translit="true"] .translit-toggle-btn .icon-translit-off { display: block; }
+        html[data-hide-translit="true"] .translit-toggle-btn {
+            color: var(--accent);
+            border-color: var(--accent);
         }
         .word-box:hover .translit-container,
         .word-box.active .translit-container {
@@ -508,10 +576,10 @@
             white-space: nowrap;
             pointer-events: none;
             transition: opacity 0.6s ease, transform 0.2s cubic-bezier(0.1, 0.7, 0.1, 1), color 0.5s ease;
-            filter: blur(12px);
+            filter: blur(3px);
             user-select: none;
-            -webkit-mask-image: radial-gradient(circle, black 30%, transparent 82%);
-            mask-image: radial-gradient(circle, black 30%, transparent 82%);
+            -webkit-mask-image: radial-gradient(circle, black 55%, transparent 90%);
+            mask-image: radial-gradient(circle, black 55%, transparent 90%);
         }
 
         /* Voice Aura - Kinetic Nebula Effect */
@@ -522,7 +590,7 @@
             transform: translate(-50%, -50%) scale(0.6);
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.05) 50%, transparent 70%);
+            background: radial-gradient(circle, rgba(10, 132, 255, 0.15) 0%, rgba(0, 122, 255, 0.05) 50%, transparent 70%);
             border-radius: 51% 49% 48% 52% / 45% 55% 45% 55%;
             filter: blur(60px);
             z-index: 1; /* Behind words (z-index 5) */
@@ -535,7 +603,7 @@
             content: '';
             position: absolute;
             inset: 20%;
-            background: radial-gradient(circle, rgba(52, 199, 89, 0.4) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(10, 132, 255, 0.4) 0%, transparent 60%);
             filter: blur(40px);
             border-radius: inherit;
             animation: rotateAura 15s linear infinite;
@@ -795,6 +863,20 @@
         }
         #download-btn.visible {
             display: block;
+        }
+        /* Cachés visuellement — DOM + handlers conservés */
+        #download-btn,
+        #download-btn.visible,
+        #report-diag-btn,
+        #voice-lab-btn,
+        #live-assistant,
+        #live-assistant.visible,
+        #voice-lab-modal,
+        #txt-start,
+        #dataset-optin-label,
+        #mistake-test-label,
+        #start-overlay {
+            display: none !important;
         }
 
         /* Smart Progress Line below Header */
@@ -1323,6 +1405,32 @@
             .voice-aura { width: 300px; height: 300px; }
         }
 
+        @media (min-width: 900px) {
+            .container {
+                max-width: 1500px;
+            }
+            .arabic-word {
+                font-size: clamp(3.2rem, 5vw, 5.4rem);
+            }
+            .word-box {
+                min-width: 130px;
+                padding: 18px 24px;
+            }
+            .ayah-line {
+                gap: 36px 28px;
+            }
+            .verse-marker {
+                width: 52px;
+                height: 52px;
+                font-size: 1.35rem;
+                margin-top: 28px;
+            }
+            .translit-en,
+            .translit-ru {
+                font-size: 0.85rem;
+            }
+        }
+
         /* Live Assistant Panel */
         #live-assistant {
             display: none;
@@ -1347,6 +1455,10 @@
             display: flex !important;
             transform: translateY(0);
             opacity: 1;
+        }
+        #live-assistant,
+        #live-assistant.visible {
+            display: none !important;
         }
         .assistant-header {
             position: absolute;
@@ -1736,22 +1848,20 @@
 
         html[data-theme="light"] .word-box,
         html[data-theme="blue"] .word-box {
-            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+            box-shadow: none;
         }
         html[data-theme="light"] .word-box:hover,
         html[data-theme="blue"] .word-box:hover {
-            border-color: #D1D5DB;
+            border-color: transparent;
         }
-        html[data-theme="light"] .word-box.correct {
-            background: rgba(5, 150, 105, 0.08);
-        }
+        html[data-theme="light"] .word-box.correct,
         html[data-theme="blue"] .word-box.correct {
-            background: rgba(37, 99, 235, 0.08);
+            background: transparent;
         }
         html[data-theme="light"] .word-box.missed,
         html[data-theme="blue"] .word-box.missed {
             background: rgba(239, 68, 68, 0.1);
-            border-color: #ef4444;
+            border-color: transparent;
         }
         html[data-theme="light"] .verse-marker,
         html[data-theme="blue"] .verse-marker {
@@ -1802,7 +1912,6 @@
         html[data-theme="light"] #ghost-word-container,
         html[data-theme="blue"] #ghost-word-container {
             color: var(--accent);
-            opacity: 0.08;
         }
         html[data-theme="light"] .loading-spinner,
         html[data-theme="blue"] .loading-spinner {
@@ -1820,6 +1929,9 @@
                 var t = localStorage.getItem('tajwid_theme') || 'dark';
                 if (t !== 'light' && t !== 'blue') t = 'dark';
                 document.documentElement.setAttribute('data-theme', t);
+                if (localStorage.getItem('tajwid_hide_translit') === '1') {
+                    document.documentElement.setAttribute('data-hide-translit', 'true');
+                }
             } catch (e) {}
         })();
     </script>
@@ -1846,10 +1958,19 @@
             </div>
         </div>
 
+        <button type="button" class="lang-menu-btn translit-toggle-btn" id="translit-toggle-btn" onclick="toggleTranslit(event)" title="Masquer la translittération" aria-pressed="false" aria-label="Masquer la translittération">
+            <svg class="icon-translit-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
+            <svg class="icon-translit-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path><line x1="2" y1="2" x2="22" y2="22"></line></svg>
+        </button>
+
         <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme(event)" title="Thème" aria-label="Cycle thème sombre / vert / bleu">
             <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             <svg class="icon-blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+        </button>
+
+        <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="openDuoSelector()" title="Mode Duo" aria-label="Mode Duo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         </button>
 
         <button class="profile-btn" onclick="openStatsModal()">
@@ -2953,13 +3074,18 @@
         const newVerseData = [];
         let lastWasMarker = false;
 
+        let ayahLine = document.createElement('div');
+        ayahLine.className = 'ayah-line';
+        container.appendChild(ayahLine);
+
         parts.forEach((part) => {
             // Nettoyage complet : on vire le HTML ET les caractères invisibles corrupteurs
             const cleanText = part.replace(/<[^>]*>/g, '').replace(/[\u200B-\u200D\uFEFF\s\u00A0]/g, '').trim();
             if (!cleanText) return;
 
-            // 1. Détection robuste des marqueurs de verset (avec ou sans ornement, split ou non)
-            const isMarker = /﴿|﴾/.test(cleanText) || part.includes('class="end"') || part.includes('verse-marker');
+            // 1. Détection robuste des marqueurs de verset (avec ou sans ornement, class=end quoté ou non)
+            const isEndSpan = /\bclass=["']?end["']?/.test(part);
+            const isMarker = /﴿|﴾/.test(cleanText) || isEndSpan || part.includes('verse-marker');
             
             // 2. Détection des chiffres seuls (Arabes ou Latins)
             const isDigitOnly = /^[0-9\u0660-\u0669\u06F0-\u06F9]+$/.test(cleanText);
@@ -2970,7 +3096,7 @@
             if (isMarker || (isDigitOnly && !hasArabicLetters)) {
                 // Pour éviter les doublons, on ne rend le marqueur que s'il contient les ornements complets
                 // ou si c'est la version officielle wrapée.
-                if (!lastWasMarker && (cleanText.includes('﴿') || part.includes('end') || isDigitOnly)) {
+                if (!lastWasMarker && (cleanText.includes('﴿') || isEndSpan || isDigitOnly)) {
                     const marker = document.createElement('div');
                     marker.className = 'verse-marker';
                     
@@ -2979,8 +3105,11 @@
                     if (match) content = `﴿${match[0]}﴾`;
 
                     marker.innerHTML = content;
-                    container.appendChild(marker);
-                    lastWasMarker = true; 
+                    ayahLine.appendChild(marker);
+                    lastWasMarker = true;
+                    ayahLine = document.createElement('div');
+                    ayahLine.className = 'ayah-line';
+                    container.appendChild(ayahLine);
                 }
                 return;
             }
@@ -3028,17 +3157,25 @@
             box.dataset.hasRule = ruleType ? 'true' : 'false';
             box.dataset.ruleType = ruleType ? ruleType.split('-')[0] : "";
             box.dataset.ruleFull = ruleType || "";
-            container.appendChild(box);
+            ayahLine.appendChild(box);
 
             newVerseData.push({ ar: cleanText, ruleType: ruleType || "" });
             metaIdx++;
         });
 
+        if (ayahLine && ayahLine.childNodes.length === 0) {
+            ayahLine.remove();
+        }
+
         verseData = newVerseData;
         sessionDiagnostics.expected = verseData.map(w => normalize(w.ar));
         sessionDiagnostics.ref = verse.ref;
 
-        document.getElementById('box-0')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                container.querySelector('.ayah-line')?.classList.add('active-ayah');
+            });
+        });
         
         // Mettre à jour le panneau expert
         updateExpertPanel();
@@ -3450,6 +3587,7 @@
                 currentStream = stream;
             }
             console.log("Stream prêt");
+            try { localStorage.setItem('tajwid_mic_ok', String(Date.now())); } catch (e) {}
 
             datasetOptIn = !!document.getElementById('dataset-optin')?.checked;
             mistakeTestMode = !!document.getElementById('mistake-test-optin')?.checked;
@@ -3768,15 +3906,14 @@
             aura.style.transform = `translate(-50%, -50%) scale(${0.8 + easedVol / 45})`;
             aura.style.opacity = easedVol > 5 ? Math.min(0.2 + easedVol / 30, 0.7) : 0;
             
-            // Always Emerald Nebula
-            aura.style.background = `radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.05) 50%, transparent 70%)`;
+            // Always Blue Nebula
+            aura.style.background = `radial-gradient(circle, rgba(10, 132, 255, 0.2) 0%, rgba(0, 122, 255, 0.05) 50%, transparent 70%)`;
             if (ghost) ghost.style.color = 'var(--accent)';
         }
 
         if (ghost) {
             ghost.style.transform = `translate(-50%, -50%) scale(${1 + easedVol / 180})`;
-            // Bumped opacity slightly for another 5% visibility
-            ghost.style.opacity = easedVol > 5 ? Math.min(0.02 + easedVol / 300, 0.08) : 0;
+            ghost.style.opacity = easedVol > 5 ? 0.10 : 0;
         }
 
         // Idée 5 : commit sur chute d’énergie (fin de mot)
@@ -4979,10 +5116,23 @@
             duoConn.send({ type: 'sync_match', idx: idx });
         }
 
+        const line = box?.closest('.ayah-line');
+        let switchedAyah = false;
+        if (line && !line.querySelector('.word-box:not(.correct)')) {
+            const nextLine = line.nextElementSibling;
+            if (nextLine && nextLine.classList.contains('ayah-line')) {
+                line.classList.remove('active-ayah');
+                nextLine.classList.add('active-ayah');
+                switchedAyah = true;
+            }
+        }
+
         const nextBox = document.getElementById(`box-${idx + 1}`);
         if (nextBox) {
             nextBox.classList.add('active');
-            nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (!switchedAyah) {
+                nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
     }
 
@@ -5472,6 +5622,25 @@
         applyTheme(order[(idx + 1) % order.length]);
     }
 
+    function applyTranslitVisibility(hidden) {
+        document.documentElement.setAttribute('data-hide-translit', hidden ? 'true' : 'false');
+        try { localStorage.setItem('tajwid_hide_translit', hidden ? '1' : '0'); } catch (e) {}
+        const btn = document.getElementById('translit-toggle-btn');
+        if (btn) {
+            btn.classList.toggle('active', hidden);
+            const label = hidden ? 'Afficher la translittération' : 'Masquer la translittération';
+            btn.title = label;
+            btn.setAttribute('aria-label', label);
+            btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+        }
+    }
+
+    function toggleTranslit(event) {
+        if (event) event.stopPropagation();
+        const hidden = document.documentElement.getAttribute('data-hide-translit') === 'true';
+        applyTranslitVisibility(!hidden);
+    }
+
     // Fermer les menus au clic ailleurs
     window.addEventListener('click', () => {
         document.getElementById('lang-options')?.classList.remove('active');
@@ -5486,6 +5655,7 @@
         console.log("DOMContentLoaded");
         try {
             applyTheme(localStorage.getItem('tajwid_theme') || 'dark');
+            applyTranslitVisibility(localStorage.getItem('tajwid_hide_translit') === '1');
         } catch (e) {
             applyTheme('dark');
         }
@@ -5529,6 +5699,7 @@
                 await fetchVerseFromAPI('1');
                 console.log("Initial surahs loaded: 1, 112, 113, 114");
             }
+            setTimeout(() => { startRecognition(); }, 250);
         } catch (e) {
             console.error("Initial load failed:", e);
         }
