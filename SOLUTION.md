@@ -1,4 +1,4 @@
-# SOLUTION — Validation vocale TAJWID
+# SOLUTION — Validation vocale Tilmidh
 
 Date : 2026-08-10  
 Cible prod : `public/index.html` (SPA static Vercel)  

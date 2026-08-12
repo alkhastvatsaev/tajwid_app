@@ -13,7 +13,7 @@ Fichier : `public/index.html` — seule app prod. Relire [`docs/APP-MAP.md`](../
 - `verseData[i].ar` = texte arabe du mot ; matching via `normalize` + `getRootSkeleton`
 - Classes Quran.com → `dataset.ruleType` (`madda_normal` → `madd-tabii`, etc.)
 - Boot : 112→113→114→1 ; **pas** de `?ref=`
-- Duo Peer IDs : `vatsaev-tajwid-user1|user2`
+- Duo Peer IDs : `vatsaev-tilmidh-user1|user2`
 - « IA Import » → `fetchVerseFromAPI` → quran.com
 
 ## Ne touche pas sans demande nommée

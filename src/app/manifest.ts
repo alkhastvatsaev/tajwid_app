@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "TAJWID — Apprentissage du Coran",
-    short_name: "TAJWID",
+    name: "Tilmidh تلميذ — Entraînement Tajwid",
+    short_name: "Tilmidh",
     description:
-      "Pratiquez le Tajwid avec feedback vocal en direct et mode Duo P2P.",
+      "Entraînement tajwid mot à mot. Outil pédagogique, pas une ijazah.",
     start_url: "/",
     display: "standalone",
     background_color: "#030303",

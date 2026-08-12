@@ -10,7 +10,7 @@ python3 -m pip install fastapi uvicorn --quiet
 echo "Nettoyage du port $PORT..."
 lsof -ti :$PORT | xargs kill -9 2>/dev/null
 
-echo "Lancement de TAJWID-VATSAEV..."
+echo "Lancement de Tilmidh..."
 python3 server.py &
 SERVER_PID=$!
 

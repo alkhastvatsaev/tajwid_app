@@ -2602,7 +2602,7 @@
         </div>
         <div class="expert-title" id="txt-expert-title">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/><path d="M12 2L2 7L12 12L22 7L12 2Z"/></svg>
-            Tajwid Analysis
+            Expert Tilmidh
         </div>
         <div id="expert-rules-list" class="rules-list">
             <!-- Populated by JS -->
@@ -2753,8 +2753,8 @@
 
         const roleId = role === 'User 1' ? 'user1' : 'user2';
         const targetRoleId = role === 'User 1' ? 'user2' : 'user1';
-        const peerId = `vatsaev-tajwid-${roleId}`;
-        const targetId = `vatsaev-tajwid-${targetRoleId}`;
+        const peerId = `vatsaev-tilmidh-${roleId}`;
+        const targetId = `vatsaev-tilmidh-${targetRoleId}`;
         
         peer = new Peer(peerId);
 
@@ -2975,7 +2975,7 @@
             voiceLabBtn: "Voice Lab · Tarteel",
             voiceLabTitle: "Analyse vocale vs Tarteel",
             voiceLabDesc: "Métriques de session pour fermer l’écart avec Tarteel (WER ~4 %, latence <200 ms, word-level).",
-            expertTitle: "Analyse Tajwid",
+            expertTitle: "Expert Tilmidh",
             expertLegend: "Légende des Règles",
             legend: {
                 madd: "Prolongations (ا و ي)",
@@ -3061,7 +3061,7 @@
             voiceLabBtn: "Voice Lab · Tarteel",
             voiceLabTitle: "Voice analysis vs Tarteel",
             voiceLabDesc: "Session metrics to close the gap with Tarteel (WER ~4%, latency <200ms, word-level).",
-            expertTitle: "Tajwid Analysis",
+            expertTitle: "Tilmidh Expert",
             expertLegend: "Rule Legend",
             legend: {
                 madd: "Prolongations (ا و ي)",
@@ -3147,7 +3147,7 @@
             voiceLabBtn: "Voice Lab · Tarteel",
             voiceLabTitle: "Голосовой анализ vs Tarteel",
             voiceLabDesc: "Метрики сессии, чтобы догнать Tarteel (WER ~4%, задержка <200 мс).",
-            expertTitle: "Анализ Таджвида",
+            expertTitle: "Эксперт Tilmidh",
             expertLegend: "Легенда Правил",
             legend: {
                 madd: "Удлинения (ا و ي)",
@@ -3771,7 +3771,7 @@
     function getTranscribeUrl() {
         const host = location.hostname;
         if (host === 'localhost' || host === '127.0.0.1') {
-            return 'https://tajwid-app-vatsaev.vercel.app/api/transcribe';
+            return 'https://tilmidh.app/api/transcribe';
         }
         return '/api/transcribe';
     }
@@ -5124,7 +5124,7 @@
         const tarteelParityScore = Math.max(0, Math.min(100, Math.round(scoreParts.reduce((a, b) => a + b, 0))));
 
         const report = {
-            schema: 'tajwid-voice-lab-v1',
+            schema: 'tilmidh-voice-lab-v1',
             generatedAt: new Date().toISOString(),
             ref: sessionDiagnostics.ref || VERSES_LIBRARY[activeVerseIdx]?.ref || null,
             engine: sessionDiagnostics.engine || (typeof VOICE_ENGINE !== 'undefined' ? VOICE_ENGINE : 'webspeech'),
@@ -5736,7 +5736,7 @@
 
     function getSaveRecitationUrl() {
         // Toujours l’API prod : preview / tunnel n’ont pas /api, et CORS est ouvert sur cet endpoint.
-        return 'https://tajwid-app-vatsaev.vercel.app/api/save-recitation';
+        return 'https://tilmidh.app/api/save-recitation';
     }
 
     async function blobToBase64Raw(blob) {
@@ -5896,7 +5896,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'recitation_tajwid.webm';
+        a.download = 'recitation_tilmidh.webm';
         a.click();
     }
 

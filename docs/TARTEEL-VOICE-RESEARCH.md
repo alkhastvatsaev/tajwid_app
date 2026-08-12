@@ -228,7 +228,7 @@ def normalize_arabic(text: str) -> str:
     ...
 ```
 
-Sans diacritiques, le matching devient tolérant aux erreurs ASR de voyelles — **même philosophie** que TAJWID (`normalize` + squelette), mais Tarteel/IqraAI reste au niveau **mot**, pas squelette اوي.
+Sans diacritiques, le matching devient tolérant aux erreurs ASR de voyelles — **même philosophie** que Tilmidh (`normalize` + squelette), mais Tarteel/IqraAI reste au niveau **mot**, pas squelette اوي.
 
 ### 5.3 Alignement (cœur « bien lu ou pas »)
 
@@ -292,12 +292,12 @@ Tilawa confirme empiriquement : **ASR Quran-finetuned + matching texte** reste l
 
 ---
 
-## 8. Checklist « copier Tarteel » pour TAJWID
+## 8. Checklist « copier Tarteel » pour Tilmidh
 
 Ordre pragmatique (du plus proche du public au plus hard) :
 
 1. **Remplacer / compléter Web Speech** par `tarteel-ai/whisper-base-ar-quran` (serveur ou WASM/CoreML) — gros gain WER Coran.
-2. **Garder** un `normalize` arabe (strip diacritics + formes) — déjà dans TAJWID.
+2. **Garder** un `normalize` arabe (strip diacritics + formes) — déjà dans Tilmidh.
 3. **Aligner** avec DiffLib/Levenshtein word-level (comme IqraAI) en plus du squelette اوي — pour missed/extra comme Tarteel.
 4. **Corpus fixe** Tanzil / Quran.com Uthmani comme source de vérité (Tarteel exploite le Coran fermé = avantage vs ASR open-domain).
 5. **Streaming** chunks ~100–200 ms ; latence cible &lt;300 ms (Tarteel &lt;200 ms en cloud GPU).
@@ -355,4 +355,4 @@ Ordre pragmatique (du plus proche du public au plus hard) :
 
 ---
 
-*Fin du dossier. Pour TAJWID : le chemin le plus court pour « copier » la sensation Tarteel = Whisper Tarteel HF + normalize + SequenceMatcher word-level, pas Web Speech seul.*
+*Fin du dossier. Pour Tilmidh : le chemin le plus court pour « copier » la sensation Tarteel = Whisper Tarteel HF + normalize + SequenceMatcher word-level, pas Web Speech seul.*

@@ -16,7 +16,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 # Confusions tajwid — ne jamais proposer en alias auto
-TAJWID_FORBID_PAIRS = {
+TILMIDH_FORBID_PAIRS = {
     ("سراط", "صراط"),
     ("السراط", "الصراط"),
     ("سيرات", "صراط"),
@@ -52,7 +52,7 @@ def mine_aliases(root: Path, min_count: int = 3) -> None:
                 continue
             if heard == exp:
                 continue
-            if (heard, exp) in TAJWID_FORBID_PAIRS or (exp, heard) in TAJWID_FORBID_PAIRS:
+            if (heard, exp) in TILMIDH_FORBID_PAIRS or (exp, heard) in TILMIDH_FORBID_PAIRS:
                 continue
             counts[(exp, heard)] += 1
         # mismatches from analysis companion if present
@@ -71,7 +71,7 @@ def mine_aliases(root: Path, min_count: int = 3) -> None:
                     continue
                 if not e or not h:
                     continue
-                if (h, e) in TAJWID_FORBID_PAIRS:
+                if (h, e) in TILMIDH_FORBID_PAIRS:
                     continue
                 counts[(e, h)] += int(c)
 

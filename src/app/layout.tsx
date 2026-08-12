@@ -17,14 +17,14 @@ const amiri = Amiri({
 });
 
 export const metadata: Metadata = {
-  title: "TAJWID — Apprentissage du Coran",
+  title: "Tilmidh تلميذ — Entraînement Tajwid mot à mot",
   description:
-    "Pratiquez le Tajwid avec feedback vocal en direct et mode Duo P2P.",
-  applicationName: "TAJWID",
+    "Récite le Coran, le micro vérifie chaque mot. Couleurs tajwid, Fātiḥah, Ikhlāṣ, Duo imam/talib.",
+  applicationName: "Tilmidh",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "TAJWID",
+    title: "Tilmidh",
   },
   formatDetection: {
     telephone: false,

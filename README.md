@@ -1,8 +1,8 @@
-# TAJWID — Legacy SPA (production)
+# Tilmidh — Legacy SPA (production)
 
-Application web d’apprentissage du Tajwid. **La production sert le monolite HTML** [`public/index.html`](public/index.html).
+Application web d’entraînement au tajwid mot à mot. **La production sert le monolite HTML** [`public/index.html`](public/index.html).
 
-Prod : https://tajwid-app-vatsaev.vercel.app/
+Prod : https://tilmidh.app/
 
 ## Lancement local
 
@@ -12,7 +12,7 @@ Prod : https://tajwid-app-vatsaev.vercel.app/
 python3 server.py
 ```
 
-Ouvre [http://localhost:8000](http://localhost:8000) (sert `public/index.html`).  
+Ouvre [http://localhost:3000](http://localhost:3000) (sert `public/index.html`).  
 Le endpoint `POST /log` reçoit les rapports techniques (fichier `diagnostic_report.json`).
 
 ### Option B — fichiers statiques

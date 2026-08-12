@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 PORT=3000
 
 echo "------------------------------------------"
-echo "TAJWID — Next.js PWA"
+echo "Tilmidh — Next.js PWA"
 echo "------------------------------------------"
 
 if ! command -v node >/dev/null 2>&1; then

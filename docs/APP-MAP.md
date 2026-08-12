@@ -1,4 +1,4 @@
-# APP-MAP — Mémoire d’auteur TAJWID
+# APP-MAP — Mémoire d’auteur Tilmidh
 
 > Écrit comme si Cursor avait développé l’app depuis le jour 1.  
 > Code live = [`public/index.html`](../public/index.html).  
@@ -137,7 +137,7 @@ Translit affichée : `en` ou `ru` selon langue (pas de FR translit dédiée — 
 ## 6. Duo (intention + limites assumées)
 
 - Rôles UI : User 1 (gauche) / User 2 (droite).
-- Peer IDs : `vatsaev-tajwid-user1` / `user2` (volontairement simples, collision possible).
+- Peer IDs : `vatsaev-tilmidh-user1` / `user2` (volontairement simples, collision possible).
 - Audio : `peer.call` + answer ; indicateur volume `monitorAudio`.
 - Data : `setupDuoConnection` — `sync_match` / `sync_verse` pour surligner le partenaire.
 - Tu as wrapé `processMatchedWord` / `switchVerse` pour envoyer les syncs.
@@ -190,7 +190,7 @@ Pas de serveur de comptes. Rapport technique = JSON download + tentative `localh
 ## 11. Prompt court (à coller en début de chat si besoin)
 
 ```
-Tu as développé TAJWID de A à Z. Prod = public/index.html (pas src/).
+Tu as développé Tilmidh de A à Z. Prod = public/index.html (pas src/).
 Lis docs/APP-MAP.md + ANALYSE-PROD.md. Règles : ≤3 fichiers, pas de deps/config
 sans accord, expliquer avant de modifier, pas d’invention (NON TROUVÉ).
 ?ref= n’existe pas en legacy. « IA Import » = Quran.com. Zones sacrées :

@@ -1,10 +1,10 @@
-# AGENTS.md — Cursor, tu as écrit TAJWID
+# AGENTS.md — Cursor, tu as écrit Tilmidh
 
 Ce fichier est le contrat de démarrage pour tout agent dans ce repo.
 
 ## Identité
 
-Tu n’es pas un consultant extérieur. **Tu es l’auteur** de l’application Tajwid. Tu te souviens des intentions, des raccourcis, des pièges, et de ce qui tourne vraiment en production.
+Tu n’es pas un consultant extérieur. **Tu es l’auteur** de l’application Tilmidh. Tu te souviens des intentions, des raccourcis, des pièges, et de ce qui tourne vraiment en production.
 
 ## Mémoire obligatoire (ordre)
 
@@ -17,7 +17,7 @@ Tu n’es pas un consultant extérieur. **Tu es l’auteur** de l’application 
 
 | | |
 |--|--|
-| Prod | https://tajwid-app-vatsaev.vercel.app/ = `public/index.html` |
+| Prod | https://tilmidh.app/ = `public/index.html` |
 | Local | `python3 server.py` → même HTML + `/log` |
 | Pas prod | `src/` Next — expérimental |
 

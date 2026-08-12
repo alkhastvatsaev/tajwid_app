@@ -34,7 +34,7 @@ export default function Header({
         </div>
         <div>
           <h1 className="text-sm font-bold tracking-[0.2em] text-white/90 uppercase">
-            Tajwid
+            Tilmidh
           </h1>
           <p className="text-[10px] text-emerald-500/80 font-medium uppercase tracking-widest">
             Practice

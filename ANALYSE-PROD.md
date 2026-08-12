@@ -1,9 +1,9 @@
-# Analyse production TAJWID (A→Z)
+# Analyse production Tilmidh (A→Z)
 
-**Date :** 2026-08-10  
-**URL analysée :** https://tajwid-app-vatsaev.vercel.app/?ref=41%3A1  
+**Date :** 2026-08-10 (màj marque 2026-08-12)  
+**URL analysée :** https://tilmidh.app/  
 **Outils :** agent-reach (`doctor --json`) — web = **Jina Reader** ; GitHub = **gh CLI**  
-**Repo :** https://github.com/alkhastvatsaev/tajwid_app
+**Repo :** https://github.com/alkhastvatsaev/tilmidh
 
 ---
 
@@ -13,7 +13,7 @@
 |--------|-------------|
 | HTTP | `200`, `content-type: text/html`, `content-length: **137090**` |
 | Cache | `x-vercel-cache: HIT` |
-| Titre | `TAJWID-VATSAEV` |
+| Titre | `Tilmidh تلميذ` |
 | Stack runtime | **1 seul fichier HTML/JS** + PeerJS CDN `1.5.0` + Google Fonts |
 | Framework | **Pas** de Next (`next-size-adjust` absent) |
 
@@ -99,7 +99,7 @@ flowchart LR
 1. **`?ref=` mort en prod** — les deep links du type `/?ref=41:1` ne chargent pas le verset demandé.
 2. **Téléchargement** : sur `main`/prod, CSS `#download-btn { display: none !important }` + pas d’ajout de `.visible` dans `finishVerse()` ; correctif uniquement sur `stabilize/legacy-prod`.
 3. **« IA Import »** = appel Quran.com, **pas** d’API IA (OpenAI, etc.).
-4. **Mode Duo** : PeerJS avec IDs fixes `vatsaev-tajwid-user1` / `user2`.
+4. **Mode Duo** : PeerJS avec IDs fixes `vatsaev-tilmidh-user1` / `user2`.
 5. **Double codebase** (`public/` legacy vs `src/` Next) — risque de redeploy de la mauvaise stack.
 6. **Rapport technique** vers `http://localhost:8000/log` : no-op en production (normal ; utile seulement avec `server.py` en local).
 
@@ -107,7 +107,7 @@ flowchart LR
 
 ## 7. Synthèse
 
-La page https://tajwid-app-vatsaev.vercel.app/?ref=41%3A1 charge bien l’app legacy complète, mais **pas le verset 41:1**. Le démarrage force Al-Fātiḥah (+ sourates 112–114). Pour ouvrir Fussilat 41:1 aujourd’hui : import manuel ou browser de sourate dans l’UI.
+La page https://tilmidh.app/?ref=41%3A1 charge bien l’app legacy complète, mais **pas le verset 41:1**. Le démarrage force Al-Fātiḥah (+ sourates 112–114). Pour ouvrir Fussilat 41:1 aujourd’hui : import manuel ou browser de sourate dans l’UI.
 
 Agent Reach au moment de l’analyse : **v1.5.0** (à jour).
 

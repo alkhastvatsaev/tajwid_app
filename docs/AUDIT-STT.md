@@ -34,7 +34,7 @@ Utilisé : `gh` search/API + arXiv/OpenReview (août 2026).
 | **Ahkam DL** | Classif règles de base sur audio | [malayyoub/Ahkam-Al-Tajweed](https://github.com/malayyoub/Ahkam-Al-Tajweed) | Moyen |
 | **Phonemizer** | Cible IPA/tajwīd pour scoring | [Hetchy/Quranic-Phonemizer](https://github.com/Hetchy/Quranic-Phonemizer) | Outil, pas juge |
 
-### Architecture cible « professeur » (recommandée pour TAJWID)
+### Architecture cible « professeur » (recommandée pour Tilmidh)
 
 ```
 Micro

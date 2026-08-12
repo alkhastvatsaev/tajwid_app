@@ -43,7 +43,7 @@ function RemoteAudio({ stream }: { stream: MediaStream | null }) {
   return <audio ref={ref} autoPlay playsInline className="hidden" />;
 }
 
-export default function TajwidPage() {
+export default function TilmidhPage() {
   const router = useRouter();
   const [started, setStarted] = useState(false);
   const [currentVerse, setCurrentVerse] = useState<Verse | null>(null);

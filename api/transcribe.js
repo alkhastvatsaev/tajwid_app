@@ -4,6 +4,8 @@
  * → Groq Whisper (clé côté serveur uniquement)
  */
 const ALLOWED_ORIGINS = new Set([
+  'https://tilmidh.app',
+  'https://www.tilmidh.app',
   'https://tajwid-app-vatsaev.vercel.app',
   'http://localhost:8000',
   'http://127.0.0.1:8000',

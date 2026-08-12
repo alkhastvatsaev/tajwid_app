@@ -1,6 +1,6 @@
-# Règles de Tajwīd — Référence complète (TAJWID app)
+# Règles de Tajwīd — Référence complète (Tilmidh app)
 
-> Document de connaissance pour l’app **TAJWID-VATSAEV**.  
+> Document de connaissance pour l’app **Tilmidh**.  
 > Riwāya cible : **Ḥafṣ ʿan ʿĀṣim**.  
 > Mode produit actuel : **focus Al-Fātiḥah** (`FATIHA_ONLY` dans `public/index.html`).  
 > Recherche : agent-reach (**GitHub `gh`** + **Jina Reader** / Wikipedia / READMEs repos) — août 2026.
