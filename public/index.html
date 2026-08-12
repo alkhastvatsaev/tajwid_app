@@ -41,6 +41,7 @@
             --surface: rgba(255, 255, 255, 0.02);
             --surface-hover: rgba(255, 255, 255, 0.05);
             --accent: #059669; 
+            --validated: #3B82F6;
             --accent-gradient: linear-gradient(135deg, #059669, #047857);
             --success: #10B981;
             --error: #FF3B30;
@@ -80,6 +81,7 @@
             --surface: #FFFFFF;
             --surface-hover: #F3F4F6;
             --accent: #047857;
+            --validated: #1D4ED8;
             --accent-gradient: linear-gradient(135deg, #059669, #047857);
             --success: #059669;
             --error: #DC2626;
@@ -112,6 +114,7 @@
             --surface: #FFFFFF;
             --surface-hover: #E8F1FA;
             --accent: #1D4ED8;
+            --validated: #1D4ED8;
             --accent-gradient: linear-gradient(135deg, #2563EB, #1D4ED8);
             --success: #059669;
             --error: #DC2626;
@@ -453,8 +456,8 @@
         }
         .word-box.correct .arabic-word,
         .word-box.correct .arabic-word * {
-            color: var(--accent);
-            text-decoration-color: var(--accent);
+            color: var(--validated);
+            text-decoration-color: var(--validated);
         }
 
         /* Tarteel-style mistake detection */
@@ -544,6 +547,33 @@
             overflow: visible;
             line-height: 1.55;
             padding: 0.12em 0.18em 0;
+        }
+
+        /* Reading-paced fill: unread → green → blue (stays blue when .correct). */
+        .arabic-word.shimmering {
+            background-repeat: no-repeat;
+            background-color: var(--gs-base, var(--text));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent !important;
+        }
+        .word-box.correct .arabic-word.shimmering,
+        .word-box.correct .arabic-word.shimmering * {
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            text-decoration-color: transparent;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .arabic-word.shimmering {
+                background-image: none !important;
+                -webkit-text-fill-color: unset;
+                color: var(--text) !important;
+            }
+            .word-box.correct .arabic-word.shimmering,
+            .word-box.correct .arabic-word.shimmering * {
+                color: var(--validated) !important;
+            }
         }
 
         .translit-container {
@@ -4617,6 +4647,7 @@
             resetUI();
             updateAssistantWords();
             setWhisperBtnState('idle');
+            startWordShimmer(document.querySelector('.word-box.active'));
 
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (AudioContext) {
@@ -6069,11 +6100,84 @@
         }
     }
 
+    let shimmerRun = null;
+    let shimmerMsPerChar = 180;
+    const shimmerPaceSamples = [];
+
+    function shimmerCharCount(plain) {
+        return Math.max(1, String(plain || '').replace(/\s/g, '').length);
+    }
+
+    function shimmerDurationFor(plain, box) {
+        let ms = shimmerCharCount(plain) * shimmerMsPerChar;
+        if (box?.dataset?.ruleFull && String(box.dataset.ruleFull).indexOf('madd') === 0) ms *= 1.35;
+        return Math.min(2600, Math.max(480, ms));
+    }
+
+    function rememberShimmerPace(plain, elapsed) {
+        const per = elapsed / shimmerCharCount(plain);
+        if (per < 70 || per > 700) return;
+        shimmerPaceSamples.push(per);
+        if (shimmerPaceSamples.length > 6) shimmerPaceSamples.shift();
+        shimmerMsPerChar = shimmerPaceSamples.reduce((a, b) => a + b, 0) / shimmerPaceSamples.length;
+    }
+
+    function stopShimmerRun(restore) {
+        if (!shimmerRun) return;
+        const { el, anim, savedHtml } = shimmerRun;
+        try { anim && anim.cancel(); } catch (e) {}
+        el.classList.remove('shimmering');
+        el.style.removeProperty('background-image');
+        el.style.removeProperty('background-size');
+        el.style.removeProperty('background-position');
+        el.style.removeProperty('--gs-base');
+        if (restore && savedHtml) el.innerHTML = savedHtml;
+        shimmerRun = null;
+    }
+
+    function startWordShimmer(box) {
+        if (!box) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const el = box.querySelector('.arabic-word');
+        if (!el || typeof el.animate !== 'function') return;
+        if (shimmerRun && shimmerRun.el === el) return;
+        if (shimmerRun) stopShimmerRun(true);
+
+        const savedHtml = el.innerHTML;
+        const plain = (el.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!plain) return;
+        el.textContent = plain;
+        el.classList.add('shimmering');
+        const base = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#F5F5f7';
+        el.style.setProperty('--gs-base', base);
+        el.style.backgroundImage = 'linear-gradient(to left, var(--validated) 0%, var(--accent) 30%, var(--gs-base) 58%, var(--gs-base) 100%)';
+        el.style.backgroundSize = '260% 100%';
+
+        const anim = el.animate(
+            [
+                { backgroundPosition: '100% 0' },
+                { backgroundPosition: '22% 0' }
+            ],
+            { duration: shimmerDurationFor(plain, box), easing: 'linear', fill: 'forwards' }
+        );
+        shimmerRun = { box, el, anim, savedHtml, startedAt: performance.now(), plain };
+    }
+
+    function finishWordShimmer(box) {
+        if (shimmerRun && shimmerRun.box === box) {
+            rememberShimmerPace(shimmerRun.plain, performance.now() - shimmerRun.startedAt);
+            stopShimmerRun(true);
+            return;
+        }
+        box?.querySelector('.arabic-word')?.classList.remove('shimmering');
+    }
+
     function processMatchedWord(idx, maddMissed = false) {
         const box = document.getElementById(`box-${idx}`);
         if (box?.classList.contains('correct')) return;
         box?.classList.remove('active', 'missed', 'extra-hint');
         box?.classList.add('correct');
+        finishWordShimmer(box);
         
         // --- GHOST WORD TRANSITION ---
         const nextGhostIdx = idx + 1;
@@ -6133,6 +6237,7 @@
         const nextBox = document.getElementById(`box-${idx + 1}`);
         if (nextBox) {
             nextBox.classList.add('active');
+            startWordShimmer(nextBox);
             if (!switchedAyah) {
                 nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
@@ -6548,6 +6653,7 @@
     }
 
     function resetUI() {
+        stopShimmerRun(true);
         document.querySelectorAll('.word-box').forEach(b => {
             b.className = 'word-box';
             const feedback = b.querySelector('.stt-feedback');
