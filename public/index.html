@@ -627,7 +627,7 @@
         }
         
         /* Color coding guide by type */
-        .word-box[data-rule-type="madd"] .tajwid-warning { color: var(--madd); }
+        .word-box[data-rule-type="madd"] .tajwid-warning { display: none; }
         .word-box[data-rule-type="ghunnah"] .tajwid-warning { color: var(--ghunnah); }
         .word-box[data-rule-type="ikhfa"] .tajwid-warning { color: var(--ikhfa); }
         .word-box[data-rule-type="qalqalah"] .tajwid-warning { color: var(--qalqalah); }
@@ -635,26 +635,28 @@
         /* Madd Guide Dots - Proportional Guidance */
         .madd-dots-guide {
             position: absolute;
-            top: -18px;
+            top: -8px;
             left: 50%;
-            transform: translateX(-50%) scale(0.6);
+            transform: translateX(-50%);
             display: flex;
             gap: 3px;
-            opacity: 0;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0.9;
             pointer-events: none;
+            z-index: 1;
         }
         .active .madd-dots-guide {
             opacity: 1;
-            transform: translateX(-50%) scale(1);
         }
         .dot-pip {
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: #ff453a;
-            box-shadow: 0 0 5px rgba(255, 69, 58, 0.5);
+            background: var(--madd-tabii);
         }
+        .word-box[data-rule-full="madd-tabii"] .dot-pip { background: var(--madd-tabii); }
+        .word-box[data-rule-full="madd-munfasil"] .dot-pip { background: var(--madd-munfasil); }
+        .word-box[data-rule-full="madd-muttasil"] .dot-pip { background: var(--madd-muttasil); }
+        .word-box[data-rule-full="madd-lazim"] .dot-pip { background: var(--madd-lazim); }
 
         .madd-missed-hint {
             position: absolute;
@@ -4106,10 +4108,10 @@
             else if (part.includes('izhar')) ruleType = "izhaar";
             else if (part.includes('qalqalah')) ruleType = "qalqalah";
 
-            const dotsCount = ruleType === 'madd-tabii' ? 2 : (ruleType === 'madd-munfasil' || ruleType === 'madd-muttasil') ? 4 : (ruleType === 'madd-lazim') ? 6 : 0;
+            const dotsCount = ruleType === 'madd-tabii' ? 2 : ruleType === 'madd-munfasil' ? 4 : ruleType === 'madd-muttasil' ? 5 : ruleType === 'madd-lazim' ? 6 : 0;
             const dotsHtml = dotsCount ? `<div class="madd-dots-guide">${Array(dotsCount).fill('<div class="dot-pip"></div>').join('')}</div>` : '';
 
-            const ruleTag = ruleType ? (translations[currentLang].rules[ruleType]?.tag || "Tajwid") : "";
+            const ruleTag = (ruleType && !ruleType.startsWith('madd')) ? (translations[currentLang].rules[ruleType]?.tag || "Tajwid") : "";
             const meta = wordsMeta[metaIdx] || { en: "", ru: "" };
 
             box.innerHTML = `
