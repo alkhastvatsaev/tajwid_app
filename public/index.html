@@ -1049,12 +1049,13 @@
         }
 
         /* Groupe Call dock dropdown — glass */
-        .gc-dock-wrap { position: relative; display: flex; align-items: center; }
+        .gc-dock-wrap { display: flex; align-items: center; }
         .gc-dock-dropdown {
             position: absolute;
             top: calc(100% + 10px);
-            right: 50%;
-            transform: translateX(50%);
+            left: 50%;
+            right: auto;
+            transform: translateX(-50%);
             width: 240px;
             background: rgba(255, 255, 255, 0.16);
             backdrop-filter: blur(22px) saturate(180%);
@@ -1081,23 +1082,11 @@
         }
         @keyframes gcDropIn { from { opacity:0; transform:translateX(50%) scale(0.95) translateY(-6px); } to { opacity:1; transform:translateX(50%) scale(1) translateY(0); } }
         .gc-dock-dropdown.active { display: flex; }
-        .gc-dock-dropdown::before {
-            content: '';
+        .verse-selector > .gc-dock-dropdown {
             position: absolute;
-            top: -6px;
-            right: calc(50% - 6px);
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.16);
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            border-radius: 3px;
-            transform: rotate(45deg);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            clip-path: polygon(0 0, 100% 0, 0 100%);
+            z-index: 1200;
         }
         .gc-dock-title { font-weight: 700; font-size: 0.72rem; color: var(--text); text-align: center; letter-spacing: 0.08em; }
-        .gc-dock-sub { font-size: 0.6rem; color: var(--subtext); text-align: center; opacity: 0.7; margin-top: -3px; }
         .gc-dock-tabs {
             display: flex;
             gap: 3px;
@@ -1120,8 +1109,8 @@
             transition: all 0.2s;
         }
         .gc-dock-tab.active {
-            background: linear-gradient(180deg, rgba(59,130,246,0.92), rgba(29,78,216,0.88));
-            color: #fff;
+            background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            color: #fff !important;
             box-shadow: 0 2px 8px rgba(29,78,216,0.25);
         }
         .gc-dock-input {
@@ -1147,43 +1136,25 @@
             padding: 9px 0;
             border-radius: 100px;
             border: none;
-            background: linear-gradient(180deg, rgba(59,130,246,0.92), rgba(29,78,216,0.88));
+            background: linear-gradient(180deg, #3b82f6, #1d4ed8);
             color: #fff;
             font-weight: 700;
             font-size: 0.7rem;
             font-family: 'Outfit', sans-serif;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 2px 8px rgba(29,78,216,0.25);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 2px 8px rgba(29,78,216,0.35);
             margin-top: 2px;
+            position: relative;
+            z-index: 1;
         }
         .gc-dock-action:active { transform: scale(0.97); }
         .gc-dock-panel { display: flex; flex-direction: column; gap: 5px; }
         .gc-dock-error { font-size: 0.62rem; color: #f87171; text-align: center; margin: 0; min-height: 0; }
-        .gc-dock-close {
-            position: absolute;
-            top: 8px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: var(--subtext);
-            cursor: pointer;
-            font-size: 1rem;
-            line-height: 1;
-            opacity: 0.5;
-            transition: opacity 0.2s;
-            padding: 2px;
-        }
-        .gc-dock-close:hover { opacity: 1; }
 
         /* Theme-aware dropdown */
         html[data-theme="light"] .gc-dock-dropdown,
         html[data-theme="blue"] .gc-dock-dropdown {
-            background: rgba(255, 255, 255, 0.55);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-        html[data-theme="light"] .gc-dock-dropdown::before,
-        html[data-theme="blue"] .gc-dock-dropdown::before {
             background: rgba(255, 255, 255, 0.55);
             border-color: rgba(255, 255, 255, 0.6);
         }
@@ -1201,6 +1172,10 @@
         html[data-theme="light"] .gc-dock-tab,
         html[data-theme="blue"] .gc-dock-tab {
             color: var(--text);
+        }
+        html[data-theme="light"] .gc-dock-tab.active,
+        html[data-theme="blue"] .gc-dock-tab.active {
+            color: #fff !important;
         }
 
         .profile-btn {
@@ -2551,40 +2526,39 @@
             <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="toggleGcDockMenu(event)" title="Groupe Call" aria-label="Groupe Call">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
             </button>
-            <div class="gc-dock-dropdown" id="gc-dock-dropdown" onclick="event.stopPropagation()">
-                <button type="button" class="gc-dock-close" onclick="document.getElementById('gc-dock-dropdown').classList.remove('active')" aria-label="Fermer">&times;</button>
-                <div class="gc-dock-title">GROUPE CALL</div>
-                <div class="gc-dock-sub">Audio seul · code + mot de passe</div>
-                <div class="gc-dock-tabs">
-                    <button type="button" class="gc-dock-tab active" data-gc-dock="create" onclick="showGcDockTab('create')">Créer</button>
-                    <button type="button" class="gc-dock-tab" data-gc-dock="join" onclick="showGcDockTab('join')">Rejoindre</button>
-                </div>
-                <div id="gc-dock-create" class="gc-dock-panel">
-                    <input class="gc-dock-input" id="gc-dock-create-name" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
-                    <input class="gc-dock-input" id="gc-dock-create-pwd" type="password" placeholder="Mot de passe (min. 4)" minlength="4" autocomplete="new-password">
-                    <button type="button" class="gc-dock-action" onclick="gcDockCreate()">Créer la salle</button>
-                </div>
-                <div id="gc-dock-join" class="gc-dock-panel" style="display:none;">
-                    <input class="gc-dock-input" id="gc-dock-join-code" type="text" placeholder="Code (6 car.)" maxlength="6" autocapitalize="characters" autocomplete="off">
-                    <input class="gc-dock-input" id="gc-dock-join-pwd" type="password" placeholder="Mot de passe" autocomplete="current-password">
-                    <input class="gc-dock-input" id="gc-dock-join-name" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
-                    <button type="button" class="gc-dock-action" onclick="gcDockJoin()">Rejoindre</button>
-                </div>
-                <div id="gc-dock-room-info" class="gc-dock-panel" style="display:none;">
-                    <div style="text-align:center;font-size:0.78rem;color:var(--text);">
-                        Code : <strong id="gc-dock-code-show"></strong><br>
-                        Mot de passe : <strong id="gc-dock-pwd-show"></strong>
-                    </div>
-                    <button type="button" class="gc-dock-action" onclick="gcDockCopyLink()">Copier le lien</button>
-                </div>
-                <p id="gc-dock-error" class="gc-dock-error"></p>
-            </div>
         </div>
 
         <button class="profile-btn" onclick="openStatsModal()">
             <span id="progress-percent" style="display:none">0%</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </button>
+
+        <div class="gc-dock-dropdown" id="gc-dock-dropdown" onclick="event.stopPropagation()">
+            <div class="gc-dock-title">GROUPE CALL</div>
+            <div class="gc-dock-tabs">
+                <button type="button" class="gc-dock-tab active" data-gc-dock="create" onclick="showGcDockTab('create')">Créer</button>
+                <button type="button" class="gc-dock-tab" data-gc-dock="join" onclick="showGcDockTab('join')">Rejoindre</button>
+            </div>
+            <div id="gc-dock-create" class="gc-dock-panel">
+                <input class="gc-dock-input" id="gc-dock-create-name" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
+                <input class="gc-dock-input" id="gc-dock-create-pwd" type="password" placeholder="Mot de passe (min. 4)" minlength="4" autocomplete="new-password">
+                <button type="button" class="gc-dock-action" onclick="gcDockCreate()">Créer la salle</button>
+            </div>
+            <div id="gc-dock-join" class="gc-dock-panel" style="display:none;">
+                <input class="gc-dock-input" id="gc-dock-join-code" type="text" placeholder="Code (6 car.)" maxlength="6" autocapitalize="characters" autocomplete="off">
+                <input class="gc-dock-input" id="gc-dock-join-pwd" type="password" placeholder="Mot de passe" autocomplete="current-password">
+                <input class="gc-dock-input" id="gc-dock-join-name" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
+                <button type="button" class="gc-dock-action" onclick="gcDockJoin()">Rejoindre</button>
+            </div>
+            <div id="gc-dock-room-info" class="gc-dock-panel" style="display:none;">
+                <div style="text-align:center;font-size:0.78rem;color:var(--text);">
+                    Code : <strong id="gc-dock-code-show"></strong><br>
+                    Mot de passe : <strong id="gc-dock-pwd-show"></strong>
+                </div>
+                <button type="button" class="gc-dock-action" onclick="gcDockCopyLink()">Copier le lien</button>
+            </div>
+            <p id="gc-dock-error" class="gc-dock-error"></p>
+        </div>
     </div>
     <div class="smart-progress-bar">
         <div id="session-progress" class="smart-progress-fill"></div>
@@ -2903,19 +2877,31 @@
     let gcRoomKey = '';
 
     /* ── Dock dropdown (glass) ── */
+    function closeGcDockMenu() {
+        const dd = document.getElementById('gc-dock-dropdown');
+        if (!dd) return;
+        dd.classList.remove('active');
+        document.removeEventListener('click', closeGcDockOutside, true);
+    }
+    function closeLangMenu() {
+        document.getElementById('lang-options')?.classList.remove('active');
+    }
     function toggleGcDockMenu(e) {
         e.stopPropagation();
+        closeLangMenu();
         const dd = document.getElementById('gc-dock-dropdown');
         dd.classList.toggle('active');
         if (dd.classList.contains('active')) {
             document.addEventListener('click', closeGcDockOutside, true);
+        } else {
+            document.removeEventListener('click', closeGcDockOutside, true);
         }
     }
     function closeGcDockOutside(e) {
         const dd = document.getElementById('gc-dock-dropdown');
-        if (!dd.contains(e.target) && e.target.id !== 'header-duo-btn') {
-            dd.classList.remove('active');
-            document.removeEventListener('click', closeGcDockOutside, true);
+        const btn = document.getElementById('header-duo-btn');
+        if (!dd.contains(e.target) && !btn?.contains(e.target)) {
+            closeGcDockMenu();
         }
     }
     function showGcDockTab(tab) {
@@ -2960,7 +2946,7 @@
             const res = await fetch('/api/room/join', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ roomCode: code, password: pwd, displayName: name, roomKey: gcRoomKey }) });
             const data = await res.json();
             if (!res.ok) { const msgs = { room_not_found:'Salle introuvable', wrong_password:'Mot de passe incorrect' }; throw new Error(msgs[data.error] || data.error || 'Erreur'); }
-            document.getElementById('gc-dock-dropdown').classList.remove('active');
+            closeGcDockMenu();
             pauseRecognitionForGroupCall();
             await connectLiveKitRoom(data.token, data.livekitUrl);
         } catch(e) { gcDockError(e.message); }
@@ -6473,6 +6459,7 @@
 
     function toggleLangMenu(event) {
         if (event) event.stopPropagation();
+        closeGcDockMenu();
         document.getElementById('lang-options').classList.toggle('active');
     }
 
@@ -6522,7 +6509,8 @@
 
     // Fermer les menus au clic ailleurs
     window.addEventListener('click', () => {
-        document.getElementById('lang-options')?.classList.remove('active');
+        closeLangMenu();
+        closeGcDockMenu();
     });
 
     function closeModal() {
@@ -6610,7 +6598,8 @@
             expert?.classList.remove('chrome-hidden');
             clearTimeout(dockHideTimer);
             dockHideTimer = setTimeout(() => {
-                if (document.getElementById('lang-options')?.classList.contains('active')) {
+                if (document.getElementById('lang-options')?.classList.contains('active') ||
+                    document.getElementById('gc-dock-dropdown')?.classList.contains('active')) {
                     armDockHide();
                     return;
                 }
