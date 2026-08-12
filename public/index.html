@@ -3641,6 +3641,7 @@
         }
         document.body.classList.remove('ipad-mode');
         if (btn) btn.classList.remove('ipad-active');
+        document.getElementById('verse-selector')?.classList.remove('dock-hidden');
         if (header) {
             header.style.filter = 'none';
             header.style.opacity = '0';
@@ -3721,6 +3722,7 @@
             }
             document.body.classList.add('ipad-mode');
             if (btn) btn.classList.add('ipad-active');
+            document.getElementById('verse-selector')?.classList.add('dock-hidden');
         }
     }
     function animateIpadTo(target, duration, onDone) {
