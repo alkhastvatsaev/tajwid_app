@@ -1330,7 +1330,7 @@
             color: #fff !important;
         }
 
-        /* iPad rendez-vous — même écran, scroll = montée (ContainerScroll) */
+        /* iPad rendez-vous — centre écran, entrée auto depuis le bas */
         #ipad-panel {
             position: fixed;
             inset: 0;
@@ -1338,6 +1338,7 @@
             display: none;
             pointer-events: none;
             background: transparent;
+            overflow: visible;
         }
         #ipad-panel.active {
             display: block;
@@ -1346,37 +1347,35 @@
         body.ipad-mode { overflow: hidden; }
         .ipad-inline-stage {
             position: fixed;
+            top: 50%;
             left: 50%;
-            bottom: calc(20px + env(safe-area-inset-bottom));
-            transform: translateX(-50%);
-            width: min(92vw, 64rem);
+            transform: translate(-50%, -50%);
+            width: min(92vw, 520px);
+            max-height: calc(100vh - 100px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
             perspective: 1000px;
             z-index: 901;
             pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
         }
         .ipad-scroll-header {
-            max-width: 64rem;
-            margin: 0 auto 0.5rem;
+            width: 100%;
             text-align: center;
-            will-change: transform;
+            will-change: transform, opacity;
             pointer-events: none;
+            flex-shrink: 0;
         }
         .ipad-scroll-header h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1.15;
-            margin: 0;
-            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
-        }
-        .ipad-scroll-header span {
-            display: block;
-            font-size: clamp(1.75rem, 6vw, 3.5rem);
+            font-size: clamp(1.35rem, 4.5vw, 2rem);
             font-weight: 700;
-            margin-top: 0.2rem;
-            line-height: 1;
-            letter-spacing: -0.03em;
+            color: var(--text);
+            line-height: 1.2;
+            margin: 0;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
         }
         .lang-menu-btn.ipad-active {
             background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88)) !important;
@@ -1385,14 +1384,13 @@
         }
         .ipad-device {
             position: relative;
-            max-width: 64rem;
             width: 100%;
-            height: min(52vh, 30rem);
-            margin: 0 auto;
+            height: min(58vh, 460px);
+            flex-shrink: 0;
             background: #222222;
             border: 4px solid #6C6C6C;
-            border-radius: 30px;
-            padding: 0.5rem;
+            border-radius: 28px;
+            padding: 12px 10px 16px;
             box-shadow:
                 0 0 #0000004d,
                 0 9px 20px #0000004a,
@@ -1404,9 +1402,11 @@
             will-change: transform;
         }
         @media (min-width: 768px) {
+            .ipad-inline-stage { width: min(92vw, 580px); }
             .ipad-device {
-                height: min(58vh, 40rem);
-                padding: 1.5rem;
+                height: min(62vh, 520px);
+                padding: 14px 12px 18px;
+                border-radius: 30px;
             }
         }
         .ipad-camera {
@@ -1421,31 +1421,16 @@
             box-shadow: inset 0 0 0 2px #3a3a3a, 0 0 0 1px #000;
             z-index: 2;
         }
-        .ipad-label {
-            position: absolute;
-            bottom: 7px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.62rem;
-            font-weight: 800;
-            letter-spacing: 0.32em;
-            color: #8a8a8a;
-            font-family: 'Outfit', sans-serif;
-            pointer-events: none;
-        }
         .ipad-screen {
             height: 100%;
             background: #f3f4f6;
-            border-radius: 1rem;
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             color: #111827;
             font-family: 'Outfit', sans-serif;
-            padding: 0.75rem;
-        }
-        @media (min-width: 768px) {
-            .ipad-screen { border-radius: 1rem; padding: 1rem; }
+            padding: 0.5rem;
         }
         .ipad-cal-header {
             display: flex;
@@ -1501,17 +1486,19 @@
         .ipad-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            padding: 8px 10px 12px;
+            gap: 3px;
+            padding: 6px 8px 8px;
             flex: 1;
+            min-height: 0;
+            overflow-y: auto;
         }
         .ipad-day {
             border: none;
             background: transparent;
-            border-radius: 12px;
-            min-height: 36px;
+            border-radius: 10px;
+            min-height: 32px;
             cursor: pointer;
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             font-weight: 600;
             color: #111827;
             font-family: inherit;
@@ -1527,7 +1514,10 @@
         .ipad-slots {
             background: #fff;
             border-top: 1px solid rgba(0, 0, 0, 0.06);
-            padding: 12px 14px 16px;
+            padding: 8px 10px 10px;
+            flex-shrink: 0;
+            max-height: 38%;
+            overflow-y: auto;
         }
         .ipad-slots-label {
             font-size: 0.68rem;
@@ -2985,7 +2975,7 @@
             </button>
         </div>
 
-        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="IPAD — Rendez-vous professeurs" aria-label="Ouvrir l’iPad rendez-vous">
+        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Ouvrir les rendez-vous professeurs">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
         </button>
 
@@ -3152,7 +3142,7 @@
     <div id="ipad-panel" aria-hidden="true">
         <div class="ipad-inline-stage">
             <div class="ipad-scroll-header" id="ipad-scroll-header">
-                <h1 id="ipad-scroll-title">IPAD<br><span>Rendez-vous professeurs</span></h1>
+                <h1 id="ipad-scroll-title">Rendez-vous professeurs</h1>
             </div>
             <div class="ipad-device" id="ipad-scroll-card">
                 <div class="ipad-camera" aria-hidden="true"></div>
@@ -3177,7 +3167,6 @@
                     </div>
                     <div class="ipad-home-bar" aria-hidden="true"></div>
                 </div>
-                <div class="ipad-label">IPAD</div>
             </div>
         </div>
     </div>
@@ -3381,7 +3370,7 @@
         document.getElementById('lang-options')?.classList.remove('active');
     }
 
-    /* ── iPad calendrier — même écran, scroll molette/touch = montée ── */
+    /* ── iPad calendrier — entrée auto centre + scroll optionnel ── */
     var ipadCalYear = null;
     var ipadCalMonth = null;
     var ipadCalSelected = null;
@@ -3390,6 +3379,7 @@
     var ipadProgress = 0;
     var ipadTouchY = 0;
     var ipadScrollBound = false;
+    var ipadEntranceRaf = null;
     var IPAD_MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
     var IPAD_SLOTS = [
         { time: '10:00', name: 'Ustadh Karim' },
@@ -3399,29 +3389,65 @@
     function ipadDateKey(y, m, d) {
         return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
     }
+    function ipadEaseOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+    function cancelIpadEntrance() {
+        if (ipadEntranceRaf) cancelAnimationFrame(ipadEntranceRaf);
+        ipadEntranceRaf = null;
+    }
     function updateIpadScrollAnim() {
         var header = document.getElementById('ipad-scroll-header');
         var card = document.getElementById('ipad-scroll-card');
         if (!header || !card) return;
         var p = ipadProgress;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            header.style.transform = 'translateY(-100px)';
+            header.style.transform = 'translateY(0)';
+            header.style.opacity = '1';
             card.style.transform = 'translateY(0) rotateX(0deg) scale(1)';
             return;
         }
         var mobile = window.innerWidth <= 768;
         var rot = 20 * (1 - p);
-        var scaleStart = mobile ? 0.7 : 1.05;
-        var scaleEnd = mobile ? 0.9 : 1;
+        var scaleStart = mobile ? 0.82 : 0.88;
+        var scaleEnd = 1;
         var scale = scaleStart + (scaleEnd - scaleStart) * p;
-        var headerY = -100 * p;
-        var riseY = (1 - p) * (mobile ? 140 : 200);
+        var riseY = (1 - p) * (window.innerHeight * 0.52);
+        var headerY = (1 - p) * 28;
+        var headerOpacity = 0.35 + 0.65 * p;
         header.style.transform = 'translateY(' + headerY + 'px)';
+        header.style.opacity = String(headerOpacity);
         card.style.transform = 'translateY(' + riseY + 'px) rotateX(' + rot + 'deg) scale(' + scale + ')';
+    }
+    function animateIpadEntrance() {
+        cancelIpadEntrance();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            ipadProgress = 1;
+            updateIpadScrollAnim();
+            return;
+        }
+        ipadProgress = 0;
+        updateIpadScrollAnim();
+        var start = null;
+        var duration = 920;
+        function step(ts) {
+            if (!ipadPanelActive) return;
+            if (!start) start = ts;
+            var t = Math.min(1, (ts - start) / duration);
+            ipadProgress = ipadEaseOutCubic(t);
+            updateIpadScrollAnim();
+            if (t < 1) {
+                ipadEntranceRaf = requestAnimationFrame(step);
+            } else {
+                ipadEntranceRaf = null;
+            }
+        }
+        ipadEntranceRaf = requestAnimationFrame(step);
     }
     function onIpadWheel(e) {
         if (!ipadPanelActive) return;
         e.preventDefault();
+        cancelIpadEntrance();
         ipadProgress = Math.min(1, Math.max(0, ipadProgress + e.deltaY * 0.0018));
         updateIpadScrollAnim();
     }
@@ -3433,9 +3459,12 @@
         if (!ipadPanelActive || !e.touches.length) return;
         var dy = ipadTouchY - e.touches[0].clientY;
         ipadTouchY = e.touches[0].clientY;
-        ipadProgress = Math.min(1, Math.max(0, ipadProgress + dy * 0.003));
-        updateIpadScrollAnim();
-        if (Math.abs(dy) > 2) e.preventDefault();
+        if (Math.abs(dy) > 2) {
+            cancelIpadEntrance();
+            ipadProgress = Math.min(1, Math.max(0, ipadProgress + dy * 0.003));
+            updateIpadScrollAnim();
+            e.preventDefault();
+        }
     }
     function bindIpadScrollAnim() {
         if (ipadScrollBound) return;
@@ -3476,10 +3505,11 @@
         panel.setAttribute('aria-hidden', 'false');
         document.body.classList.add('ipad-mode');
         if (btn) btn.classList.add('ipad-active');
-        updateIpadScrollAnim();
+        animateIpadEntrance();
     }
     function closeIpadCalendar() {
         if (!ipadPanelActive) return;
+        cancelIpadEntrance();
         ipadPanelActive = false;
         ipadProgress = 0;
         var panel = document.getElementById('ipad-panel');
