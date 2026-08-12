@@ -1853,21 +1853,22 @@
         /* Mobile — lecture arabe lisible (iPhone) */
         @media (max-width: 600px) {
             .container {
-                padding-top: calc(88px + env(safe-area-inset-top));
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-bottom: calc(130px + env(safe-area-inset-bottom));
+                padding-top: calc(80px + env(safe-area-inset-top));
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-bottom: calc(108px + env(safe-area-inset-bottom));
             }
             #verse-container {
-                min-height: calc(100dvh - 220px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-                padding: 16px 4px;
-                gap: 20px;
+                min-height: calc(100dvh - 188px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                padding: 10px 2px;
+                gap: 16px;
                 justify-content: center;
             }
             .ayah-line {
-                gap: 10px 6px;
-                padding: 0 6px;
+                gap: 20px 8px;
+                padding: 0 4px;
                 max-width: 100%;
+                align-items: flex-end;
             }
             /* Sur mobile : une seule ayah visible, centrée et grande */
             .ayah-line.ayah-prev,
@@ -1880,23 +1881,28 @@
                 transform: translateY(-50%) scale(1);
             }
             .arabic-word {
-                font-size: clamp(2.1rem, 8.5vmin, 3rem) !important;
-                line-height: 1.4;
+                font-size: clamp(2.85rem, 12.5vmin, 4.1rem) !important;
+                line-height: 1.3;
             }
             .word-box {
                 min-width: 0;
-                padding: 8px 8px;
+                padding: 4px 2px 26px;
                 flex: 0 1 auto;
+            }
+            .translit-container {
+                transform: translate(-50%, -4px);
+                max-width: 180%;
             }
             .translit-en,
             .translit-ru {
-                font-size: 0.58rem;
+                font-size: 0.62rem;
             }
             .verse-marker {
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 0.72rem !important;
-                margin-top: 10px;
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 0.82rem !important;
+                margin-top: 12px;
+                flex-shrink: 0;
             }
             #restart-btn {
                 width: 90%;
@@ -1904,14 +1910,14 @@
             }
         }
         @media (max-width: 480px) {
-            .container { padding-top: calc(92px + env(safe-area-inset-top)); }
+            .container { padding-top: calc(84px + env(safe-area-inset-top)); }
             .arabic-word {
-                font-size: clamp(2rem, 9vmin, 2.85rem) !important;
+                font-size: clamp(2.65rem, 13vmin, 3.85rem) !important;
             }
             .ayah-line {
-                gap: 8px 4px;
+                gap: 18px 6px;
             }
-            .word-box { padding: 6px 6px; }
+            .word-box { padding: 4px 2px 24px; }
             .verse-selector { 
                 width: max-content;
                 max-width: calc(100% - 16px);
