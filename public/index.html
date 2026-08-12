@@ -14,7 +14,7 @@
     <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
     <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/">
-    <meta name="theme-color" content="#EDF3FA">
+    <meta name="theme-color" content="#FFFFFF">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:url" content="https://tilmidh.app/">
@@ -108,7 +108,7 @@
         }
 
         html[data-theme="blue"] {
-            --bg: #EDF3FA;
+            --bg: #FFFFFF;
             --surface: #FFFFFF;
             --surface-hover: #E8F1FA;
             --accent: #1D4ED8;
@@ -194,12 +194,11 @@
                 radial-gradient(ellipse 90% 50% at 50% -5%, rgba(4, 120, 87, 0.08) 0%, transparent 72%);
         }
         html[data-theme="blue"] {
-            background-color: #EDF3FA;
+            background-color: #FFFFFF;
         }
         html[data-theme="blue"]::before {
-            background-color: #EDF3FA;
-            background-image:
-                radial-gradient(ellipse 90% 50% at 50% -5%, rgba(59, 130, 246, 0.11) 0%, transparent 72%);
+            background-color: #FFFFFF;
+            background-image: none;
         }
         
         body {
@@ -295,29 +294,38 @@
             pointer-events: none;
             transform-origin: center center;
             transform: translateY(calc(-50% + 24vh)) scale(0.5);
-            transition: opacity 0.58s ease, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.58s;
-            will-change: transform, opacity;
+            transition: opacity 0.58s ease, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.58s, filter 0.58s ease;
+            will-change: transform, opacity, filter;
+            filter: blur(0);
         }
         .ayah-line.active-ayah {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
             transform: translateY(-50%) scale(1);
+            filter: blur(0);
             z-index: 3;
         }
         .ayah-line.ayah-prev {
-            opacity: 0.55;
+            opacity: 0.28;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% - 22vh)) scale(0.5);
+            filter: blur(5px);
             z-index: 2;
         }
         .ayah-line.ayah-next {
-            opacity: 0.55;
+            opacity: 0.28;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% + 22vh)) scale(0.5);
+            filter: blur(5px);
             z-index: 2;
+        }
+        .ayah-line.ayah-prev .translit-container,
+        .ayah-line.ayah-next .translit-container {
+            opacity: 0 !important;
+            visibility: hidden;
         }
         .ayah-line.ayah-exit {
             opacity: 0;
@@ -330,9 +338,9 @@
             .ayah-line {
                 transition: none;
             }
-            .ayah-line.active-ayah { transform: translateY(-50%) scale(1); }
-            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); }
-            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); }
+            .ayah-line.active-ayah { transform: translateY(-50%) scale(1); filter: none; }
+            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.35; }
+            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.35; }
         }
         #verse-container::-webkit-scrollbar { display: none; }
 
@@ -1881,17 +1889,20 @@
                 align-items: flex-end;
             }
             .ayah-line.ayah-prev {
-                opacity: 0.42;
+                opacity: 0.22;
                 visibility: visible;
                 transform: translateY(calc(-50% - 28vh)) scale(0.4);
+                filter: blur(6px);
             }
             .ayah-line.ayah-next {
-                opacity: 0.42;
+                opacity: 0.22;
                 visibility: visible;
                 transform: translateY(calc(-50% + 28vh)) scale(0.4);
+                filter: blur(6px);
             }
             .ayah-line.active-ayah {
                 transform: translateY(-50%) scale(1);
+                filter: blur(0);
             }
             .arabic-word {
                 font-size: clamp(3.35rem, 16.5vmin, 4.8rem) !important;
@@ -6582,7 +6593,7 @@
         try { localStorage.setItem('tajwid_theme', next); } catch (e) {}
         const themeMeta = document.querySelector('meta[name="theme-color"]');
         if (themeMeta) {
-            const themeColors = { dark: '#030303', light: '#F4FAF7', blue: '#EDF3FA' };
+            const themeColors = { dark: '#030303', light: '#F4FAF7', blue: '#FFFFFF' };
             themeMeta.content = themeColors[next] || themeColors.dark;
         }
         const btn = document.getElementById('theme-toggle-btn');
