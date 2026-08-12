@@ -6580,39 +6580,8 @@
             console.error("Initial load failed:", e);
         }
 
-        let dockHideTimer = null;
-        let lastDockX = null;
-        let lastDockY = null;
-        const armDockHide = (e) => {
-            const dock = document.getElementById('verse-selector');
-            if (!dock) return;
-            if (e && e.type === 'mousemove') {
-                if (lastDockX !== null && Math.hypot(e.clientX - lastDockX, e.clientY - lastDockY) < 8) {
-                    return;
-                }
-                lastDockX = e.clientX;
-                lastDockY = e.clientY;
-            }
-            dock.classList.remove('dock-hidden');
-            const expert = document.getElementById('expert-panel');
-            expert?.classList.remove('chrome-hidden');
-            clearTimeout(dockHideTimer);
-            dockHideTimer = setTimeout(() => {
-                if (document.getElementById('lang-options')?.classList.contains('active') ||
-                    document.getElementById('gc-dock-dropdown')?.classList.contains('active')) {
-                    armDockHide();
-                    return;
-                }
-                dock.classList.add('dock-hidden');
-                if (!expert?.classList.contains('open')) {
-                    expert?.classList.add('chrome-hidden');
-                }
-            }, 3000);
-        };
-        window.addEventListener('mousemove', armDockHide);
-        window.addEventListener('touchstart', armDockHide, { passive: true });
-        window.addEventListener('keydown', armDockHide);
-        armDockHide();
+        document.getElementById('verse-selector')?.classList.remove('dock-hidden');
+        document.getElementById('expert-panel')?.classList.remove('chrome-hidden');
     });
 
     // Groupe Call — sync verset
