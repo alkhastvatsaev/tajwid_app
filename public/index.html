@@ -1875,27 +1875,27 @@
                 justify-content: center;
             }
             .ayah-line {
-                gap: 20px 8px;
+                gap: 22px 10px;
                 padding: 0 4px;
                 max-width: 100%;
                 align-items: flex-end;
             }
             .ayah-line.ayah-prev {
-                opacity: 0.5;
+                opacity: 0.42;
                 visibility: visible;
-                transform: translateY(calc(-50% - 15vh)) scale(0.46);
+                transform: translateY(calc(-50% - 28vh)) scale(0.4);
             }
             .ayah-line.ayah-next {
-                opacity: 0.5;
+                opacity: 0.42;
                 visibility: visible;
-                transform: translateY(calc(-50% + 15vh)) scale(0.46);
+                transform: translateY(calc(-50% + 28vh)) scale(0.4);
             }
             .ayah-line.active-ayah {
                 transform: translateY(-50%) scale(1);
             }
             .arabic-word {
-                font-size: clamp(2.85rem, 12.5vmin, 4.1rem) !important;
-                line-height: 1.3;
+                font-size: clamp(3.35rem, 16.5vmin, 4.8rem) !important;
+                line-height: 1.35;
             }
             .word-box {
                 min-width: 0;
@@ -1925,12 +1925,18 @@
         @media (max-width: 480px) {
             .container { padding-top: calc(84px + env(safe-area-inset-top)); }
             .arabic-word {
-                font-size: clamp(2.65rem, 13vmin, 3.85rem) !important;
+                font-size: clamp(3.2rem, 17.5vmin, 4.6rem) !important;
             }
             .ayah-line {
-                gap: 18px 6px;
+                gap: 22px 8px;
             }
-            .word-box { padding: 4px 2px 24px; }
+            .ayah-line.ayah-prev {
+                transform: translateY(calc(-50% - 30vh)) scale(0.38);
+            }
+            .ayah-line.ayah-next {
+                transform: translateY(calc(-50% + 30vh)) scale(0.38);
+            }
+            .word-box { padding: 4px 2px 28px; }
             .verse-selector { 
                 width: max-content;
                 max-width: calc(100% - 16px);
