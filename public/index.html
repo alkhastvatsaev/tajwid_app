@@ -1330,29 +1330,89 @@
             color: #fff !important;
         }
 
-        /* iPad rendez-vous (dock → overlay) */
+        /* iPad rendez-vous — port ContainerScroll (Aceternity) en vanilla */
         #ipad-overlay {
             position: fixed;
             inset: 0;
             z-index: 5300;
             display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            background: rgba(0, 0, 0, 0.72);
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            background: rgba(0, 0, 0, 0.88);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
+        }
+        #ipad-overlay.visible { display: block; }
+        .ipad-overlay-close {
+            position: fixed;
+            top: calc(12px + env(safe-area-inset-top));
+            right: calc(12px + env(safe-area-inset-right));
+            z-index: 5302;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1.35rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ipad-scroll-container {
+            min-height: 60rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 0.5rem 18rem;
+        }
+        @media (min-width: 768px) {
+            .ipad-scroll-container { min-height: 80rem; padding: 2.5rem 5rem 28rem; }
+        }
+        .ipad-scroll-stage {
+            width: 100%;
+            position: relative;
+            padding: 2.5rem 0 10rem;
             perspective: 1000px;
         }
-        #ipad-overlay.visible { display: flex; }
+        @media (min-width: 768px) {
+            .ipad-scroll-stage { padding: 10rem 0; }
+        }
+        .ipad-scroll-header {
+            max-width: 64rem;
+            margin: 0 auto;
+            text-align: center;
+            will-change: transform;
+        }
+        .ipad-scroll-header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.15;
+            margin: 0;
+        }
+        .ipad-scroll-header span {
+            display: block;
+            font-size: clamp(2.25rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-top: 0.25rem;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
         .ipad-device {
             position: relative;
-            width: min(92vw, 760px);
-            height: min(84vh, 560px);
+            max-width: 64rem;
+            width: 100%;
+            height: 30rem;
+            margin: -3rem auto 0;
             background: #222222;
             border: 4px solid #6C6C6C;
-            border-radius: 36px;
-            padding: 16px 14px 28px;
+            border-radius: 30px;
+            padding: 0.5rem;
             box-shadow:
                 0 0 #0000004d,
                 0 9px 20px #0000004a,
@@ -1360,12 +1420,14 @@
                 0 84px 50px #00000026,
                 0 149px 60px #0000000a,
                 0 233px 65px #00000003;
-            transform: rotateX(18deg) scale(0.92);
             transform-origin: center center;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
-        #ipad-overlay.visible .ipad-device {
-            transform: rotateX(0deg) scale(1);
+        @media (min-width: 768px) {
+            .ipad-device {
+                height: 40rem;
+                padding: 1.5rem;
+            }
         }
         .ipad-camera {
             position: absolute;
@@ -1393,13 +1455,17 @@
         }
         .ipad-screen {
             height: 100%;
-            background: #f4f4f7;
-            border-radius: 18px;
+            background: #f3f4f6;
+            border-radius: 1rem;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             color: #111827;
             font-family: 'Outfit', sans-serif;
+            padding: 0.75rem;
+        }
+        @media (min-width: 768px) {
+            .ipad-screen { border-radius: 1rem; padding: 1rem; }
         }
         .ipad-cal-header {
             display: flex;
@@ -1526,16 +1592,11 @@
             margin: 0 auto 8px;
         }
         @media (max-width: 640px) {
-            .ipad-device {
-                width: min(96vw, 420px);
-                height: min(86vh, 680px);
-                border-radius: 28px;
-                padding: 14px 10px 24px;
-            }
             .ipad-day { min-height: 32px; font-size: 0.8rem; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .ipad-device { transition: none; transform: none; }
+            .ipad-scroll-header { transform: none !important; }
+            .ipad-device { transform: none !important; }
         }
 
         .profile-btn {
@@ -3107,33 +3168,40 @@
         }
     </style>
 
-    <!-- iPad rendez-vous professeurs -->
-    <div id="ipad-overlay" class="modal-overlay" onclick="closeIpadCalendar()">
-        <div class="ipad-device" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="ipad-cal-month">
-            <div class="ipad-camera" aria-hidden="true"></div>
-            <div class="ipad-screen">
-                <div class="ipad-cal-header">
-                    <div>
-                        <div class="ipad-cal-sub">Rendez-vous professeurs</div>
-                        <div class="ipad-cal-title" id="ipad-cal-month">Août 2026</div>
+    <!-- iPad rendez-vous — ContainerScroll (scroll → rotateX / scale / translateY) -->
+    <div id="ipad-overlay" onclick="closeIpadCalendar()">
+        <button type="button" class="ipad-overlay-close" onclick="closeIpadCalendar()" aria-label="Fermer">×</button>
+        <div id="ipad-scroll-container" class="ipad-scroll-container" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="ipad-scroll-title">
+            <div class="ipad-scroll-stage">
+                <div class="ipad-scroll-header" id="ipad-scroll-header">
+                    <h1 id="ipad-scroll-title">IPAD<br><span>Rendez-vous professeurs</span></h1>
+                </div>
+                <div class="ipad-device" id="ipad-scroll-card">
+                    <div class="ipad-camera" aria-hidden="true"></div>
+                    <div class="ipad-screen">
+                        <div class="ipad-cal-header">
+                            <div>
+                                <div class="ipad-cal-sub">Calendrier</div>
+                                <div class="ipad-cal-title" id="ipad-cal-month">Août 2026</div>
+                            </div>
+                            <div class="ipad-nav">
+                                <button type="button" onclick="shiftIpadMonth(-1)" aria-label="Mois précédent">‹</button>
+                                <button type="button" onclick="shiftIpadMonth(1)" aria-label="Mois suivant">›</button>
+                            </div>
+                        </div>
+                        <div class="ipad-week" aria-hidden="true">
+                            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                        </div>
+                        <div class="ipad-grid" id="ipad-cal-grid"></div>
+                        <div class="ipad-slots">
+                            <div class="ipad-slots-label" id="ipad-slots-label">Créneaux</div>
+                            <div class="ipad-slot-list" id="ipad-slot-list"></div>
+                        </div>
+                        <div class="ipad-home-bar" aria-hidden="true"></div>
                     </div>
-                    <div class="ipad-nav">
-                        <button type="button" onclick="shiftIpadMonth(-1)" aria-label="Mois précédent">‹</button>
-                        <button type="button" onclick="shiftIpadMonth(1)" aria-label="Mois suivant">›</button>
-                        <button type="button" class="ipad-close" onclick="closeIpadCalendar()" aria-label="Fermer">×</button>
-                    </div>
+                    <div class="ipad-label">IPAD</div>
                 </div>
-                <div class="ipad-week" aria-hidden="true">
-                    <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
-                </div>
-                <div class="ipad-grid" id="ipad-cal-grid"></div>
-                <div class="ipad-slots">
-                    <div class="ipad-slots-label" id="ipad-slots-label">Créneaux</div>
-                    <div class="ipad-slot-list" id="ipad-slot-list"></div>
-                </div>
-                <div class="ipad-home-bar" aria-hidden="true"></div>
             </div>
-            <div class="ipad-label">IPAD</div>
         </div>
     </div>
 
@@ -3336,11 +3404,12 @@
         document.getElementById('lang-options')?.classList.remove('active');
     }
 
-    /* ── iPad calendrier rendez-vous (placeholder dock) ── */
+    /* ── iPad calendrier — port ContainerScroll (framer-motion → vanilla) ── */
     var ipadCalYear = null;
     var ipadCalMonth = null;
     var ipadCalSelected = null;
     var ipadBookedSlot = null;
+    var ipadScrollBound = false;
     var IPAD_MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
     var IPAD_SLOTS = [
         { time: '10:00', name: 'Ustadh Karim' },
@@ -3349,6 +3418,40 @@
     ];
     function ipadDateKey(y, m, d) {
         return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+    }
+    function ipadScrollProgress() {
+        var overlay = document.getElementById('ipad-overlay');
+        if (!overlay) return 0;
+        var max = overlay.scrollHeight - overlay.clientHeight;
+        if (max <= 0) return 1;
+        return Math.min(1, Math.max(0, overlay.scrollTop / max));
+    }
+    function updateIpadScrollAnim() {
+        var header = document.getElementById('ipad-scroll-header');
+        var card = document.getElementById('ipad-scroll-card');
+        if (!header || !card) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            header.style.transform = 'translateY(-100px)';
+            card.style.transform = 'rotateX(0deg) scale(1)';
+            return;
+        }
+        var p = ipadScrollProgress();
+        var mobile = window.innerWidth <= 768;
+        var rot = 20 * (1 - p);
+        var scaleStart = mobile ? 0.7 : 1.05;
+        var scaleEnd = mobile ? 0.9 : 1;
+        var scale = scaleStart + (scaleEnd - scaleStart) * p;
+        var translateY = -100 * p;
+        header.style.transform = 'translateY(' + translateY + 'px)';
+        card.style.transform = 'rotateX(' + rot + 'deg) scale(' + scale + ')';
+    }
+    function bindIpadScrollAnim() {
+        if (ipadScrollBound) return;
+        ipadScrollBound = true;
+        var overlay = document.getElementById('ipad-overlay');
+        if (!overlay) return;
+        overlay.addEventListener('scroll', updateIpadScrollAnim, { passive: true });
+        window.addEventListener('resize', updateIpadScrollAnim);
     }
     function openIpadCalendar(e) {
         if (e) e.stopPropagation();
@@ -3361,15 +3464,20 @@
             ipadCalSelected = now.getDate();
         }
         renderIpadCalendar();
+        bindIpadScrollAnim();
         var overlay = document.getElementById('ipad-overlay');
-        overlay.style.display = 'flex';
-        setTimeout(function () { overlay.classList.add('visible'); }, 10);
+        overlay.style.display = 'block';
+        overlay.scrollTop = 0;
+        overlay.classList.add('visible');
+        setTimeout(updateIpadScrollAnim, 10);
+        requestAnimationFrame(updateIpadScrollAnim);
     }
     function closeIpadCalendar() {
         var overlay = document.getElementById('ipad-overlay');
         if (!overlay) return;
         overlay.classList.remove('visible');
         overlay.style.display = 'none';
+        overlay.scrollTop = 0;
     }
     function shiftIpadMonth(delta) {
         ipadCalMonth += delta;
