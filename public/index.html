@@ -64,6 +64,7 @@
             --ham-wasl: #555;             /* Dark Grey for silent */
             /* Aliases used by some CSS rules */
             --madd-fari: var(--madd-munfasil);
+            --madd-arid: var(--madd-munfasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             
@@ -102,6 +103,7 @@
             --qalqalah: #DC2626;
             --ham-wasl: #9CA3AF;
             --madd-fari: var(--madd-munfasil);
+            --madd-arid: var(--madd-munfasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             --overlay-scrim: rgba(15, 23, 42, 0.45);
@@ -135,6 +137,7 @@
             --qalqalah: #DC2626;
             --ham-wasl: #9CA3AF;
             --madd-fari: var(--madd-munfasil);
+            --madd-arid: var(--madd-munfasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             --overlay-scrim: rgba(15, 23, 42, 0.45);
@@ -695,6 +698,7 @@
             background: var(--madd-tabii);
         }
         .word-box[data-rule-full="madd-tabii"] .dot-pip { background: var(--madd-tabii); }
+        .word-box[data-rule-full="madd-arid"] .dot-pip { background: var(--madd-arid); }
         .word-box[data-rule-full="madd-munfasil"] .dot-pip { background: var(--madd-munfasil); }
         .word-box[data-rule-full="madd-muttasil"] .dot-pip { background: var(--madd-muttasil); }
         .word-box[data-rule-full="madd-lazim"] .dot-pip { background: var(--madd-lazim); }
@@ -3575,6 +3579,7 @@
             },
             rules: {
                 'madd-tabii': { tag: 'Madd Tabī‘ī', title: 'Madd Tabī‘ī', desc: 'Prolongation naturelle de 2 temps sur les lettres Alif, Waw ou Ya.' },
+                'madd-arid': { tag: 'Madd ‘Āriḍ', title: 'Madd ‘Āriḍ', desc: 'À l’arrêt : 2, 4 ou 6 temps sur la lettre de prolongation avant un soukoun accidentel.' },
                 'madd-munfasil': { tag: 'Madd Munfaṣil', title: 'Madd Munfaṣil', desc: 'Prolongation de 4 ou 5 temps quand la Hamza est dans le mot suivant.' },
                 'madd-muttasil': { tag: 'Madd Muttaṣil', title: 'Madd Muttaṣil', desc: 'Prolongation obligatoire de 4 ou 5 temps quand la Hamza est dans le même mot.' },
                 'madd-lazim': { tag: 'Madd Lāzim', title: 'Madd Lāzim', desc: 'Prolongation obligatoire de 6 temps due à un Soukoun originel.' },
@@ -3661,6 +3666,7 @@
             },
             rules: {
                 'madd-tabii': { tag: 'Madd Tabī‘ī', title: 'Madd Tabī‘ī', desc: 'Natural prolongation of 2 counts on Alif, Waw, or Ya.' },
+                'madd-arid': { tag: 'Madd ‘Āriḍ', title: 'Madd ‘Āriḍ', desc: 'When stopping: 2, 4 or 6 counts on the madd letter before an incidental sukun.' },
                 'madd-munfasil': { tag: 'Madd Munfaṣil', title: 'Madd Munfaṣil', desc: 'Extension of 4 or 5 counts when Hamza is in the next word.' },
                 'madd-muttasil': { tag: 'Madd Muttaṣil', title: 'Madd Muttaṣil', desc: 'Mandatory extension of 4 or 5 counts when Hamza is in the same word.' },
                 'madd-lazim': { tag: 'Madd Lāzim', title: 'Madd Lāzim', desc: 'Mandatory extension of 6 counts due to a permanent Sukun.' },
@@ -3747,6 +3753,7 @@
             },
             rules: {
                 'madd-tabii': { tag: 'Мадд Табии', title: 'Мадд Табии', desc: 'Естественное удлинение на 2 счета (буквы Алиф, Вав, Йа).' },
+                'madd-arid': { tag: 'Мадд Арид', title: 'Мадд Арид', desc: 'При остановке: 2, 4 или 6 счетов на букве мадд перед случайным сукуном.' },
                 'madd-munfasil': { tag: 'Мадд Мунфасиль', title: 'Мадд Мунфасиль', desc: 'Удлинение на 4 или 5 счетов, когда Хамза находится в следующем слове.' },
                 'madd-muttasil': { tag: 'Мадд Муттасиль', title: 'Мадд Муттасиль', desc: 'Обязательное удлинение на 4 или 5 счетов, когда Хамза в том же слове.' },
                 'madd-lazim': { tag: 'Мадд Лязим', title: 'Мадд Лязим', desc: 'Обязательное удлинение на 6 счетов из-за постоянного сукуна.' },
@@ -4063,6 +4070,39 @@
         }
     }
 
+    // Quran.com n’étiquette pas tous les ṭabīʿī de Fātiḥah ; ʿāriḍ ≠ munfaṣil.
+    const FATIHA_TABII_EXTRA = { 'اياك': 1, 'واياك': 1, 'اهدنا': 1, 'الذين': 1, 'المغضوب': 1, 'ولا': 1 };
+
+    function classifyTajweedRule(part, cleanText) {
+        const html = part || '';
+        // Lāzim avant ʿāriḍ : الضالين a madda_necessary + madda_permissible
+        if (html.includes('madda_compulsory') || html.includes('madda_long')) return 'madd-lazim';
+        if (html.includes('madda_necessary')) {
+            if (html.includes('madda_permissible') || /[ّٓ]/.test(html)) return 'madd-lazim';
+            return 'madd-muttasil';
+        }
+        if (html.includes('madda_normal')) return 'madd-tabii';
+        if (html.includes('madda_permissible')) return 'madd-arid';
+        if (html.includes('ghunnah')) return 'ghunnah';
+        if (html.includes('idgham_with_ghunnah')) return 'idgham-ghunnah';
+        if (html.includes('idgham_without_ghunnah')) return 'idgham-no-ghunnah';
+        if (html.includes('ikhfa')) return 'ikhfa';
+        if (html.includes('iqlab')) return 'iqlab';
+        if (html.includes('izhar')) return 'izhaar';
+        if (html.includes('qalqalah')) return 'qalqalah';
+        const n = normalize(cleanText || '');
+        if (FATIHA_TABII_EXTRA[n]) return 'madd-tabii';
+        return '';
+    }
+
+    function maddDotsCount(ruleType) {
+        if (ruleType === 'madd-tabii') return 2;
+        if (ruleType === 'madd-arid' || ruleType === 'madd-munfasil') return 4;
+        if (ruleType === 'madd-muttasil') return 5;
+        if (ruleType === 'madd-lazim') return 6;
+        return 0;
+    }
+
     function loadVerse(index) {
         const container = document.getElementById('verse-container');
         const ghostContainer = document.getElementById('ghost-word-container');
@@ -4136,20 +4176,8 @@
             box.id = `box-${metaIdx}`;
             if (metaIdx === 0) box.classList.add('active');
 
-            let ruleType = "";
-            if (part.includes('madda_normal')) ruleType = "madd-tabii";
-            else if (part.includes('madda_permissible')) ruleType = "madd-munfasil";
-            else if (part.includes('madda_necessary')) ruleType = "madd-muttasil";
-            else if (part.includes('madda_compulsory') || part.includes('madda_long')) ruleType = "madd-lazim";
-            else if (part.includes('ghunnah')) ruleType = "ghunnah";
-            else if (part.includes('idgham_with_ghunnah')) ruleType = "idgham-ghunnah";
-            else if (part.includes('idgham_without_ghunnah')) ruleType = "idgham-no-ghunnah";
-            else if (part.includes('ikhfa')) ruleType = "ikhfa";
-            else if (part.includes('iqlab')) ruleType = "iqlab";
-            else if (part.includes('izhar')) ruleType = "izhaar";
-            else if (part.includes('qalqalah')) ruleType = "qalqalah";
-
-            const dotsCount = ruleType === 'madd-tabii' ? 2 : ruleType === 'madd-munfasil' ? 4 : ruleType === 'madd-muttasil' ? 5 : ruleType === 'madd-lazim' ? 6 : 0;
+            const ruleType = classifyTajweedRule(part, cleanText);
+            const dotsCount = maddDotsCount(ruleType);
             const dotsHtml = dotsCount ? `<div class="madd-dots-guide">${Array(dotsCount).fill('<div class="dot-pip"></div>').join('')}</div>` : '';
 
             const ruleTag = (ruleType && !ruleType.startsWith('madd')) ? (translations[currentLang].rules[ruleType]?.tag || "Tajwid") : "";
@@ -4234,18 +4262,7 @@
             const rawPart = parts.find(p => p.includes(word.ar));
             if (!rawPart) return;
 
-            let type = "";
-            if (rawPart.includes('madda_normal')) type = "madd-tabii";
-            else if (rawPart.includes('madda_permissible')) type = "madd-munfasil";
-            else if (rawPart.includes('madda_necessary')) type = "madd-muttasil";
-            else if (rawPart.includes('madda_compulsory') || rawPart.includes('madda_long')) type = "madd-lazim";
-            else if (rawPart.includes('ghunnah')) type = "ghunnah";
-            else if (rawPart.includes('idgham_with_ghunnah')) type = "idgham-ghunnah";
-            else if (rawPart.includes('idgham_without_ghunnah')) type = "idgham-no-ghunnah";
-            else if (rawPart.includes('ikhfa')) type = "ikhfa";
-            else if (rawPart.includes('iqlab')) type = "iqlab";
-            else if (rawPart.includes('izhar')) type = "izhaar";
-            else if (rawPart.includes('qalqalah')) type = "qalqalah";
+            const type = classifyTajweedRule(rawPart, word.ar);
             
             if (type && !seen.has(word.ar + type)) {
                 detectedRules.push({ type, word: word.ar });
@@ -4277,6 +4294,7 @@
 
     function getRuleColor(type) {
         if (type === 'madd-tabii') return '#64D2FF';      // Sky Blue
+        if (type === 'madd-arid') return '#007AFF';       // iOS Blue (ʿāriḍ)
         if (type === 'madd-munfasil') return '#007AFF';   // iOS Blue
         if (type === 'madd-muttasil') return '#5856D6';   // Indigo
         if (type === 'madd-lazim') return '#AF52DE';      // Purple
@@ -4308,7 +4326,8 @@
         let ruleKey = "";
         
         if (className.includes('madda_normal')) ruleKey = 'madd-tabii';
-        else if (className.includes('madda')) ruleKey = 'madd-fari';
+        else if (className.includes('madda_compulsory') || className.includes('madda_long') || className.includes('madda_necessary')) ruleKey = 'madd-lazim';
+        else if (className.includes('madda_permissible') || className.includes('madda')) ruleKey = 'madd-arid';
         else if (className.includes('ghunnah')) ruleKey = 'ghunnah';
         else if (className.includes('ikhfa')) ruleKey = 'ikhfa';
         else if (className.includes('qalqalah')) ruleKey = 'qalqalah';
@@ -4910,7 +4929,7 @@
             const isMadd = ruleType && ruleType.indexOf('madd') === 0;
             const isGhunnah = ruleType && ruleType.indexOf('ghunnah') === 0;
             if (isMadd) {
-                const beats = ruleType.includes('lazim') ? 6 : (ruleType.includes('munfasil') || ruleType.includes('muttasil') ? 4 : 2);
+                const beats = ruleType.includes('lazim') ? 6 : (ruleType.includes('arid') || ruleType.includes('munfasil') || ruleType.includes('muttasil') ? 4 : 2);
                 minMs = Math.max(220, 180 + beats * 90);
                 reasonKey = 'hintNeedMadd';
                 if (voicedMs < minMs) {
