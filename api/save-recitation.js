@@ -3,11 +3,22 @@
  * Body JSON: { audioBase64, mimeType, meta }
  * → Vercel Blob (privé) sous recitations/fatiha/
  */
+const ALLOWED_ORIGINS = new Set([
+  'https://tilmidh.app',
+  'https://www.tilmidh.app',
+  'https://tajwid-app-vatsaev.vercel.app',
+  'http://localhost:8000',
+  'http://127.0.0.1:8000',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+]);
+
 function setCors(req, res) {
-  // Opt-in dataset POST, pas de cookies : * évite les échecs preview / tunnel / localhost.
   const origin = req.headers.origin || '';
-  res.setHeader('Access-Control-Allow-Origin', origin || '*');
-  res.setHeader('Vary', 'Origin');
+  if (ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
@@ -62,6 +73,11 @@ module.exports = async function handler(req, res) {
   setCors(req, res);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+
+  const origin = req.headers.origin || '';
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return res.status(403).json({ error: 'origin_not_allowed' });
+  }
 
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) {

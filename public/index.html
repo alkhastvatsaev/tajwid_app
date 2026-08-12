@@ -558,6 +558,17 @@
             -webkit-text-fill-color: transparent;
             color: transparent !important;
         }
+        .arabic-word.shimmering * {
+            background-image: inherit;
+            background-size: inherit;
+            background-position: inherit;
+            background-repeat: inherit;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            text-decoration-color: transparent;
+        }
         .word-box.correct .arabic-word.shimmering,
         .word-box.correct .arabic-word.shimmering * {
             color: transparent !important;
@@ -4575,6 +4586,17 @@
         }
     }
 
+    let micGestureArmed = false;
+    function armMicOnFirstGesture() {
+        if (micGestureArmed || isRecording) return;
+        const go = () => {
+            if (isRecording) return;
+            micGestureArmed = true;
+            try { startRecognition(); } catch (e) { console.warn('mic gesture', e); }
+        };
+        window.addEventListener('pointerdown', go, { once: true, passive: true });
+    }
+
     // === Reconnaissance vocale + audio (Whisper primaire / WebSpeech secours) ===
     async function startRecognition() {
         console.log("startRecognition invoked", VOICE_ENGINE);
@@ -4776,7 +4798,7 @@
                     for (const v of variants) {
                         if (!v.text || v.text === cleanFull) continue;
                         if (typeof v.conf === 'number' && v.conf < VOICE_PERF.confMinSoft && stuckMsNow() < VOICE_PERF.falseRejectMs) continue;
-                        const r2 = checkWordStream(v.text, { silentDiag: true });
+                        const r2 = checkWordStream(v.text, { silentDiag: true, singleWord: true });
                         if (r2 && r2.matched) {
                             result = r2;
                             sessionDiagnostics.errors.push({
@@ -5305,7 +5327,7 @@
         if (!verseData[currentIdx]) return false;
         const box = document.getElementById(`box-${currentIdx}`);
         if (box?.classList.contains('correct')) return false;
-        const opts = soft ? { soft: true, allowPrefix: true } : { allowPrefix: stuckMsNow() >= VOICE_PERF.falseRejectMs };
+        const opts = soft ? { soft: true, allowPrefix: false } : { allowPrefix: false };
         const verdict = matchFatihaWord(hWord, verseData[currentIdx].ar, opts);
         if (!verdict.ok) return false;
         const target = normalize(verseData[currentIdx].ar);
@@ -5322,7 +5344,9 @@
             mistakeTestMode: !!mistakeTestMode,
             voicePerf: true
         });
-        learnPersonalAlias(target, normalize(hWord));
+        if (verdict.reason === 'exact' || verdict.reason === 'liaison' || verdict.reason === 'liaison_alias' || verdict.reason === 'alif_ortho' || verdict.reason === 'alif_ortho_liaison') {
+            learnPersonalAlias(target, normalize(hWord));
+        }
         processMatchedWord(currentIdx, false);
         currentIdx++;
         markWordEntered(currentIdx);
@@ -5358,7 +5382,6 @@
         const tokens = String(last.raw || '').split(/\s+/).filter(Boolean).slice(-6);
         lastEnergyCommitAt = now;
         for (let t = tokens.length - 1; t >= 0; t--) {
-            if (tryAcceptToken(tokens[t], 'energy_commit', true)) return;
             if (tryAcceptToken(tokens[t], 'energy_commit', false)) return;
         }
     }
@@ -5875,7 +5898,6 @@
 
     function checkWordStream(transcript, streamOpts) {
         const silentDiag = !!(streamOpts && streamOpts.silentDiag);
-        const softGate = !!(VOICE_PERF.enabled && !mistakeTestMode && stuckMsNow() >= Math.min(1200, VOICE_PERF.falseRejectMs));
         const rawHeard = transcript.toLowerCase();
         const cleanRaw = rawHeard.replace(/[\u200B-\u200D\uFEFF\u200E\u200F]/g, " ");
         const heard = cleanRaw.split(/\s+/).filter(w => w.length > 0);
@@ -5898,9 +5920,12 @@
             });
         }
 
-        // Stream cumulatif Chrome : scanner depuis l’index courant (pas seulement la fin)
-        // Sinon الرحمن déjà passé dans le buffer n’est plus dans la fenêtre et force le manuel
-        const start = Math.max(0, tempIdx);
+        // Queue STT récente (pas l’index verset comme index de tokens).
+        const scanWindow = Math.max(STT_WINDOW, (verseData.length - tempIdx) + 4);
+        const start = Math.max(0, heard.length - scanWindow);
+        const singleWord = !!(streamOpts && streamOpts.singleWord);
+        const weakReasons = { prefix_progress: 1, soft_stt: 1, near1: 1, near2: 1, root_safe: 1 };
+        const strongReasons = { exact: 1, liaison: 1, liaison_alias: 1, alif_ortho: 1, alif_ortho_liaison: 1 };
         for (let i = start; i < heard.length && tempIdx < verseData.length; i++) {
             const hWord = heard[i];
             const hNorm = normalize(hWord);
@@ -5914,60 +5939,18 @@
             }
 
             let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar, {
-                soft: softGate,
-                allowPrefix: softGate && VOICE_PERF.prefixCommit
+                soft: false,
+                allowPrefix: false
             });
-            // Chrome omet parfois أنعمت / اهدنا : si le mot SUIVANT match, on saute 1 cible
-            if (!verdict.ok && !mistakeTestMode && tempIdx + 1 < verseData.length) {
-                const curLen = normalize(verseData[tempIdx].ar).length;
-                if (curLen >= 4) {
-                    const nextVerdict = matchFatihaWord(hWord, verseData[tempIdx + 1].ar, { soft: softGate });
-                    if (nextVerdict.ok) {
-                        sessionDiagnostics.matches.push({
-                            expected: normalize(verseData[tempIdx].ar),
-                            expectedRaw: verseData[tempIdx].ar,
-                            heard: '[stt_omit]',
-                            index: tempIdx,
-                            reason: 'stt_omit_skip',
-                            time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + 's',
-                            maddMissed: false
-                        });
-                        processMatchedWord(tempIdx, false);
-                        tempIdx++;
-                        matched++;
-                        verdict = nextVerdict;
-                    }
-                }
-            }
+            // Pas de saut : un mot suivant bien dit ne valide pas la cible actuelle.
             if (!verdict.ok) continue;
 
             const target = normalize(verseData[tempIdx].ar);
             const ruleFull = verseData[tempIdx].ruleType || document.getElementById(`box-${tempIdx}`)?.dataset?.ruleFull || "";
-            // Gate durée désactivé sur le suivi temps réel (évite faux refus + latence ressentie)
             let acoustic = { ok: true, layer: 'webspeech', voicedMs: 0, minMs: 0 };
-            if (false && (typeof VOICE_ENGINE === 'undefined' || VOICE_ENGINE !== 'whisper')) {
-                acoustic = PronunciationJudge.evaluate({
-                    expectedAr: verseData[tempIdx].ar,
-                    ruleType: ruleFull,
-                    transcriptToken: hWord
-                });
-                if (!acoustic.ok) {
-                    sessionDiagnostics.errors.push({
-                        time: new Date().toISOString(),
-                        type: 'acoustic_gate',
-                        expected: target,
-                        heard: hWord,
-                        voicedMs: acoustic.voicedMs,
-                        minMs: acoustic.minMs,
-                        layer: acoustic.layer
-                    });
-                    const msg = translations[currentLang][acoustic.reasonKey] || translations[currentLang].hintNeedSound;
-                    showAssistantFeedback(msg);
-                    continue;
-                }
-            }
 
-            const isMaddMissed = false;
+            const isMadd = String(ruleFull).indexOf('madd') === 0 || boxAlready?.dataset?.ruleType === 'madd';
+            const isMaddMissed = !!(isMadd && (verdict.reason === 'root_safe' || String(verdict.reason).indexOf('near') === 0));
 
             sessionDiagnostics.matches.push({
                 expected: target,
@@ -5983,10 +5966,11 @@
                 mistakeTestMode: !!mistakeTestMode
             });
 
-            learnPersonalAlias(target, hNorm);
+            if (strongReasons[verdict.reason]) learnPersonalAlias(target, hNorm);
             processMatchedWord(tempIdx, isMaddMissed);
             tempIdx++;
             matched++;
+            if (singleWord || weakReasons[verdict.reason]) break;
         }
 
         if (matched > 0) {
@@ -6146,7 +6130,6 @@
         const savedHtml = el.innerHTML;
         const plain = (el.textContent || '').replace(/\s+/g, ' ').trim();
         if (!plain) return;
-        el.textContent = plain;
         el.classList.add('shimmering');
         const base = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#F5F5f7';
         el.style.setProperty('--gs-base', base);
@@ -6871,7 +6854,7 @@
             } catch (refErr) {
                 console.warn("ref param", refErr);
             }
-            setTimeout(() => { startRecognition(); }, 250);
+            armMicOnFirstGesture();
         } catch (e) {
             console.error("Initial load failed:", e);
         }
