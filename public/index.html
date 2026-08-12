@@ -1387,11 +1387,14 @@
             width: 100%;
             height: min(58vh, 460px);
             flex-shrink: 0;
-            background: #222222;
-            border: 4px solid #6C6C6C;
-            border-radius: 28px;
-            padding: 12px 10px 16px;
+            background:
+                linear-gradient(145deg, #3a3a3c 0%, #1c1c1e 42%, #2c2c2e 78%, #48484a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 36px;
+            padding: 10px;
             box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.45),
                 0 0 #0000004d,
                 0 9px 20px #0000004a,
                 0 37px 37px #00000042,
@@ -1401,42 +1404,177 @@
             transform-origin: center center;
             will-change: transform;
         }
+        .ipad-device::before,
+        .ipad-device::after {
+            content: "";
+            position: absolute;
+            background: #2a2a2c;
+            border-radius: 3px;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+            z-index: 3;
+        }
+        /* volume rockers */
+        .ipad-device::before {
+            left: -3px;
+            top: 88px;
+            width: 3px;
+            height: 78px;
+            background:
+                linear-gradient(#2a2a2c, #2a2a2c) 0 0 / 100% 28px no-repeat,
+                linear-gradient(#2a2a2c, #2a2a2c) 0 36px / 100% 42px no-repeat;
+        }
+        /* power button */
+        .ipad-device::after {
+            right: -3px;
+            top: 118px;
+            width: 3px;
+            height: 52px;
+        }
         @media (min-width: 768px) {
             .ipad-inline-stage { width: min(92vw, 580px); }
             .ipad-device {
                 height: min(62vh, 520px);
-                padding: 14px 12px 18px;
-                border-radius: 30px;
+                padding: 12px;
+                border-radius: 40px;
             }
-        }
-        .ipad-camera {
-            position: absolute;
-            top: 7px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #111;
-            box-shadow: inset 0 0 0 2px #3a3a3a, 0 0 0 1px #000;
-            z-index: 2;
+            .ipad-device::before { top: 110px; height: 92px; }
+            .ipad-device::after { top: 140px; height: 60px; }
         }
         .ipad-screen {
+            position: relative;
             height: 100%;
-            background: #f3f4f6;
-            border-radius: 14px;
+            background: #f2f2f7;
+            border-radius: 26px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             color: #111827;
             font-family: 'Outfit', sans-serif;
-            padding: 0.5rem;
+            padding: 0;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+        }
+        @media (min-width: 768px) {
+            .ipad-screen { border-radius: 30px; }
+        }
+        .ipad-status {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.01em;
+            flex-shrink: 0;
+        }
+        .ipad-status > span:first-child {
+            min-width: 42px;
+        }
+        .ipad-status-icons {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 58px;
+            justify-content: flex-end;
+        }
+        .ipad-status-icons .sig {
+            width: 15px;
+            height: 10px;
+            display: block;
+            background:
+                linear-gradient(#111827, #111827) 0 100% / 2px 4px no-repeat,
+                linear-gradient(#111827, #111827) 4px 100% / 2px 6px no-repeat,
+                linear-gradient(#111827, #111827) 8px 100% / 2px 8px no-repeat,
+                linear-gradient(#111827, #111827) 12px 100% / 2px 10px no-repeat;
+        }
+        .ipad-status-icons .wifi {
+            width: 13px;
+            height: 10px;
+            display: block;
+            background:
+                radial-gradient(circle at 50% 100%, transparent 55%, #111827 56% 68%, transparent 69%),
+                radial-gradient(circle at 50% 100%, transparent 72%, #111827 73% 82%, transparent 83%);
+        }
+        .ipad-status-icons .batt {
+            width: 20px;
+            height: 9px;
+            display: block;
+            border-radius: 2.5px;
+            box-shadow: inset 0 0 0 1.4px #111827;
+            position: relative;
+            background: transparent;
+        }
+        .ipad-status-icons .batt::before {
+            content: "";
+            position: absolute;
+            inset: 1.5px 4px 1.5px 1.5px;
+            background: #111827;
+            border-radius: 1px;
+        }
+        .ipad-status-icons .batt::after {
+            content: "";
+            position: absolute;
+            right: -3px;
+            top: 2px;
+            width: 2px;
+            height: 5px;
+            border-radius: 0 1px 1px 0;
+            background: #111827;
+        }
+        .ipad-island {
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 102px;
+            height: 29px;
+            background: #050505;
+            border-radius: 100px;
+            z-index: 4;
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+                0 1px 3px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 10px;
+            pointer-events: none;
+        }
+        .ipad-island-cam {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 35% 35%, #4a6f9a 0%, #142033 45%, #05070c 100%);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+                0 0 0 2.5px #0d0d0d;
+        }
+        .ipad-island-glow {
+            position: absolute;
+            left: 15px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #151515;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
+        .ipad-screen-body {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 2px 10px 0;
+            overflow: hidden;
         }
         .ipad-cal-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 16px 8px;
+            padding: 8px 6px 8px;
             gap: 8px;
         }
         .ipad-cal-title {
@@ -1555,11 +1693,12 @@
         }
         .ipad-slot span { font-weight: 500; opacity: 0.72; font-size: 0.75rem; }
         .ipad-home-bar {
-            width: 92px;
+            width: 108px;
             height: 5px;
             border-radius: 100px;
-            background: rgba(0, 0, 0, 0.18);
-            margin: 0 auto 8px;
+            background: rgba(0, 0, 0, 0.28);
+            margin: 6px auto 10px;
+            flex-shrink: 0;
         }
         @media (max-width: 640px) {
             .ipad-day { min-height: 32px; font-size: 0.8rem; }
@@ -3139,31 +3278,44 @@
     </style>
 
     <!-- iPad rendez-vous — même écran, scroll pour monter -->
-    <div id="ipad-panel" aria-hidden="true">
+    <div id="ipad-panel" aria-hidden="true" onclick="onIpadPanelClick(event)">
         <div class="ipad-inline-stage">
             <div class="ipad-scroll-header" id="ipad-scroll-header">
                 <h1 id="ipad-scroll-title">Rendez-vous professeurs</h1>
             </div>
-            <div class="ipad-device" id="ipad-scroll-card">
-                <div class="ipad-camera" aria-hidden="true"></div>
+            <div class="ipad-device" id="ipad-scroll-card" onclick="event.stopPropagation()">
                 <div class="ipad-screen">
-                    <div class="ipad-cal-header">
-                        <div>
-                            <div class="ipad-cal-sub">Calendrier</div>
-                            <div class="ipad-cal-title" id="ipad-cal-month">Août 2026</div>
-                        </div>
-                        <div class="ipad-nav">
-                            <button type="button" onclick="shiftIpadMonth(-1)" aria-label="Mois précédent">‹</button>
-                            <button type="button" onclick="shiftIpadMonth(1)" aria-label="Mois suivant">›</button>
+                    <div class="ipad-island" aria-hidden="true">
+                        <span class="ipad-island-glow"></span>
+                        <span class="ipad-island-cam"></span>
+                    </div>
+                    <div class="ipad-status" aria-hidden="true">
+                        <span id="ipad-status-time">9:41</span>
+                        <div class="ipad-status-icons">
+                            <span class="sig"></span>
+                            <span class="wifi"></span>
+                            <span class="batt"></span>
                         </div>
                     </div>
-                    <div class="ipad-week" aria-hidden="true">
-                        <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
-                    </div>
-                    <div class="ipad-grid" id="ipad-cal-grid"></div>
-                    <div class="ipad-slots">
-                        <div class="ipad-slots-label" id="ipad-slots-label">Créneaux</div>
-                        <div class="ipad-slot-list" id="ipad-slot-list"></div>
+                    <div class="ipad-screen-body">
+                        <div class="ipad-cal-header">
+                            <div>
+                                <div class="ipad-cal-sub">Calendrier</div>
+                                <div class="ipad-cal-title" id="ipad-cal-month">Août 2026</div>
+                            </div>
+                            <div class="ipad-nav">
+                                <button type="button" onclick="shiftIpadMonth(-1)" aria-label="Mois précédent">‹</button>
+                                <button type="button" onclick="shiftIpadMonth(1)" aria-label="Mois suivant">›</button>
+                            </div>
+                        </div>
+                        <div class="ipad-week" aria-hidden="true">
+                            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                        </div>
+                        <div class="ipad-grid" id="ipad-cal-grid"></div>
+                        <div class="ipad-slots">
+                            <div class="ipad-slots-label" id="ipad-slots-label">Créneaux</div>
+                            <div class="ipad-slot-list" id="ipad-slot-list"></div>
+                        </div>
                     </div>
                     <div class="ipad-home-bar" aria-hidden="true"></div>
                 </div>
@@ -3370,12 +3522,13 @@
         document.getElementById('lang-options')?.classList.remove('active');
     }
 
-    /* ── iPad calendrier — entrée auto centre + scroll optionnel ── */
+    /* ── iPad calendrier — entrée/sortie animées + scroll down / clic dehors ── */
     var ipadCalYear = null;
     var ipadCalMonth = null;
     var ipadCalSelected = null;
     var ipadBookedSlot = null;
     var ipadPanelActive = false;
+    var ipadClosing = false;
     var ipadProgress = 0;
     var ipadTouchY = 0;
     var ipadScrollBound = false;
@@ -3403,7 +3556,7 @@
         var p = ipadProgress;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             header.style.transform = 'translateY(0)';
-            header.style.opacity = '1';
+            header.style.opacity = ipadClosing ? '0' : '1';
             card.style.transform = 'translateY(0) rotateX(0deg) scale(1)';
             return;
         }
@@ -3421,6 +3574,7 @@
     }
     function animateIpadEntrance() {
         cancelIpadEntrance();
+        ipadClosing = false;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             ipadProgress = 1;
             updateIpadScrollAnim();
@@ -3431,7 +3585,7 @@
         var start = null;
         var duration = 920;
         function step(ts) {
-            if (!ipadPanelActive) return;
+            if (!ipadPanelActive || ipadClosing) return;
             if (!start) start = ts;
             var t = Math.min(1, (ts - start) / duration);
             ipadProgress = ipadEaseOutCubic(t);
@@ -3444,26 +3598,75 @@
         }
         ipadEntranceRaf = requestAnimationFrame(step);
     }
-    function onIpadWheel(e) {
-        if (!ipadPanelActive) return;
-        e.preventDefault();
+    function finishIpadClose() {
         cancelIpadEntrance();
-        ipadProgress = Math.min(1, Math.max(0, ipadProgress + e.deltaY * 0.0018));
+        ipadClosing = false;
+        ipadPanelActive = false;
+        ipadProgress = 0;
+        var panel = document.getElementById('ipad-panel');
+        var btn = document.getElementById('header-ipad-btn');
+        if (panel) {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        }
+        document.body.classList.remove('ipad-mode');
+        if (btn) btn.classList.remove('ipad-active');
+        unbindIpadScrollAnim();
         updateIpadScrollAnim();
     }
+    function animateIpadExit() {
+        cancelIpadEntrance();
+        ipadClosing = true;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            finishIpadClose();
+            return;
+        }
+        var start = null;
+        var from = Math.max(0.08, ipadProgress);
+        var duration = 780;
+        function step(ts) {
+            if (!start) start = ts;
+            var t = Math.min(1, (ts - start) / duration);
+            ipadProgress = from * (1 - ipadEaseOutCubic(t));
+            updateIpadScrollAnim();
+            if (t < 1) {
+                ipadEntranceRaf = requestAnimationFrame(step);
+            } else {
+                ipadEntranceRaf = null;
+                finishIpadClose();
+            }
+        }
+        ipadEntranceRaf = requestAnimationFrame(step);
+    }
+    function onIpadPanelClick(e) {
+        if (!ipadPanelActive || ipadClosing) return;
+        if (e.target.closest && e.target.closest('.ipad-device')) return;
+        closeIpadCalendar();
+    }
+    function onIpadWheel(e) {
+        if (!ipadPanelActive || ipadClosing) return;
+        e.preventDefault();
+        cancelIpadEntrance();
+        // scroll down → descend / ferme ; scroll up → remonte
+        ipadProgress = Math.min(1, Math.max(0, ipadProgress - e.deltaY * 0.0018));
+        updateIpadScrollAnim();
+        if (e.deltaY > 0 && ipadProgress <= 0.06) closeIpadCalendar();
+    }
     function onIpadTouchStart(e) {
-        if (!ipadPanelActive || !e.touches.length) return;
+        if (!ipadPanelActive || ipadClosing || !e.touches.length) return;
         ipadTouchY = e.touches[0].clientY;
     }
     function onIpadTouchMove(e) {
-        if (!ipadPanelActive || !e.touches.length) return;
+        if (!ipadPanelActive || ipadClosing || !e.touches.length) return;
         var dy = ipadTouchY - e.touches[0].clientY;
         ipadTouchY = e.touches[0].clientY;
         if (Math.abs(dy) > 2) {
             cancelIpadEntrance();
+            // swipe up (dy>0) remonte ; swipe down (dy<0) descend
             ipadProgress = Math.min(1, Math.max(0, ipadProgress + dy * 0.003));
             updateIpadScrollAnim();
             e.preventDefault();
+            if (dy < 0 && ipadProgress <= 0.06) closeIpadCalendar();
         }
     }
     function bindIpadScrollAnim() {
@@ -3480,12 +3683,13 @@
         window.removeEventListener('wheel', onIpadWheel);
         window.removeEventListener('touchstart', onIpadTouchStart);
         window.removeEventListener('touchmove', onIpadTouchMove);
+        window.removeEventListener('resize', updateIpadScrollAnim);
     }
     function openIpadCalendar(e) {
         if (e) e.stopPropagation();
         closeLangMenu();
         closeGcDockMenu();
-        if (ipadPanelActive) {
+        if (ipadPanelActive || ipadClosing) {
             closeIpadCalendar();
             return;
         }
@@ -3496,8 +3700,14 @@
             ipadCalSelected = now.getDate();
         }
         renderIpadCalendar();
+        var timeEl = document.getElementById('ipad-status-time');
+        if (timeEl) {
+            var nowClock = new Date();
+            timeEl.textContent = nowClock.getHours() + ':' + String(nowClock.getMinutes()).padStart(2, '0');
+        }
         bindIpadScrollAnim();
         ipadProgress = 0;
+        ipadClosing = false;
         ipadPanelActive = true;
         var panel = document.getElementById('ipad-panel');
         var btn = document.getElementById('header-ipad-btn');
@@ -3508,20 +3718,8 @@
         animateIpadEntrance();
     }
     function closeIpadCalendar() {
-        if (!ipadPanelActive) return;
-        cancelIpadEntrance();
-        ipadPanelActive = false;
-        ipadProgress = 0;
-        var panel = document.getElementById('ipad-panel');
-        var btn = document.getElementById('header-ipad-btn');
-        if (panel) {
-            panel.classList.remove('active');
-            panel.setAttribute('aria-hidden', 'true');
-        }
-        document.body.classList.remove('ipad-mode');
-        if (btn) btn.classList.remove('ipad-active');
-        unbindIpadScrollAnim();
-        updateIpadScrollAnim();
+        if (!ipadPanelActive || ipadClosing) return;
+        animateIpadExit();
     }
     function shiftIpadMonth(delta) {
         ipadCalMonth += delta;
