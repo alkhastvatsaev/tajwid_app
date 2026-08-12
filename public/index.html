@@ -1633,8 +1633,46 @@
             height: 4px;
             border-radius: 100px;
             background: rgba(0, 0, 0, 0.28);
-            margin: 4px auto 7px;
+            margin: 4px auto 2px;
             flex-shrink: 0;
+        }
+        .ipad-dismiss-hint {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            width: 100%;
+            padding: 2px 0 8px;
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ipad-dismiss-hint svg {
+            width: 22px;
+            height: 22px;
+            opacity: 0.7;
+            animation: ipad-dismiss-bounce 1.6s ease-in-out infinite;
+        }
+        .ipad-dismiss-hint span {
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            opacity: 0.55;
+        }
+        .ipad-dismiss-hint:active { color: #111827; }
+        .ipad-dismiss-hint:active svg { opacity: 1; animation: none; }
+        @keyframes ipad-dismiss-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.55; }
+            50% { transform: translateY(4px); opacity: 0.95; }
+        }
+        @media (max-width: 900px) {
+            .ipad-dismiss-hint { display: flex; }
         }
         @media (max-width: 640px) {
             .ipad-device { height: min(76dvh, 580px); border-radius: 28px; }
@@ -1644,6 +1682,7 @@
         @media (prefers-reduced-motion: reduce) {
             .ipad-scroll-header { transform: none !important; }
             .ipad-device { transform: none !important; }
+            .ipad-dismiss-hint svg { animation: none; }
         }
 
         .profile-btn {
@@ -3248,6 +3287,10 @@
                         </div>
                     </div>
                     <div class="ipad-home-bar" aria-hidden="true"></div>
+                    <button type="button" class="ipad-dismiss-hint" onclick="event.stopPropagation(); closeIpadCalendar();" aria-label="Ranger l’iPad">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                        <span>Ranger</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -3643,7 +3686,7 @@
         if (el.closest('#modal-overlay.visible, #modal-overlay[style*="flex"]')) return true;
         if (el.closest('.verse-selector')) return true;
         if (el.closest('.bottom-controls')) return true;
-        if (ipadPanelActive && el.closest('.ipad-grid, .ipad-slots, .ipad-nav, .ipad-day, .ipad-slot')) return true;
+        // Sur l’iPad ouvert : laisser le swipe (sauf boutons nav précis au tap)
         return false;
     }
     function ensureIpadShell() {
