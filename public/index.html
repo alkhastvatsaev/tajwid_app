@@ -14,7 +14,7 @@
     <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
     <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/">
-    <meta name="theme-color" content="#BFDBFE">
+    <meta name="theme-color" content="#EDF3FA">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:url" content="https://tilmidh.app/">
@@ -108,7 +108,7 @@
         }
 
         html[data-theme="blue"] {
-            --bg: #F4F8FC;
+            --bg: #EDF3FA;
             --surface: #FFFFFF;
             --surface-hover: #E8F1FA;
             --accent: #1D4ED8;
@@ -183,26 +183,23 @@
             left: calc(0px - env(safe-area-inset-left, 0px));
             background-color: var(--bg);
             background-image:
-                radial-gradient(ellipse 110% 72% at 50% -18%, rgba(16, 185, 129, 0.14) 0%, transparent 68%),
-                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.08) 0px, transparent 55%);
+                radial-gradient(ellipse 90% 50% at 50% -5%, rgba(16, 185, 129, 0.1) 0%, transparent 72%);
         }
         html[data-theme="light"] {
-            background-color: #E8F5F0;
+            background-color: #F4FAF7;
         }
         html[data-theme="light"]::before {
-            background-color: #E8F5F0;
+            background-color: #F4FAF7;
             background-image:
-                radial-gradient(ellipse 120% 80% at 50% -22%, rgba(4, 120, 87, 0.14) 0%, transparent 70%),
-                linear-gradient(180deg, #D1FAE5 0%, #E8F5F0 45%, #FAFBFA 100%);
+                radial-gradient(ellipse 90% 50% at 50% -5%, rgba(4, 120, 87, 0.08) 0%, transparent 72%);
         }
         html[data-theme="blue"] {
-            background-color: #DBEAFE;
+            background-color: #EDF3FA;
         }
         html[data-theme="blue"]::before {
-            background-color: #DBEAFE;
+            background-color: #EDF3FA;
             background-image:
-                radial-gradient(ellipse 130% 85% at 50% -28%, rgba(37, 99, 235, 0.32) 0%, rgba(219, 234, 254, 0.55) 48%, transparent 74%),
-                linear-gradient(180deg, #BFDBFE 0%, #DBEAFE 38%, #F0F7FF 72%, #F4F8FC 100%);
+                radial-gradient(ellipse 90% 50% at 50% -5%, rgba(59, 130, 246, 0.11) 0%, transparent 72%);
         }
         
         body {
@@ -1862,24 +1859,6 @@
         }
         /* Mobile — lecture arabe lisible (iPhone) */
         @media (max-width: 600px) {
-            html[data-theme="blue"] {
-                background-color: #BFDBFE;
-            }
-            html[data-theme="blue"]::before {
-                background-color: #BFDBFE;
-                background-image:
-                    radial-gradient(ellipse 170% 120% at 50% -42%, rgba(37, 99, 235, 0.42) 0%, rgba(191, 219, 254, 0.9) 52%, transparent 80%),
-                    linear-gradient(180deg, #93C5FD 0%, #BFDBFE 24%, #DBEAFE 55%, #F0F7FF 100%);
-            }
-            html[data-theme="light"] {
-                background-color: #D1FAE5;
-            }
-            html[data-theme="light"]::before {
-                background-color: #D1FAE5;
-                background-image:
-                    radial-gradient(ellipse 170% 120% at 50% -42%, rgba(4, 120, 87, 0.2) 0%, rgba(209, 250, 229, 0.9) 52%, transparent 80%),
-                    linear-gradient(180deg, #A7F3D0 0%, #D1FAE5 24%, #E8F5F0 55%, #FAFBFA 100%);
-            }
             body {
                 padding-top: 20px;
             }
@@ -1901,12 +1880,15 @@
                 max-width: 100%;
                 align-items: flex-end;
             }
-            /* Sur mobile : une seule ayah visible, centrée et grande */
-            .ayah-line.ayah-prev,
+            .ayah-line.ayah-prev {
+                opacity: 0.5;
+                visibility: visible;
+                transform: translateY(calc(-50% - 15vh)) scale(0.46);
+            }
             .ayah-line.ayah-next {
-                opacity: 0 !important;
-                visibility: hidden !important;
-                pointer-events: none !important;
+                opacity: 0.5;
+                visibility: visible;
+                transform: translateY(calc(-50% + 15vh)) scale(0.46);
             }
             .ayah-line.active-ayah {
                 transform: translateY(-50%) scale(1);
@@ -6163,7 +6145,6 @@
 
         document.getElementById('live-assistant')?.classList.remove('visible');
         markAsCompleted(VERSES_LIBRARY[activeVerseIdx].ref);
-        document.body.classList.add('celebration-mode');
         const restartBtn = document.getElementById('restart-btn');
         if (restartBtn) {
             restartBtn.classList.add('visible');
@@ -6595,7 +6576,7 @@
         try { localStorage.setItem('tajwid_theme', next); } catch (e) {}
         const themeMeta = document.querySelector('meta[name="theme-color"]');
         if (themeMeta) {
-            const themeColors = { dark: '#030303', light: '#D1FAE5', blue: '#BFDBFE' };
+            const themeColors = { dark: '#030303', light: '#F4FAF7', blue: '#EDF3FA' };
             themeMeta.content = themeColors[next] || themeColors.dark;
         }
         const btn = document.getElementById('theme-toggle-btn');
