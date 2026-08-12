@@ -1461,41 +1461,12 @@
         @media (min-width: 768px) {
             .ipad-screen { border-radius: 28px; }
         }
-        .ipad-status {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 34px 16px 2px;
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: #111827;
-            letter-spacing: -0.01em;
-            flex-shrink: 0;
-            line-height: 1;
-        }
-        .ipad-island {
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 88px;
-            height: 24px;
-            background: #050505;
-            border-radius: 100px;
-            z-index: 4;
-            box-shadow:
-                inset 0 0 0 1px rgba(255, 255, 255, 0.07),
-                0 1px 3px rgba(0, 0, 0, 0.4);
-            pointer-events: none;
-        }
         .ipad-screen-body {
             flex: 1;
             min-height: 0;
             display: flex;
             flex-direction: column;
-            padding: 0 8px;
+            padding: 10px 8px 0;
             overflow: hidden;
             gap: 2px;
         }
@@ -3268,10 +3239,6 @@
             </div>
             <div class="ipad-device" id="ipad-scroll-card" onclick="event.stopPropagation()">
                 <div class="ipad-screen">
-                    <div class="ipad-island" aria-hidden="true"></div>
-                    <div class="ipad-status" aria-hidden="true">
-                        <span id="ipad-status-time">9:41</span>
-                    </div>
                     <div class="ipad-screen-body">
                         <div class="ipad-cal-header">
                             <div>
@@ -3706,11 +3673,6 @@
             ipadCalSelected = now.getDate();
         }
         renderIpadCalendar();
-        var timeEl = document.getElementById('ipad-status-time');
-        if (timeEl) {
-            var nowClock = new Date();
-            timeEl.textContent = nowClock.getHours() + ':' + String(nowClock.getMinutes()).padStart(2, '0');
-        }
         var panel = document.getElementById('ipad-panel');
         var btn = document.getElementById('header-ipad-btn');
         if (!ipadPanelActive) {
