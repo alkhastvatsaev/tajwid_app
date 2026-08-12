@@ -825,23 +825,59 @@
             transition: 0.2s;
         }
         .lang-menu-btn:hover { filter: brightness(1.06); }
-        
-        .lang-options {
+
+        /* Dropdown dock — animation type Apple (opacity + scale + blur) */
+        .dock-dropdown {
+            display: flex;
+            flex-direction: column;
             position: absolute;
             top: calc(100% + 12px);
             left: 50%;
             right: auto;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(0.94) translateY(-8px);
+            transform-origin: top center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            filter: blur(10px);
+            z-index: 1200;
+            transition:
+                opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 0.36s;
+        }
+        .dock-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(-50%) scale(1) translateY(0);
+            filter: blur(0);
+            transition:
+                opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0s linear 0s;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .dock-dropdown {
+                filter: none;
+                transition: opacity 0.15s ease, visibility 0s linear 0.15s;
+            }
+            .dock-dropdown.active {
+                transform: translateX(-50%);
+                transition: opacity 0.15s ease, visibility 0s linear 0s;
+            }
+        }
+        
+        .lang-options {
             background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(22px) saturate(180%);
             -webkit-backdrop-filter: blur(22px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 24px;
             padding: 12px;
-            display: none;
-            flex-direction: column;
             gap: 8px;
-            z-index: 1200;
             min-width: 104px;
             box-shadow:
                 0 0 6px rgba(0, 0, 0, 0.03),
@@ -855,7 +891,6 @@
             position: absolute;
             z-index: 1200;
         }
-        .lang-options.active { display: flex; }
         .lang-options .lang-btn {
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -1057,11 +1092,6 @@
         /* Groupe Call dock dropdown — glass */
         .gc-dock-wrap { display: flex; align-items: center; }
         .gc-dock-dropdown {
-            position: absolute;
-            top: calc(100% + 12px);
-            left: 50%;
-            right: auto;
-            transform: translateX(-50%);
             width: 268px;
             background: rgba(255, 255, 255, 0.16);
             backdrop-filter: blur(22px) saturate(180%);
@@ -1069,10 +1099,7 @@
             border: 1px solid rgba(255, 255, 255, 0.45);
             border-radius: 24px;
             padding: 18px;
-            display: none;
-            flex-direction: column;
             gap: 11px;
-            z-index: 1200;
             box-shadow:
                 0 0 6px rgba(0,0,0,0.03),
                 0 4px 12px rgba(0,0,0,0.12),
@@ -1083,14 +1110,7 @@
                 inset 0 0 6px 6px rgba(0,0,0,0.12),
                 inset 0 0 2px 2px rgba(0,0,0,0.06),
                 0 0 12px rgba(255,255,255,0.15);
-            transform-origin: top center;
-            animation: gcDropIn 0.2s cubic-bezier(0.22,1,0.36,1);
         }
-        @keyframes gcDropIn {
-            from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-        .gc-dock-dropdown.active { display: flex; }
         .verse-selector > .gc-dock-dropdown {
             position: absolute;
             z-index: 1200;
@@ -2537,13 +2557,13 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </button>
 
-        <div class="lang-options" id="lang-options" onclick="event.stopPropagation()">
+        <div class="lang-options dock-dropdown" id="lang-options" onclick="event.stopPropagation()">
             <button class="lang-btn" onclick="setLanguage('fr', event)">FR</button>
             <button class="lang-btn" onclick="setLanguage('en', event)">EN</button>
             <button class="lang-btn" onclick="setLanguage('ru', event)">RU</button>
         </div>
 
-        <div class="gc-dock-dropdown" id="gc-dock-dropdown" onclick="event.stopPropagation()">
+        <div class="gc-dock-dropdown dock-dropdown" id="gc-dock-dropdown" onclick="event.stopPropagation()">
             <div class="gc-dock-title">GROUPE CALL</div>
             <div class="gc-dock-tabs">
                 <button type="button" class="gc-dock-tab active" data-gc-dock="create" onclick="showGcDockTab('create')">Créer</button>
@@ -2765,22 +2785,6 @@
                 <button class="close-modal" id="txt-import-cancel" style="background:transparent; border:1px solid rgba(255,255,255,0.2)" onclick="closeImportModal()">Annuler</button>
                 <button class="close-modal" id="btn-import-exec" onclick="fetchVerseFromAPI()">Importer</button>
             </div>
-        </div>
-    </div>
-
-    <div id="expert-panel">
-        <div class="expert-toggle" onclick="toggleExpertPanel()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </div>
-        <div class="expert-title" id="txt-expert-title">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17L12 22L22 17"/><path d="M2 12L12 17L22 12"/><path d="M12 2L2 7L12 12L22 7L12 2Z"/></svg>
-            Expert Tilmidh
-        </div>
-        <div id="expert-rules-list" class="rules-list">
-            <!-- Populated by JS -->
-        </div>
-        <div class="expert-legend" id="expert-legend">
-            <!-- Populated by JS -->
         </div>
     </div>
 
@@ -3994,10 +3998,6 @@
                 if (nxt && nxt.classList.contains('ayah-line')) nxt.classList.add('ayah-next');
             });
         });
-        
-        // Mettre à jour le panneau expert
-        updateExpertPanel();
-        document.getElementById('expert-panel')?.classList.add('visible');
     }
 
     function toggleExpertPanel() {
@@ -6591,7 +6591,6 @@
         }
 
         document.getElementById('verse-selector')?.classList.remove('dock-hidden');
-        document.getElementById('expert-panel')?.classList.remove('chrome-hidden');
     });
 
     // Groupe Call — sync verset
