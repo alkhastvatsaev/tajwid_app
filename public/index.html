@@ -2,14 +2,19 @@
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tilmidh">
+    <meta name="format-detection" content="telephone=no">
     <title>Tilmidh تلميذ — Entraînement Tajwid mot à mot</title>
     <meta name="description" content="Récite le Coran, le micro vérifie chaque mot. Couleurs tajwid, Fātiḥah, Ikhlāṣ, Duo imam/talib. Outil d'entraînement gratuit — pas une ijazah.">
     <link rel="canonical" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
     <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/">
-    <meta name="theme-color" content="#059669">
+    <meta name="theme-color" content="#F4F8FC">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:url" content="https://tilmidh.app/">
@@ -160,12 +165,40 @@
             overflow: hidden;
             overscroll-behavior: none;
         }
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            background-color: var(--bg);
+            min-height: 100%;
+            min-height: 100dvh;
+        }
+        html::before {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            pointer-events: none;
+            top: calc(0px - env(safe-area-inset-top, 0px));
+            right: calc(0px - env(safe-area-inset-right, 0px));
+            bottom: calc(0px - env(safe-area-inset-bottom, 0px));
+            left: calc(0px - env(safe-area-inset-left, 0px));
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(ellipse 110% 72% at 50% -18%, rgba(16, 185, 129, 0.14) 0%, transparent 68%),
+                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.08) 0px, transparent 55%);
+        }
+        html[data-theme="light"]::before {
+            background-image:
+                radial-gradient(ellipse 110% 72% at 50% -18%, rgba(4, 120, 87, 0.1) 0%, transparent 68%),
+                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.06) 0px, transparent 55%);
+        }
+        html[data-theme="blue"]::before {
+            background-image:
+                radial-gradient(ellipse 110% 72% at 50% -18%, rgba(37, 99, 235, 0.2) 0%, transparent 68%),
+                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 55%);
+        }
         
         body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.08) 0px, transparent 50%);
+            background: transparent;
             color: var(--text);
             font-family: var(--font-main);
             display: flex; 
@@ -179,6 +212,14 @@
         }
         
         body.celebration-mode {
+            background-color: #011c14;
+        }
+        body.celebration-mode::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
             background-color: #011c14;
             background-image: radial-gradient(circle at center, rgba(52, 199, 89, 0.1) 0%, transparent 70%);
         }
@@ -1809,20 +1850,53 @@
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(52, 199, 89, 0.2);
         }
-        /* Mobile specific adjustments */
+        /* Mobile — lecture arabe lisible (iPhone) */
         @media (max-width: 600px) {
             .container {
-                padding-top: calc(85px + env(safe-area-inset-top));
-                padding-left: 15px;
-                padding-right: 15px;
+                padding-top: calc(88px + env(safe-area-inset-top));
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: calc(130px + env(safe-area-inset-bottom));
             }
-            .word-box .arabic-word {
-                font-size: 1.7rem !important;
+            #verse-container {
+                min-height: calc(100dvh - 220px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                padding: 16px 4px;
+                gap: 20px;
+                justify-content: center;
+            }
+            .ayah-line {
+                gap: 10px 6px;
+                padding: 0 6px;
+                max-width: 100%;
+            }
+            /* Sur mobile : une seule ayah visible, centrée et grande */
+            .ayah-line.ayah-prev,
+            .ayah-line.ayah-next {
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+            .ayah-line.active-ayah {
+                transform: translateY(-50%) scale(1);
+            }
+            .arabic-word {
+                font-size: clamp(2.1rem, 8.5vmin, 3rem) !important;
+                line-height: 1.4;
+            }
+            .word-box {
+                min-width: 0;
+                padding: 8px 8px;
+                flex: 0 1 auto;
+            }
+            .translit-en,
+            .translit-ru {
+                font-size: 0.58rem;
             }
             .verse-marker {
-                width: 32px !important;
-                height: 32px !important;
-                font-size: 0.75rem !important;
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 0.72rem !important;
+                margin-top: 10px;
             }
             #restart-btn {
                 width: 90%;
@@ -1830,9 +1904,14 @@
             }
         }
         @media (max-width: 480px) {
-            .container { padding-top: 100px; }
-            .arabic-word { font-size: 2rem; }
-            .word-box { min-width: 70px; padding: 10px 12px; }
+            .container { padding-top: calc(92px + env(safe-area-inset-top)); }
+            .arabic-word {
+                font-size: clamp(2rem, 9vmin, 2.85rem) !important;
+            }
+            .ayah-line {
+                gap: 8px 4px;
+            }
+            .word-box { padding: 6px 6px; }
             .verse-selector { 
                 width: max-content;
                 max-width: calc(100% - 16px);
@@ -2100,21 +2179,11 @@
         html[data-theme="blue"] .theme-toggle-btn .icon-blue { display: block; }
 
         /* Shared light surfaces (green + blue) */
-        html[data-theme="light"] body {
-            background-image:
-                radial-gradient(at 0% 0%, rgba(4, 120, 87, 0.07) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.05) 0px, transparent 50%);
-        }
-        html[data-theme="light"] body.celebration-mode {
+        html[data-theme="light"] body.celebration-mode::before {
             background-color: #ECFDF5;
             background-image: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
         }
-        html[data-theme="blue"] body {
-            background-image:
-                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
-        }
-        html[data-theme="blue"] body.celebration-mode {
+        html[data-theme="blue"] body.celebration-mode::before {
             background-color: #EFF6FF;
             background-image: radial-gradient(circle at center, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
         }
@@ -2881,6 +2950,15 @@
     </div>
 
     <script>
+    // Mobile : comportement app native (pas de pinch / zoom)
+    (function lockMobileViewport() {
+        if (!window.matchMedia('(max-width: 900px)').matches) return;
+        const blockGesture = (e) => e.preventDefault();
+        document.addEventListener('gesturestart', blockGesture, { passive: false });
+        document.addEventListener('gesturechange', blockGesture, { passive: false });
+        document.addEventListener('gestureend', blockGesture, { passive: false });
+    })();
+
     // GROUPE CALL (LiveKit audio)
     let lkRoom = null;
     let groupCallActive = false;
@@ -6478,6 +6556,11 @@
         const next = allowed[theme] ? theme : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         try { localStorage.setItem('tajwid_theme', next); } catch (e) {}
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeMeta) {
+            const themeColors = { dark: '#030303', light: '#FAFBFA', blue: '#F4F8FC' };
+            themeMeta.content = themeColors[next] || themeColors.dark;
+        }
         const btn = document.getElementById('theme-toggle-btn');
         if (btn) {
             const labels = {
