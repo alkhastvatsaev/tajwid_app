@@ -1462,67 +1462,13 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 16px 22px 8px;
             font-size: 0.72rem;
             font-weight: 700;
             color: #111827;
             letter-spacing: -0.01em;
             flex-shrink: 0;
-        }
-        .ipad-status > span:first-child {
-            min-width: 42px;
-        }
-        .ipad-status-icons {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            min-width: 58px;
-            justify-content: flex-end;
-        }
-        .ipad-status-icons .sig {
-            width: 15px;
-            height: 10px;
-            display: block;
-            background:
-                linear-gradient(#111827, #111827) 0 100% / 2px 4px no-repeat,
-                linear-gradient(#111827, #111827) 4px 100% / 2px 6px no-repeat,
-                linear-gradient(#111827, #111827) 8px 100% / 2px 8px no-repeat,
-                linear-gradient(#111827, #111827) 12px 100% / 2px 10px no-repeat;
-        }
-        .ipad-status-icons .wifi {
-            width: 13px;
-            height: 10px;
-            display: block;
-            background:
-                radial-gradient(circle at 50% 100%, transparent 55%, #111827 56% 68%, transparent 69%),
-                radial-gradient(circle at 50% 100%, transparent 72%, #111827 73% 82%, transparent 83%);
-        }
-        .ipad-status-icons .batt {
-            width: 20px;
-            height: 9px;
-            display: block;
-            border-radius: 2.5px;
-            box-shadow: inset 0 0 0 1.4px #111827;
-            position: relative;
-            background: transparent;
-        }
-        .ipad-status-icons .batt::before {
-            content: "";
-            position: absolute;
-            inset: 1.5px 4px 1.5px 1.5px;
-            background: #111827;
-            border-radius: 1px;
-        }
-        .ipad-status-icons .batt::after {
-            content: "";
-            position: absolute;
-            right: -3px;
-            top: 2px;
-            width: 2px;
-            height: 5px;
-            border-radius: 0 1px 1px 0;
-            background: #111827;
         }
         .ipad-island {
             position: absolute;
@@ -1537,30 +1483,7 @@
             box-shadow:
                 inset 0 0 0 1px rgba(255, 255, 255, 0.07),
                 0 1px 3px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 0 10px;
             pointer-events: none;
-        }
-        .ipad-island-cam {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background:
-                radial-gradient(circle at 35% 35%, #4a6f9a 0%, #142033 45%, #05070c 100%);
-            box-shadow:
-                inset 0 0 0 1px rgba(255, 255, 255, 0.18),
-                0 0 0 2.5px #0d0d0d;
-        }
-        .ipad-island-glow {
-            position: absolute;
-            left: 15px;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #151515;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
         }
         .ipad-screen-body {
             flex: 1;
@@ -3285,17 +3208,9 @@
             </div>
             <div class="ipad-device" id="ipad-scroll-card" onclick="event.stopPropagation()">
                 <div class="ipad-screen">
-                    <div class="ipad-island" aria-hidden="true">
-                        <span class="ipad-island-glow"></span>
-                        <span class="ipad-island-cam"></span>
-                    </div>
+                    <div class="ipad-island" aria-hidden="true"></div>
                     <div class="ipad-status" aria-hidden="true">
                         <span id="ipad-status-time">9:41</span>
-                        <div class="ipad-status-icons">
-                            <span class="sig"></span>
-                            <span class="wifi"></span>
-                            <span class="batt"></span>
-                        </div>
                     </div>
                     <div class="ipad-screen-body">
                         <div class="ipad-cal-header">
