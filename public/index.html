@@ -1337,7 +1337,7 @@
             z-index: 900;
             display: none;
             pointer-events: none;
-            background: transparent;
+            background: rgba(8, 12, 24, 0);
             overflow: visible;
         }
         #ipad-panel.active {
@@ -1352,7 +1352,8 @@
             transform: translate(-50%, -50%);
             width: min(92vw, 520px);
             max-height: calc(100vh - 100px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-            perspective: 1000px;
+            perspective: 1400px;
+            perspective-origin: 50% 45%;
             z-index: 901;
             pointer-events: auto;
             display: flex;
@@ -1363,7 +1364,7 @@
         .ipad-scroll-header {
             width: 100%;
             text-align: center;
-            will-change: transform, opacity;
+            will-change: transform, opacity, filter;
             pointer-events: none;
             flex-shrink: 0;
         }
@@ -1401,8 +1402,10 @@
                 0 84px 50px #00000026,
                 0 149px 60px #0000000a,
                 0 233px 65px #00000003;
-            transform-origin: center center;
-            will-change: transform;
+            transform-origin: 50% 85%;
+            transform-style: preserve-3d;
+            will-change: transform, filter, opacity;
+            backface-visibility: hidden;
         }
         .ipad-device::before,
         .ipad-device::after {
@@ -3457,8 +3460,20 @@
     function ipadDateKey(y, m, d) {
         return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
     }
-    function ipadEaseOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
+    function ipadEaseOutExpo(t) {
+        return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+    function ipadEaseInCubic(t) {
+        return t * t * t;
+    }
+    function ipadSpringOut(t) {
+        if (t <= 0) return 0;
+        if (t >= 1) return 1;
+        var c4 = (2 * Math.PI) / 2.8;
+        return 1 + Math.pow(2, -11 * t) * Math.sin((t * 11 - 0.75) * c4);
+    }
+    function ipadClamp01(v) {
+        return Math.min(1, Math.max(0, v));
     }
     function cancelIpadEntrance() {
         if (ipadEntranceRaf) cancelAnimationFrame(ipadEntranceRaf);
@@ -3467,25 +3482,52 @@
     function updateIpadScrollAnim() {
         var header = document.getElementById('ipad-scroll-header');
         var card = document.getElementById('ipad-scroll-card');
+        var panel = document.getElementById('ipad-panel');
         if (!header || !card) return;
-        var p = ipadProgress;
+        var p = ipadClamp01(ipadProgress);
+        if (panel) {
+            panel.style.background = 'rgba(8, 12, 24, ' + (0.34 * p).toFixed(3) + ')';
+        }
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            header.style.transform = 'translateY(0)';
+            header.style.transform = 'translate3d(0,0,0)';
             header.style.opacity = ipadClosing ? '0' : '1';
-            card.style.transform = 'translateY(0) rotateX(0deg) scale(1)';
+            header.style.filter = 'none';
+            card.style.transform = 'translate3d(0,0,0) rotateX(0deg) scale(1)';
+            card.style.opacity = '1';
+            card.style.filter = 'none';
             return;
         }
         var mobile = window.innerWidth <= 768;
-        var rot = 20 * (1 - p);
-        var scaleStart = mobile ? 0.82 : 0.88;
-        var scaleEnd = 1;
-        var scale = scaleStart + (scaleEnd - scaleStart) * p;
-        var riseY = (1 - p) * (window.innerHeight * 0.52);
-        var headerY = (1 - p) * 28;
-        var headerOpacity = 0.35 + 0.65 * p;
-        header.style.transform = 'translateY(' + headerY + 'px)';
-        header.style.opacity = String(headerOpacity);
-        card.style.transform = 'translateY(' + riseY + 'px) rotateX(' + rot + 'deg) scale(' + scale + ')';
+        var lift = ipadEaseOutExpo(p);
+        var tilt = 1 - ipadSpringOut(Math.min(1, p * 1.05));
+        var pop = ipadSpringOut(p);
+        var rot = (mobile ? 26 : 22) * tilt;
+        var scaleBase = mobile ? 0.78 : 0.84;
+        var scale = scaleBase + (1.015 - scaleBase) * pop;
+        if (p > 0.86) {
+            var settle = (p - 0.86) / 0.14;
+            scale = scale + (1 - scale) * settle;
+        }
+        var riseY = (1 - lift) * (window.innerHeight * (mobile ? 0.62 : 0.58));
+        var z = -80 * (1 - lift);
+        var blur = (1 - lift) * 14;
+        var cardOpacity = 0.55 + 0.45 * lift;
+        var bright = 0.9 + 0.1 * lift;
+        var headerP = ipadClamp01((p - 0.14) / 0.72);
+        var headerLift = ipadEaseOutExpo(headerP);
+        var headerY = (1 - headerLift) * 36;
+        var headerOpacity = headerLift;
+        var headerBlur = (1 - headerLift) * 8;
+        header.style.transform = 'translate3d(0,' + headerY.toFixed(2) + 'px,0)';
+        header.style.opacity = headerOpacity.toFixed(3);
+        header.style.filter = headerBlur > 0.2 ? ('blur(' + headerBlur.toFixed(2) + 'px)') : 'none';
+        card.style.transform =
+            'translate3d(0,' + riseY.toFixed(2) + 'px,' + z.toFixed(2) + 'px) rotateX(' +
+            rot.toFixed(2) + 'deg) scale(' + scale.toFixed(4) + ')';
+        card.style.opacity = cardOpacity.toFixed(3);
+        card.style.filter =
+            (blur > 0.25 ? ('blur(' + blur.toFixed(2) + 'px) ') : '') +
+            'brightness(' + bright.toFixed(3) + ')';
     }
     function animateIpadEntrance() {
         cancelIpadEntrance();
@@ -3498,16 +3540,19 @@
         ipadProgress = 0;
         updateIpadScrollAnim();
         var start = null;
-        var duration = 920;
+        var duration = 1180;
         function step(ts) {
             if (!ipadPanelActive || ipadClosing) return;
             if (!start) start = ts;
             var t = Math.min(1, (ts - start) / duration);
-            ipadProgress = ipadEaseOutCubic(t);
+            // temps linéaire → courbes premium appliquées dans updateIpadScrollAnim
+            ipadProgress = t;
             updateIpadScrollAnim();
             if (t < 1) {
                 ipadEntranceRaf = requestAnimationFrame(step);
             } else {
+                ipadProgress = 1;
+                updateIpadScrollAnim();
                 ipadEntranceRaf = null;
             }
         }
@@ -3520,12 +3565,23 @@
         ipadProgress = 0;
         var panel = document.getElementById('ipad-panel');
         var btn = document.getElementById('header-ipad-btn');
+        var header = document.getElementById('ipad-scroll-header');
+        var card = document.getElementById('ipad-scroll-card');
         if (panel) {
             panel.classList.remove('active');
             panel.setAttribute('aria-hidden', 'true');
+            panel.style.background = 'rgba(8, 12, 24, 0)';
         }
         document.body.classList.remove('ipad-mode');
         if (btn) btn.classList.remove('ipad-active');
+        if (header) {
+            header.style.filter = 'none';
+            header.style.opacity = '0';
+        }
+        if (card) {
+            card.style.filter = 'none';
+            card.style.opacity = '1';
+        }
         unbindIpadScrollAnim();
         updateIpadScrollAnim();
     }
@@ -3537,12 +3593,13 @@
             return;
         }
         var start = null;
-        var from = Math.max(0.08, ipadProgress);
-        var duration = 780;
+        var from = Math.max(0.12, ipadProgress);
+        var duration = 680;
         function step(ts) {
             if (!start) start = ts;
             var t = Math.min(1, (ts - start) / duration);
-            ipadProgress = from * (1 - ipadEaseOutCubic(t));
+            var k = ipadEaseInCubic(t);
+            ipadProgress = from * (1 - k);
             updateIpadScrollAnim();
             if (t < 1) {
                 ipadEntranceRaf = requestAnimationFrame(step);
