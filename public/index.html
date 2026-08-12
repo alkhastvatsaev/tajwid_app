@@ -3052,7 +3052,7 @@
             </button>
         </div>
 
-        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous — swipe up" aria-label="Rendez-vous professeurs (swipe up)">
+        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous — swipe down" aria-label="Rendez-vous professeurs (swipe down)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
         </button>
 
@@ -3710,9 +3710,9 @@
     }
     function onIpadWheel(e) {
         if (ipadClosing || ipadDragActive) return;
-        // trackpad / molette : swipe up (deltaY < 0) ouvre, swipe down ferme
+        // trackpad / molette : swipe down (deltaY > 0) ouvre, swipe up ferme
         if (!ipadPanelActive) {
-            if (e.deltaY < -28) {
+            if (e.deltaY > 28) {
                 e.preventDefault();
                 openIpadCalendar();
             }
@@ -3720,9 +3720,9 @@
         }
         e.preventDefault();
         cancelIpadEntrance();
-        ipadProgress = Math.min(1, Math.max(0, ipadProgress - e.deltaY * 0.0018));
+        ipadProgress = Math.min(1, Math.max(0, ipadProgress + e.deltaY * 0.0018));
         updateIpadScrollAnim();
-        if (e.deltaY > 0 && ipadProgress <= 0.08) closeIpadCalendar();
+        if (e.deltaY < 0 && ipadProgress <= 0.08) closeIpadCalendar();
     }
     function onIpadTouchStart(e) {
         if (ipadClosing || !e.touches || !e.touches.length) return;
@@ -3739,7 +3739,7 @@
         if (!ipadDragActive || ipadClosing || !e.touches || !e.touches.length) return;
         var y = e.touches[0].clientY;
         var x = e.touches[0].clientX;
-        var dy = ipadDragStartY - y; // up = positive
+        var dy = ipadDragStartY - y; // up = positive, down = negative
         var dx = Math.abs(x - ipadDragStartX);
         if (!ipadDragCommitted) {
             if (Math.abs(dy) < 10) return;
@@ -3747,8 +3747,8 @@
                 ipadDragActive = false;
                 return;
             }
-            // closed → only swipe up opens ; open → vertical drag
-            if (!ipadDragFromOpen && dy < 8) return;
+            // closed → only swipe down opens ; open → vertical drag
+            if (!ipadDragFromOpen && dy > -8) return;
             ipadDragCommitted = true;
             cancelIpadEntrance();
             if (!ipadDragFromOpen) {
@@ -3758,9 +3758,11 @@
         }
         var range = Math.max(220, window.innerHeight * 0.52);
         if (ipadDragFromOpen) {
-            ipadProgress = ipadClamp01(ipadDragStartProgress + dy / range);
+            // swipe up ferme, swipe down remonte
+            ipadProgress = ipadClamp01(ipadDragStartProgress - dy / range);
         } else {
-            ipadProgress = ipadClamp01(dy / range);
+            // swipe down ouvre
+            ipadProgress = ipadClamp01((-dy) / range);
         }
         updateIpadScrollAnim();
         e.preventDefault();
