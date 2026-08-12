@@ -3040,7 +3040,7 @@
             </button>
         </div>
 
-        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Ouvrir les rendez-vous professeurs">
+        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous — swipe up" aria-label="Rendez-vous professeurs (swipe up)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
         </button>
 
@@ -3451,6 +3451,12 @@
     var ipadTouchY = 0;
     var ipadScrollBound = false;
     var ipadEntranceRaf = null;
+    var ipadDragActive = false;
+    var ipadDragCommitted = false;
+    var ipadDragStartY = 0;
+    var ipadDragStartX = 0;
+    var ipadDragFromOpen = false;
+    var ipadDragStartProgress = 0;
     var IPAD_MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
     var IPAD_SLOTS = [
         { time: '10:00', name: 'Ustadh Karim' },
@@ -3582,7 +3588,6 @@
             card.style.filter = 'none';
             card.style.opacity = '1';
         }
-        unbindIpadScrollAnim();
         updateIpadScrollAnim();
     }
     function animateIpadExit() {
@@ -3611,60 +3616,27 @@
         ipadEntranceRaf = requestAnimationFrame(step);
     }
     function onIpadPanelClick(e) {
-        if (!ipadPanelActive || ipadClosing) return;
+        if (!ipadPanelActive || ipadClosing || ipadDragActive) return;
         if (e.target.closest && e.target.closest('.ipad-device')) return;
         closeIpadCalendar();
     }
-    function onIpadWheel(e) {
-        if (!ipadPanelActive || ipadClosing) return;
-        e.preventDefault();
-        cancelIpadEntrance();
-        // scroll down → descend / ferme ; scroll up → remonte
-        ipadProgress = Math.min(1, Math.max(0, ipadProgress - e.deltaY * 0.0018));
-        updateIpadScrollAnim();
-        if (e.deltaY > 0 && ipadProgress <= 0.06) closeIpadCalendar();
+    function ipadIgnoreGestureTarget(el) {
+        if (!el || !el.closest) return false;
+        if (el.closest('#start-overlay')) return true;
+        if (el.closest('#duo-selector-overlay')) return true;
+        if (el.closest('#voice-lab-modal')) return true;
+        if (el.closest('#quran-modal')) return true;
+        if (el.closest('#stats-modal')) return true;
+        if (el.closest('#import-modal')) return true;
+        if (el.closest('#modal-overlay.visible, #modal-overlay[style*="flex"]')) return true;
+        if (el.closest('.verse-selector')) return true;
+        if (el.closest('.bottom-controls')) return true;
+        if (ipadPanelActive && el.closest('.ipad-grid, .ipad-slots, .ipad-nav, .ipad-day, .ipad-slot')) return true;
+        return false;
     }
-    function onIpadTouchStart(e) {
-        if (!ipadPanelActive || ipadClosing || !e.touches.length) return;
-        ipadTouchY = e.touches[0].clientY;
-    }
-    function onIpadTouchMove(e) {
-        if (!ipadPanelActive || ipadClosing || !e.touches.length) return;
-        var dy = ipadTouchY - e.touches[0].clientY;
-        ipadTouchY = e.touches[0].clientY;
-        if (Math.abs(dy) > 2) {
-            cancelIpadEntrance();
-            // swipe up (dy>0) remonte ; swipe down (dy<0) descend
-            ipadProgress = Math.min(1, Math.max(0, ipadProgress + dy * 0.003));
-            updateIpadScrollAnim();
-            e.preventDefault();
-            if (dy < 0 && ipadProgress <= 0.06) closeIpadCalendar();
-        }
-    }
-    function bindIpadScrollAnim() {
-        if (ipadScrollBound) return;
-        ipadScrollBound = true;
-        window.addEventListener('wheel', onIpadWheel, { passive: false });
-        window.addEventListener('touchstart', onIpadTouchStart, { passive: true });
-        window.addEventListener('touchmove', onIpadTouchMove, { passive: false });
-        window.addEventListener('resize', updateIpadScrollAnim);
-    }
-    function unbindIpadScrollAnim() {
-        if (!ipadScrollBound) return;
-        ipadScrollBound = false;
-        window.removeEventListener('wheel', onIpadWheel);
-        window.removeEventListener('touchstart', onIpadTouchStart);
-        window.removeEventListener('touchmove', onIpadTouchMove);
-        window.removeEventListener('resize', updateIpadScrollAnim);
-    }
-    function openIpadCalendar(e) {
-        if (e) e.stopPropagation();
+    function ensureIpadShell() {
         closeLangMenu();
         closeGcDockMenu();
-        if (ipadPanelActive || ipadClosing) {
-            closeIpadCalendar();
-            return;
-        }
         var now = new Date();
         if (ipadCalYear == null) {
             ipadCalYear = now.getFullYear();
@@ -3677,16 +3649,146 @@
             var nowClock = new Date();
             timeEl.textContent = nowClock.getHours() + ':' + String(nowClock.getMinutes()).padStart(2, '0');
         }
-        bindIpadScrollAnim();
-        ipadProgress = 0;
-        ipadClosing = false;
-        ipadPanelActive = true;
         var panel = document.getElementById('ipad-panel');
         var btn = document.getElementById('header-ipad-btn');
-        panel.classList.add('active');
-        panel.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('ipad-mode');
-        if (btn) btn.classList.add('ipad-active');
+        if (!ipadPanelActive) {
+            ipadPanelActive = true;
+            ipadClosing = false;
+            if (panel) {
+                panel.classList.add('active');
+                panel.setAttribute('aria-hidden', 'false');
+            }
+            document.body.classList.add('ipad-mode');
+            if (btn) btn.classList.add('ipad-active');
+        }
+    }
+    function animateIpadTo(target, duration, onDone) {
+        cancelIpadEntrance();
+        target = ipadClamp01(target);
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            ipadProgress = target;
+            updateIpadScrollAnim();
+            if (onDone) onDone();
+            return;
+        }
+        var start = null;
+        var from = ipadProgress;
+        var dur = duration || 720;
+        function step(ts) {
+            if (!start) start = ts;
+            var t = Math.min(1, (ts - start) / dur);
+            var k = target >= from ? ipadEaseOutExpo(t) : ipadEaseInCubic(t);
+            ipadProgress = from + (target - from) * k;
+            updateIpadScrollAnim();
+            if (t < 1) {
+                ipadEntranceRaf = requestAnimationFrame(step);
+            } else {
+                ipadProgress = target;
+                updateIpadScrollAnim();
+                ipadEntranceRaf = null;
+                if (onDone) onDone();
+            }
+        }
+        ipadEntranceRaf = requestAnimationFrame(step);
+    }
+    function snapIpadOpen() {
+        ipadClosing = false;
+        ensureIpadShell();
+        animateIpadTo(1, 780);
+    }
+    function onIpadWheel(e) {
+        if (ipadClosing || ipadDragActive) return;
+        // trackpad / molette : swipe up (deltaY < 0) ouvre, swipe down ferme
+        if (!ipadPanelActive) {
+            if (e.deltaY < -28) {
+                e.preventDefault();
+                openIpadCalendar();
+            }
+            return;
+        }
+        e.preventDefault();
+        cancelIpadEntrance();
+        ipadProgress = Math.min(1, Math.max(0, ipadProgress - e.deltaY * 0.0018));
+        updateIpadScrollAnim();
+        if (e.deltaY > 0 && ipadProgress <= 0.08) closeIpadCalendar();
+    }
+    function onIpadTouchStart(e) {
+        if (ipadClosing || !e.touches || !e.touches.length) return;
+        if (ipadIgnoreGestureTarget(e.target)) return;
+        ipadDragActive = true;
+        ipadDragCommitted = false;
+        ipadDragStartY = e.touches[0].clientY;
+        ipadDragStartX = e.touches[0].clientX;
+        ipadDragFromOpen = ipadPanelActive && !ipadClosing;
+        ipadDragStartProgress = ipadDragFromOpen ? ipadProgress : 0;
+        ipadTouchY = ipadDragStartY;
+    }
+    function onIpadTouchMove(e) {
+        if (!ipadDragActive || ipadClosing || !e.touches || !e.touches.length) return;
+        var y = e.touches[0].clientY;
+        var x = e.touches[0].clientX;
+        var dy = ipadDragStartY - y; // up = positive
+        var dx = Math.abs(x - ipadDragStartX);
+        if (!ipadDragCommitted) {
+            if (Math.abs(dy) < 10) return;
+            if (dx > Math.abs(dy) * 0.85) {
+                ipadDragActive = false;
+                return;
+            }
+            // closed → only swipe up opens ; open → vertical drag
+            if (!ipadDragFromOpen && dy < 8) return;
+            ipadDragCommitted = true;
+            cancelIpadEntrance();
+            if (!ipadDragFromOpen) {
+                ipadProgress = 0;
+                ensureIpadShell();
+            }
+        }
+        var range = Math.max(220, window.innerHeight * 0.52);
+        if (ipadDragFromOpen) {
+            ipadProgress = ipadClamp01(ipadDragStartProgress + dy / range);
+        } else {
+            ipadProgress = ipadClamp01(dy / range);
+        }
+        updateIpadScrollAnim();
+        e.preventDefault();
+    }
+    function onIpadTouchEnd() {
+        if (!ipadDragActive) return;
+        var wasCommitted = ipadDragCommitted;
+        var fromOpen = ipadDragFromOpen;
+        ipadDragActive = false;
+        ipadDragCommitted = false;
+        if (!wasCommitted) return;
+        if (ipadProgress >= 0.36) {
+            snapIpadOpen();
+        } else if (fromOpen || ipadPanelActive) {
+            closeIpadCalendar();
+        } else {
+            finishIpadClose();
+        }
+    }
+    function bindIpadGestures() {
+        if (ipadScrollBound) return;
+        ipadScrollBound = true;
+        window.addEventListener('wheel', onIpadWheel, { passive: false });
+        window.addEventListener('touchstart', onIpadTouchStart, { passive: true });
+        window.addEventListener('touchmove', onIpadTouchMove, { passive: false });
+        window.addEventListener('touchend', onIpadTouchEnd, { passive: true });
+        window.addEventListener('touchcancel', onIpadTouchEnd, { passive: true });
+        window.addEventListener('resize', updateIpadScrollAnim);
+    }
+    function openIpadCalendar(e) {
+        if (e) e.stopPropagation();
+        closeLangMenu();
+        closeGcDockMenu();
+        if (ipadClosing) return;
+        if (ipadPanelActive && ipadProgress > 0.5) {
+            closeIpadCalendar();
+            return;
+        }
+        ensureIpadShell();
+        ipadProgress = 0;
         animateIpadEntrance();
     }
     function closeIpadCalendar() {
@@ -7470,6 +7572,7 @@
     window.addEventListener('DOMContentLoaded', async () => {
         console.log("DOMContentLoaded");
         try {
+            bindIpadGestures();
             applyTheme('blue');
             applyTranslitVisibility(localStorage.getItem('tajwid_hide_translit') === '1');
         } catch (e) {
