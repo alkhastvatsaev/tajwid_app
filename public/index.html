@@ -2808,7 +2808,7 @@
                 <span id="txt-mistake-test">Mode test fautes (désactive la grammaire STT qui « corrige » tes voyelles)</span>
             </label>
             
-            <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); openGroupCall()">GROUPE CALL</button>
+            <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); document.getElementById('gc-dock-dropdown').classList.add('active');">GROUPE CALL</button>
 
             <div class="daily-card" id="daily-verse-card" style="margin-top: 20px;">
                 <div class="daily-label" id="txt-daily-label">Verset du Jour</div>
@@ -6601,7 +6601,13 @@
     try {
         const gcParams = new URLSearchParams(location.search);
         if (gcParams.get('room')) {
-            setTimeout(() => openGroupCall(), 800);
+            setTimeout(() => {
+                const code = gcParams.get('room').toUpperCase();
+                gcRoomKey = gcParams.get('k') || '';
+                showGcDockTab('join');
+                document.getElementById('gc-dock-join-code').value = code;
+                document.getElementById('gc-dock-dropdown').classList.add('active');
+            }, 800);
         }
     } catch (e) { /* ignore */ }
 
