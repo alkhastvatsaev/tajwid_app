@@ -27,7 +27,7 @@
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Entraînement tajwid mot à mot avec micro. Outil pédagogique, pas une ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["fr","en","ru"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/peerjs@1.5.0/dist/peerjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.9.9/dist/livekit-client.umd.min.js"></script>
     <style>
         :root {
             --bg: #030303;
@@ -2389,7 +2389,7 @@
             <svg class="icon-blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
         </button>
 
-        <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="openDuoSelector()" title="Mode Duo" aria-label="Mode Duo">
+        <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="openGroupCall()" title="Groupe Call" aria-label="Groupe Call">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
         </button>
 
@@ -2643,35 +2643,37 @@
     </div>
 
     <div id="duo-selector-overlay">
-        <h1>MODE DUO</h1>
-        <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
-            <div class="duo-choice-card" onclick="selectDuoRole('User 1')">
-                <h2 style="margin: 0;">User 1</h2>
-                <p style="margin-top: 8px;">À gauche</p>
-            </div>
-            <div class="duo-choice-card" onclick="selectDuoRole('User 2')">
-                <h2 style="margin: 0;">User 2</h2>
-                <p style="margin-top: 8px;">À droite</p>
-            </div>
+        <h1>GROUPE CALL</h1>
+        <p style="margin:0;font-size:0.8rem;color:var(--subtext);max-width:300px;text-align:center;">Audio seul — créez une salle ou rejoignez avec code + mot de passe.</p>
+        <div id="gc-tabs" style="display:flex;gap:8px;">
+            <button type="button" class="btn-duo gc-tab active" data-gc-tab="create" onclick="showGcTab('create')">Créer</button>
+            <button type="button" class="btn-duo gc-tab" data-gc-tab="join" onclick="showGcTab('join')">Rejoindre</button>
         </div>
-        <button class="btn-duo" type="button" onclick="closeDuoSelector()">Annuler</button>
+        <div id="gc-panel-create" class="gc-panel" style="display:flex;flex-direction:column;gap:10px;width:min(300px,90vw);">
+            <input id="gc-create-name" class="gc-input" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
+            <input id="gc-create-password" class="gc-input" type="password" placeholder="Mot de passe (min. 4 car.)" minlength="4" autocomplete="new-password">
+            <button type="button" class="btn-duo" onclick="createGroupRoom()">Créer la salle</button>
+        </div>
+        <div id="gc-panel-join" class="gc-panel" style="display:none;flex-direction:column;gap:10px;width:min(300px,90vw);">
+            <input id="gc-join-code" class="gc-input" type="text" placeholder="Code (6 caractères)" maxlength="6" autocapitalize="characters" autocomplete="off">
+            <input id="gc-join-password" class="gc-input" type="password" placeholder="Mot de passe" autocomplete="current-password">
+            <input id="gc-join-name" class="gc-input" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
+            <button type="button" class="btn-duo" onclick="joinGroupRoom()">Rejoindre</button>
+        </div>
+        <div id="gc-room-info" style="display:none;flex-direction:column;gap:8px;align-items:center;text-align:center;">
+            <p style="margin:0;font-size:0.85rem;">Code : <strong id="gc-room-code"></strong></p>
+            <p style="margin:0;font-size:0.85rem;">Mot de passe : <strong id="gc-room-pwd"></strong></p>
+            <button type="button" class="btn-duo" onclick="copyGroupLink()">Copier le lien</button>
+            <button type="button" class="btn-duo" onclick="enterCreatedRoom()">Entrer dans la salle</button>
+        </div>
+        <p id="gc-error" style="display:none;margin:0;color:#ff6b6b;font-size:0.8rem;max-width:300px;text-align:center;"></p>
+        <button class="btn-duo" type="button" onclick="closeGroupCall()">Annuler</button>
     </div>
 
-    <div id="duo-panels-container" style="display: none; position: fixed; top: calc(85px + env(safe-area-inset-top)); width: 100%; justify-content: space-between; padding: 0 40px; z-index: 1000; pointer-events: none;">
-        <div id="panel-user1" class="duo-panel" style="pointer-events: auto;">
-            <div class="duo-name" style="font-size: 1rem;">User 1</div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div id="status-user1" class="duo-status"></div>
-                <div id="mic-user1" class="duo-mic-indicator"></div>
-            </div>
-        </div>
-        <div id="panel-user2" class="duo-panel" style="pointer-events: auto;">
-            <div class="duo-name" style="font-size: 1rem;">User 2</div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div id="status-user2" class="duo-status" style="width: 8px; height: 8px; border-radius: 50%; background: #555;"></div>
-                <div id="mic-user2" class="duo-mic-indicator"></div>
-            </div>
-        </div>
+    <div id="group-call-bar" style="display:none;position:fixed;top:calc(85px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:1000;background:rgba(0,0,0,0.55);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:8px 14px;gap:10px;align-items:center;font-size:0.75rem;color:#fff;max-width:92vw;">
+        <span id="gc-bar-label" style="font-weight:600;">Groupe Call</span>
+        <span id="gc-participant-count">1</span>
+        <button type="button" class="btn-duo" style="margin:0;padding:6px 12px;font-size:0.7rem;" onclick="leaveGroupCall()">Quitter</button>
     </div>
 
     <div id="start-overlay" style="cursor: pointer; z-index: 9999;">
@@ -2691,7 +2693,7 @@
                 <span id="txt-mistake-test">Mode test fautes (désactive la grammaire STT qui « corrige » tes voyelles)</span>
             </label>
             
-            <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); openDuoSelector()">MODE DUO</button>
+            <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); openGroupCall()">GROUPE CALL</button>
 
             <div class="daily-card" id="daily-verse-card" style="margin-top: 20px;">
                 <div class="daily-label" id="txt-daily-label">Verset du Jour</div>
@@ -2703,180 +2705,228 @@
     </div>
 
     <script>
-    // DUO MODE LOGIC
-    let peer = null;
-    let duoRole = null;
-    let duoConnection = null;
+    // GROUPE CALL (LiveKit audio)
+    let lkRoom = null;
+    let groupCallActive = false;
+    let gcPendingJoin = null;
+    let gcShareUrl = '';
 
-    function openDuoSelector() {
+    function showGcError(msg) {
+        const el = document.getElementById('gc-error');
+        if (!el) return;
+        el.textContent = msg || '';
+        el.style.display = msg ? 'block' : 'none';
+    }
+
+    function showGcTab(tab) {
+        showGcError('');
+        document.querySelectorAll('.gc-tab').forEach((btn) => {
+            btn.classList.toggle('active', btn.dataset.gcTab === tab);
+        });
+        document.getElementById('gc-panel-create').style.display = tab === 'create' ? 'flex' : 'none';
+        document.getElementById('gc-panel-join').style.display = tab === 'join' ? 'flex' : 'none';
+        document.getElementById('gc-room-info').style.display = 'none';
+    }
+
+    function openGroupCall() {
+        showGcTab('join');
+        showGcError('');
+        document.getElementById('gc-room-info').style.display = 'none';
         document.getElementById('duo-selector-overlay').style.display = 'flex';
+        const params = new URLSearchParams(location.search);
+        const room = params.get('room');
+        if (room) {
+            document.getElementById('gc-join-code').value = room.toUpperCase();
+            showGcTab('join');
+        }
     }
 
-    function closeDuoSelector() {
+    function closeGroupCall() {
         document.getElementById('duo-selector-overlay').style.display = 'none';
+        showGcError('');
     }
 
-    async function selectDuoRole(role) {
-        duoRole = role;
-        closeDuoSelector();
-        
-        // Hide overlay immediately
+    function hideStartOverlayForGroup() {
         const startOverlay = document.getElementById('start-overlay');
+        if (!startOverlay) return;
         startOverlay.style.opacity = '0';
-        setTimeout(() => startOverlay.style.display = 'none', 500);
-        
-        // Show duo UI
-        document.getElementById('duo-panels-container').style.display = 'flex';
-        
-        // Highlights local panel
-        const roleId = role === 'User 1' ? 'user1' : 'user2';
-        document.getElementById(`panel-${roleId}`).classList.add('active');
-        
-        initDuoMode(role);
+        setTimeout(() => { startOverlay.style.display = 'none'; }, 500);
     }
 
-    async function initDuoMode(role) {
-        console.log("Initializing Duo Mode for:", role);
-        
-        // Request micro first for both PeerJS and standard recognition
+    function updateGroupCallBar() {
+        const bar = document.getElementById('group-call-bar');
+        const countEl = document.getElementById('gc-participant-count');
+        if (!bar || !countEl) return;
+        const n = lkRoom ? lkRoom.remoteParticipants.size + 1 : 0;
+        countEl.textContent = n <= 1 ? '1 participant' : `${n} participants`;
+        bar.style.display = groupCallActive ? 'flex' : 'none';
+    }
+
+    function handleGroupCallData(raw) {
+        let data;
         try {
-            if (!currentStream) {
-                currentStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                console.log("Microphone access granted:", currentStream.id);
-            }
-        } catch(e) {
-            console.error("Microphone access error:", e);
-            alert("Erreur micro: " + e.message);
+            data = JSON.parse(new TextDecoder().decode(raw));
+        } catch (e) {
             return;
         }
-
-
-        const roleId = role === 'User 1' ? 'user1' : 'user2';
-        const targetRoleId = role === 'User 1' ? 'user2' : 'user1';
-        const peerId = `vatsaev-tilmidh-${roleId}`;
-        const targetId = `vatsaev-tilmidh-${targetRoleId}`;
-        
-        peer = new Peer(peerId);
-
-        peer.on('open', (id) => {
-            console.log('Connecté avec PeerID:', id);
-            updateDuoStatus(role, 'online');
-            
-            // Local mic feedback
-            monitorAudio(currentStream, role);
-            
-            // Try to connect to other peer
-            setTimeout(() => {
-                // Audio Call
-                const call = peer.call(targetId, currentStream);
-                if (call) {
-                    console.log("Appel sortant vers", targetId);
-                    handleCall(call);
+        if (data.type === 'sync_match') {
+            const wordBox = document.getElementById(`box-${data.idx}`);
+            if (wordBox) {
+                wordBox.classList.add('partner-active');
+                if (!wordBox.querySelector('.partner-dot')) {
+                    const dot = document.createElement('div');
+                    dot.className = 'partner-dot';
+                    wordBox.appendChild(dot);
                 }
-                // Data Connection
-                const conn = peer.connect(targetId);
-                if (conn) {
-                    setupDuoConnection(conn);
-                }
-            }, 3000);
-        });
-
-        peer.on('connection', (conn) => {
-             console.log("Connexion data reçue");
-             setupDuoConnection(conn);
-        });
-
-        peer.on('call', (call) => {
-            console.log("Appel entrant reçu");
-            call.answer(currentStream);
-            handleCall(call);
-        });
-
-        peer.on('error', (err) => {
-            console.warn('PeerJS warning:', err);
-        });
-        
-        // Also start standard recognition
-        startRecognition();
-    }
-
-
-    function handleCall(call) {
-        call.on('stream', (stream) => {
-            console.log("Flux audio distant reçu");
-            let audio = document.getElementById('duo-audio-player');
-            if (!audio) {
-                audio = document.createElement('audio');
-                audio.id = 'duo-audio-player';
-                audio.setAttribute('autoplay', 'true');
-                audio.setAttribute('playsinline', 'true');
-                audio.style.display = 'none';
-                document.body.appendChild(audio);
             }
-            audio.srcObject = stream;
-            audio.play().catch(e => {
-                console.warn("Autoplay bloqué, ajout du bouton de déblocage");
-                let btn = document.getElementById('duo-unmute-btn');
-                if (!btn) {
-                    btn = document.createElement('button');
-                    btn.id = 'duo-unmute-btn';
-                    btn.innerHTML = "🔊 ACTIVER LE SON DU DUO";
-                    btn.className = "btn-duo";
-                    btn.style.position = 'fixed';
-                    btn.style.top = '20px';
-                    btn.style.left = '50%';
-                    btn.style.transform = 'translateX(-50%)';
-                    btn.style.zIndex = '12000';
-                    btn.onclick = () => { audio.play(); btn.remove(); };
-                    document.body.appendChild(btn);
-                }
-            });
-            
-            const otherRole = duoRole === 'User 1' ? 'User 2' : 'User 1';
-            updateDuoStatus(otherRole, 'online');
-            monitorAudio(stream, otherRole);
+        }
+        if (data.type === 'sync_verse' && activeVerseIdx !== data.verseIdx) {
+            activeVerseIdx = data.verseIdx;
+            loadVerse(activeVerseIdx);
+        }
+    }
+
+    function groupCallSend(data) {
+        if (!lkRoom || lkRoom.state !== 'connected') return;
+        try {
+            const payload = new TextEncoder().encode(JSON.stringify(data));
+            lkRoom.localParticipant.publishData(payload, { reliable: true });
+        } catch (e) {
+            console.warn('groupCallSend', e);
+        }
+    }
+
+    async function ensureMicStream() {
+        if (!currentStream) {
+            currentStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            console.log('Microphone access granted:', currentStream.id);
+        }
+        return currentStream;
+    }
+
+    async function connectLiveKitRoom(token, url) {
+        if (!window.LivekitClient) {
+            throw new Error('LiveKit client non chargé');
+        }
+        const { Room, RoomEvent, Track } = LivekitClient;
+        if (lkRoom) {
+            try { lkRoom.disconnect(); } catch (e) { /* ignore */ }
+        }
+        lkRoom = new Room({ adaptiveStream: true, dynacast: true, audioCaptureDefaults: { echoCancellation: true, noiseSuppression: true } });
+
+        lkRoom.on(RoomEvent.DataReceived, (payload) => handleGroupCallData(payload));
+        lkRoom.on(RoomEvent.ParticipantConnected, () => updateGroupCallBar());
+        lkRoom.on(RoomEvent.ParticipantDisconnected, () => updateGroupCallBar());
+        lkRoom.on(RoomEvent.TrackSubscribed, (track) => {
+            if (track.kind === Track.Kind.Audio) {
+                const el = track.attach();
+                el.style.display = 'none';
+                document.body.appendChild(el);
+            }
         });
+        lkRoom.on(RoomEvent.Disconnected, () => {
+            groupCallActive = false;
+            updateGroupCallBar();
+        });
+
+        await lkRoom.connect(url, token);
+        await lkRoom.localParticipant.setMicrophoneEnabled(true);
+        groupCallActive = true;
+        updateGroupCallBar();
+        closeGroupCall();
+        hideStartOverlayForGroup();
+        startRecognition();
+        console.log('Groupe Call connecté:', lkRoom.name);
     }
 
-
-    function updateDuoStatus(role, status) {
-        const roleId = role === 'User 1' ? 'user1' : (role === 'User 2' ? 'user2' : role.toLowerCase());
-        const dot = document.getElementById(`status-${roleId}`);
-        if(dot) dot.classList.add('online');
-    }
-
-    async function monitorAudio(stream, role) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioContext = new AudioContext();
-        
-        // Mobile Fix: Resume context on user action if needed (but selectDuoRole is a click)
-        if (audioContext.state === 'suspended') {
-            await audioContext.resume();
+    async function createGroupRoom() {
+        showGcError('');
+        const displayName = document.getElementById('gc-create-name').value.trim() || 'Hôte';
+        const password = document.getElementById('gc-create-password').value.trim();
+        try {
+            const res = await fetch('/api/room/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ displayName, password: password || undefined }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || data.error || 'Erreur création');
+            gcPendingJoin = { token: data.token, url: data.livekitUrl };
+            gcShareUrl = data.shareUrl || `${location.origin}/?room=${data.roomCode}`;
+            document.getElementById('gc-room-code').textContent = data.roomCode;
+            document.getElementById('gc-room-pwd').textContent = data.password;
+            document.getElementById('gc-panel-create').style.display = 'none';
+            document.getElementById('gc-panel-join').style.display = 'none';
+            document.getElementById('gc-tabs').style.display = 'none';
+            document.getElementById('gc-room-info').style.display = 'flex';
+        } catch (e) {
+            console.error('createGroupRoom', e);
+            showGcError(e.message || 'Impossible de créer la salle');
         }
-
-        const source = audioContext.createMediaStreamSource(stream);
-        const analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256;
-        source.connect(analyser);
-        
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
-        const roleId = role === 'User 1' ? 'user1' : (role === 'User 2' ? 'user2' : role.toLowerCase());
-        const micIndicator = document.getElementById(`mic-${roleId}`);
-
-
-        function check() {
-            if (!micIndicator) return;
-            analyser.getByteFrequencyData(dataArray);
-            let avg = dataArray.reduce((p, c) => p + c, 0) / dataArray.length;
-            
-            if(avg > 10) micIndicator.classList.add('active');
-            else micIndicator.classList.remove('active');
-
-            
-            requestAnimationFrame(check);
-        }
-        check();
     }
+
+    async function enterCreatedRoom() {
+        if (!gcPendingJoin) return;
+        try {
+            await ensureMicStream();
+            await connectLiveKitRoom(gcPendingJoin.token, gcPendingJoin.url);
+            gcPendingJoin = null;
+        } catch (e) {
+            console.error('enterCreatedRoom', e);
+            showGcError(e.message || 'Connexion impossible');
+        }
+    }
+
+    async function joinGroupRoom() {
+        showGcError('');
+        const roomCode = document.getElementById('gc-join-code').value.trim().toUpperCase();
+        const password = document.getElementById('gc-join-password').value.trim();
+        const displayName = document.getElementById('gc-join-name').value.trim() || 'Participant';
+        if (!/^[A-Z0-9]{6}$/.test(roomCode)) {
+            showGcError('Code invalide (6 caractères)');
+            return;
+        }
+        if (!password) {
+            showGcError('Mot de passe requis');
+            return;
+        }
+        try {
+            const res = await fetch('/api/room/join', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ roomCode, password, displayName }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                const msgs = { room_not_found: 'Salle introuvable', wrong_password: 'Mot de passe incorrect' };
+                throw new Error(msgs[data.error] || data.error || 'Erreur');
+            }
+            await ensureMicStream();
+            await connectLiveKitRoom(data.token, data.livekitUrl);
+        } catch (e) {
+            console.error('joinGroupRoom', e);
+            showGcError(e.message || 'Connexion impossible');
+        }
+    }
+
+    function copyGroupLink() {
+        const code = document.getElementById('gc-room-code').textContent;
+        const url = gcShareUrl || `${location.origin}/?room=${code}`;
+        navigator.clipboard.writeText(url).catch(() => {});
+    }
+
+    function leaveGroupCall() {
+        groupCallActive = false;
+        if (lkRoom) {
+            try { lkRoom.disconnect(); } catch (e) { /* ignore */ }
+            lkRoom = null;
+        }
+        updateGroupCallBar();
+    }
+
+    // Alias rétrocompat
+    function openDuoSelector() { openGroupCall(); }
+    function closeDuoSelector() { closeGroupCall(); }
 
     const SURAHS_LIST = [
         "Al-Fatihah","Al-Baqarah","Ali 'Imran","An-Nisa'","Al-Ma'idah","Al-An'am","Al-A'raf","Al-Anfal","At-Tawbah","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Isra'","Al-Kahf","Maryam","Ta-Ha","Al-Anbiya'","Al-Hajj","Al-Mu'minun","An-Nur","Al-Furqan","Ash-Shu'ara'","An-Naml","Al-Qasas","Al-'Ankabut","Ar-Rum","Luqman","As-Sajdah","Al-Ahzab","Saba'","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujurat","Qaf","Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqi'ah","Al-Hadid","Al-Mujadilah","Al-Hashr","Al-Mumtahanah","As-Saff","Al-Jumu'ah","Al-Munafiqun","At-Taghabun","At-Talaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Ma'arij","Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba'","An-Nazi'at","'Abasa","At-Takwir","Al-Infitar","Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-A'la","Al-Ghashiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Ad-Duha","Ash-Sharh","At-Tin","Al-'Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-'Adiyat","Al-Qari'ah","At-Takathur","Al-'Asr","Al-Humazah","Al-Fil","Quraysh","Al-Ma'un","Al-Kawthar","Al-Kafirun","An-Nasr","Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"
@@ -5536,10 +5586,8 @@
             feedbackEl.style.opacity = '1';
         }
 
-        // Duo Mode Sync
-        if (typeof peer !== 'undefined' && peer && duoConn && duoConn.open) {
-            duoConn.send({ type: 'sync_match', idx: idx });
-        }
+        // Groupe Call sync
+        groupCallSend({ type: 'sync_match', idx: idx });
 
         const line = box?.closest('.ayah-line');
         let switchedAyah = false;
@@ -6231,64 +6279,31 @@
         armDockHide();
     });
 
-    // === NEW DUO MODE LOGIC (User 1 & User 2) ===
-    let duoConn = null;
-    let duoCall = null;
-
-    // The logic is moved to the top of the script (where I added it previously)
-    // but I will add the necessary overrides here to sync recitation.
-
-    const originalProcessMatchedWord = typeof processMatchedWord !== 'undefined' ? processMatchedWord : null;
-    if (originalProcessMatchedWord) {
-        window.processMatchedWord = function(idx, maddMissed = false) {
-            originalProcessMatchedWord(idx, maddMissed);
-            if (peer && duoConn && duoConn.open) {
-                duoConn.send({ type: 'sync_match', idx: idx });
-            }
-        };
-    }
-
+    // Groupe Call — sync verset
     const originalSwitchVerse = typeof switchVerse !== 'undefined' ? switchVerse : null;
     if (originalSwitchVerse) {
         window.switchVerse = async function(index) {
             await originalSwitchVerse(index);
-            if (peer && duoConn && duoConn.open) {
-                duoConn.send({ type: 'sync_verse', verseIdx: index });
-            }
+            groupCallSend({ type: 'sync_verse', verseIdx: index });
         };
     }
 
-    // Add connection handling to the initDuoMode flow if needed
-    // This part ensures that Peer Data Connection is also established for syncing UI
-    function setupDuoConnection(conn) {
-        duoConn = conn;
-        conn.on('data', (data) => {
-            if (data.type === 'sync_match') {
-                // Visualize other's progress
-                console.log("Partner matched word:", data.idx);
-                const wordBox = document.getElementById(`box-${data.idx}`);
-                if(wordBox) {
-                    wordBox.classList.add('partner-active');
-                    // Optional: add a small visual indicator like a dot
-                    if (!wordBox.querySelector('.partner-dot')) {
-                        const dot = document.createElement('div');
-                        dot.className = 'partner-dot';
-                        wordBox.appendChild(dot);
-                    }
-                }
-            }
-            if (data.type === 'sync_verse') {
-                if(activeVerseIdx !== data.verseIdx) {
-                    activeVerseIdx = data.verseIdx;
-                    loadVerse(activeVerseIdx);
-                }
-            }
-        });
-    }
-
-    // Inject CSS for partner highlighting
-    const duoStyle = document.createElement('style');
-    duoStyle.textContent = `
+    const gcStyle = document.createElement('style');
+    gcStyle.textContent = `
+        .gc-input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        .gc-tab.active {
+            background: var(--accent) !important;
+            border-color: var(--accent) !important;
+            color: #fff !important;
+        }
         .word-box.partner-active {
             border-bottom: 3px solid #007AFF !important;
             background: rgba(0, 122, 255, 0.05) !important;
@@ -6305,12 +6320,16 @@
             border-radius: 50%;
             box-shadow: 0 0 8px #007AFF;
         }
-        .duo-panel.active {
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 15px rgba(5, 150, 105, 0.3);
-        }
     `;
-    document.head.appendChild(duoStyle);
+    document.head.appendChild(gcStyle);
+
+    // Deep link ?room=CODE
+    try {
+        const gcParams = new URLSearchParams(location.search);
+        if (gcParams.get('room')) {
+            setTimeout(() => openGroupCall(), 800);
+        }
+    } catch (e) { /* ignore */ }
 
 
     window.startRecognition = startRecognition;

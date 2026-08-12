@@ -40,3 +40,4 @@ twa/keystore-password.txt
 twa/.gradle/
 twa/gradle/
 twa/gradlew*
+.gstack/
