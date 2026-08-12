@@ -314,7 +314,7 @@
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            transform: translateY(-50%) scale(1);
+            transform: translateY(-50%) scale(var(--ayah-fit, 1));
             filter: none;
             isolation: isolate;
             z-index: 5;
@@ -354,7 +354,7 @@
             .ayah-line {
                 transition: none;
             }
-            .ayah-line.active-ayah { transform: translateY(-50%) scale(1); filter: none; }
+            .ayah-line.active-ayah { transform: translateY(-50%) scale(var(--ayah-fit, 1)); filter: none; }
             .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.35; }
             .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.35; }
         }
@@ -1887,54 +1887,61 @@
         }
         /* Mobile — lecture arabe lisible (iPhone) */
         @media (max-width: 600px) {
+            html, body {
+                height: 100svh;
+                max-height: 100svh;
+            }
             body {
-                padding-top: 20px;
+                padding-top: 0;
+                padding-bottom: 0;
             }
             .container {
-                padding-top: calc(80px + env(safe-area-inset-top));
+                padding-top: calc(70px + env(safe-area-inset-top));
                 padding-left: 8px;
                 padding-right: 8px;
-                padding-bottom: calc(108px + env(safe-area-inset-bottom));
+                padding-bottom: calc(12px + env(safe-area-inset-bottom));
             }
             #verse-container {
-                min-height: calc(100dvh - 188px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-                padding: 10px 2px;
-                gap: 16px;
+                flex: 1 1 auto;
+                min-height: 0;
+                height: 100%;
+                padding: 4px 4px;
+                gap: 0;
                 justify-content: center;
             }
             .ayah-line {
-                padding: 0 4px;
+                padding: 0 6px;
                 max-width: 100%;
             }
             .ayah-words {
-                gap: 22px 10px;
+                gap: 14px 8px;
                 align-items: flex-end;
             }
             .ayah-line.ayah-prev {
-                opacity: 0.22;
+                opacity: 0.18;
                 visibility: visible;
-                transform: translateY(calc(-50% - 28vh)) scale(0.4);
-                filter: blur(6px);
+                transform: translateY(calc(-50% - 34vh)) scale(0.34);
+                filter: blur(7px);
             }
             .ayah-line.ayah-next {
-                opacity: 0.22;
+                opacity: 0.18;
                 visibility: visible;
-                transform: translateY(calc(-50% + 28vh)) scale(0.4);
-                filter: blur(6px);
+                transform: translateY(calc(-50% + 34vh)) scale(0.34);
+                filter: blur(7px);
             }
             .ayah-line.active-ayah {
-                transform: translateY(-50%) scale(1);
+                transform: translateY(-50%) scale(var(--ayah-fit, 1));
                 filter: none;
                 overflow: visible;
                 max-height: none;
             }
             .arabic-word {
-                font-size: clamp(3.35rem, 16.5vmin, 4.8rem) !important;
-                line-height: 1.55;
+                font-size: clamp(1.95rem, 8.8vw, 2.45rem) !important;
+                line-height: 1.5;
             }
             .word-box {
                 min-width: 0;
-                padding: 10px 6px 28px;
+                padding: 6px 4px 22px;
                 flex: 0 1 auto;
                 overflow: visible;
             }
@@ -1957,23 +1964,23 @@
             }
         }
         @media (max-width: 480px) {
-            .container { padding-top: calc(84px + env(safe-area-inset-top)); }
+            .container { padding-top: calc(68px + env(safe-area-inset-top)); }
             .arabic-word {
-                font-size: clamp(3.2rem, 17.5vmin, 4.6rem) !important;
+                font-size: clamp(1.85rem, 8.4vw, 2.3rem) !important;
             }
             .ayah-line {
-                gap: 22px 8px;
+                gap: 10px;
             }
             .ayah-words {
-                gap: 22px 8px;
+                gap: 12px 6px;
             }
             .ayah-line.ayah-prev {
-                transform: translateY(calc(-50% - 30vh)) scale(0.38);
+                transform: translateY(calc(-50% - 36vh)) scale(0.32);
             }
             .ayah-line.ayah-next {
-                transform: translateY(calc(-50% + 30vh)) scale(0.38);
+                transform: translateY(calc(-50% + 36vh)) scale(0.32);
             }
-            .word-box { padding: 4px 2px 28px; }
+            .word-box { padding: 4px 3px 20px; }
             .verse-selector { 
                 width: max-content;
                 max-width: calc(100% - 16px);
@@ -4141,8 +4148,29 @@
                 first?.classList.add('active-ayah');
                 const nxt = first?.nextElementSibling;
                 if (nxt && nxt.classList.contains('ayah-line')) nxt.classList.add('ayah-next');
+                fitActiveAyah();
             });
         });
+    }
+
+    function fitActiveAyah() {
+        const box = document.getElementById('verse-container');
+        const line = box?.querySelector('.ayah-line.active-ayah');
+        if (!box || !line) return;
+        line.style.setProperty('--ayah-fit', '1');
+        const availH = Math.max(140, box.clientHeight - 8);
+        const availW = Math.max(140, box.clientWidth - 8);
+        const h = line.offsetHeight || 1;
+        const w = line.scrollWidth || 1;
+        let s = Math.min(availH / h, availW / w, 1);
+        if (!isFinite(s) || s <= 0) s = 1;
+        s = Math.min(1, Math.max(0.58, s * 0.9));
+        line.style.setProperty('--ayah-fit', String(s));
+    }
+    window.addEventListener('resize', () => fitActiveAyah());
+    window.addEventListener('orientationchange', () => setTimeout(fitActiveAyah, 280));
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => fitActiveAyah()).catch(() => {});
     }
 
     function toggleExpertPanel() {
@@ -6096,6 +6124,7 @@
                     upcoming.classList.add('ayah-next');
                 }
                 switchedAyah = true;
+                requestAnimationFrame(() => fitActiveAyah());
             }
         }
 
