@@ -1,4 +1,4 @@
-const { setCors, createLiveKitToken, verifyRoomPassword } = require('../lib/livekit-room');
+const { setCors, createLiveKitToken, authorizeRoomJoin } = require('../lib/livekit-room');
 
 module.exports = async function handler(req, res) {
   setCors(req, res);
@@ -9,6 +9,7 @@ module.exports = async function handler(req, res) {
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
     const roomCode = String(body.roomCode || '').trim().toUpperCase();
     const password = String(body.password || '').trim();
+    const roomKey = String(body.roomKey || '').trim();
     const displayName = String(body.displayName || 'Participant').trim().slice(0, 32) || 'Participant';
 
     if (!/^[A-Z0-9]{6}$/.test(roomCode)) {
@@ -18,7 +19,7 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'password_required' });
     }
 
-    const check = await verifyRoomPassword(roomCode, password);
+    const check = await authorizeRoomJoin(roomCode, password, roomKey);
     if (!check.ok) {
       const status = check.error === 'room_not_found' ? 404 : 403;
       return res.status(status).json({ error: check.error });

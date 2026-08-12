@@ -91,6 +91,35 @@ async function createLiveKitToken(roomCode, displayName, isHost = false) {
   return { token, url, identity };
 }
 
+function signRoomKey(roomCode, password) {
+  const secret = process.env.LIVEKIT_API_SECRET || process.env.ROOM_PEPPER || 'tilmidh-room-v1';
+  const pwdHash = hashPassword(roomCode, password);
+  return crypto
+    .createHmac('sha256', secret)
+    .update(`${String(roomCode).toUpperCase()}:${pwdHash}`)
+    .digest('base64url');
+}
+
+function verifyRoomKey(roomCode, password, roomKey) {
+  if (!roomKey || !password) return false;
+  try {
+    const expected = signRoomKey(roomCode, password);
+    const a = Buffer.from(expected);
+    const b = Buffer.from(String(roomKey));
+    return a.length === b.length && crypto.timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
+}
+
+async function findRoom(roomCode) {
+  const { httpUrl, apiKey, apiSecret } = getLiveKitConfig();
+  const svc = new RoomServiceClient(httpUrl, apiKey, apiSecret);
+  const name = roomName(roomCode);
+  const rooms = await svc.listRooms([name]);
+  return rooms.find((r) => r.name === name) || null;
+}
+
 async function createRoom(roomCode, password) {
   const { httpUrl, apiKey, apiSecret } = getLiveKitConfig();
   const svc = new RoomServiceClient(httpUrl, apiKey, apiSecret);
@@ -99,23 +128,30 @@ async function createRoom(roomCode, password) {
   try {
     await svc.createRoom({
       name,
-      emptyTimeout: 600,
+      emptyTimeout: 3600,
       maxParticipants: 50,
       metadata: JSON.stringify({ pwdHash, created: Date.now() }),
     });
   } catch (e) {
     const msg = String(e && e.message ? e.message : e);
     if (!msg.toLowerCase().includes('already exists')) throw e;
+    try {
+      await svc.updateRoomMetadata(name, JSON.stringify({ pwdHash, created: Date.now() }));
+    } catch {
+      /* ignore */
+    }
   }
   return name;
 }
 
+async function ensureRoomExists(roomCode, password) {
+  const existing = await findRoom(roomCode);
+  if (existing) return existing.name;
+  return createRoom(roomCode, password);
+}
+
 async function verifyRoomPassword(roomCode, password) {
-  const { httpUrl, apiKey, apiSecret } = getLiveKitConfig();
-  const svc = new RoomServiceClient(httpUrl, apiKey, apiSecret);
-  const name = roomName(roomCode);
-  const rooms = await svc.listRooms([name]);
-  const room = rooms.find((r) => r.name === name);
+  const room = await findRoom(roomCode);
   if (!room) return { ok: false, error: 'room_not_found' };
   let meta = {};
   try {
@@ -131,10 +167,19 @@ async function verifyRoomPassword(roomCode, password) {
   return { ok: true };
 }
 
-function shareUrl(req, roomCode) {
+async function authorizeRoomJoin(roomCode, password, roomKey) {
+  if (verifyRoomKey(roomCode, password, roomKey)) {
+    await ensureRoomExists(roomCode, password);
+    return { ok: true };
+  }
+  return verifyRoomPassword(roomCode, password);
+}
+
+function shareUrl(req, roomCode, password) {
   const origin = req.headers.origin;
   const base = origin || process.env.SITE_URL || 'https://tilmidh.app';
-  return `${base.replace(/\/$/, '')}/?room=${encodeURIComponent(roomCode)}`;
+  const k = signRoomKey(roomCode, password);
+  return `${base.replace(/\/$/, '')}/?room=${encodeURIComponent(roomCode)}&k=${encodeURIComponent(k)}`;
 }
 
 module.exports = {
@@ -144,5 +189,7 @@ module.exports = {
   createLiveKitToken,
   createRoom,
   verifyRoomPassword,
+  authorizeRoomJoin,
+  signRoomKey,
   shareUrl,
 };

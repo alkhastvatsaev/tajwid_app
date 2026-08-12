@@ -27,6 +27,8 @@
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Entraînement tajwid mot à mot avec micro. Outil pédagogique, pas une ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["fr","en","ru"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://tilmidh-20wxcwho.livekit.cloud" crossorigin>
+    <link rel="dns-prefetch" href="https://tilmidh-20wxcwho.livekit.cloud">
     <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.9.9/dist/livekit-client.umd.min.js"></script>
     <style>
         :root {
@@ -1045,6 +1047,90 @@
             background: rgba(225, 29, 72, 0.16);
             border-color: rgba(225, 29, 72, 0.32);
         }
+
+        /* Groupe Call dock dropdown */
+        .gc-dock-wrap { position: relative; display: flex; align-items: center; }
+        .gc-dock-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 260px;
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 22px;
+            padding: 14px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1200;
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+            animation: gcDropIn 0.25s cubic-bezier(0.22,1,0.36,1);
+        }
+        @keyframes gcDropIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+        .gc-dock-dropdown.active { display: flex; }
+        .gc-dock-title { font-weight: 700; font-size: 0.82rem; color: var(--text); text-align: center; letter-spacing: 0.06em; }
+        .gc-dock-sub { font-size: 0.65rem; color: var(--subtext); text-align: center; }
+        .gc-dock-tabs { display: flex; gap: 4px; }
+        .gc-dock-tab {
+            flex: 1;
+            padding: 7px 0;
+            border-radius: 100px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: var(--text);
+            transition: 0.2s;
+        }
+        .gc-dock-tab.active {
+            background: linear-gradient(180deg, rgba(59,130,246,0.92), rgba(29,78,216,0.88));
+            color: #fff;
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.42), 0 2px 10px rgba(29,78,216,0.28);
+        }
+        .gc-dock-input {
+            width: 100%;
+            padding: 9px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--text);
+            font-size: 0.75rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .gc-dock-input::placeholder { color: var(--subtext); opacity: 0.7; }
+        .gc-dock-action {
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 100px;
+            border: none;
+            background: linear-gradient(180deg, rgba(59,130,246,0.92), rgba(29,78,216,0.88));
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.42), 0 2px 10px rgba(29,78,216,0.28);
+        }
+        .gc-dock-action:hover { filter: brightness(1.08); }
+        .gc-dock-panel { display: flex; flex-direction: column; gap: 6px; }
+        .gc-dock-error { font-size: 0.68rem; color: #f87171; text-align: center; margin: 0; min-height: 0; }
 
         .profile-btn {
             background: rgba(255,255,255,0.05);
@@ -2389,9 +2475,38 @@
             <svg class="icon-blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
         </button>
 
-        <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="openGroupCall()" title="Groupe Call" aria-label="Groupe Call">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
-        </button>
+        <div class="gc-dock-wrap">
+            <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="toggleGcDockMenu(event)" title="Groupe Call" aria-label="Groupe Call">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
+            </button>
+            <div class="gc-dock-dropdown" id="gc-dock-dropdown">
+                <div class="gc-dock-title">GROUPE CALL</div>
+                <div class="gc-dock-sub">Audio seul · code + mot de passe</div>
+                <div class="gc-dock-tabs">
+                    <button type="button" class="gc-dock-tab active" data-gc-dock="create" onclick="showGcDockTab('create')">Créer</button>
+                    <button type="button" class="gc-dock-tab" data-gc-dock="join" onclick="showGcDockTab('join')">Rejoindre</button>
+                </div>
+                <div id="gc-dock-create" class="gc-dock-panel">
+                    <input class="gc-dock-input" id="gc-dock-create-name" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
+                    <input class="gc-dock-input" id="gc-dock-create-pwd" type="password" placeholder="Mot de passe (min. 4)" minlength="4" autocomplete="new-password">
+                    <button type="button" class="gc-dock-action" onclick="gcDockCreate()">Créer la salle</button>
+                </div>
+                <div id="gc-dock-join" class="gc-dock-panel" style="display:none;">
+                    <input class="gc-dock-input" id="gc-dock-join-code" type="text" placeholder="Code (6 car.)" maxlength="6" autocapitalize="characters" autocomplete="off">
+                    <input class="gc-dock-input" id="gc-dock-join-pwd" type="password" placeholder="Mot de passe" autocomplete="current-password">
+                    <input class="gc-dock-input" id="gc-dock-join-name" type="text" placeholder="Votre prénom" maxlength="32" autocomplete="nickname">
+                    <button type="button" class="gc-dock-action" onclick="gcDockJoin()">Rejoindre</button>
+                </div>
+                <div id="gc-dock-room-info" class="gc-dock-panel" style="display:none;">
+                    <div style="text-align:center;font-size:0.78rem;color:var(--text);">
+                        Code : <strong id="gc-dock-code-show"></strong><br>
+                        Mot de passe : <strong id="gc-dock-pwd-show"></strong>
+                    </div>
+                    <button type="button" class="gc-dock-action" onclick="gcDockCopyLink()">Copier le lien</button>
+                </div>
+                <p id="gc-dock-error" class="gc-dock-error"></p>
+            </div>
+        </div>
 
         <button class="profile-btn" onclick="openStatsModal()">
             <span id="progress-percent" style="display:none">0%</span>
@@ -2710,6 +2825,122 @@
     let groupCallActive = false;
     let gcPendingJoin = null;
     let gcShareUrl = '';
+    let gcMicWarmPromise = null;
+    let gcConnecting = false;
+    let gcRoomKey = '';
+
+    /* ── Dock dropdown (glass) ── */
+    function toggleGcDockMenu(e) {
+        e.stopPropagation();
+        const dd = document.getElementById('gc-dock-dropdown');
+        dd.classList.toggle('active');
+        if (dd.classList.contains('active')) {
+            document.addEventListener('click', closeGcDockOutside, true);
+        }
+    }
+    function closeGcDockOutside(e) {
+        const dd = document.getElementById('gc-dock-dropdown');
+        if (!dd.contains(e.target) && e.target.id !== 'header-duo-btn') {
+            dd.classList.remove('active');
+            document.removeEventListener('click', closeGcDockOutside, true);
+        }
+    }
+    function showGcDockTab(tab) {
+        document.getElementById('gc-dock-error').textContent = '';
+        document.querySelectorAll('.gc-dock-tab').forEach(b => b.classList.toggle('active', b.dataset.gcDock === tab));
+        document.getElementById('gc-dock-create').style.display = tab === 'create' ? 'flex' : 'none';
+        document.getElementById('gc-dock-join').style.display = tab === 'join' ? 'flex' : 'none';
+        document.getElementById('gc-dock-room-info').style.display = 'none';
+    }
+    function gcDockError(msg) { document.getElementById('gc-dock-error').textContent = msg || ''; }
+    async function gcDockCreate() {
+        gcDockError('');
+        const name = document.getElementById('gc-dock-create-name').value.trim() || 'Hôte';
+        const pwd = document.getElementById('gc-dock-create-pwd').value;
+        if (pwd.length < 4) { gcDockError('Mot de passe 4 caractères min.'); return; }
+        try {
+            prewarmGroupCallMic().catch(() => {});
+            const res = await fetch('/api/room/create', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ displayName: name, password: pwd }) });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Erreur création');
+            document.getElementById('gc-dock-create').style.display = 'none';
+            document.getElementById('gc-dock-join').style.display = 'none';
+            document.getElementById('gc-dock-room-info').style.display = 'flex';
+            document.getElementById('gc-dock-code-show').textContent = data.roomCode;
+            document.getElementById('gc-dock-pwd-show').textContent = pwd;
+            gcShareUrl = data.shareUrl || '';
+            gcRoomKey = data.roomKey || '';
+            document.querySelectorAll('.gc-dock-tabs').forEach(t => t.style.display = 'none');
+            pauseRecognitionForGroupCall();
+            await connectLiveKitRoom(data.token, data.livekitUrl);
+        } catch(e) { gcDockError(e.message); }
+    }
+    async function gcDockJoin() {
+        gcDockError('');
+        const code = document.getElementById('gc-dock-join-code').value.trim().toUpperCase();
+        const pwd = document.getElementById('gc-dock-join-pwd').value;
+        const name = document.getElementById('gc-dock-join-name').value.trim() || 'Invité';
+        if (!code) { gcDockError('Entrez le code salle'); return; }
+        if (!pwd) { gcDockError('Entrez le mot de passe'); return; }
+        try {
+            prewarmGroupCallMic().catch(() => {});
+            const res = await fetch('/api/room/join', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ roomCode: code, password: pwd, displayName: name, roomKey: gcRoomKey }) });
+            const data = await res.json();
+            if (!res.ok) { const msgs = { room_not_found:'Salle introuvable', wrong_password:'Mot de passe incorrect' }; throw new Error(msgs[data.error] || data.error || 'Erreur'); }
+            document.getElementById('gc-dock-dropdown').classList.remove('active');
+            pauseRecognitionForGroupCall();
+            await connectLiveKitRoom(data.token, data.livekitUrl);
+        } catch(e) { gcDockError(e.message); }
+    }
+    function gcDockCopyLink() {
+        if (gcShareUrl && navigator.clipboard) {
+            navigator.clipboard.writeText(gcShareUrl).then(() => gcDockError('Lien copié !'));
+        }
+    }
+
+    function setGcBusy(busy, label) {
+        gcConnecting = busy;
+        document.querySelectorAll('#gc-panel-create .btn-duo, #gc-panel-join .btn-duo, #gc-room-info .btn-duo').forEach((btn) => {
+            if (busy) {
+                if (!btn.dataset.gcOrig) btn.dataset.gcOrig = btn.textContent;
+                btn.textContent = label || 'Connexion…';
+                btn.disabled = true;
+            } else if (btn.dataset.gcOrig) {
+                btn.textContent = btn.dataset.gcOrig;
+                btn.disabled = false;
+            }
+        });
+    }
+
+    function prewarmGroupCallMic() {
+        if (currentStream?.getAudioTracks?.().some((t) => t.readyState === 'live')) {
+            return Promise.resolve(currentStream);
+        }
+        if (gcMicWarmPromise) return gcMicWarmPromise;
+        if (!navigator.mediaDevices?.getUserMedia) {
+            return Promise.reject(new Error('Micro non disponible'));
+        }
+        gcMicWarmPromise = navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } })
+            .then((stream) => {
+                currentStream = stream;
+                console.log('Groupe Call: micro pré-chauffé');
+                return stream;
+            })
+            .catch((e) => {
+                gcMicWarmPromise = null;
+                throw e;
+            });
+        return gcMicWarmPromise;
+    }
+
+    function pauseRecognitionForGroupCall() {
+        try { recognition?.stop(); } catch (e) { /* ignore */ }
+        try { recognition?.abort?.(); } catch (e) { /* ignore */ }
+        isRecording = false;
+        if (mediaRec && mediaRec.state === 'recording') {
+            try { mediaRec.stop(); } catch (e) { /* ignore */ }
+        }
+    }
 
     function showGcError(msg) {
         const el = document.getElementById('gc-error');
@@ -2733,8 +2964,10 @@
         showGcError('');
         document.getElementById('gc-room-info').style.display = 'none';
         document.getElementById('duo-selector-overlay').style.display = 'flex';
+        prewarmGroupCallMic().catch(() => {});
         const params = new URLSearchParams(location.search);
         const room = params.get('room');
+        gcRoomKey = params.get('k') || '';
         if (room) {
             document.getElementById('gc-join-code').value = room.toUpperCase();
             showGcTab('join');
@@ -2797,10 +3030,17 @@
     }
 
     async function ensureMicStream() {
-        if (!currentStream) {
-            currentStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            console.log('Microphone access granted:', currentStream.id);
+        pauseRecognitionForGroupCall();
+        if (currentStream?.getAudioTracks().some((t) => t.readyState === 'live')) {
+            return currentStream;
         }
+        if (gcMicWarmPromise) {
+            try { return await gcMicWarmPromise; } catch (e) { /* retry below */ }
+        }
+        currentStream = await navigator.mediaDevices.getUserMedia({
+            audio: { echoCancellation: true, noiseSuppression: true },
+        });
+        console.log('Microphone access granted:', currentStream.id);
         return currentStream;
     }
 
@@ -2812,7 +3052,13 @@
         if (lkRoom) {
             try { lkRoom.disconnect(); } catch (e) { /* ignore */ }
         }
-        lkRoom = new Room({ adaptiveStream: true, dynacast: true, audioCaptureDefaults: { echoCancellation: true, noiseSuppression: true } });
+        pauseRecognitionForGroupCall();
+        const stream = await ensureMicStream();
+        lkRoom = new Room({
+            adaptiveStream: false,
+            dynacast: false,
+            audioCaptureDefaults: { echoCancellation: true, noiseSuppression: true },
+        });
 
         lkRoom.on(RoomEvent.DataReceived, (payload) => handleGroupCallData(payload));
         lkRoom.on(RoomEvent.ParticipantConnected, () => updateGroupCallBar());
@@ -2829,21 +3075,34 @@
             updateGroupCallBar();
         });
 
-        await lkRoom.connect(url, token);
-        await lkRoom.localParticipant.setMicrophoneEnabled(true);
+        await lkRoom.connect(url, token, {
+            autoSubscribe: true,
+            peerConnectionTimeout: 12000,
+        });
+        const micTrack = stream.getAudioTracks()[0];
+        if (micTrack) {
+            await lkRoom.localParticipant.publishTrack(micTrack, { source: Track.Source.Microphone });
+        } else {
+            await lkRoom.localParticipant.setMicrophoneEnabled(true);
+        }
         groupCallActive = true;
         updateGroupCallBar();
         closeGroupCall();
         hideStartOverlayForGroup();
-        startRecognition();
+        const barLabel = document.getElementById('gc-bar-label');
+        if (barLabel && gcShareUrl) barLabel.textContent = `Salle ${document.getElementById('gc-room-code')?.textContent || ''}`;
         console.log('Groupe Call connecté:', lkRoom.name);
+        setTimeout(() => { if (!groupCallActive) return; try { startRecognition(); } catch (e) { /* ignore */ } }, 1200);
     }
 
     async function createGroupRoom() {
+        if (gcConnecting) return;
         showGcError('');
+        setGcBusy(true, 'Création…');
         const displayName = document.getElementById('gc-create-name').value.trim() || 'Hôte';
         const password = document.getElementById('gc-create-password').value.trim();
         try {
+            const micP = prewarmGroupCallMic().catch(() => null);
             const res = await fetch('/api/room/create', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -2851,10 +3110,13 @@
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.detail || data.error || 'Erreur création');
-            gcPendingJoin = { token: data.token, url: data.livekitUrl };
             gcShareUrl = data.shareUrl || `${location.origin}/?room=${data.roomCode}`;
+            gcRoomKey = data.roomKey || gcRoomKey;
             document.getElementById('gc-room-code').textContent = data.roomCode;
             document.getElementById('gc-room-pwd').textContent = data.password;
+            await micP;
+            setGcBusy(true, 'Connexion…');
+            await connectLiveKitRoom(data.token, data.livekitUrl);
             document.getElementById('gc-panel-create').style.display = 'none';
             document.getElementById('gc-panel-join').style.display = 'none';
             document.getElementById('gc-tabs').style.display = 'none';
@@ -2862,22 +3124,27 @@
         } catch (e) {
             console.error('createGroupRoom', e);
             showGcError(e.message || 'Impossible de créer la salle');
+        } finally {
+            setGcBusy(false);
         }
     }
 
     async function enterCreatedRoom() {
-        if (!gcPendingJoin) return;
+        if (!gcPendingJoin || gcConnecting) return;
         try {
-            await ensureMicStream();
+            setGcBusy(true, 'Connexion…');
             await connectLiveKitRoom(gcPendingJoin.token, gcPendingJoin.url);
             gcPendingJoin = null;
         } catch (e) {
             console.error('enterCreatedRoom', e);
             showGcError(e.message || 'Connexion impossible');
+        } finally {
+            setGcBusy(false);
         }
     }
 
     async function joinGroupRoom() {
+        if (gcConnecting) return;
         showGcError('');
         const roomCode = document.getElementById('gc-join-code').value.trim().toUpperCase();
         const password = document.getElementById('gc-join-password').value.trim();
@@ -2891,21 +3158,27 @@
             return;
         }
         try {
-            const res = await fetch('/api/room/join', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ roomCode, password, displayName }),
-            });
+            setGcBusy(true, 'Connexion…');
+            pauseRecognitionForGroupCall();
+            const [res] = await Promise.all([
+                fetch('/api/room/join', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ roomCode, password, displayName, roomKey: gcRoomKey }),
+                }),
+                prewarmGroupCallMic().catch(() => null),
+            ]);
             const data = await res.json();
             if (!res.ok) {
                 const msgs = { room_not_found: 'Salle introuvable', wrong_password: 'Mot de passe incorrect' };
                 throw new Error(msgs[data.error] || data.error || 'Erreur');
             }
-            await ensureMicStream();
             await connectLiveKitRoom(data.token, data.livekitUrl);
         } catch (e) {
             console.error('joinGroupRoom', e);
             showGcError(e.message || 'Connexion impossible');
+        } finally {
+            setGcBusy(false);
         }
     }
 
@@ -2921,6 +3194,7 @@
             try { lkRoom.disconnect(); } catch (e) { /* ignore */ }
             lkRoom = null;
         }
+        gcMicWarmPromise = null;
         updateGroupCallBar();
     }
 

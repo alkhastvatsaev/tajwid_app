@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "framework": null,
+  "buildCommand": "echo legacy-static",
+  "outputDirectory": "public",
+  "installCommand": "echo skip",
   "cleanUrls": true,
   "rewrites": [
     {

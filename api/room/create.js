@@ -4,6 +4,7 @@ const {
   randomPassword,
   createLiveKitToken,
   createRoom,
+  signRoomKey,
   shareUrl,
 } = require('../lib/livekit-room');
 
@@ -22,13 +23,16 @@ module.exports = async function handler(req, res) {
     if (!password) password = randomPassword();
 
     const roomCode = randomRoomCode();
-    await createRoom(roomCode, password);
-    const { token, url } = await createLiveKitToken(roomCode, displayName, true);
+    const [{ token, url }] = await Promise.all([
+      createLiveKitToken(roomCode, displayName, true),
+      createRoom(roomCode, password),
+    ]);
 
     return res.status(200).json({
       roomCode,
       password,
-      shareUrl: shareUrl(req, roomCode),
+      roomKey: signRoomKey(roomCode, password),
+      shareUrl: shareUrl(req, roomCode, password),
       token,
       livekitUrl: url,
     });
