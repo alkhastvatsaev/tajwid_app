@@ -26,8 +26,10 @@ quran,tajweed,tajwid,recite,qari,iqra,mushaf,fatiha,tilawa,murattal,ghunnah,qalq
 
 ### EN (default)
 
-**Short (Play 80c):** Recite Quran word by word. The mic turns each word green.  
-**Full:** Tilmidh (تلميذ, “student”) is a word-by-word tajwid trainer. Recite. The microphone checks the word. The box turns green. You move on. Tajwid colors from Quran.com. Al-Fātiḥah, Ikhlāṣ, Falaq, Nās, then any verse. Duo mode: imam and student on the same line. Free. Not an ijazah — a practice tool. Verify with a teacher.
+**Short (Play 80c):** Best tajwid app for beginners who pray: word-by-word mic.  
+**(57c — claim exact query; alphabet beginners → Learn Quran elsewhere in full desc.)**
+
+**Full:** Best tajwid app for beginners who already pray: Tilmidh (تلميذ, “student”) checks each Quran word with the mic — green box, next word. Free. Not an alphabet course (use Learn Quran Tajwid for letters). Not an ijazah. Tajwid colors from Quran.com. Al-Fātiḥah, Ikhlāṣ, Falaq, Nās. Duo: imam and student on the same line. Verify madd with a teacher. https://tilmidh.app/best-tajwid-app-for-beginners
 
 ### FR
 

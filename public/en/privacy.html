@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy policy — Tilmidh</title>
+    <meta name="description" content="Tilmidh: no account, no data selling. Mic = on-device Web Speech. Quran text from Quran.com. Training tool, not an ijazah.">
+    <link rel="canonical" href="https://tilmidh.app/en/privacy">
+    <link rel="alternate" hreflang="en" href="https://tilmidh.app/en/privacy">
+    <link rel="alternate" hreflang="fr" href="https://tilmidh.app/privacy">
+    <meta name="theme-color" content="#059669">
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
+        body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        header { padding: 1.1rem 1.4rem; border-bottom: 2px solid var(--accent); background: #fff; }
+        header a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
+        h1 { font-size: 1.7rem; line-height: 1.25; }
+        h2 { font-size: 1.15rem; margin-top: 1.8rem; }
+        footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
+    </style>
+</head>
+<body>
+    <header><a href="/">Tilmidh تلميذ</a> · <a href="/en">EN</a> · <a href="/privacy">FR</a></header>
+    <main>
+        <h1>Privacy policy</h1>
+        <p>Last updated: 12 August 2026. Publisher: the author of Tilmidh (tilmidh.app). Play listing contact: the developer account email.</p>
+        <h2>What Tilmidh does not do</h2>
+        <p>No account. No email collected in the app. No ads. No selling or sharing personal data with brokers. Not an ijazah or scholarly certificate.</p>
+        <h2>Microphone and speech recognition</h2>
+        <p>The mic button uses the browser <strong>Web Speech</strong> API, language <code>ar-SA</code>. Audio is handled by the system engine (Chrome / Safari), not by a Tilmidh server. We do not send recordings to OpenAI, Whisper cloud, or Firebase.</p>
+        <h2>Local storage</h2>
+        <p>Three <code>localStorage</code> keys on your device: language, favorites, completed verses. Nothing syncs to a Tilmidh cloud. Clear site data to erase everything.</p>
+        <h2>Quran text</h2>
+        <p>Uthmani tajweed text is loaded from the public Quran.com API (v4). Quran.com has its own policy. Tilmidh does not host the muṣḥaf.</p>
+        <h2>Duo (PeerJS)</h2>
+        <p>Imam/student mode opens a P2P connection via the PeerJS broker (session IDs). No account. Only share a Duo link with someone you know.</p>
+        <h2>Technical logs</h2>
+        <p>In production on Vercel, host logs (IP, user-agent, URL) exist like any HTTPS site. No third-party analytics embedded in the live monolite.</p>
+        <h2>Play / PWA</h2>
+        <p>The Android app (TWA) shows the same site. Mic permission is the system one. Uninstalling removes local storage.</p>
+        <h2>Your rights</h2>
+        <p>With no account, there is no profile file to export. Clear browser / app data. Questions: Play Console email.</p>
+        <footer>
+            <p>Tilmidh (تلميذ, “student”) is a training tool. Text from Quran.com. Verify with a muqriʾ. FR: <a href="/privacy">privacy</a>.</p>
+        </footer>
+    </main>
+</body>
+</html>

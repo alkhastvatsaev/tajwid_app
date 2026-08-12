@@ -4,21 +4,59 @@
     <loc>https://tilmidh.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tilmidh.app/en"/>
   </url>
   <url>
     <loc>https://tilmidh.app/en</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tilmidh.app/en"/>
   </url>
   <url>
     <loc>https://tilmidh.app/best-tajwid-app-for-beginners</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/best-tajwid-app-for-beginners"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/best-tajwid-app-for-beginners"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/apprendre-tajwid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tilmidh.app/best-tajwid-app-for-beginners"/>
   </url>
   <url>
     <loc>https://tilmidh.app/id</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tilmidh.app/en"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/ar</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tilmidh.app/en"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/id/best-tajwid-app-for-beginners</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/best-tajwid-app-for-beginners"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/best-tajwid-app-for-beginners"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/apprendre-tajwid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tilmidh.app/best-tajwid-app-for-beginners"/>
   </url>
   <url>
     <loc>https://tilmidh.app/apprendre-tajwid</loc>
@@ -34,6 +72,15 @@
     <loc>https://tilmidh.app/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/privacy"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/privacy"/>
   </url>
   <url>
     <loc>https://tilmidh.app/llms.txt</loc>
@@ -44,45 +91,146 @@
     <loc>https://tilmidh.app/regle/qalqalah</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/qalqalah"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/qalqalah"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/regle/qalqalah"/>
   </url>
   <url>
     <loc>https://tilmidh.app/regle/ghunnah</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/ghunnah"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/ghunnah"/>
   </url>
   <url>
     <loc>https://tilmidh.app/regle/idgham</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/idgham"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/idgham"/>
   </url>
   <url>
     <loc>https://tilmidh.app/regle/ikhfa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/ikhfa"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/ikhfa"/>
   </url>
   <url>
     <loc>https://tilmidh.app/regle/madd</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/madd"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/madd"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/regle/madd"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/regle/qalqalah</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/qalqalah"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/qalqalah"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/regle/qalqalah"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/regle/ghunnah</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/ghunnah"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/ghunnah"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/regle/idgham</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/idgham"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/idgham"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/regle/ikhfa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/ikhfa"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/ikhfa"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/regle/madd</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/madd"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/madd"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/regle/madd"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/id/regle/qalqalah</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/regle/qalqalah"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/qalqalah"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/qalqalah"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/id/regle/madd</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tilmidh.app/id/regle/madd"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/regle/madd"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/regle/madd"/>
   </url>
   <url>
     <loc>https://tilmidh.app/sourate/1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/1"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/1"/>
   </url>
   <url>
     <loc>https://tilmidh.app/sourate/112</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/112"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/112"/>
   </url>
   <url>
     <loc>https://tilmidh.app/sourate/113</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/113"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/113"/>
   </url>
   <url>
     <loc>https://tilmidh.app/sourate/114</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/114"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/114"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/sourate/1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/1"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/1"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/sourate/112</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/112"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/112"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/sourate/113</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/113"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/113"/>
+  </url>
+  <url>
+    <loc>https://tilmidh.app/en/sourate/114</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/114"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/114"/>
   </url>
 </urlset>

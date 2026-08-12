@@ -1,13 +1,13 @@
 {
   "name": "Tilmidh",
   "short_name": "Tilmidh",
-  "description": "Entraînement tajwid mot à mot. Outil pédagogique, pas une ijazah.",
+  "description": "Best tajwid practice for beginners who pray: word-by-word mic trainer. Not an ijazah.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#030303",
   "theme_color": "#059669",
-  "lang": "fr",
+  "lang": "en",
   "dir": "ltr",
   "icons": [
     {
