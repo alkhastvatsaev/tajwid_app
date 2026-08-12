@@ -3091,7 +3091,7 @@
             </button>
         </div>
 
-        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous — swipe down" aria-label="Rendez-vous professeurs (swipe down)">
+        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Rendez-vous professeurs">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
         </button>
 
@@ -3753,7 +3753,8 @@
     }
     function onIpadWheel(e) {
         if (ipadClosing || ipadDragActive) return;
-        // trackpad / molette : swipe down (deltaY > 0) ouvre, swipe up ferme
+        // Desktop trackpad / molette : swipe down ouvre, swipe up ferme
+        // (mobile tactile reste swipe up = ouvrir, swipe down = ranger)
         if (!ipadPanelActive) {
             if (e.deltaY > 28) {
                 e.preventDefault();
@@ -3790,8 +3791,8 @@
                 ipadDragActive = false;
                 return;
             }
-            // closed → only swipe down opens ; open → vertical drag
-            if (!ipadDragFromOpen && dy > -8) return;
+            // Mobile : swipe up ouvre (desktop = wheel inversé séparément)
+            if (!ipadDragFromOpen && dy < 8) return;
             ipadDragCommitted = true;
             cancelIpadEntrance();
             if (!ipadDragFromOpen) {
@@ -3801,11 +3802,11 @@
         }
         var range = Math.max(220, window.innerHeight * 0.52);
         if (ipadDragFromOpen) {
-            // swipe up ferme, swipe down remonte
-            ipadProgress = ipadClamp01(ipadDragStartProgress - dy / range);
+            // mobile : swipe up remonte, swipe down range / ferme
+            ipadProgress = ipadClamp01(ipadDragStartProgress + dy / range);
         } else {
-            // swipe down ouvre
-            ipadProgress = ipadClamp01((-dy) / range);
+            // mobile : swipe up ouvre
+            ipadProgress = ipadClamp01(dy / range);
         }
         updateIpadScrollAnim();
         e.preventDefault();
