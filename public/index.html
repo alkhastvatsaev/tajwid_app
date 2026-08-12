@@ -296,8 +296,8 @@
             transform-origin: center center;
             transform: translateY(calc(-50% + 24vh)) scale(0.5);
             transition: opacity 0.58s ease, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.58s, filter 0.58s ease;
-            will-change: transform, opacity, filter;
-            filter: blur(0);
+            will-change: transform, opacity;
+            filter: none;
         }
         .ayah-words {
             display: flex;
@@ -307,29 +307,28 @@
             gap: 25px 12px;
             width: 100%;
             direction: rtl;
+            overflow: visible;
+            padding: 6px 8px 2px;
         }
         .ayah-line.active-ayah {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
             transform: translateY(-50%) scale(1);
-            filter: blur(0);
-            z-index: 3;
-            max-height: calc(100dvh - 210px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-            overflow-x: hidden;
-            overflow-y: auto;
-            overscroll-behavior: contain;
-            scrollbar-width: none;
+            filter: none;
+            isolation: isolate;
+            z-index: 5;
+            overflow: visible;
+            max-height: none;
             padding: 4px 0 6px;
         }
-        .ayah-line.active-ayah::-webkit-scrollbar { display: none; }
         .ayah-line.ayah-prev {
             opacity: 0.28;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% - 22vh)) scale(0.5);
             filter: blur(5px);
-            z-index: 2;
+            z-index: 1;
         }
         .ayah-line.ayah-next {
             opacity: 0.28;
@@ -337,7 +336,7 @@
             pointer-events: none;
             transform: translateY(calc(-50% + 22vh)) scale(0.5);
             filter: blur(5px);
-            z-index: 2;
+            z-index: 1;
         }
         .ayah-line.ayah-prev .translit-container,
         .ayah-line.ayah-next .translit-container {
@@ -374,6 +373,7 @@
             position: relative;
             cursor: pointer;
             box-shadow: none;
+            overflow: visible;
         }
 
         .word-box:hover {
@@ -402,14 +402,6 @@
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-        }
-        .ayah-line.active-ayah .verse-marker {
-            position: sticky;
-            bottom: 0;
-            z-index: 6;
-            opacity: 0.72;
-            background: color-mix(in srgb, var(--bg) 82%, transparent);
-            box-shadow: 0 -10px 18px color-mix(in srgb, var(--bg) 70%, transparent);
         }
         .verse-marker:hover {
             opacity: 1;
@@ -549,6 +541,9 @@
             letter-spacing: 0 !important;
             word-spacing: normal !important;
             white-space: nowrap;
+            overflow: visible;
+            line-height: 1.55;
+            padding: 0.12em 0.18em 0;
         }
 
         .translit-container {
@@ -1929,17 +1924,19 @@
             }
             .ayah-line.active-ayah {
                 transform: translateY(-50%) scale(1);
-                filter: blur(0);
-                max-height: calc(100dvh - 190px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                filter: none;
+                overflow: visible;
+                max-height: none;
             }
             .arabic-word {
                 font-size: clamp(3.35rem, 16.5vmin, 4.8rem) !important;
-                line-height: 1.35;
+                line-height: 1.55;
             }
             .word-box {
                 min-width: 0;
-                padding: 4px 2px 26px;
+                padding: 10px 6px 28px;
                 flex: 0 1 auto;
+                overflow: visible;
             }
             .translit-container {
                 transform: translate(-50%, -4px);
