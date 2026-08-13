@@ -50,6 +50,9 @@
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Best tajwid practice app for beginners who already pray: word-by-word mic trainer. Free. Not an ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["en","fr","id","ar","ru"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://tilmidh.app/en","https://tilmidh.app/best-tajwid-app-for-beginners"]}
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <!-- Preload mushaf COLR fonts — avoid 1s flash of Tilmidh/system serif -->
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* COLR tajweed font — colors in glyphs, joining intact (Safari-safe) */
         @font-face {
@@ -57,7 +60,7 @@
             src: url('/fonts/KFGQPCHAFSColored-Bold.woff2') format('woff2');
             font-weight: 400 700;
             font-style: normal;
-            font-display: swap;
+            font-display: block;
         }
         /* Validated: same KFGQPC outlines, every glyph COLR #3B82F6 */
         @font-face {
@@ -65,14 +68,14 @@
             src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2') format('woff2');
             font-weight: 400 700;
             font-style: normal;
-            font-display: swap;
+            font-display: block;
         }
         @font-face {
             font-family: 'Tilmidh Tajweed';
             src: url('/fonts/TilmidhTajweed-Regular.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
-            font-display: swap;
+            font-display: optional;
         }
     </style>
     <link rel="preconnect" href="https://tilmidh-20wxcwho.livekit.cloud" crossorigin>
@@ -543,9 +546,9 @@
             border-color: rgba(245, 158, 11, 0.35);
         }
 
-        /* COLR tajweed: one shaped run — colors live in the font (KFGQPC / TilmidhTajweed). */
+        /* COLR tajweed: one shaped run — KFGQPC only (no Tilmidh/serif flash). */
         .arabic-word {
-            font-family: 'KFGQPC Colored', 'Tilmidh Tajweed', serif;
+            font-family: 'KFGQPC Colored';
             font-weight: 700;
             font-size: clamp(1.8rem, 5vw, 2.5rem); 
             margin-bottom: 0;
@@ -7299,6 +7302,12 @@
 
         // Chargement initial
         try {
+            if (document.fonts?.load) {
+                await Promise.all([
+                    document.fonts.load("700 4rem 'KFGQPC Colored'"),
+                    document.fonts.load("700 4rem 'KFGQPC Validated'")
+                ]).catch(() => {});
+            }
             if (FATIHA_ONLY) {
                 await fetchVerseFromAPI('1');
                 console.log("FATIHA_ONLY: Al-Fātiḥah loaded");
