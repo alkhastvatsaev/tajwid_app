@@ -41,3 +41,4 @@ twa/.gradle/
 twa/gradle/
 twa/gradlew*
 .gstack/
+fonts/vendor/

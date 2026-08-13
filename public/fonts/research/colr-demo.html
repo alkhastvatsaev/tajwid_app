@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tilmidh — démo COLR vs spans</title>
+  <style>
+    @font-face {
+      font-family: "KFGQPC Colored";
+      src: url("../KFGQPCHAFSColored-Bold.woff2") format("woff2");
+      font-display: swap;
+    }
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 40rem;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background: #faf8f5;
+      color: #1c1916;
+    }
+    h1 { font-size: 1.1rem; }
+    .row {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e8e4dc;
+    }
+    .ar {
+      font-size: 2.4rem;
+      line-height: 1.8;
+      direction: rtl;
+      text-align: center;
+    }
+    .colr { font-family: "KFGQPC Colored", serif; }
+    .broken span { color: #14b8a6; }
+    .note { font-size: 0.85rem; color: #64748b; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Jointure arabe + couleur</h1>
+  <p class="note">Serveur : <code>python3 server.py</code> puis ouvrir <code>/fonts/research/colr-demo.html</code> — tester aussi sur Safari.</p>
+
+  <div class="row">
+    <strong>A — Police COLR (KFGQPC Colored)</strong>
+    <div class="ar colr">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+    <p class="note">Couleurs dans le glyphe. Jointures intactes. Pas de span mid-mot.</p>
+  </div>
+
+  <div class="row">
+    <strong>B — Même texte + span CSS (ce qui casse Safari)</strong>
+    <div class="ar broken">بِسْمِ ٱللَّهِ ٱلرَّحْ<span>ـٰ</span>نِ ٱلرَّحِيمِ</div>
+    <p class="note">Sur Safari le <code>ـٰ</code> coloré devient souvent une barre.</p>
+  </div>
+</body>
+</html>
