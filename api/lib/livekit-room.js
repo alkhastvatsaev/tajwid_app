@@ -56,8 +56,17 @@ function roomName(roomCode) {
   return `tilmidh-${String(roomCode).toUpperCase()}`;
 }
 
+function getRoomPepper() {
+  const pepper = process.env.ROOM_PEPPER || process.env.LIVEKIT_API_SECRET;
+  if (pepper) return pepper;
+  if (process.env.VERCEL_ENV === 'production') {
+    throw new Error('ROOM_PEPPER required in production');
+  }
+  return 'tilmidh-room-v1';
+}
+
 function hashPassword(roomCode, password) {
-  const pepper = process.env.ROOM_PEPPER || 'tilmidh-room-v1';
+  const pepper = getRoomPepper();
   return crypto
     .createHash('sha256')
     .update(`${pepper}:${String(roomCode).toUpperCase()}:${password}`)
@@ -94,7 +103,7 @@ async function createLiveKitToken(roomCode, displayName, isHost = false) {
 }
 
 function signRoomKey(roomCode, password) {
-  const secret = process.env.LIVEKIT_API_SECRET || process.env.ROOM_PEPPER || 'tilmidh-room-v1';
+  const secret = process.env.LIVEKIT_API_SECRET || getRoomPepper();
   const pwdHash = hashPassword(roomCode, password);
   return crypto
     .createHmac('sha256', secret)

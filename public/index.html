@@ -2300,7 +2300,6 @@
             color: var(--subtext);
             opacity: 0.6;
         }
-        #progress-label, #progress-percent { display: none !important; }
         .assistant-section {
             display: flex;
             flex-direction: column;
@@ -2838,7 +2837,7 @@
     <script>
         (function () {
             try {
-                var themeBoot = localStorage.getItem('tajwid_theme') || 'blue';
+                var themeBoot = 'blue';
                 document.documentElement.setAttribute('data-theme', themeBoot);
                 var langBoot = localStorage.getItem('tajwid_lang') || 'fr';
                 document.documentElement.setAttribute('data-lang', langBoot);
@@ -2882,12 +2881,6 @@
             <svg class="icon-translit-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9"/><path d="M8.5 6v2"/><path d="M5.5 15c1.2-3.2 3.2-6 7-8"/><path d="M13 20l3.2-9h.6L20 20"/><path d="M14.2 17h4.6"/><path d="M4 4l16 16"/></svg>
         </button>
 
-        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme(event)" title="Thème" aria-label="Cycle thème sombre / vert / bleu">
-            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <svg class="icon-blue" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-        </button>
-
         <div class="gc-dock-wrap">
             <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="toggleGcDockMenu(event)" title="Groupe Call" aria-label="Groupe Call">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
@@ -2896,11 +2889,6 @@
 
         <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Rendez-vous professeurs">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
-        </button>
-
-        <button class="profile-btn" onclick="openStatsModal()">
-            <span id="progress-percent" style="display:none">0%</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </button>
 
         <div class="lang-options dock-dropdown" id="lang-options" onclick="event.stopPropagation()">
@@ -2942,41 +2930,15 @@
 
     <div class="container">
 
-        <div id="download-btn">
-            <button onclick="downloadFullAudio()">
-                <span id="txt-download">Télécharger ma récitation</span>
-            </button>
-        </div>
-
         <div id="verse-container" onclick="openTajweedModal(event)"></div>
 
     <!-- Background Feedback Elements -->
     <div id="ghost-word-container"></div>
     <div class="voice-aura" id="voice-aura"></div>
         <div class="bottom-controls">
-            <button id="restart-btn" class="visible" style="display:none; background:var(--success); color:white; border:none; padding:14px 35px; border-radius:100px; font-weight:600; cursor:pointer;" onclick="restartRecitation()">Recommencer</button>
+            <button id="restart-btn" style="background:var(--success); color:white; border:none; padding:14px 35px; border-radius:100px; font-weight:600; cursor:pointer;" onclick="restartRecitation()">Recommencer</button>
             <div id="install-pwa-banner"></div>
             <div id="rate-tilmidh-banner"></div>
-            <button id="report-diag-btn" style="position:relative; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); padding:10px 20px; border-radius:100px; font-size: 0.8rem; cursor:pointer; backdrop-filter:blur(10px);" onclick="manualReport()">
-                <span id="report-btn-text">Rapport Technique</span>
-            </button>
-            <button id="voice-lab-btn" type="button" onclick="openVoiceLab()" style="position:relative; background:rgba(5,150,105,0.25); color:white; border:1px solid rgba(5,150,105,0.45); padding:10px 20px; border-radius:100px; font-size: 0.8rem; cursor:pointer; backdrop-filter:blur(10px);">
-                <span id="txt-voice-lab-btn">Voice Lab · Tarteel</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Voice Lab: analyse écart vs Tarteel -->
-    <div id="voice-lab-modal" class="modal-overlay" onclick="closeVoiceLab()" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(18px); z-index:5200; display:none; align-items:center; justify-content:center; padding:16px;">
-        <div class="tajwid-modal" style="max-width:560px; width:100%; max-height:88vh; overflow:auto; text-align:left;" onclick="event.stopPropagation()">
-            <div class="modal-tag" style="background:linear-gradient(135deg,#059669,#0ea5e9)">Voice Lab</div>
-            <div class="modal-title" id="txt-voice-lab-title" style="font-size:1.35rem;">Analyse vocale vs Tarteel</div>
-            <p class="modal-desc" id="txt-voice-lab-desc" style="margin-bottom:14px;">Métriques de session pour fermer l’écart avec Tarteel (WER ~4 %, latence &lt;200 ms, word-level).</p>
-            <div id="voice-lab-body" style="font-size:0.78rem; line-height:1.45; color:var(--text);"></div>
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;">
-                <button class="close-modal" type="button" onclick="downloadVoiceLabJson()" style="flex:1; min-width:140px;">Export JSON</button>
-                <button class="close-modal" type="button" onclick="closeVoiceLab()" style="flex:1; min-width:140px; background:transparent; border:1px solid rgba(255,255,255,0.2);">Fermer</button>
-            </div>
         </div>
     </div>
 
@@ -3002,58 +2964,6 @@
             padding: 16px 30px;
             font-size: 0.95rem;
             box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
-        }
-        #report-diag-btn { 
-            width: auto; 
-            opacity: 0.6; 
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        #voice-lab-btn {
-            width: auto;
-            opacity: 0.95;
-        }
-        .voice-lab-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin: 10px 0 14px;
-        }
-        .voice-lab-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 10px 12px;
-        }
-        .voice-lab-card .vl-val {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .voice-lab-card .vl-label {
-            font-size: 0.65rem;
-            color: var(--subtext);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-top: 2px;
-        }
-        .voice-lab-card.ok .vl-val { color: #34c759; }
-        .voice-lab-card.warn .vl-val { color: #f59e0b; }
-        .voice-lab-card.bad .vl-val { color: #ef4444; }
-        .voice-lab-list {
-            margin: 0;
-            padding-left: 1.1rem;
-        }
-        .voice-lab-list li { margin-bottom: 6px; }
-        .voice-lab-mono {
-            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-            font-size: 0.68rem;
-            background: rgba(0,0,0,0.25);
-            border-radius: 8px;
-            padding: 8px 10px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-break: break-word;
         }
     </style>
 
@@ -3121,37 +3031,6 @@
         </div>
     </div>
 
-    <!-- Stats Modal -->
-    <div id="stats-modal" class="modal-overlay" onclick="closeStatsModal()" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(20px); z-index:5000; display:none; align-items:center; justify-content:center;">
-        <div class="tajwid-modal" style="max-width:400px; width:90%;" onclick="event.stopPropagation()">
-            <div class="modal-tag" style="background:linear-gradient(135deg, var(--accent), #5e5ce6)">Progression</div>
-            <div class="modal-title" id="txt-stats-title">Tableau de Bord</div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-completed">0</div>
-                    <div class="stat-label" id="txt-stats-verses">Versets</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-favorites">0</div>
-                    <div class="stat-label" id="txt-stats-favs">Favoris</div>
-                </div>
-            </div>
-
-            <div style="text-align: left; margin-bottom: 20px;">
-                <div style="display:flex; justify-content:space-between; font-size: 0.8rem; margin-bottom: 8px;">
-                    <span style="color:white" id="txt-stats-goal">Objectif Coran</span>
-                    <span style="color:var(--accent)" id="progress-label">0%</span>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="profile-progress-bar"></div>
-                </div>
-            </div>
-            
-            <button class="close-modal" id="txt-stats-continue" style="width:100%" onclick="closeStatsModal()">Continuer l'apprentissage</button>
-        </div>
-    </div>
-
     <!-- Smart Import Modal -->
     <!-- Summary Modal -->
     <!-- Summary Modal Removed -->
@@ -3170,36 +3049,6 @@
                 <button class="close-modal" id="btn-import-exec" onclick="fetchVerseFromAPI()">Importer</button>
             </div>
         </div>
-    </div>
-
-    <div id="live-assistant">
-        <div class="assistant-header">
-            <div class="pulse-red"></div>
-            <span id="txt-assistant-title">Suivi de récitation</span>
-        </div>
-        <div id="txt-assistant-layer" style="font-size:0.55rem; color:var(--subtext); line-height:1.35; margin:14px 0 4px; opacity:0.85;">
-            Mot par mot en temps réel (Chrome)
-        </div>
-        
-        <div class="assistant-section">
-            <div class="assistant-label" id="txt-assistant-target">Mot cible</div>
-            <div class="assistant-val target" id="assistant-target-word">...</div>
-            <div style="font-size: 0.7rem; color: var(--accent); margin-top: 2px;" id="assistant-target-translit"></div>
-        </div>
-
-        <div class="assistant-section">
-            <div class="assistant-label" id="txt-assistant-heard">Vous avez dit</div>
-            <div class="assistant-val heard" id="assistant-heard-word">...</div>
-        </div>
-
-        <button type="button" id="whisper-rec-btn" disabled style="display:none">Écoute continue</button>
-
-        <div class="tarteel-error-bar" id="tarteel-error-bar" aria-live="polite">
-            <span><span id="txt-tarteel-errors">Erreurs</span>: <span class="tarteel-count" id="tarteel-missed-count">0</span></span>
-            <span><span id="txt-tarteel-extras">En trop</span>: <span class="tarteel-extra-count" id="tarteel-extra-count">0</span></span>
-        </div>
-
-        <div id="assistant-feedback-box" class="assistant-feedback"></div>
     </div>
 
     <div id="duo-selector-overlay">
@@ -3234,34 +3083,6 @@
         <span id="gc-bar-label" style="font-weight:600;">Groupe Call</span>
         <span id="gc-participant-count">1</span>
         <button type="button" class="btn-duo" style="margin:0;padding:6px 12px;font-size:0.7rem;" onclick="leaveGroupCall()">Quitter</button>
-    </div>
-
-    <div id="start-overlay" style="cursor: pointer; z-index: 9999;">
-
-        <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
-            <div class="start-icon" id="main-start-btn">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-            </div>
-            <p id="txt-start" style="font-weight: 500;">Touchez pour commencer</p>
-
-            <label id="dataset-optin-label" onclick="event.stopPropagation();" style="display:flex; align-items:flex-start; gap:10px; max-width:280px; text-align:left; font-size:0.72rem; line-height:1.35; color:var(--subtext); cursor:pointer; user-select:none;">
-                <input type="checkbox" id="dataset-optin" onclick="event.stopPropagation();" style="margin-top:3px; accent-color:var(--accent); flex-shrink:0;">
-                <span id="txt-dataset-optin">J’accepte d’enregistrer cette Fātiḥah (audio + télémétrie riche) pour améliorer l’app</span>
-            </label>
-            <label id="mistake-test-label" onclick="event.stopPropagation();" style="display:flex; align-items:flex-start; gap:10px; max-width:280px; text-align:left; font-size:0.72rem; line-height:1.35; color:var(--subtext); cursor:pointer; user-select:none;">
-                <input type="checkbox" id="mistake-test-optin" onclick="event.stopPropagation();" style="margin-top:3px; accent-color:#ff453a; flex-shrink:0;">
-                <span id="txt-mistake-test">Mode test fautes (désactive la grammaire STT qui « corrige » tes voyelles)</span>
-            </label>
-            
-            <button id="duo-mode-btn" class="btn-duo" onclick="event.stopPropagation(); document.getElementById('gc-dock-dropdown').classList.add('active');">GROUPE CALL</button>
-
-            <div class="daily-card" id="daily-verse-card" style="margin-top: 20px;">
-                <div class="daily-label" id="txt-daily-label">Verset du Jour</div>
-                <div class="daily-ref" id="daily-ref-text">Sourate ...</div>
-                <div class="daily-sub" id="txt-daily-sub">Appuyez pour découvrir</div>
-            </div>
-
-        </div>
     </div>
 
     <script>
@@ -4484,13 +4305,19 @@
     }
 
     function updateStatsUI() {
-        document.getElementById('stat-completed').innerText = completedRefs.length;
-        document.getElementById('stat-favorites').innerText = favorites.length;
+        const completedEl = document.getElementById('stat-completed');
+        if (!completedEl) return;
+        completedEl.innerText = completedRefs.length;
+        const favEl = document.getElementById('stat-favorites');
+        if (favEl) favEl.innerText = favorites.length;
         const denom = Math.max(countLibraryAyahs(), completedRefs.length, 1);
         const percent = Math.min(100, ((completedRefs.length / denom) * 100)).toFixed(1);
-        document.getElementById('progress-percent').innerText = percent + "%";
-        document.getElementById('progress-label').innerText = percent + "%";
-        document.getElementById('profile-progress-bar').style.width = percent + "%";
+        const pctEl = document.getElementById('progress-percent');
+        if (pctEl) pctEl.innerText = percent + "%";
+        const labelEl = document.getElementById('progress-label');
+        if (labelEl) labelEl.innerText = percent + "%";
+        const bar = document.getElementById('profile-progress-bar');
+        if (bar) bar.style.width = percent + "%";
     }
 
     function transliterateToCyrillic(text) {
@@ -4516,8 +4343,8 @@
         return num.toString().split('').map(digit => arabicDigits[digit] || digit).join('');
     }
 
-    // Mode focus désactivé en prod — import, browser, ?ref= et sourates 112–114 disponibles
-    const FATIHA_ONLY = false;
+    // Mode focus : Al-Fātiḥah seulement
+    const FATIHA_ONLY = true;
     const FATIHA_SURAH = 1;
     const FATIHA_AYAH_COUNT = 7;
 
@@ -4720,28 +4547,29 @@
         if (!html || !html.includes('madda_normal')) return html;
         // Quran.com met parfois seul le ـٰ (U+0670) dans la balise — invisible une fois colorié
         return html.replace(
-            /([\u0621-\u064A\u0671])([\u064B-\u0652]*)<tajweed class=madda_normal>([^<]*)<\/tajweed>/g,
+            /([\u0621-\u064A\u0671])([\u064B-\u0652]*)<tajweed class=["']?madda_normal["']?>([^<]*)<\/tajweed>/g,
             '<tajweed class="madda_normal">$1$2$3</tajweed>'
         );
     }
 
+    const HARAKA = '[\u064B-\u0652\u0670]*';
     function applyFatihaTabiiMarkup(html, cleanText) {
         const norm = normalize(cleanText || '');
         if (!FATIHA_TABII_EXTRA[norm] || /madda_/.test(html)) return html;
         if (norm === 'اياك' || norm === 'واياك') {
-            return html.replace(/(يَّ)(ا)(كَ)/, '<tajweed class="madda_normal">$1$2</tajweed>$3');
+            return html.replace(new RegExp('(ي' + HARAKA + 'ا)(ك' + HARAKA + ')'), '<tajweed class="madda_normal">$1</tajweed>$2');
         }
         if (norm === 'اهدنا') {
-            return html.replace(/(نَا)$/, '<tajweed class="madda_normal">$1</tajweed>');
+            return html.replace(new RegExp('(ن' + HARAKA + 'ا' + HARAKA + ')$'), '<tajweed class="madda_normal">$1</tajweed>');
         }
         if (norm === 'الذين') {
-            return html.replace(/(ِينَ)/, '<tajweed class="madda_normal">$1</tajweed>');
+            return html.replace(new RegExp('(ي' + HARAKA + 'ن' + HARAKA + ')'), '<tajweed class="madda_normal">$1</tajweed>');
         }
         if (norm === 'المغضوب') {
-            return html.replace(/(ُوبِ)/, '<tajweed class="madda_normal">$1</tajweed>');
+            return html.replace(new RegExp('(و' + HARAKA + 'ب' + HARAKA + ')'), '<tajweed class="madda_normal">$1</tajweed>');
         }
         if (norm === 'ولا') {
-            return html.replace(/(لَا)$/, '<tajweed class="madda_normal">$1</tajweed>');
+            return html.replace(new RegExp('(ل' + HARAKA + 'ا' + HARAKA + ')$'), '<tajweed class="madda_normal">$1</tajweed>');
         }
         return html;
     }
@@ -4923,6 +4751,7 @@
     }
 
     function openTajweedModal(e) {
+        if (!isRecording) return;
         const el = e.target.closest('tajweed, span, [class*="madda"], .ghunnah, .ikhfa, .qalqalah, .iqlab, .idgham_with_ghunnah, .ham_wasl');
         if (!el) return;
 
@@ -5216,12 +5045,11 @@
     }
 
     function showSttUnsupportedHint() {
-        const startTxt = document.getElementById('txt-start');
-        const overlay = document.getElementById('start-overlay');
-        if (startTxt) {
-            startTxt.innerText = 'Micro non disponible ici — utilisez Safari (iOS) ou Chrome (Android/desktop).';
+        const btn = document.getElementById('restart-btn');
+        if (btn) {
+            btn.innerText = 'Micro non disponible — Safari (iOS) ou Chrome';
+            btn.disabled = true;
         }
-        if (overlay) overlay.style.display = 'flex';
     }
 
     // === Reconnaissance vocale + audio (Whisper primaire / WebSpeech secours) ===
@@ -5296,8 +5124,7 @@
             whisperRecording = false;
             whisperBusy = false;
             resetTarteelStats();
-            if (overlay) overlay.style.display = 'none';
-            document.getElementById('live-assistant')?.classList.add('visible');
+            document.getElementById('restart-btn')?.classList.remove('visible');
             resetUI();
             updateAssistantWords();
             setWhisperBtnState('idle');
@@ -6907,8 +6734,9 @@
         const restartBtn = document.getElementById('restart-btn');
         if (restartBtn) {
             restartBtn.classList.add('visible');
+            const t = translations[currentLang] || {};
+            restartBtn.innerText = t.restart || 'Recommencer';
         }
-        document.getElementById('download-btn')?.classList.add('visible');
         offerPwaInstall();
         offerRatePrompt();
     }
@@ -7393,41 +7221,25 @@
         console.log("DOMContentLoaded");
         try {
             bindIpadGestures();
-            applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
+            applyTheme('blue');
             applyTranslitVisibility(localStorage.getItem('tajwid_hide_translit') === '1');
         } catch (e) {
-            applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
+            applyTheme('blue');
         }
         if (!hasWebSpeech()) showSttUnsupportedHint();
         const savedLang = localStorage.getItem('tajwid_lang') || 'fr';
         setLanguage(savedLang);
         updateStatsUI();
-        if (FATIHA_ONLY) {
-            const dailyCard = document.getElementById('daily-verse-card');
-            if (dailyCard) dailyCard.style.display = 'none';
-        } else {
-            initDailyVerse();
+
+        const verseBox = document.getElementById('verse-container');
+        if (verseBox) {
+            verseBox.addEventListener('pointerdown', () => {
+                if (isRecording) return;
+                try { startRecognition(); } catch (e) { console.warn('mic tap', e); }
+            }, { passive: true });
         }
 
-        // Listeners robustes
-        const startOverlay = document.getElementById('start-overlay');
-        if (startOverlay) {
-            startOverlay.addEventListener('click', () => {
-                console.log("Overlay clicked");
-                startRecognition();
-            });
-        }
-
-        const dailyCard = document.getElementById('daily-verse-card');
-        if (dailyCard && !FATIHA_ONLY) {
-            dailyCard.addEventListener('click', (e) => {
-                e.stopPropagation();
-                console.log("Daily card clicked");
-                loadDailyVerse();
-            });
-        }
-
-        // Chargement initial — mode focus Al-Fātiḥah
+        // Chargement initial
         try {
             if (FATIHA_ONLY) {
                 await fetchVerseFromAPI('1');
@@ -7441,7 +7253,7 @@
             }
             try {
                 const ref = new URLSearchParams(location.search).get('ref');
-                if (ref) {
+                if (ref && (!FATIHA_ONLY || parseSurahNum(ref) === FATIHA_SURAH)) {
                     await fetchVerseFromAPI(ref);
                     console.log("Deep link ref loaded:", ref);
                 }
