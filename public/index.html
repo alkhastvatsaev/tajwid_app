@@ -605,8 +605,8 @@
             color: var(--tj-ink);
             -webkit-text-fill-color: var(--tj-ink);
             text-rendering: optimizeLegibility;
-            font-feature-settings: "liga" 0, "rlig" 0, "calt" 0;
-            font-variant-ligatures: none;
+            font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
+            font-variant-ligatures: common-ligatures;
             letter-spacing: 0 !important;
             word-spacing: normal !important;
             white-space: nowrap;
@@ -4556,35 +4556,24 @@
     // Quran.com n’étiquette pas tous les ṭabīʿī de Fātiḥah ; ʿāriḍ ≠ munfaṣil.
     const FATIHA_TABII_EXTRA = { 'اياك': 1, 'واياك': 1, 'اهدنا': 1, 'الذين': 1, 'المغضوب': 1, 'ولا': 1 };
 
-    function expandMaddCombining(html) {
-        if (!html || !html.includes('madda_normal')) return html;
-        // Quran.com met souvent seul ـٰ (tatweel+alif dagger) dans la balise.
-        // Colorier le tatweel → barre teal pleine (surtout Safari). On colore la lettre
-        // précédente et on laisse le dagger hors span / sans tatweel.
-        return html.replace(
-            /([\u0621-\u064A\u0671])([\u064B-\u0652]*)<tajweed class=["']?madda_normal["']?>([^<]*)<\/tajweed>/g,
-            (_, letter, harakat, inner) => {
-                const dagger = String(inner).replace(/\u0640/g, ''); // drop tatweel U+0640
-                return `<tajweed class="madda_normal">${letter}${harakat}</tajweed>${dagger}`;
-            }
-        );
-    }
-
-    function sanitizeTajweedPaint(html) {
+    // Quran.com marque souvent le ṭabīʿī par ـٰ seul (tatweel + alif dagger).
+    // Colorier ça → barre teal Safari. Étendre en span mid-mot → casse la ligature
+    // Chrome (مَٰ devient مَ + ٰ flottant). Solution : unwrap, les points madd restent.
+    function stripUnsafeMaddSpans(html) {
         if (!html) return html;
-        let out = String(html);
-        // Jamais colorier un tatweel seul — source des barres Safari
-        out = out.replace(
-            /<(tajweed|span)(\s+[^>]*class=["'][^"']*madda_[^"']*["'][^>]*)>([^<]*)<\/\1>/gi,
-            (full, tag, attrs, inner) => {
-                const cleaned = String(inner).replace(/\u0640/g, '');
-                if (!cleaned || !/[\u0621-\u064A\u0671]/.test(cleaned)) {
-                    return cleaned; // unwrap: only marks / empty
+        // class=madda_normal (Quran.com, sans quotes) OU class="madda_normal"
+        return String(html).replace(
+            /<(tajweed|span)(\s+[^>]*\bclass=(["']?)[^"'\s>]*madda_normal[^"'\s>]*\3[^>]*)>([^<]*)<\/\1>/gi,
+            (_, tag, attrs, _q, inner) => {
+                const text = String(inner);
+                const withoutTatweel = text.replace(/\u0640/g, '');
+                // Pas de lettre arabe de base → unwrap (ـٰ, ٰ…)
+                if (!/[\u0621-\u064A\u0671]/.test(withoutTatweel)) {
+                    return withoutTatweel;
                 }
-                return `<${tag}${attrs}>${cleaned}</${tag}>`;
+                return `<${tag}${attrs}>${withoutTatweel}</${tag}>`;
             }
         );
-        return out;
     }
 
     const HARAKA = '[\u064B-\u0652\u0670]*';
@@ -4610,12 +4599,12 @@
     }
 
     function applyFatihaMaddMarkup(html, cleanText) {
-        return sanitizeTajweedPaint(applyFatihaTabiiMarkup(expandMaddCombining(html), cleanText));
+        return stripUnsafeMaddSpans(applyFatihaTabiiMarkup(html, cleanText));
     }
 
     function tajweedToSpan(html) {
         if (!html) return html;
-        return sanitizeTajweedPaint(String(html)
+        return stripUnsafeMaddSpans(String(html)
             .replace(/<\s*tajweed\b/gi, '<span')
             .replace(/<\s*\/\s*tajweed\s*>/gi, '</span>'));
     }
