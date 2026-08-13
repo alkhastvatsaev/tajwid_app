@@ -517,84 +517,20 @@
             border-color: rgba(245, 158, 11, 0.35);
         }
 
-        /* ── Tajwid : span + text-fill (Safari WebKit ne peint pas <tajweed>) ── */
-        tajweed, .arabic-word span[class] {
-            display: inline;
-            font: inherit;
-            background: none !important;
-            background-color: transparent !important;
-            -webkit-box-decoration-break: clone;
-            box-decoration-break: clone;
-            position: static;
+        /* ── Gradient-ink tajweed (Safari-safe) ──
+           Un seul nœud texte (ligatures OK) ; couleurs via
+           linear-gradient + background-clip:text — jamais de <span> mid-mot. */
+        .arabic-word.aw-gradient {
+            background-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            -webkit-text-fill-color: transparent !important;
         }
-
-        .madda_normal,
-        tajweed.madda_normal {
-            color: var(--madd-tabii);
-            -webkit-text-fill-color: var(--madd-tabii);
-            background: transparent !important;
-            text-decoration: none !important;
-            box-shadow: none !important;
-        }
-        .madda_permissible,
-        tajweed.madda_permissible {
-            /* ʿāriḍ : points madd seulement (visible au waqf), pas de couleur en lecture liée */
-            color: inherit;
-            -webkit-text-fill-color: inherit;
-        }
-        .madda_necessary,
-        tajweed.madda_necessary {
-            color: var(--madd-lazim);
-            -webkit-text-fill-color: var(--madd-lazim);
-        }
-        .madda_compulsory, .madda_long,
-        tajweed.madda_compulsory, tajweed.madda_long {
-            color: var(--madd-lazim);
-            -webkit-text-fill-color: var(--madd-lazim);
-        }
-        .ghunnah {
-            color: var(--ghunnah);
-            -webkit-text-fill-color: var(--ghunnah);
-            text-decoration: underline dotted;
-            text-decoration-color: color-mix(in srgb, var(--ghunnah) 45%, transparent);
-            text-underline-offset: 3px;
-        }
-        .idgham_with_ghunnah, .idgham_mutajanisayn, .idgham_mutaqaribayn, .idgham_without_ghunnah {
-            color: var(--idgham);
-            -webkit-text-fill-color: var(--idgham);
-            text-decoration: underline dotted;
-            text-decoration-color: color-mix(in srgb, var(--idgham) 45%, transparent);
-            text-underline-offset: 3px;
-        }
-        .ikhfa, .ikhfa_shafawi {
-            color: var(--ikhfa);
-            -webkit-text-fill-color: var(--ikhfa);
-            text-decoration: underline dotted;
-            text-decoration-color: color-mix(in srgb, var(--ikhfa) 45%, transparent);
-            text-underline-offset: 3px;
-        }
-        .iqlab {
-            color: var(--iqlab);
-            -webkit-text-fill-color: var(--iqlab);
-            text-decoration: underline dotted;
-            text-decoration-color: color-mix(in srgb, var(--iqlab) 50%, transparent);
-            text-underline-offset: 3px;
-        }
-        .izhar, .izhar_shafawi {
-            color: var(--izhar);
-            -webkit-text-fill-color: var(--izhar);
-        }
-        .qalqalah, .qalaqah {
-            color: var(--qalqalah);
-            -webkit-text-fill-color: var(--qalqalah);
-            text-decoration: underline dotted;
-            text-decoration-color: color-mix(in srgb, var(--qalqalah) 50%, transparent);
-            text-underline-offset: 3px;
-        }
-        .ham_wasl, .hamzat_wasl, .slm, .laam_shamsiyah {
-            color: var(--ham-wasl);
-            -webkit-text-fill-color: var(--ham-wasl);
-            opacity: 0.72;
+        .word-box.correct .arabic-word.aw-gradient {
+            background-image: none !important;
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
         }
 
         .arabic-word {
@@ -4556,26 +4492,6 @@
     // Quran.com n’étiquette pas tous les ṭabīʿī de Fātiḥah ; ʿāriḍ ≠ munfaṣil.
     const FATIHA_TABII_EXTRA = { 'اياك': 1, 'واياك': 1, 'اهدنا': 1, 'الذين': 1, 'المغضوب': 1, 'ولا': 1 };
 
-    // Quran.com marque souvent le ṭabīʿī par ـٰ seul (tatweel + alif dagger).
-    // Colorier ça → barre teal Safari. Étendre en span mid-mot → casse la ligature
-    // Chrome (مَٰ devient مَ + ٰ flottant). Solution : unwrap, les points madd restent.
-    function stripUnsafeMaddSpans(html) {
-        if (!html) return html;
-        // class=madda_normal (Quran.com, sans quotes) OU class="madda_normal"
-        return String(html).replace(
-            /<(tajweed|span)(\s+[^>]*\bclass=(["']?)[^"'\s>]*madda_normal[^"'\s>]*\3[^>]*)>([^<]*)<\/\1>/gi,
-            (_, tag, attrs, _q, inner) => {
-                const text = String(inner);
-                const withoutTatweel = text.replace(/\u0640/g, '');
-                // Pas de lettre arabe de base → unwrap (ـٰ, ٰ…)
-                if (!/[\u0621-\u064A\u0671]/.test(withoutTatweel)) {
-                    return withoutTatweel;
-                }
-                return `<${tag}${attrs}>${withoutTatweel}</${tag}>`;
-            }
-        );
-    }
-
     const HARAKA = '[\u064B-\u0652\u0670]*';
     function applyFatihaTabiiMarkup(html, cleanText) {
         const norm = normalize(cleanText || '');
@@ -4598,20 +4514,191 @@
         return html;
     }
 
-    function applyFatihaMaddMarkup(html, cleanText) {
-        return stripUnsafeMaddSpans(applyFatihaTabiiMarkup(html, cleanText));
+    function escapeHtmlText(s) {
+        return String(s)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
 
-    function tajweedToSpan(html) {
-        if (!html) return html;
-        return stripUnsafeMaddSpans(String(html)
-            .replace(/<\s*tajweed\b/gi, '<span')
-            .replace(/<\s*\/\s*tajweed\s*>/gi, '</span>'));
+    function tajweedClassColor(cls) {
+        if (!cls) return null;
+        if (cls.includes('madda_permissible')) return null;
+        if (cls.includes('madda_compulsory') || cls.includes('madda_long') || cls.includes('madda_necessary')) return 'var(--madd-lazim)';
+        if (cls.includes('madda_normal') || cls.includes('madda')) return 'var(--madd-tabii)';
+        if (cls.includes('ghunnah')) return 'var(--ghunnah)';
+        if (cls.includes('ikhfa')) return 'var(--ikhfa)';
+        if (cls.includes('qalqalah') || cls.includes('qalaqah')) return 'var(--qalqalah)';
+        if (cls.includes('iqlab')) return 'var(--iqlab)';
+        if (cls.includes('idgham')) return 'var(--idgham)';
+        if (cls.includes('izhar')) return 'var(--izhar)';
+        if (cls.includes('ham_wasl') || cls.includes('hamzat_wasl') || cls.includes('laam_shamsiyah') || cls.includes('slm')) {
+            return 'var(--ham-wasl)';
+        }
+        return null;
+    }
+
+    /** Gradient-ink: plain shaped word + tint ranges. No mid-word color spans (Safari-safe). */
+    function parseTajweedInk(html) {
+        const plainParts = [];
+        const tints = [];
+        const src = String(html || '');
+        const re = /<(tajweed|span)([^>]*)>([^<]*)<\/\1>|([^<]+)/gi;
+        let m;
+        while ((m = re.exec(src))) {
+            if (m[4] != null) {
+                plainParts.push(m[4]);
+                continue;
+            }
+            const attrs = m[2] || '';
+            const inner = m[3] || '';
+            const cm = attrs.match(/\bclass=(["']?)([^"'\s>]+)\1/i);
+            const cls = cm ? cm[2] : '';
+            const color = tajweedClassColor(cls);
+            const hasLetter = /[\u0621-\u064A\u0671]/.test(inner.replace(/\u0640/g, ''));
+
+            if (/madda_normal/.test(cls) && !hasLetter) {
+                const plainSoFar = plainParts.join('');
+                let i = plainSoFar.length - 1;
+                while (i >= 0 && /[\u064B-\u0652\u0670\u0640]/.test(plainSoFar[i])) i--;
+                const cleaned = inner.replace(/\u0640/g, '');
+                if (color && i >= 0 && /[\u0621-\u064A\u0671]/.test(plainSoFar[i])) {
+                    let start = i;
+                    let end = i + 1;
+                    while (end < plainSoFar.length && /[\u064B-\u0652]/.test(plainSoFar[end])) end++;
+                    plainParts.push(cleaned);
+                    end += cleaned.length;
+                    tints.push({ start, end, color });
+                } else {
+                    plainParts.push(cleaned);
+                }
+                continue;
+            }
+
+            const cleaned = inner.replace(/\u0640/g, '');
+            const start = plainParts.join('').length;
+            plainParts.push(cleaned);
+            if (color && cleaned.length) {
+                tints.push({ start, end: start + cleaned.length, color });
+            }
+        }
+        return { plain: plainParts.join(''), tints };
+    }
+
+    /** Measure UTF-16 slice bounds relative to the word element (LTR % axis). */
+    function measureTextSlice(el, textNode, start, end) {
+        const text = textNode.textContent || '';
+        const len = text.length;
+        const a = Math.max(0, Math.min(start, len));
+        const b = Math.max(a, Math.min(end, len));
+        if (b <= a) return null;
+        const box = el.getBoundingClientRect();
+        const w = Math.max(box.width, 1);
+        // Use post-transform px only — CSS font-size is pre-scale and blows up bands under ayah-fit.
+        let minL = Infinity, maxR = -Infinity;
+        const isMark = /[\u064B-\u065F\u0670\u0640\u06D6-\u06ED]/;
+        let measuredLetter = false;
+        for (let i = a; i < b; i++) {
+            if (isMark.test(text[i])) continue;
+            try {
+                const range = document.createRange();
+                range.setStart(textNode, i);
+                range.setEnd(textNode, i + 1);
+                Array.from(range.getClientRects()).forEach((r) => {
+                    if (r.width < 0.5) return;
+                    measuredLetter = true;
+                    minL = Math.min(minL, r.left);
+                    maxR = Math.max(maxR, r.right);
+                });
+            } catch (e) { /* ignore */ }
+        }
+        if (!measuredLetter) {
+            try {
+                const range = document.createRange();
+                range.setStart(textNode, a);
+                range.setEnd(textNode, b);
+                Array.from(range.getClientRects()).forEach((r) => {
+                    if (r.width < 0.5) return;
+                    minL = Math.min(minL, r.left);
+                    maxR = Math.max(maxR, r.right);
+                });
+            } catch (e) { return null; }
+        }
+        if (!isFinite(minL) || maxR <= minL) return null;
+        const span = maxR - minL;
+        // Hairline floor (post-transform px) + proportional pad — no CSS em.
+        if (span < 6) {
+            const mid = (minL + maxR) / 2;
+            minL = mid - 4;
+            maxR = mid + 4;
+        }
+        const pad = Math.max(1.5, span * 0.12);
+        minL -= pad;
+        maxR += pad;
+        return {
+            leftPct: Math.max(0, Math.min(100, ((minL - box.left) / w) * 100)),
+            rightPct: Math.max(0, Math.min(100, ((maxR - box.left) / w) * 100))
+        };
+    }
+
+    /** Paint tajweed colors without mid-word spans (Safari cannot bar-paint tatweel). */
+    function layoutTajweedTints(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.arabic-word.aw-gradient').forEach((el) => {
+            if (el.closest('.word-box.correct')) {
+                el.style.backgroundImage = 'none';
+                return;
+            }
+            const textNode = el.firstChild;
+            if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return;
+            let tints = [];
+            try { tints = JSON.parse(el.getAttribute('data-tints') || '[]'); } catch (e) { tints = []; }
+            // Skip ham-wasl / shamsiya — same ink family as body; they only add noise.
+            tints = tints.filter((t) => t && t.color && !String(t.color).includes('ham-wasl'));
+            if (!tints.length) {
+                el.style.backgroundImage = 'none';
+                el.classList.remove('aw-gradient');
+                el.style.color = '';
+                el.style.webkitTextFillColor = '';
+                return;
+            }
+            const bands = [];
+            tints.forEach((spec) => {
+                const m = measureTextSlice(el, textNode, spec.start, spec.end);
+                if (!m || m.rightPct - m.leftPct < 0.4) return;
+                bands.push({ left: m.leftPct, right: m.rightPct, color: spec.color });
+            });
+            if (!bands.length) {
+                el.style.backgroundImage = 'none';
+                el.classList.remove('aw-gradient');
+                el.style.color = '';
+                el.style.webkitTextFillColor = '';
+                return;
+            }
+            bands.sort((a, b) => a.left - b.left);
+            const ink = 'var(--tj-ink)';
+            const stops = [`${ink} 0%`];
+            let cursor = 0;
+            bands.forEach((band) => {
+                const L = Math.max(cursor, band.left);
+                const R = Math.max(L, band.right);
+                if (L > cursor) stops.push(`${ink} ${L}%`);
+                stops.push(`${band.color} ${L}%`);
+                stops.push(`${band.color} ${R}%`);
+                stops.push(`${ink} ${R}%`);
+                cursor = R;
+            });
+            stops.push(`${ink} 100%`);
+            el.style.backgroundImage = `linear-gradient(90deg, ${stops.join(', ')})`;
+            el.style.webkitBackgroundClip = 'text';
+            el.style.backgroundClip = 'text';
+            el.style.webkitTextFillColor = 'transparent';
+            el.style.color = 'transparent';
+        });
     }
 
     function classifyTajweedRule(part, cleanText) {
         const html = part || '';
-        // Lāzim avant ʿāriḍ : الضالين a madda_necessary + madda_permissible
         if (html.includes('madda_compulsory') || html.includes('madda_long')) return 'madd-lazim';
         if (html.includes('madda_necessary')) {
             if (html.includes('madda_permissible') || /[ّٓ]/.test(html)) return 'madd-lazim';
@@ -4713,7 +4800,14 @@
             if (metaIdx === 0) box.classList.add('active');
 
             const ruleType = classifyTajweedRule(part, cleanText);
-            const arabicHtml = tajweedToSpan(applyFatihaMaddMarkup(part, cleanText));
+            const marked = applyFatihaTabiiMarkup(part, cleanText);
+            const ink = parseTajweedInk(marked);
+            const usefulTints = ink.tints.filter((t) => t && !String(t.color).includes('ham-wasl'));
+            const safePlain = escapeHtmlText(ink.plain);
+            const tintsAttr = JSON.stringify(usefulTints).replace(/'/g, '&#39;');
+            const wordHtml = usefulTints.length
+                ? `<div class="arabic-word aw-gradient" data-tints='${tintsAttr}'>${safePlain}</div>`
+                : `<div class="arabic-word">${safePlain}</div>`;
             const dotsCount = maddDotsCount(ruleType);
             const dotsHtml = dotsCount ? `<div class="madd-dots-guide">${Array(dotsCount).fill('<div class="dot-pip"></div>').join('')}</div>` : '';
 
@@ -4722,7 +4816,7 @@
 
             box.innerHTML = `
                 ${dotsHtml}
-                <div class="arabic-word">${arabicHtml}</div>
+                ${wordHtml}
                 <div class="translit-container">
                     <div class="translit-en">${meta.en}</div>
                     <div class="translit-ru">${meta.ru}</div>
@@ -4757,6 +4851,7 @@
                 const nxt = first?.nextElementSibling;
                 if (nxt && nxt.classList.contains('ayah-line')) nxt.classList.add('ayah-next');
                 fitActiveAyah();
+                layoutTajweedTints(container);
             });
         });
     }
@@ -4774,11 +4869,12 @@
         if (!isFinite(s) || s <= 0) s = 1;
         s = Math.min(1, Math.max(0.58, s * 0.96));
         line.style.setProperty('--ayah-fit', String(s));
+        layoutTajweedTints(box);
     }
-    window.addEventListener('resize', () => fitActiveAyah());
-    window.addEventListener('orientationchange', () => setTimeout(fitActiveAyah, 280));
+    window.addEventListener('resize', () => { fitActiveAyah(); layoutTajweedTints(); });
+    window.addEventListener('orientationchange', () => setTimeout(() => { fitActiveAyah(); layoutTajweedTints(); }, 280));
     if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => fitActiveAyah()).catch(() => {});
+        document.fonts.ready.then(() => { fitActiveAyah(); layoutTajweedTints(); }).catch(() => {});
     }
 
     function openTajweedModal(e) {
