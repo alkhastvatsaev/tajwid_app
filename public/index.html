@@ -358,20 +358,13 @@
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            /* translate only — scale() breaks WebKit clip-path / text paint for tajweed */
-            transform: translateY(-50%);
+            /* scale fit — COLR n’utilise plus clip-path, scale OK */
+            transform: translateY(-50%) scale(var(--ayah-fit, 1));
             filter: none;
             z-index: 5;
             overflow: visible;
             max-height: none;
             padding: 4px 0 6px;
-        }
-        .ayah-line.active-ayah .arabic-word {
-            font-size: calc(clamp(1.8rem, 5vw, 2.5rem) * var(--ayah-fit, 1));
-        }
-        .ayah-line.active-ayah .madd-dots-guide {
-            transform: translateX(-50%) scale(var(--ayah-fit, 1));
-            transform-origin: center bottom;
         }
         .ayah-line.ayah-prev {
             opacity: 0.72;
@@ -405,7 +398,7 @@
             .ayah-line {
                 transition: none;
             }
-            .ayah-line.active-ayah { transform: translateY(-50%); filter: none; }
+            .ayah-line.active-ayah { transform: translateY(-50%) scale(var(--ayah-fit, 1)); filter: none; }
             .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.55; }
             .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.55; }
         }
