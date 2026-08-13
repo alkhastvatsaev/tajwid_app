@@ -49,7 +49,7 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Best tajwid practice app for beginners who already pray: word-by-word mic trainer. Free. Not an ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["en","fr","id","ar","ru"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://tilmidh.app/en","https://tilmidh.app/best-tajwid-app-for-beginners"]}
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <style>
         /* COLR tajweed font — colors in glyphs, joining intact (Safari-safe) */
         @font-face {
@@ -65,6 +65,18 @@
             font-weight: 400;
             font-style: normal;
             font-display: swap;
+        }
+        /* Validated: force Tilmidh COLR layers to blue (#3B82F6) */
+        @font-palette-values --tilmidh-validated {
+            font-family: 'Tilmidh Tajweed';
+            base-palette: 0;
+            override-colors:
+                0 #3B82F6,
+                1 #3B82F6,
+                2 #3B82F6,
+                3 #3B82F6,
+                4 #3B82F6,
+                5 #3B82F6;
         }
     </style>
     <link rel="preconnect" href="https://tilmidh-20wxcwho.livekit.cloud" crossorigin>
@@ -439,7 +451,7 @@
             width: 30px;
             height: 30px;
             margin: 0;
-            font-family: 'Amiri', serif;
+            font-family: 'Tilmidh Tajweed', serif;
             font-size: 0.85rem;
             color: var(--accent);
             opacity: 0.5;
@@ -537,7 +549,7 @@
 
         /* COLR tajweed: one shaped run — colors live in the font (KFGQPC / TilmidhTajweed). */
         .arabic-word {
-            font-family: 'KFGQPC Colored', 'Tilmidh Tajweed', 'Amiri', serif;
+            font-family: 'KFGQPC Colored', 'Tilmidh Tajweed', serif;
             font-size: clamp(1.8rem, 5vw, 2.5rem); 
             margin-bottom: 0;
             direction: rtl;
@@ -557,7 +569,7 @@
             color: inherit;
             -webkit-text-fill-color: unset;
         }
-        /* Validated: no box chrome — solid blue ink (Amiri, COLR palette can't recolor) */
+        /* Validated: Tilmidh Tajweed in solid blue (no Amiri) */
         html[data-colr-tajweed="1"] .word-box.correct {
             border-color: transparent !important;
             background: transparent !important;
@@ -565,7 +577,8 @@
             box-shadow: none !important;
         }
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word {
-            font-family: 'Amiri', serif !important;
+            font-family: 'Tilmidh Tajweed', serif !important;
+            font-palette: --tilmidh-validated;
             color: var(--validated) !important;
             -webkit-text-fill-color: var(--validated) !important;
             opacity: 1;
@@ -723,7 +736,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2; /* Just above aura */
-            font-family: 'Amiri', serif;
+            font-family: 'Tilmidh Tajweed', serif;
             font-size: clamp(10rem, 30vw, 15rem); /* Reduced size for mobile */
             color: var(--accent);
             opacity: 0;
@@ -1093,7 +1106,7 @@
             font-weight: 700;
         }
         .v-btn.surah-btn {
-            font-family: 'Amiri', serif;
+            font-family: 'Tilmidh Tajweed', serif;
             font-size: 0.88rem;
         }
         .verse-selector.dock-hidden {
@@ -1112,7 +1125,7 @@
             color: var(--text);
             font-size: 0.95rem;
             font-weight: 700;
-            font-family: 'Amiri', serif;
+            font-family: 'Tilmidh Tajweed', 'Outfit', sans-serif;
             height: 42px;
             padding: 0 18px;
             border-radius: 100px;
@@ -2292,7 +2305,7 @@
         }
         .assistant-val.target {
             border-left: 3px solid var(--accent);
-            font-family: 'Amiri', serif;
+            font-family: 'Tilmidh Tajweed', serif;
             font-size: 1.2rem;
             justify-content: flex-end;
             direction: rtl;
@@ -2387,7 +2400,7 @@
         }
         .error-expected {
             color: var(--accent);
-            font-family: 'Amiri', serif;
+            font-family: 'Tilmidh Tajweed', serif;
             font-size: 1rem;
         }
         .error-heard {
