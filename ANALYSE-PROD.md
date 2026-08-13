@@ -1,120 +1,88 @@
 # Analyse production Tilmidh (A→Z)
 
-**Date :** 2026-08-10 (màj marque 2026-08-12)  
-**URL analysée :** https://tilmidh.app/  
-**Outils :** agent-reach (`doctor --json`) — web = **Jina Reader** ; GitHub = **gh CLI**  
+**Date :** 2026-08-13 (branche `ship/audit-fixes-2026-08`)  
+**URL :** https://tilmidh.app/  
 **Repo :** https://github.com/alkhastvatsaev/tilmidh
 
 ---
 
-## 1. Ce que la prod sert vraiment
+## 1. Ce que la prod sert
 
 | Signal | Observation |
 |--------|-------------|
-| HTTP | `200`, `content-type: text/html`, `content-length: **137090**` |
-| Cache | `x-vercel-cache: HIT` |
-| Titre | `Tilmidh تلميذ` |
-| Stack runtime | **1 seul fichier HTML/JS** + PeerJS CDN `1.5.0` + Google Fonts |
-| Framework | **Pas** de Next (`next-size-adjust` absent) |
+| Fichier live | `public/index.html` monolite (~340 KB) |
+| Deploy | Vercel static + rewrites SPA + routes `api/*` |
+| STT | Web Speech `ar-SA` (pas Whisper en continu) |
+| Texte | `api.quran.com/v4` + `text_uthmani_tajweed` |
+| Next `src/` | **Non déployé** |
 
-Sur GitHub, `public/index.html` fait ≈ **137090** octets — **même taille** que la réponse prod.
-
-`vercel.json` sur `main` :
-
-```json
-{
-  "version": 2,
-  "cleanUrls": true,
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
-```
-
-**Verdict :** la production = SPA legacy static (`public/index.html`), **pas** l’app Next.js dans `src/`.
+`vercel.json` : rewrite catch-all SPA + `/log` → `/api/log`, `/save-recording` → `/api/save-recording`.
 
 ---
 
-## 2. Query `?ref=41:1` — constat critique
-
-- API Quran OK : `41:1` = sourate **Fussilat** (فصلت), 1 mot.
-- Jina Reader sur l’URL avec `ref=41:1` expose le contenu d’**Al-Fātiḥah** (بسم… الحمد…), pas Fussilat.
-
-Dans `public/index.html`, au `DOMContentLoaded` :
-
-- charge les sourates `112`, `113`, `114`, puis `1` (Fātiḥah active en dernier) ;
-- **aucun** `URLSearchParams` / `location.search` / lecture de `?ref=`.
-
-**Verdict :** le query `?ref=41:1` est **ignoré** par la prod actuelle.  
-(Le paramètre `ref` est géré dans le code Next `src/`, non déployé en prod.)
-
----
-
-## 3. UI / features relevées (page live + HTML)
-
-Présents et câblés dans le monolite :
-
-- i18n FR / EN / RU
-- Overlay « Touchez pour commencer » + Verset du jour + Mode Duo
-- Browser Al-Quran + **IA Import** (label UI) → données via `api.quran.com`
-- Tableau de bord (versets / favoris / objectif Coran %)
-- Analyse live « Cible » / « Vous dites »
-- Rapport technique + modale d’explication des règles Tajwid
-- Bouton « Télécharger ma récitation » (présent dans le DOM)
-
-**État client :**
-
-- `localStorage` : `tajwid_lang`, `tajwid_favorites`, `tajwid_completed`
-- Pas de base de données côté prod pour ces features
-
----
-
-## 4. Flux runtime (prod)
-
-```mermaid
-flowchart LR
-  Browser --> StaticHTML["public/index.html via Vercel"]
-  StaticHTML --> QuranAPI["api.quran.com v4"]
-  StaticHTML --> WebSpeech["Web Speech API"]
-  StaticHTML --> MediaRec["MediaRecorder"]
-  StaticHTML --> PeerJS["PeerJS CDN broker"]
-  StaticHTML --> LocalStorage
-  Rapport -->|"localhost:8000/log"| FastAPI["server.py local only"]
-```
-
----
-
-## 5. GitHub — état du repo (au moment de l’analyse)
+## 2. Correctifs audit (2026-08-13)
 
 | Item | État |
 |------|------|
-| Default branch | `main` |
-| Dernier commit `main` | `339f3b6` — Rollback production to legacy static SPA |
-| PR #1 Next PWA | MERGED, puis rollback |
-| Branche `stabilize/legacy-prod` | Poussée (fix download + `server.py` + docs) — **pas encore sur prod** |
-| CI récente | Success sur le rollback |
+| `FATIHA_ONLY` | `false` — import, browser, `?ref=`, verset du jour OK |
+| Overlay start | Visible ; micro via click overlay (plus de `armMicOnFirstGesture`) |
+| Thème | `localStorage.tajwid_theme` respecté |
+| UI cachée CSS | Retiré (download, rapport, Voice Lab, thème, profil…) |
+| STT Firefox/iOS | Message overlay si pas de Web Speech |
+| Transliteration API | Garde `mapApiWord` |
+| Modale tajweed | Mapping idgham/iqlab/laam_shamsiyah corrigé |
+| Meta/OG | Plus de claim Ikhlāṣ-only / Duo imam |
+| Stats | % basé sur ayahs en bibliothèque (plus 6236 fixe) |
+| Offline | Cache session + Al-Fātiḥah embarquée |
+| a11y zoom | `user-scalable=no` retiré ; `dir="auto"` |
+| POST /log Vercel | `api/log.js` actif |
+| `server.py` | Fallback stdlib si FastAPI absent |
+| Docs | APP-MAP + ANALYSE-PROD à jour |
 
 ---
 
-## 6. Écarts / risques (faits observés)
+## 3. `?ref=` — comportement actuel
 
-1. **`?ref=` mort en prod** — les deep links du type `/?ref=41:1` ne chargent pas le verset demandé.
-2. **Téléchargement** : sur `main`/prod, CSS `#download-btn { display: none !important }` + pas d’ajout de `.visible` dans `finishVerse()` ; correctif uniquement sur `stabilize/legacy-prod`.
-3. **« IA Import »** = appel Quran.com, **pas** d’API IA (OpenAI, etc.).
-4. **Mode Duo** : PeerJS avec IDs fixes `vatsaev-tilmidh-user1` / `user2`.
-5. **Double codebase** (`public/` legacy vs `src/` Next) — risque de redeploy de la mauvaise stack.
-6. **Rapport technique** vers `http://localhost:8000/log` : no-op en production (normal ; utile seulement avec `server.py` en local).
+Au `DOMContentLoaded`, après boot 112/113/114/1 :
 
----
+```js
+const ref = new URLSearchParams(location.search).get('ref');
+if (ref) await fetchVerseFromAPI(ref);
+```
 
-## 7. Synthèse
-
-La page https://tilmidh.app/?ref=41%3A1 charge bien l’app legacy complète, mais **pas le verset 41:1**. Le démarrage force Al-Fātiḥah (+ sourates 112–114). Pour ouvrir Fussilat 41:1 aujourd’hui : import manuel ou browser de sourate dans l’UI.
-
-Agent Reach au moment de l’analyse : **v1.5.0** (à jour).
+**Verdict :** deep links `/?ref=41:1` chargent le verset demandé (si API joignable).
 
 ---
 
-## Suite possible (non exécutée ici)
+## 4. Flux runtime
 
-1. Merger / déployer `stabilize/legacy-prod` (téléchargement + docs + `server.py`).
-2. Ajouter le support de `?ref=` dans le legacy `public/index.html`.
-3. Autre priorité à définir.
+```mermaid
+flowchart LR
+  Browser --> StaticHTML["public/index.html"]
+  StaticHTML --> QuranAPI["api.quran.com"]
+  StaticHTML --> WebSpeech["Web Speech ar-SA"]
+  StaticHTML --> LiveKit["Groupe Call"]
+  StaticHTML --> LocalStorage
+  Rapport --> LogAPI["POST /log → api/log.js"]
+  Dataset --> SaveAPI["POST /save-recording"]
+```
+
+---
+
+## 5. Risques résiduels
+
+1. **Web Speech** absent sur Firefox desktop et Chrome iOS → entraînement micro impossible (message affiché).
+2. **Groupe Call** : nécessite env LiveKit + `ROOM_PEPPER` en prod ; HMAC fallback dev seulement.
+3. **Whisper** : code mort partiel (juge post-ayah optionnel) — pas le moteur live.
+4. **Double codebase** `public/` vs `src/` — ne pas redeployer Next par erreur.
+
+---
+
+## 6. Test plan post-deploy
+
+1. `/?ref=1:1` → Fātiḥah 1:1 active.
+2. Overlay → micro Safari/Chrome Android.
+3. Import sourate 2 → pas de doublon au re-clic.
+4. Stats : % cohérent avec sourates chargées.
+5. Rapport diagnostic → 200 sur `/log`.
+6. Mode avion → Al-Fātiḥah embarquée au boot.

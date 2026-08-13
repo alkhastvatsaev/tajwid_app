@@ -1,35 +1,17 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
+#!/usr/bin/env python3
+"""Serveur local Tilmidh — FastAPI si dispo, sinon http.server stdlib."""
 import json
 import os
+import sys
 import base64
 import re
 from datetime import datetime
 
-app = FastAPI()
+ROOT = os.path.dirname(os.path.abspath(__file__))
+PUBLIC = os.path.join(ROOT, "public")
+RECORDINGS_DIR = os.path.join(ROOT, "recordings")
+PORT = int(os.environ.get("PORT", "3000"))
 
-RECORDINGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "recordings")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/", response_class=HTMLResponse)
-async def read_index():
-    with open("public/index.html", "r", encoding="utf-8") as f:
-        return f.read()
-
-@app.post("/log")
-async def save_log(request: Request):
-    data = await request.json()
-    with open("diagnostic_report.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    return {"status": "success", "file": "diagnostic_report.json"}
 
 def _strip_data_url(b64: str) -> str:
     if not b64:
@@ -37,6 +19,7 @@ def _strip_data_url(b64: str) -> str:
     if b64.startswith("data:") and "," in b64:
         return b64.split(",", 1)[1]
     return b64
+
 
 def _ext_from_mime(mime: str) -> str:
     m = (mime or "").lower()
@@ -50,71 +33,191 @@ def _ext_from_mime(mime: str) -> str:
         return "mp3"
     return "webm"
 
-@app.post("/save-recording")
-async def save_recording(request: Request):
-    """Opt-in dataset: écrit recordings/{stamp}.webm + .json"""
-    try:
-        body = await request.json()
-    except Exception:
-        return JSONResponse({"error": "invalid_json"}, status_code=400)
 
-    audio_b64 = _strip_data_url(body.get("audioBase64") or "")
-    mime = body.get("mimeType") or "audio/webm"
-    meta = body.get("meta") if isinstance(body.get("meta"), dict) else {}
+def run_stdlib():
+    import http.server
+    import socketserver
 
-    if not audio_b64:
-        return JSONResponse({"error": "audioBase64 required"}, status_code=400)
+    class TilmidhHandler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=PUBLIC, **kwargs)
 
-    try:
-        raw = base64.b64decode(audio_b64)
-    except Exception:
-        return JSONResponse({"error": "invalid_base64"}, status_code=400)
+        def do_GET(self):
+            if self.path in ("/", "/index.html"):
+                index_path = os.path.join(PUBLIC, "index.html")
+                try:
+                    with open(index_path, "r", encoding="utf-8") as f:
+                        body = f.read().encode("utf-8")
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html; charset=utf-8")
+                    self.send_header("Content-Length", str(len(body)))
+                    self.end_headers()
+                    self.wfile.write(body)
+                    return
+                except OSError:
+                    pass
+            super().do_GET()
 
-    if not raw:
-        return JSONResponse({"error": "empty audio"}, status_code=400)
+        def do_POST(self):
+            length = int(self.headers.get("Content-Length", 0))
+            raw = self.rfile.read(length) if length else b""
+            try:
+                data = json.loads(raw.decode("utf-8") or "{}")
+            except Exception:
+                data = {}
 
-    os.makedirs(RECORDINGS_DIR, exist_ok=True)
-    stamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
-    safe = re.sub(r"[^a-zA-Z0-9_-]+", "", stamp)
-    ext = _ext_from_mime(mime)
-    audio_name = f"fatiha-{safe}.{ext}"
-    meta_name = f"fatiha-{safe}.json"
-    audio_path = os.path.join(RECORDINGS_DIR, audio_name)
-    meta_path = os.path.join(RECORDINGS_DIR, meta_name)
+            if self.path == "/log":
+                with open(os.path.join(ROOT, "diagnostic_report.json"), "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                self._json(200, {"status": "success", "file": "diagnostic_report.json"})
+                return
 
-    with open(audio_path, "wb") as f:
-        f.write(raw)
+            if self.path == "/save-recording":
+                audio_b64 = _strip_data_url(data.get("audioBase64") or "")
+                mime = data.get("mimeType") or "audio/webm"
+                meta = data.get("meta") if isinstance(data.get("meta"), dict) else {}
+                if not audio_b64:
+                    self._json(400, {"error": "audioBase64 required"})
+                    return
+                try:
+                    audio_raw = base64.b64decode(audio_b64)
+                except Exception:
+                    self._json(400, {"error": "invalid_base64"})
+                    return
+                os.makedirs(RECORDINGS_DIR, exist_ok=True)
+                stamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+                safe = re.sub(r"[^a-zA-Z0-9_-]+", "", stamp)
+                ext = _ext_from_mime(mime)
+                audio_name = f"fatiha-{safe}.{ext}"
+                meta_name = f"fatiha-{safe}.json"
+                with open(os.path.join(RECORDINGS_DIR, audio_name), "wb") as f:
+                    f.write(audio_raw)
+                payload = {
+                    **meta,
+                    "consent": True,
+                    "savedAt": datetime.utcnow().isoformat() + "Z",
+                    "localAudio": audio_name,
+                }
+                with open(os.path.join(RECORDINGS_DIR, meta_name), "w", encoding="utf-8") as f:
+                    json.dump(payload, f, ensure_ascii=False, indent=2)
+                self._json(200, {"ok": True, "audioFile": audio_name, "metaFile": meta_name, "dir": "recordings"})
+                return
 
-    payload = {
-        **meta,
-        "consent": True,
-        "savedAt": datetime.utcnow().isoformat() + "Z",
-        "localAudio": audio_name,
-    }
-    with open(meta_path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+            self._json(404, {"error": "not_found"})
 
-    return {
-        "ok": True,
-        "audioFile": audio_name,
-        "metaFile": meta_name,
-        "dir": "recordings",
-    }
+        def _json(self, code, payload):
+            body = json.dumps(payload).encode("utf-8")
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
 
-@app.get("/{path:path}")
-async def public_static(path: str):
-    root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public")
-    candidate = os.path.normpath(os.path.join(root, path))
-    if not candidate.startswith(root):
+        def log_message(self, fmt, *args):
+            sys.stderr.write("[stdlib] %s - %s\n" % (self.address_string(), fmt % args))
+
+    print("SERVEUR STDlib sur http://localhost:%s (sans FastAPI)" % PORT)
+    print("Enregistrements opt-in → %s" % RECORDINGS_DIR)
+    with socketserver.TCPServer(("0.0.0.0", PORT), TilmidhHandler) as httpd:
+        httpd.serve_forever()
+
+
+def run_fastapi():
+    from fastapi import FastAPI, Request
+    from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+    from fastapi.middleware.cors import CORSMiddleware
+    import uvicorn
+
+    app = FastAPI()
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    @app.get("/", response_class=HTMLResponse)
+    async def read_index():
+        with open(os.path.join(PUBLIC, "index.html"), "r", encoding="utf-8") as f:
+            return f.read()
+
+    @app.post("/log")
+    async def save_log(request: Request):
+        data = await request.json()
+        with open(os.path.join(ROOT, "diagnostic_report.json"), "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        return {"status": "success", "file": "diagnostic_report.json"}
+
+    @app.post("/save-recording")
+    async def save_recording(request: Request):
+        try:
+            body = await request.json()
+        except Exception:
+            return JSONResponse({"error": "invalid_json"}, status_code=400)
+
+        audio_b64 = _strip_data_url(body.get("audioBase64") or "")
+        mime = body.get("mimeType") or "audio/webm"
+        meta = body.get("meta") if isinstance(body.get("meta"), dict) else {}
+
+        if not audio_b64:
+            return JSONResponse({"error": "audioBase64 required"}, status_code=400)
+
+        try:
+            raw = base64.b64decode(audio_b64)
+        except Exception:
+            return JSONResponse({"error": "invalid_base64"}, status_code=400)
+
+        if not raw:
+            return JSONResponse({"error": "empty audio"}, status_code=400)
+
+        os.makedirs(RECORDINGS_DIR, exist_ok=True)
+        stamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+        safe = re.sub(r"[^a-zA-Z0-9_-]+", "", stamp)
+        ext = _ext_from_mime(mime)
+        audio_name = "fatiha-%s.%s" % (safe, ext)
+        meta_name = "fatiha-%s.json" % safe
+        audio_path = os.path.join(RECORDINGS_DIR, audio_name)
+        meta_path = os.path.join(RECORDINGS_DIR, meta_name)
+
+        with open(audio_path, "wb") as f:
+            f.write(raw)
+
+        payload = {
+            **meta,
+            "consent": True,
+            "savedAt": datetime.utcnow().isoformat() + "Z",
+            "localAudio": audio_name,
+        }
+        with open(meta_path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+        return {
+            "ok": True,
+            "audioFile": audio_name,
+            "metaFile": meta_name,
+            "dir": "recordings",
+        }
+
+    @app.get("/{path:path}")
+    async def public_static(path: str):
+        candidate = os.path.normpath(os.path.join(PUBLIC, path))
+        if not candidate.startswith(PUBLIC):
+            return HTMLResponse("Not found", status_code=404)
+        if os.path.isfile(candidate):
+            return FileResponse(candidate)
+        html = candidate + ".html"
+        if os.path.isfile(html):
+            return FileResponse(html)
         return HTMLResponse("Not found", status_code=404)
-    if os.path.isfile(candidate):
-        return FileResponse(candidate)
-    html = candidate + ".html"
-    if os.path.isfile(html):
-        return FileResponse(html)
-    return HTMLResponse("Not found", status_code=404)
+
+    print("SERVEUR FastAPI sur http://localhost:%s" % PORT)
+    print("Enregistrements opt-in → %s" % RECORDINGS_DIR)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
+
 
 if __name__ == "__main__":
-    print("SERVEUR DE DIAGNOSTIC DÉMARRÉ sur http://localhost:3000")
-    print(f"Enregistrements opt-in → {RECORDINGS_DIR}")
-    uvicorn.run(app, host="0.0.0.0", port=3000)
+    try:
+        run_fastapi()
+    except ImportError:
+        run_stdlib()

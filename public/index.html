@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr" dir="auto">
 <head>
     <meta charset="UTF-8">
     <!-- Google tag (gtag.js) -->
@@ -10,14 +10,14 @@
       gtag('js', new Date());
       gtag('config', 'G-GN2HKJF3L0');
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Tilmidh">
     <meta name="format-detection" content="telephone=no">
     <title>Tilmidh تلميذ — Entraînement Tajwid mot à mot</title>
-    <meta name="description" content="Récite le Coran, le micro vérifie chaque mot. Couleurs tajwid, Fātiḥah, Ikhlāṣ, Duo imam/talib. Outil d'entraînement gratuit — pas une ijazah.">
+    <meta name="description" content="Récite le Coran mot à mot avec couleurs tajwid, micro en arabe, import de sourates et mode Groupe Call. Entraînement gratuit — pas une ijazah.">
     <link rel="canonical" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
@@ -34,11 +34,11 @@
     <meta property="og:locale:alternate" content="ru_RU">
     <meta property="og:url" content="https://tilmidh.app/">
     <meta property="og:title" content="Tilmidh تلميذ — Entraînement Tajwid mot à mot">
-    <meta property="og:description" content="Récite le Coran, le micro vérifie chaque mot. Couleurs tajwid, Fātiḥah, Ikhlāṣ, Duo imam/talib.">
+    <meta property="og:description" content="Récite le Coran mot à mot — tajwid, micro arabe, import de sourates, Groupe Call.">
     <meta property="og:image" content="https://tilmidh.app/og.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tilmidh تلميذ — Entraînement Tajwid mot à mot">
-    <meta name="twitter:description" content="Récite le Coran, le micro vérifie chaque mot. Couleurs tajwid, Duo imam/talib.">
+    <meta name="twitter:description" content="Récite le Coran mot à mot — tajwid, micro arabe, import de sourates, Groupe Call.">
     <meta name="twitter:image" content="https://tilmidh.app/og.png">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -67,22 +67,22 @@
             --text: #F5F5f7;
             --subtext: #86868b;
             
-            /* Expert Tajwid Colors (Premium) */
-            --ghunnah: #34C759;           /* Green */
-            --madd-tabii: #64D2FF;        /* Sky Blue */
-            --madd-munfasil: #007AFF;      /* iOS Blue */
-            --madd-muttasil: #5856D6;      /* Indigo */
-            --madd-lazim: #AF52DE;         /* Purple */
-            --ikhfa: #FF9F0A;             /* Orange */
-            --idgham-ghunnah: #FF2D55;      /* Pink/Red */
-            --idgham-no-ghunnah: #8E8E93;   /* Grey */
-            --iqlab: #FF375F;             /* Rose */
-            --izhar: #C7C7CC;             /* Light Grey */
-            --qalqalah: #FF3B30;          /* Bright Red */
-            --ham-wasl: #555;             /* Dark Grey for silent */
-            /* Aliases used by some CSS rules */
+            /* Premium Tajwid — 4 familles distinctes */
+            --tj-ink: #EDE8DF;
+            --ghunnah: #8FD49A;
+            --madd-tabii: #8EEADB;
+            --madd-munfasil: #5ECFC4;
+            --madd-muttasil: #3AADA8;
+            --madd-lazim: #1E8A8A;
+            --ikhfa: #E4B87A;
+            --idgham-ghunnah: #D4A66A;
+            --idgham-no-ghunnah: #A89478;
+            --iqlab: #E8C090;
+            --izhar: #A8A4A0;
+            --qalqalah: #E09888;
+            --ham-wasl: var(--subtext);
             --madd-fari: var(--madd-munfasil);
-            --madd-arid: var(--madd-munfasil);
+            --madd-arid: var(--madd-muttasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             
@@ -108,20 +108,21 @@
             --text: #0B1220;
             --subtext: #6B7280;
             --border: #E5E7EB;
-            --ghunnah: #15803D;
-            --madd-tabii: #0369A1;
-            --madd-munfasil: #1D4ED8;
-            --madd-muttasil: #4338CA;
-            --madd-lazim: #7E22CE;
-            --ikhfa: #C2410C;
-            --idgham-ghunnah: #BE123C;
-            --idgham-no-ghunnah: #57534E;
-            --iqlab: #E11D48;
+            --tj-ink: #1C1916;
+            --ghunnah: #2F8A52;
+            --madd-tabii: #14B8A6;
+            --madd-munfasil: #0D9488;
+            --madd-muttasil: #0F766E;
+            --madd-lazim: #115E59;
+            --ikhfa: #B45309;
+            --idgham-ghunnah: #A16207;
+            --idgham-no-ghunnah: #78716C;
+            --iqlab: #C27803;
             --izhar: #57534E;
-            --qalqalah: #DC2626;
-            --ham-wasl: #9CA3AF;
+            --qalqalah: #BE4444;
+            --ham-wasl: var(--subtext);
             --madd-fari: var(--madd-munfasil);
-            --madd-arid: var(--madd-munfasil);
+            --madd-arid: var(--madd-muttasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             --overlay-scrim: rgba(15, 23, 42, 0.45);
@@ -142,20 +143,21 @@
             --text: #0B1220;
             --subtext: #64748B;
             --border: #D6E3F0;
-            --ghunnah: #15803D;
-            --madd-tabii: #0369A1;
-            --madd-munfasil: #1D4ED8;
-            --madd-muttasil: #4338CA;
-            --madd-lazim: #6D28D9;
-            --ikhfa: #C2410C;
-            --idgham-ghunnah: #BE123C;
-            --idgham-no-ghunnah: #57534E;
-            --iqlab: #E11D48;
-            --izhar: #57534E;
-            --qalqalah: #DC2626;
-            --ham-wasl: #9CA3AF;
+            --tj-ink: #152033;
+            --ghunnah: #2F8A52;
+            --madd-tabii: #0EA5A0;
+            --madd-munfasil: #0D8A8A;
+            --madd-muttasil: #0B7078;
+            --madd-lazim: #095A68;
+            --ikhfa: #B45309;
+            --idgham-ghunnah: #A16207;
+            --idgham-no-ghunnah: #78716C;
+            --iqlab: #C27803;
+            --izhar: #64748B;
+            --qalqalah: #BE4444;
+            --ham-wasl: var(--subtext);
             --madd-fari: var(--madd-munfasil);
-            --madd-arid: var(--madd-munfasil);
+            --madd-arid: var(--madd-muttasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             --overlay-scrim: rgba(15, 23, 42, 0.45);
@@ -327,9 +329,10 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: flex-start;
-            gap: 25px 12px;
+            align-items: flex-end;
+            gap: 8px 6px;
             width: 100%;
+            max-width: 100%;
             direction: rtl;
             overflow: visible;
             padding: 6px 8px 2px;
@@ -347,19 +350,19 @@
             padding: 4px 0 6px;
         }
         .ayah-line.ayah-prev {
-            opacity: 0.28;
+            opacity: 0.72;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% - 22vh)) scale(0.5);
-            filter: blur(5px);
+            filter: none;
             z-index: 1;
         }
         .ayah-line.ayah-next {
-            opacity: 0.28;
+            opacity: 0.72;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% + 22vh)) scale(0.5);
-            filter: blur(5px);
+            filter: none;
             z-index: 1;
         }
         .ayah-line.ayah-prev .translit-container,
@@ -379,8 +382,8 @@
                 transition: none;
             }
             .ayah-line.active-ayah { transform: translateY(-50%) scale(var(--ayah-fit, 1)); filter: none; }
-            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.35; }
-            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.35; }
+            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.55; }
+            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.55; }
         }
         #verse-container::-webkit-scrollbar { display: none; }
 
@@ -388,16 +391,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 12px 16px;
+            padding: 8px 10px 20px;
             border-radius: 18px;
             background: transparent;
             border: 1px solid transparent;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            min-width: 80px;
+            min-width: 0;
             position: relative;
             cursor: pointer;
             box-shadow: none;
             overflow: visible;
+            flex: 0 0 auto;
         }
 
         .word-box:hover {
@@ -477,8 +481,8 @@
         }
         .word-box.correct .arabic-word,
         .word-box.correct .arabic-word * {
-            color: var(--validated);
-            text-decoration-color: var(--validated);
+            color: var(--validated) !important;
+            opacity: 1;
         }
 
         /* Tarteel-style mistake detection */
@@ -513,46 +517,62 @@
             border-color: rgba(245, 158, 11, 0.35);
         }
 
-        /* Tajwid Styling - User Defined Scheme */
-        .madda_normal { 
-            color: var(--madd-tabii); 
-            text-decoration: underline dotted rgba(100, 210, 255, 0.4); 
+        /* ── Tajwid premium : couleurs lisibles, palette émeraude ── */
+        tajweed { display: inline; font: inherit; }
+
+        .madda_normal,
+        tajweed.madda_normal {
+            color: var(--madd-tabii);
         }
-        .madda_permissible, .madda_necessary { 
-            color: var(--madd-fari); 
-            text-decoration: underline dotted rgba(10, 132, 255, 0.4); 
+        .madda_permissible,
+        tajweed.madda_permissible {
+            /* ʿāriḍ : points madd seulement (visible au waqf), pas de couleur en lecture liée */
+            color: inherit;
         }
-        .madda_compulsory, .madda_long { 
-            color: var(--madd-lazim); 
-            text-decoration: underline dotted rgba(175, 82, 222, 0.5); 
+        .madda_necessary,
+        tajweed.madda_necessary {
+            color: var(--madd-lazim);
         }
-        .ghunnah { 
-            color: var(--ghunnah); 
-            text-decoration: underline dotted rgba(52, 199, 89, 0.4); 
+        .madda_compulsory, .madda_long,
+        tajweed.madda_compulsory, tajweed.madda_long {
+            color: var(--madd-lazim);
         }
-        .idgham_with_ghunnah, .idgham_mutajanisayn, .idgham_mutaqaribayn, .idgham_without_ghunnah { 
-            color: var(--idgham); 
-            text-decoration: underline dotted rgba(175, 82, 222, 0.4); 
+        .ghunnah {
+            color: var(--ghunnah);
+            text-decoration: underline dotted;
+            text-decoration-color: color-mix(in srgb, var(--ghunnah) 45%, transparent);
+            text-underline-offset: 3px;
         }
-        .ikhfa, .ikhfa_shafawi { 
-            color: var(--ikhfa); 
-            text-decoration: underline dotted rgba(255, 159, 10, 0.4); 
+        .idgham_with_ghunnah, .idgham_mutajanisayn, .idgham_mutaqaribayn, .idgham_without_ghunnah {
+            color: var(--idgham);
+            text-decoration: underline dotted;
+            text-decoration-color: color-mix(in srgb, var(--idgham) 45%, transparent);
+            text-underline-offset: 3px;
         }
-        .iqlab { 
-            color: var(--iqlab); 
-            font-weight: 800; 
-            text-decoration: underline wavy rgba(255, 55, 95, 0.5);
+        .ikhfa, .ikhfa_shafawi {
+            color: var(--ikhfa);
+            text-decoration: underline dotted;
+            text-decoration-color: color-mix(in srgb, var(--ikhfa) 45%, transparent);
+            text-underline-offset: 3px;
         }
-        .izhar, .izhar_shafawi { 
-            color: var(--izhar); 
+        .iqlab {
+            color: var(--iqlab);
+            text-decoration: underline dotted;
+            text-decoration-color: color-mix(in srgb, var(--iqlab) 50%, transparent);
+            text-underline-offset: 3px;
         }
-        .qalqalah { 
-            color: var(--qalqalah); 
-            text-decoration: underline double rgba(255, 59, 48, 0.4); 
+        .izhar, .izhar_shafawi {
+            color: var(--izhar);
+        }
+        .qalqalah, .qalaqah {
+            color: var(--qalqalah);
+            text-decoration: underline dotted;
+            text-decoration-color: color-mix(in srgb, var(--qalqalah) 50%, transparent);
+            text-underline-offset: 3px;
         }
         .ham_wasl, .hamzat_wasl, .slm, .laam_shamsiyah {
             color: var(--ham-wasl);
-            opacity: 0.6;
+            opacity: 0.72;
         }
 
         .arabic-word {
@@ -560,6 +580,7 @@
             font-size: clamp(1.8rem, 5vw, 2.5rem); 
             margin-bottom: 0;
             direction: rtl;
+            color: var(--tj-ink);
             text-rendering: optimizeLegibility;
             font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
             letter-spacing: 0 !important;
@@ -568,44 +589,6 @@
             overflow: visible;
             line-height: 1.55;
             padding: 0.12em 0.18em 0;
-        }
-
-        /* Reading-paced fill: unread → green → blue (stays blue when .correct). */
-        .arabic-word.shimmering {
-            background-repeat: no-repeat;
-            background-color: var(--gs-base, var(--text));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent !important;
-        }
-        .arabic-word.shimmering * {
-            background-image: inherit;
-            background-size: inherit;
-            background-position: inherit;
-            background-repeat: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent !important;
-            color: transparent !important;
-            text-decoration-color: transparent;
-        }
-        .word-box.correct .arabic-word.shimmering,
-        .word-box.correct .arabic-word.shimmering * {
-            color: transparent !important;
-            -webkit-text-fill-color: transparent;
-            text-decoration-color: transparent;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .arabic-word.shimmering {
-                background-image: none !important;
-                -webkit-text-fill-color: unset;
-                color: var(--text) !important;
-            }
-            .word-box.correct .arabic-word.shimmering,
-            .word-box.correct .arabic-word.shimmering * {
-                color: var(--validated) !important;
-            }
         }
 
         .translit-container {
@@ -714,6 +697,7 @@
             height: 5px;
             border-radius: 50%;
             background: var(--madd-tabii);
+            box-shadow: 0 0 6px color-mix(in srgb, var(--madd-tabii) 45%, transparent);
         }
         .word-box[data-rule-full="madd-tabii"] .dot-pip { background: var(--madd-tabii); }
         .word-box[data-rule-full="madd-arid"] .dot-pip { background: var(--madd-arid); }
@@ -736,7 +720,8 @@
 
         /* Consolidated Tajwid Rule Styling */
         .tajwid-madd, .tajwid-ghunnah, .tajwid-ikhfa, .tajwid-qalqalah, 
-        .madda_normal, .madda_permissible, .madda_necessary, .ghunnah, .ikhfa, .qalqalah, .idgham_with_ghunnah, .idgham_without_ghunnah, .iqlab, .ham_wasl, .laam_shamsiyah {
+        .madda_normal, .madda_permissible, .madda_necessary, .ghunnah, .ikhfa, .qalqalah, .qalaqah, .idgham_with_ghunnah, .idgham_without_ghunnah, .iqlab, .ham_wasl, .laam_shamsiyah,
+        tajweed.madda_normal, tajweed.madda_permissible, tajweed.madda_necessary, tajweed.ghunnah, tajweed.ikhfa, tajweed.qalqalah, tajweed.qalaqah, tajweed.idgham_with_ghunnah, tajweed.idgham_without_ghunnah, tajweed.iqlab, tajweed.ham_wasl, tajweed.laam_shamsiyah {
             cursor: help !important;
             display: inline !important;
             unicode-bidi: normal !important;
@@ -745,8 +730,7 @@
             pointer-events: auto !important;
         }
         .arabic-word span:hover {
-            filter: brightness(1.2);
-            text-decoration: underline solid currentColor;
+            filter: brightness(1.08);
         }
 
         .controls {
@@ -1123,7 +1107,25 @@
         #v-btns-container {
             display: flex;
             align-items: center;
-            flex-shrink: 0;
+            flex-shrink: 1;
+            min-width: 0;
+            max-width: min(56vw, 320px);
+            overflow-x: auto;
+            gap: 4px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        #v-btns-container::-webkit-scrollbar { display: none; }
+        .v-btn.ayah-btn {
+            min-width: 34px;
+            padding: 0 12px;
+            font-family: var(--font-main);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+        .v-btn.surah-btn {
+            font-family: 'Amiri', serif;
+            font-size: 0.88rem;
         }
         .verse-selector.dock-hidden {
             opacity: 0;
@@ -1748,22 +1750,6 @@
         #download-btn.visible {
             display: block;
         }
-        /* Cachés visuellement — DOM + handlers conservés */
-        #download-btn,
-        #download-btn.visible,
-        #report-diag-btn,
-        #voice-lab-btn,
-        #live-assistant,
-        #live-assistant.visible,
-        #voice-lab-modal,
-        #txt-start,
-        #dataset-optin-label,
-        #mistake-test-label,
-        #start-overlay,
-        #theme-toggle-btn,
-        .profile-btn {
-            display: none !important;
-        }
 
         /* Smart Progress Line below Header */
         .smart-progress-bar {
@@ -1803,88 +1789,6 @@
             transition: 0.4s;
             opacity: 0;
         }
-        /* Expert Side Panel Drawer - Refined Design */
-        #expert-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 340px;
-            max-width: 100%;
-            transform: translateX(100%);
-            height: 100dvh;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
-            z-index: 2800;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity0.5s ease;
-            padding: calc(30px + env(safe-area-inset-top)) 15px 40px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: -20px 0 60px rgba(0,0,0,0.8);
-            opacity: 0;
-            pointer-events: none;
-        }
-        #expert-panel.visible { 
-            opacity: 1; 
-            pointer-events: auto;
-        }
-        #expert-panel.open {
-            transform: translateX(0);
-        }
-        .expert-toggle {
-            position: absolute;
-            left: -50px;
-            top: 15%;
-            width: 50px;
-            height: 80px;
-            background: var(--accent);
-            border-radius: 20px 0 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: white;
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
-            box-shadow: -5px 0 20px rgba(5, 150, 105, 0.3);
-        }
-        #expert-panel.chrome-hidden:not(.open) .expert-toggle {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(18px);
-        }
-        .expert-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-left: 10px;
-        }
-        .rules-list {
-            flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 0 5px 20px 0;
-        }
-        .rule-item {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            animation: slideInRight 0.5s ease forwards;
-            opacity: 0;
-        }
-
         /* Duo Mode Styles */
         #duo-container {
             display: none;
@@ -2034,90 +1938,6 @@
             background: rgba(255, 255, 255, 0.32);
             border-color: rgba(255, 255, 255, 0.6);
             color: var(--text);
-        }
-
-        .rule-item:hover { 
-            background: rgba(255, 255, 255, 0.08); 
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        .rule-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            width: 100%;
-        }
-        .rule-badge {
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .rule-word {
-            font-family: 'Amiri', serif;
-            font-size: 1.4rem;
-            direction: rtl;
-            color: white;
-            line-height: 1;
-        }
-        .rule-inst {
-            font-size: 0.85rem;
-            color: var(--subtext);
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        /* Legend at bottom of panel */
-        .expert-legend {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .legend-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--subtext);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-        .legend-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .legend-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 10px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-        .legend-label {
-            font-size: 0.6rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            align-self: flex-start;
-        }
-        .legend-letters {
-            font-family: 'Amiri', serif;
-            font-size: 1.1rem;
-            color: white;
-            direction: rtl;
-            text-align: right;
         }
 
         .tajwid-modal {
@@ -2311,20 +2131,28 @@
                 max-width: 100%;
             }
             .ayah-words {
-                gap: 14px 8px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                justify-content: flex-start;
+                gap: 6px 4px;
                 align-items: flex-end;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                scroll-padding-inline: 12px;
             }
+            .ayah-words::-webkit-scrollbar { display: none; }
             .ayah-line.ayah-prev {
-                opacity: 0.18;
+                opacity: 0.72;
                 visibility: visible;
                 transform: translateY(calc(-50% - 34vh)) scale(0.34);
-                filter: blur(7px);
+                filter: none;
             }
             .ayah-line.ayah-next {
-                opacity: 0.18;
+                opacity: 0.72;
                 visibility: visible;
                 transform: translateY(calc(-50% + 34vh)) scale(0.34);
-                filter: blur(7px);
+                filter: none;
             }
             .ayah-line.active-ayah {
                 transform: translateY(-50%) scale(var(--ayah-fit, 1));
@@ -2454,10 +2282,6 @@
             display: flex !important;
             transform: translateY(0);
             opacity: 1;
-        }
-        #live-assistant,
-        #live-assistant.visible {
-            display: none !important;
         }
         .assistant-header {
             position: absolute;
@@ -2726,8 +2550,6 @@
         html[data-theme="light"] .tajwid-modal,
         html[data-theme="light"] .summary-card,
         html[data-theme="light"] .surah-card,
-        html[data-theme="light"] .rule-item,
-        html[data-theme="light"] .legend-item,
         html[data-theme="blue"] .verse-selector,
         html[data-theme="blue"] .daily-card,
         html[data-theme="blue"] .stat-card,
@@ -2738,9 +2560,7 @@
         html[data-theme="blue"] .lang-options,
         html[data-theme="blue"] .tajwid-modal,
         html[data-theme="blue"] .summary-card,
-        html[data-theme="blue"] .surah-card,
-        html[data-theme="blue"] .rule-item,
-        html[data-theme="blue"] .legend-item {
+        html[data-theme="blue"] .surah-card {
             background: var(--surface);
             border-color: var(--border);
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
@@ -2793,12 +2613,10 @@
         html[data-theme="light"] .daily-card:hover,
         html[data-theme="light"] .surah-card:hover,
         html[data-theme="light"] .duo-choice-card:hover,
-        html[data-theme="light"] .rule-item:hover,
         html[data-theme="light"] .v-btn:hover,
         html[data-theme="blue"] .daily-card:hover,
         html[data-theme="blue"] .surah-card:hover,
         html[data-theme="blue"] .duo-choice-card:hover,
-        html[data-theme="blue"] .rule-item:hover,
         html[data-theme="blue"] .v-btn:hover {
             background: var(--surface-hover);
         }
@@ -2904,21 +2722,11 @@
             background: var(--overlay-scrim) !important;
         }
 
-        html[data-theme="light"] #expert-panel,
         html[data-theme="light"] #live-assistant,
-        html[data-theme="blue"] #expert-panel,
         html[data-theme="blue"] #live-assistant {
             background: var(--panel-bg);
             border-color: var(--border);
             box-shadow: -10px 0 40px rgba(15, 23, 42, 0.08);
-        }
-        html[data-theme="light"] #expert-panel,
-        html[data-theme="blue"] #expert-panel {
-            border-left-color: var(--border);
-        }
-        html[data-theme="light"] .expert-legend,
-        html[data-theme="blue"] .expert-legend {
-            border-top-color: var(--border);
         }
         html[data-theme="light"] .assistant-val,
         html[data-theme="blue"] .assistant-val {
@@ -3030,8 +2838,8 @@
     <script>
         (function () {
             try {
-                document.documentElement.setAttribute('data-theme', 'blue');
-                try { localStorage.setItem('tajwid_theme', 'blue'); } catch (e2) {}
+                var themeBoot = localStorage.getItem('tajwid_theme') || 'blue';
+                document.documentElement.setAttribute('data-theme', themeBoot);
                 var langBoot = localStorage.getItem('tajwid_lang') || 'fr';
                 document.documentElement.setAttribute('data-lang', langBoot);
                 if (localStorage.getItem('tajwid_hide_translit') === '1') {
@@ -4628,40 +4436,6 @@
             document.getElementById('txt-expert-title').innerHTML = icon + t.expertTitle;
         }
 
-        // Populate Legend
-        const legendContainer = document.getElementById('expert-legend');
-        if (legendContainer) {
-            legendContainer.innerHTML = `
-                <div class="legend-title">${t.expertLegend}</div>
-                <div class="legend-grid">
-                    <div class="legend-item">
-                        <div class="legend-label" style="background:#64D2FF">Madd</div>
-                        <div class="legend-letters">ا و ي</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" style="background:#34C759">Ghunnah</div>
-                        <div class="legend-letters">نّ مّ</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" style="background:#FF9F0A">Ikhfa</div>
-                        <div class="legend-letters">ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" style="background:#AF52DE">Idgham</div>
-                        <div class="legend-letters">ي ر م ل و ن</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" style="background:#FF3B30">Qalqalah</div>
-                        <div class="legend-letters">ق ط ب ج د</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" style="background:#8E8E93">Izhar</div>
-                        <div class="legend-letters">أ هـ ع ح غ خ</div>
-                    </div>
-                </div>
-            `;
-        }
-
         if (document.getElementById('txt-summary-title')) document.getElementById('txt-summary-title').innerText = t.summaryTitle;
         if (document.getElementById('txt-summary-fluidity')) document.getElementById('txt-summary-fluidity').innerText = t.summaryFluidity;
         if (document.getElementById('txt-summary-mistakes')) document.getElementById('txt-summary-mistakes').innerText = t.summaryMistakes;
@@ -4698,10 +4472,22 @@
         updateStatsUI();
     }
 
+    function countLibraryAyahs() {
+        let total = 0;
+        for (const v of VERSES_LIBRARY) {
+            const range = v.ref && v.ref.match(/\[(\d+)-(\d+)\]/);
+            if (range) total += parseInt(range[2], 10) - parseInt(range[1], 10) + 1;
+            else if (v.ref && /:\d+/.test(v.ref)) total += 1;
+            else total += 1;
+        }
+        return Math.max(total, 1);
+    }
+
     function updateStatsUI() {
         document.getElementById('stat-completed').innerText = completedRefs.length;
         document.getElementById('stat-favorites').innerText = favorites.length;
-        const percent = ((completedRefs.length / 6236) * 100).toFixed(1);
+        const denom = Math.max(countLibraryAyahs(), completedRefs.length, 1);
+        const percent = Math.min(100, ((completedRefs.length / denom) * 100)).toFixed(1);
         document.getElementById('progress-percent').innerText = percent + "%";
         document.getElementById('progress-label').innerText = percent + "%";
         document.getElementById('profile-progress-bar').style.width = percent + "%";
@@ -4730,8 +4516,8 @@
         return num.toString().split('').map(digit => arabicDigits[digit] || digit).join('');
     }
 
-    // Mode focus : Al-Fātiḥah uniquement (entraînement règles + STT)
-    const FATIHA_ONLY = true;
+    // Mode focus désactivé en prod — import, browser, ?ref= et sourates 112–114 disponibles
+    const FATIHA_ONLY = false;
     const FATIHA_SURAH = 1;
     const FATIHA_AYAH_COUNT = 7;
 
@@ -4753,6 +4539,54 @@
             return false;
         }
         return true;
+    }
+
+    function upsertVerseEntry(entry) {
+        const refKey = entry.ref || '';
+        let idx = VERSES_LIBRARY.findIndex(v => v.ref === refKey);
+        if (idx >= 0) {
+            VERSES_LIBRARY[idx] = entry;
+        } else {
+            VERSES_LIBRARY.push(entry);
+            idx = VERSES_LIBRARY.length - 1;
+        }
+        return idx;
+    }
+
+    function cacheVerseEntry(entry) {
+        try {
+            const n = parseSurahNum(entry.ref);
+            if (n) sessionStorage.setItem('tajwid_cache_' + n, JSON.stringify(entry));
+        } catch (e) {}
+    }
+
+    function loadCachedVerse(surahNum) {
+        try {
+            const raw = sessionStorage.getItem('tajwid_cache_' + surahNum);
+            return raw ? JSON.parse(raw) : null;
+        } catch (e) { return null; }
+    }
+
+    const OFFLINE_VERSES = {"1":{"title":"Al-Fatihah","ref":"Al-Fatihah [1-7]","text":"بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span> ٱلْحَمْدُ لِلَّهِ رَبِّ <tajweed class=ham_wasl>ٱ</tajweed>لْعَ<tajweed class=madda_normal>ـٰ</tajweed>لَم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢</span> ٱ<tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٣</span> مَ<tajweed class=madda_normal>ـٰ</tajweed>لِكِ يَوْمِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دّ<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٤</span> إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَع<tajweed class=madda_permissible>ِي</tajweed>نُ <span class=end>٥</span> ٱهْدِنَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صِّر<tajweed class=madda_normal>َٲ</tajweed>طَ <tajweed class=ham_wasl>ٱ</tajweed>لْمُسْتَق<tajweed class=madda_permissible>ِي</tajweed>مَ <span class=end>٦</span> صِر<tajweed class=madda_normal>َٲ</tajweed>طَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَغْضُوبِ عَلَيْهِمْ وَلَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ضّ<tajweed class=madda_necessary>َا</tajweed>ٓلّ<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٧</span>","words":[{"en":"bis'mi"},{"en":"l-lahi"},{"en":"l-raḥmāni"},{"en":"l-raḥīmi"},{"en":"al-ḥamdu"},{"en":"lillahi"},{"en":"rabbi"},{"en":"l-ʿālamīna"},{"en":"al-raḥmāni"},{"en":"l-raḥīmi"},{"en":"māliki"},{"en":"yawmi"},{"en":"l-dīni"},{"en":"iyyāka"},{"en":"naʿbudu"},{"en":"wa-iyyāka"},{"en":"nastaʿīnu"},{"en":"ih'dinā"},{"en":"l-ṣirāṭa"},{"en":"l-mus'taqīma"},{"en":"ṣirāṭa"},{"en":"alladhīna"},{"en":"anʿamta"},{"en":"ʿalayhim"},{"en":"ghayri"},{"en":"l-maghḍūbi"},{"en":"ʿalayhim"},{"en":"walā"},{"en":"l-ḍālīna"}]}};
+
+    function getOfflineVerseEntry(surahNum) {
+        const raw = OFFLINE_VERSES[surahNum];
+        if (!raw) return null;
+        return {
+            ...raw,
+            words: raw.words.map(w => ({
+                en: w.en,
+                ru: transliterateToCyrillic(w.en)
+            }))
+        };
+    }
+
+    function mapApiWord(w) {
+        const tr = w.transliteration?.text || w.transliteration?.text_uthmani || '';
+        return {
+            en: tr,
+            ru: transliterateToCyrillic(tr)
+        };
     }
 
     // === API Quran.com avec tajwid natif ===
@@ -4820,10 +4654,7 @@
                         combinedText += text + " ";
                     }
                     
-                    const wordsForVerse = v.words.filter(w => w.char_type_name === 'word').map(w => ({
-                        en: w.transliteration.text,
-                        ru: transliterateToCyrillic(w.transliteration.text)
-                    }));
+                    const wordsForVerse = v.words.filter(w => w.char_type_name === 'word').map(mapApiWord);
                     combinedWords = combinedWords.concat(wordsForVerse);
                 });
 
@@ -4839,20 +4670,28 @@
                     title: chapterName,
                     ref: `${chapterName} [${chapterId}:${verse.verse_number}]`,
                     text: verse.text_uthmani_tajweed,
-                    words: verse.words.filter(w => w.char_type_name === 'word').map(w => ({
-                        en: w.transliteration.text,
-                        ru: transliterateToCyrillic(w.transliteration.text)
-                    }))
+                    words: verse.words.filter(w => w.char_type_name === 'word').map(mapApiWord)
                 };
             }
 
-            VERSES_LIBRARY.push(newEntry);
-            await switchVerse(VERSES_LIBRARY.length - 1);
+            const idx = upsertVerseEntry(newEntry);
+            cacheVerseEntry(newEntry);
+            await switchVerse(idx);
             closeImportModal();
             closeQuranBrowser();
         } catch (err) {
             console.error("Erreur API Quran:", err);
-            alert("Erreur de chargement : " + err.message);
+            const sn = parseSurahNum(ref);
+            const cached = sn ? loadCachedVerse(sn) : null;
+            const offline = sn ? getOfflineVerseEntry(sn) : null;
+            const fallback = cached || offline;
+            if (fallback) {
+                const idx = upsertVerseEntry(fallback);
+                await switchVerse(idx);
+                alert(cached ? 'Hors-ligne : verset chargé depuis le cache local.' : 'Hors-ligne : Al-Fātiḥah embarquée (API indisponible).');
+            } else {
+                alert("Erreur de chargement : " + err.message);
+            }
         } finally {
             if (loader) loader.style.display = 'none';
         }
@@ -4877,6 +4716,40 @@
     // Quran.com n’étiquette pas tous les ṭabīʿī de Fātiḥah ; ʿāriḍ ≠ munfaṣil.
     const FATIHA_TABII_EXTRA = { 'اياك': 1, 'واياك': 1, 'اهدنا': 1, 'الذين': 1, 'المغضوب': 1, 'ولا': 1 };
 
+    function expandMaddCombining(html) {
+        if (!html || !html.includes('madda_normal')) return html;
+        // Quran.com met parfois seul le ـٰ (U+0670) dans la balise — invisible une fois colorié
+        return html.replace(
+            /([\u0621-\u064A\u0671])([\u064B-\u0652]*)<tajweed class=madda_normal>([^<]*)<\/tajweed>/g,
+            '<tajweed class="madda_normal">$1$2$3</tajweed>'
+        );
+    }
+
+    function applyFatihaTabiiMarkup(html, cleanText) {
+        const norm = normalize(cleanText || '');
+        if (!FATIHA_TABII_EXTRA[norm] || /madda_/.test(html)) return html;
+        if (norm === 'اياك' || norm === 'واياك') {
+            return html.replace(/(يَّ)(ا)(كَ)/, '<tajweed class="madda_normal">$1$2</tajweed>$3');
+        }
+        if (norm === 'اهدنا') {
+            return html.replace(/(نَا)$/, '<tajweed class="madda_normal">$1</tajweed>');
+        }
+        if (norm === 'الذين') {
+            return html.replace(/(ِينَ)/, '<tajweed class="madda_normal">$1</tajweed>');
+        }
+        if (norm === 'المغضوب') {
+            return html.replace(/(ُوبِ)/, '<tajweed class="madda_normal">$1</tajweed>');
+        }
+        if (norm === 'ولا') {
+            return html.replace(/(لَا)$/, '<tajweed class="madda_normal">$1</tajweed>');
+        }
+        return html;
+    }
+
+    function applyFatihaMaddMarkup(html, cleanText) {
+        return applyFatihaTabiiMarkup(expandMaddCombining(html), cleanText);
+    }
+
     function classifyTajweedRule(part, cleanText) {
         const html = part || '';
         // Lāzim avant ʿāriḍ : الضالين a madda_necessary + madda_permissible
@@ -4893,7 +4766,7 @@
         if (html.includes('ikhfa')) return 'ikhfa';
         if (html.includes('iqlab')) return 'iqlab';
         if (html.includes('izhar')) return 'izhaar';
-        if (html.includes('qalqalah')) return 'qalqalah';
+        if (html.includes('qalqalah') || html.includes('qalaqah')) return 'qalqalah';
         const n = normalize(cleanText || '');
         if (FATIHA_TABII_EXTRA[n]) return 'madd-tabii';
         return '';
@@ -4981,6 +4854,7 @@
             if (metaIdx === 0) box.classList.add('active');
 
             const ruleType = classifyTajweedRule(part, cleanText);
+            const arabicHtml = applyFatihaMaddMarkup(part, cleanText);
             const dotsCount = maddDotsCount(ruleType);
             const dotsHtml = dotsCount ? `<div class="madd-dots-guide">${Array(dotsCount).fill('<div class="dot-pip"></div>').join('')}</div>` : '';
 
@@ -4989,7 +4863,7 @@
 
             box.innerHTML = `
                 ${dotsHtml}
-                <div class="arabic-word">${part}</div>
+                <div class="arabic-word">${arabicHtml}</div>
                 <div class="translit-container">
                     <div class="translit-en">${meta.en}</div>
                     <div class="translit-ru">${meta.ru}</div>
@@ -5048,85 +4922,11 @@
         document.fonts.ready.then(() => fitActiveAyah()).catch(() => {});
     }
 
-    function toggleExpertPanel() {
-        document.getElementById('expert-panel')?.classList.toggle('open');
-    }
-
-    function updateExpertPanel() {
-        const list = document.getElementById('expert-rules-list');
-        if (!list) return;
-        list.innerHTML = '';
-        
-        // Récupérer toutes les règles uniques du verset actuel
-        const detectedRules = [];
-        const seen = new Set();
-        
-        verseData.forEach(word => {
-            const parts = VERSES_LIBRARY[activeVerseIdx].text.split(/[\s\u00A0]+(?![^<]*>)/g);
-            const rawPart = parts.find(p => p.includes(word.ar));
-            if (!rawPart) return;
-
-            const type = classifyTajweedRule(rawPart, word.ar);
-            
-            if (type && !seen.has(word.ar + type)) {
-                detectedRules.push({ type, word: word.ar });
-                seen.add(word.ar + type);
-            }
-        });
-
-        if (detectedRules.length === 0) {
-            list.innerHTML = `<div style="text-align:center; color:var(--subtext); padding:20px; font-size:0.8rem;">Aucune règle complexe détectée sur ce passage.</div>`;
-            return;
-        }
-
-        detectedRules.forEach((item, i) => {
-            const ruleInfo = translations[currentLang].rules[item.type];
-            const div = document.createElement('div');
-            div.className = 'rule-item';
-            div.style.animationDelay = (i * 0.1) + 's';
-            div.onclick = () => showRuleModal(item.type);
-            div.innerHTML = `
-                <div class="rule-header">
-                    <div class="rule-badge" style="background:${getRuleColor(item.type)}">${ruleInfo.tag}</div>
-                    <div class="rule-word">${item.word}</div>
-                </div>
-                <div class="rule-inst">${ruleInfo.desc}</div>
-            `;
-            list.appendChild(div);
-        });
-    }
-
-    function getRuleColor(type) {
-        if (type === 'madd-tabii') return '#64D2FF';      // Sky Blue
-        if (type === 'madd-arid') return '#007AFF';       // iOS Blue (ʿāriḍ)
-        if (type === 'madd-munfasil') return '#007AFF';   // iOS Blue
-        if (type === 'madd-muttasil') return '#5856D6';   // Indigo
-        if (type === 'madd-lazim') return '#AF52DE';      // Purple
-        if (type === 'ghunnah') return '#34C759';         // Green
-        if (type === 'idgham-ghunnah') return '#FF2D55';   // Pink
-        if (type === 'idgham-no-ghunnah') return '#8E8E93'; // Grey
-        if (type === 'ikhfa') return '#FF9F0A';           // Orange
-        if (type === 'iqlab') return '#FF375F';           // Rose
-        if (type === 'izhaar') return '#C7C7CC';          // Silver
-        if (type === 'qalqalah') return '#FF3B30';        // Red
-        return 'var(--accent)';
-    }
-
-    function showRuleModal(type) {
-        const rule = translations[currentLang].rules[type];
-        if (!rule) return;
-        document.getElementById('rule-tag').innerText = rule.tag;
-        document.getElementById('rule-title').innerText = rule.title;
-        document.getElementById('rule-desc').innerText = rule.desc;
-        document.getElementById('modal-overlay').style.display = 'flex';
-        setTimeout(() => document.getElementById('modal-overlay').classList.add('visible'), 10);
-    }
-
     function openTajweedModal(e) {
-        const span = e.target.closest('span');
-        if (!span) return;
-        
-        const className = span.className;
+        const el = e.target.closest('tajweed, span, [class*="madda"], .ghunnah, .ikhfa, .qalqalah, .iqlab, .idgham_with_ghunnah, .ham_wasl');
+        if (!el) return;
+
+        const className = typeof el.className === 'string' ? el.className : (el.getAttribute('class') || '');
         let ruleKey = "";
         
         if (className.includes('madda_normal')) ruleKey = 'madd-tabii';
@@ -5134,11 +4934,13 @@
         else if (className.includes('madda_permissible') || className.includes('madda')) ruleKey = 'madd-arid';
         else if (className.includes('ghunnah')) ruleKey = 'ghunnah';
         else if (className.includes('ikhfa')) ruleKey = 'ikhfa';
-        else if (className.includes('qalqalah')) ruleKey = 'qalqalah';
-        else if (className.includes('idgham')) ruleKey = 'idgham';
-        else if (className.includes('izhar')) ruleKey = 'izhar';
-        else if (className.includes('iqlab')) ruleKey = 'idgham'; // Iqlab is often grouped with idgham colors
-        else if (className.includes('ham_wasl')) ruleKey = 'madd-tabii'; // or generic
+        else if (className.includes('qalqalah') || className.includes('qalaqah')) ruleKey = 'qalqalah';
+        else if (className.includes('idgham_with_ghunnah') || className.includes('idgham_mutajanisayn') || className.includes('idgham_mutaqaribayn')) ruleKey = 'idgham-ghunnah';
+        else if (className.includes('idgham_without_ghunnah')) ruleKey = 'idgham-no-ghunnah';
+        else if (className.includes('idgham')) ruleKey = 'idgham-ghunnah';
+        else if (className.includes('izhar')) ruleKey = 'izhaar';
+        else if (className.includes('iqlab')) ruleKey = 'iqlab';
+        else if (className.includes('ham_wasl') || className.includes('hamzat_wasl') || className.includes('laam_shamsiyah')) return;
 
         const rule = translations[currentLang]?.rules[ruleKey];
         if (rule) {
@@ -5409,15 +5211,17 @@
         }
     }
 
-    let micGestureArmed = false;
-    function armMicOnFirstGesture() {
-        if (micGestureArmed || isRecording) return;
-        const go = () => {
-            if (isRecording) return;
-            micGestureArmed = true;
-            try { startRecognition(); } catch (e) { console.warn('mic gesture', e); }
-        };
-        window.addEventListener('pointerdown', go, { once: true, passive: true });
+    function hasWebSpeech() {
+        return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+    }
+
+    function showSttUnsupportedHint() {
+        const startTxt = document.getElementById('txt-start');
+        const overlay = document.getElementById('start-overlay');
+        if (startTxt) {
+            startTxt.innerText = 'Micro non disponible ici — utilisez Safari (iOS) ou Chrome (Android/desktop).';
+        }
+        if (overlay) overlay.style.display = 'flex';
     }
 
     // === Reconnaissance vocale + audio (Whisper primaire / WebSpeech secours) ===
@@ -5434,10 +5238,15 @@
             return;
         }
 
+        if (VOICE_ENGINE === 'webspeech' && !hasWebSpeech()) {
+            showSttUnsupportedHint();
+            return;
+        }
+
         if (VOICE_ENGINE === 'webspeech') {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
-                alert("Votre navigateur ne supporte pas la reconnaissance vocale. Utilisez Chrome ou Safari.");
+                showSttUnsupportedHint();
                 return;
             }
         }
@@ -5843,7 +5652,7 @@
     // Limite : si Chrome écrit déjà le BON mot malgré la faute → impossible en texte seul.
     const STT_MODE = 'balanced'; // 'strict' | 'balanced' | 'legacy'
     const STT_FILLERS = new Set(['امين', 'آمين', 'يا', 'و', 'ثم', 'اه', 'ام']);
-    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 12; // whisper auto: phrases entières
+    const STT_WINDOW = STT_MODE === 'strict' ? 2 : 5;
     let lastMatchedFingerprint = '';
 
     // Voice Perf v1 — checkpoint: tag checkpoint/voice-half-working-20260810
@@ -6929,53 +6738,26 @@
         shimmerMsPerChar = shimmerPaceSamples.reduce((a, b) => a + b, 0) / shimmerPaceSamples.length;
     }
 
-    function stopShimmerRun(restore) {
-        if (!shimmerRun) return;
-        const { el, anim, savedHtml } = shimmerRun;
-        try { anim && anim.cancel(); } catch (e) {}
-        el.classList.remove('shimmering');
-        el.style.removeProperty('background-image');
-        el.style.removeProperty('background-size');
-        el.style.removeProperty('background-position');
-        el.style.removeProperty('--gs-base');
-        if (restore && savedHtml) el.innerHTML = savedHtml;
+    function stopShimmerRun() {
         shimmerRun = null;
     }
 
     function startWordShimmer(box) {
         if (!box) return;
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (shimmerRun && shimmerRun.box === box) return;
+        if (shimmerRun) stopShimmerRun();
         const el = box.querySelector('.arabic-word');
-        if (!el || typeof el.animate !== 'function') return;
-        if (shimmerRun && shimmerRun.el === el) return;
-        if (shimmerRun) stopShimmerRun(true);
-
-        const savedHtml = el.innerHTML;
+        if (!el) return;
         const plain = (el.textContent || '').replace(/\s+/g, ' ').trim();
         if (!plain) return;
-        el.classList.add('shimmering');
-        const base = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#F5F5f7';
-        el.style.setProperty('--gs-base', base);
-        el.style.backgroundImage = 'linear-gradient(to left, var(--validated) 0%, var(--accent) 30%, var(--gs-base) 58%, var(--gs-base) 100%)';
-        el.style.backgroundSize = '260% 100%';
-
-        const anim = el.animate(
-            [
-                { backgroundPosition: '100% 0' },
-                { backgroundPosition: '22% 0' }
-            ],
-            { duration: shimmerDurationFor(plain, box), easing: 'linear', fill: 'forwards' }
-        );
-        shimmerRun = { box, el, anim, savedHtml, startedAt: performance.now(), plain };
+        shimmerRun = { box, el, startedAt: performance.now(), plain };
     }
 
     function finishWordShimmer(box) {
         if (shimmerRun && shimmerRun.box === box) {
             rememberShimmerPace(shimmerRun.plain, performance.now() - shimmerRun.startedAt);
-            stopShimmerRun(true);
-            return;
+            stopShimmerRun();
         }
-        box?.querySelector('.arabic-word')?.classList.remove('shimmering');
     }
 
     function processMatchedWord(idx, maddMissed = false) {
@@ -7098,19 +6880,6 @@
         sessionDiagnostics.endTime = new Date().toISOString();
 
         try { applyTarteelFinishAnalysis(finalRaw); } catch (e) { console.warn('tarteel finish', e); }
-        try {
-            buildTarteelGapAnalysis();
-            setTimeout(() => {
-                try { openVoiceLab(); } catch (err) { console.warn('voice lab open', err); }
-            }, 600);
-        } catch (e) { console.warn('voice lab', e); }
-
-        // Idée 6 : juge Whisper post-ayah (n’annule pas les verts Web Speech)
-        try {
-            runPostAyahWhisperJudge().then(() => {
-                try { buildTarteelGapAnalysis(); } catch (e2) {}
-            });
-        } catch (e) { console.warn('whisper judge launch', e); }
 
         const shouldSaveDataset = datasetOptIn;
         const stopRecPromise = new Promise((resolve) => {
@@ -7459,7 +7228,7 @@
     }
 
     function resetUI() {
-        stopShimmerRun(true);
+        stopShimmerRun();
         document.querySelectorAll('.word-box').forEach(b => {
             b.className = 'word-box';
             const feedback = b.querySelector('.stt-feedback');
@@ -7624,11 +7393,12 @@
         console.log("DOMContentLoaded");
         try {
             bindIpadGestures();
-            applyTheme('blue');
+            applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
             applyTranslitVisibility(localStorage.getItem('tajwid_hide_translit') === '1');
         } catch (e) {
-            applyTheme('blue');
+            applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
         }
+        if (!hasWebSpeech()) showSttUnsupportedHint();
         const savedLang = localStorage.getItem('tajwid_lang') || 'fr';
         setLanguage(savedLang);
         updateStatsUI();
@@ -7678,9 +7448,15 @@
             } catch (refErr) {
                 console.warn("ref param", refErr);
             }
-            armMicOnFirstGesture();
         } catch (e) {
             console.error("Initial load failed:", e);
+            const cached = loadCachedVerse(1);
+            const offline = getOfflineVerseEntry(1);
+            const fallback = cached || offline;
+            if (fallback) {
+                const idx = upsertVerseEntry(fallback);
+                await switchVerse(idx);
+            }
         }
 
         document.getElementById('verse-selector')?.classList.remove('dock-hidden');
