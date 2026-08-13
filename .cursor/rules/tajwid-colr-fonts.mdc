@@ -12,19 +12,21 @@ Quand tu ajoutes / débloques des sourates (`FATIHA_ONLY`, `fetchVerseFromAPI`, 
 | Rôle | Famille CSS | Fichier |
 |------|-------------|---------|
 | Ayah / mots | `KFGQPC Colored` | `public/fonts/KFGQPCHAFSColored-Bold.woff2` |
-| Mot validé (tout bleu) | `KFGQPC Validated` | `public/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2` |
+| Mot validé | **même** `KFGQPC Colored` + check UI `--validated` | (plus de wipe Validated) |
 | UI chrome seulement | `Tilmidh Tajweed` | `public/fonts/TilmidhTajweed-Regular.ttf` |
 
-Rebuild validé : `fonts/scripts/build_kfgqpc_validated_blue.py` (tous les glyphes COLR `#3B82F6`).
+`KFGQPCHAFSColored-ValidatedBlue.woff2` reste généré (legacy / optionnel) via `fonts/scripts/build_kfgqpc_validated_blue.py`.
+CPAL aligné app : `fonts/scripts/remap_kfgqpc_cpal.py` (madd `#D97706`, silent `#8B8680`).
 
 ## Règles non négociables
 
 1. `USE_COLR_TAJWEED_FONT = true` + `data-colr-tajweed="1"`.
 2. Affichage : `plainUthmaniFromHtml()` — **pas** de `<span>` mid-mot pour la couleur (Safari casse les jointures).
 3. `.arabic-word` = **uniquement** `font-family: 'KFGQPC Colored'` — **jamais** Tilmidh / Amiri / `serif` dans ce stack (FOUT).
-4. `.word-box.correct .arabic-word` = **uniquement** `KFGQPC Validated` (+ fill `--validated`).
-5. Preload des 2 woff2 + `font-display: block` + `document.fonts.load` avant le 1er verset.
+4. `.word-box.correct` = **garder** `KFGQPC Colored` (tajweed visible) + badge check `--validated` — **pas** de swap Validated / fill bleu full-word.
+5. Preload Colored (+ Validated optionnel) + `font-display: block` + `document.fonts.load` Colored avant le 1er verset.
 6. Conserver le **tatweel** (`ـ`) pour les calt COLR (dagger madd).
+7. Quran.com `ٲ` (U+0672) → dagger `ٰ` (U+0670) dans `plainUthmaniFromHtml` + cmap patch `patch_kfgqpc_uni0672.py`.
 
 ## Interdit
 

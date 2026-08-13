@@ -51,13 +51,13 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <!-- Preload mushaf COLR fonts — avoid 1s flash of Tilmidh/system serif -->
-    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-1" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-1" as="font" type="font/woff2" crossorigin>
     <style>
         /* COLR tajweed font — colors in glyphs, joining intact (Safari-safe) */
         @font-face {
             font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2') format('woff2');
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-1') format('woff2');
             font-weight: 400 700;
             font-style: normal;
             font-display: block;
@@ -65,7 +65,7 @@
         /* Validated: same KFGQPC outlines, every glyph COLR #3B82F6 */
         @font-face {
             font-family: 'KFGQPC Validated';
-            src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2') format('woff2');
+            src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-1') format('woff2');
             font-weight: 400 700;
             font-style: normal;
             font-display: block;
@@ -95,22 +95,22 @@
             --text: #F5F5f7;
             --subtext: #86868b;
             
-            /* Premium Tajwid — 4 familles distinctes */
+            /* Tajwid — familles: chaud=madd (aligné COLR #E66D00), vert=nasal, rouge=qalqalah */
             --tj-ink: #EDE8DF;
-            --ghunnah: #8FD49A;
-            --madd-tabii: #8EEADB;
-            --madd-munfasil: #5ECFC4;
-            --madd-muttasil: #3AADA8;
-            --madd-lazim: #1E8A8A;
-            --ikhfa: #E4B87A;
-            --idgham-ghunnah: #D4A66A;
-            --idgham-no-ghunnah: #A89478;
-            --iqlab: #E8C090;
+            --ghunnah: #6EE7B7;
+            --madd-tabii: #FB923C;
+            --madd-munfasil: #F59E0B;
+            --madd-muttasil: #EA580C;
+            --madd-lazim: #C2410C;
+            --ikhfa: #34D399;
+            --idgham-ghunnah: #10B981;
+            --idgham-no-ghunnah: #A8A29E;
+            --iqlab: #6EE7B7;
             --izhar: #A8A4A0;
-            --qalqalah: #E09888;
+            --qalqalah: #F87171;
             --ham-wasl: var(--subtext);
             --madd-fari: var(--madd-munfasil);
-            --madd-arid: var(--madd-muttasil);
+            --madd-arid: var(--madd-munfasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             
@@ -137,20 +137,20 @@
             --subtext: #6B7280;
             --border: #E5E7EB;
             --tj-ink: #1C1916;
-            --ghunnah: #2F8A52;
-            --madd-tabii: #14B8A6;
-            --madd-munfasil: #0D9488;
-            --madd-muttasil: #0F766E;
-            --madd-lazim: #115E59;
-            --ikhfa: #B45309;
-            --idgham-ghunnah: #A16207;
+            --ghunnah: #059669;
+            --madd-tabii: #D97706;
+            --madd-munfasil: #B45309;
+            --madd-muttasil: #C2410C;
+            --madd-lazim: #9A3412;
+            --ikhfa: #34D399;
+            --idgham-ghunnah: #047857;
             --idgham-no-ghunnah: #78716C;
-            --iqlab: #C27803;
+            --iqlab: #10B981;
             --izhar: #57534E;
-            --qalqalah: #BE4444;
+            --qalqalah: #DC2626;
             --ham-wasl: var(--subtext);
             --madd-fari: var(--madd-munfasil);
-            --madd-arid: var(--madd-muttasil);
+            --madd-arid: var(--madd-munfasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             --overlay-scrim: rgba(15, 23, 42, 0.45);
@@ -172,20 +172,20 @@
             --subtext: #64748B;
             --border: #D6E3F0;
             --tj-ink: #152033;
-            --ghunnah: #2F8A52;
-            --madd-tabii: #0EA5A0;
-            --madd-munfasil: #0D8A8A;
-            --madd-muttasil: #0B7078;
-            --madd-lazim: #095A68;
-            --ikhfa: #B45309;
-            --idgham-ghunnah: #A16207;
+            --ghunnah: #059669;
+            --madd-tabii: #D97706;
+            --madd-munfasil: #B45309;
+            --madd-muttasil: #C2410C;
+            --madd-lazim: #9A3412;
+            --ikhfa: #34D399;
+            --idgham-ghunnah: #047857;
             --idgham-no-ghunnah: #78716C;
-            --iqlab: #C27803;
+            --iqlab: #10B981;
             --izhar: #64748B;
-            --qalqalah: #BE4444;
+            --qalqalah: #DC2626;
             --ham-wasl: var(--subtext);
             --madd-fari: var(--madd-munfasil);
-            --madd-arid: var(--madd-muttasil);
+            --madd-arid: var(--madd-munfasil);
             --idgham: var(--idgham-ghunnah);
             --madd: var(--madd-tabii);
             --overlay-scrim: rgba(15, 23, 42, 0.45);
@@ -507,11 +507,21 @@
             border-color: transparent;
             background: transparent;
         }
+        /* Success = check bleu ; garder l’encre COLR tajweed (pas de wipe Validated) */
         .word-box.correct .arabic-word,
         .word-box.correct .arabic-word * {
-            color: var(--validated) !important;
-            -webkit-text-fill-color: var(--validated) !important;
             opacity: 1;
+        }
+        .word-box.correct .manual-validate-btn {
+            display: flex;
+            background: var(--validated);
+            pointer-events: none;
+            cursor: default;
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--validated) 35%, transparent);
+        }
+        .word-box.correct .manual-validate-btn:hover {
+            transform: none;
+            background: var(--validated);
         }
 
         /* Tarteel-style mistake detection */
@@ -569,25 +579,19 @@
             color: inherit;
             -webkit-text-fill-color: unset;
         }
-        /* Validated: full-word blue via KFGQPC Validated (all glyphs COLR) */
+        /* Validated: keep KFGQPC Colored tajweed ; check = succès UI */
         html[data-colr-tajweed="1"] .word-box.correct {
             border-color: transparent !important;
             background: transparent !important;
             outline: none !important;
             box-shadow: none !important;
         }
-        html[data-colr-tajweed="1"] .word-box.correct .arabic-word {
-            font-family: 'KFGQPC Validated' !important;
-            font-weight: 700 !important;
-            color: var(--validated) !important;
-            -webkit-text-fill-color: var(--validated) !important;
-            opacity: 1;
-        }
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word,
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word * {
-            font-family: 'KFGQPC Validated' !important;
-            color: var(--validated) !important;
-            -webkit-text-fill-color: var(--validated) !important;
+            font-family: 'KFGQPC Colored' !important;
+            color: inherit !important;
+            -webkit-text-fill-color: unset !important;
+            opacity: 1;
         }
 
         .translit-container {
@@ -703,6 +707,34 @@
         .word-box[data-rule-full="madd-munfasil"] .dot-pip { background: var(--madd-munfasil); }
         .word-box[data-rule-full="madd-muttasil"] .dot-pip { background: var(--madd-muttasil); }
         .word-box[data-rule-full="madd-lazim"] .dot-pip { background: var(--madd-lazim); }
+
+        /* Légende Fātiḥah — madd + silencieux seulement */
+        .tajweed-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px 20px;
+            margin: 8px auto 4px;
+            padding: 0 16px;
+            max-width: 420px;
+            font-family: var(--font-main);
+            font-size: 0.72rem;
+            color: var(--subtext);
+            letter-spacing: 0.01em;
+        }
+        .tajweed-legend .leg-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .tajweed-legend .leg-swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .tajweed-legend .leg-madd .leg-swatch { background: var(--madd-tabii); }
+        .tajweed-legend .leg-silent .leg-swatch { background: #8B8680; }
 
         .madd-missed-hint {
             position: absolute;
@@ -2919,6 +2951,10 @@
     <div class="container">
 
         <div id="verse-container" onclick="openTajweedModal(event)"></div>
+        <div id="tajweed-legend" class="tajweed-legend" aria-label="Légende tajweed">
+            <span class="leg-item leg-madd"><span class="leg-swatch" aria-hidden="true"></span><span id="leg-madd-label">Prolongations</span></span>
+            <span class="leg-item leg-silent"><span class="leg-swatch" aria-hidden="true"></span><span id="leg-silent-label">Lettres silencieuses</span></span>
+        </div>
 
     <!-- Background Feedback Elements -->
     <div id="ghost-word-container"></div>
@@ -3990,6 +4026,7 @@
             expertLegend: "Légende des Règles",
             legend: {
                 madd: "Prolongations (ا و ي)",
+                silent: "Lettres silencieuses (ٱ · ل شمسية)",
                 noon: "Noun Sakinah & Tanween",
                 ghunnah: "Nasalisation (نّ مّ)",
                 qalqalah: "Rebond (ق ط ب ج د)",
@@ -4010,7 +4047,9 @@
                 'idgham-no-ghunnah': { tag: 'Idghām', title: 'Idghām sans Ghunnah', desc: 'Fusion complète du N sans nasalisation.' },
                 'izhaar': { tag: 'Iẓhār', title: 'Iẓhār', desc: 'Clarification totale du son N sans aucune nasalisation.' },
                 'iqlab': { tag: 'Iqlāb', title: 'Iqlāb', desc: 'Transformation du son N en un son "M" devant la lettre Ba.' },
-                'qalqalah': { tag: 'Qalqalah', title: 'Qalqalah', desc: 'Effet de rebond ou de vibration sur les lettres Qof, To, Ba, Jim, Dal.' }
+                'qalqalah': { tag: 'Qalqalah', title: 'Qalqalah', desc: 'Effet de rebond ou de vibration sur les lettres Qof, To, Ba, Jim, Dal.' },
+                'ham-wasl': { tag: 'Hamzat al-waṣl', title: 'Hamzat al-waṣl (ٱ)', desc: 'Alif de liaison : ne se prononce pas en milieu de récitation (lettre grise). On le lit seulement en début de phrase.' },
+                'laam-shamsiyah': { tag: 'Lām shamsiyya', title: 'Lām shamsiyya', desc: 'Le ل de l’article ne se prononce pas : il fusionne dans la lettre suivante (ex. الشّمس).' }
             }
         },
         en: {
@@ -4077,6 +4116,7 @@
             expertLegend: "Rule Legend",
             legend: {
                 madd: "Prolongations (ا و ي)",
+                silent: "Silent letters (ٱ · solar ل)",
                 noon: "Noon Sakinah & Tanween",
                 ghunnah: "Nasalization (نّ مّ)",
                 qalqalah: "Bounce (ق ط ب ج د)",
@@ -4097,7 +4137,9 @@
                 'idgham-no-ghunnah': { tag: 'Idghām', title: 'Idghām without Ghunnah', desc: 'Complete merging of the N without nasalization.' },
                 'izhaar': { tag: 'Iẓhār', title: 'Iẓhār', desc: 'Total clarification of the rule without nasalization.' },
                 'iqlab': { tag: 'Iqlāb', title: 'Iqlāb', desc: 'Transformation of the N sound into an "M" sound before Ba.' },
-                'qalqalah': { tag: 'Qalqalah', title: 'Qalqalah', desc: 'Bouncing the sound on letters Qof, To, Ba, Jim, Dal.' }
+                'qalqalah': { tag: 'Qalqalah', title: 'Qalqalah', desc: 'Bouncing the sound on letters Qof, To, Ba, Jim, Dal.' },
+                'ham-wasl': { tag: 'Hamzat al-waṣl', title: 'Hamzat al-waṣl (ٱ)', desc: 'Connecting alif: not pronounced mid-recitation (gray letter). Read it only at the start of a phrase.' },
+                'laam-shamsiyah': { tag: 'Solar lām', title: 'Solar lām (ل شمسية)', desc: 'The ل of the article is not pronounced: it merges into the next letter (e.g. ash-shams).' }
             }
         },
         ru: {
@@ -4164,6 +4206,7 @@
             expertLegend: "Легенда Правил",
             legend: {
                 madd: "Удлинения (ا و ي)",
+                silent: "Непроизносимые (ٱ · солнечная ل)",
                 noon: "Нун Сакина и Танвин",
                 ghunnah: "Гунна (نّ مّ)",
                 qalqalah: "Калькаля (ق ط ب ج д)",
@@ -4184,7 +4227,9 @@
                 'idgham-no-ghunnah': { tag: 'Идгам', title: 'Идгам без гунны', desc: 'Полное слияние звука Н без назализации.' },
                 'izhaar': { tag: 'Изхар', title: 'Изхар', desc: 'Четкое произношение звука Н без назализации.' },
                 'iqlab': { tag: 'Икляб', title: 'Икляб', desc: 'Превращение звука Н в звук «М» перед буквой Ба.' },
-                'qalqalah': { tag: 'Калькаля', title: 'Калькаля', desc: 'Вибрация или «толчок» звука для букв Каф, Та, Ба, Джим, Даль.' }
+                'qalqalah': { tag: 'Калькаля', title: 'Калькаля', desc: 'Вибрация или «толчок» звука для букв Каф, Та, Ба, Джим, Даль.' },
+                'ham-wasl': { tag: 'Хамзат аль-васль', title: 'Хамзат аль-васль (ٱ)', desc: 'Соединительный алиф: не читается в середине рецитации (серая буква). Читается только в начале фразы.' },
+                'laam-shamsiyah': { tag: 'Солнечная лям', title: 'Солнечная лям', desc: 'Лям артикля не произносится: сливается со следующей буквой (напр. аш-шамс).' }
             }
         }
     };
@@ -4248,6 +4293,13 @@
         if (document.getElementById('txt-summary-title')) document.getElementById('txt-summary-title').innerText = t.summaryTitle;
         if (document.getElementById('txt-summary-fluidity')) document.getElementById('txt-summary-fluidity').innerText = t.summaryFluidity;
         if (document.getElementById('txt-summary-mistakes')) document.getElementById('txt-summary-mistakes').innerText = t.summaryMistakes;
+
+        if (document.getElementById('leg-madd-label') && t.legend?.madd) {
+            document.getElementById('leg-madd-label').innerText = t.legend.madd;
+        }
+        if (document.getElementById('leg-silent-label') && t.legend?.silent) {
+            document.getElementById('leg-silent-label').innerText = t.legend.silent;
+        }
 
         const btns = document.querySelectorAll('.lang-btn');
         btns.forEach(btn => {
@@ -4385,7 +4437,7 @@
         } catch (e) { return null; }
     }
 
-    const OFFLINE_VERSES = {"1":{"title":"Al-Fatihah","ref":"Al-Fatihah [1-7]","text":"بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span> ٱلْحَمْدُ لِلَّهِ رَبِّ <tajweed class=ham_wasl>ٱ</tajweed>لْعَ<tajweed class=madda_normal>ـٰ</tajweed>لَم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢</span> ٱ<tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٣</span> مَ<tajweed class=madda_normal>ـٰ</tajweed>لِكِ يَوْمِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دّ<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٤</span> إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَع<tajweed class=madda_permissible>ِي</tajweed>نُ <span class=end>٥</span> ٱهْدِنَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صِّر<tajweed class=madda_normal>َٲ</tajweed>طَ <tajweed class=ham_wasl>ٱ</tajweed>لْمُسْتَق<tajweed class=madda_permissible>ِي</tajweed>مَ <span class=end>٦</span> صِر<tajweed class=madda_normal>َٲ</tajweed>طَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَغْضُوبِ عَلَيْهِمْ وَلَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ضّ<tajweed class=madda_necessary>َا</tajweed>ٓلّ<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٧</span>","words":[{"en":"bis'mi"},{"en":"l-lahi"},{"en":"l-raḥmāni"},{"en":"l-raḥīmi"},{"en":"al-ḥamdu"},{"en":"lillahi"},{"en":"rabbi"},{"en":"l-ʿālamīna"},{"en":"al-raḥmāni"},{"en":"l-raḥīmi"},{"en":"māliki"},{"en":"yawmi"},{"en":"l-dīni"},{"en":"iyyāka"},{"en":"naʿbudu"},{"en":"wa-iyyāka"},{"en":"nastaʿīnu"},{"en":"ih'dinā"},{"en":"l-ṣirāṭa"},{"en":"l-mus'taqīma"},{"en":"ṣirāṭa"},{"en":"alladhīna"},{"en":"anʿamta"},{"en":"ʿalayhim"},{"en":"ghayri"},{"en":"l-maghḍūbi"},{"en":"ʿalayhim"},{"en":"walā"},{"en":"l-ḍālīna"}]}};
+    const OFFLINE_VERSES = {"1":{"title":"Al-Fatihah","ref":"Al-Fatihah [1-7]","text":"بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span> ٱلْحَمْدُ لِلَّهِ رَبِّ <tajweed class=ham_wasl>ٱ</tajweed>لْعَ<tajweed class=madda_normal>ـٰ</tajweed>لَم<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٢</span> ٱ<tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>٣</span> مَ<tajweed class=madda_normal>ـٰ</tajweed>لِكِ يَوْمِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>دّ<tajweed class=madda_permissible>ِي</tajweed>نِ <span class=end>٤</span> إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَع<tajweed class=madda_permissible>ِي</tajweed>نُ <span class=end>٥</span> ٱهْدِنَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>صِّر<tajweed class=madda_normal>َٰ</tajweed>طَ <tajweed class=ham_wasl>ٱ</tajweed>لْمُسْتَق<tajweed class=madda_permissible>ِي</tajweed>مَ <span class=end>٦</span> صِر<tajweed class=madda_normal>َٰ</tajweed>طَ <tajweed class=ham_wasl>ٱ</tajweed>لَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ <tajweed class=ham_wasl>ٱ</tajweed>لْمَغْضُوبِ عَلَيْهِمْ وَلَا <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>ضّ<tajweed class=madda_necessary>َا</tajweed>ٓلّ<tajweed class=madda_permissible>ِي</tajweed>نَ <span class=end>٧</span>","words":[{"en":"bis'mi"},{"en":"l-lahi"},{"en":"l-raḥmāni"},{"en":"l-raḥīmi"},{"en":"al-ḥamdu"},{"en":"lillahi"},{"en":"rabbi"},{"en":"l-ʿālamīna"},{"en":"al-raḥmāni"},{"en":"l-raḥīmi"},{"en":"māliki"},{"en":"yawmi"},{"en":"l-dīni"},{"en":"iyyāka"},{"en":"naʿbudu"},{"en":"wa-iyyāka"},{"en":"nastaʿīnu"},{"en":"ih'dinā"},{"en":"l-ṣirāṭa"},{"en":"l-mus'taqīma"},{"en":"ṣirāṭa"},{"en":"alladhīna"},{"en":"anʿamta"},{"en":"ʿalayhim"},{"en":"ghayri"},{"en":"l-maghḍūbi"},{"en":"ʿalayhim"},{"en":"walā"},{"en":"l-ḍālīna"}]}};
 
     function getOfflineVerseEntry(surahNum) {
         const raw = OFFLINE_VERSES[surahNum];
@@ -4580,9 +4632,13 @@
         return null;
     }
 
-    /** Strip tags only — keep tatweel/dagger for COLR fonts (calt needs ـٰ). */
+    /** Strip tags only — keep tatweel/dagger for COLR fonts (calt needs ـٰ).
+     *  Quran.com madd stand-in U+0672 (ٲ) → real dagger U+0670 (ٰ); KFGQPC's
+     *  uni0672 is a disc+dots placeholder (صراط). */
     function plainUthmaniFromHtml(html) {
-        return String(html || '').replace(/<[^>]+>/g, '');
+        return String(html || '')
+            .replace(/<[^>]+>/g, '')
+            .replace(/\u0672/g, '\u0670');
     }
 
     /** Legacy helper: plain + tint ranges (kept for classify path / non-COLR experiments). */
@@ -4650,6 +4706,8 @@
         if (html.includes('qalqalah') || html.includes('qalaqah')) return 'qalqalah';
         const n = normalize(cleanText || '');
         if (FATIHA_TABII_EXTRA[n]) return 'madd-tabii';
+        if (html.includes('laam_shamsiyah')) return 'laam-shamsiyah';
+        if (html.includes('ham_wasl') || html.includes('hamzat_wasl')) return 'ham-wasl';
         return '';
     }
 
@@ -4828,7 +4886,8 @@
             else if (className.includes('idgham')) ruleKey = 'idgham-ghunnah';
             else if (className.includes('izhar')) ruleKey = 'izhaar';
             else if (className.includes('iqlab')) ruleKey = 'iqlab';
-            else if (className.includes('ham_wasl') || className.includes('hamzat_wasl') || className.includes('laam_shamsiyah')) return;
+            else if (className.includes('laam_shamsiyah')) ruleKey = 'laam-shamsiyah';
+            else if (className.includes('ham_wasl') || className.includes('hamzat_wasl')) ruleKey = 'ham-wasl';
         }
         if (!ruleKey) return;
 
