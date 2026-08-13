@@ -343,7 +343,6 @@
             pointer-events: auto;
             transform: translateY(-50%) scale(var(--ayah-fit, 1));
             filter: none;
-            isolation: isolate;
             z-index: 5;
             overflow: visible;
             max-height: none;
@@ -482,6 +481,7 @@
         .word-box.correct .arabic-word,
         .word-box.correct .arabic-word * {
             color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
             opacity: 1;
         }
 
@@ -517,61 +517,80 @@
             border-color: rgba(245, 158, 11, 0.35);
         }
 
-        /* ── Tajwid premium : couleurs lisibles, palette émeraude ── */
-        tajweed { display: inline; font: inherit; }
+        /* ── Tajwid : span + text-fill (Safari WebKit ne peint pas <tajweed>) ── */
+        tajweed, .arabic-word span[class] {
+            display: inline;
+            font: inherit;
+            background: none !important;
+            background-color: transparent !important;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            position: static;
+        }
 
         .madda_normal,
         tajweed.madda_normal {
             color: var(--madd-tabii);
+            -webkit-text-fill-color: var(--madd-tabii);
         }
         .madda_permissible,
         tajweed.madda_permissible {
             /* ʿāriḍ : points madd seulement (visible au waqf), pas de couleur en lecture liée */
             color: inherit;
+            -webkit-text-fill-color: inherit;
         }
         .madda_necessary,
         tajweed.madda_necessary {
             color: var(--madd-lazim);
+            -webkit-text-fill-color: var(--madd-lazim);
         }
         .madda_compulsory, .madda_long,
         tajweed.madda_compulsory, tajweed.madda_long {
             color: var(--madd-lazim);
+            -webkit-text-fill-color: var(--madd-lazim);
         }
         .ghunnah {
             color: var(--ghunnah);
+            -webkit-text-fill-color: var(--ghunnah);
             text-decoration: underline dotted;
             text-decoration-color: color-mix(in srgb, var(--ghunnah) 45%, transparent);
             text-underline-offset: 3px;
         }
         .idgham_with_ghunnah, .idgham_mutajanisayn, .idgham_mutaqaribayn, .idgham_without_ghunnah {
             color: var(--idgham);
+            -webkit-text-fill-color: var(--idgham);
             text-decoration: underline dotted;
             text-decoration-color: color-mix(in srgb, var(--idgham) 45%, transparent);
             text-underline-offset: 3px;
         }
         .ikhfa, .ikhfa_shafawi {
             color: var(--ikhfa);
+            -webkit-text-fill-color: var(--ikhfa);
             text-decoration: underline dotted;
             text-decoration-color: color-mix(in srgb, var(--ikhfa) 45%, transparent);
             text-underline-offset: 3px;
         }
         .iqlab {
             color: var(--iqlab);
+            -webkit-text-fill-color: var(--iqlab);
             text-decoration: underline dotted;
             text-decoration-color: color-mix(in srgb, var(--iqlab) 50%, transparent);
             text-underline-offset: 3px;
         }
         .izhar, .izhar_shafawi {
             color: var(--izhar);
+            -webkit-text-fill-color: var(--izhar);
         }
         .qalqalah, .qalaqah {
             color: var(--qalqalah);
+            -webkit-text-fill-color: var(--qalqalah);
             text-decoration: underline dotted;
             text-decoration-color: color-mix(in srgb, var(--qalqalah) 50%, transparent);
             text-underline-offset: 3px;
         }
         .ham_wasl, .hamzat_wasl, .slm, .laam_shamsiyah {
             color: var(--ham-wasl);
+            -webkit-text-fill-color: var(--ham-wasl);
             opacity: 0.72;
         }
 
@@ -581,8 +600,10 @@
             margin-bottom: 0;
             direction: rtl;
             color: var(--tj-ink);
+            -webkit-text-fill-color: var(--tj-ink);
             text-rendering: optimizeLegibility;
-            font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
+            font-feature-settings: "liga" 0, "rlig" 0, "calt" 0;
+            font-variant-ligatures: none;
             letter-spacing: 0 !important;
             word-spacing: normal !important;
             white-space: nowrap;
@@ -718,19 +739,8 @@
             animation: fadeIn 0.3s ease;
         }
 
-        /* Consolidated Tajwid Rule Styling */
-        .tajwid-madd, .tajwid-ghunnah, .tajwid-ikhfa, .tajwid-qalqalah, 
-        .madda_normal, .madda_permissible, .madda_necessary, .ghunnah, .ikhfa, .qalqalah, .qalaqah, .idgham_with_ghunnah, .idgham_without_ghunnah, .iqlab, .ham_wasl, .laam_shamsiyah,
-        tajweed.madda_normal, tajweed.madda_permissible, tajweed.madda_necessary, tajweed.ghunnah, tajweed.ikhfa, tajweed.qalqalah, tajweed.qalaqah, tajweed.idgham_with_ghunnah, tajweed.idgham_without_ghunnah, tajweed.iqlab, tajweed.ham_wasl, tajweed.laam_shamsiyah {
-            cursor: help !important;
-            display: inline !important;
-            unicode-bidi: normal !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            pointer-events: auto !important;
-        }
         .arabic-word span:hover {
-            filter: brightness(1.08);
+            filter: none;
         }
 
         .controls {
@@ -4578,6 +4588,13 @@
         return applyFatihaTabiiMarkup(expandMaddCombining(html), cleanText);
     }
 
+    function tajweedToSpan(html) {
+        if (!html) return html;
+        return String(html)
+            .replace(/<\s*tajweed\b/gi, '<span')
+            .replace(/<\s*\/\s*tajweed\s*>/gi, '</span>');
+    }
+
     function classifyTajweedRule(part, cleanText) {
         const html = part || '';
         // Lāzim avant ʿāriḍ : الضالين a madda_necessary + madda_permissible
@@ -4682,7 +4699,7 @@
             if (metaIdx === 0) box.classList.add('active');
 
             const ruleType = classifyTajweedRule(part, cleanText);
-            const arabicHtml = applyFatihaMaddMarkup(part, cleanText);
+            const arabicHtml = tajweedToSpan(applyFatihaMaddMarkup(part, cleanText));
             const dotsCount = maddDotsCount(ruleType);
             const dotsHtml = dotsCount ? `<div class="madd-dots-guide">${Array(dotsCount).fill('<div class="dot-pip"></div>').join('')}</div>` : '';
 
