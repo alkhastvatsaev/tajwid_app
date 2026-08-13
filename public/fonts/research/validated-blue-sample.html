@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<title>KFGQPC Validated Blue — sample</title>
+<style>
+@font-face {
+  font-family: 'KFGQPC Colored';
+  src: url('/fonts/KFGQPCHAFSColored-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'KFGQPC Validated';
+  src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2') format('woff2');
+  font-weight: 700;
+}
+body { font-family: system-ui; background:#fafafa; color:#111; padding:2rem; }
+.row { display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0; align-items:flex-end; }
+.word { font-size: 3.5rem; line-height:1.6; }
+.tajweed { font-family: 'KFGQPC Colored'; }
+.blue { font-family: 'KFGQPC Validated'; }
+h1 { font-size:1.1rem; font-weight:600; }
+p { color:#555; max-width:40rem; }
+</style>
+</head>
+<body>
+<h1>Audit sample — same glyphs, blue palette</h1>
+<p>Left = live tajweed colors (KFGQPC Colored). Right = validated blue (KFGQPC Validated). Shapes must match; only ink changes.</p>
+<div class="row">
+  <span class="word tajweed">ٱلْحَمْدُ</span>
+  <span class="word blue">ٱلْحَمْدُ</span>
+</div>
+<div class="row">
+  <span class="word tajweed">لِلَّهِ</span>
+  <span class="word blue">لِلَّهِ</span>
+</div>
+<div class="row">
+  <span class="word tajweed">ٱلْعَـٰلَمِينَ</span>
+  <span class="word blue">ٱلْعَـٰلَمِينَ</span>
+</div>
+<div class="row">
+  <span class="word tajweed">ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</span>
+  <span class="word blue">ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</span>
+</div>
+</body>
+</html>

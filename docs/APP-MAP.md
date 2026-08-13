@@ -33,7 +33,7 @@ Monolite volontaire. `src/` Next = **non servi** en prod.
 
 | Zone | Contenu |
 |------|---------|
-| `<head>` | GA4, meta OG, Outfit CDN + `@font-face` COLR (KFGQPC / Tilmidh Tajweed), LiveKit |
+| `<head>` | GA4, meta OG, Outfit CDN + `@font-face` COLR (KFGQPC Colored / KFGQPC Validated blue / Tilmidh Tajweed), LiveKit |
 | CSS | Mobile-first, `.word-box`, carousel ayahs (`font-size` fit, pas `scale` sur active) |
 | DOM | `#verse-selector`, `#verse-container`, modals, Groupe Call |
 | `<script>` | API Quran, STT, matching, LiveKit ; `USE_COLR_TAJWEED_FONT = true` |
@@ -52,7 +52,7 @@ Ouverture (Fātiḥah)
   → boot Al-Fātiḥah
   → tap verset → startRecognition
        ↓ récite
-  → checkWordStream → .word-box.correct (chrome bleu, couleurs COLR gardées)
+  → checkWordStream → .word-box.correct (KFGQPC Validated = même glyphes, palette bleue)
        ↓ dernier mot
   → finishVerse → Recommencer
 ```

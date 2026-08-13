@@ -59,24 +59,20 @@
             font-style: normal;
             font-display: swap;
         }
+        /* Validated: same KFGQPC COLR glyphs, entire CPAL baked #3B82F6 */
+        @font-face {
+            font-family: 'KFGQPC Validated';
+            src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
         @font-face {
             font-family: 'Tilmidh Tajweed';
             src: url('/fonts/TilmidhTajweed-Regular.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
-        }
-        /* Validated: force Tilmidh COLR layers to blue (#3B82F6) */
-        @font-palette-values --tilmidh-validated {
-            font-family: 'Tilmidh Tajweed';
-            base-palette: 0;
-            override-colors:
-                0 #3B82F6,
-                1 #3B82F6,
-                2 #3B82F6,
-                3 #3B82F6,
-                4 #3B82F6,
-                5 #3B82F6;
         }
     </style>
     <link rel="preconnect" href="https://tilmidh-20wxcwho.livekit.cloud" crossorigin>
@@ -569,7 +565,7 @@
             color: inherit;
             -webkit-text-fill-color: unset;
         }
-        /* Validated: Tilmidh Tajweed in solid blue (no Amiri) */
+        /* Validated: same KFGQPC shapes as tajweed, solid blue COLR palette */
         html[data-colr-tajweed="1"] .word-box.correct {
             border-color: transparent !important;
             background: transparent !important;
@@ -577,11 +573,16 @@
             box-shadow: none !important;
         }
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word {
-            font-family: 'Tilmidh Tajweed', serif !important;
-            font-palette: --tilmidh-validated;
-            color: var(--validated) !important;
-            -webkit-text-fill-color: var(--validated) !important;
+            font-family: 'KFGQPC Validated', 'KFGQPC Colored', serif !important;
+            color: inherit;
+            -webkit-text-fill-color: unset;
             opacity: 1;
+        }
+        /* Defeat non-COLR blue fill on descendants (would fight baked palette) */
+        html[data-colr-tajweed="1"] .word-box.correct .arabic-word,
+        html[data-colr-tajweed="1"] .word-box.correct .arabic-word * {
+            color: inherit !important;
+            -webkit-text-fill-color: unset !important;
         }
 
         .translit-container {
