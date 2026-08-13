@@ -55,15 +55,15 @@
         @font-face {
             font-family: 'KFGQPC Colored';
             src: url('/fonts/KFGQPCHAFSColored-Bold.woff2') format('woff2');
-            font-weight: 700;
+            font-weight: 400 700;
             font-style: normal;
             font-display: swap;
         }
-        /* Validated: same KFGQPC COLR glyphs, entire CPAL baked #3B82F6 */
+        /* Validated: same KFGQPC outlines, every glyph COLR #3B82F6 */
         @font-face {
             font-family: 'KFGQPC Validated';
             src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2') format('woff2');
-            font-weight: 700;
+            font-weight: 400 700;
             font-style: normal;
             font-display: swap;
         }
@@ -546,6 +546,7 @@
         /* COLR tajweed: one shaped run — colors live in the font (KFGQPC / TilmidhTajweed). */
         .arabic-word {
             font-family: 'KFGQPC Colored', 'Tilmidh Tajweed', serif;
+            font-weight: 700;
             font-size: clamp(1.8rem, 5vw, 2.5rem); 
             margin-bottom: 0;
             direction: rtl;
@@ -565,7 +566,7 @@
             color: inherit;
             -webkit-text-fill-color: unset;
         }
-        /* Validated: same KFGQPC shapes as tajweed, solid blue COLR palette */
+        /* Validated: full-word blue via KFGQPC Validated (all glyphs COLR) */
         html[data-colr-tajweed="1"] .word-box.correct {
             border-color: transparent !important;
             background: transparent !important;
@@ -573,16 +574,17 @@
             box-shadow: none !important;
         }
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word {
-            font-family: 'KFGQPC Validated', 'KFGQPC Colored', serif !important;
-            color: inherit;
-            -webkit-text-fill-color: unset;
+            font-family: 'KFGQPC Validated' !important;
+            font-weight: 700 !important;
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
             opacity: 1;
         }
-        /* Defeat non-COLR blue fill on descendants (would fight baked palette) */
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word,
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word * {
-            color: inherit !important;
-            -webkit-text-fill-color: unset !important;
+            font-family: 'KFGQPC Validated' !important;
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
         }
 
         .translit-container {
