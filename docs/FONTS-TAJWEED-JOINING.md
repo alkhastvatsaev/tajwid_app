@@ -53,8 +53,14 @@ On **ne redessine pas** l’alphabet. On fork une police coranique open (Amiri Q
 
 Limite : une COLR « statique » colore des **types** de glyphes (tout dagger, certains calt), pas un span Quran.com arbitraire. Pour Fātiḥah + règles fréquentes, c’est suffisant. Pour un mushaf 100 % dynamique, il faudra soit plusieurs palettes, soit des glyphes PUA par règle.
 
-## Démo
+## Rôles en prod (ship/colr-tajweed-font)
 
-Ouvrir http://localhost:3000/fonts/research/colr-demo.html — KFGQPC Colored vs span CSS cassé.
+| Asset | Rôle | Licence |
+|-------|------|---------|
+| `public/fonts/KFGQPCHAFSColored-Bold.woff2` | Encre mushaf (primaire) | GPL-3 → `LICENSE-KFGQPC-GPL3.txt` |
+| `public/fonts/TilmidhTajweed-Regular.ttf` | Fallback COLR (Amiri Quran + marks) | OFL + layers Tilmidh |
+| Quran.com tags | Points madd + `data-rule-full` + modale | — |
 
-Notre POC : `fonts/tilmidh/TilmidhTajweed-Regular.ttf` (généré par `fonts/scripts/build_tilmidh_colr.py` depuis Amiri Quran + COLR teal sur `ـ` / `ٰ`).
+Démo A/B : `/fonts/research/colr-demo.html`.
+
+Build fallback : `.venv/bin/python fonts/scripts/build_tilmidh_colr.py`.

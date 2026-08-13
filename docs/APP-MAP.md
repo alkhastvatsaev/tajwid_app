@@ -1,7 +1,8 @@
 # APP-MAP — Mémoire d’auteur Tilmidh
 
 > Code live = [`public/index.html`](../public/index.html).  
-> Audit live = [`ANALYSE-PROD.md`](../ANALYSE-PROD.md).
+> Audit live = [`ANALYSE-PROD.md`](../ANALYSE-PROD.md).  
+> Fonts COLR = [`docs/FONTS-TAJWEED-JOINING.md`](FONTS-TAJWEED-JOINING.md).
 
 ---
 
@@ -9,14 +10,22 @@
 
 PWA-like d’entraînement Tajwid mobile :
 
-1. Coran avec couleurs Tajwid (tags Quran.com `text_uthmani_tajweed`).
+1. Coran uthmani + **couleurs tajweed via police COLR** (`KFGQPC Colored` / fallback `TilmidhTajweed`) — pas de `<span>` mid-mot (Safari).
 2. Micro + **Web Speech API** `ar-SA` (`VOICE_ENGINE = 'webspeech'`).
 3. Validation mot à mot + feedback « Cible / Vous dites ».
 4. Persistance locale (`localStorage` + cache `sessionStorage`).
 5. **Groupe Call** via LiveKit (`api/room/*`) ; Duo PeerJS legacy toujours dans le DOM.
-6. Import / browser / `?ref=` / verset du jour actifs (`FATIHA_ONLY = false`).
+6. **`FATIHA_ONLY = true`** en prod (branche `ship/colr-tajweed-font`) : Al-Fātiḥah seulement ; mic via tap sur le verset.
 
 Monolite volontaire. `src/` Next = **non servi** en prod.
+
+### Deux cerveaux (volontairement complémentaires)
+
+| Couche | Source | Rôle |
+|--------|--------|------|
+| Encre colorée | Font COLR (KFGQPC GPL / Tilmidh OFL) | Visuel mushaf, jointures OK |
+| Points madd + `data-rule-full` | tags Quran.com + `classifyTajweedRule` | Compte des temps + modale |
+| Modale règle | clic `.word-box` → `dataset.ruleFull` | Explication Tilmidh |
 
 ---
 
@@ -24,33 +33,31 @@ Monolite volontaire. `src/` Next = **non servi** en prod.
 
 | Zone | Contenu |
 |------|---------|
-| `<head>` | GA4, meta OG, fonts, LiveKit client CDN |
-| CSS | Mobile-first, `.word-box`, carousel ayahs, modals, Groupe Call |
-| DOM | `#verse-selector`, `#verse-container`, `#start-overlay`, modals, Voice Lab |
-| `<script>` | API Quran, STT, matching, LiveKit group call |
+| `<head>` | GA4, meta OG, Amiri CDN + `@font-face` COLR, LiveKit |
+| CSS | Mobile-first, `.word-box`, carousel ayahs (`font-size` fit, pas `scale` sur active) |
+| DOM | `#verse-selector`, `#verse-container`, modals, Groupe Call |
+| `<script>` | API Quran, STT, matching, LiveKit ; `USE_COLR_TAJWEED_FONT = true` |
 
 ### IDs DOM critiques
 
-`verse-container` · `start-overlay` · `live-assistant` · `voice-lab-modal` · `quran-modal` · `import-modal` · `stats-modal` · `group-call-bar` · `download-btn` · `report-diag-btn` · `box-{n}`
+`verse-container` · `box-{n}` · `modal-overlay` · `group-call-bar`
 
 ---
 
 ## 2. Flux utilisateur
 
 ```
-Ouverture
+Ouverture (Fātiḥah)
   → thème localStorage.tajwid_theme (défaut blue)
-  → boot : sourates 112, 113, 114, 1 puis ?ref= si présent
-  → overlay « Touchez pour commencer » (#start-overlay)
-       ↓ click overlay (pas de pointerdown global)
-  → startRecognition (Web Speech si dispo ; sinon message navigateur)
+  → boot Al-Fātiḥah
+  → tap verset → startRecognition
        ↓ récite
-  → checkWordStream → processMatchedWord → .word-box.correct (bleu)
+  → checkWordStream → .word-box.correct (chrome bleu, couleurs COLR gardées)
        ↓ dernier mot
-  → finishVerse (celebration, completed, restart, download)
+  → finishVerse → Recommencer
 ```
 
-Chemins : Verset du jour · Import · Browser · Favoris · Stats · Rapport · Voice Lab (manuel) · Groupe Call · clic tajweed → modale règle.
+Clic mot avec règle (pendant enregistrement) → modale via `data-rule-full`.
 
 ---
 
@@ -58,15 +65,14 @@ Chemins : Verset du jour · Import · Browser · Favoris · Stats · Rapport · 
 
 ### `fetchVerseFromAPI`
 
-- Chapitre entier ou `surah:ayah` via Quran.com v4.
-- `upsertVerseEntry` (pas de doublons) + `cacheVerseEntry` (sessionStorage).
-- Fallback : cache session → `OFFLINE_VERSES[1]` (Al-Fātiḥah embarquée).
-- `mapApiWord` : translit optionnelle (`w.transliteration?.text`).
+- Chapitre / ayah via Quran.com v4 (`text_uthmani_tajweed` pour classifier).
+- Affichage : `plainUthmaniFromHtml` (tags retirés, **tatweel conservé** pour calt COLR).
+- Fallback offline Fātiḥah.
 
 ### Madd Fātiḥah
 
-- `expandMaddCombining`, `applyFatihaTabiiMarkup`, `FATIHA_TABII_EXTRA`.
-- `madda_permissible` : couleur héritée (ʿāriḍ), points au-dessus seulement.
+- `applyFatihaTabiiMarkup`, `FATIHA_TABII_EXTRA` → `classifyTajweedRule` + points.
+- Couleur lettre = police COLR (pas CSS mid-mot).
 
 ---
 
