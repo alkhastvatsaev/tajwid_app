@@ -4,6 +4,9 @@
   "buildCommand": "echo legacy-static",
   "outputDirectory": "public",
   "installCommand": "echo skip",
+  "git": {
+    "deploymentEnabled": false
+  },
   "cleanUrls": true,
   "rewrites": [
     { "source": "/log", "destination": "/api/log" },
