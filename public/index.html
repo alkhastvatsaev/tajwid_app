@@ -557,15 +557,18 @@
             color: inherit;
             -webkit-text-fill-color: unset;
         }
-        /* Validated: keep COLR ink; signal progress via box chrome only */
-        html[data-colr-tajweed="1"] .word-box.correct .arabic-word {
-            color: inherit !important;
-            -webkit-text-fill-color: unset !important;
-            opacity: 0.95;
-        }
+        /* Validated: no box chrome — solid blue ink (Amiri, COLR palette can't recolor) */
         html[data-colr-tajweed="1"] .word-box.correct {
-            border-color: color-mix(in srgb, var(--validated) 55%, transparent);
-            background: color-mix(in srgb, var(--validated) 8%, transparent);
+            border-color: transparent !important;
+            background: transparent !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        html[data-colr-tajweed="1"] .word-box.correct .arabic-word {
+            font-family: 'Amiri', serif !important;
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
+            opacity: 1;
         }
 
         .translit-container {
