@@ -532,6 +532,9 @@
         tajweed.madda_normal {
             color: var(--madd-tabii);
             -webkit-text-fill-color: var(--madd-tabii);
+            background: transparent !important;
+            text-decoration: none !important;
+            box-shadow: none !important;
         }
         .madda_permissible,
         tajweed.madda_permissible {
@@ -4555,11 +4558,33 @@
 
     function expandMaddCombining(html) {
         if (!html || !html.includes('madda_normal')) return html;
-        // Quran.com met parfois seul le ـٰ (U+0670) dans la balise — invisible une fois colorié
+        // Quran.com met souvent seul ـٰ (tatweel+alif dagger) dans la balise.
+        // Colorier le tatweel → barre teal pleine (surtout Safari). On colore la lettre
+        // précédente et on laisse le dagger hors span / sans tatweel.
         return html.replace(
             /([\u0621-\u064A\u0671])([\u064B-\u0652]*)<tajweed class=["']?madda_normal["']?>([^<]*)<\/tajweed>/g,
-            '<tajweed class="madda_normal">$1$2$3</tajweed>'
+            (_, letter, harakat, inner) => {
+                const dagger = String(inner).replace(/\u0640/g, ''); // drop tatweel U+0640
+                return `<tajweed class="madda_normal">${letter}${harakat}</tajweed>${dagger}`;
+            }
         );
+    }
+
+    function sanitizeTajweedPaint(html) {
+        if (!html) return html;
+        let out = String(html);
+        // Jamais colorier un tatweel seul — source des barres Safari
+        out = out.replace(
+            /<(tajweed|span)(\s+[^>]*class=["'][^"']*madda_[^"']*["'][^>]*)>([^<]*)<\/\1>/gi,
+            (full, tag, attrs, inner) => {
+                const cleaned = String(inner).replace(/\u0640/g, '');
+                if (!cleaned || !/[\u0621-\u064A\u0671]/.test(cleaned)) {
+                    return cleaned; // unwrap: only marks / empty
+                }
+                return `<${tag}${attrs}>${cleaned}</${tag}>`;
+            }
+        );
+        return out;
     }
 
     const HARAKA = '[\u064B-\u0652\u0670]*';
@@ -4585,14 +4610,14 @@
     }
 
     function applyFatihaMaddMarkup(html, cleanText) {
-        return applyFatihaTabiiMarkup(expandMaddCombining(html), cleanText);
+        return sanitizeTajweedPaint(applyFatihaTabiiMarkup(expandMaddCombining(html), cleanText));
     }
 
     function tajweedToSpan(html) {
         if (!html) return html;
-        return String(html)
+        return sanitizeTajweedPaint(String(html)
             .replace(/<\s*tajweed\b/gi, '<span')
-            .replace(/<\s*\/\s*tajweed\s*>/gi, '</span>');
+            .replace(/<\s*\/\s*tajweed\s*>/gi, '</span>'));
     }
 
     function classifyTajweedRule(part, cleanText) {
