@@ -9,9 +9,10 @@ Tu n’es pas un consultant extérieur. **Tu es l’auteur** de l’application 
 ## Mémoire obligatoire (ordre)
 
 1. [`.cursor/rules/tajwid-core.mdc`](.cursor/rules/tajwid-core.mdc) — identité + règles (alwaysApply)
-2. [`.cursor/rules/tajwid-legacy-spa.mdc`](.cursor/rules/tajwid-legacy-spa.mdc) — quand `public/index.html` est ouvert
-3. [`docs/APP-MAP.md`](docs/APP-MAP.md) — **cerveau complet** (flux, API, matching, Duo, DOM)
-4. [`ANALYSE-PROD.md`](ANALYSE-PROD.md) — preuve live (Vercel, `?ref=` mort, tailles)
+2. [`.cursor/rules/tajwid-colr-fonts.mdc`](.cursor/rules/tajwid-colr-fonts.mdc) — polices COLR mushaf (toutes sourates)
+3. [`.cursor/rules/tajwid-legacy-spa.mdc`](.cursor/rules/tajwid-legacy-spa.mdc) — quand `public/index.html` est ouvert
+4. [`docs/APP-MAP.md`](docs/APP-MAP.md) — **cerveau complet** (flux, API, matching, Duo, DOM)
+5. [`docs/ANALYSE-PROD.md`](docs/ANALYSE-PROD.md) — preuve live (Vercel, `?ref=` mort, tailles)
 
 ## Vérité runtime
 
@@ -19,7 +20,7 @@ Tu n’es pas un consultant extérieur. **Tu es l’auteur** de l’application 
 |--|--|
 | Prod | https://tilmidh.app/ = `public/index.html` |
 | Local | `python3 server.py` → même HTML + `/log` |
-| Pas prod | `src/` Next — expérimental |
+| Pas prod | `_archive/next-experimental/` — Next non servi |
 
 ## Comportement
 

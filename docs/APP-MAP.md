@@ -1,7 +1,7 @@
 # APP-MAP — Mémoire d’auteur Tilmidh
 
 > Code live = [`public/index.html`](../public/index.html).  
-> Audit live = [`ANALYSE-PROD.md`](../ANALYSE-PROD.md).  
+> Audit live = [`ANALYSE-PROD.md`](ANALYSE-PROD.md).  
 > Fonts COLR = [`docs/FONTS-TAJWEED-JOINING.md`](FONTS-TAJWEED-JOINING.md).
 
 ---

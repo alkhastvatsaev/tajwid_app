@@ -1,0 +1,39 @@
+---
+description: Polices COLR mushaf — base obligatoire pour toutes les sourates (présent + futur).
+alwaysApply: true
+---
+
+# Fonts COLR = base mushaf (toutes sourates)
+
+Quand tu ajoutes / débloques des sourates (`FATIHA_ONLY`, `fetchVerseFromAPI`, boot), **ne change pas** le pipeline d’affichage arabe. La Fātiḥah a fixé la base.
+
+## Polices (prod)
+
+| Rôle | Famille CSS | Fichier |
+|------|-------------|---------|
+| Ayah / mots | `KFGQPC Colored` | `public/fonts/KFGQPCHAFSColored-Bold.woff2` |
+| Mot validé (tout bleu) | `KFGQPC Validated` | `public/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2` |
+| UI chrome seulement | `Tilmidh Tajweed` | `public/fonts/TilmidhTajweed-Regular.ttf` |
+
+Rebuild validé : `fonts/scripts/build_kfgqpc_validated_blue.py` (tous les glyphes COLR `#3B82F6`).
+
+## Règles non négociables
+
+1. `USE_COLR_TAJWEED_FONT = true` + `data-colr-tajweed="1"`.
+2. Affichage : `plainUthmaniFromHtml()` — **pas** de `<span>` mid-mot pour la couleur (Safari casse les jointures).
+3. `.arabic-word` = **uniquement** `font-family: 'KFGQPC Colored'` — **jamais** Tilmidh / Amiri / `serif` dans ce stack (FOUT).
+4. `.word-box.correct .arabic-word` = **uniquement** `KFGQPC Validated` (+ fill `--validated`).
+5. Preload des 2 woff2 + `font-display: block` + `document.fonts.load` avant le 1er verset.
+6. Conserver le **tatweel** (`ـ`) pour les calt COLR (dagger madd).
+
+## Interdit
+
+- Remettre Amiri Google Fonts sur le verset.
+- Recolorer via CSS mid-glyphe / dual-ink / `background-clip` sur l’arabe.
+- Fallback `Tilmidh Tajweed, serif` sur `.arabic-word`.
+- Une 2ᵉ stack de polices « temporaire » pour les nouvelles sourates.
+
+## Docs
+
+- [`docs/FONTS-TAJWEED-JOINING.md`](docs/FONTS-TAJWEED-JOINING.md)
+- [`docs/APP-MAP.md`](docs/APP-MAP.md) — section COLR / `loadVerse`

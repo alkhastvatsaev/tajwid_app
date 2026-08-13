@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Tu es l’auteur de Tilmidh
 
-Tu as écrit cette app de A à Z. Tu la connais par cœur. Avant toute action non triviale, recharge ta mémoire dans [`docs/APP-MAP.md`](docs/APP-MAP.md) et [`ANALYSE-PROD.md`](ANALYSE-PROD.md).
+Tu as écrit cette app de A à Z. Tu la connais par cœur. Avant toute action non triviale, recharge ta mémoire dans [`docs/APP-MAP.md`](docs/APP-MAP.md) et [`docs/ANALYSE-PROD.md`](docs/ANALYSE-PROD.md).
 
 ## Ce que tu as shippé en prod
 
@@ -13,13 +13,14 @@ Tu as écrit cette app de A à Z. Tu la connais par cœur. Avant toute action no
 - **URL :** https://tilmidh.app/
 - **Deploy :** Vercel static + rewrite SPA ([`vercel.json`](vercel.json))
 - **Titre :** `Tilmidh تلميذ`
-- **Deps runtime CDN :** PeerJS 1.5.0 (unpkg), Google Fonts Amiri+Outfit
+- **Deps runtime CDN :** LiveKit, Google Fonts Outfit (pas Amiri sur le verset)
 - **STT :** Web Speech API `ar-SA` (pas Whisper en prod)
 - **Texte sacré :** `api.quran.com/v4` + `text_uthmani_tajweed`
+- **Polices mushaf :** COLR — voir [`.cursor/rules/tajwid-colr-fonts.mdc`](tajwid-colr-fonts.mdc) (KFGQPC Colored / Validated)
 
 ## Ce que tu n’as PAS mis en prod (même si ça existe dans le repo)
 
-- [`src/`](src/) Next.js + Serwist = **expérimental / non servi**
+- [`_archive/next-experimental/`](_archive/next-experimental/) Next.js = **expérimental / non servi**
 - Firebase / OpenAI Whisper / ElevenLabs = **pas dans le monolite live**
 - Le label UI **« IA Import »** = marketing ; tu as branché **Quran.com**, pas une LLM
 

@@ -1,39 +1,39 @@
-# Tilmidh — Legacy SPA (production)
+# Tilmidh — best tajwid app for beginners
 
-Application web d’entraînement au tajwid mot à mot. **La production sert le monolite HTML** [`public/index.html`](public/index.html).
+Application web d’entraînement au tajwid mot à mot.  
+**Production :** https://tilmidh.app/ = monolite [`public/index.html`](public/index.html)
 
-Prod : https://tilmidh.app/
+## Carte du repo
+
+```text
+public/          PROD — HTML/CSS/JS + fonts COLR + pages SEO
+api/             Vercel serverless (log, LiveKit rooms, …)
+fonts/           Sources + scripts build COLR (pas servi tel quel)
+docs/            Cerveau produit (APP-MAP, fonts, SEO, …)
+twa/             Android / Play (TWA)
+scripts/         Outils voix / analyse
+server.py        Local : sert public/ + POST /log
+_archive/        Pas prod — old SPA, Next expérimental, notes
+.cursor/rules/   Règles agents (COLR fonts, monolite, …)
+```
 
 ## Lancement local
-
-### Option A — serveur de diagnostic Python
 
 ```bash
 python3 server.py
 ```
 
-Ouvre [http://localhost:3000](http://localhost:3000) (sert `public/index.html`).  
-Le endpoint `POST /log` reçoit les rapports techniques (fichier `diagnostic_report.json`).
+→ [http://localhost:3000](http://localhost:3000) (`public/index.html`).
 
-### Option B — fichiers statiques
+## Polices mushaf (base pour toutes les sourates)
 
-Servir le dossier `public/` (ou ouvrir via le déploiement Vercel).
-
-## Fonctionnalités (prod actuelle)
-
-- i18n FR / EN / RU (`localStorage`: `tajwid_lang`)
-- Reconnaissance vocale (Web Speech API) + barre de progression de session
-- Analyse live « Cible » / « Vous dites »
-- Enregistrement + téléchargement de la récitation (après fin de verset)
-- Rapport technique (JSON + envoi local `/log` si le serveur tourne)
-- Modale d’explication des règles Tajwid
-- Sélecteur de sourate + import par référence (ex. `2:255`) — label UI « IA Import », données via **api.quran.com**
-- Tableau de bord (versets complétés, favoris, objectif Coran %) — `localStorage`
-- Mode Duo (PeerJS, User 1 / User 2)
-- Verset du jour
+- Ayah : `KFGQPC Colored` → `public/fonts/KFGQPCHAFSColored-Bold.woff2`
+- Validé : `KFGQPC Validated` → `public/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2`
+- Règle agent : [`.cursor/rules/tajwid-colr-fonts.mdc`](.cursor/rules/tajwid-colr-fonts.mdc)
 
 ## Hors production
 
-Le dossier [`src/`](src/) contient une app **Next.js** non servie par le déploiement Vercel actuel (preset static + `public/`). Ne pas confondre avec la prod.
+- [`_archive/next-experimental/`](_archive/next-experimental/) — Next.js non servi
+- [`_archive/old-spa/`](_archive/old-spa/) — anciens monolites
 
-Archives : [`old/`](old/), [`old/legacy-spa/`](old/legacy-spa/).
+Ne pas confondre avec la prod Vercel (`outputDirectory: public`).
