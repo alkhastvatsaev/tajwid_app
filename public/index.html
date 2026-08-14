@@ -8151,10 +8151,10 @@
         if (!container) return;
         const verse = VERSES_LIBRARY[activeVerseIdx];
         const ref = verse?.ref || '';
-        const isFatiha = !ref || ref.includes('Fatihah') || ref.includes('[1:') || ref.includes('[1-');
         const isKursi = ref.includes('[2:255]');
-        const isKahf = ref.includes('Kahf') || ref.includes('[18:');
-        const isMulk = ref.includes('Mulk') || ref.includes('[67:');
+        const isKahf = /Kahf/i.test(ref) || /\[18[:\-]/.test(ref);
+        const isMulk = /Mulk/i.test(ref) || /\[67[:\-]/.test(ref);
+        const isFatiha = !isKursi && !isKahf && !isMulk;
         container.innerHTML = `
                 <button type="button" class="v-btn surah-btn${isFatiha ? ' active' : ''}" id="header-surah-btn" onclick="toggleSurahMenu(event)" title="Sourates" aria-label="Sourates" aria-expanded="false">الفاتحة</button>
             `;
