@@ -1516,6 +1516,21 @@
             position: absolute;
             z-index: 1200;
         }
+        .surah-dock-dropdown {
+            width: 220px;
+            border-radius: 24px;
+            padding: 16px;
+            gap: 8px;
+        }
+        .verse-selector > .surah-dock-dropdown {
+            position: absolute;
+            z-index: 1200;
+        }
+        .surah-dock-dropdown .settings-dock-row-label {
+            font-family: 'Tilmidh Tajweed', 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
         .gc-dock-title { font-weight: 700; font-size: 0.72rem; color: var(--text); text-align: center; letter-spacing: 0.08em; }
         .gc-dock-tabs {
             display: flex;
@@ -3227,6 +3242,22 @@
     </svg>
     <div class="verse-selector" id="verse-selector">
         <div id="v-btns-container" style="display: flex;"></div>
+
+        <div class="surah-dock-dropdown glass-panel dock-dropdown" id="surah-dock-dropdown" onclick="event.stopPropagation()">
+            <div class="settings-dock-title">Sourates</div>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="1" onclick="selectPracticeSurah('1', event)">
+                <span class="settings-dock-row-label">الفاتحة</span>
+            </button>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="2:255" onclick="selectPracticeSurah('2:255', event)">
+                <span class="settings-dock-row-label">الكرسي</span>
+            </button>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="18" onclick="selectPracticeSurah('18', event)">
+                <span class="settings-dock-row-label">الكهف</span>
+            </button>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="67" onclick="selectPracticeSurah('67', event)">
+                <span class="settings-dock-row-label">الملك</span>
+            </button>
+        </div>
         
         <button class="heart-btn dock-glass-bubble" id="header-heart" onclick="toggleFavoriteCurrent()" title="Favoris">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12.57 12 20l-7.5-7.43a5 5 0 1 1 7.5-6.57 5 5 0 1 1 7.5 6.57Z"/></svg>
@@ -3663,6 +3694,14 @@
         dd.classList.remove('active');
         document.removeEventListener('click', closeGcDockOutside, true);
     }
+    function closeSurahMenu() {
+        const dd = document.getElementById('surah-dock-dropdown');
+        if (!dd) return;
+        dd.classList.remove('active');
+        document.removeEventListener('click', closeSurahOutside, true);
+        const btn = document.getElementById('header-surah-btn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
     function closeSettingsMenu() {
         const dd = document.getElementById('settings-dock-dropdown');
         if (!dd) return;
@@ -3673,6 +3712,7 @@
     function toggleSettingsMenu(e) {
         e.stopPropagation();
         closeGcDockMenu();
+        closeSurahMenu();
         const dd = document.getElementById('settings-dock-dropdown');
         dd.classList.toggle('active');
         if (dd.classList.contains('active')) {
@@ -3887,6 +3927,7 @@
     function ensureIpadShell() {
         closeLangMenu();
         closeGcDockMenu();
+        closeSurahMenu();
         var now = new Date();
         if (ipadCalYear == null) {
             ipadCalYear = now.getFullYear();
@@ -4031,6 +4072,7 @@
         if (e) e.stopPropagation();
         closeLangMenu();
         closeGcDockMenu();
+        closeSurahMenu();
         if (ipadClosing) return;
         if (ipadPanelActive && ipadProgress > 0.5) {
             closeIpadCalendar();
@@ -4100,9 +4142,40 @@
         if (e.key === 'Escape' && ipadPanelActive) closeIpadCalendar();
     });
 
+    function toggleSurahMenu(e) {
+        e.stopPropagation();
+        closeSettingsMenu();
+        closeGcDockMenu();
+        const dd = document.getElementById('surah-dock-dropdown');
+        if (!dd) return;
+        dd.classList.toggle('active');
+        const open = dd.classList.contains('active');
+        const btn = document.getElementById('header-surah-btn');
+        if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            document.addEventListener('click', closeSurahOutside, true);
+        } else {
+            document.removeEventListener('click', closeSurahOutside, true);
+        }
+    }
+    function closeSurahOutside(e) {
+        const dd = document.getElementById('surah-dock-dropdown');
+        const btn = document.getElementById('header-surah-btn');
+        if (!dd) return;
+        if (!dd.contains(e.target) && !btn?.contains(e.target)) {
+            closeSurahMenu();
+        }
+    }
+    function selectPracticeSurah(ref, event) {
+        if (event) event.stopPropagation();
+        closeSurahMenu();
+        fetchVerseFromAPI(ref);
+    }
+
     function toggleGcDockMenu(e) {
         e.stopPropagation();
         closeSettingsMenu();
+        closeSurahMenu();
         const dd = document.getElementById('gc-dock-dropdown');
         dd.classList.toggle('active');
         if (dd.classList.contains('active')) {
@@ -8075,19 +8148,21 @@
 
     function initVerseSelector() {
         const container = document.getElementById('v-btns-container');
+        if (!container) return;
         const verse = VERSES_LIBRARY[activeVerseIdx];
-        if (!verse || !container) return;
-
-        const ref = verse.ref || '';
-        const isFatiha = ref.includes('Fatihah') || ref.includes('[1:') || ref.includes('[1-');
+        const ref = verse?.ref || '';
+        const isFatiha = !ref || ref.includes('Fatihah') || ref.includes('[1:') || ref.includes('[1-');
+        const isKursi = ref.includes('[2:255]');
         const isKahf = ref.includes('Kahf') || ref.includes('[18:');
         const isMulk = ref.includes('Mulk') || ref.includes('[67:');
         container.innerHTML = `
-                <button class="v-btn${isFatiha ? ' active' : ''}" onclick="fetchVerseFromAPI('1')" title="Al-Fātiḥah">الفاتحة</button>
-                <button class="v-btn${ref.includes('[2:255]') ? ' active' : ''}" onclick="fetchVerseFromAPI('2:255')" title="Ayat al-Kursi">الكرسي</button>
-                <button class="v-btn${isKahf ? ' active' : ''}" onclick="fetchVerseFromAPI('18')" title="Al-Kahf">الكهف</button>
-                <button class="v-btn${isMulk ? ' active' : ''}" onclick="fetchVerseFromAPI('67')" title="Al-Mulk">الملك</button>
+                <button type="button" class="v-btn surah-btn${isFatiha ? ' active' : ''}" id="header-surah-btn" onclick="toggleSurahMenu(event)" title="Sourates" aria-label="Sourates" aria-expanded="false">الفاتحة</button>
             `;
+        document.querySelectorAll('.surah-pick-btn').forEach(btn => {
+            const r = btn.dataset.practiceRef;
+            const on = (r === '1' && isFatiha) || (r === '2:255' && isKursi) || (r === '18' && isKahf) || (r === '67' && isMulk);
+            btn.classList.toggle('active', on);
+        });
     }
 
     function applyTheme(theme) {
@@ -8141,6 +8216,7 @@
     window.addEventListener('click', () => {
         closeSettingsMenu();
         closeGcDockMenu();
+        closeSurahMenu();
     });
 
     function closeModal() {
