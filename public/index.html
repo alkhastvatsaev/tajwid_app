@@ -25,7 +25,7 @@
     <link rel="alternate" hreflang="id" href="https://tilmidh.app/id">
     <link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar">
     <link rel="alternate" hreflang="ru" href="https://tilmidh.app/ru">
-    <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/en">
+    <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/id">
     <meta name="theme-color" content="#FFFFFF">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
@@ -407,29 +407,39 @@
             padding-bottom: calc(180px + env(safe-area-inset-bottom)); /* Clear bottom buttons & home bar */
         }
 
-        /* Footer SEO — texte marque + maillage interne, réellement visible
-           (body est overflow:hidden : on l'ancre dans la bande basse réservée) */
+        /* Footer SEO — texte marque + maillage interne, RÉELLEMENT VISIBLE.
+           Ne jamais le repasser en sr-only (width:1px, clip-path, display:none) :
+           un h1 de marque et vingt liens dissimulés, c'est du texte caché, et
+           c'est sanctionné indépendamment de toute question de cloaking.
+           Il est ancré dans la bande basse déjà réservée par .container. */
         #seo-footer {
             position: absolute;
             left: 0;
             right: 0;
-            bottom: calc(8px + env(safe-area-inset-bottom));
+            bottom: calc(6px + env(safe-area-inset-bottom));
             z-index: 6;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             padding: 0 14px;
             text-align: center;
             font-family: var(--font-main);
-            font-size: 0.62rem;
-            line-height: 1.5;
+            font-size: 0.6rem;
+            line-height: 1.45;
             color: var(--subtext);
         }
-        #seo-footer h1 {
-            font-size: 0.7rem;
+        #seo-footer section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        #seo-footer h1,
+        #seo-footer h2 {
+            font-size: 0.68rem;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             text-transform: none;
             color: var(--subtext);
             margin: 0;
@@ -442,23 +452,21 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 3px 12px;
+            gap: 2px 10px;
+            margin: 0;
         }
         #seo-footer a {
             color: var(--subtext);
             text-decoration: none;
             border-bottom: 1px solid currentColor;
         }
-        #seo-footer a:hover {
-            color: var(--accent);
-        }
+        #seo-footer a:hover { color: var(--accent); }
+        /* Sur petit écran, la bande basse ne peut pas porter deux langues :
+           la section indonésienne reste servie sur /id, qui est sa vraie URL. */
         @media (max-width: 900px) {
-            #seo-footer {
-                font-size: 0.54rem;
-                gap: 3px;
-                bottom: calc(4px + env(safe-area-inset-bottom));
-            }
-            #seo-footer h1 { font-size: 0.6rem; }
+            #seo-footer { font-size: 0.52rem; bottom: calc(3px + env(safe-area-inset-bottom)); }
+            #seo-footer h1, #seo-footer h2 { font-size: 0.58rem; }
+            #seo-footer p { display: none; }
         }
 
         h1,
@@ -3180,8 +3188,16 @@
                 var themeBoot = localStorage.getItem('tajwid_theme') || 'blue';
                 if (themeBoot !== 'green') themeBoot = 'blue';
                 document.documentElement.setAttribute('data-theme', themeBoot);
-                var langBoot = localStorage.getItem('tajwid_lang') || 'fr';
+                var langBoot = localStorage.getItem('tajwid_lang');
+                if (!langBoot) {
+                    var nav = (navigator.language || '').toLowerCase();
+                    if (nav.indexOf('id') === 0) langBoot = 'id';
+                    else if (nav.indexOf('ru') === 0) langBoot = 'ru';
+                    else if (nav.indexOf('en') === 0) langBoot = 'en';
+                    else langBoot = 'fr';
+                }
                 document.documentElement.setAttribute('data-lang', langBoot);
+                document.documentElement.lang = langBoot === 'ru' ? 'ru' : (langBoot === 'en' ? 'en' : (langBoot === 'id' ? 'id' : 'fr'));
                 if (localStorage.getItem('tajwid_hide_translit') === '1') {
                     document.documentElement.setAttribute('data-hide-translit', 'true');
                 }
@@ -3239,6 +3255,7 @@
                 <div class="settings-lang-row">
                     <button class="lang-btn" onclick="setLanguage('fr', event)">FR</button>
                     <button class="lang-btn" onclick="setLanguage('en', event)">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('id', event)">ID</button>
                     <button class="lang-btn" onclick="setLanguage('ru', event)">RU</button>
                 </div>
             </div>
@@ -3303,24 +3320,48 @@
             <div id="install-pwa-banner"></div>
         </div>
 
-        <footer id="seo-footer" aria-label="À propos de Tilmidh">
-            <h1>Tilmidh <span lang="ar" dir="rtl">تلميذ</span> — entraînement tajwid mot à mot</h1>
-            <p>Tilmidh est un entraîneur web gratuit : récitez le Coran mot à mot, le micro vérifie chaque mot en arabe, avec les couleurs tajwid. Outil de pratique pour débutants — pas une ijazah.</p>
-            <nav aria-label="Pages Tilmidh">
-                <a href="/apprendre-tajwid">Apprendre le tajwid</a>
-                <a href="/tajwid-microphone">Micro tajwid</a>
-                <a href="/regle/qalqalah">Qalqalah</a>
-                <a href="/regle/ghunnah">Ghunnah</a>
-                <a href="/regle/madd">Madd</a>
-                <a href="/regle/ikhfa">Ikhfa</a>
-                <a href="/regle/idgham">Idgham</a>
-                <a href="/sourate/1">Al-Fātiḥah</a>
-                <a href="/en" hreflang="en">English</a>
-                <a href="/id" hreflang="id">Indonesia</a>
-                <a href="/ar" hreflang="ar">العربية</a>
-                <a href="/ru" hreflang="ru">Русский</a>
-                <a href="/privacy">Confidentialité</a>
-            </nav>
+        <footer id="seo-footer" aria-label="Tilmidh">
+            <section lang="fr" aria-label="Français">
+                <h1>Tilmidh <span lang="ar" dir="rtl">تلميذ</span> — entraînement tajwid mot à mot</h1>
+                <p>Tilmidh est un entraîneur web gratuit : récitez le Coran mot à mot, le micro vérifie chaque mot en arabe, avec les couleurs tajwid. Outil de pratique pour débutants — pas une ijazah.</p>
+                <nav aria-label="Pages Tilmidh (FR)">
+                    <a href="/apprendre-tajwid">Apprendre le tajwid</a>
+                    <a href="/regles-de-tajwid">Toutes les règles</a>
+                    <a href="/coran-phonetique">Coran phonétique</a>
+                    <a href="/tajwid-microphone">Micro tajwid</a>
+                    <a href="/regle/qalqalah">Qalqalah</a>
+                    <a href="/regle/ghunnah">Ghunnah</a>
+                    <a href="/regle/madd">Madd</a>
+                    <a href="/regle/ikhfa">Ikhfa</a>
+                    <a href="/regle/idgham">Idgham</a>
+                    <a href="/sourate/1">Al-Fātiḥah</a>
+                    <a href="/en" hreflang="en">English</a>
+                    <a href="/id" hreflang="id">Indonesia</a>
+                    <a href="/ar" hreflang="ar">العربية</a>
+                    <a href="/ru" hreflang="ru">Русский</a>
+                    <a href="/privacy">Confidentialité</a>
+                </nav>
+            </section>
+            <section lang="id" aria-label="Bahasa Indonesia">
+                <h2>Tilmidh <span lang="ar" dir="rtl">تلميذ</span> — latihan tajwid kata demi kata</h2>
+                <p>Tilmidh adalah pelatih web gratis: baca Quran kata demi kata, mikrofon memeriksa setiap kata Arab, dengan warna tajwid. Alat latihan untuk pemula — bukan ijazah.</p>
+                <nav aria-label="Halaman Tilmidh (ID)">
+                    <a href="/id" hreflang="id">Latihan tajwid</a>
+                    <a href="/id/best-tajwid-app-for-beginners" hreflang="id">Aplikasi tajwid pemula</a>
+                    <a href="/id/tajwid-microphone" hreflang="id">Mikrofon tajwid</a>
+                    <a href="/id/regle/qalqalah" hreflang="id">Qalqalah</a>
+                    <a href="/id/regle/ghunnah" hreflang="id">Ghunnah</a>
+                    <a href="/id/regle/madd" hreflang="id">Madd</a>
+                    <a href="/id/regle/ikhfa" hreflang="id">Ikhfa</a>
+                    <a href="/id/regle/idgham" hreflang="id">Idgham</a>
+                    <a href="/?ref=1">Al-Fatihah</a>
+                    <a href="/en" hreflang="en">English</a>
+                    <a href="/id" hreflang="id">Indonesia</a>
+                    <a href="/ar" hreflang="ar">العربية</a>
+                    <a href="/ru" hreflang="ru">Русский</a>
+                    <a href="/privacy">Privasi</a>
+                </nav>
+            </section>
         </footer>
     </div>
 
@@ -4730,13 +4771,115 @@
                 'ham-wasl': { tag: 'Хамзат аль-васль', title: 'Хамзат аль-васль (ٱ)', desc: 'Соединительный алиф: не читается в середине рецитации (серая буква). Читается только в начале фразы.' },
                 'laam-shamsiyah': { tag: 'Солнечная лям', title: 'Солнечная лям', desc: 'Лям артикля не произносится: сливается со следующей буквой (напр. аш-шамс).' }
             }
+        },
+        id: {
+            start: "Ketuk untuk mulai pelacakan",
+            download: "Unduh bacaan",
+            legMadd: "Panjang", legGhunnah: "Hidung", legIkhfa: "Sembunyi",
+            warnMadd: "Panjangkan! 2 harakat",
+            warnGhunnah: "Hidung! (Ghunnah)",
+            warnIkhfa: "Sembunyikan! (Ikhfā’)",
+            warnQalqalah: "Pantul! (Qalqalah)",
+            statusListen: "Pelacakan aktif — bacalah",
+            statusMic: "Izinkan mikrofon",
+            micPrompt: "Ketuk untuk mengizinkan mikrofon",
+            restart: "Mulai lagi",
+            settingsTitle: "Pengaturan",
+            settingsLang: "Bahasa",
+            settingsTranslit: "Transliterasi",
+            translitShow: "Tampilkan transliterasi",
+            translitHide: "Sembunyikan transliterasi",
+            settingsTajweed: "Warna tajwid",
+            tajweedColorsShow: "Tampilkan warna tajwid",
+            tajweedColorsHide: "Sembunyikan warna tajwid",
+            settingsTheme: "Tema",
+            themeBlue: "Biru",
+            themeGreen: "Hijau",
+            dailyLabel: "Ayat hari ini",
+            dailySub: "Ketuk untuk lihat",
+            browserTitle: "Pilih surat",
+            browserSearch: "Cari surat...",
+            browserClose: "Tutup",
+            statsTitle: "Dasbor",
+            statsVerses: "Ayat",
+            statsFavs: "Favorit",
+            statsGoal: "Target Quran",
+            statsContinue: "Lanjutkan belajar",
+            importTitle: "Ayat baru",
+            importDesc: "Ketik referensi (contoh: 2:255)",
+            importPlaceholder: "Surat:Ayat (contoh: 18:10)",
+            importCancel: "Batal",
+            importBtn: "Impor",
+            modalUnderstood: "Mengerti",
+            reportBtn: "Laporan teknis",
+            reportSent: "Laporan terkirim!",
+            assistantTitle: "Pelacakan bacaan",
+            assistantTarget: "Kata target",
+            assistantHeard: "Anda ucapkan",
+            assistantLayer: "Pelacakan real-time (Chrome). Whisper untuk nanti.",
+            datasetOptIn: "Saya setuju merekam Al-Fatihah ini (audio + telemetri) untuk meningkatkan aplikasi",
+            mistakeTest: "Mode uji kesalahan (nonaktifkan gramatika STT yang “memperbaiki” vokal)",
+            datasetSaved: "Rekaman tersimpan (unduh + cloud)",
+            datasetSaveFail: "Diunduh lokal — unggah cloud gagal",
+            datasetNoAudio: "Opt-in aktif tapi tidak ada audio",
+            whisperHold: "Dengarkan terus — bacalah",
+            whisperListening: "Dengarkan terus — bacalah",
+            whisperHearing: "Mendengarkan…",
+            whisperRecording: "Mendengarkan…",
+            whisperChecking: "Menganalisis Whisper…",
+            whisperFail: "Whisper gagal — lanjutkan",
+            whisperMiss: "Belum kata yang benar — lanjutkan",
+            hintRepeat: "Coba lagi: artikulasikan sedikit lebih jelas.",
+            hintAlmost: "Hampir! Artikulasikan sedikit lagi.",
+            hintNeedSound: "Suara terlalu pendek atau diam — lanjutkan baca.",
+            hintNeedMadd: "Panjangkan lagi (durasi / madd).",
+            summaryTitle: "Ringkasan bacaan",
+            summaryFluidity: "Kelancaran",
+            summaryMistakes: "Kesalahan",
+            maddMissed: "Madd terlewat",
+            tarteelErrors: "Kesalahan",
+            tarteelExtras: "Lebih",
+            tarteelMissedWord: "Kata terlewat (tidak dibaca)",
+            tarteelExtraWord: "Kata lebih — di luar ayat",
+            voiceLabBtn: "Voice Lab · Tarteel",
+            voiceLabTitle: "Analisis suara vs Tarteel",
+            voiceLabDesc: "Metrik sesi untuk mendekati Tarteel (WER ~4%, latensi <200 ms, per kata).",
+            expertTitle: "Ahli Tilmidh",
+            expertLegend: "Legenda aturan",
+            legend: {
+                madd: "Perpanjangan (ا و ي)",
+                silent: "Huruf diam (ٱ · lam syamsiyah)",
+                noon: "Nun sukun & tanwin",
+                ghunnah: "Dengung (نّ مّ)",
+                qalqalah: "Pantulan (ق ط ب ج د)",
+                ikhfa: "Menyembunyikan",
+                idgham: "Peleburan (ي ر م ل و ن)",
+                izhar: "Menjelaskan",
+                iqlab: "Pengubahan (ب)"
+            },
+            rules: {
+                'madd-tabii': { tag: 'Madd Tabī‘ī', title: 'Madd Tabī‘ī', desc: 'Perpanjangan alami 2 harakat pada alif, waw, atau ya.' },
+                'madd-arid': { tag: 'Madd ‘Āriḍ', title: 'Madd ‘Āriḍ', desc: 'Saat waqaf: 2, 4, atau 6 harakat pada huruf madd sebelum sukun kebetulan.' },
+                'madd-munfasil': { tag: 'Madd Munfaṣil', title: 'Madd Munfaṣil', desc: 'Perpanjangan 4 atau 5 harakat bila hamzah di kata berikutnya.' },
+                'madd-muttasil': { tag: 'Madd Muttaṣil', title: 'Madd Muttaṣil', desc: 'Perpanjangan wajib 4 atau 5 harakat bila hamzah dalam kata yang sama.' },
+                'madd-lazim': { tag: 'Madd Lāzim', title: 'Madd Lāzim', desc: 'Perpanjangan wajib 6 harakat karena sukun asli.' },
+                'ikhfa': { tag: 'Ikhfā’', title: 'Ikhfā’', desc: 'Menyembunyikan ringan bunyi “N” sebelum huruf tertentu.' },
+                'ghunnah': { tag: 'Ghunnah', title: 'Ghunnah', desc: 'Dengung hidung 2 harakat dari nun dan mim.' },
+                'idgham-ghunnah': { tag: 'Idghām', title: 'Idghām dengan ghunnah', desc: 'Meleburkan N ke huruf berikutnya dengan dengung.' },
+                'idgham-no-ghunnah': { tag: 'Idghām', title: 'Idghām tanpa ghunnah', desc: 'Peleburan penuh N tanpa dengung.' },
+                'izhaar': { tag: 'Iẓhār', title: 'Iẓhār', desc: 'Menjelaskan bunyi N tanpa dengung.' },
+                'iqlab': { tag: 'Iqlāb', title: 'Iqlāb', desc: 'Mengubah bunyi N menjadi “M” sebelum ba.' },
+                'qalqalah': { tag: 'Qalqalah', title: 'Qalqalah', desc: 'Pantulan bunyi pada huruf qaf, ta, ba, jim, dal.' },
+                'ham-wasl': { tag: 'Hamzat al-waṣl', title: 'Hamzat al-waṣl (ٱ)', desc: 'Alif washl: tidak dibaca di tengah bacaan (huruf abu-abu). Hanya di awal frasa.' },
+                'laam-shamsiyah': { tag: 'Lām syamsiyah', title: 'Lām syamsiyah', desc: 'Lām artikel tidak dibaca: melebur ke huruf berikutnya (mis. ash-shams).' }
+            }
         }
     };
 
     function setLanguage(lang) {
         currentLang = lang;
         document.documentElement.setAttribute('data-lang', lang);
-        document.documentElement.lang = lang === 'ru' ? 'ru' : (lang === 'en' ? 'en' : 'fr');
+        document.documentElement.lang = lang === 'ru' ? 'ru' : (lang === 'en' ? 'en' : (lang === 'id' ? 'id' : 'fr'));
         const t = translations[lang];
         
         if (document.getElementById('txt-start')) document.getElementById('txt-start').innerText = t.micPrompt || t.start;
@@ -7883,7 +8026,7 @@
             applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
         }
         if (!hasWebSpeech()) showSttUnsupportedHint();
-        const savedLang = localStorage.getItem('tajwid_lang') || 'fr';
+        const savedLang = localStorage.getItem('tajwid_lang') || document.documentElement.getAttribute('data-lang') || 'fr';
         setLanguage(savedLang);
         updateStatsUI();
 
