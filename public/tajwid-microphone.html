@@ -12,8 +12,13 @@
     <meta name="theme-color" content="#059669">
     <meta property="og:title" content="Tajwid microphone — Tilmidh">
     <meta property="og:url" content="https://tilmidh.app/tajwid-microphone">
-    <meta property="og:image" content="https://tilmidh.app/og.png">
-    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <meta property="og:image" content="https://tilmidh.app/img/og/fr/micro-tajwid.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Micro tajwid — vérifier sa récitation">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://tilmidh.app/img/og/fr/micro-tajwid.png">
+                                                <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
@@ -27,12 +32,17 @@
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
+            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
     </style>
 </head>
 <body>
     <header><a href="/">Tilmidh تلميذ</a></header>
     <main>
         <h1>Tajwid microphone — vérifier sa récitation</h1>
+        <figure class="hero-img">
+            <img src="/img/page/fr/micro-tajwid.webp" alt="Micro tajwid — vérifier sa récitation" width="960" height="540" loading="lazy" decoding="async">
+        </figure>
         <p>Un « recitation checker » n’écoute pas le tajwid comme un shaykh. Tilmidh vérifie que tu as dit <em>le bon mot</em>, dans l’ordre, avec un matching tolérant sur les voyelles que Chrome avale. Les couleurs tajwid (Quran.com) sont à l’écran pour te rappeler le geste. Le micro ne chronomètre pas les harakāt du madd.</p>
         <p class="ar">قُلْ هُوَ ٱللَّهُ أَحَدٌ</p>
         <p>Chrome / Android : autorise le micro une fois. Safari iOS : même permission, reconnaissance parfois plus stricte. Si la case reste grise, répète ce mot seulement — n’enchaîne pas la sourate. Mode Duo : un imam et un talib sur la même ligne (PeerJS), sans compte.</p>

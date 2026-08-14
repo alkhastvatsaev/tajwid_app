@@ -71,6 +71,10 @@ export function renderPage(p) {
   const dir = RTL.has(p.lang) ? ' dir="rtl"' : '';
   const canonical = urlFor(p.lang, p.path);
   const navHtml = p.nav.map((n) => `            <a href="${n.href}">${esc(n.label)}</a>`).join('\n');
+  const ogSlug = p.ogSlug || 'tilmidh';
+  const ogAlt = esc(p.ogAlt || p.title);
+  const ogImage = `${SITE}/img/og/${p.lang}/${ogSlug}.png`;
+  const pageImage = `/img/page/${p.lang}/${ogSlug}.webp`;
 
   return `<!DOCTYPE html>
 <html lang="${p.lang}"${dir}>
@@ -87,8 +91,12 @@ ${hreflangBlock(p.path, p.available)}
     <meta property="og:title" content="${esc(p.title)}">
     <meta property="og:description" content="${esc(p.description)}">
     <meta property="og:url" content="${canonical}">
-    <meta property="og:image" content="${SITE}/og.png">
+    <meta property="og:image" content="${ogImage}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${ogAlt}">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${ogImage}">
     <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="/manifest.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
@@ -106,6 +114,8 @@ ${hreflangBlock(p.path, p.available)}
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
+        .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
         table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
         th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
         th { color: var(--muted); font-weight: 600; }
@@ -115,6 +125,9 @@ ${hreflangBlock(p.path, p.available)}
     <header><a href="${prefix(p.lang)}/">Tilmidh تلميذ</a></header>
     <main>
         <h1>${esc(p.h1)}</h1>
+        <figure class="hero-img">
+            <img src="${pageImage}" alt="${ogAlt}" width="960" height="540" loading="lazy" decoding="async">
+        </figure>
 ${p.body}
         <nav>
 ${navHtml}

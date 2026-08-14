@@ -16,9 +16,14 @@
     <meta property="og:title" content="Tilmidh">
     <meta property="og:description" content="Читай Коран слово за словом. Микрофон проверяет каждое слово. Цвета таджвида, Фатиха, Ихляс. Бесплатно. Не иджаза.">
     <meta property="og:url" content="https://tilmidh.app/ru">
-    <meta property="og:locale" content="ru_RU">
-    <meta property="og:image" content="https://tilmidh.app/og.png">
-    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <meta property="og:image" content="https://tilmidh.app/img/og/ru/tilmidh.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Tilmidh — тренажёр таджвида">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://tilmidh.app/img/og/ru/tilmidh.png">
+                                            <meta property="og:locale" content="ru_RU">
+        <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="/manifest.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <style>
@@ -37,12 +42,17 @@
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
 
+            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
     </style>
 </head>
 <body>
     <header><a href="/">Tilmidh تلميذ</a> · <a href="/ru">RU</a> · <a href="/en">EN</a></header>
     <main>
         <h1>Tilmidh — тренажёр таджвида слово за словом</h1>
+        <figure class="hero-img">
+            <img src="/img/page/ru/tilmidh.webp" alt="Tilmidh — тренажёр таджвида" width="960" height="540" loading="lazy" decoding="async">
+        </figure>
         <p><strong>Лучшее приложение таджвида для начинающих</strong>, которые уже читают намаз: Tilmidh (تلميذ — «ученик») — бесплатный веб-тренажёр. Ты читаешь слово, микрофон проверяет, клетка зеленеет, идёшь дальше. Это не курс алфавита (для букв — «Уроки таджвида» / Learn Quran). Это не иджаза.</p>
         <p class="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
         <p>Порядок старта: Ихляс → Фаляк → Нас → Фатиха. Цвета таджвида с Quran.com. Распознавание — Web Speech API браузера (<code>ar-SA</code>) на устройстве. Режим Duo: имам и талиб на одной строке (PeerJS), без аккаунта. Ссылка <code>?ref=1</code> открывает аят после загрузки.</p>

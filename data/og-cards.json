@@ -1,0 +1,459 @@
+{
+  "palette": {
+    "bg": "#51A26A",
+    "ink": "#FFFFFF",
+    "accent": "#0F2A1C"
+  },
+  "cards": {
+    "home": {
+      "arabic": "تلميذ",
+      "shape": "circle",
+      "titles": {
+        "fr": "Entraînement tajwid mot à mot",
+        "en": "Word-by-word tajwid practice",
+        "id": "Latihan tajwid kata demi kata",
+        "ar": "تمرين تجويد كلمةً بكلمة",
+        "ru": "Таджвид слово за слово"
+      },
+      "alts": {
+        "fr": "Tilmidh — entraînement tajwid mot à mot",
+        "en": "Tilmidh — word-by-word tajwid trainer",
+        "id": "Tilmidh — latihan tajwid kata demi kata",
+        "ar": "تلميذ — تمرين تجويد",
+        "ru": "Tilmidh — тренажёр таджвида"
+      },
+      "slugs": {
+        "fr": "tilmidh",
+        "en": "tilmidh",
+        "id": "tilmidh",
+        "ar": "tilmidh",
+        "ru": "tilmidh"
+      }
+    },
+    "fatihah": {
+      "arabic": "ٱلْفَاتِحَة",
+      "shape": "circle",
+      "titles": {
+        "fr": "Réciter Al-Fātiḥah",
+        "en": "Practice Al-Fātiḥah",
+        "id": "Belajar Al-Fatihah",
+        "ar": "سورة الفاتحة",
+        "ru": "Сура Аль-Фатиха"
+      },
+      "alts": {
+        "fr": "Al-Fātiḥah en arabe — entraînement Tilmidh",
+        "en": "Al-Fātiḥah Arabic — Tilmidh practice",
+        "id": "Belajar Al-Fatihah — latihan mikrofon Tilmidh",
+        "ar": "سورة الفاتحة — تلميذ",
+        "ru": "Аль-Фатиха — Tilmidh"
+      },
+      "slugs": {
+        "fr": "reciter-al-fatihah",
+        "en": "practice-al-fatihah",
+        "id": "belajar-al-fatihah",
+        "ar": "al-fatihah",
+        "ru": "sura-fatikha"
+      }
+    },
+    "mulk": {
+      "arabic": "ٱلْمُلْك",
+      "shape": "octagon",
+      "titles": {
+        "fr": "Surate Al-Mulk",
+        "en": "Sūrat al-Mulk",
+        "id": "Belajar Surat Al-Mulk",
+        "ar": "سورة الملك",
+        "ru": "Сура Аль-Мульк"
+      },
+      "alts": {
+        "fr": "Al-Mulk — récitation Tilmidh",
+        "en": "Al-Mulk — Tilmidh recitation",
+        "id": "Belajar Surat Al-Mulk — Tilmidh",
+        "ar": "سورة الملك — تلميذ",
+        "ru": "Аль-Мульк — Tilmidh"
+      },
+      "slugs": {
+        "fr": "sourate-al-mulk",
+        "en": "surah-al-mulk",
+        "id": "belajar-al-mulk",
+        "ar": "al-mulk",
+        "ru": "sura-mulk"
+      }
+    },
+    "kursi": {
+      "arabic": "ٱلْكُرْسِيّ",
+      "shape": "arc",
+      "titles": {
+        "fr": "Ayat al-Kursi",
+        "en": "Ayat al-Kursi",
+        "id": "Belajar Ayat Kursi",
+        "ar": "آية الكرسي",
+        "ru": "Аят al-Kursi"
+      },
+      "alts": {
+        "fr": "Ayat al-Kursi — entraînement Tilmidh",
+        "en": "Ayat al-Kursi — Tilmidh practice",
+        "id": "Belajar Ayat Kursi — latihan Tilmidh",
+        "ar": "آية الكرسي — تلميذ",
+        "ru": "Аят al-Kursi — Tilmidh"
+      },
+      "slugs": {
+        "fr": "ayat-kursi",
+        "en": "ayat-kursi",
+        "id": "belajar-ayat-kursi",
+        "ar": "ayat-kursi",
+        "ru": "ayat-kursi"
+      }
+    },
+    "ikhlas": {
+      "arabic": "أَحَد",
+      "shape": "diamond",
+      "titles": {
+        "fr": "Al-Ikhlāṣ",
+        "en": "Al-Ikhlāṣ",
+        "id": "Al-Ikhlas",
+        "ar": "الإخلاص",
+        "ru": "Аль-Ихлас"
+      },
+      "alts": {
+        "fr": "Al-Ikhlāṣ — Tilmidh",
+        "en": "Al-Ikhlāṣ — Tilmidh",
+        "id": "Surat Al-Ikhlas — Tilmidh",
+        "ar": "الإخلاص — تلميذ",
+        "ru": "Аль-Ихлас — Tilmidh"
+      },
+      "slugs": {
+        "fr": "sourate-al-ikhlas",
+        "en": "surah-al-ikhlas",
+        "id": "surat-al-ikhlas",
+        "ar": "al-ikhlas",
+        "ru": "sura-ikhlas"
+      }
+    },
+    "falaq": {
+      "arabic": "ٱلْفَلَق",
+      "shape": "circle",
+      "titles": {
+        "fr": "Al-Falaq",
+        "en": "Al-Falaq",
+        "id": "Al-Falaq",
+        "ar": "الفلق",
+        "ru": "Аль-Фалак"
+      },
+      "alts": {
+        "fr": "Al-Falaq — Tilmidh",
+        "en": "Al-Falaq — Tilmidh",
+        "id": "Surat Al-Falaq — Tilmidh",
+        "ar": "الفلق — تلميذ",
+        "ru": "Аль-Фалак — Tilmidh"
+      },
+      "slugs": {
+        "fr": "sourate-al-falaq",
+        "en": "surah-al-falaq",
+        "id": "surat-al-falaq",
+        "ar": "al-falaq",
+        "ru": "sura-falaq"
+      }
+    },
+    "nas": {
+      "arabic": "ٱلنَّاس",
+      "shape": "octagon",
+      "titles": {
+        "fr": "An-Nās",
+        "en": "An-Nās",
+        "id": "An-Nas",
+        "ar": "الناس",
+        "ru": "Ан-Нас"
+      },
+      "alts": {
+        "fr": "An-Nās — Tilmidh",
+        "en": "An-Nās — Tilmidh",
+        "id": "Surat An-Nas — Tilmidh",
+        "ar": "الناس — تلميذ",
+        "ru": "Ан-Нас — Tilmidh"
+      },
+      "slugs": {
+        "fr": "sourate-an-nas",
+        "en": "surah-an-nas",
+        "id": "surat-an-nas",
+        "ar": "an-nas",
+        "ru": "sura-nas"
+      }
+    },
+    "qalqalah": {
+      "arabic": "ق",
+      "shape": "circle",
+      "titles": {
+        "fr": "Qalqalah",
+        "en": "Qalqalah",
+        "id": "Belajar Qalqalah",
+        "ar": "قلقلة",
+        "ru": "Калькаля"
+      },
+      "alts": {
+        "fr": "Règle qalqalah — Tilmidh",
+        "en": "Qalqalah rule — Tilmidh",
+        "id": "Belajar qalqalah — Tilmidh",
+        "ar": "قلقلة — تلميذ",
+        "ru": "Калькаля — Tilmidh"
+      },
+      "slugs": {
+        "fr": "regle-qalqalah",
+        "en": "qalqalah-rule",
+        "id": "belajar-qalqalah",
+        "ar": "qalqalah",
+        "ru": "qalqalah"
+      }
+    },
+    "ghunnah": {
+      "arabic": "نّ",
+      "shape": "octagon",
+      "titles": {
+        "fr": "Ghunnah",
+        "en": "Ghunnah",
+        "id": "Belajar Ghunnah",
+        "ar": "غنة",
+        "ru": "Гунна"
+      },
+      "alts": {
+        "fr": "Ghunnah — Tilmidh",
+        "en": "Ghunnah — Tilmidh",
+        "id": "Belajar ghunnah — Tilmidh",
+        "ar": "غنة — تلميذ",
+        "ru": "Гунна — Tilmidh"
+      },
+      "slugs": {
+        "fr": "regle-ghunnah",
+        "en": "ghunnah-rule",
+        "id": "belajar-ghunnah",
+        "ar": "ghunnah",
+        "ru": "ghunnah"
+      }
+    },
+    "madd": {
+      "arabic": "ا",
+      "shape": "arc",
+      "titles": {
+        "fr": "Madd",
+        "en": "Madd",
+        "id": "Belajar Madd",
+        "ar": "مد",
+        "ru": "Мадд"
+      },
+      "alts": {
+        "fr": "Madd tajwid — Tilmidh",
+        "en": "Madd tajwid — Tilmidh",
+        "id": "Belajar madd — Tilmidh",
+        "ar": "مد — تلميذ",
+        "ru": "Мадд — Tilmidh"
+      },
+      "slugs": {
+        "fr": "regle-madd",
+        "en": "madd-rule",
+        "id": "belajar-madd",
+        "ar": "madd",
+        "ru": "madd"
+      }
+    },
+    "ikhfa": {
+      "arabic": "ن",
+      "shape": "diamond",
+      "titles": {
+        "fr": "Ikhfa",
+        "en": "Ikhfa",
+        "id": "Belajar Ikhfa",
+        "ar": "إخفاء",
+        "ru": "Ихфа"
+      },
+      "alts": {
+        "fr": "Ikhfa — Tilmidh",
+        "en": "Ikhfa — Tilmidh",
+        "id": "Belajar ikhfa — Tilmidh",
+        "ar": "إخفاء — تلميذ",
+        "ru": "Ихфа — Tilmidh"
+      },
+      "slugs": {
+        "fr": "regle-ikhfa",
+        "en": "ikhfa-rule",
+        "id": "belajar-ikhfa",
+        "ar": "ikhfa",
+        "ru": "ikhfa"
+      }
+    },
+    "idgham": {
+      "arabic": "م",
+      "shape": "circle",
+      "titles": {
+        "fr": "Idgham",
+        "en": "Idgham",
+        "id": "Belajar Idgham",
+        "ar": "إدغام",
+        "ru": "Идгам"
+      },
+      "alts": {
+        "fr": "Idgham — Tilmidh",
+        "en": "Idgham — Tilmidh",
+        "id": "Belajar idgham — Tilmidh",
+        "ar": "إدغام — تلميذ",
+        "ru": "Идгам — Tilmidh"
+      },
+      "slugs": {
+        "fr": "regle-idgham",
+        "en": "idgham-rule",
+        "id": "belajar-idgham",
+        "ar": "idgham",
+        "ru": "idgham"
+      }
+    },
+    "mic": {
+      "arabic": "مِ",
+      "shape": "bars",
+      "titles": {
+        "fr": "Micro tajwid",
+        "en": "Tajwid microphone",
+        "id": "Mikrofon tajwid",
+        "ar": "ميكروفون التجويد",
+        "ru": "Микрофон таджвида"
+      },
+      "alts": {
+        "fr": "Micro tajwid — vérifier sa récitation",
+        "en": "Tajwid mic — check recitation",
+        "id": "Mikrofon tajwid — cek bacaan",
+        "ar": "ميكروفون التجويد — تلميذ",
+        "ru": "Микрофон — Tilmidh"
+      },
+      "slugs": {
+        "fr": "micro-tajwid",
+        "en": "tajwid-microphone",
+        "id": "mikrofon-tajwid",
+        "ar": "tajwid-microphone",
+        "ru": "tajwid-microphone"
+      }
+    },
+    "tajwid": {
+      "arabic": "تَجْوِيد",
+      "shape": "arc",
+      "titles": {
+        "fr": "Apprendre le tajwid",
+        "en": "Learn tajwid",
+        "id": "Belajar tajwid",
+        "ar": "تعلم التجويد",
+        "ru": "Изучение таджвида"
+      },
+      "alts": {
+        "fr": "Apprendre le tajwid avec Tilmidh",
+        "en": "Learn tajwid with Tilmidh",
+        "id": "Belajar tajwid dengan Tilmidh",
+        "ar": "تعلم التجويد — تلميذ",
+        "ru": "Таджвид — Tilmidh"
+      },
+      "slugs": {
+        "fr": "apprendre-tajwid",
+        "en": "learn-tajwid",
+        "id": "belajar-tajwid",
+        "ar": "learn-tajwid",
+        "ru": "tajwid"
+      }
+    },
+    "pemula": {
+      "arabic": "تلميذ",
+      "shape": "diamond",
+      "titles": {
+        "fr": "Meilleure app tajwid débutants",
+        "en": "Best tajwid app for beginners",
+        "id": "Aplikasi tajwid terbaik pemula",
+        "ar": "أفضل تطبيق تجويد",
+        "ru": "Лучшее приложение таджвида"
+      },
+      "alts": {
+        "fr": "Tilmidh — app tajwid pour débutants",
+        "en": "Tilmidh — best beginner tajwid app",
+        "id": "Aplikasi tajwid terbaik untuk pemula — Tilmidh",
+        "ar": "تلميذ — للمبتدئين",
+        "ru": "Tilmidh — для начинающих"
+      },
+      "slugs": {
+        "fr": "meilleure-app-tajwid",
+        "en": "best-tajwid-app",
+        "id": "aplikasi-tajwid-pemula",
+        "ar": "best-tajwid-app",
+        "ru": "prilozhenie-tadzhvid"
+      }
+    },
+    "phonetic": {
+      "arabic": "بِسْمِ",
+      "shape": "circle",
+      "titles": {
+        "fr": "Coran phonétique",
+        "en": "Quran phonetic",
+        "id": "Quran fonetik",
+        "ar": "قرآن صوتي",
+        "ru": "Фонетический Коран"
+      },
+      "alts": {
+        "fr": "Coran phonétique — Tilmidh",
+        "en": "Phonetic Quran — Tilmidh",
+        "id": "Quran fonetik — Tilmidh",
+        "ar": "قرآن — تلميذ",
+        "ru": "Коран — Tilmidh"
+      },
+      "slugs": {
+        "fr": "coran-phonetique",
+        "en": "quran-phonetic",
+        "id": "quran-fonetik",
+        "ar": "quran-phonetic",
+        "ru": "quran-phonetic"
+      }
+    },
+    "rules-hub": {
+      "arabic": "تَجْوِيد",
+      "shape": "octagon",
+      "titles": {
+        "fr": "Règles de tajwid",
+        "en": "Tajweed rules",
+        "id": "Aturan tajwid",
+        "ar": "أحكام التجويد",
+        "ru": "Правила таджвида"
+      },
+      "alts": {
+        "fr": "Toutes les règles de tajwid — Tilmidh",
+        "en": "All tajweed rules — Tilmidh",
+        "id": "Semua aturan tajwid — Tilmidh",
+        "ar": "أحكام التجويد — تلميذ",
+        "ru": "Правила — Tilmidh"
+      },
+      "slugs": {
+        "fr": "regles-tajwid",
+        "en": "tajweed-rules",
+        "id": "aturan-tajwid",
+        "ar": "tajweed-rules",
+        "ru": "tajweed-rules"
+      }
+    },
+    "privacy": {
+      "arabic": "",
+      "shape": "bars",
+      "titles": {
+        "fr": "Confidentialité",
+        "en": "Privacy",
+        "id": "Privasi",
+        "ar": "الخصوصية",
+        "ru": "Конфиденциальность"
+      },
+      "alts": {
+        "fr": "Politique de confidentialité Tilmidh",
+        "en": "Tilmidh privacy policy",
+        "id": "Kebijakan privasi Tilmidh",
+        "ar": "خصوصية تلميذ",
+        "ru": "Конфиденциальность Tilmidh"
+      },
+      "slugs": {
+        "fr": "confidentialite",
+        "en": "privacy",
+        "id": "privasi",
+        "ar": "privacy",
+        "ru": "privacy"
+      }
+    }
+  }
+}

@@ -16,9 +16,14 @@
     <meta property="og:title" content="Tilmidh — best tajwid practice for beginners">
     <meta property="og:description" content="Best tajwid app for beginners who pray: word-by-word mic. Free training tool, not an ijazah.">
     <meta property="og:url" content="https://tilmidh.app/en">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://tilmidh.app/og.png">
-    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <meta property="og:image" content="https://tilmidh.app/img/og/en/tilmidh.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Tilmidh — word-by-word tajwid trainer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://tilmidh.app/img/og/en/tilmidh.png">
+                                            <meta property="og:locale" content="en_US">
+        <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="/manifest.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <style>
@@ -33,12 +38,17 @@
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
+            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
     </style>
 </head>
 <body>
     <header><a href="/">Tilmidh تلميذ</a> · <a href="/">FR</a> · <a href="/id">ID</a> · <a href="/ar">AR</a> · <a href="/ru">RU</a></header>
     <main>
         <h1>Tilmidh — best tajwid practice for beginners</h1>
+        <figure class="hero-img">
+            <img src="/img/page/en/tilmidh.webp" alt="Tilmidh — word-by-word tajwid trainer" width="960" height="540" loading="lazy" decoding="async">
+        </figure>
         <p><strong>Best tajwid app for beginners</strong> who already pray: Tilmidh (تلميذ, “student”) is a free web trainer. You recite, the microphone checks each Arabic word, the box turns green, you move on. Not an alphabet course (use Learn Quran Tajwid for that). Not an ijazah. Read the full claim: <a href="/best-tajwid-app-for-beginners">best tajwid app for beginners</a>.</p>
         <p class="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
         <p>Boot order is pedagogical: Ikhlāṣ, Falaq, Nās, then Al-Fātiḥah. Tajwid colors from Quran.com (Uthmani). Speech is the browser Web Speech API in <code>ar-SA</code>, on-device. Duo mode: imam and ṭālib on the same line (PeerJS), no account. A <code>?ref=112:1</code> link loads that verse after boot.</p>
