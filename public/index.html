@@ -7982,7 +7982,7 @@
             if (!practiceSpec(sNum)) return '';
             const isFav = favorites.some(ref => ref.startsWith(`${sNum}:`));
             if (FATIHA_ONLY || name.toLowerCase().includes(query) || sNum.toString() === query) {
-                const startRef = (sNum === 2) ? '2:255' : `${sNum}:1`;
+                const startRef = (sNum === 2) ? '2:255' : (sNum === 1 || sNum === 18 || sNum === 67) ? `${sNum}` : `${sNum}:1`;
                 const fullRef = (sNum === 2) ? '2:255' : `${sNum}`;
                 return `
                     <div class="surah-card" onclick="fetchVerseFromAPI('${startRef}')">
@@ -8003,12 +8003,14 @@
         if (!verse || !container) return;
 
         const ref = verse.ref || '';
-        const isFatiha = ref.includes('[1:') || ref.includes('[1-');
+        const isFatiha = ref.includes('Fatihah') || ref.includes('[1:') || ref.includes('[1-');
+        const isKahf = ref.includes('Kahf') || ref.includes('[18:');
+        const isMulk = ref.includes('Mulk') || ref.includes('[67:');
         container.innerHTML = `
                 <button class="v-btn${isFatiha ? ' active' : ''}" onclick="fetchVerseFromAPI('1')" title="Al-Fātiḥah">الفاتحة</button>
                 <button class="v-btn${ref.includes('[2:255]') ? ' active' : ''}" onclick="fetchVerseFromAPI('2:255')" title="Ayat al-Kursi">الكرسي</button>
-                <button class="v-btn${ref.includes('[18:') ? ' active' : ''}" onclick="fetchVerseFromAPI('18:1')" title="Al-Kahf">الكهف</button>
-                <button class="v-btn${ref.includes('[67:') ? ' active' : ''}" onclick="fetchVerseFromAPI('67:1')" title="Al-Mulk">الملك</button>
+                <button class="v-btn${isKahf ? ' active' : ''}" onclick="fetchVerseFromAPI('18')" title="Al-Kahf">الكهف</button>
+                <button class="v-btn${isMulk ? ' active' : ''}" onclick="fetchVerseFromAPI('67')" title="Al-Mulk">الملك</button>
             `;
     }
 
@@ -8116,8 +8118,11 @@
             try {
                 const ref = new URLSearchParams(location.search).get('ref');
                 if (ref) {
-                    await fetchVerseFromAPI(ref);
-                    console.log("Deep link ref loaded:", ref);
+                    let deepRef = ref;
+                    if (deepRef === '18:1') deepRef = '18';
+                    if (deepRef === '67:1') deepRef = '67';
+                    await fetchVerseFromAPI(deepRef);
+                    console.log("Deep link ref loaded:", deepRef);
                 }
             } catch (refErr) {
                 console.warn("ref param", refErr);
