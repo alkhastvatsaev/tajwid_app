@@ -18,6 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>Tilmidh تلميذ — Entraînement Tajwid mot à mot</title>
     <meta name="description" content="Récite le Coran mot à mot avec couleurs tajwid, micro en arabe, import de sourates et mode Groupe Call. Entraînement gratuit — pas une ijazah.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
     <link rel="canonical" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
@@ -36,6 +37,9 @@
     <meta property="og:title" content="Tilmidh تلميذ — Entraînement Tajwid mot à mot">
     <meta property="og:description" content="Récite le Coran mot à mot — tajwid, micro arabe, import de sourates, Groupe Call.">
     <meta property="og:image" content="https://tilmidh.app/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+    <meta property="og:image:alt" content="Tilmidh تلميذ — logo">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tilmidh تلميذ — Entraînement Tajwid mot à mot">
     <meta name="twitter:description" content="Récite le Coran mot à mot — tajwid, micro arabe, import de sourates, Groupe Call.">
@@ -53,6 +57,7 @@
     <!-- Preload mushaf COLR fonts — avoid 1s flash of Tilmidh/system serif -->
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-1" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-1" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.ttf?v=2" as="font" type="font/ttf" crossorigin>
     <style>
         /* COLR tajweed font — colors in glyphs, joining intact (Safari-safe) */
         @font-face {
@@ -66,6 +71,14 @@
         @font-face {
             font-family: 'KFGQPC Validated';
             src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-1') format('woff2');
+            font-weight: 400 700;
+            font-style: normal;
+            font-display: block;
+        }
+        /* Mono: COLR stripped — ink via CSS only (tajweed colors off) */
+        @font-face {
+            font-family: 'KFGQPC Mono';
+            src: url('/fonts/KFGQPCHAFSColored-Mono.ttf?v=2') format('truetype');
             font-weight: 400 700;
             font-style: normal;
             font-display: block;
@@ -121,6 +134,38 @@
             --overlay-scrim: rgba(0, 0, 0, 0.75);
             --panel-bg: rgba(10, 10, 10, 0.92);
             --on-accent: #ffffff;
+            --glass-fill: rgba(255, 255, 255, 0.16);
+            --glass-fill-strong: rgba(255, 255, 255, 0.22);
+            --glass-border: rgba(255, 255, 255, 0.45);
+            --glass-blur: blur(22px) saturate(180%);
+            --glass-shadow:
+                0 0 6px rgba(0, 0, 0, 0.03),
+                0 2px 6px rgba(0, 0, 0, 0.08),
+                inset 3px 3px 0.5px -3px rgba(0, 0, 0, 0.9),
+                inset -3px -3px 0.5px -3px rgba(0, 0, 0, 0.85),
+                inset 1px 1px 1px -0.5px rgba(0, 0, 0, 0.6),
+                inset -1px -1px 1px -0.5px rgba(0, 0, 0, 0.6),
+                inset 0 0 6px 6px rgba(0, 0, 0, 0.12),
+                inset 0 0 2px 2px rgba(0, 0, 0, 0.06),
+                0 0 12px rgba(255, 255, 255, 0.15);
+            --dock-tilt-x: 0px;
+            --dock-tilt-y: 0px;
+            --glass-parallax-x: 0px;
+            --glass-parallax-y: 0px;
+            --glass-shine-x: 0px;
+            --glass-shine-y: 0px;
+            /* Accent brand (bleu par défaut — surchargé par data-theme) */
+            --brand: #1D4ED8;
+            --brand-mid: #2563EB;
+            --brand-soft: rgba(59, 130, 246, 0.92);
+            --brand-deep: rgba(29, 78, 216, 0.88);
+            --brand-shadow: rgba(29, 78, 216, 0.28);
+            --brand-gradient: linear-gradient(180deg, var(--brand-soft), var(--brand-deep));
+            --brand-gradient-solid: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            --voice-aura-outer: rgba(10, 132, 255, 0.15);
+            --voice-aura-outer-live: rgba(10, 132, 255, 0.2);
+            --voice-aura-mid: rgba(0, 122, 255, 0.05);
+            --voice-aura-inner: rgba(10, 132, 255, 0.4);
         }
 
         html[data-theme="light"] {
@@ -165,12 +210,69 @@
             --accent: #1D4ED8;
             --validated: #1D4ED8;
             --accent-gradient: linear-gradient(135deg, #2563EB, #1D4ED8);
+            --brand: #1D4ED8;
+            --brand-mid: #2563EB;
+            --brand-soft: rgba(59, 130, 246, 0.92);
+            --brand-deep: rgba(29, 78, 216, 0.88);
+            --brand-shadow: rgba(29, 78, 216, 0.28);
+            --brand-gradient: linear-gradient(180deg, var(--brand-soft), var(--brand-deep));
+            --brand-gradient-solid: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            --voice-aura-outer: rgba(10, 132, 255, 0.15);
+            --voice-aura-outer-live: rgba(10, 132, 255, 0.2);
+            --voice-aura-mid: rgba(0, 122, 255, 0.05);
+            --voice-aura-inner: rgba(10, 132, 255, 0.4);
             --success: #059669;
             --error: #DC2626;
             --warning: #D97706;
             --text: #0B1220;
             --subtext: #64748B;
             --border: #D6E3F0;
+            --tj-ink: #152033;
+            --ghunnah: #059669;
+            --madd-tabii: #D97706;
+            --madd-munfasil: #B45309;
+            --madd-muttasil: #C2410C;
+            --madd-lazim: #9A3412;
+            --ikhfa: #34D399;
+            --idgham-ghunnah: #047857;
+            --idgham-no-ghunnah: #78716C;
+            --iqlab: #10B981;
+            --izhar: #64748B;
+            --qalqalah: #DC2626;
+            --ham-wasl: var(--subtext);
+            --madd-fari: var(--madd-munfasil);
+            --madd-arid: var(--madd-munfasil);
+            --idgham: var(--idgham-ghunnah);
+            --madd: var(--madd-tabii);
+            --overlay-scrim: rgba(15, 23, 42, 0.45);
+            --panel-bg: rgba(255, 255, 255, 0.96);
+            --on-accent: #ffffff;
+        }
+
+        html[data-theme="green"] {
+            --bg: #FFFFFF;
+            --surface: #FFFFFF;
+            --surface-hover: #ECFDF5;
+            --accent: #047857;
+            --validated: #059669;
+            --accent-gradient: linear-gradient(135deg, #10B981, #047857);
+            --brand: #047857;
+            --brand-mid: #059669;
+            --brand-soft: rgba(16, 185, 129, 0.92);
+            --brand-deep: rgba(4, 120, 87, 0.88);
+            --brand-shadow: rgba(4, 120, 87, 0.28);
+            --brand-gradient: linear-gradient(180deg, var(--brand-soft), var(--brand-deep));
+            --brand-gradient-solid: linear-gradient(180deg, #10b981, #047857);
+            --voice-aura-outer: rgba(16, 185, 129, 0.15);
+            --voice-aura-outer-live: rgba(16, 185, 129, 0.22);
+            --voice-aura-mid: rgba(5, 150, 105, 0.06);
+            --voice-aura-inner: rgba(16, 185, 129, 0.42);
+            --success: #059669;
+            --error: #DC2626;
+            --warning: #D97706;
+            --text: #0B1220;
+            --subtext: #64748B;
+            --border: #D1FAE5;
             --tj-ink: #152033;
             --ghunnah: #059669;
             --madd-tabii: #D97706;
@@ -254,6 +356,13 @@
             background-color: #FFFFFF;
             background-image: none;
         }
+        html[data-theme="green"] {
+            background-color: #FFFFFF;
+        }
+        html[data-theme="green"]::before {
+            background-color: #FFFFFF;
+            background-image: none;
+        }
         
         body {
             position: relative;
@@ -298,7 +407,63 @@
             padding-bottom: calc(180px + env(safe-area-inset-bottom)); /* Clear bottom buttons & home bar */
         }
 
-        h1 {
+        /* Footer SEO — texte marque + maillage interne, réellement visible
+           (body est overflow:hidden : on l'ancre dans la bande basse réservée) */
+        #seo-footer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: calc(8px + env(safe-area-inset-bottom));
+            z-index: 6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 0 14px;
+            text-align: center;
+            font-family: var(--font-main);
+            font-size: 0.62rem;
+            line-height: 1.5;
+            color: var(--subtext);
+        }
+        #seo-footer h1 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: none;
+            color: var(--subtext);
+            margin: 0;
+        }
+        #seo-footer p {
+            margin: 0;
+            max-width: 640px;
+        }
+        #seo-footer nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3px 12px;
+        }
+        #seo-footer a {
+            color: var(--subtext);
+            text-decoration: none;
+            border-bottom: 1px solid currentColor;
+        }
+        #seo-footer a:hover {
+            color: var(--accent);
+        }
+        @media (max-width: 900px) {
+            #seo-footer {
+                font-size: 0.54rem;
+                gap: 3px;
+                bottom: calc(4px + env(safe-area-inset-bottom));
+            }
+            #seo-footer h1 { font-size: 0.6rem; }
+        }
+
+        h1,
+        .ipad-scroll-header h2,
+        #duo-selector-overlay h2 {
             font-size: 1.1rem;
             font-weight: 300;
             color: var(--subtext);
@@ -378,25 +543,29 @@
             padding: 4px 0 6px;
         }
         .ayah-line.ayah-prev {
-            opacity: 0.72;
+            opacity: 0.28;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% - 22vh)) scale(0.5);
-            filter: none;
+            filter: blur(5px);
             z-index: 1;
         }
         .ayah-line.ayah-next {
-            opacity: 0.72;
+            opacity: 0.28;
             visibility: visible;
             pointer-events: none;
             transform: translateY(calc(-50% + 22vh)) scale(0.5);
-            filter: none;
+            filter: blur(5px);
             z-index: 1;
         }
         .ayah-line.ayah-prev .translit-container,
-        .ayah-line.ayah-next .translit-container {
+        .ayah-line.ayah-next .translit-container,
+        .ayah-line.ayah-prev .madd-dots-guide,
+        .ayah-line.ayah-next .madd-dots-guide,
+        .ayah-line.ayah-prev .manual-validate-btn,
+        .ayah-line.ayah-next .manual-validate-btn {
             opacity: 0 !important;
-            visibility: hidden;
+            visibility: hidden !important;
         }
         .ayah-line.ayah-exit {
             opacity: 0;
@@ -410,8 +579,8 @@
                 transition: none;
             }
             .ayah-line.active-ayah { transform: translateY(-50%) scale(var(--ayah-fit, 1)); filter: none; }
-            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.55; }
-            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.55; }
+            .ayah-line.ayah-prev { transform: translateY(calc(-50% - 22vh)) scale(0.5); filter: none; opacity: 0.35; }
+            .ayah-line.ayah-next { transform: translateY(calc(-50% + 22vh)) scale(0.5); filter: none; opacity: 0.35; }
         }
         #verse-container::-webkit-scrollbar { display: none; }
 
@@ -419,7 +588,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 8px 10px 20px;
+            padding: 10px 10px 6px;
             border-radius: 18px;
             background: transparent;
             border: 1px solid transparent;
@@ -438,31 +607,9 @@
             border-color: transparent;
         }
 
-        /* Premium Verse Number Styling */
+        /* Numéro de verset — masqué (séparation ayah conservée en JS) */
         .verse-marker {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            margin: 0;
-            font-family: 'Tilmidh Tajweed', serif;
-            font-size: 0.85rem;
-            color: var(--accent);
-            opacity: 0.5;
-            user-select: none;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-        .verse-marker:hover {
-            opacity: 1;
-            background: rgba(255, 255, 255, 0.08);
-            transform: scale(1.1);
+            display: none !important;
         }
 
         .word-box.active {
@@ -470,58 +617,23 @@
             background: transparent;
             transform: translateY(-2px);
             box-shadow: none;
-        }
-        
-        /* Manual Validation Button */
-        .manual-validate-btn {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            border: 2px solid var(--bg);
             cursor: pointer;
-            z-index: 10;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
-        .word-box.active .manual-validate-btn {
-            display: flex;
-        }
-        .manual-validate-btn:hover {
-            transform: scale(1.2);
-            background: var(--success);
-        }
-        .manual-validate-btn svg {
-            width: 14px;
-            height: 14px;
+
+        .manual-validate-btn {
+            display: none !important;
         }
 
         .word-box.correct {
             border-color: transparent;
             background: transparent;
         }
-        /* Success = check bleu ; garder l’encre COLR tajweed (pas de wipe Validated) */
+        /* Validé : mot bleu (COLR Validated ou ink CSS) */
         .word-box.correct .arabic-word,
         .word-box.correct .arabic-word * {
             opacity: 1;
-        }
-        .word-box.correct .manual-validate-btn {
-            display: flex;
-            background: var(--validated);
-            pointer-events: none;
-            cursor: default;
-            box-shadow: 0 0 0 2px color-mix(in srgb, var(--validated) 35%, transparent);
-        }
-        .word-box.correct .manual-validate-btn:hover {
-            transform: none;
-            background: var(--validated);
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
         }
 
         /* Tarteel-style mistake detection */
@@ -588,9 +700,19 @@
         }
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word,
         html[data-colr-tajweed="1"] .word-box.correct .arabic-word * {
-            font-family: 'KFGQPC Colored' !important;
+            font-family: 'KFGQPC Validated' !important;
             color: inherit !important;
             -webkit-text-fill-color: unset !important;
+            opacity: 1;
+        }
+        /* Thème vert : pas de COLR bleu — ink CSS verte sur Mono */
+        html[data-theme="green"] .word-box.correct .arabic-word,
+        html[data-theme="green"] .word-box.correct .arabic-word *,
+        html[data-theme="green"][data-colr-tajweed="1"] .word-box.correct .arabic-word,
+        html[data-theme="green"][data-colr-tajweed="1"] .word-box.correct .arabic-word * {
+            font-family: 'KFGQPC Mono' !important;
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
             opacity: 1;
         }
 
@@ -599,16 +721,20 @@
             flex-direction: column;
             align-items: center;
             gap: 2px;
-            position: absolute;
-            left: 50%;
-            top: 100%;
-            transform: translate(-50%, -6px);
-            width: max-content;
-            max-width: 160%;
-            margin-top: 0;
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+            width: 100%;
+            max-width: none;
+            margin-top: 4px;
             opacity: 0.7;
             pointer-events: none;
             transition: opacity 0.25s ease;
+            z-index: 2;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
         }
         html[data-hide-translit="true"] .translit-container {
             visibility: hidden;
@@ -617,9 +743,24 @@
         .translit-toggle-btn .icon-translit-off { display: none; }
         html[data-hide-translit="true"] .translit-toggle-btn .icon-translit-on { display: none; }
         html[data-hide-translit="true"] .translit-toggle-btn .icon-translit-off { display: block; }
-        html[data-hide-translit="true"] .translit-toggle-btn {
-            color: var(--accent);
-            border-color: var(--accent);
+        .tajweed-colors-toggle-btn .icon-tajweed-off { display: none; }
+        html[data-hide-tajweed-colors="true"] .tajweed-colors-toggle-btn .icon-tajweed-on { display: none; }
+        html[data-hide-tajweed-colors="true"] .tajweed-colors-toggle-btn .icon-tajweed-off { display: block; }
+        html[data-hide-tajweed-colors="true"] .word-box .arabic-word {
+            font-family: 'KFGQPC Mono' !important;
+            color: var(--tj-ink) !important;
+            -webkit-text-fill-color: var(--tj-ink) !important;
+        }
+        html[data-hide-tajweed-colors="true"] .word-box.correct .arabic-word,
+        html[data-hide-tajweed-colors="true"] .word-box.correct .arabic-word * {
+            font-family: 'KFGQPC Mono' !important;
+            color: var(--validated) !important;
+            -webkit-text-fill-color: var(--validated) !important;
+            opacity: 1;
+        }
+        html[data-hide-tajweed-colors="true"] .madd-dots-guide,
+        html[data-hide-tajweed-colors="true"] .tajwid-warning {
+            display: none !important;
         }
         .word-box:hover .translit-container,
         .word-box.active .translit-container {
@@ -631,6 +772,8 @@
             font-weight: 500;
             text-transform: lowercase;
             letter-spacing: 0.5px;
+            text-align: center;
+            width: 100%;
         }
         .translit-ru {
             font-size: 0.65rem;
@@ -638,6 +781,8 @@
             font-weight: 600;
             text-transform: lowercase;
             letter-spacing: 0.5px;
+            text-align: center;
+            width: 100%;
         }
         html:not([data-lang="ru"]) .translit-ru { display: none; }
         html[data-lang="ru"] .translit-en { display: none; }
@@ -683,9 +828,9 @@
         /* Madd Guide Dots - Proportional Guidance */
         .madd-dots-guide {
             position: absolute;
-            top: -8px;
+            top: 0;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -85%);
             display: flex;
             gap: 3px;
             opacity: 0.9;
@@ -707,34 +852,6 @@
         .word-box[data-rule-full="madd-munfasil"] .dot-pip { background: var(--madd-munfasil); }
         .word-box[data-rule-full="madd-muttasil"] .dot-pip { background: var(--madd-muttasil); }
         .word-box[data-rule-full="madd-lazim"] .dot-pip { background: var(--madd-lazim); }
-
-        /* Légende Fātiḥah — madd + silencieux seulement */
-        .tajweed-legend {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px 20px;
-            margin: 8px auto 4px;
-            padding: 0 16px;
-            max-width: 420px;
-            font-family: var(--font-main);
-            font-size: 0.72rem;
-            color: var(--subtext);
-            letter-spacing: 0.01em;
-        }
-        .tajweed-legend .leg-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-        }
-        .tajweed-legend .leg-swatch {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .tajweed-legend .leg-madd .leg-swatch { background: var(--madd-tabii); }
-        .tajweed-legend .leg-silent .leg-swatch { background: #8B8680; }
 
         .madd-missed-hint {
             position: absolute;
@@ -795,7 +912,7 @@
             transform: translate(-50%, -50%) scale(0.6);
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(10, 132, 255, 0.15) 0%, rgba(0, 122, 255, 0.05) 50%, transparent 70%);
+            background: radial-gradient(circle, var(--voice-aura-outer-live) 0%, var(--voice-aura-mid) 50%, transparent 70%);
             border-radius: 51% 49% 48% 52% / 45% 55% 45% 55%;
             filter: blur(60px);
             z-index: 1; /* Behind words (z-index 5) */
@@ -808,7 +925,7 @@
             content: '';
             position: absolute;
             inset: 20%;
-            background: radial-gradient(circle, rgba(10, 132, 255, 0.4) 0%, transparent 60%);
+            background: radial-gradient(circle, var(--voice-aura-inner) 0%, transparent 60%);
             filter: blur(40px);
             border-radius: inherit;
             animation: rotateAura 15s linear infinite;
@@ -820,10 +937,9 @@
         }
 
         #restart-btn {
-            position: fixed;
-            bottom: calc(40px + env(safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
+            position: relative;
+            width: 100%;
+            transform: translateY(20px);
             background: var(--accent);
             box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
             border: none;
@@ -836,25 +952,25 @@
             display: none;
             opacity: 0;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2500;
+            z-index: 1;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
         #restart-btn.visible {
             display: block;
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
         }
         #restart-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-50%) scale(1.05);
+            transform: scale(1.02);
         }
         #install-pwa-banner {
-            position: fixed;
-            bottom: calc(108px + env(safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%) translateY(12px);
-            z-index: 2501;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            transform: translateY(12px);
+            z-index: 1;
             display: none;
             opacity: 0;
             background: var(--accent);
@@ -866,12 +982,11 @@
             font-weight: 600;
             box-shadow: 0 8px 28px rgba(5, 150, 105, 0.35);
             text-align: center;
-            max-width: 90vw;
         }
         #install-pwa-banner.visible {
             display: block;
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
         }
         #install-pwa-banner button {
             background: none;
@@ -882,11 +997,11 @@
             padding: 0;
         }
         #rate-tilmidh-banner {
-            position: fixed;
-            bottom: calc(160px + env(safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%) translateY(12px);
-            z-index: 2502;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            transform: translateY(12px);
+            z-index: 1;
             display: none;
             opacity: 0;
             background: #111;
@@ -903,7 +1018,7 @@
         #rate-tilmidh-banner.visible {
             display: block;
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateY(0);
         }
         #rate-tilmidh-banner a, #rate-tilmidh-banner button {
             background: none;
@@ -1050,7 +1165,7 @@
         }
         .lang-options .lang-btn:hover { filter: brightness(1.06); color: var(--text); }
         .lang-options .lang-btn.active {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88));
+            background: var(--brand-gradient);
             color: #fff;
             border-color: rgba(255, 255, 255, 0.4);
         }
@@ -1064,32 +1179,24 @@
             position: fixed;
             top: calc(15px + env(safe-area-inset-top));
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translate3d(var(--dock-tilt-x), var(--dock-tilt-y), 0);
             display: flex;
             align-items: center;
             gap: 8px;
             width: max-content;
             isolation: isolate;
-            background: rgba(255, 255, 255, 0.16);
-            backdrop-filter: blur(22px) saturate(180%);
-            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            background: var(--glass-fill);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
             padding: 8px 10px;
             border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.45);
+            border: 1px solid var(--glass-border);
             z-index: 1000;
             max-width: calc(100vw - 24px);
             overflow: visible;
-            box-shadow:
-                0 0 6px rgba(0, 0, 0, 0.03),
-                0 2px 6px rgba(0, 0, 0, 0.08),
-                inset 3px 3px 0.5px -3px rgba(0, 0, 0, 0.9),
-                inset -3px -3px 0.5px -3px rgba(0, 0, 0, 0.85),
-                inset 1px 1px 1px -0.5px rgba(0, 0, 0, 0.6),
-                inset -1px -1px 1px -0.5px rgba(0, 0, 0, 0.6),
-                inset 0 0 6px 6px rgba(0, 0, 0, 0.12),
-                inset 0 0 2px 2px rgba(0, 0, 0, 0.06),
-                0 0 12px rgba(255, 255, 255, 0.15);
+            box-shadow: var(--glass-shadow);
             transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
         }
         .verse-selector::before {
             content: "";
@@ -1098,22 +1205,67 @@
             z-index: 0;
             border-radius: inherit;
             pointer-events: none;
+            transform: translate3d(var(--glass-shine-x), var(--glass-shine-y), 0);
             box-shadow:
                 inset 3px 3px 0.5px -3px rgba(255, 255, 255, 0.65),
                 inset -2px -2px 0.5px -2px rgba(255, 255, 255, 0.2);
+            transition: transform 0.12s ease-out;
         }
         .verse-selector::after {
+            content: "";
+            position: absolute;
+            inset: -8%;
+            z-index: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            overflow: hidden;
+            transform: translate3d(var(--glass-parallax-x), var(--glass-parallax-y), 0);
+            backdrop-filter: url("#container-glass");
+            -webkit-backdrop-filter: url("#container-glass");
+            transition: transform 0.12s ease-out;
+        }
+        .verse-selector > * {
+            position: relative;
+            z-index: 1;
+        }
+        .verse-selector .dock-glass-bubble {
+            transform: translate3d(calc(var(--glass-parallax-x) * 0.35), calc(var(--glass-parallax-y) * 0.35), 0);
+            transition: transform 0.12s ease-out;
+        }
+        .glass-panel {
+            position: relative;
+            isolation: isolate;
+            background: var(--glass-fill);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+        }
+        .glass-panel::before {
             content: "";
             position: absolute;
             inset: 0;
             z-index: 0;
             border-radius: inherit;
             pointer-events: none;
-            overflow: hidden;
+            transform: translate3d(calc(var(--glass-shine-x) * 0.6), calc(var(--glass-shine-y) * 0.6), 0);
+            box-shadow:
+                inset 3px 3px 0.5px -3px rgba(255, 255, 255, 0.55),
+                inset -2px -2px 0.5px -2px rgba(255, 255, 255, 0.18);
+        }
+        .glass-panel::after {
+            content: "";
+            position: absolute;
+            inset: -6%;
+            z-index: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            transform: translate3d(calc(var(--glass-parallax-x) * 0.5), calc(var(--glass-parallax-y) * 0.5), 0);
             backdrop-filter: url("#container-glass");
             -webkit-backdrop-filter: url("#container-glass");
         }
-        .verse-selector > * {
+        .glass-panel > * {
             position: relative;
             z-index: 1;
         }
@@ -1150,7 +1302,7 @@
         .verse-selector.dock-hidden {
             opacity: 0;
             pointer-events: none;
-            transform: translateX(-50%) translateY(-18px);
+            transform: translateX(-50%) translateY(-18px) translate3d(var(--dock-tilt-x), var(--dock-tilt-y), 0);
         }
         .smart-progress-bar {
             transition: opacity 0.4s ease;
@@ -1178,12 +1330,12 @@
         }
         .v-btn:hover { filter: brightness(1.06); }
         .v-btn.active {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88));
+            background: var(--brand-gradient);
             color: #fff;
             border-color: rgba(255, 255, 255, 0.35);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                0 2px 10px rgba(29, 78, 216, 0.28);
+                0 2px 10px var(--brand-shadow);
         }
         .v-btn.active:hover {
             filter: brightness(1.06);
@@ -1238,13 +1390,13 @@
             stroke-width: 1.55;
         }
         .verse-selector .v-btn.active {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88));
+            background: var(--brand-gradient);
             color: #fff;
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.42),
                 inset 2px 2px 0.5px -2px rgba(0, 0, 0, 0.25),
-                0 2px 10px rgba(29, 78, 216, 0.28);
+                0 2px 10px var(--brand-shadow);
         }
         .verse-selector .heart-btn.active {
             color: #E11D48;
@@ -1252,27 +1404,138 @@
             border-color: rgba(225, 29, 72, 0.32);
         }
 
-        /* Groupe Call dock dropdown — glass */
-        .gc-dock-wrap { display: flex; align-items: center; }
+        /* Settings + Groupe Call dock dropdowns — glass */
+        .settings-dock-wrap { display: flex; align-items: center; flex-shrink: 0; }
+        .settings-dock-dropdown {
+            width: 220px;
+            border-radius: 24px;
+            padding: 16px;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.94) !important;
+        }
+        .settings-dock-dropdown.glass-panel::after {
+            opacity: 0.25;
+        }
+        .verse-selector > .settings-dock-dropdown {
+            position: absolute;
+            z-index: 1200;
+        }
+        .settings-dock-title {
+            font-weight: 700;
+            font-size: 0.72rem;
+            color: var(--text);
+            text-align: center;
+            letter-spacing: 0.08em;
+        }
+        .settings-dock-section { display: flex; flex-direction: column; gap: 8px; }
+        .settings-dock-label {
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: var(--subtext);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .settings-lang-row {
+            display: flex;
+            gap: 6px;
+        }
+        .settings-lang-row .lang-btn {
+            flex: 1;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--text);
+            padding: 10px 0;
+            border-radius: 100px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+        }
+        .settings-lang-row .lang-btn:hover { filter: brightness(0.98); }
+        .settings-lang-row .lang-btn:not(.active):hover { color: var(--text); }
+        .settings-lang-row .lang-btn.active {
+            background: var(--brand-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 2px 10px var(--brand-shadow);
+        }
+        .settings-lang-row .lang-btn.active:hover { color: #fff; filter: brightness(1.04); }
+        .settings-dock-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 14px;
+            border-radius: 100px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: #FFFFFF;
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+        }
+        .settings-dock-row:hover { filter: brightness(0.98); }
+        .settings-dock-row.active {
+            background: var(--brand-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 2px 10px var(--brand-shadow);
+        }
+        .settings-dock-row.active:hover { color: #fff; filter: brightness(1.04); }
+        .settings-dock-row.active svg { color: #fff; stroke: #fff; }
+        .settings-dock-row svg { flex-shrink: 0; width: 18px; height: 18px; }
+        .settings-dock-row-label { flex: 1; text-align: left; }
+        html[data-theme="light"] .settings-dock-dropdown,
+        html[data-theme="blue"] .settings-dock-dropdown,
+        html[data-theme="green"] .settings-dock-dropdown,
+        html[data-theme="light"] .gc-dock-dropdown,
+        html[data-theme="blue"] .gc-dock-dropdown,
+        html[data-theme="green"] .gc-dock-dropdown {
+            background: rgba(255, 255, 255, 0.55);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        html[data-theme="light"] .settings-lang-row .lang-btn:not(.active),
+        html[data-theme="blue"] .settings-lang-row .lang-btn:not(.active),
+        html[data-theme="green"] .settings-lang-row .lang-btn:not(.active) {
+            background: #FFFFFF;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        html[data-theme="light"] .settings-lang-row .lang-btn.active,
+        html[data-theme="blue"] .settings-lang-row .lang-btn.active,
+        html[data-theme="green"] .settings-lang-row .lang-btn.active {
+            background: var(--brand-gradient) !important;
+            color: #fff !important;
+            border-color: transparent !important;
+        }
+        html[data-theme="light"] .settings-dock-row:not(.active),
+        html[data-theme="blue"] .settings-dock-row:not(.active),
+        html[data-theme="green"] .settings-dock-row:not(.active) {
+            background: #FFFFFF;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        html[data-theme="light"] .settings-dock-row.active,
+        html[data-theme="blue"] .settings-dock-row.active,
+        html[data-theme="green"] .settings-dock-row.active {
+            background: var(--brand-gradient) !important;
+            color: #fff !important;
+            border-color: transparent !important;
+        }
+
+        .gc-dock-wrap { display: flex; align-items: center; flex-shrink: 0; }
         .gc-dock-dropdown {
             width: 268px;
-            background: rgba(255, 255, 255, 0.16);
-            backdrop-filter: blur(22px) saturate(180%);
-            -webkit-backdrop-filter: blur(22px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.45);
             border-radius: 24px;
             padding: 18px;
             gap: 11px;
-            box-shadow:
-                0 0 6px rgba(0,0,0,0.03),
-                0 4px 12px rgba(0,0,0,0.12),
-                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
-                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
-                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
-                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
-                inset 0 0 6px 6px rgba(0,0,0,0.12),
-                inset 0 0 2px 2px rgba(0,0,0,0.06),
-                0 0 12px rgba(255,255,255,0.15);
         }
         .verse-selector > .gc-dock-dropdown {
             position: absolute;
@@ -1301,7 +1564,7 @@
             transition: all 0.2s;
         }
         .gc-dock-tab.active {
-            background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            background: var(--brand-gradient-solid);
             color: #fff !important;
             box-shadow: 0 2px 8px rgba(29,78,216,0.25);
         }
@@ -1328,7 +1591,7 @@
             padding: 11px 0;
             border-radius: 100px;
             border: none;
-            background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+            background: var(--brand-gradient-solid);
             color: #fff;
             font-weight: 700;
             font-size: 0.7rem;
@@ -1408,7 +1671,7 @@
             pointer-events: none;
             flex-shrink: 0;
         }
-        .ipad-scroll-header h1 {
+        .ipad-scroll-header h2 {
             font-family: 'Outfit', sans-serif;
             font-size: clamp(1rem, 3.6vw, 1.35rem);
             font-weight: 700;
@@ -1419,7 +1682,7 @@
             text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
         }
         .lang-menu-btn.ipad-active {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88)) !important;
+            background: var(--brand-gradient) !important;
             color: #fff !important;
             border-color: rgba(255, 255, 255, 0.4) !important;
         }
@@ -1904,7 +2167,7 @@
             gap: 22px;
             padding: 24px;
         }
-        #duo-selector-overlay h1 {
+        #duo-selector-overlay h2 {
             font-size: 0.8rem;
             letter-spacing: 0.18em;
             font-weight: 700;
@@ -2125,18 +2388,24 @@
         /* Mobile — lecture arabe lisible (iPhone) */
         @media (max-width: 600px) {
             html, body {
-                height: 100svh;
-                max-height: 100svh;
+                height: 100dvh;
+                max-height: 100dvh;
+            }
+            @supports not (height: 100dvh) {
+                html, body {
+                    height: 100svh;
+                    max-height: 100svh;
+                }
             }
             body {
                 padding-top: 0;
                 padding-bottom: 0;
             }
             .container {
-                padding-top: calc(70px + env(safe-area-inset-top));
+                padding-top: calc(88px + env(safe-area-inset-top));
                 padding-left: 8px;
                 padding-right: 8px;
-                padding-bottom: calc(12px + env(safe-area-inset-bottom));
+                padding-bottom: calc(120px + env(safe-area-inset-bottom));
             }
             #verse-container {
                 flex: 1 1 auto;
@@ -2149,30 +2418,38 @@
             .ayah-line {
                 padding: 0 6px;
                 max-width: 100%;
+                will-change: auto;
+            }
+            .ayah-line.ayah-prev .madd-dots-guide,
+            .ayah-line.ayah-next .madd-dots-guide,
+            .ayah-line.ayah-prev .manual-validate-btn,
+            .ayah-line.ayah-next .manual-validate-btn,
+            .ayah-line.ayah-prev .translit-container,
+            .ayah-line.ayah-next .translit-container {
+                opacity: 0 !important;
+                visibility: hidden !important;
             }
             .ayah-words {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                overflow-y: hidden;
-                justify-content: flex-start;
-                gap: 6px 4px;
+                flex-wrap: wrap;
+                overflow: visible;
+                justify-content: center;
+                gap: 8px 6px;
                 align-items: flex-end;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                scroll-padding-inline: 12px;
+                padding-top: 18px;
+                padding-bottom: 6px;
+                padding-inline: 4px;
             }
-            .ayah-words::-webkit-scrollbar { display: none; }
             .ayah-line.ayah-prev {
-                opacity: 0.72;
+                opacity: 0.28;
                 visibility: visible;
-                transform: translateY(calc(-50% - 34vh)) scale(0.34);
-                filter: none;
+                transform: translateY(calc(-50% - 28vh)) scale(0.42);
+                filter: blur(5px);
             }
             .ayah-line.ayah-next {
-                opacity: 0.72;
+                opacity: 0.28;
                 visibility: visible;
-                transform: translateY(calc(-50% + 34vh)) scale(0.34);
-                filter: none;
+                transform: translateY(calc(-50% + 28vh)) scale(0.42);
+                filter: blur(5px);
             }
             .ayah-line.active-ayah {
                 transform: translateY(-50%) scale(var(--ayah-fit, 1));
@@ -2185,31 +2462,40 @@
                 line-height: 1.5;
             }
             .word-box {
-                min-width: 0;
-                padding: 6px 4px 22px;
-                flex: 0 1 auto;
+                min-width: min-content;
+                padding: 8px 2px 4px;
+                border-radius: 0;
+                flex: 0 0 auto;
                 overflow: visible;
+                -webkit-tap-highlight-color: transparent;
             }
             .translit-container {
-                transform: translate(-50%, -4px);
-                max-width: 180%;
+                margin-top: 3px;
             }
             .translit-en,
             .translit-ru {
-                font-size: 0.62rem;
+                font-size: clamp(0.82rem, 3.36vw, 0.94rem);
+                line-height: 1.35;
             }
             .verse-marker {
-                width: 28px;
-                height: 28px;
-                font-size: 0.78rem;
+                font-size: 0.88rem;
+                margin: 4px 0 2px;
+            }
+            .bottom-controls {
+                bottom: calc(max(24px, env(safe-area-inset-bottom)) + 8px);
+                flex-direction: column-reverse;
+                gap: 10px;
             }
             #restart-btn {
                 width: 90%;
                 max-width: 320px;
+                min-height: 48px;
+                padding: 14px 24px;
+                font-size: 0.9rem;
             }
         }
         @media (max-width: 480px) {
-            .container { padding-top: calc(68px + env(safe-area-inset-top)); }
+            .container { padding-top: calc(88px + env(safe-area-inset-top)); }
             .arabic-word {
                 font-size: clamp(2.22rem, 10.08vw, 2.76rem) !important;
             }
@@ -2217,15 +2503,25 @@
                 gap: 10px;
             }
             .ayah-words {
-                gap: 12px 6px;
+                gap: 10px 8px;
+                padding-top: 16px;
+            }
+            .word-box {
+                padding: 8px 2px 4px;
+                flex: 0 0 auto;
+                min-width: min-content;
+                border-radius: 0;
             }
             .ayah-line.ayah-prev {
-                transform: translateY(calc(-50% - 36vh)) scale(0.32);
+                transform: translateY(calc(-50% - 30vh)) scale(0.4);
+                filter: blur(5px);
+                opacity: 0.28;
             }
             .ayah-line.ayah-next {
-                transform: translateY(calc(-50% + 36vh)) scale(0.32);
+                transform: translateY(calc(-50% + 30vh)) scale(0.4);
+                filter: blur(5px);
+                opacity: 0.28;
             }
-            .word-box { padding: 4px 3px 20px; }
             .verse-selector { 
                 width: max-content;
                 max-width: calc(100% - 16px);
@@ -2236,21 +2532,46 @@
             .mini-lang-selector { margin: 0; }
             .mini-lang-selector .lang-btn { padding: 6px 8px; font-size: 0.55rem; }
             .gc-dock-dropdown { width: 248px; padding: 16px; }
+            .settings-dock-dropdown { width: 210px; padding: 14px; }
             .v-btn-book { margin-right: 2px; }
             .profile-btn { margin: 0; padding: 0; }
             .v-btn { height: 42px; padding: 0 16px; font-size: 0.9rem; }
-            #restart-btn { 
-                padding: 12px 25px; 
-                font-size: 0.8rem; 
+            #restart-btn {
+                width: 90%;
+                max-width: 320px;
+                min-height: 48px;
+                padding: 14px 24px;
+                font-size: 0.85rem;
                 letter-spacing: 1px;
-                width: auto;
-                min-width: 140px;
             }
             #next-verse-btn {
                 padding: 12px 25px;
                 font-size: 0.8rem;
             }
             .voice-aura { width: 300px; height: 300px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .verse-selector,
+            .verse-selector::before,
+            .verse-selector::after,
+            .verse-selector .dock-glass-bubble,
+            .glass-panel::before,
+            .glass-panel::after {
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* iOS Safari — carousel sans blur GPU (opacity seule) */
+        @supports (-webkit-touch-callout: none) {
+            @media (max-width: 600px) {
+                .ayah-line.ayah-prev,
+                .ayah-line.ayah-next {
+                    filter: none !important;
+                    opacity: 0.18;
+                }
+            }
         }
 
         @media (min-width: 900px) {
@@ -2268,9 +2589,7 @@
                 gap: 36px 28px;
             }
             .verse-marker {
-                width: 36px;
-                height: 36px;
-                font-size: 1.05rem;
+                font-size: 1rem;
             }
             .translit-en,
             .translit-ru {
@@ -2513,7 +2832,7 @@
         html[data-theme="light"] .assistant-val,
         html[data-theme="light"] .btn-duo,
         html[data-theme="light"] .search-box,
-        html[data-theme="light"] #duo-selector-overlay h1,
+        html[data-theme="light"] #duo-selector-overlay h2,
         html[data-theme="light"] #txt-stats-goal,
         html[data-theme="blue"] .daily-ref,
         html[data-theme="blue"] #start-overlay p,
@@ -2532,7 +2851,7 @@
         html[data-theme="blue"] .assistant-val,
         html[data-theme="blue"] .btn-duo,
         html[data-theme="blue"] .search-box,
-        html[data-theme="blue"] #duo-selector-overlay h1,
+        html[data-theme="blue"] #duo-selector-overlay h2,
         html[data-theme="blue"] #txt-stats-goal {
             color: var(--text);
         }
@@ -2585,26 +2904,27 @@
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
         }
         html[data-theme="light"] .verse-selector,
-        html[data-theme="blue"] .verse-selector {
+        html[data-theme="blue"] .verse-selector,
+        html[data-theme="green"] .verse-selector {
             background: rgba(255, 255, 255, 0.18);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow:
-                0 0 6px rgba(0, 0, 0, 0.03),
-                0 2px 6px rgba(0, 0, 0, 0.08),
-                inset 3px 3px 0.5px -3px rgba(0, 0, 0, 0.9),
-                inset -3px -3px 0.5px -3px rgba(0, 0, 0, 0.85),
-                inset 1px 1px 1px -0.5px rgba(0, 0, 0, 0.6),
-                inset -1px -1px 1px -0.5px rgba(0, 0, 0, 0.6),
-                inset 0 0 6px 6px rgba(0, 0, 0, 0.12),
-                inset 0 0 2px 2px rgba(0, 0, 0, 0.06),
-                0 0 12px rgba(255, 255, 255, 0.15);
+            box-shadow: var(--glass-shadow);
+        }
+        html[data-theme="light"] .glass-panel,
+        html[data-theme="blue"] .glass-panel,
+        html[data-theme="green"] .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            border-color: rgba(255, 255, 255, 0.6);
         }
         html[data-theme="light"] .verse-selector .lang-menu-btn,
         html[data-theme="light"] .verse-selector .heart-btn,
         html[data-theme="light"] .verse-selector .v-btn,
         html[data-theme="blue"] .verse-selector .lang-menu-btn,
         html[data-theme="blue"] .verse-selector .heart-btn,
-        html[data-theme="blue"] .verse-selector .v-btn {
+        html[data-theme="blue"] .verse-selector .v-btn,
+        html[data-theme="green"] .verse-selector .lang-menu-btn,
+        html[data-theme="green"] .verse-selector .heart-btn,
+        html[data-theme="green"] .verse-selector .v-btn {
             background: rgba(255, 255, 255, 0.22);
             border: 1px solid rgba(255, 255, 255, 0.48);
             box-shadow:
@@ -2614,8 +2934,9 @@
                 0 1px 2px rgba(0, 0, 0, 0.05);
         }
         html[data-theme="light"] .verse-selector .v-btn.active,
-        html[data-theme="blue"] .verse-selector .v-btn.active {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88));
+        html[data-theme="blue"] .verse-selector .v-btn.active,
+        html[data-theme="green"] .verse-selector .v-btn.active {
+            background: var(--brand-gradient);
             color: #fff;
             border-color: rgba(255, 255, 255, 0.4);
         }
@@ -2676,7 +2997,7 @@
         html[data-theme="blue"] .verse-selector .v-btn.active,
         html[data-theme="light"] .verse-selector .v-btn.active:hover,
         html[data-theme="blue"] .verse-selector .v-btn.active:hover {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88));
+            background: var(--brand-gradient);
             color: #fff !important;
             border-color: rgba(255, 255, 255, 0.4);
         }
@@ -2709,7 +3030,7 @@
         }
         html[data-theme="light"] .lang-options .lang-btn.active,
         html[data-theme="blue"] .lang-options .lang-btn.active {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.92), rgba(29, 78, 216, 0.88));
+            background: var(--brand-gradient);
             color: #fff !important;
         }
         html[data-theme="light"] .theme-toggle-btn,
@@ -2771,13 +3092,12 @@
         }
         html[data-theme="light"] .verse-marker,
         html[data-theme="blue"] .verse-marker {
-            background: #F3F4F6;
-            border-color: var(--border);
-            box-shadow: none;
+            color: var(--subtext);
+            opacity: 0.5;
         }
         html[data-theme="light"] .verse-marker:hover,
         html[data-theme="blue"] .verse-marker:hover {
-            background: #E5E7EB;
+            opacity: 0.75;
         }
         html[data-theme="light"] .progress-container,
         html[data-theme="blue"] .progress-container {
@@ -2857,12 +3177,18 @@
     <script>
         (function () {
             try {
-                var themeBoot = 'blue';
+                var themeBoot = localStorage.getItem('tajwid_theme') || 'blue';
+                if (themeBoot !== 'green') themeBoot = 'blue';
                 document.documentElement.setAttribute('data-theme', themeBoot);
                 var langBoot = localStorage.getItem('tajwid_lang') || 'fr';
                 document.documentElement.setAttribute('data-lang', langBoot);
                 if (localStorage.getItem('tajwid_hide_translit') === '1') {
                     document.documentElement.setAttribute('data-hide-translit', 'true');
+                }
+                if (localStorage.getItem('tajwid_hide_tajweed_colors') === '1') {
+                    document.documentElement.setAttribute('data-hide-tajweed-colors', 'true');
+                } else {
+                    document.documentElement.setAttribute('data-colr-tajweed', '1');
                 }
             } catch (e) {}
         })();
@@ -2877,8 +3203,8 @@
             <filter id="container-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
                 <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence" />
                 <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise" />
-                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="14" xChannelSelector="R" yChannelSelector="B" result="displaced" />
-                <feGaussianBlur in="displaced" stdDeviation="2" result="finalBlur" />
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="32" xChannelSelector="R" yChannelSelector="B" result="displaced" />
+                <feGaussianBlur in="displaced" stdDeviation="3" result="finalBlur" />
                 <feComposite in="finalBlur" in2="finalBlur" operator="over" />
             </filter>
         </defs>
@@ -2886,38 +3212,56 @@
     <div class="verse-selector" id="verse-selector">
         <div id="v-btns-container" style="display: flex;"></div>
         
-        <button class="heart-btn" id="header-heart" onclick="toggleFavoriteCurrent()" title="Favoris">
+        <button class="heart-btn dock-glass-bubble" id="header-heart" onclick="toggleFavoriteCurrent()" title="Favoris">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12.57 12 20l-7.5-7.43a5 5 0 1 1 7.5-6.57 5 5 0 1 1 7.5 6.57Z"/></svg>
-        </button>
-        
-        <div class="mini-lang-selector">
-            <button class="lang-menu-btn" onclick="toggleLangMenu(event)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.4 2.9 3.6 5.9 3.6 9s-1.2 6.1-3.6 9c-2.4-2.9-3.6-5.9-3.6-9s1.2-6.1 3.6-9Z"/><path d="M3.2 12h17.6"/></svg>
-            </button>
-        </div>
-
-        <button type="button" class="lang-menu-btn translit-toggle-btn" id="translit-toggle-btn" onclick="toggleTranslit(event)" title="Masquer la translittération" aria-pressed="false" aria-label="Masquer la translittération">
-            <svg class="icon-translit-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9"/><path d="M8.5 6v2"/><path d="M5.5 15c1.2-3.2 3.2-6 7-8"/><path d="M13 20l3.2-9h.6L20 20"/><path d="M14.2 17h4.6"/></svg>
-            <svg class="icon-translit-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9"/><path d="M8.5 6v2"/><path d="M5.5 15c1.2-3.2 3.2-6 7-8"/><path d="M13 20l3.2-9h.6L20 20"/><path d="M14.2 17h4.6"/><path d="M4 4l16 16"/></svg>
         </button>
 
         <div class="gc-dock-wrap">
-            <button type="button" class="lang-menu-btn" id="header-duo-btn" onclick="toggleGcDockMenu(event)" title="Groupe Call" aria-label="Groupe Call">
+            <button type="button" class="lang-menu-btn dock-glass-bubble" id="header-duo-btn" onclick="toggleGcDockMenu(event)" title="Groupe Call" aria-label="Groupe Call">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
             </button>
         </div>
 
-        <button type="button" class="lang-menu-btn" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Rendez-vous professeurs">
+        <button type="button" class="lang-menu-btn dock-glass-bubble" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Rendez-vous professeurs">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
         </button>
 
-        <div class="lang-options dock-dropdown" id="lang-options" onclick="event.stopPropagation()">
-            <button class="lang-btn" onclick="setLanguage('fr', event)">FR</button>
-            <button class="lang-btn" onclick="setLanguage('en', event)">EN</button>
-            <button class="lang-btn" onclick="setLanguage('ru', event)">RU</button>
+        <div class="settings-dock-wrap">
+            <button type="button" class="lang-menu-btn dock-glass-bubble" id="header-settings-btn" onclick="toggleSettingsMenu(event)" title="Réglages" aria-label="Réglages">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+            </button>
         </div>
 
-        <div class="gc-dock-dropdown dock-dropdown" id="gc-dock-dropdown" onclick="event.stopPropagation()">
+        <div class="settings-dock-dropdown glass-panel dock-dropdown" id="settings-dock-dropdown" onclick="event.stopPropagation()">
+            <div class="settings-dock-title" id="txt-settings-title">Réglages</div>
+            <div class="settings-dock-section">
+                <div class="settings-dock-label" id="txt-settings-lang">Langue</div>
+                <div class="settings-lang-row">
+                    <button class="lang-btn" onclick="setLanguage('fr', event)">FR</button>
+                    <button class="lang-btn" onclick="setLanguage('en', event)">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('ru', event)">RU</button>
+                </div>
+            </div>
+            <div class="settings-dock-section">
+                <div class="settings-dock-label" id="txt-settings-theme">Thème</div>
+                <div class="settings-lang-row theme-pick-row">
+                    <button type="button" class="lang-btn theme-pick-btn" data-accent-theme="blue" onclick="setAccentTheme('blue', event)">Bleu</button>
+                    <button type="button" class="lang-btn theme-pick-btn" data-accent-theme="green" onclick="setAccentTheme('green', event)">Vert</button>
+                </div>
+            </div>
+            <button type="button" class="settings-dock-row translit-toggle-btn" id="translit-toggle-btn" onclick="toggleTranslit(event)" title="Masquer la translittération" aria-pressed="false" aria-label="Masquer la translittération">
+                <svg class="icon-translit-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M6 9h12"/><path d="M8 13h8"/></svg>
+                <svg class="icon-translit-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M6 9h12"/><path d="M8 13h8"/><path d="M4 4l16 16"/></svg>
+                <span class="settings-dock-row-label" id="txt-settings-translit">Translittération</span>
+            </button>
+            <button type="button" class="settings-dock-row tajweed-colors-toggle-btn" id="tajweed-colors-toggle-btn" onclick="toggleTajweedColors(event)" title="Masquer les couleurs tajwid" aria-pressed="false" aria-label="Masquer les couleurs tajwid">
+                <svg class="icon-tajweed-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="icon-tajweed-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><path d="M4 4l16 16"/></svg>
+                <span class="settings-dock-row-label" id="txt-settings-tajweed">Couleurs tajwid</span>
+            </button>
+        </div>
+
+        <div class="gc-dock-dropdown glass-panel dock-dropdown" id="gc-dock-dropdown" onclick="event.stopPropagation()">
             <div class="gc-dock-title">GROUPE CALL</div>
             <div class="gc-dock-tabs">
                 <button type="button" class="gc-dock-tab active" data-gc-dock="create" onclick="showGcDockTab('create')">Créer</button>
@@ -2950,36 +3294,54 @@
 
     <div class="container">
 
-        <div id="verse-container" onclick="openTajweedModal(event)"></div>
-        <div id="tajweed-legend" class="tajweed-legend" aria-label="Légende tajweed">
-            <span class="leg-item leg-madd"><span class="leg-swatch" aria-hidden="true"></span><span id="leg-madd-label">Prolongations</span></span>
-            <span class="leg-item leg-silent"><span class="leg-swatch" aria-hidden="true"></span><span id="leg-silent-label">Lettres silencieuses</span></span>
-        </div>
+        <div id="verse-container" onclick="onWordTap(event)"></div>
 
     <!-- Background Feedback Elements -->
     <div id="ghost-word-container"></div>
     <div class="voice-aura" id="voice-aura"></div>
         <div class="bottom-controls">
-            <button id="restart-btn" style="background:var(--success); color:white; border:none; padding:14px 35px; border-radius:100px; font-weight:600; cursor:pointer;" onclick="restartRecitation()">Recommencer</button>
             <div id="install-pwa-banner"></div>
-            <div id="rate-tilmidh-banner"></div>
         </div>
+
+        <footer id="seo-footer" aria-label="À propos de Tilmidh">
+            <h1>Tilmidh <span lang="ar" dir="rtl">تلميذ</span> — entraînement tajwid mot à mot</h1>
+            <p>Tilmidh est un entraîneur web gratuit : récitez le Coran mot à mot, le micro vérifie chaque mot en arabe, avec les couleurs tajwid. Outil de pratique pour débutants — pas une ijazah.</p>
+            <nav aria-label="Pages Tilmidh">
+                <a href="/apprendre-tajwid">Apprendre le tajwid</a>
+                <a href="/tajwid-microphone">Micro tajwid</a>
+                <a href="/regle/qalqalah">Qalqalah</a>
+                <a href="/regle/ghunnah">Ghunnah</a>
+                <a href="/regle/madd">Madd</a>
+                <a href="/regle/ikhfa">Ikhfa</a>
+                <a href="/regle/idgham">Idgham</a>
+                <a href="/sourate/1">Al-Fātiḥah</a>
+                <a href="/en" hreflang="en">English</a>
+                <a href="/id" hreflang="id">Indonesia</a>
+                <a href="/ar" hreflang="ar">العربية</a>
+                <a href="/ru" hreflang="ru">Русский</a>
+                <a href="/privacy">Confidentialité</a>
+            </nav>
+        </footer>
     </div>
 
     <!-- Additional BotStyles -->
     <style>
         .bottom-controls {
             display: flex; 
-            flex-direction: column;
-            gap: 12px; 
+            flex-direction: column-reverse;
+            gap: 10px; 
             position: fixed; 
-            bottom: calc(40px + env(safe-area-inset-bottom)); /* Higher for iPhone bar */
+            bottom: calc(max(24px, env(safe-area-inset-bottom)) + 8px);
             left: 50%; 
             transform: translateX(-50%); 
             width: 90%;
             max-width: 400px;
             z-index: 2500;
             align-items: center;
+            pointer-events: none;
+        }
+        .bottom-controls > * {
+            pointer-events: auto;
         }
         #restart-btn { 
             width: 100%; 
@@ -2995,7 +3357,7 @@
     <div id="ipad-panel" aria-hidden="true" onclick="onIpadPanelClick(event)">
         <div class="ipad-inline-stage">
             <div class="ipad-scroll-header" id="ipad-scroll-header">
-                <h1 id="ipad-scroll-title">Rendez-vous professeurs</h1>
+                <h2 id="ipad-scroll-title">Rendez-vous professeurs</h2>
             </div>
             <div class="ipad-device" id="ipad-scroll-card" onclick="event.stopPropagation()">
                 <div class="ipad-screen">
@@ -3076,7 +3438,7 @@
     </div>
 
     <div id="duo-selector-overlay">
-        <h1>GROUPE CALL</h1>
+        <h2>GROUPE CALL</h2>
         <p style="margin:0;font-size:0.8rem;color:var(--subtext);max-width:300px;text-align:center;">Audio seul — créez une salle ou rejoignez avec code + mot de passe.</p>
         <div id="gc-tabs" style="display:flex;gap:8px;">
             <button type="button" class="btn-duo gc-tab active" data-gc-tab="create" onclick="showGcTab('create')">Créer</button>
@@ -3127,6 +3489,67 @@
     let gcMicWarmPromise = null;
     let gcConnecting = false;
     let gcRoomKey = '';
+    let autoRestartTimer = null;
+
+    /* ── Dock glass — parallax gyro (iPhone) ── */
+    function initDockGlassTilt() {
+        const root = document.documentElement;
+        const dock = document.getElementById('verse-selector');
+        if (!dock || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        let tiltOn = false;
+        let targetX = 0, targetY = 0, curX = 0, curY = 0;
+        let rafId = null;
+
+        function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+        function onOrient(e) {
+            if (!tiltOn) return;
+            const gamma = e.gamma != null ? e.gamma : 0;
+            const beta = e.beta != null ? e.beta : 45;
+            targetX = clamp(gamma * 0.42, -11, 11);
+            targetY = clamp((beta - 48) * 0.32, -9, 9);
+        }
+
+        function tick() {
+            curX += (targetX - curX) * 0.14;
+            curY += (targetY - curY) * 0.14;
+            root.style.setProperty('--dock-tilt-x', curX.toFixed(2) + 'px');
+            root.style.setProperty('--dock-tilt-y', curY.toFixed(2) + 'px');
+            root.style.setProperty('--glass-parallax-x', (curX * 1.65).toFixed(2) + 'px');
+            root.style.setProperty('--glass-parallax-y', (curY * 1.65).toFixed(2) + 'px');
+            root.style.setProperty('--glass-shine-x', (curX * -0.85).toFixed(2) + 'px');
+            root.style.setProperty('--glass-shine-y', (curY * -0.85).toFixed(2) + 'px');
+            rafId = requestAnimationFrame(tick);
+        }
+
+        function startTilt() {
+            if (tiltOn) return;
+            tiltOn = true;
+            if (!rafId) rafId = requestAnimationFrame(tick);
+        }
+
+        function requestTiltAccess() {
+            if (typeof DeviceOrientationEvent === 'undefined') return;
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(state => {
+                        if (state === 'granted') {
+                            window.addEventListener('deviceorientation', onOrient, true);
+                            startTilt();
+                        }
+                    })
+                    .catch(() => {});
+            } else {
+                window.addEventListener('deviceorientation', onOrient, true);
+                startTilt();
+            }
+        }
+
+        dock.addEventListener('pointerdown', requestTiltAccess, { once: true, passive: true });
+        /* iOS : autoriser au 1er tap écran si le dock est masqué */
+        document.body.addEventListener('pointerdown', requestTiltAccess, { once: true, passive: true });
+    }
 
     /* ── Dock dropdown (glass) ── */
     function closeGcDockMenu() {
@@ -3135,8 +3558,30 @@
         dd.classList.remove('active');
         document.removeEventListener('click', closeGcDockOutside, true);
     }
-    function closeLangMenu() {
-        document.getElementById('lang-options')?.classList.remove('active');
+    function closeSettingsMenu() {
+        const dd = document.getElementById('settings-dock-dropdown');
+        if (!dd) return;
+        dd.classList.remove('active');
+        document.removeEventListener('click', closeSettingsOutside, true);
+    }
+    function closeLangMenu() { closeSettingsMenu(); }
+    function toggleSettingsMenu(e) {
+        e.stopPropagation();
+        closeGcDockMenu();
+        const dd = document.getElementById('settings-dock-dropdown');
+        dd.classList.toggle('active');
+        if (dd.classList.contains('active')) {
+            document.addEventListener('click', closeSettingsOutside, true);
+        } else {
+            document.removeEventListener('click', closeSettingsOutside, true);
+        }
+    }
+    function closeSettingsOutside(e) {
+        const dd = document.getElementById('settings-dock-dropdown');
+        const btn = document.getElementById('header-settings-btn');
+        if (!dd.contains(e.target) && !btn?.contains(e.target)) {
+            closeSettingsMenu();
+        }
     }
 
     /* ── iPad calendrier — entrée/sortie animées + scroll down / clic dehors ── */
@@ -3552,7 +3997,7 @@
 
     function toggleGcDockMenu(e) {
         e.stopPropagation();
-        closeLangMenu();
+        closeSettingsMenu();
         const dd = document.getElementById('gc-dock-dropdown');
         dd.classList.toggle('active');
         if (dd.classList.contains('active')) {
@@ -3707,6 +4152,24 @@
         if (!startOverlay) return;
         startOverlay.style.opacity = '0';
         setTimeout(() => { startOverlay.style.display = 'none'; }, 500);
+    }
+
+    function showMicPromptOverlay() {
+        const overlay = document.getElementById('start-overlay');
+        const startTxt = document.getElementById('txt-start');
+        const t = translations[currentLang] || translations.fr;
+        if (startTxt) startTxt.innerText = t.micPrompt || t.start;
+        if (!overlay) return;
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+    }
+
+    function tryAutoStartMic() {
+        if (new URLSearchParams(location.search).get('room')) return;
+        setTimeout(() => {
+            if (isRecording) return;
+            try { startRecognition({ auto: true }); } catch (e) { console.warn('auto mic', e); }
+        }, 600);
     }
 
     function updateGroupCallBar() {
@@ -3972,7 +4435,19 @@
             warnQalqalah: "Rebond ! (Qalqalah)",
             statusListen: "Suivi actif — récitez",
             statusMic: "Veuillez autoriser le micro",
+            micPrompt: "Appuyez pour autoriser le microphone",
             restart: "Recommencer",
+            settingsTitle: "Réglages",
+            settingsLang: "Langue",
+            settingsTranslit: "Translittération",
+            translitShow: "Afficher la translittération",
+            translitHide: "Masquer la translittération",
+            settingsTajweed: "Couleurs tajwid",
+            tajweedColorsShow: "Afficher les couleurs tajwid",
+            tajweedColorsHide: "Masquer les couleurs tajwid",
+            settingsTheme: "Thème",
+            themeBlue: "Bleu",
+            themeGreen: "Vert",
             dailyLabel: "Verset du Jour",
             dailySub: "Appuyez pour découvrir",
             browserTitle: "Choisir une Sourate",
@@ -4062,7 +4537,19 @@
             warnQalqalah: "Bounce! (Qalqalah)",
             statusListen: "Tracking on — recite",
             statusMic: "Please allow microphone",
+            micPrompt: "Tap to allow the microphone",
             restart: "Restart",
+            settingsTitle: "Settings",
+            settingsLang: "Language",
+            settingsTranslit: "Transliteration",
+            translitShow: "Show transliteration",
+            translitHide: "Hide transliteration",
+            settingsTajweed: "Tajweed colors",
+            tajweedColorsShow: "Show tajweed colors",
+            tajweedColorsHide: "Hide tajweed colors",
+            settingsTheme: "Theme",
+            themeBlue: "Blue",
+            themeGreen: "Green",
             dailyLabel: "Verse of the Day",
             dailySub: "Tap to discover",
             browserTitle: "Choose a Surah",
@@ -4152,7 +4639,19 @@
             warnQalqalah: "Толчок! (Калькаля)",
             statusListen: "Whisper — слово за словом",
             statusMic: "Разрешите микрофон",
+            micPrompt: "Нажмите, чтобы разрешить микрофон",
             restart: "Начать сначала",
+            settingsTitle: "Настройки",
+            settingsLang: "Язык",
+            settingsTranslit: "Транслитерация",
+            translitShow: "Показать транслитерацию",
+            translitHide: "Скрыть транслитерацию",
+            settingsTajweed: "Цвета таджвида",
+            tajweedColorsShow: "Показать цвета таджвида",
+            tajweedColorsHide: "Скрыть цвета таджвида",
+            settingsTheme: "Тема",
+            themeBlue: "Синий",
+            themeGreen: "Зелёный",
             dailyLabel: "Аят дня",
             dailySub: "Нажмите, чтобы узнать",
             browserTitle: "Выберите суру",
@@ -4240,11 +4739,10 @@
         document.documentElement.lang = lang === 'ru' ? 'ru' : (lang === 'en' ? 'en' : 'fr');
         const t = translations[lang];
         
-        if (document.getElementById('txt-start')) document.getElementById('txt-start').innerText = t.start;
+        if (document.getElementById('txt-start')) document.getElementById('txt-start').innerText = t.micPrompt || t.start;
         if (document.getElementById('txt-download')) document.getElementById('txt-download').innerText = t.download;
         if (document.getElementById('txt-daily-label')) document.getElementById('txt-daily-label').innerText = t.dailyLabel;
         if (document.getElementById('txt-daily-sub')) document.getElementById('txt-daily-sub').innerText = t.dailySub;
-        if (document.getElementById('restart-btn')) document.getElementById('restart-btn').innerText = t.restart;
         if (document.getElementById('next-verse-btn')) document.getElementById('next-verse-btn').innerText = t.nextVerse;
 
         if (document.getElementById('txt-browser-title')) document.getElementById('txt-browser-title').innerText = t.browserTitle;
@@ -4294,12 +4792,16 @@
         if (document.getElementById('txt-summary-fluidity')) document.getElementById('txt-summary-fluidity').innerText = t.summaryFluidity;
         if (document.getElementById('txt-summary-mistakes')) document.getElementById('txt-summary-mistakes').innerText = t.summaryMistakes;
 
-        if (document.getElementById('leg-madd-label') && t.legend?.madd) {
-            document.getElementById('leg-madd-label').innerText = t.legend.madd;
-        }
-        if (document.getElementById('leg-silent-label') && t.legend?.silent) {
-            document.getElementById('leg-silent-label').innerText = t.legend.silent;
-        }
+        if (document.getElementById('txt-settings-title')) document.getElementById('txt-settings-title').innerText = t.settingsTitle;
+        if (document.getElementById('txt-settings-lang')) document.getElementById('txt-settings-lang').innerText = t.settingsLang;
+        if (document.getElementById('txt-settings-translit')) document.getElementById('txt-settings-translit').innerText = t.settingsTranslit;
+        if (document.getElementById('txt-settings-tajweed')) document.getElementById('txt-settings-tajweed').innerText = t.settingsTajweed;
+        if (document.getElementById('txt-settings-theme')) document.getElementById('txt-settings-theme').innerText = t.settingsTheme;
+        document.querySelectorAll('.theme-pick-btn[data-accent-theme="blue"]').forEach(el => { el.textContent = t.themeBlue; });
+        document.querySelectorAll('.theme-pick-btn[data-accent-theme="green"]').forEach(el => { el.textContent = t.themeGreen; });
+        updateThemeSettingsUI();
+        const settingsBtn = document.getElementById('header-settings-btn');
+        if (settingsBtn) settingsBtn.title = t.settingsTitle;
 
         const btns = document.querySelectorAll('.lang-btn');
         btns.forEach(btn => {
@@ -4308,6 +4810,10 @@
         });
 
         localStorage.setItem('tajwid_lang', lang);
+        const hiddenTranslit = document.documentElement.getAttribute('data-hide-translit') === 'true';
+        applyTranslitVisibility(hiddenTranslit);
+        const hiddenTajweed = document.documentElement.getAttribute('data-hide-tajweed-colors') === 'true';
+        applyTajweedColorsVisibility(hiddenTajweed);
     }
 
     function toggleFavoriteCurrent() {
@@ -4383,11 +4889,45 @@
         return num.toString().split('').map(digit => arabicDigits[digit] || digit).join('');
     }
 
+    function formatVerseMarker(raw) {
+        const digits = String(raw || '').replace(/[^\d\u0660-\u0669\u06F0-\u06F9]/g, '');
+        if (!digits) return '';
+        const arabic = digits.replace(/[0-9]/g, d => toArabicNumerals(d));
+        return `\uFD3F${arabic}\uFD3E`;
+    }
+
     // Mode focus : Al-Fātiḥah seulement
     const FATIHA_ONLY = true;
     /** Branch experiment: COLR font paints tajweed; no mid-word CSS color. */
     const USE_COLR_TAJWEED_FONT = true;
-    if (USE_COLR_TAJWEED_FONT) document.documentElement.setAttribute('data-colr-tajweed', '1');
+    function applyTajweedColorsVisibility(hidden) {
+        document.documentElement.setAttribute('data-hide-tajweed-colors', hidden ? 'true' : 'false');
+        if (USE_COLR_TAJWEED_FONT) {
+            if (hidden) document.documentElement.removeAttribute('data-colr-tajweed');
+            else document.documentElement.setAttribute('data-colr-tajweed', '1');
+        }
+        try { localStorage.setItem('tajwid_hide_tajweed_colors', hidden ? '1' : '0'); } catch (e) {}
+        if (hidden && document.fonts?.load) {
+            document.fonts.load("700 2rem 'KFGQPC Mono'").catch(() => {});
+        }
+        document.querySelectorAll('.arabic-word').forEach(el => {
+            el.style.fontFamily = hidden ? "'KFGQPC Mono'" : "'KFGQPC Colored'";
+        });
+        const btn = document.getElementById('tajweed-colors-toggle-btn');
+        const t = translations[currentLang] || translations.fr;
+        const label = hidden ? (t.tajweedColorsShow || 'Afficher les couleurs tajwid') : (t.tajweedColorsHide || 'Masquer les couleurs tajwid');
+        if (btn) {
+            btn.classList.toggle('active', hidden);
+            btn.title = label;
+            btn.setAttribute('aria-label', label);
+            btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+        }
+    }
+    function toggleTajweedColors(event) {
+        if (event) event.stopPropagation();
+        const hidden = document.documentElement.getAttribute('data-hide-tajweed-colors') === 'true';
+        applyTajweedColorsVisibility(!hidden);
+    }
     const FATIHA_SURAH = 1;
     const FATIHA_AYAH_COUNT = 7;
 
@@ -4761,18 +5301,7 @@
             const hasArabicLetters = /[\u0621-\u064A\u0671]/.test(cleanText);
 
             if (isMarker || (isDigitOnly && !hasArabicLetters)) {
-                // Pour éviter les doublons, on ne rend le marqueur que s'il contient les ornements complets
-                // ou si c'est la version officielle wrapée.
-                if (!lastWasMarker && (cleanText.includes('﴿') || isEndSpan || isDigitOnly)) {
-                    const marker = document.createElement('div');
-                    marker.className = 'verse-marker';
-                    
-                    let content = cleanText;
-                    const match = cleanText.match(/[0-9\u0660-\u0669\u06F0-\u06F9]+/);
-                    if (match) content = `﴿${match[0]}﴾`;
-
-                    marker.innerHTML = content;
-                    ayahLine.appendChild(marker);
+                if (!lastWasMarker) {
                     lastWasMarker = true;
                     ayahLine = document.createElement('div');
                     ayahLine.className = 'ayah-line';
@@ -4811,9 +5340,6 @@
                 <div class="translit-container">
                     <div class="translit-en">${meta.en}</div>
                     <div class="translit-ru">${meta.ru}</div>
-                </div>
-                <div class="manual-validate-btn" onclick="manualValidateWord(${metaIdx}, event)" title="Valider manuellement">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 </div>
                 <div class="stt-feedback" id="stt-${metaIdx}"></div>
                 <div class="tajwid-warning" id="warn-${metaIdx}">${ruleTag}</div>
@@ -4854,16 +5380,32 @@
         const availH = Math.max(140, box.clientHeight - 8);
         const availW = Math.max(140, box.clientWidth - 8);
         const h = line.offsetHeight || 1;
-        const w = line.scrollWidth || 1;
-        let s = Math.min(availH / h, availW / w, 1);
+        const words = line.querySelector('.ayah-words');
+        const scrollMode = !!(words && getComputedStyle(words).flexWrap === 'nowrap');
+        let s = scrollMode
+            ? Math.min(availH / h, 1)
+            : Math.min(availH / h, availW / (line.scrollWidth || 1), 1);
         if (!isFinite(s) || s <= 0) s = 1;
-        s = Math.min(1, Math.max(0.58, s * 0.96));
+        s = Math.min(1, Math.max(scrollMode ? 0.85 : 0.58, s * 0.96));
         line.style.setProperty('--ayah-fit', String(s));
     }
     window.addEventListener('resize', () => { fitActiveAyah(); });
     window.addEventListener('orientationchange', () => setTimeout(() => { fitActiveAyah(); }, 280));
     if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(() => { fitActiveAyah(); }).catch(() => {});
+    }
+
+    function onWordTap(e) {
+        const box = e.target.closest('.word-box');
+        if (!box) return;
+        if (box.classList.contains('active') && !box.classList.contains('correct')) {
+            const idx = parseInt(String(box.id || '').replace('box-', ''), 10);
+            if (!Number.isNaN(idx)) {
+                manualValidateWord(idx, e);
+                return;
+            }
+        }
+        openTajweedModal(e);
     }
 
     function openTajweedModal(e) {
@@ -5165,20 +5707,15 @@
     }
 
     function showSttUnsupportedHint() {
-        const btn = document.getElementById('restart-btn');
-        if (btn) {
-            btn.innerText = 'Micro non disponible — Safari (iOS) ou Chrome';
-            btn.disabled = true;
-        }
+        alert('Micro non disponible — utilise Safari (iOS) ou Chrome.');
     }
 
     // === Reconnaissance vocale + audio (Whisper primaire / WebSpeech secours) ===
-    async function startRecognition() {
+    async function startRecognition(opts) {
         console.log("startRecognition invoked", VOICE_ENGINE);
         
         if (isRecording) return;
         
-        const overlay = document.getElementById('start-overlay');
         const startTxt = document.getElementById('txt-start');
         
         if (window.location.protocol === 'http:' && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
@@ -5234,6 +5771,7 @@
             };
 
             isRecording = true;
+            hideStartOverlayForGroup();
             lastMatchedFingerprint = '';
             voiceEnergyRing = [];
             wordEnteredAt = performance.now();
@@ -5244,7 +5782,7 @@
             whisperRecording = false;
             whisperBusy = false;
             resetTarteelStats();
-            document.getElementById('restart-btn')?.classList.remove('visible');
+            if (autoRestartTimer) { clearTimeout(autoRestartTimer); autoRestartTimer = null; }
             resetUI();
             updateAssistantWords();
             setWhisperBtnState('idle');
@@ -5396,7 +5934,7 @@
             recognition.onerror = e => {
                 console.error("Erreur Recognition:", e.error);
                 sessionDiagnostics.errors.push({ time: new Date().toISOString(), type: e.error });
-                if (e.error === 'not-allowed') alert("Microphone bloqué par le navigateur.");
+                if (e.error === 'not-allowed') showMicPromptOverlay();
             };
             
             recognition.onend = () => {
@@ -5413,14 +5951,14 @@
             }
         } catch (err) {
             console.error("Microphone Error:", err);
-            let userMsg = "Erreur micro : " + err.message;
             if (err.name === 'NotAllowedError') {
-                userMsg = "L'accès au micro a été refusé. Veuillez cliquer sur l'icône de cadenas dans la barre d'adresse pour l'autoriser.";
+                showMicPromptOverlay();
             } else if (err.name === 'NotFoundError') {
-                userMsg = "Aucun microphone détecté sur cet appareil.";
+                alert("Aucun microphone détecté sur cet appareil.");
+            } else {
+                alert("Erreur micro : " + err.message);
             }
-            alert(userMsg);
-            if (startTxt) startTxt.innerText = translations[currentLang]?.start || "Touchez pour commencer";
+            if (startTxt) startTxt.innerText = translations[currentLang]?.micPrompt || translations[currentLang]?.start || "Appuyez pour autoriser le microphone";
             isRecording = false;
         }
     }
@@ -5531,8 +6069,7 @@
             aura.style.transform = `translate(-50%, -50%) scale(${0.8 + easedVol / 45})`;
             aura.style.opacity = easedVol > 5 ? Math.min(0.2 + easedVol / 30, 0.7) : 0;
             
-            // Always Blue Nebula
-            aura.style.background = `radial-gradient(circle, rgba(10, 132, 255, 0.2) 0%, rgba(0, 122, 255, 0.05) 50%, transparent 70%)`;
+            // Aura + ghost suivent --voice-aura-* via CSS
             if (ghost) ghost.style.color = 'var(--accent)';
         }
 
@@ -5903,6 +6440,7 @@
     }
 
     function tryAcceptToken(hWord, reasonTag, soft) {
+        syncCurrentIdxFromDom();
         if (!verseData[currentIdx]) return false;
         const box = document.getElementById(`box-${currentIdx}`);
         if (box?.classList.contains('correct')) return false;
@@ -6469,9 +7007,25 @@
             }
             document.body.classList.remove('celebration-mode');
             document.getElementById('next-verse-btn').style.display = 'none';
-            document.getElementById('restart-btn').classList.remove('visible');
             await fetchVerseFromAPI(surah, nextAyah);
             startRecognition();
+        }
+    }
+
+    function syncCurrentIdxFromDom() {
+        if (!verseData || !verseData.length) return;
+        let idx = 0;
+        while (idx < verseData.length) {
+            const box = document.getElementById(`box-${idx}`);
+            if (!box?.classList.contains('correct')) break;
+            idx++;
+        }
+        currentIdx = Math.min(idx, verseData.length);
+        document.querySelectorAll('.word-box.active').forEach(el => el.classList.remove('active'));
+        const activeBox = document.getElementById(`box-${currentIdx}`);
+        if (activeBox && !activeBox.classList.contains('correct')) {
+            activeBox.classList.add('active');
+            startWordShimmer(activeBox);
         }
     }
 
@@ -6480,9 +7034,11 @@
         const rawHeard = transcript.toLowerCase();
         const cleanRaw = rawHeard.replace(/[\u200B-\u200D\uFEFF\u200E\u200F]/g, " ");
         const heard = cleanRaw.split(/\s+/).filter(w => w.length > 0);
-        
-        let matched = 0;
-        let tempIdx = currentIdx;
+
+        syncCurrentIdxFromDom();
+        if (currentIdx >= verseData.length) {
+            return { matched: false, text: transcript, deduped: true };
+        }
 
         const fingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
         // Ne dédupliquer que les succès déjà consommés (sinon un interim raté bloque le final)
@@ -6499,45 +7055,47 @@
             });
         }
 
-        // Queue STT récente (pas l’index verset comme index de tokens).
-        const scanWindow = Math.max(STT_WINDOW, (verseData.length - tempIdx) + 4);
-        const start = Math.max(0, heard.length - scanWindow);
         const singleWord = !!(streamOpts && streamOpts.singleWord);
-        const weakReasons = { prefix_progress: 1, soft_stt: 1, near1: 1, near2: 1, root_safe: 1 };
+        const tailLen = singleWord ? 1 : 2;
         const strongReasons = { exact: 1, liaison: 1, liaison_alias: 1, alif_ortho: 1, alif_ortho_liaison: 1 };
-        for (let i = start; i < heard.length && tempIdx < verseData.length; i++) {
+        const idx = currentIdx;
+        const box = document.getElementById(`box-${idx}`);
+        if (!box || box.classList.contains('correct')) {
+            return { matched: false, text: transcript };
+        }
+
+        let matchedWord = null;
+        let matchedVerdict = null;
+        const tailStart = Math.max(0, heard.length - tailLen);
+        for (let i = heard.length - 1; i >= tailStart; i--) {
             const hWord = heard[i];
             const hNorm = normalize(hWord);
             if (!hNorm || STT_FILLERS.has(hNorm)) continue;
-
-            const boxAlready = document.getElementById(`box-${tempIdx}`);
-            if (boxAlready?.classList.contains('correct')) {
-                tempIdx++;
-                i--;
-                continue;
-            }
-
-            let verdict = matchFatihaWord(hWord, verseData[tempIdx].ar, {
+            const verdict = matchFatihaWord(hWord, verseData[idx].ar, {
                 soft: false,
                 allowPrefix: false
             });
-            // Pas de saut : un mot suivant bien dit ne valide pas la cible actuelle.
-            if (!verdict.ok) continue;
+            if (verdict.ok) {
+                matchedWord = hWord;
+                matchedVerdict = verdict;
+                break;
+            }
+        }
 
-            const target = normalize(verseData[tempIdx].ar);
-            const ruleFull = verseData[tempIdx].ruleType || document.getElementById(`box-${tempIdx}`)?.dataset?.ruleFull || "";
-            let acoustic = { ok: true, layer: 'webspeech', voicedMs: 0, minMs: 0 };
-
-            const isMadd = String(ruleFull).indexOf('madd') === 0 || boxAlready?.dataset?.ruleType === 'madd';
-            const isMaddMissed = !!(isMadd && (verdict.reason === 'root_safe' || String(verdict.reason).indexOf('near') === 0));
+        if (matchedWord && matchedVerdict) {
+            const target = normalize(verseData[idx].ar);
+            const hNorm = normalize(matchedWord);
+            const ruleFull = verseData[idx].ruleType || box?.dataset?.ruleFull || "";
+            const isMadd = String(ruleFull).indexOf('madd') === 0 || box?.dataset?.ruleType === 'madd';
+            const isMaddMissed = !!(isMadd && (matchedVerdict.reason === 'root_safe' || String(matchedVerdict.reason).indexOf('near') === 0));
 
             sessionDiagnostics.matches.push({
                 expected: target,
-                expectedRaw: verseData[tempIdx].ar,
-                heard: hWord,
-                index: tempIdx,
-                reason: verdict.reason,
-                acoustic: { voicedMs: acoustic.voicedMs, minMs: acoustic.minMs, layer: acoustic.layer },
+                expectedRaw: verseData[idx].ar,
+                heard: matchedWord,
+                index: idx,
+                reason: matchedVerdict.reason,
+                acoustic: { voicedMs: 0, minMs: 0, layer: 'webspeech' },
                 energy: typeof getInstantVoiceEnergy === 'function' ? Math.round(getInstantVoiceEnergy() * 10) / 10 : null,
                 ms: sessionDiagnostics.startTime ? Math.round(performance.now() - sessionDiagnostics.startTime) : null,
                 time: ((performance.now() - sessionDiagnostics.startTime) / 1000).toFixed(2) + "s",
@@ -6545,21 +7103,15 @@
                 mistakeTestMode: !!mistakeTestMode
             });
 
-            if (strongReasons[verdict.reason]) learnPersonalAlias(target, hNorm);
-            processMatchedWord(tempIdx, isMaddMissed);
-            tempIdx++;
-            matched++;
-            if (singleWord || weakReasons[verdict.reason]) break;
-        }
-
-        if (matched > 0) {
-            currentIdx = tempIdx;
+            if (strongReasons[matchedVerdict.reason]) learnPersonalAlias(target, hNorm);
+            processMatchedWord(idx, isMaddMissed);
+            currentIdx = idx + 1;
             markWordEntered(currentIdx);
             refreshDynamicGrammar();
             lastMatchedFingerprint = heard.slice(-8).map(w => normalize(w)).join('|') + '#' + currentIdx;
             updateAssistantWords();
             hideAssistantFeedback();
-            
+
             if (currentIdx >= verseData.length) finishVerse();
 
             const progress = (currentIdx / verseData.length) * 100;
@@ -6774,14 +7326,16 @@
             nextBox.classList.add('active');
             startWordShimmer(nextBox);
             if (!switchedAyah) {
-                nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                nextBox.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                requestAnimationFrame(() => fitActiveAyah());
             }
         }
     }
 
     function manualValidateWord(idx, event) {
         if (event) event.stopPropagation();
-        
+        syncCurrentIdxFromDom();
+        if (idx !== currentIdx) return;
         // On récupère ce que l'IA entendait à ce moment précis pour le rapport
         const heardAtMoment = document.getElementById('assistant-heard-word')?.innerText || "NON_CAPTE";
 
@@ -6851,14 +7405,18 @@
 
         document.getElementById('live-assistant')?.classList.remove('visible');
         markAsCompleted(VERSES_LIBRARY[activeVerseIdx].ref);
-        const restartBtn = document.getElementById('restart-btn');
-        if (restartBtn) {
-            restartBtn.classList.add('visible');
-            const t = translations[currentLang] || {};
-            restartBtn.innerText = t.restart || 'Recommencer';
+        const isMobile = window.innerWidth <= 600;
+        const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent || '');
+        if (!isMobile) {
+            offerPwaInstall();
+        } else if (!isIos) {
+            offerPwaInstall();
         }
-        offerPwaInstall();
-        offerRatePrompt();
+        if (autoRestartTimer) clearTimeout(autoRestartTimer);
+        autoRestartTimer = setTimeout(() => {
+            autoRestartTimer = null;
+            restartRecitation();
+        }, 5000);
     }
 
     let deferredInstallPrompt = null;
@@ -6888,21 +7446,6 @@
             }
         } catch (e) {
             console.warn('pwa install', e);
-        }
-    }
-    function offerRatePrompt() {
-        try {
-            if (localStorage.getItem('tajwid_rate_dismissed') === '1') return;
-            const banner = document.getElementById('rate-tilmidh-banner');
-            if (!banner) return;
-            banner.innerHTML = 'Ça t’a aidé ? <a href="https://tilmidh.app/" target="_blank" rel="noopener">Partage Tilmidh</a> · <button type="button" id="rate-tilmidh-dismiss">Plus tard</button>';
-            banner.classList.add('visible');
-            document.getElementById('rate-tilmidh-dismiss').onclick = () => {
-                localStorage.setItem('tajwid_rate_dismissed', '1');
-                banner.classList.remove('visible');
-            };
-        } catch (e) {
-            console.warn('rate prompt', e);
         }
     }
     try {
@@ -7073,8 +7616,8 @@
     }
 
     function restartRecitation() {
+        if (autoRestartTimer) { clearTimeout(autoRestartTimer); autoRestartTimer = null; }
         document.body.classList.remove('celebration-mode');
-        document.getElementById('restart-btn')?.classList.remove('visible');
         document.getElementById('download-btn')?.classList.remove('visible');
         
         // On recharge le verset proprement (reset l'UI et le currentIdx)
@@ -7271,49 +7814,41 @@
         `;
     }
 
-    function toggleLangMenu(event) {
-        if (event) event.stopPropagation();
-        closeGcDockMenu();
-        document.getElementById('lang-options').classList.toggle('active');
-    }
-
     function applyTheme(theme) {
-        const allowed = { dark: 1, light: 1, blue: 1 };
-        const next = allowed[theme] ? theme : 'dark';
+        const allowed = { blue: 1, green: 1, dark: 1, light: 1 };
+        let next = allowed[theme] ? theme : 'blue';
+        if (next === 'dark' || next === 'light') next = 'blue';
         document.documentElement.setAttribute('data-theme', next);
         try { localStorage.setItem('tajwid_theme', next); } catch (e) {}
         const themeMeta = document.querySelector('meta[name="theme-color"]');
         if (themeMeta) {
-            const themeColors = { dark: '#030303', light: '#F4FAF7', blue: '#FFFFFF' };
-            themeMeta.content = themeColors[next] || themeColors.dark;
+            const themeColors = { dark: '#030303', light: '#F4FAF7', blue: '#FFFFFF', green: '#FFFFFF' };
+            themeMeta.content = themeColors[next] || themeColors.blue;
         }
-        const btn = document.getElementById('theme-toggle-btn');
-        if (btn) {
-            const labels = {
-                dark: 'Thème vert',
-                light: 'Thème bleu',
-                blue: 'Thème sombre'
-            };
-            btn.title = labels[next] || 'Thème';
-            btn.setAttribute('aria-label', 'Thème actuel : ' + next + '. Cliquer pour changer.');
-        }
+        updateThemeSettingsUI();
     }
 
-    function toggleTheme(event) {
+    function setAccentTheme(theme, event) {
         if (event) event.stopPropagation();
-        const order = ['dark', 'light', 'blue'];
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        const idx = order.indexOf(current);
-        applyTheme(order[(idx + 1) % order.length]);
+        applyTheme(theme);
+    }
+
+    function updateThemeSettingsUI() {
+        const current = document.documentElement.getAttribute('data-theme') || 'blue';
+        const accent = (current === 'green') ? 'green' : 'blue';
+        document.querySelectorAll('.theme-pick-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.accentTheme === accent);
+        });
     }
 
     function applyTranslitVisibility(hidden) {
         document.documentElement.setAttribute('data-hide-translit', hidden ? 'true' : 'false');
         try { localStorage.setItem('tajwid_hide_translit', hidden ? '1' : '0'); } catch (e) {}
         const btn = document.getElementById('translit-toggle-btn');
+        const t = translations[currentLang] || translations.fr;
+        const label = hidden ? (t.translitShow || 'Afficher la translittération') : (t.translitHide || 'Masquer la translittération');
         if (btn) {
             btn.classList.toggle('active', hidden);
-            const label = hidden ? 'Afficher la translittération' : 'Masquer la translittération';
             btn.title = label;
             btn.setAttribute('aria-label', label);
             btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
@@ -7328,7 +7863,7 @@
 
     // Fermer les menus au clic ailleurs
     window.addEventListener('click', () => {
-        closeLangMenu();
+        closeSettingsMenu();
         closeGcDockMenu();
     });
 
@@ -7341,10 +7876,11 @@
         console.log("DOMContentLoaded");
         try {
             bindIpadGestures();
-            applyTheme('blue');
+            applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
             applyTranslitVisibility(localStorage.getItem('tajwid_hide_translit') === '1');
+            applyTajweedColorsVisibility(localStorage.getItem('tajwid_hide_tajweed_colors') === '1');
         } catch (e) {
-            applyTheme('blue');
+            applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
         }
         if (!hasWebSpeech()) showSttUnsupportedHint();
         const savedLang = localStorage.getItem('tajwid_lang') || 'fr';
@@ -7359,12 +7895,22 @@
             }, { passive: true });
         }
 
+        const micOverlay = document.getElementById('start-overlay');
+        if (micOverlay) {
+            micOverlay.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (isRecording) return;
+                try { startRecognition(); } catch (e2) { console.warn('mic overlay tap', e2); }
+            }, { passive: true });
+        }
+
         // Chargement initial
         try {
             if (document.fonts?.load) {
                 await Promise.all([
                     document.fonts.load("700 4rem 'KFGQPC Colored'"),
-                    document.fonts.load("700 4rem 'KFGQPC Validated'")
+                    document.fonts.load("700 4rem 'KFGQPC Validated'"),
+                    document.fonts.load("700 4rem 'KFGQPC Mono'")
                 ]).catch(() => {});
             }
             if (FATIHA_ONLY) {
@@ -7398,6 +7944,8 @@
         }
 
         document.getElementById('verse-selector')?.classList.remove('dock-hidden');
+        initDockGlassTilt();
+        tryAutoStartMic();
     });
 
     // Groupe Call — sync verset
@@ -7462,5 +8010,13 @@
     window.startRecognition = startRecognition;
     window.toggleWhisperRecord = toggleWhisperRecord;
 </script>
+
+<!-- Fallback micro : iOS/Safari exige parfois un tap explicite -->
+<div id="start-overlay" style="display:none" role="button" tabindex="0" aria-label="Autoriser le microphone">
+    <div class="start-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="#fff"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+    </div>
+    <p id="txt-start">Appuyez pour autoriser le microphone</p>
+</div>
 </body>
 </html>

@@ -1,6 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Tilmidh">
-  <rect width="512" height="512" rx="96" fill="#059669"/>
-  <!-- Geometric T -->
-  <rect x="118" y="128" width="276" height="72" rx="16" fill="#FFFFFF"/>
-  <rect x="208" y="128" width="96" height="268" rx="16" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" role="img" aria-label="Tilmidh">
+  <image width="512" height="512" xlink:href="icon-512.png"/>
 </svg>
