@@ -5595,6 +5595,16 @@
 
             newVerseData.push({ ar: cleanText, ruleType: ruleType || "" });
             metaIdx++;
+
+            // Waqf mushaf (ۖۗۘۚۛ) = coupure de phrase, comme un ayah du carrousel.
+            if (/[\u06D6\u06D7\u06D8\u06DA\u06DB]/.test(cleanText)) {
+                ayahLine = document.createElement('div');
+                ayahLine.className = 'ayah-line';
+                ayahWords = document.createElement('div');
+                ayahWords.className = 'ayah-words';
+                ayahLine.appendChild(ayahWords);
+                container.appendChild(ayahLine);
+            }
         });
 
         if (ayahLine && ayahWords && ayahWords.childNodes.length === 0) {
