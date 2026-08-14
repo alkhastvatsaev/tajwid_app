@@ -102,10 +102,10 @@
         "ru": "Сура Аль-Мульк",
         "tr": "Sure Mulk",
         "ur": "سورہ الملک",
-        "bn": "Sūrat al-Mulk",
-        "ms": "Sūrat al-Mulk",
-        "de": "Sūrat al-Mulk",
-        "es": "Sūrat al-Mulk"
+        "bn": "সূরা আল-মুলক",
+        "ms": "Belajar Surah Al-Mulk",
+        "de": "Sure Al-Mulk lernen",
+        "es": "Aprender Sura Al-Mulk"
       },
       "alts": {
         "fr": "Al-Mulk — récitation Tilmidh",
@@ -128,10 +128,10 @@
         "ru": "sura-mulk",
         "tr": "sure-mulk",
         "ur": "surah-mulk",
-        "bn": "surah-al-mulk",
-        "ms": "surah-al-mulk",
-        "de": "surah-al-mulk",
-        "es": "surah-al-mulk"
+        "bn": "al-mulk",
+        "ms": "al-mulk",
+        "de": "al-mulk",
+        "es": "surah-mulk"
       }
     },
     "kursi": {
@@ -145,10 +145,10 @@
         "ru": "Аят al-Kursi",
         "tr": "Ayetel Kürsi",
         "ur": "آیت الکرسی",
-        "bn": "Ayat al-Kursi",
-        "ms": "Ayat al-Kursi",
-        "de": "Ayat al-Kursi",
-        "es": "Ayat al-Kursi"
+        "bn": "আয়াতুল কুরসি শেখা",
+        "ms": "Belajar Ayat Kursi",
+        "de": "Ayat al-Kursi lernen",
+        "es": "Aprender Ayat al-Kursi"
       },
       "alts": {
         "fr": "Ayat al-Kursi — entraînement Tilmidh",
@@ -734,6 +734,49 @@
         "ms": "tajweed-rules",
         "de": "tajweed-rules",
         "es": "tajweed-rules"
+      }
+    },
+    "lire-coran": {
+      "arabic": "تلميذ",
+      "shape": "diamond",
+      "titles": {
+        "fr": "Apprendre à lire le Coran",
+        "en": "Learn to read the Quran",
+        "id": "Belajar baca Al-Quran",
+        "ar": "تعلم قراءة القرآن",
+        "ru": "Научиться читать Коран",
+        "tr": "Kuran okumayı öğren",
+        "ur": "قرآن پڑھna سیکھیں",
+        "bn": "কুরআন পড়া শেখা",
+        "ms": "Belajar baca Quran",
+        "de": "Koran lesen lernen",
+        "es": "Aprender a leer el Corán"
+      },
+      "alts": {
+        "fr": "Tilmidh — meilleure app apprendre lire Coran",
+        "en": "Tilmidh — learn to read Quran",
+        "id": "Tilmidh — belajar baca Al-Quran",
+        "ar": "تلميذ — تعلم قراءة القرآن",
+        "ru": "Tilmidh — читать Коран",
+        "tr": "Tilmidh — Kuran okuma",
+        "ur": "Tilmidh — قرآن پڑھna",
+        "bn": "Tilmidh — কুরআন পড়া",
+        "ms": "Tilmidh — baca Quran",
+        "de": "Tilmidh — Koran lesen",
+        "es": "Tilmidh — leer Corán"
+      },
+      "slugs": {
+        "fr": "meilleure-app-lire-coran",
+        "en": "learn-read-quran",
+        "id": "belajar-baca-quran",
+        "ar": "learn-read-quran",
+        "ru": "learn-read-quran",
+        "tr": "learn-read-quran",
+        "ur": "learn-read-quran",
+        "bn": "learn-read-quran",
+        "ms": "learn-read-quran",
+        "de": "learn-read-quran",
+        "es": "learn-read-quran"
       }
     },
     "privacy": {

@@ -51,6 +51,8 @@ function cardIdForRoute(route) {
   if (route.includes('regles-de-tajwid')) return 'rules-hub';
   if (route.includes('coran-phonetique')) return 'phonetic';
   if (route.includes('best-tajwid-app-for-beginners')) return 'pemula';
+  if (route.includes('meilleure-app-apprendre-lire-coran')) return 'lire-coran';
+  if (route === '/sourates') return 'phonetic';
   if (route.includes('prilozhenie-tadzhvida')) return 'pemula';
   if (route.includes('privacy')) return 'privacy';
   return 'home';
