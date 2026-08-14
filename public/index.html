@@ -2572,6 +2572,33 @@
             }
         }
 
+        /* Ayah long (Kursi, Kahf…) : densité mushaf, pas les cartes Fātiḥah. */
+        .ayah-line.ayah-compact .ayah-words {
+            gap: 2px 8px;
+            padding: 2px 6px;
+            max-width: min(1100px, 100%);
+        }
+        .ayah-line.ayah-compact .word-box {
+            min-width: 0;
+            padding: 1px 2px 0;
+        }
+        .ayah-line.ayah-compact .arabic-word {
+            font-size: var(--ayah-font, 1.4rem) !important;
+            line-height: 1.85;
+            padding: 0.02em 0.04em 0;
+        }
+        .ayah-line.ayah-compact .translit-container {
+            display: none;
+        }
+        .ayah-line.ayah-compact .word-box.active .translit-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .ayah-line.ayah-compact .madd-dots-guide {
+            transform: scale(0.85);
+            margin-bottom: 0;
+        }
+
         /* Live Assistant Panel */
         #live-assistant {
             display: none;
@@ -5593,7 +5620,35 @@
         const box = document.getElementById('verse-container');
         const line = box?.querySelector('.ayah-line.active-ayah');
         if (!box || !line) return;
+        box.querySelectorAll('.ayah-line').forEach(el => {
+            if (el !== line) {
+                el.classList.remove('ayah-compact');
+                el.style.removeProperty('--ayah-font');
+            }
+        });
+        const n = line.querySelectorAll('.word-box').length;
+        const compact = n > 12;
+        line.classList.toggle('ayah-compact', compact);
         line.style.setProperty('--ayah-fit', '1');
+        if (compact) {
+            const availH = Math.max(160, box.clientHeight - 12);
+            const availW = Math.max(160, box.clientWidth - 12);
+            let rem = n > 45 ? 1.28 : n > 28 ? 1.42 : 1.58;
+            line.style.setProperty('--ayah-font', rem + 'rem');
+            void line.offsetHeight;
+            let guard = 0;
+            while (guard++ < 10) {
+                const h = line.offsetHeight || 1;
+                const w = line.scrollWidth || 1;
+                if (h <= availH && w <= availW) break;
+                if (rem <= 1.02) break;
+                rem = Math.max(1.02, rem - 0.08);
+                line.style.setProperty('--ayah-font', rem + 'rem');
+                void line.offsetHeight;
+            }
+            return;
+        }
+        line.style.removeProperty('--ayah-font');
         const availH = Math.max(140, box.clientHeight - 8);
         const availW = Math.max(140, box.clientWidth - 8);
         const h = line.offsetHeight || 1;
