@@ -2,14 +2,14 @@
 // Toutes les pages générées passent par ici : un défaut se corrige à un seul endroit.
 
 export const SITE = 'https://tilmidh.app';
-export const LANGS = ['fr', 'en', 'id', 'ar', 'ru'];
+export const LANGS = ['fr', 'en', 'id', 'ar', 'ru', 'tr', 'ur', 'bn', 'ms', 'de', 'es'];
 
 // Préfixe d'URL par langue : le français est à la racine.
 export const prefix = (lang) => (lang === 'fr' ? '' : `/${lang}`);
 
 export const urlFor = (lang, path) => `${SITE}${prefix(lang)}${path}`;
 
-const RTL = new Set(['ar']);
+const RTL = new Set(['ar', 'ur']);
 
 const esc = (s) =>
   String(s).replace(/&(?!#?\w+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

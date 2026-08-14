@@ -12,7 +12,7 @@
     { "source": "/log", "destination": "/api/log" },
     { "source": "/save-recording", "destination": "/api/save-recording" },
     {
-      "source": "/((?!api/|regle(?:/|$)|sourate(?:/|$)|en(?:/|$)|id(?:/|$)|ar(?:/|$)|ru(?:/|$)|aso(?:/|$)|privacy(?:/|$)|apprendre-tajwid(?:/|$)|tajwid-microphone(?:/|$)|best-tajwid-app-for-beginners(?:/|$)|llms\\.txt|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|indexnow\\.txt|BingSiteAuth\\.xml|favicon\\.ico|favicon-|apple-touch-icon\\.png|og\\.png|icons/|\\.well-known/).*)",
+      "source": "/((?!api/|regle(?:/|$)|sourate(?:/|$)|en(?:/|$)|id(?:/|$)|ar(?:/|$)|ru(?:/|$)|tr(?:/|$)|ur(?:/|$)|bn(?:/|$)|ms(?:/|$)|de(?:/|$)|es(?:/|$)|aso(?:/|$)|privacy(?:/|$)|apprendre-tajwid(?:/|$)|tajwid-microphone(?:/|$)|best-tajwid-app-for-beginners(?:/|$)|llms\\.txt|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|indexnow\\.txt|BingSiteAuth\\.xml|favicon\\.ico|favicon-|apple-touch-icon\\.png|og\\.png|icons/|\\.well-known/).*)",
       "destination": "/index.html"
     }
   ],
