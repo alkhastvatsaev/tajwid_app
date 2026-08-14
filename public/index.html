@@ -67,14 +67,14 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <!-- Preload mushaf COLR fonts — avoid 1s flash of Tilmidh/system serif -->
-    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-1" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-1" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.ttf?v=2" as="font" type="font/ttf" crossorigin>
     <style>
         /* COLR tajweed font — colors in glyphs, joining intact (Safari-safe) */
         @font-face {
             font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-1') format('woff2');
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
             font-weight: 400 700;
             font-style: normal;
             font-display: block;
@@ -82,7 +82,7 @@
         /* Validated: same KFGQPC outlines, every glyph COLR #3B82F6 */
         @font-face {
             font-family: 'KFGQPC Validated';
-            src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-1') format('woff2');
+            src: url('/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-2') format('woff2');
             font-weight: 400 700;
             font-style: normal;
             font-display: block;
@@ -5070,8 +5070,32 @@
         return `\uFD3F${arabic}\uFD3E`;
     }
 
-    // Mode focus : Al-Fātiḥah seulement
-    const FATIHA_ONLY = true;
+    // Pratique : Fātiḥah + Ayat al-Kursi + Al-Kahf + Al-Mulk (pas les 114).
+    const FATIHA_ONLY = false;
+    const PRACTICE_SURAHS = {
+        1: { count: 7 },
+        2: { ayahs: [255] },
+        18: { count: 110 },
+        67: { count: 30 }
+    };
+    function practiceSpec(surah) {
+        return PRACTICE_SURAHS[surah] || null;
+    }
+    function practiceAllows(surah, ayah) {
+        const p = practiceSpec(surah);
+        if (!p) return false;
+        if (p.ayahs) return p.ayahs.indexOf(ayah) !== -1;
+        return ayah >= 1 && ayah <= p.count;
+    }
+    function practiceNextAyah(surah, ayah) {
+        const p = practiceSpec(surah);
+        if (!p) return null;
+        if (p.ayahs) {
+            const i = p.ayahs.indexOf(ayah);
+            return (i >= 0 && i < p.ayahs.length - 1) ? p.ayahs[i + 1] : null;
+        }
+        return ayah < p.count ? ayah + 1 : null;
+    }
     /** Branch experiment: COLR font paints tajweed; no mid-word CSS color. */
     const USE_COLR_TAJWEED_FONT = true;
     function applyTajweedColorsVisibility(hidden) {
@@ -5115,12 +5139,24 @@
     }
 
     function assertFatihaOnly(ref) {
-        if (!FATIHA_ONLY) return true;
         const n = parseSurahNum(ref);
-        if (n !== FATIHA_SURAH) {
-            console.warn('FATIHA_ONLY: refus de charger la sourate', ref);
-            alert('Mode focus Al-Fātiḥah : les autres sourates sont temporairement masquées.');
+        const p = practiceSpec(n);
+        if (!p) {
+            console.warn('PRACTICE: sourate hors liste', ref);
+            alert('Pour l’instant : Al-Fātiḥah, Ayat al-Kursi (2:255), Al-Kahf (18), Al-Mulk (67).');
             return false;
+        }
+        const s = String(ref).trim();
+        if (p.ayahs && !s.includes(':')) {
+            return true; // fetchVerseFromAPI réécrit en 2:255
+        }
+        if (s.includes(':')) {
+            const ayah = parseInt(s.split(':')[1], 10);
+            if (!practiceAllows(n, ayah)) {
+                console.warn('PRACTICE: ayah hors liste', ref);
+                alert('Cet ayah n’est pas encore ouvert à la pratique micro.');
+                return false;
+            }
         }
         return true;
     }
@@ -5194,6 +5230,10 @@
         if (!ref) return;
         if (ref.includes('-') && !isFullSurah) ref = ref.split('-')[0];
         if (!assertFatihaOnly(ref)) return;
+        if (parseSurahNum(ref) === 2 && (isFullSurah || !String(ref).includes(':'))) {
+            ref = '2:255';
+            isFullSurah = false;
+        }
 
         const loader = document.getElementById('import-loader');
         if (loader) loader.style.display = 'block';
@@ -5352,7 +5392,10 @@
     function plainUthmaniFromHtml(html) {
         return String(html || '')
             .replace(/<[^>]+>/g, '')
-            .replace(/\u0672/g, '\u0670');
+            .replace(/\u0672/g, '\u0670')
+            // Quran.com inserts a space before waqf marks (Mn). Isolated, KFGQPC
+            // paints the mark on a dotted circle (black disc). Attach to previous letter.
+            .replace(/ +([\u06D6-\u06DC\u06DF-\u06E4\u06EA-\u06ED])/g, '$1');
     }
 
     /** Legacy helper: plain + tint ranges (kept for classify path / non-COLR experiments). */
@@ -5619,17 +5662,7 @@
     // === Daily Verse Logic ===
     let dailyVerse = null;
     function getDailyVerseRef() {
-        if (FATIHA_ONLY) {
-            return { sNum: FATIHA_SURAH, aNum: 1, name: SURAHS_LIST[0] };
-        }
-        const d = new Date();
-        const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
-        const random = (s) => {
-            s = (s * 16807) % 2147483647;
-            return s / 2147483647;
-        };
-        const sIdx = Math.floor(random(seed) * 114) + 1;
-        return { sNum: sIdx, aNum: 1, name: SURAHS_LIST[sIdx - 1] };
+        return { sNum: FATIHA_SURAH, aNum: 1, name: SURAHS_LIST[0] };
     }
 
     async function initDailyVerse() {
@@ -7174,9 +7207,9 @@
         const match = currentRef.match(/\[(\d+):(\d+)\]/);
         if (match) {
             const surah = parseInt(match[1]);
-            const nextAyah = parseInt(match[2]) + 1;
-            if (FATIHA_ONLY && (surah !== FATIHA_SURAH || nextAyah > FATIHA_AYAH_COUNT)) {
-                console.warn('FATIHA_ONLY: fin de Al-Fātiḥah');
+            const nextAyah = practiceNextAyah(surah, parseInt(match[2], 10));
+            if (!nextAyah) {
+                console.warn('PRACTICE: fin de sourate', currentRef);
                 return;
             }
             document.body.classList.remove('celebration-mode');
@@ -7914,10 +7947,6 @@
     }
 
     function openImportModal() {
-        if (FATIHA_ONLY) {
-            alert('Mode focus Al-Fātiḥah : import d’autres sourates désactivé.');
-            return;
-        }
         const modal = document.getElementById('import-modal');
         if (modal) {
             modal.style.display = 'flex';
@@ -7931,7 +7960,6 @@
     }
 
     function openQuranBrowser() {
-        if (FATIHA_ONLY) return; // navigation via sélecteur ayah 1–7
         const modal = document.getElementById('quran-modal');
         if (modal) {
             modal.style.display = 'flex';
@@ -7951,14 +7979,16 @@
         
         grid.innerHTML = SURAHS_LIST.map((name, i) => {
             const sNum = i + 1;
-            if (FATIHA_ONLY && sNum !== FATIHA_SURAH) return '';
+            if (!practiceSpec(sNum)) return '';
             const isFav = favorites.some(ref => ref.startsWith(`${sNum}:`));
             if (FATIHA_ONLY || name.toLowerCase().includes(query) || sNum.toString() === query) {
+                const startRef = (sNum === 2) ? '2:255' : `${sNum}:1`;
+                const fullRef = (sNum === 2) ? '2:255' : `${sNum}`;
                 return `
-                    <div class="surah-card" onclick="fetchVerseFromAPI('${sNum}:1')">
+                    <div class="surah-card" onclick="fetchVerseFromAPI('${startRef}')">
                         <div class="surah-num">${sNum}</div>
-                        <div class="surah-name">${name}</div>
-                        <button class="v-btn" style="padding: 4px 8px; font-size: 0.5rem; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: var(--subtext); width: 100%; border-radius: 6px;" onclick="event.stopPropagation(); fetchVerseFromAPI('${sNum}')">Tout lire</button>
+                        <div class="surah-name">${sNum === 2 ? 'Ayat al-Kursi' : name}</div>
+                        <button class="v-btn" style="padding: 4px 8px; font-size: 0.5rem; margin-top: 5px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: var(--subtext); width: 100%; border-radius: 6px;" onclick="event.stopPropagation(); fetchVerseFromAPI('${fullRef}')">${sNum === 2 ? '2:255' : 'Tout lire'}</button>
                         ${isFav ? '<div class="fav-indicator"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>' : ''}
                     </div>
                 `;
@@ -7972,20 +8002,14 @@
         const verse = VERSES_LIBRARY[activeVerseIdx];
         if (!verse || !container) return;
 
-        if (FATIHA_ONLY) {
-            const fullActive = (verse.ref || '').includes('[1-');
-            container.innerHTML = `
-                <button class="v-btn${fullActive ? ' active' : ''}" onclick="fetchVerseFromAPI('1')" title="Al-Fātiḥah complète">الفاتحة</button>
-            `;
-            return;
-        }
-        
+        const ref = verse.ref || '';
+        const isFatiha = ref.includes('[1:') || ref.includes('[1-');
         container.innerHTML = `
-            <button class="v-btn active" onclick="openQuranBrowser()" style="display:flex; align-items:center; gap:8px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                ${verse.ref || verse.title}
-            </button>
-        `;
+                <button class="v-btn${isFatiha ? ' active' : ''}" onclick="fetchVerseFromAPI('1')" title="Al-Fātiḥah">الفاتحة</button>
+                <button class="v-btn${ref.includes('[2:255]') ? ' active' : ''}" onclick="fetchVerseFromAPI('2:255')" title="Ayat al-Kursi">الكرسي</button>
+                <button class="v-btn${ref.includes('[18:') ? ' active' : ''}" onclick="fetchVerseFromAPI('18:1')" title="Al-Kahf">الكهف</button>
+                <button class="v-btn${ref.includes('[67:') ? ' active' : ''}" onclick="fetchVerseFromAPI('67:1')" title="Al-Mulk">الملك</button>
+            `;
     }
 
     function applyTheme(theme) {
@@ -8087,19 +8111,11 @@
                     document.fonts.load("700 4rem 'KFGQPC Mono'")
                 ]).catch(() => {});
             }
-            if (FATIHA_ONLY) {
-                await fetchVerseFromAPI('1');
-                console.log("FATIHA_ONLY: Al-Fātiḥah loaded");
-            } else {
-                await fetchVerseFromAPI('112');
-                await fetchVerseFromAPI('113');
-                await fetchVerseFromAPI('114');
-                await fetchVerseFromAPI('1');
-                console.log("Initial surahs loaded: 1, 112, 113, 114");
-            }
+            await fetchVerseFromAPI('1');
+            console.log("PRACTICE: Al-Fātiḥah loaded");
             try {
                 const ref = new URLSearchParams(location.search).get('ref');
-                if (ref && (!FATIHA_ONLY || parseSurahNum(ref) === FATIHA_SURAH)) {
+                if (ref) {
                     await fetchVerseFromAPI(ref);
                     console.log("Deep link ref loaded:", ref);
                 }
