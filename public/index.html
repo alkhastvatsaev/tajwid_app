@@ -2046,6 +2046,12 @@
             justify-content: center;
             transition: 0.4s;
             opacity: 0;
+            pointer-events: none;
+        }
+        #modal-overlay.visible {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
         }
         /* Duo Mode Styles */
         #duo-container {
@@ -5680,13 +5686,13 @@
     function onWordTap(e) {
         const box = e.target.closest('.word-box');
         if (!box) return;
-        if (box.classList.contains('active') && !box.classList.contains('correct')) {
-            const idx = parseInt(String(box.id || '').replace('box-', ''), 10);
-            if (!Number.isNaN(idx)) {
-                manualValidateWord(idx, e);
-                return;
-            }
+        const idx = parseInt(String(box.id || '').replace('box-', ''), 10);
+        syncCurrentIdxFromDom();
+        if (!Number.isNaN(idx) && idx === currentIdx && !box.classList.contains('correct')) {
+            manualValidateWord(idx, e);
+            return;
         }
+        if (isRecording) return;
         openTajweedModal(e);
     }
 
@@ -5720,7 +5726,12 @@
             document.getElementById('rule-tag').innerText = rule.tag;
             document.getElementById('rule-title').innerText = rule.title;
             document.getElementById('rule-desc').innerText = rule.desc;
-            document.getElementById('modal-overlay').style.display = 'flex';
+            const overlay = document.getElementById('modal-overlay');
+            if (overlay) {
+                overlay.style.display = 'flex';
+                overlay.style.opacity = '1';
+                overlay.classList.add('visible');
+            }
         }
     }
 
@@ -8133,7 +8144,11 @@
     });
 
     function closeModal() {
-        document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+        const overlay = document.getElementById('modal-overlay');
+        if (!overlay) return;
+        overlay.classList.remove('visible');
+        overlay.style.display = 'none';
+        overlay.style.opacity = '';
     }
 
     // === Initialisation ===
