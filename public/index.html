@@ -1303,9 +1303,11 @@
             z-index: 900;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 8px;
             padding: 6px;
             border-radius: 100px;
+            overflow: visible;
             font-family: var(--font-main);
             transition: opacity 0.4s ease;
         }
@@ -1315,7 +1317,8 @@
             align-items: center;
             justify-content: center;
             isolation: isolate;
-            width: 42px;
+            width: auto;
+            min-width: 42px;
             height: 42px;
             padding: 0;
             gap: 0;
@@ -1326,8 +1329,7 @@
             flex-shrink: 0;
             color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.4);
-            transform: translate3d(calc(var(--glass-parallax-x) * 0.35), calc(var(--glass-parallax-y) * 0.35), 0);
-            transition: width 0.28s ease, padding 0.28s ease, gap 0.28s ease, border-radius 0.28s ease, transform 0.12s ease-out;
+            transition: padding 0.28s ease, gap 0.28s ease;
         }
         #contact-bar .contact-mail {
             background: var(--brand-gradient);
@@ -1364,10 +1366,8 @@
         }
         #contact-bar.contact-open .contact-mail,
         #contact-bar.contact-open .contact-wa {
-            width: auto;
             padding: 0 14px 0 12px;
             gap: 8px;
-            border-radius: 100px;
         }
         #contact-bar.contact-open .contact-mail-label,
         #contact-bar.contact-open .contact-wa span {
@@ -1375,19 +1375,17 @@
             opacity: 1;
         }
         @media (hover: hover) and (pointer: fine) {
-            #contact-bar:hover .contact-mail,
-            #contact-bar:focus-within .contact-mail,
-            #contact-bar:hover .contact-wa,
-            #contact-bar:focus-within .contact-wa {
-                width: auto;
+            #contact-bar .contact-mail:hover,
+            #contact-bar .contact-mail:focus-visible,
+            #contact-bar .contact-wa:hover,
+            #contact-bar .contact-wa:focus-visible {
                 padding: 0 14px 0 12px;
                 gap: 8px;
-                border-radius: 100px;
             }
-            #contact-bar:hover .contact-mail-label,
-            #contact-bar:focus-within .contact-mail-label,
-            #contact-bar:hover .contact-wa span,
-            #contact-bar:focus-within .contact-wa span {
+            #contact-bar .contact-mail:hover .contact-mail-label,
+            #contact-bar .contact-mail:focus-visible .contact-mail-label,
+            #contact-bar .contact-wa:hover span,
+            #contact-bar .contact-wa:focus-visible span {
                 max-width: 240px;
                 opacity: 1;
             }
