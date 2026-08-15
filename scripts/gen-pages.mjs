@@ -15,6 +15,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderPage, usefulWordCount, prefix, LANGS } from './lib/template.mjs';
+import { illuIdForRoute, getCaption } from './lib/illustrations.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data');
@@ -50,7 +51,9 @@ function availableLangs(entry, kind) {
     existsSync(
       kind
         ? path.join(PUBLIC, prefix(l).slice(1), kind, `${entry.slug}.html`)
-        : path.join(PUBLIC, prefix(l).slice(1), `${entry.slug}.html`)
+        : entry.slug
+          ? path.join(PUBLIC, prefix(l).slice(1), `${entry.slug}.html`)
+          : path.join(PUBLIC, `${l}.html`)
     )
   );
   return LANGS.filter((l) => fromData.includes(l) || onDisk.includes(l));
@@ -65,9 +68,11 @@ async function buildEntry(entry, kind) {
   for (const lang of toWrite) {
     if (ONLY_LANG && lang !== ONLY_LANG) continue;
     const L = entry.langs[lang];
-    const pagePath = kind ? `/${kind}/${entry.slug}` : `/${entry.slug}`;
+    // slug vide = page d'accueil de la langue (public/en.html → /en)
+    const pagePath = kind ? `/${kind}/${entry.slug}` : entry.slug ? `/${entry.slug}` : '/';
 
     const bodyHtml = L.body.map((block) => renderBlock(block, lang, entry)).join('\n');
+    const illuId = entry.illuId || illuIdForRoute(pagePath);
 
     const html = renderPage({
       lang,
@@ -81,6 +86,10 @@ async function buildEntry(entry, kind) {
       footer: L.footer,
       dateModified: entry.dateModified ?? new Date().toISOString().slice(0, 10),
       breadcrumb: L.breadcrumb,
+      illuId,
+      illuCaption: L.illuCaption || getCaption(lang, illuId),
+      ogSlug: L.ogSlug || entry.ogSlug,
+      ogAlt: L.ogAlt || L.title,
     });
 
     const words = usefulWordCount(html);
@@ -91,7 +100,9 @@ async function buildEntry(entry, kind) {
 
     const outPath = kind
       ? path.join(PUBLIC, prefix(lang).slice(1), kind, `${entry.slug}.html`)
-      : path.join(PUBLIC, prefix(lang).slice(1), `${entry.slug}.html`);
+      : entry.slug
+        ? path.join(PUBLIC, prefix(lang).slice(1), `${entry.slug}.html`)
+        : path.join(PUBLIC, `${lang}.html`);
     if (AUDIT) {
       stats.skipped++;
       console.log(`  ok   ${lang.padEnd(2)} ${pagePath.padEnd(34)} ${words} mots`);

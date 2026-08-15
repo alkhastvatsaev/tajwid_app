@@ -1,0 +1,394 @@
+[
+  {
+    "slug": "qalqalah",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "id": {
+        "title": "Belajar qalqalah — latihan kata per kata | Tilmidh تلميذ",
+        "description": "Qalqalah: pantulan huruf ق ط ب ج د. Contoh dari surat Al-Ikhlas, latihan lewat mikrofon kata per kata. Alat latihan, bukan ijazah.",
+        "h1": "Belajar qalqalah dengan mikrofon",
+        "body": [
+          { "t": "p", "html": "Qalqalah adalah pantulan ringan yang muncul pada lima huruf ketika huruf itu mati (sukun), atau ketika kita berhenti padanya di akhir kata. Hurufnya ada lima: <strong>ق ط ب ج د</strong>, yang biasa dihafal dengan singkatan <em>qutb jad</em>. Tanpa pantulan itu, huruf menjadi tertelan dan kata kehilangan bentuknya. Tetapi kalau pantulannya berlebihan, kita justru menambahkan vokal yang tidak ada dalam bacaan." },
+          { "t": "h2", "html": "Lima huruf dan tempat keluarnya" },
+          { "t": "table", "head": ["Huruf", "Tempat keluar (makhraj)"], "rows": [["ق", "pangkal lidah menempel langit-langit lunak"], ["ط", "ujung lidah pada pangkal gigi seri atas"], ["ب", "dua bibir"], ["ج", "tengah lidah dengan langit-langit"], ["د", "ujung lidah pada pangkal gigi seri atas"]] },
+          { "t": "h2", "html": "Contoh dalam Al-Ikhlas" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "Pada <em>Qul huwa Allāhu ahad</em> (Al-Ikhlas 112:1), huruf <strong>ق</strong> pada kata <em>qul</em> mendapat qalqalah sugra, karena huruf itu mati di tengah kata. Yang kita lakukan bukan memanjangkan dan bukan pula menambahkan bunyi <em>u</em> sesudah qaf. Kita melepaskan tekanan artikulasi sehingga terdengar satu ketukan pendek, lalu langsung menyambung ke <em>huwa</em>." },
+          { "t": "h2", "html": "Sugra, wustha, kubra" },
+          { "t": "p", "html": "Qalqalah sugra terjadi di tengah kata, seperti qaf pada <em>qul</em> tadi. Qalqalah wustha terjadi ketika kita berhenti pada huruf di akhir kata tanpa tasydid. Qalqalah kubra terjadi ketika kita berhenti pada huruf berharakat tasydid, dan pantulannya terdengar paling jelas. Contohnya huruf <strong>د</strong> pada <em>ahad</em> bila kita waqaf di situ. Perbedaannya bukan pada jenis bunyi, melainkan pada kadar jelasnya pantulan." },
+          { "t": "h2", "html": "Kesalahan yang paling sering" },
+          { "t": "p", "html": "Kesalahan pertama adalah menelan qaf sehingga terdengar seperti <em>kul</em>. Kesalahan kedua adalah mengubah qaf menjadi bunyi g, yang lazim terjadi pada penutur bahasa sehari-hari. Kesalahan ketiga adalah menambahkan vokal penuh, sehingga <em>qul</em> terdengar seperti <em>qulu</em>. Ketiganya berasal dari satu sebab yang sama: tergesa-gesa berpindah ke kata berikutnya." },
+          { "t": "p", "html": "Tilmidh menampilkan warna tajwid dari teks Uthmani Quran.com dan hanya berpindah ke kata berikutnya bila kerangka konsonan yang terdengar sudah cocok. Bacalah pelan. Kalau satu kata tetap berwarna abu-abu, ulangi kata itu saja — di situlah letak gunanya alat ini." },
+          { "t": "h2", "html": "Bedanya dengan huruf mati yang lain" },
+          { "t": "p", "html": "Huruf mati selain kelima huruf ini dibaca tanpa pantulan sama sekali. Sin yang mati pada <em>waswās</em>, misalnya, hanya ditahan sejenak lalu dilepas tanpa ketukan. Kalau kamu memberi pantulan pada huruf yang bukan huruf qalqalah, bacaanmu terdengar dibuat-buat dan justru menyalahi kaidah. Karena itu menghafal kelima huruf itu lebih penting daripada menghafal penjelasannya." },
+          { "t": "h2", "html": "Urutan latihan yang disarankan" },
+          { "t": "p", "html": "Mulailah dari qalqalah kubra, yaitu ketika berhenti di akhir ayat, karena di situ pantulannya paling terdengar dan paling mudah dikenali telinga. Sesudah bentuknya tetap, barulah turun ke qalqalah sugra di tengah kata, yang jauh lebih halus. Membalik urutan ini biasanya membuat pemula memberi pantulan berlebihan di tengah kata, dan kebiasaan itu sukar dihilangkan kemudian." },
+          { "t": "cta", "ref": "112:1", "label": "Buka mikrofon pada ayat ini" },
+          { "t": "p", "html": "Sesudah itu bukalah surat Al-Falaq. Di sana ada <em>qul</em> sekali lagi, lalu qaf pada <em>al-falaq</em> bila kita berhenti padanya. Berganti-ganti antara Al-Ikhlas dan Al-Falaq sampai pantulan itu menjadi satu gerakan yang tetap, bukan efek suara yang dibuat-buat." }
+        ],
+        "nav": [
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/112", "label": "Al-Ikhlas" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Qalqalah", "item": "/id/regle/qalqalah" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed). Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "ar": {
+        "title": "تمرين القلقلة كلمةً بكلمة | تلميذ",
+        "description": "القلقلة: اضطراب حروف «قطب جد» عند سكونها. أمثلة من سورة الإخلاص، وتمرين عملي بالميكروفون كلمةً بكلمة. أداة تمرين وليست إجازة.",
+        "h1": "تمرين القلقلة بالميكروفون",
+        "body": [
+          { "t": "p", "html": "القلقلة اضطرابٌ يسيرٌ في مخرج الحرف يُسمَع عند سكونه، سواءٌ أكان السكون أصليًّا في وسط الكلمة أم عارضًا بالوقف في آخرها. وحروفها خمسة مجموعة في قولهم <strong>قُطْبُ جَدٍّ</strong>، وهي: <strong>ق ط ب ج د</strong>. فإن تركتَ هذا الاضطراب ابتلع الحرفُ نفسه، وإن بالغتَ فيه تولّدت حركةٌ لا أصل لها في التلاوة." },
+          { "t": "h2", "html": "مخارج الحروف الخمسة" },
+          { "t": "table", "head": ["الحرف", "المخرج"], "rows": [["ق", "أقصى اللسان مع ما فوقه من الحنك"], ["ط", "طرف اللسان مع أصول الثنايا العليا"], ["ب", "ما بين الشفتين"], ["ج", "وسط اللسان مع ما يقابله من الحنك"], ["د", "طرف اللسان مع أصول الثنايا العليا"]] },
+          { "t": "h2", "html": "مثال من سورة الإخلاص" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "في قوله تعالى <em>قُلْ هُوَ اللهُ أَحَدٌ</em> تجد القافَ ساكنةً في وسط الكلمة، فهذه قلقلةٌ صغرى. والمطلوب فيها أن تُفلِت المخرج إفلاتةً خفيفة يُسمَع لها صوتٌ يسير، ثم تصل بـ<em>هو</em> من غير تولّد ضمّةٍ بعد القاف ومن غير مدٍّ." },
+          { "t": "h2", "html": "الصغرى والوسطى والكبرى" },
+          { "t": "p", "html": "الصغرى ما كان سكونها أصليًّا في وسط الكلمة، كقاف <em>قُل</em>. والوسطى ما وقفتَ عليه في آخر الكلمة من غير تشديد، كدال <em>أَحَد</em> إذا وقفتَ عليها. والكبرى ما وقفتَ عليه مشدَّدًا، وهي أظهرها صوتًا. والفرق بينها في مقدار الظهور لا في جنس الصوت، وهذا ما يغفل عنه كثيرٌ من المبتدئين." },
+          { "t": "h2", "html": "أخطاء شائعة" },
+          { "t": "p", "html": "أوّلها إخفاء القاف حتى تُسمَع كافًا، فيصير <em>قل</em> أشبه بـ<em>كل</em>. وثانيها قلبها جيمًا قاهريّةً كما في لهجات العامّة. وثالثها تولّد حركةٍ كاملةٍ بعد الحرف، فيُسمَع <em>قُلُ</em>. وهذه الثلاثة ترجع إلى سببٍ واحد: العجلة في الانتقال إلى الكلمة التالية قبل تمام الحرف." },
+          { "t": "h2", "html": "الحروف الساكنة الأخرى" },
+          { "t": "p", "html": "ما عدا هذه الخمسة من الحروف الساكنة لا قلقلة فيه البتّة. فالسين الساكنة في <em>وَسْوَاس</em> تُحبَس ثم تُطلَق من غير اضطراب. ومن قلقل حرفًا ليس من حروفها فقد زاد في التلاوة ما ليس منها، وصار أداؤه متكلَّفًا. ولذلك كان حفظ الحروف الخمسة أنفع من حفظ التعريف نفسه." },
+          { "t": "h2", "html": "ترتيب التمرين" },
+          { "t": "p", "html": "ابدأ بالقلقلة الكبرى عند الوقف على أواخر الآيات، فإنّها أظهر ما يكون صوتًا وأيسر ما تلتقطه الأذن. فإذا استقرّت لك هيئتها فانزل إلى الصغرى في وسط الكلمة، وهي أخفى وأدقّ. أمّا عكس هذا الترتيب فيوقع المبتدئ في المبالغة داخل الكلمة، وهي عادةٌ يصعب نزعها بعد رسوخها." },
+          { "t": "h2", "html": "لماذا سورة الإخلاص" },
+          { "t": "p", "html": "اختيرت سورة الإخلاص لأنّ أكثر الناس يحفظونها، ولأنّها تجمع القلقلة في موضعين متقاربين: قاف <em>قُل</em> في أوّلها ودال <em>أَحَد</em> في آخرها. فتكون التمرين على نوعين من القلقلة في آيةٍ واحدةٍ قصيرة، وهذا أنفع من تفريق التمرين على سورٍ متباعدة. ثمّ انتقل إلى سورة الفلق، ففيها <em>قُل</em> مرّةً أخرى، وقاف <em>الفَلَق</em> عند الوقف." },
+          { "t": "cta", "ref": "112:1", "label": "افتح الميكروفون على هذه الآية" },
+          { "t": "p", "html": "يعرض تلميذ نصّ المصحف بألوان التجويد من Quran.com، ولا ينتقل إلى الكلمة التالية إلا إذا وافق الهيكل الحرفي لما نطقتَه. اقرأ على مهل، فإن بقيت الكلمة رماديّةً فأعِدها وحدها. على أنّ الأداة لا تحكم على مقدار قلقلتك ولا على صفتها، وإنما يُرجَع في ذلك إلى سماع المقرئ." }
+        ],
+        "nav": [
+          { "href": "/regle/ghunnah", "label": "الغنّة" },
+          { "href": "/regle/idgham", "label": "الإدغام" },
+          { "href": "/regle/ikhfa", "label": "الإخفاء" },
+          { "href": "/regle/madd", "label": "المدّ" },
+          { "href": "/sourate/112", "label": "الإخلاص" }
+        ],
+        "breadcrumb": [
+          { "name": "تلميذ", "item": "/ar" },
+          { "name": "القلقلة", "item": "/ar/regle/qalqalah" }
+        ],
+        "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      }
+    }
+  },
+  {
+    "slug": "ghunnah",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "id": {
+        "title": "Belajar ghunnah — dengung dua harakat | Tilmidh تلميذ",
+        "description": "Ghunnah: dengung sekitar dua harakat pada نّ dan مّ. Contoh dari Al-Fatihah dan An-Nas, latihan lewat mikrofon. Alat latihan, bukan ijazah.",
+        "h1": "Belajar ghunnah dengan mikrofon",
+        "body": [
+          { "t": "p", "html": "Ghunnah adalah dengung yang keluar dari rongga hidung selama kira-kira dua harakat. Panjang dua harakat itu bukan ukuran jam, melainkan ukuran ketukan bacaanmu sendiri: kira-kira selama mengucapkan dua huruf berharakat dengan tempo yang sedang. Yang menentukan benar atau tidaknya bukan angkanya, melainkan ketetapannya sepanjang bacaan." },
+          { "t": "h2", "html": "Kapan ghunnah wajib muncul" },
+          { "t": "p", "html": "Ghunnah paling jelas terdengar pada nun bertasydid <strong>نّ</strong> dan mim bertasydid <strong>مّ</strong>. Keduanya sering disebut sebagai induk ghunnah, karena dengungnya berdiri sendiri tanpa bergantung pada huruf sesudahnya. Selain itu, dengung juga muncul menyertai hukum idgham dengan ghunnah, iqlab, dan ikhfa." },
+          { "t": "table", "head": ["Keadaan", "Dengung"], "rows": [["نّ dan مّ bertasydid", "dua harakat, paling jelas"], ["Idgham dengan ghunnah (ي ن م و)", "dua harakat ketika melebur"], ["Iqlab (ب sesudah nun mati)", "dua harakat, bibir tidak rapat penuh"], ["Ikhfa (lima belas huruf)", "dua harakat, nun disamarkan"]] },
+          { "t": "h2", "html": "Contoh dari An-Nas" },
+          { "t": "ar", "html": "مَلِكِ ٱلنَّاسِ" },
+          { "t": "p", "html": "Pada <em>maliki n-nās</em> (An-Nas 114:2), nun bertasydid pada <em>an-nās</em> harus didengungkan penuh. Banyak yang membacanya terlalu cepat sehingga tasydid hilang dan kata itu terdengar seperti <em>anas</em>. Tahan dengungnya, rasakan getaran di hidung, baru lanjutkan." },
+          { "t": "h2", "html": "Cara menguji dirimu sendiri" },
+          { "t": "p", "html": "Ada satu cara sederhana. Tutuplah kedua lubang hidungmu dengan jari, lalu bacalah kata yang mengandung nun bertasydid. Bila dengungnya benar, suaranya akan tertahan dan terasa jelas berbeda. Bila tidak terjadi apa-apa, berarti dengungnya belum keluar dari hidung, dan kamu hanya menahan suara di mulut." },
+          { "t": "p", "html": "Kesalahan yang lain adalah dengung yang tidak tetap: kadang panjang, kadang pendek, dalam satu ayat yang sama. Telinga pendengar menangkap ketidaktetapan itu jauh lebih cepat daripada kekurangan panjangnya. Karena itu, latihlah satu ayat berulang-ulang sampai setiap dengung terdengar sama." },
+          { "t": "h2", "html": "Ghunnah dalam Al-Fatihah" },
+          { "t": "p", "html": "Dalam Al-Fatihah, dengung yang paling jelas terdapat pada kata <em>ar-rahmān</em> dan <em>ar-rahīm</em> jika mengikuti penulisan mushaf yang menyertakan tasydid pada nun. Karena kedua kata itu berulang dalam satu surat yang dibaca setiap rakaat, kesalahan pada dengungnya akan terbawa ke seluruh salatmu. Justru karena itulah surat ini menjadi tempat latihan yang paling berguna." },
+          { "t": "h2", "html": "Dengung bukan suara hidung yang dipaksakan" },
+          { "t": "p", "html": "Banyak pemula mengira ghunnah berarti berbicara melalui hidung dengan sengaja, sehingga suaranya berubah menjadi sengau sepanjang bacaan. Yang benar bukan demikian. Suara tetap keluar seperti biasa; hanya pada huruf tertentu sebagian aliran udara dialihkan ke rongga hidung selama dua harakat, lalu berhenti. Bila seluruh bacaanmu terdengar sengau, berarti dengungnya tidak lagi terbatas pada tempatnya." },
+          { "t": "cta", "ref": "114:2", "label": "Buka mikrofon pada ayat ini" },
+          { "t": "p", "html": "Tilmidh memeriksa setiap kata melalui mikrofon dan baru berpindah bila kata itu dikenali. Alat ini tidak mengukur panjang dengungmu dalam satuan waktu — untuk itu tetap diperlukan telinga seorang guru. Yang dilakukannya adalah memaksamu berhenti pada kata yang belum benar, dan itu sudah cukup untuk membentuk kebiasaan." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/114", "label": "An-Nas" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Ghunnah", "item": "/id/regle/ghunnah" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed). Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "ar": {
+        "title": "تمرين الغنّة بمقدار حركتين | تلميذ",
+        "description": "الغنّة: صوتٌ يخرج من الخيشوم بمقدار حركتين في النون والميم المشدّدتين. أمثلة من الفاتحة والناس، وتمرين بالميكروفون. أداة تمرين وليست إجازة.",
+        "h1": "تمرين الغنّة بالميكروفون",
+        "body": [
+          { "t": "p", "html": "الغنّة صوتٌ لذيذٌ يخرج من الخيشوم، أي من التجويف الأنفي، لا عمل للّسان فيه. ومقدارها حركتان، والحركة قدرُ قبضِ الإصبع أو بسطه في تقدير القدماء. وليس المقصود ضبطها بالثانية، وإنّما ثباتُها في تلاوتك كلّها على قدرٍ واحد؛ فاختلاف المقدار في الآية الواحدة أظهرُ للأذن من قِصَرِه." },
+          { "t": "h2", "html": "مواضع الغنّة" },
+          { "t": "p", "html": "أكملُ ما تكون الغنّة في النون والميم المشدَّدتين <strong>نّ</strong> و<strong>مّ</strong>، وتسمّيان أصلَ الغنّة، لأنّ الغنّة فيهما لازمةٌ لذاتهما لا لما بعدهما. ثمّ تأتي تبعًا في الإدغام بغنّة، والإقلاب، والإخفاء." },
+          { "t": "table", "head": ["الموضع", "الغنّة"], "rows": [["نّ ومّ المشدَّدتان", "حركتان، وهي أكملها"], ["الإدغام بغنّة (ي ن م و)", "حركتان عند الإدغام"], ["الإقلاب (الباء بعد النون الساكنة)", "حركتان مع عدم إطباق الشفتين"], ["الإخفاء (خمسة عشر حرفًا)", "حركتان مع إخفاء النون"]] },
+          { "t": "h2", "html": "مثال من سورة الناس" },
+          { "t": "ar", "html": "مَلِكِ ٱلنَّاسِ" },
+          { "t": "p", "html": "في <em>مَلِكِ النَّاسِ</em> نونٌ مشدَّدة، والواجب إشباع غنّتها. وكثيرٌ من القرّاء يمرّ عليها مسرعًا حتى يذهب أثر التشديد فتُسمَع الكلمة كأنّها بلا شدّة. فاحبس الصوت في الخيشوم، وتحسّس الاهتزاز في الأنف، ثم أكمِل." },
+          { "t": "h2", "html": "الغنّة في الفاتحة" },
+          { "t": "p", "html": "أظهر مواضعها في الفاتحة نون <em>الرَّحمٰن</em> ونون <em>الرَّحيم</em> على ما في رسم المصحف من التشديد. ولمّا كانت الفاتحة تُقرَأ في كلّ ركعة، فإنّ الخطأ في غنّتها ينتقل إلى صلاتك كلّها. ولهذا كانت أنفع موضعٍ للتمرين على الإطلاق." },
+          { "t": "h2", "html": "كيف تختبر نفسك" },
+          { "t": "p", "html": "طريقةٌ يسيرة: أمسِك أنفك بإصبعيك ثم اقرأ كلمةً فيها نونٌ مشدَّدة. فإن كانت الغنّة صحيحةً انحبس الصوت وتغيّر تغيّرًا بيّنًا. وإن لم يتغيّر شيءٌ فالصوت محبوسٌ في الفم ولم يصل إلى الخيشوم، وتلك علامة أنّ الغنّة لم تتحقّق أصلاً." },
+          { "t": "h2", "html": "الغنّة ليست خُنّةً في الصوت" },
+          { "t": "p", "html": "يظنّ بعض المبتدئين أنّ الغنّة أن يتكلّم من أنفه في تلاوته كلّها، فيصير صوته أخنّ من أوّله إلى آخره. وليس الأمر كذلك. الصوت يبقى على طبيعته، وإنّما يُصرَف بعضُ الهواء إلى الخيشوم عند حروفٍ مخصوصة بمقدار حركتين ثمّ ينقطع. فإذا كانت تلاوتك كلّها خُنّةً فقد خرجت الغنّة عن موضعها." },
+          { "t": "h2", "html": "مراتب الغنّة" },
+          { "t": "p", "html": "ذكر أهل الأداء أنّ الغنّة تتفاوت كمالاً ونقصًا على مراتب: أكملها في المشدَّد من النون والميم، ثمّ في المدغم بغنّة، ثمّ في المخفى، ثمّ في الساكن المظهَر، ثمّ في المتحرّك وهي أنقصها. ولستَ مطالبًا بحفظ هذا الترتيب لتصحّ تلاوتك، وإنّما فائدته أن تعلم أنّ الغنّة ليست بابًا واحدًا، وأنّ إشباعها في غير موضع الإشباع خطأٌ كتركها في موضعه." },
+          { "t": "cta", "ref": "114:2", "label": "افتح الميكروفون على هذه الآية" },
+          { "t": "p", "html": "يتحقّق تلميذ من كلّ كلمةٍ بالميكروفون ولا ينتقل إلا إذا عرفها. وهو لا يقيس مقدار غنّتك بالزمن، فذلك ممّا يُرجَع فيه إلى أذن المعلّم؛ وإنّما يُلزِمك بالوقوف عند الكلمة التي لم تصحّ، وهذا وحده كافٍ في تكوين العادة." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "القلقلة" },
+          { "href": "/regle/idgham", "label": "الإدغام" },
+          { "href": "/regle/ikhfa", "label": "الإخفاء" },
+          { "href": "/regle/madd", "label": "المدّ" },
+          { "href": "/sourate/114", "label": "الناس" }
+        ],
+        "breadcrumb": [
+          { "name": "تلميذ", "item": "/ar" },
+          { "name": "الغنّة", "item": "/ar/regle/ghunnah" }
+        ],
+        "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      }
+    }
+  },
+  {
+    "slug": "idgham",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "id": {
+        "title": "Belajar idgham — nun mati melebur | Tilmidh تلميذ",
+        "description": "Idgham: nun mati dan tanwin melebur ke huruf ي ن م و ل ر. Dengan dan tanpa ghunnah, contoh dan latihan mikrofon. Alat latihan, bukan ijazah.",
+        "h1": "Belajar idgham dengan mikrofon",
+        "body": [
+          { "t": "p", "html": "Idgham berarti memasukkan. Nun mati <strong>نْ</strong> atau tanwin yang bertemu salah satu dari enam huruf tertentu tidak lagi dibaca sebagai nun yang berdiri sendiri, melainkan lebur ke dalam huruf sesudahnya. Satu syarat yang sering dilupakan: peleburan ini hanya terjadi <strong>antara dua kata</strong>, bukan di dalam satu kata yang sama." },
+          { "t": "h2", "html": "Dua jenis idgham" },
+          { "t": "table", "head": ["Jenis", "Huruf", "Dengung"], "rows": [["Dengan ghunnah", "ي ن م و", "ada, sekitar dua harakat"], ["Tanpa ghunnah", "ل ر", "tidak ada sama sekali"]] },
+          { "t": "p", "html": "Pembagian ini penting karena kesalahan yang paling umum justru terletak di sini: mendengungkan lam dan ra padahal keduanya harus lebur tanpa dengung sedikit pun. Empat huruf pertama biasa dihafal dengan singkatan <em>yanmu</em>." },
+          { "t": "h2", "html": "Contoh peleburan tanpa dengung" },
+          { "t": "ar", "html": "مِن رَّبِّهِمْ" },
+          { "t": "p", "html": "Pada <em>min rabbihim</em>, nun mati pada <em>min</em> bertemu ra pada kata berikutnya. Nun itu hilang sepenuhnya, dan yang terdengar adalah ra yang seolah bertasydid: <em>mir-rabbihim</em>. Tidak ada sisa bunyi n, dan tidak ada dengung. Bila kamu masih mendengar bunyi n sedikit pun, peleburannya belum sempurna." },
+          { "t": "h2", "html": "Contoh peleburan dengan dengung" },
+          { "t": "ar", "html": "مَن يَعْمَلْ" },
+          { "t": "p", "html": "Pada <em>man yaʿmal</em>, nun mati bertemu ya. Nun lebur ke dalam ya, tetapi dengungnya tetap ditahan sekitar dua harakat: <em>may-yaʿmal</em>. Perbedaan dengan contoh sebelumnya hanya terletak pada dengung ini, dan justru di situlah kebanyakan orang tertukar." },
+          { "t": "h2", "html": "Mengapa harus antara dua kata" },
+          { "t": "p", "html": "Bila nun mati bertemu salah satu huruf itu di dalam satu kata yang sama, hukumnya bukan idgham melainkan izhar, yaitu nun dibaca jelas. Contohnya terdapat pada kata <em>dunyā</em> dan <em>bunyān</em>. Kata-kata semacam ini jumlahnya sedikit dan sebaiknya dihafal langsung, karena kaidahnya di sini justru kebalikan dari kebiasaan." },
+          { "t": "h2", "html": "Tanwin diperlakukan sama" },
+          { "t": "p", "html": "Semua kaidah di atas berlaku sama untuk tanwin, yaitu baris dua di akhir kata. Sebabnya sederhana: tanwin pada hakikatnya adalah bunyi nun mati yang tidak ditulis dengan huruf. Maka <em>rahīmun rabbuhum</em> diperlakukan persis seperti <em>min rabbihim</em>. Banyak pemula menghafal kaidah ini hanya untuk nun bertanda sukun, lalu bingung ketika bertemu tanwin di akhir ayat." },
+          { "t": "h2", "html": "Jangan tertukar dengan iqlab" },
+          { "t": "p", "html": "Bila nun mati atau tanwin bertemu huruf ba, hukumnya bukan idgham melainkan iqlab: nun berubah menjadi mim yang tidak sempurna, disertai dengung, dan kedua bibir tidak dirapatkan penuh. Huruf ba tidak termasuk enam huruf idgham, dan juga tidak termasuk huruf ikhfa. Ia berdiri sendiri dengan satu hukum khusus, dan itulah sebabnya ia mudah terlewat." },
+          { "t": "cta", "ref": "1:2", "label": "Buka mikrofon pada Al-Fatihah" },
+          { "t": "p", "html": "Bacalah pelan-pelan dan biarkan mikrofon memeriksa setiap kata. Bila satu kata tidak juga dikenali, kemungkinan besar peleburannya belum terjadi dan nun masih terdengar. Ulangi kata itu saja sampai bentuknya benar, lalu lanjutkan." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/1", "label": "Al-Fatihah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Idgham", "item": "/id/regle/idgham" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed). Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "ar": {
+        "title": "تمرين الإدغام: النون الساكنة والتنوين | تلميذ",
+        "description": "الإدغام: النون الساكنة والتنوين تُدغَم في «يرملون». بغنّة وبغير غنّة، مع الأمثلة وشرط كونه بين كلمتين، وتمرين بالميكروفون.",
+        "h1": "تمرين الإدغام بالميكروفون",
+        "body": [
+          { "t": "p", "html": "الإدغام إدخالُ حرفٍ ساكنٍ في حرفٍ متحرّكٍ بحيث يصيران حرفًا واحدًا مشدَّدًا. فإذا وقعت النون الساكنة <strong>نْ</strong> أو التنوين قبل أحد حروف <strong>يرملون</strong> لم تُنطَق النون مستقلّة، بل ذهبت في الحرف الذي بعدها. وثمّ شرطٌ يغفل عنه كثيرون: لا يكون الإدغام إلا <strong>بين كلمتين</strong>، لا في كلمةٍ واحدة." },
+          { "t": "h2", "html": "قسمان لا ثالث لهما" },
+          { "t": "table", "head": ["القسم", "الحروف", "الغنّة"], "rows": [["بغنّة", "ي ن م و", "حركتان"], ["بغير غنّة", "ل ر", "لا غنّة البتّة"]] },
+          { "t": "p", "html": "وأهمّية هذا التقسيم أنّ أكثر الخطأ واقعٌ فيه: يُغنّ القارئ عند اللام والراء وهما ممّا يُدغَم بغير غنّة أصلاً. والحروف الأربعة الأولى تُجمَع في قولهم <em>يَنْمُو</em>." },
+          { "t": "h2", "html": "مثالٌ بغير غنّة" },
+          { "t": "ar", "html": "مِن رَّبِّهِمْ" },
+          { "t": "p", "html": "في <em>مِن رَّبِّهِم</em> وقعت النون الساكنة قبل الراء، فذهبت النون بالكلّية وصارت الراء مشدَّدة: <em>مِرَّبِّهِم</em>. فلا يبقى للنون أثرٌ ولا غنّةٌ ألبتّة. فإن سمعتَ من نفسك بقيّةَ نونٍ فالإدغام لم يتمّ." },
+          { "t": "h2", "html": "مثالٌ بغنّة" },
+          { "t": "ar", "html": "مَن يَعْمَلْ" },
+          { "t": "p", "html": "وفي <em>مَن يَعمَل</em> وقعت النون قبل الياء، فأُدغِمت فيها مع بقاء الغنّة مقدارَ حركتين: <em>مَيَّعمَل</em>. والفرق بين المثالين في الغنّة وحدها، وهنا يقع الالتباس عند أكثر المبتدئين." },
+          { "t": "h2", "html": "لِمَ اشتُرِط أن يكون بين كلمتين" },
+          { "t": "p", "html": "إذا اجتمعت النون الساكنة وأحدُ هذه الحروف في كلمةٍ واحدة وجب الإظهار لا الإدغام، وسمّي إظهارًا مطلقًا. ومواضعه في القرآن قليلةٌ محصورة، منها <em>الدُّنيا</em> و<em>بُنيان</em> و<em>صِنوان</em> و<em>قِنوان</em>. والأحسن حفظُها بأعيانها، لأنّ حكمها على خلاف ما اعتادته الأذن." },
+          { "t": "h2", "html": "التنوين كالنون الساكنة" },
+          { "t": "p", "html": "كلّ ما تقدّم جارٍ في التنوين أيضًا، إذ حقيقته نونٌ ساكنةٌ زائدةٌ لا تُكتَب. فحكمُ <em>رَحيمٌ رَبُّهُم</em> حكمُ <em>مِن رَبِّهِم</em> سواءً بسواء. وكثيرٌ من المبتدئين يحفظ الباب في النون المرسومة وحدها، ثمّ يحتار عند التنوين في أواخر الآيات." },
+          { "t": "h2", "html": "ولا تخلط بينه وبين الإقلاب" },
+          { "t": "p", "html": "فإن وقعت الباء بعد النون الساكنة أو التنوين فالحكم الإقلاب لا الإدغام: تُقلَب النون ميمًا مخفاةً مع الغنّة، ولا تُطبَق الشفتان إطباقًا تامًّا. فالباء ليست من حروف الإدغام ولا من حروف الإخفاء، بل انفردت بحكمٍ خاصّ، ولذلك كثُر سهو الناس عنها." },
+          { "t": "h2", "html": "الكامل والناقص" },
+          { "t": "p", "html": "قسّم أهل الأداء الإدغام إلى كاملٍ وناقص. فالكامل ما ذهبت فيه ذات الحرف وصفته معًا، وذلك في النون والميم واللام والراء. والناقص ما ذهبت فيه الذات وبقيت الصفة، وهي الغنّة، وذلك في الياء والواو. ولهذا قيل إنّ الإدغام في <em>مَن يَعمَل</em> ناقص، لأنّ النون ذهبت وبقي أثرها في الخيشوم. وهذا التقسيم يفسّر لك لماذا بقيت الغنّة في أربعةٍ دون اثنين، بدل أن تحفظه حفظًا مجرّدًا." },
+          { "t": "cta", "ref": "1:2", "label": "افتح الميكروفون على الفاتحة" },
+          { "t": "p", "html": "اقرأ على مهلٍ ودع الميكروفون يتحقّق من كلّ كلمة. فإن تعذّرت كلمةٌ فالغالب أنّ الإدغام لم يتمّ وأنّ أثر النون باقٍ. أعِد تلك الكلمة وحدها حتى تستقيم هيئتها، ثمّ امضِ." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "القلقلة" },
+          { "href": "/regle/ghunnah", "label": "الغنّة" },
+          { "href": "/regle/ikhfa", "label": "الإخفاء" },
+          { "href": "/regle/madd", "label": "المدّ" },
+          { "href": "/sourate/1", "label": "الفاتحة" }
+        ],
+        "breadcrumb": [
+          { "name": "تلميذ", "item": "/ar" },
+          { "name": "الإدغام", "item": "/ar/regle/idgham" }
+        ],
+        "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      }
+    }
+  },
+  {
+    "slug": "ikhfa",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "id": {
+        "title": "Belajar ikhfa — nun mati disamarkan | Tilmidh تلميذ",
+        "description": "Ikhfa: nun mati disamarkan sebelum lima belas huruf, disertai dengung dua harakat. Contoh dan latihan mikrofon. Alat latihan, bukan ijazah.",
+        "h1": "Belajar ikhfa dengan mikrofon",
+        "body": [
+          { "t": "p", "html": "Ikhfa berarti menyamarkan. Nun mati <strong>نْ</strong> atau tanwin yang bertemu salah satu dari lima belas huruf tidak dibaca jelas seperti izhar, tetapi juga tidak lebur sepenuhnya seperti idgham. Bunyinya berada di antara keduanya, disertai dengung sekitar dua harakat." },
+          { "t": "h2", "html": "Lima belas huruf ikhfa" },
+          { "t": "p", "html": "Huruf-hurufnya adalah semua huruf hijaiyah selain enam huruf halq untuk izhar, empat huruf <em>yanmu</em> dan dua huruf lam serta ra untuk idgham, dan ba untuk iqlab. Yang tersisa itulah huruf ikhfa: <strong>ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك</strong>. Menghafal daftar sisa ini biasanya lebih mudah daripada menghafal kelima belasnya satu per satu." },
+          { "t": "h2", "html": "Bagaimana bunyinya sebenarnya" },
+          { "t": "p", "html": "Lidah tidak menempel pada tempat keluarnya nun. Ia bersiap ke posisi huruf sesudahnya, sementara suara sudah mengalir ke hidung. Hasilnya menyerupai bunyi ng yang samar, lalu langsung disusul huruf berikutnya. Karena posisi lidah mengikuti huruf sesudahnya, warna bunyi ikhfa sedikit berbeda dari satu huruf ke huruf lain, dan itu memang wajar." },
+          { "t": "h2", "html": "Contoh dari An-Nas" },
+          { "t": "ar", "html": "مِن شَرِّ ٱلْوَسْوَاسِ" },
+          { "t": "p", "html": "Pada <em>min sharri l-waswās</em> (An-Nas 114:4), nun mati pada <em>min</em> bertemu syin. Nun tidak diucapkan jelas dan tidak pula hilang: ia disamarkan sambil didengungkan, lalu syin diucapkan penuh. Bila kamu mendengar n yang tegas, itu izhar dan keliru di tempat ini. Bila nun hilang sama sekali, itu idgham dan juga keliru." },
+          { "t": "h2", "html": "Kesalahan yang paling sering" },
+          { "t": "p", "html": "Kesalahan yang paling umum adalah menempelkan lidah ke langit-langit, sehingga nun terdengar jelas dan hukum ikhfa batal. Kesalahan kedua adalah memanjangkan dengung melebihi dua harakat, biasanya karena ingin memastikan dengungnya terdengar. Kesalahan ketiga adalah menghilangkan dengung sepenuhnya karena tergesa-gesa." },
+          { "t": "h2", "html": "Ikhfa juga berlaku untuk tanwin" },
+          { "t": "p", "html": "Seperti pada idgham, semua kaidah ikhfa berlaku sama untuk tanwin, karena tanwin adalah bunyi nun mati yang tidak dituliskan. Contohnya terdapat pada <em>samīʿun ʿalīm</em> dan susunan sejenis yang banyak menutup ayat. Karena penutup ayat sering dibaca cepat, ikhfa pada tanwin justru menjadi tempat kesalahan yang paling sering luput dari perhatian." },
+          { "t": "h2", "html": "Mengapa ikhfa terasa paling sulit" },
+          { "t": "p", "html": "Ikhfa sukar karena ia menuntut dua hal sekaligus: menahan lidah agar tidak menempel, dan menahan dengung selama dua harakat. Izhar hanya menuntut kejelasan, idgham hanya menuntut peleburan, sedangkan ikhfa berada di tengah dan tidak punya patokan bunyi yang tegas. Jalan keluarnya adalah melatih satu huruf saja sampai tetap, misalnya ta, sebelum berpindah ke huruf yang lain." },
+          { "t": "cta", "ref": "114:4", "label": "Buka mikrofon pada ayat ini" },
+          { "t": "p", "html": "Latihlah satu ayat saja sampai bentuknya tetap, baru berpindah. Tilmidh memeriksa kata per kata melalui mikrofon dan berhenti pada kata yang belum benar, sehingga kamu tidak terbiasa melewati kesalahan tanpa menyadarinya." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/114", "label": "An-Nas" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Ikhfa", "item": "/id/regle/ikhfa" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed). Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "ar": {
+        "title": "تمرين الإخفاء: النون الساكنة عند خمسة عشر حرفًا | تلميذ",
+        "description": "الإخفاء: النون الساكنة والتنوين تُخفى عند خمسة عشر حرفًا مع الغنّة. صفة الأداء، ومثال من سورة الناس، وتمرين بالميكروفون.",
+        "h1": "تمرين الإخفاء بالميكروفون",
+        "body": [
+          { "t": "p", "html": "الإخفاء نطقٌ بالحرف على صفةٍ بين الإظهار والإدغام، عارٍ عن التشديد، مع بقاء الغنّة. فإذا وقعت النون الساكنة <strong>نْ</strong> أو التنوين قبل أحد خمسة عشر حرفًا لم تُظهَر النون إظهارًا بيّنًا ولم تُدغَم إدغامًا تامًّا، بل كانت بينهما مع غنّةٍ مقدارها حركتان." },
+          { "t": "h2", "html": "حروف الإخفاء الخمسة عشر" },
+          { "t": "p", "html": "هي ما بقي من حروف الهجاء بعد إخراج حروف الإظهار الستّة الحلقيّة، وحروف <em>يرملون</em> الستّة للإدغام، والباء للإقلاب. والباقي: <strong>ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك</strong>. وحفظُها بطريق الباقي أيسر من حفظها واحدًا واحدًا." },
+          { "t": "h2", "html": "صفة الأداء" },
+          { "t": "p", "html": "لا يلتصق طرف اللسان بمخرج النون، بل يتهيّأ لمخرج الحرف الذي بعدها، والصوت جارٍ في الخيشوم. فيُسمَع صوتٌ بين النون والغنّة، ثمّ يُنطَق الحرف بعده كاملاً. ولأنّ اللسان يتهيّأ لما بعده، اختلفت هيئة الإخفاء يسيرًا من حرفٍ إلى حرف، وذلك أمرٌ مقصود لا عيب فيه." },
+          { "t": "h2", "html": "مثال من سورة الناس" },
+          { "t": "ar", "html": "مِن شَرِّ ٱلْوَسْوَاسِ" },
+          { "t": "p", "html": "في <em>مِن شَرِّ الوَسواس</em> وقعت النون الساكنة قبل الشين. فلا تُنطَق النون بيّنةً ولا تذهب بالكلّية، بل تُخفى مع الغنّة ثمّ تُنطَق الشين كاملة. فإن سمعتَ نونًا صريحةً فذلك إظهارٌ وهو خطأٌ في هذا الموضع، وإن ذهبت النون رأسًا فذلك إدغامٌ وهو خطأٌ كذلك." },
+          { "t": "h2", "html": "والتنوين مثلها" },
+          { "t": "p", "html": "وكلّ ما تقدّم جارٍ في التنوين، لأنّه نونٌ ساكنةٌ غير مكتوبة. ومنه <em>سميعٌ عليم</em> وما جرى مجراه ممّا تُختَم به الآيات. ولمّا كانت أواخر الآيات تُقرَأ على عجلٍ غالبًا، صار الإخفاء في التنوين من أكثر المواضع التي يمرّ فيها الخطأ من غير أن يُنتَبه له." },
+          { "t": "h2", "html": "لِمَ كان الإخفاء أصعبها" },
+          { "t": "p", "html": "لأنّه يطلب أمرين معًا: كفّ اللسان عن المخرج، وحبس الغنّة مقدار حركتين. أمّا الإظهار فيطلب البيان وحده، والإدغام يطلب الإدخال وحده، والإخفاء بينهما ولا ضابط صوتيّ ظاهر له. والمخرج من ذلك أن تُفرِد حرفًا واحدًا بالتمرين حتى تستقرّ هيئته، كالتاء مثلاً، ثمّ تنتقل إلى غيره." },
+          { "t": "h2", "html": "أخطاء شائعة" },
+          { "t": "p", "html": "أوّلها إلصاق اللسان بالحنك فتظهر النون ويبطل الحكم. وثانيها إطالة الغنّة فوق حركتين، وأكثر ما يقع ذلك ممّن يريد أن يتحقّق من سماعها. وثالثها ذهاب الغنّة بالكلّية من العجلة. وعلاج الثلاثة واحد: التمهّل وتكرار الآية الواحدة حتى تتّحد هيئتها." },
+          { "t": "h2", "html": "مراتب الإخفاء" },
+          { "t": "p", "html": "ليس الإخفاء على درجةٍ واحدة، بل يتفاوت بقرب مخرج الحرف من مخرج النون وبعده عنه. فهو أعلى ما يكون عند الطاء والدال والتاء لقربها من مخرج النون، وأدنى ما يكون عند القاف والكاف لبعدهما، وأوسط فيما بين ذلك. ولا يُطلَب منك أن تتكلّف هذا التفاوت، فإنّه يقع بطبعه إذا هيّأتَ لسانك لمخرج الحرف الذي بعد النون؛ وإنّما ذُكِر لتعلم أنّ اختلاف الهيئة من حرفٍ إلى حرفٍ ليس خطأً منك." },
+          { "t": "cta", "ref": "114:4", "label": "افتح الميكروفون على هذه الآية" },
+          { "t": "p", "html": "تمرّن على آيةٍ واحدةٍ حتى تثبت هيئتها ثمّ انتقل. ويقف بك تلميذ عند الكلمة التي لم تصحّ، فلا تعتاد تجاوز الخطأ من غير أن تشعر به." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "القلقلة" },
+          { "href": "/regle/ghunnah", "label": "الغنّة" },
+          { "href": "/regle/idgham", "label": "الإدغام" },
+          { "href": "/regle/madd", "label": "المدّ" },
+          { "href": "/sourate/114", "label": "الناس" }
+        ],
+        "breadcrumb": [
+          { "name": "تلميذ", "item": "/ar" },
+          { "name": "الإخفاء", "item": "/ar/regle/ikhfa" }
+        ],
+        "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      }
+    }
+  },
+  {
+    "slug": "madd",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "id": {
+        "title": "Belajar madd — panjang bacaan | Tilmidh تلميذ",
+        "description": "Madd: panjang dua, empat sampai lima, dan enam harakat. Madd tabii, muttasil, munfasil, lazim. Contoh dari Al-Fatihah dan latihan mikrofon.",
+        "h1": "Belajar madd dengan mikrofon",
+        "body": [
+          { "t": "p", "html": "Madd berarti memanjangkan. Ketika sebuah harakat bertemu huruf mad yang sejenis — alif sesudah fathah, wau sesudah dammah, ya sesudah kasrah — bacaannya dipanjangkan. Panjang paling dasar adalah dua harakat, dan dari sanalah semua jenis madd yang lain dihitung." },
+          { "t": "h2", "html": "Jenis madd dan panjangnya" },
+          { "t": "table", "head": ["Jenis", "Sebab", "Panjang"], "rows": [["Madd tabii", "huruf mad tanpa sebab tambahan", "2 harakat"], ["Madd muttasil", "hamzah dalam kata yang sama", "4–5 harakat"], ["Madd munfasil", "hamzah pada kata berikutnya", "4–5 harakat"], ["Madd lazim", "sukun asli atau tasydid sesudah mad", "6 harakat"]] },
+          { "t": "p", "html": "Angka-angka di atas mengikuti riwayat Hafs dari Asim, yaitu riwayat yang dipakai di sebagian besar mushaf cetak. Yang paling sering menjadi masalah bukanlah panjang tiap jenis, melainkan ketetapannya: madd yang sama harus dibaca dengan panjang yang sama sepanjang bacaan." },
+          { "t": "h2", "html": "Contoh madd lazim dalam Al-Fatihah" },
+          { "t": "ar", "html": "وَلَا ٱلضَّآلِّينَ" },
+          { "t": "p", "html": "Pada <em>wa lā d-dāllīn</em> (Al-Fatihah 1:7) terdapat madd lazim, karena sesudah alif mad terdapat lam bertasydid. Panjangnya enam harakat, dan inilah madd terpanjang dalam surat ini. Memendekkannya adalah kesalahan yang mudah didengar oleh telinga yang terlatih, dan sekaligus kesalahan yang paling sering terjadi pada pembaca pemula." },
+          { "t": "h2", "html": "Cara melatih ketetapan panjang" },
+          { "t": "p", "html": "Hitunglah dengan jari, bukan dengan perasaan. Satu ketukan jari untuk satu harakat, dengan tempo yang tetap. Bacalah madd tabii dengan dua ketukan, lalu madd lazim dengan enam ketukan, berulang-ulang pada ayat yang sama. Sesudah beberapa hari, tanganmu tidak lagi diperlukan karena ukurannya sudah berpindah ke telinga." },
+          { "t": "p", "html": "Perlu diketahui dengan jujur: alat ini tidak mengukur panjang maddmu dalam satuan waktu. Mikrofon memeriksa kerangka konsonan sebuah kata, bukan durasi vokalnya. Untuk memastikan panjang bacaan, tetap diperlukan telinga seorang guru. Yang dapat dilakukan Tilmidh adalah memaksamu membaca pelan dan berhenti pada kata yang belum benar." },
+          { "t": "h2", "html": "Madd ketika berhenti di akhir ayat" },
+          { "t": "p", "html": "Ketika kamu berhenti pada akhir ayat, sering muncul madd arid lissukun: huruf mad diikuti huruf mati karena waqaf. Panjangnya boleh dua, empat, atau enam harakat. Yang penting bukan angka mana yang kamu pilih, melainkan bahwa kamu memakai pilihan yang sama untuk semua kejadian serupa dalam satu bacaan. Berganti-ganti panjang di tengah surat terdengar lebih janggal daripada memilih panjang yang pendek." },
+          { "t": "h2", "html": "Kesalahan memanjangkan yang bukan madd" },
+          { "t": "p", "html": "Kesalahan yang berlawanan juga umum terjadi: memanjangkan huruf yang sebenarnya tidak dipanjangkan, hanya karena berada di akhir kata atau karena mengikuti lagu bacaan yang pernah didengar. Panjang dalam bacaan Al-Quran bukan hiasan suara, melainkan kaidah yang punya sebab tertulis. Bila kamu tidak dapat menunjukkan sebabnya pada tulisan, kemungkinan besar panjang itu tidak seharusnya ada." },
+          { "t": "cta", "ref": "1:7", "label": "Buka mikrofon pada ayat ini" },
+          { "t": "p", "html": "Sesudah Al-Fatihah, cobalah surat-surat pendek yang sudah kamu hafal. Madd tabii muncul hampir di setiap ayat, sehingga latihannya tidak pernah kekurangan bahan." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/sourate/1", "label": "Al-Fatihah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Madd", "item": "/id/regle/madd" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed). Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "ar": {
+        "title": "تمرين المدّ: حركتان وأربع وستّ | تلميذ",
+        "description": "المدّ الطبيعي والمتّصل والمنفصل واللازم بمقاديرها برواية حفص، مع مدّ الضالّين في الفاتحة، وتمرين بالميكروفون كلمةً بكلمة.",
+        "h1": "تمرين المدّ بالميكروفون",
+        "body": [
+          { "t": "p", "html": "المدّ إطالةُ الصوت بحرفٍ من حروف المدّ الثلاثة: الألف الساكنة المفتوح ما قبلها، والواو الساكنة المضموم ما قبلها، والياء الساكنة المكسور ما قبلها. وأصلُ المدّ حركتان، وهو المدّ الطبيعي، وعليه تُبنى سائر المقادير." },
+          { "t": "h2", "html": "المقادير برواية حفص" },
+          { "t": "table", "head": ["النوع", "السبب", "المقدار"], "rows": [["الطبيعي", "لا سبب بعده من همزٍ ولا سكون", "حركتان"], ["المتّصل", "همزٌ بعده في الكلمة نفسها", "أربع أو خمس"], ["المنفصل", "همزٌ في أوّل الكلمة التالية", "أربع أو خمس"], ["اللازم", "سكونٌ أصليّ أو شدّةٌ بعده", "ستّ"]] },
+          { "t": "p", "html": "وهذه المقادير على رواية حفص عن عاصم، وهي رواية أكثر المصاحف المطبوعة. وأكثر ما يقع فيه الخلل ليس معرفةَ المقدار، بل الثباتُ عليه: فالمدّ الواحد ينبغي أن يُقرَأ بقدرٍ واحدٍ في التلاوة كلّها." },
+          { "t": "h2", "html": "المدّ اللازم في الفاتحة" },
+          { "t": "ar", "html": "وَلَا ٱلضَّآلِّينَ" },
+          { "t": "p", "html": "في <em>وَلا الضَّالِّين</em> مدٌّ لازمٌ كلميٌّ مثقَّل، لأنّ بعد ألف المدّ لامًا مشدَّدة. ومقداره ستّ حركات، وهو أطول مدٍّ في السورة. وقصرُه من أظهر ما تلتقطه الأذن المدرَّبة، وهو في الوقت نفسه أكثر ما يقع فيه المبتدئون." },
+          { "t": "h2", "html": "المدّ العارض للسكون" },
+          { "t": "p", "html": "وإذا وقفتَ على أواخر الآيات عرض لك مدٌّ عارضٌ للسكون، وهو أن يأتي بعد حرف المدّ حرفٌ ساكنٌ بسبب الوقف. ويجوز فيه القصر حركتين، والتوسّط أربعًا، والإشباع ستًّا. وليس المهمّ أيَّ المقادير اخترتَ، بل أن تلزم ما اخترتَه في نظائره كلّها؛ فالتنقّل بين المقادير في السورة الواحدة أنكرُ للسمع من اختيار أقصرها." },
+          { "t": "h2", "html": "كيف تضبط المقدار" },
+          { "t": "p", "html": "احسِب بالإصبع لا بالإحساس. حركةٌ واحدة لكلّ قبضةٍ أو بسطة، على وتيرةٍ واحدة. اقرأ المدّ الطبيعي بحركتين، ثمّ المدّ اللازم بستٍّ، على الآية نفسها مرّاتٍ متتابعة. وبعد أيّامٍ يستغني عن اليد، لأنّ المقدار يكون قد انتقل إلى الأذن." },
+          { "t": "h2", "html": "مدٌّ لا سبب له" },
+          { "t": "p", "html": "ويقع الخطأ المقابل كثيرًا: أن يُمدّ ما لا مدّ فيه، لمجرّد أنّه في آخر الكلمة، أو تقليدًا للحنٍ سُمِع من قارئ. والمدّ في التلاوة حكمٌ له سببٌ مرسوم، لا زينةٌ صوتيّة. فإن لم تستطع أن تُشير إلى سببه في الرسم فالغالب أنّه لا موضع له." },
+          { "t": "p", "html": "وينبغي أن يُعلَم بصراحة أنّ هذه الأداة لا تقيس مقدار مدّك بالزمن؛ إنّما يتحقّق الميكروفون من هيكل الكلمة الحرفيّ لا من طول حركاتها. فضبط المقادير ممّا يُرجَع فيه إلى سماع المقرئ. وغاية ما تصنعه الأداة أن تُلزِمك التمهّل والوقوف عند الكلمة التي لم تصحّ." },
+          { "t": "cta", "ref": "1:7", "label": "افتح الميكروفون على هذه الآية" },
+          { "t": "p", "html": "وبعد الفاتحة انتقل إلى قصار السور ممّا تحفظه، فإنّ المدّ الطبيعي يكاد لا تخلو منه آية، فلا ينقطع لك مادّة التمرين." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "القلقلة" },
+          { "href": "/regle/ghunnah", "label": "الغنّة" },
+          { "href": "/regle/idgham", "label": "الإدغام" },
+          { "href": "/regle/ikhfa", "label": "الإخفاء" },
+          { "href": "/sourate/1", "label": "الفاتحة" }
+        ],
+        "breadcrumb": [
+          { "name": "تلميذ", "item": "/ar" },
+          { "name": "المدّ", "item": "/ar/regle/madd" }
+        ],
+        "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      }
+    }
+  }
+]

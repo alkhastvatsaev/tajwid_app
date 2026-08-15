@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Practice Sūrat al-Falaq — Tilmidh</title>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
+
     <meta name="description" content="Falaq (113) word-by-word with Tilmidh mic. Qalqalah and clear articulation. Training tool — not an ijazah.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
     <link rel="canonical" href="https://tilmidh.app/en/sourate/113">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en/sourate/113">
     <link rel="alternate" hreflang="fr" href="https://tilmidh.app/sourate/113">
@@ -19,7 +23,7 @@
     <meta property="og:image:alt" content="Al-Falaq — Tilmidh">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://tilmidh.app/img/og/en/surah-al-falaq.png">
-                                                                                                <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+                                                                                                                                                                        <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="/manifest.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <style>
@@ -38,17 +42,232 @@
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
 
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
             .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
         .hero-img img { display: block; width: 100%; height: auto; }
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+        .media-illu { margin: 0.15rem 0 1.85rem; padding: 0; }
+        .media-illu .demo-stage {
+            border-radius: 22px;
+            background: #fff;
+            padding: 1.85rem 1.05rem 1.25rem;
+            box-shadow: 0 18px 50px rgba(28, 22, 16, 0.045);
+        }
+        .media-illu .demo-verse {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1.05rem 0.45rem;
+            direction: rtl;
+        }
+        .media-illu .word-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1 1 38%;
+            max-width: 11rem;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @media (min-width: 540px) {
+            .media-illu .demo-verse {
+                flex-wrap: nowrap;
+                gap: 0.45rem 1.65rem;
+            }
+            .media-illu .word-box {
+                flex: 0 1 auto;
+                max-width: none;
+                min-width: 3.6rem;
+            }
+        }
+        .media-illu .marks {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 18px;
+            margin-bottom: 0.2rem;
+            direction: ltr;
+        }
+        .media-illu .pips {
+            display: flex;
+            gap: 5px;
+            pointer-events: none;
+        }
+        .media-illu .pips i {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #d97706;
+            display: block;
+            opacity: 0;
+            transform: scale(0.35);
+        }
+        .media-illu .pips-mute i { background: #c5c0b8; }
+        .media-illu .ok {
+            position: relative;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: #059669;
+            box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.4);
+        }
+        .media-illu .ok::after {
+            content: '';
+            position: absolute;
+            left: 4.5px; top: 2.6px;
+            width: 3.2px; height: 6.2px;
+            border: solid #fff;
+            border-width: 0 1.6px 1.6px 0;
+            transform: rotate(45deg);
+        }
+        .media-illu .arabic-word {
+            font-family: 'KFGQPC Colored';
+            font-weight: 700;
+            font-size: clamp(1.55rem, 6.6vw, 2.55rem);
+            line-height: 1.65;
+            direction: rtl;
+            white-space: nowrap;
+            font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
+        }
+        .media-illu .word-box.correct .arabic-word {
+            font-family: 'KFGQPC Colored';
+        }
+        .media-illu .translit {
+            margin-top: 0.28rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.045em;
+            color: #9a958c;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
+        }
+        .media-illu .demo-hint {
+            margin: 1.15rem 0 0;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a857c;
+            letter-spacing: 0.02em;
+            opacity: 0;
+        }
+        .media-illu figcaption {
+            margin: 0.75rem 0 0;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+        .media-illu.is-alive .word-box {
+            animation: demo-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: calc(var(--i, 0) * 95ms);
+        }
+        .media-illu.is-alive .pips i {
+            animation: pip-in 0.38s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+            animation-delay: calc(0.42s + var(--i, 0) * 95ms + var(--p, 0) * 140ms);
+        }
+        .media-illu.is-alive .ok {
+            opacity: 1; transform: scale(1);
+            transition: opacity 0.28s ease 0.95s, transform 0.4s cubic-bezier(0.2,0.9,0.2,1) 0.95s;
+        }
+        .media-illu.is-alive .demo-hint {
+            opacity: 1;
+            transition: opacity 0.45s ease 0.7s;
+        }
+        @keyframes demo-in {
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes pip-in {
+            to { opacity: 1; transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .media-illu .word-box,
+            .media-illu .demo-hint,
+            .media-illu .pips i,
+            .media-illu .ok { opacity: 1; transform: none; animation: none; }
+        }
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .media-video { display: none; }
     </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg"},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/en/sourate/113#page","url":"https://tilmidh.app/en/sourate/113","name":"Practice Sūrat al-Falaq — Tilmidh","description":"Falaq (113) word-by-word with Tilmidh mic. Qalqalah and clear articulation. Training tool — not an ijazah.","inLanguage":"en","isPartOf":{"@id":"https://tilmidh.app/#website"}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/en"},{"@type":"ListItem","position":2,"name":"Practice Sūrat al-Falaq","item":"https://tilmidh.app/en/sourate/113"}]}</script>
 </head>
 <body>
     <header><a href="/">Tilmidh تلميذ</a> · <a href="/en">EN</a> · <a href="/best-tajwid-app-for-beginners">Beginners</a></header>
     <main>
+    <ol class="page-root copy-sidebar" role="presentation">
+      <li>
         <h1>Practice Sūrat al-Falaq</h1>
         <figure class="hero-img">
-            <img src="/img/page/en/surah-al-falaq.webp" alt="Al-Falaq — Tilmidh" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/img/page/en/surah-al-falaq.webp" alt="Al-Falaq — Tilmidh" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
+        <figure class="media-illu" data-illu="falaq">
+            <div class="demo-stage">
+                <div class="demo-verse" dir="rtl" lang="ar">
+                <span class="word-box correct" style="--i:0"><span class="marks"><span class="pips" aria-hidden="true"></span><span class="ok" aria-hidden="true"></span></span><span class="arabic-word">قُلۡ</span><span class="translit">qul</span></span>
+                <span class="word-box" style="--i:1"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i></span></span><span class="arabic-word">أَعُوذُ</span><span class="translit">aʿūdhu</span></span>
+                <span class="word-box" style="--i:2"><span class="marks"><span class="pips" aria-hidden="true"></span></span><span class="arabic-word">بِرَبِّ</span><span class="translit">birabbi</span></span>
+                <span class="word-box" style="--i:3"><span class="marks"><span class="pips" aria-hidden="true"></span></span><span class="arabic-word">ٱلۡفَلَقِ</span><span class="translit">l-falaq</span></span>
+                </div>
+                <p class="demo-hint">Al-Falaq</p>
+            </div>
+            <figcaption>Al-Falaq in Tilmidh.</figcaption>
+        </figure>
+        <!-- .media-video reserved for later -->
+
+
+
+
+
+
+
+
+
+
+
+
         <p>Falaq is second in the boot after Ikhlāṣ. Another <em>qul</em>, then refuge vocabulary that many rush. Tilmidh forces word-by-word so <em>aʿūdhu</em>, <em>bi-rabbi</em>, <em>al-falaq</em> each earn a green box.</p>
         <p class="ar">قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ</p>
         <p>Use this surah to stabilize qalqalah after Ikhlāṣ and before Nās. Rules: <a href="/en/regle/qalqalah">qalqalah</a>, <a href="/en/regle/madd">madd</a>. Positioning for beginners who pray: <a href="/best-tajwid-app-for-beginners">best tajwid app for beginners</a>.</p>
@@ -61,6 +280,10 @@
         <footer>
             <p>Tilmidh (تلميذ, “student”) is a recitation training tool. Text from Quran.com (Uthmani tajweed). Not an ijazah, not scholar-certified, not a substitute for a muqriʾ.</p>
         </footer>
+    </li>
+    </ol>
     </main>
+
+    <script defer src="/js/illu-motion.js"></script>
 </body>
 </html>

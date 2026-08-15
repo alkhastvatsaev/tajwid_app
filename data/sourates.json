@@ -1,0 +1,206 @@
+[
+  {
+    "slug": "67",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "fr": {
+        "title": "Sourate Al-Mulk en phonétique — réciter avec tajwid | Tilmidh تلميذ",
+        "description": "Al-Mulk (67) mot à mot : texte arabe, phonétique, règles de tajwid propres à la sourate, et micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
+        "h1": "Réciter Al-Mulk mot à mot",
+        "body": [
+          {
+            "t": "p",
+            "html": "Al-Mulk est la soixante-septième sourate, trente versets, révélée à La Mecque. Beaucoup la lisent le soir, et c’est souvent la première sourate longue qu’on apprend après les courtes de la fin du mushaf. Trente versets, c’est le bon format pour passer du par cœur mécanique à la récitation contrôlée : assez long pour que la fatigue se sente, assez court pour être repris en entier dans une séance."
+          },
+          {
+            "t": "ar",
+            "html": "تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ"
+          },
+          {
+            "t": "p",
+            "html": "<em>Tabāraka lladhī biyadihi l-mulku wa huwa ʿalā kulli shayʾin qadīr.</em> « Béni soit Celui dans la main de qui est la royauté, et qui est puissant sur toute chose. » Le premier verset donne déjà le ton de la sourate : elle parle de la souveraineté, de la création, et de ce que l’homme ne maîtrise pas."
+          },
+          {
+            "t": "h2",
+            "html": "Les règles qui reviennent le plus dans cette sourate"
+          },
+          {
+            "t": "p",
+            "html": "Trois familles dominent, et c’est ce qui fait d’Al-Mulk un bon terrain d’entraînement. D’abord le <a href=\"/regle/madd\">madd</a> : les fins de versets en <em>-īr</em>, <em>-ūr</em>, <em>-īn</em> imposent un allongement de pause, à tenir de la même façon d’un verset à l’autre. C’est là que la plupart des lecteurs se trahissent : ils allongent beaucoup au début, puis raccourcissent à mesure qu’ils fatiguent."
+          },
+          {
+            "t": "p",
+            "html": "Ensuite la <a href=\"/regle/ghunnah\">ghunnah</a>, très présente à cause des nombreux <em>inna</em> et <em>man</em>. Enfin la <a href=\"/regle/qalqalah\">qalqalah</a>, notamment sur le <strong>ق</strong> de <em>qadīr</em> si tu t’arrêtes dessus, et sur les dāl en fin de verset."
+          },
+          {
+            "t": "h2",
+            "html": "Le verset qui pose le plus de problèmes"
+          },
+          {
+            "t": "ar",
+            "html": "تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ"
+          },
+          {
+            "t": "p",
+            "html": "Au verset 8, <em>takādu tamayyazu mina l-ghayẓ</em> réunit plusieurs difficultés en peu de mots : le <strong>ظ</strong> emphatique que beaucoup prononcent comme un <em>z</em> ordinaire, le <strong>غ</strong> qui n’est pas un <em>g</em>, et un <em>tamayyazu</em> dont la shadda doit s’entendre. Prends ce verset seul, répète-le dix fois, puis reprends la sourate depuis le début."
+          },
+          {
+            "t": "h2",
+            "html": "Comment travailler trente versets sans s’épuiser"
+          },
+          {
+            "t": "p",
+            "html": "Ne récite pas la sourate entière à chaque séance. Coupe-la en trois blocs de dix versets et travaille un bloc par jour, en reprenant toujours les deux derniers versets du bloc précédent pour souder les jonctions. C’est aux jonctions que la mémoire lâche, pas au milieu des blocs. En trois jours tu as fait le tour, et la quatrième séance sert à enchaîner le tout."
+          },
+          {
+            "t": "p",
+            "html": "Tilmidh affiche le texte Uthmani avec les couleurs tajwid de Quran.com et n’avance au mot suivant que lorsque le micro a reconnu celui en cours. Sur une sourate de cette longueur, l’effet le plus utile n’est pas la validation en elle-même : c’est qu’elle t’empêche d’accélérer sans t’en rendre compte."
+          },
+          {
+            "t": "cta",
+            "ref": "67:1",
+            "label": "Ouvrir le micro sur Al-Mulk"
+          },
+          {
+            "t": "p",
+            "html": "Une remarque honnête sur les limites : l’outil vérifie le squelette consonantique de chaque mot, pas la durée de tes madd ni la qualité de tes emphatiques. Pour ces deux points, il faut l’oreille d’un muqriʾ. Ce que la machine fait bien, c’est te forcer à ralentir et à reprendre le mot qui n’est pas passé."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiḥah"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Ayat al-Kursi"
+          },
+          {
+            "href": "/sourate/112",
+            "label": "Al-Ikhlāṣ"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/regles-de-tajwid",
+            "label": "Toutes les règles"
+          },
+          {
+            "href": "/coran-phonetique",
+            "label": "Coran phonétique"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/"
+          },
+          {
+            "name": "Sourates",
+            "item": "/sourates"
+          },
+          {
+            "name": "Al-Mulk",
+            "item": "/sourate/67"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "id": {
+        "title": "Surat Al-Mulk kata demi kata — dengan tajwid | Tilmidh تلميذ",
+        "description": "Al-Mulk (67) kata demi kata: teks Arab, transliterasi, hukum tajwid yang menonjol dalam surat ini, dan mikrofon yang memeriksa setiap kata. Alat latihan — bukan ijazah.",
+        "h1": "Membaca Al-Mulk kata demi kata",
+        "body": [
+          {
+            "t": "p",
+            "html": "Al-Mulk adalah surat ke-67, terdiri dari tiga puluh ayat, diturunkan di Mekah. Banyak orang membacanya pada malam hari, dan surat inilah yang biasanya menjadi surat panjang pertama yang dihafal sesudah surat-surat pendek di akhir mushaf. Tiga puluh ayat adalah ukuran yang pas untuk berpindah dari hafalan yang sekadar lancar menuju bacaan yang terkendali: cukup panjang untuk membuat lelah, cukup pendek untuk diulang seluruhnya dalam satu sesi."
+          },
+          {
+            "t": "ar",
+            "html": "تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ"
+          },
+          {
+            "t": "p",
+            "html": "<em>Tabāraka lladhī biyadihi l-mulku wa huwa ʿalā kulli shayʾin qadīr.</em> «Mahasuci Allah yang di tangan-Nya segala kerajaan, dan Dia Mahakuasa atas segala sesuatu.» Ayat pertama sudah menentukan nada seluruh surat: ia berbicara tentang kekuasaan, penciptaan, dan hal-hal yang tidak berada dalam genggaman manusia."
+          },
+          {
+            "t": "h2",
+            "html": "Hukum yang paling sering muncul di surat ini"
+          },
+          {
+            "t": "p",
+            "html": "Ada tiga kelompok yang mendominasi, dan itulah yang menjadikan Al-Mulk lahan latihan yang baik. Pertama <a href=\"/regle/madd\">madd</a>: akhir-akhir ayat yang berbunyi <em>-īr</em>, <em>-ūr</em>, <em>-īn</em> menuntut panjang ketika berhenti, dan panjang itu harus sama dari satu ayat ke ayat berikutnya. Di sinilah kebanyakan pembaca ketahuan: panjang di awal, lalu memendek seiring datangnya lelah."
+          },
+          {
+            "t": "p",
+            "html": "Kedua <a href=\"/regle/ghunnah\">ghunnah</a>, yang banyak muncul karena seringnya kata <em>inna</em> dan <em>man</em>. Ketiga <a href=\"/regle/qalqalah\">qalqalah</a>, terutama pada huruf <strong>ق</strong> dalam <em>qadīr</em> bila kamu berhenti padanya, dan pada huruf dal di akhir ayat."
+          },
+          {
+            "t": "h2",
+            "html": "Ayat yang paling menyulitkan"
+          },
+          {
+            "t": "ar",
+            "html": "تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ"
+          },
+          {
+            "t": "p",
+            "html": "Pada ayat 8, <em>takādu tamayyazu mina l-ghayẓ</em> mengumpulkan beberapa kesulitan dalam kata yang sedikit: huruf <strong>ظ</strong> yang tebal dan sering dibaca seperti z biasa, huruf <strong>غ</strong> yang bukan g, dan <em>tamayyazu</em> yang tasydidnya harus terdengar. Ambil ayat ini sendiri, ulangi sepuluh kali, baru kembali ke awal surat."
+          },
+          {
+            "t": "h2",
+            "html": "Cara melatih tiga puluh ayat tanpa kelelahan"
+          },
+          {
+            "t": "p",
+            "html": "Jangan membaca seluruh surat pada setiap sesi. Bagilah menjadi tiga bagian, masing-masing sepuluh ayat, dan latih satu bagian setiap hari sambil selalu mengulang dua ayat terakhir dari bagian sebelumnya untuk menyambungkannya. Hafalan hampir selalu putus di sambungan, bukan di tengah bagian. Dalam tiga hari seluruh surat sudah dilalui, dan sesi keempat dipakai untuk menyambung semuanya."
+          },
+          {
+            "t": "cta",
+            "ref": "67:1",
+            "label": "Buka mikrofon pada Al-Mulk"
+          },
+          {
+            "t": "p",
+            "html": "Tilmidh menampilkan teks Uthmani dengan warna tajwid dari Quran.com dan tidak berpindah ke kata berikutnya sebelum mikrofon mengenali kata yang sedang dibaca. Pada surat sepanjang ini, manfaat terbesarnya adalah terjaganya tempo. Perlu ditegaskan bahwa alat ini tidak mengukur panjang maddmu maupun ketepatan huruf tebalmu; keduanya memerlukan telinga seorang muqri."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fatihah"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Ayat Kursi"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/regle/ghunnah",
+            "label": "Ghunnah"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqalah"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/id"
+          },
+          {
+            "name": "Al-Mulk",
+            "item": "/id/sourate/67"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed), riwayat Hafs dari Asim. Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      }
+    }
+  }
+]

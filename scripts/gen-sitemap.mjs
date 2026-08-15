@@ -24,14 +24,16 @@ const PUBLIC = path.join(ROOT, 'public');
 const CHECK = process.argv.includes('--check');
 
 // Pages hors index : elles portent un noindex ou ne sont pas du contenu.
-const EXCLUDE = [/^offline\.html$/, /^aso\//, /^sw[-.]/, /^404\.html$/];
+// Les fichiers préfixés par _ sont des brouillons de travail (ex. _preview-mushaf) :
+// jamais dans le sitemap, jamais dans un groupe hreflang.
+const EXCLUDE = [/^offline\.html$/, /^aso\//, /^sw[-.]/, /^404\.html$/, /(^|\/)_/];
 
 async function walk(dir, base = '') {
   const out = [];
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const rel = base ? `${base}/${e.name}` : e.name;
     if (e.isDirectory()) {
-      if (['fonts', 'icons', 'aso'].includes(e.name)) continue;
+      if (['fonts', 'icons', 'aso', 'img'].includes(e.name)) continue;
       out.push(...(await walk(path.join(dir, e.name), rel)));
     } else if (e.name.endsWith('.html')) {
       if (!EXCLUDE.some((r) => r.test(rel))) out.push(rel);
@@ -71,7 +73,7 @@ async function main() {
   for (const rel of files) {
     const { lang, route } = parse(rel);
     if (!byRoute.has(route)) byRoute.set(route, new Map());
-    byRoute.get(route).set(lang, { rel, url: `${SITE}${prefix(lang)}${route === '/' ? '/' : route}` });
+    byRoute.get(route).set(lang, { rel, url: `${SITE}${prefix(lang)}${route === '/' && prefix(lang) ? '' : route}` });
   }
 
   const entries = [];

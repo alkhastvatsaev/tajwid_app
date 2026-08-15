@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ফাতিহা শেখা — শব্দে শব্দে কুরআন | Tilmidh</title>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
+
     <meta name="description" content="ফাতিহা শেখা: মাইক্রোফোন প্রতিটি শব্দ যাচাই, তাজউইদ রং, শিক্ষানবিস ও শিশুদের জন্য। Tilmidh বিনামূল্যে — ইজাজত নয়।">
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
     <link rel="canonical" href="https://tilmidh.app/bn/sourate/1">
@@ -29,7 +32,7 @@
     <meta property="og:image:alt" content="আল-ফাতিহা — Tilmidh">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://tilmidh.app/img/og/bn/al-fatihah.png">
-                            <meta property="og:locale" content="bn_BD">
+                                                                                                    <meta property="og:locale" content="bn_BD">
                 <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="/manifest.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
@@ -48,17 +51,232 @@
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
         .tip { background: #fff; border-left: 4px solid var(--accent); padding: 0.85rem 1rem; margin: 1rem 0; }
+
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
             .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
         .hero-img img { display: block; width: 100%; height: auto; }
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+        .media-illu { margin: 0.15rem 0 1.85rem; padding: 0; }
+        .media-illu .demo-stage {
+            border-radius: 22px;
+            background: #fff;
+            padding: 1.85rem 1.05rem 1.25rem;
+            box-shadow: 0 18px 50px rgba(28, 22, 16, 0.045);
+        }
+        .media-illu .demo-verse {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1.05rem 0.45rem;
+            direction: rtl;
+        }
+        .media-illu .word-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1 1 38%;
+            max-width: 11rem;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @media (min-width: 540px) {
+            .media-illu .demo-verse {
+                flex-wrap: nowrap;
+                gap: 0.45rem 1.65rem;
+            }
+            .media-illu .word-box {
+                flex: 0 1 auto;
+                max-width: none;
+                min-width: 3.6rem;
+            }
+        }
+        .media-illu .marks {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 18px;
+            margin-bottom: 0.2rem;
+            direction: ltr;
+        }
+        .media-illu .pips {
+            display: flex;
+            gap: 5px;
+            pointer-events: none;
+        }
+        .media-illu .pips i {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #d97706;
+            display: block;
+            opacity: 0;
+            transform: scale(0.35);
+        }
+        .media-illu .pips-mute i { background: #c5c0b8; }
+        .media-illu .ok {
+            position: relative;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: #059669;
+            box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.4);
+        }
+        .media-illu .ok::after {
+            content: '';
+            position: absolute;
+            left: 4.5px; top: 2.6px;
+            width: 3.2px; height: 6.2px;
+            border: solid #fff;
+            border-width: 0 1.6px 1.6px 0;
+            transform: rotate(45deg);
+        }
+        .media-illu .arabic-word {
+            font-family: 'KFGQPC Colored';
+            font-weight: 700;
+            font-size: clamp(1.55rem, 6.6vw, 2.55rem);
+            line-height: 1.65;
+            direction: rtl;
+            white-space: nowrap;
+            font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
+        }
+        .media-illu .word-box.correct .arabic-word {
+            font-family: 'KFGQPC Colored';
+        }
+        .media-illu .translit {
+            margin-top: 0.28rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.045em;
+            color: #9a958c;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
+        }
+        .media-illu .demo-hint {
+            margin: 1.15rem 0 0;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a857c;
+            letter-spacing: 0.02em;
+            opacity: 0;
+        }
+        .media-illu figcaption {
+            margin: 0.75rem 0 0;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+        .media-illu.is-alive .word-box {
+            animation: demo-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: calc(var(--i, 0) * 95ms);
+        }
+        .media-illu.is-alive .pips i {
+            animation: pip-in 0.38s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+            animation-delay: calc(0.42s + var(--i, 0) * 95ms + var(--p, 0) * 140ms);
+        }
+        .media-illu.is-alive .ok {
+            opacity: 1; transform: scale(1);
+            transition: opacity 0.28s ease 0.95s, transform 0.4s cubic-bezier(0.2,0.9,0.2,1) 0.95s;
+        }
+        .media-illu.is-alive .demo-hint {
+            opacity: 1;
+            transition: opacity 0.45s ease 0.7s;
+        }
+        @keyframes demo-in {
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes pip-in {
+            to { opacity: 1; transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .media-illu .word-box,
+            .media-illu .demo-hint,
+            .media-illu .pips i,
+            .media-illu .ok { opacity: 1; transform: none; animation: none; }
+        }
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .media-video { display: none; }
     </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/bn"},{"@type":"ListItem","position":2,"name":"ফাতিহা শেখা","item":"https://tilmidh.app/bn/sourate/1"}]}</script>
 </head>
 <body>
     <header><a href="/bn">Tilmidh تلميذ</a> · <a href="/id/sourate/1">ID</a> · <a href="/en/sourate/1">EN</a></header>
     <main>
+    <ol class="page-root copy-sidebar" role="presentation">
+      <li>
         <h1>ফাতিহা শেখা — সবচেয়ে সহজ উপায় (শব্দে শব্দে)</h1>
         <figure class="hero-img">
-            <img src="/img/page/bn/al-fatihah.webp" alt="আল-ফাতিহা — Tilmidh" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/img/page/bn/al-fatihah.webp" alt="আল-ফাতিহা — Tilmidh" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
+        <figure class="media-illu" data-illu="fatihah">
+            <div class="demo-stage">
+                <div class="demo-verse" dir="rtl" lang="ar">
+                <span class="word-box correct" style="--i:0"><span class="marks"><span class="pips pips-mute" aria-hidden="true"><i style="--p:0"></i></span><span class="ok" aria-hidden="true"></span></span><span class="arabic-word">بِسۡمِ</span><span class="translit">bis'mi</span></span>
+                <span class="word-box" style="--i:1"><span class="marks"><span class="pips" aria-hidden="true"></span></span><span class="arabic-word">ٱللَّهِ</span><span class="translit">l-lāhi</span></span>
+                <span class="word-box" style="--i:2"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i></span></span><span class="arabic-word">ٱلرَّحۡمَٰنِ</span><span class="translit">l-raḥmāni</span></span>
+                <span class="word-box" style="--i:3"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i><i style="--p:2"></i><i style="--p:3"></i></span></span><span class="arabic-word">ٱلرَّحِيمِ</span><span class="translit">l-raḥīmi</span></span>
+                </div>
+                <p class="demo-hint">আল-ফাতিহা · শব্দে শব্দে</p>
+            </div>
+            <figcaption>আল-ফাতিহা — আরবি, ধ্বনি, তাজউইদ।</figcaption>
+        </figure>
+        <!-- .media-video reserved for later -->
+
+
+
+
+
+
+
+
+
+
+
+
         <p><strong>ফাতিহা</strong> প্রতিটি রakat-এ পড়া হয়। একটা শব্দ ভুল হলে পুরো tilawat বিঘ্নিত। <a href="/bn">Tilmidh</a> (تلميذ, « শিক্ষার্থী ») <strong>বিনামূল্যে</strong> ওয়েব অ্যাপ: Uthmani তাজউইদ রং, <strong>মাইক্রোফোন প্রতিটি শব্দ যাচাই</strong> — শিক্ষানবিস, কিশোর ও শিশুদের জন্য।</p>
 
         <h2>কেন Tilmidh ফাতিহার জন্য উপযুক্ত?</h2>
@@ -99,6 +317,10 @@
         <footer>
             <p>Tilmidh — tilawat অনুশীলন। পাঠ Quran.com। ইজাজত নয়। muqriʾ দিয়ে যাচাই।</p>
         </footer>
+    </li>
+    </ol>
     </main>
+
+    <script defer src="/js/illu-motion.js"></script>
 </body>
 </html>

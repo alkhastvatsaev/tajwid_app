@@ -16,14 +16,16 @@ import { SITE, LANGS, prefix } from './lib/template.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC = path.join(ROOT, 'public');
 const DRY = process.argv.includes('--dry');
-const EXCLUDE = [/^offline\.html$/, /^aso\//, /^sw[-.]/, /^404\.html$/];
+// Les fichiers préfixés par _ sont des brouillons de travail (ex. _preview-mushaf) :
+// jamais dans le sitemap, jamais dans un groupe hreflang.
+const EXCLUDE = [/^offline\.html$/, /^aso\//, /^sw[-.]/, /^404\.html$/, /(^|\/)_/];
 
 async function walk(dir, base = '') {
   const out = [];
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const rel = base ? `${base}/${e.name}` : e.name;
     if (e.isDirectory()) {
-      if (['fonts', 'icons', 'aso'].includes(e.name)) continue;
+      if (['fonts', 'icons', 'aso', 'img'].includes(e.name)) continue;
       out.push(...(await walk(path.join(dir, e.name), rel)));
     } else if (e.name.endsWith('.html') && !EXCLUDE.some((r) => r.test(rel))) {
       out.push(rel);
@@ -44,7 +46,7 @@ function parse(rel) {
   return { lang: 'fr', route: `/${p}` };
 }
 
-const urlOf = (lang, route) => `${SITE}${prefix(lang)}${route === '/' ? '/' : route}`;
+const urlOf = (lang, route) => `${SITE}${prefix(lang)}${route === '/' && prefix(lang) ? '' : route}`;
 
 const files = await walk(PUBLIC);
 const groups = new Map();

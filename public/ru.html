@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tilmidh — лучшее приложение для обучения чтению Корана для начинающих</title>
-    <meta name="description" content="Учитесь читать Коран слово за слово: транскрипция, цвета таджвида, микрофон проверяет каждое слово. Бесплатно — Фатиха, Ихляс. Тренажёр, не иджаза.">
+    <title>Tilmidh — тренажёр таджвида: читай слово за словом с микрофоном</title>
+    <meta name="description" content="Бесплатный веб-тренажёр: читай Коран слово за словом, микрофон проверяет каждое арабское слово, цвета таджвида с Quran.com. Работает в браузере, без аккаунта. Тренажёр — не иджаза.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
     <link rel="canonical" href="https://tilmidh.app/ru">
-    <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
     <link rel="alternate" hreflang="id" href="https://tilmidh.app/id">
     <link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar">
@@ -17,64 +17,291 @@
     <link rel="alternate" hreflang="ms" href="https://tilmidh.app/ms">
     <link rel="alternate" hreflang="de" href="https://tilmidh.app/de">
     <link rel="alternate" hreflang="es" href="https://tilmidh.app/es">
+    <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/id">
     <meta name="theme-color" content="#059669">
-    <meta property="og:title" content="Tilmidh — лучшее приложение для обучения чтению Корана">
-    <meta property="og:description" content="Учитесь читать Коран слово за слово — транскрипция, таджвид, микрофон. Бесплатно для начинающих.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Tilmidh — тренажёр таджвида: читай слово за словом с микрофоном">
+    <meta property="og:description" content="Бесплатный веб-тренажёр: читай Коран слово за словом, микрофон проверяет каждое арабское слово, цвета таджвида с Quran.com. Работает в браузере, без аккаунта. Тренажёр — не иджаза.">
     <meta property="og:url" content="https://tilmidh.app/ru">
     <meta property="og:image" content="https://tilmidh.app/img/og/ru/tilmidh.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Tilmidh — читать Коран слово за слово">
+    <meta property="og:image:alt" content="Tilmidh — тренажёр таджвида: читай слово за словом с микрофоном">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://tilmidh.app/img/og/ru/tilmidh.png">
-                                                                                            <meta property="og:locale" content="ru_RU">
-        <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
     <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/ru#page","url":"https://tilmidh.app/ru","name":"Tilmidh — тренажёр таджвида: читай слово за словом с микрофоном","description":"Бесплатный веб-тренажёр: читай Коран слово за словом, микрофон проверяет каждое арабское слово, цвета таджвида с Quran.com. Работает в браузере, без аккаунта. Тренажёр — не иджаза.","inLanguage":"ru","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/ru"}]}]}</script>
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
         body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
         header { padding: 1.1rem 1.4rem; border-bottom: 2px solid var(--accent); background: #fff; }
         header a { color: var(--accent); text-decoration: none; font-weight: 600; }
         main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
-        h1 { font-size: 1.7rem; line-height: 1.3; margin: 0 0 1rem; }
-        h2 { font-size: 1.15rem; margin-top: 1.8rem; }
+        h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 1rem; }
+        h2 { font-size: 1.15rem; line-height: 1.3; margin: 2rem 0 0.6rem; }
         .ar { font-family: Amiri, serif; font-size: 1.65rem; direction: rtl; text-align: right; }
         .cta { display: inline-block; margin: 1.4rem 0; padding: 0.9rem 1.35rem; background: var(--accent); color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-        th, td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid #ddd; vertical-align: top; }
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
 
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
+        th { color: var(--muted); font-weight: 600; }
+
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
             .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
         .hero-img img { display: block; width: 100%; height: auto; }
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+        .media-illu { margin: 0.15rem 0 1.85rem; padding: 0; }
+        .media-illu .demo-stage {
+            border-radius: 22px;
+            background: #fff;
+            padding: 1.85rem 1.05rem 1.25rem;
+            box-shadow: 0 18px 50px rgba(28, 22, 16, 0.045);
+        }
+        .media-illu .demo-verse {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1.05rem 0.45rem;
+            direction: rtl;
+        }
+        .media-illu .word-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1 1 38%;
+            max-width: 11rem;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @media (min-width: 540px) {
+            .media-illu .demo-verse {
+                flex-wrap: nowrap;
+                gap: 0.45rem 1.65rem;
+            }
+            .media-illu .word-box {
+                flex: 0 1 auto;
+                max-width: none;
+                min-width: 3.6rem;
+            }
+        }
+        .media-illu .marks {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 18px;
+            margin-bottom: 0.2rem;
+            direction: ltr;
+        }
+        .media-illu .pips {
+            display: flex;
+            gap: 5px;
+            pointer-events: none;
+        }
+        .media-illu .pips i {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #d97706;
+            display: block;
+            opacity: 0;
+            transform: scale(0.35);
+        }
+        .media-illu .pips-mute i { background: #c5c0b8; }
+        .media-illu .ok {
+            position: relative;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: #059669;
+            box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.4);
+        }
+        .media-illu .ok::after {
+            content: '';
+            position: absolute;
+            left: 4.5px; top: 2.6px;
+            width: 3.2px; height: 6.2px;
+            border: solid #fff;
+            border-width: 0 1.6px 1.6px 0;
+            transform: rotate(45deg);
+        }
+        .media-illu .arabic-word {
+            font-family: 'KFGQPC Colored';
+            font-weight: 700;
+            font-size: clamp(1.55rem, 6.6vw, 2.55rem);
+            line-height: 1.65;
+            direction: rtl;
+            white-space: nowrap;
+            font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
+        }
+        .media-illu .word-box.correct .arabic-word {
+            font-family: 'KFGQPC Colored';
+        }
+        .media-illu .translit {
+            margin-top: 0.28rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.045em;
+            color: #9a958c;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
+        }
+        .media-illu .demo-hint {
+            margin: 1.15rem 0 0;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a857c;
+            letter-spacing: 0.02em;
+            opacity: 0;
+        }
+        .media-illu figcaption {
+            margin: 0.75rem 0 0;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+        .media-illu.is-alive .word-box {
+            animation: demo-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: calc(var(--i, 0) * 95ms);
+        }
+        .media-illu.is-alive .pips i {
+            animation: pip-in 0.38s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+            animation-delay: calc(0.42s + var(--i, 0) * 95ms + var(--p, 0) * 140ms);
+        }
+        .media-illu.is-alive .ok {
+            opacity: 1; transform: scale(1);
+            transition: opacity 0.28s ease 0.95s, transform 0.4s cubic-bezier(0.2,0.9,0.2,1) 0.95s;
+        }
+        .media-illu.is-alive .demo-hint {
+            opacity: 1;
+            transition: opacity 0.45s ease 0.7s;
+        }
+        @keyframes demo-in {
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes pip-in {
+            to { opacity: 1; transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .media-illu .word-box,
+            .media-illu .demo-hint,
+            .media-illu .pips i,
+            .media-illu .ok { opacity: 1; transform: none; animation: none; }
+        }
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .media-video { display: none; }
     </style>
 </head>
 <body>
-    <header><a href="/">Tilmidh تلميذ</a> · <a href="/ru">RU</a> · <a href="/en">EN</a></header>
+    <header><a href="/ru/">Tilmidh تلميذ</a></header>
     <main>
-        <h1>Tilmidh — лучшее приложение для обучения чтению Корана для начинающих</h1>
+    <ol class="page-root copy-sidebar" role="presentation">
+      <li>
+        <h1>Тренируй своё чтение, слово за словом</h1>
         <figure class="hero-img">
-            <img src="/img/page/ru/tilmidh.webp" alt="Tilmidh — читать Коран слово за слово" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/img/page/ru/tilmidh.webp" alt="Tilmidh — читать Коран слово за слово" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
-        <p><strong>Лучшее приложение для обучения чтению Корана</strong> для начинающих, которые уже читают намаз: Tilmidh (تلميذ — «ученик») — бесплатное веб-приложение. Читай слово за словом с транскрипцией и цветами таджвида. Микрофон проверяет каждое слово — клетка зеленеет, идёшь дальше. Не курс алфавита. Не иджаза.</p>
-        <p class="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-        <p>Порядок старта: Ихляс → Фаляк → Нас → Фатиха. Цвета таджвида с Quran.com. Распознавание — Web Speech API браузера (<code>ar-SA</code>) на устройстве. Режим Duo: имам и талиб на одной строке (PeerJS), без аккаунта. Ссылка <code>?ref=1</code> открывает аят после загрузки.</p>
-        <p>Для России и Кавказа интерфейс тренажёра на русском. Подробный разбор: <a href="/ru/prilozhenie-tadzhvida-dlya-nachinayushchikh">лучшее приложение для обучения чтению Корана</a>.</p>
-        <a class="cta" href="/?ref=1">Открыть микрофон на Фатихе</a>
+        <figure class="media-illu" data-illu="mark">
+            <div class="demo-stage">
+                <div class="demo-verse" dir="rtl" lang="ar">
+                <span class="word-box correct" style="--i:0"><span class="marks"><span class="pips pips-mute" aria-hidden="true"><i style="--p:0"></i></span><span class="ok" aria-hidden="true"></span></span><span class="arabic-word">بِسۡمِ</span><span class="translit">bis'mi</span></span>
+                <span class="word-box" style="--i:1"><span class="marks"><span class="pips" aria-hidden="true"></span></span><span class="arabic-word">ٱللَّهِ</span><span class="translit">l-lāhi</span></span>
+                <span class="word-box" style="--i:2"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i></span></span><span class="arabic-word">ٱلرَّحۡمَٰنِ</span><span class="translit">l-raḥmāni</span></span>
+                <span class="word-box" style="--i:3"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i><i style="--p:2"></i><i style="--p:3"></i></span></span><span class="arabic-word">ٱلرَّحِيمِ</span><span class="translit">l-raḥīmi</span></span>
+                </div>
+                <p class="demo-hint">Слово за словом, как в приложении</p>
+            </div>
+            <figcaption>Арабский, фонетика, таджвид — слово за словом.</figcaption>
+        </figure>
+        <!-- .media-video reserved for later -->
+
+
+
+
+
+
+
+        <p>Tilmidh (تلميذ, «ученик») — бесплатный веб-тренажёр для тех, кто уже совершает намаз и хочет, чтобы его чтение проверяли. Ты читаешь слово вслух, микрофон слушает, клетка становится зелёной, и ты идёшь дальше. Ничего не устанавливается, звук никуда не отправляется, аккаунт не нужен.</p>
+        <h2>Для кого это</h2>
+        <p>Тренажёр сделан для того, кто уже читает намаз и знает арабские буквы, но чьё чтение никогда не поправляли вслух. Так обстоит дело у большинства взрослых, которые выучили намаз в детстве и на этом остановились. Если ты пока не читаешь арабские буквы, этот инструмент тебе рано: сначала пройди алифбу, потом возвращайся.</p>
+        <h2>Что он делает на самом деле</h2>
+        <p>На экране — текст в написании усмани с цветами таджвида от Quran.com, разбитый по словам. Распознавание речи работает внутри твоего браузера, и тренажёр переходит дальше только тогда, когда согласный костяк произнесённого совпадает со словом на экране. Если слово осталось серым — повтори именно его, а не весь аят. Это ограничение и есть смысл инструмента: оно не даёт проскользнуть мимо слова, которое ты всегда читаешь неверно.</p>
+        <h2>Чего он не делает</h2>
+        <p>Он не измеряет длительность твоего мадда и не судит, достаточно ли тяжело звучат твои эмфатические буквы. Для этого нужно человеческое ухо. Он не даёт иджазу, не является научным свидетельством и не заменяет учителя. Тот, кто обещает больше, преувеличивает возможности сегодняшнего распознавания речи.</p>
+        <h2>С чего начать</h2>
+        <p>Начни с <a href="/sourate/1">суры Аль-Фатиха</a>: ты читаешь её в каждом ракаате, и ошибка в ней тянется через весь намаз. Затем перейди к коротким сурам, которые уже знаешь наизусть. Читать по памяти, глядя в текст, поначалу непривычно — и польза именно в этом: привычка прячет ошибки, которые повторяются годами.</p>
+        <p>Когда короткие суры пойдут ровно, настоящей площадкой станут длинные: <a href="/ayat-kursi">аятуль-Курси</a> — чтобы держать дыхание в одном длинном аяте, и <a href="/sourate/67">сура Аль-Мульк</a> — чтобы держать темп на протяжении тридцати аятов.</p>
+        <h2>Правила, по одному</h2>
+        <p>У каждого правила своя страница с примером из знакомой суры и прямой ссылкой в тренажёр: <a href="/regle/qalqalah">калькаля</a>, <a href="/regle/ghunnah">гунна</a>, <a href="/regle/idgham">идгам</a>, <a href="/regle/ikhfa">ихфа</a> и <a href="/regle/madd">мадд</a>. Отрабатывать одно правило в нескольких сурах полезнее, чем прочитать все правила разом и не применить ни одного.</p>
+        <a class="cta" href="/ru/?ref=1">Открыть микрофон на Аль-Фатихе</a>
+        <p>Распознавание речи лучше всего работает в Chrome на Android и на компьютере. Нужна тихая комната и обычный голос чтения — не шёпот. Если слово не распознаётся после нескольких честных попыток, дело обычно в микрофоне или в шуме вокруг, а не в твоём чтении.</p>
         <nav>
-            <a href="/ru/prilozhenie-tadzhvida-dlya-nachinayushchikh">Обучение чтению</a>
-            <a href="/ru/sourate/1">Фатиха</a>
+            <a href="/ru/sourate/1">Аль-Фатиха</a>
+            <a href="/ru/ayat-kursi">Аятуль-Курси</a>
+            <a href="/ru/sourate/67">Аль-Мульк</a>
             <a href="/ru/regle/qalqalah">Калькаля</a>
-            <a href="/ru/regle/ghunnah">Гунна</a>
             <a href="/ru/regle/madd">Мадд</a>
-            <a href="/en/privacy">Privacy</a>
+            <a href="/ru/privacy">Конфиденциальность</a>
         </nav>
         <footer>
-            <p>Tilmidh (تلميذ — «ученик») — тренажёр чтения Корана. Текст Quran.com (Uthmani tajweed). Это не иджаза и не замена мукриʼ.</p>
+            <p>Tilmidh (تلميذ, «ученик») — тренажёр чтения Корана. Текст берётся с Quran.com (усмани, цвета таджвида), риваят Хафса от Асима. Это не иджаза, не научное свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри.</p>
         </footer>
+    </li>
+    </ol>
     </main>
+
+    <script defer src="/js/illu-motion.js"></script>
 </body>
 </html>

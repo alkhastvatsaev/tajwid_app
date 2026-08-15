@@ -13,7 +13,7 @@ import { SITE, LANGS } from './lib/template.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC = path.join(ROOT, 'public');
 const DRY = process.argv.includes('--dry');
-const EXCLUDE = [/^offline\.html$/, /^aso\//, /^sw[-.]/, /^404\.html$/];
+const EXCLUDE = [/^offline\.html$/, /^aso\//, /^sw[-.]/, /^404\.html$/, /^_preview/];
 
 const FONT = path.join(PUBLIC, 'fonts', 'TilmidhTajweed-Regular.ttf');
 const TMP = path.join(ROOT, '.tmp-og.svg');
@@ -108,19 +108,15 @@ function injectHtml(html, { ogUrl, alt, pagePath, isIndex }) {
     out = out.replace(/(<meta property="og:title"[^>]*>\n)/, `$1${ogBlock}\n`);
   }
 
-  // hero CSS
-  if (!out.includes('.hero-img')) {
-    if (out.includes('</style>')) {
-      out = out.replace('</style>', `${HERO_CSS}\n    </style>`);
-    }
-  }
-
-  // hero img after h1 (skip index monolith — no main/h1 pattern)
+  // In-page hero: first visual after h1 (WebP 960×540). Skip the app monolith.
   if (!isIndex) {
-    out = out.replace(/\s*<figure class="hero-img">[\s\S]*?<\/figure>\n?/g, '\n');
+    out = out.replace(/\s*<figure class="hero-img">[\s\S]*?<\/figure>\s*/g, '\n');
     const hero = heroBlock(pagePath, alt);
-    if (out.match(/<main>[\s\S]*?<h1[^>]*>[\s\S]*?<\/h1>/)) {
-      out = out.replace(/(<main>\s*\n?\s*<h1[^>]*>[\s\S]*?<\/h1>)/, `$1\n${hero}`);
+    if (/<h1[\s\S]*?<\/h1>/.test(out)) {
+      out = out.replace(/(<h1[\s\S]*?<\/h1>)/, `$1\n${hero}`);
+    }
+    if (!out.includes('.hero-img {')) {
+      out = out.replace('</style>', `${HERO_CSS}\n    </style>`);
     }
   }
 

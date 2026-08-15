@@ -52,7 +52,7 @@
     <meta property="og:image:alt" content="Tilmidh — apprendre à lire le Coran mot à mot">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://tilmidh.app/img/og/fr/tilmidh.png">
-                                                                                            <meta property="og:title" content="Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran">
+                                                                                                                                            <meta property="og:title" content="Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran">
     <meta property="og:description" content="Apprenez à lire le Coran mot à mot — phonétique, tajwid, micro arabe. Gratuit pour débutants.">
                         <meta name="twitter:title" content="Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran">
     <meta name="twitter:description" content="Apprenez à lire le Coran mot à mot — phonétique, tajwid, micro arabe. Gratuit pour débutants.">
@@ -65,11 +65,13 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Meilleure app gratuite pour apprendre à lire le Coran mot à mot : phonétique, couleurs tajwid, micro. Pour débutants. Pas une ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["en","fr","id","ar","ru","tr","ur","bn","ms","de","es"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://tilmidh.app/en","https://tilmidh.app/best-tajwid-app-for-beginners"]}
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <!-- Preload mushaf COLR fonts — avoid 1s flash of Tilmidh/system serif -->
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-ValidatedBlue.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.ttf?v=2" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <style>
         /* COLR tajweed font — colors in glyphs, joining intact (Safari-safe) */
         @font-face {
@@ -90,7 +92,7 @@
         /* Mono: COLR stripped — ink via CSS only (tajweed colors off) */
         @font-face {
             font-family: 'KFGQPC Mono';
-            src: url('/fonts/KFGQPCHAFSColored-Mono.ttf?v=2') format('truetype');
+            src: url('/fonts/KFGQPCHAFSColored-Mono.woff2?v=2') format('woff2');
             font-weight: 400 700;
             font-style: normal;
             font-display: block;
@@ -107,7 +109,7 @@
     </style>
     <link rel="preconnect" href="https://tilmidh-20wxcwho.livekit.cloud" crossorigin>
     <link rel="dns-prefetch" href="https://tilmidh-20wxcwho.livekit.cloud">
-    <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.9.9/dist/livekit-client.umd.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/livekit-client@2.9.9/dist/livekit-client.umd.min.js"></script>
     <style>
         :root {
             --bg: #030303;

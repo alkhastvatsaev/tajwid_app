@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tilmidh — aplikasi terbaik belajar baca Al-Quran untuk pemula</title>
-    <meta name="description" content="Belajar baca Al-Quran perkata demi perkata: fonetik, warna tajwid, mikrofon sahkan setiap perkataan Arab. Percuma — Al-Fatihah, Al-Ikhlas. Alat latihan, bukan ijazah.">
+    <title>Tilmidh — latihan tilawah kata demi kata dengan mikrofon</title>
+    <meta name="description" content="Alat web percuma: baca al-Quran kata demi kata, mikrofon menyemak setiap perkataan Arab, warna tajwid daripada Quran.com. Berjalan dalam pelayar, tanpa akaun. Alat latihan — bukan ijazah.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
     <link rel="canonical" href="https://tilmidh.app/ms">
-    <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="en" href="https://tilmidh.app/en">
     <link rel="alternate" hreflang="id" href="https://tilmidh.app/id">
     <link rel="alternate" hreflang="ar" href="https://tilmidh.app/ar">
@@ -17,20 +17,25 @@
     <link rel="alternate" hreflang="ms" href="https://tilmidh.app/ms">
     <link rel="alternate" hreflang="de" href="https://tilmidh.app/de">
     <link rel="alternate" hreflang="es" href="https://tilmidh.app/es">
+    <link rel="alternate" hreflang="fr" href="https://tilmidh.app/">
     <link rel="alternate" hreflang="x-default" href="https://tilmidh.app/id">
     <meta name="theme-color" content="#059669">
-    <meta property="og:title" content="Tilmidh — aplikasi terbaik belajar baca Al-Quran">
-    <meta property="og:description" content="Belajar baca Al-Quran perkata demi perkata — fonetik, tajwid, mikrofon. Percuma untuk pemula.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Tilmidh — latihan tilawah kata demi kata dengan mikrofon">
+    <meta property="og:description" content="Alat web percuma: baca al-Quran kata demi kata, mikrofon menyemak setiap perkataan Arab, warna tajwid daripada Quran.com. Berjalan dalam pelayar, tanpa akaun. Alat latihan — bukan ijazah.">
     <meta property="og:url" content="https://tilmidh.app/ms">
     <meta property="og:image" content="https://tilmidh.app/img/og/ms/tilmidh.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Tilmidh — belajar baca Quran perkata demi perkataan">
+    <meta property="og:image:alt" content="Tilmidh — latihan tilawah kata demi kata dengan mikrofon">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://tilmidh.app/img/og/ms/tilmidh.png">
-                            <meta property="og:locale" content="ms_MY">
-        <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/ms#page","url":"https://tilmidh.app/ms","name":"Tilmidh — latihan tilawah kata demi kata dengan mikrofon","description":"Alat web percuma: baca al-Quran kata demi kata, mikrofon menyemak setiap perkataan Arab, warna tajwid daripada Quran.com. Berjalan dalam pelayar, tanpa akaun. Alat latihan — bukan ijazah.","inLanguage":"ms","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/ms"}]}]}</script>
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
         body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
@@ -38,36 +43,265 @@
         header a { color: var(--accent); text-decoration: none; font-weight: 600; }
         main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
         h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 1rem; }
+        h2 { font-size: 1.15rem; line-height: 1.3; margin: 2rem 0 0.6rem; }
         .ar { font-family: Amiri, serif; font-size: 1.65rem; direction: rtl; text-align: right; }
         .cta { display: inline-block; margin: 1.4rem 0; padding: 0.9rem 1.35rem; background: var(--accent); color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; }
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
+
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
+        th { color: var(--muted); font-weight: 600; }
+
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+
             .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
         .hero-img img { display: block; width: 100%; height: auto; }
+    
+        @font-face {
+            font-family: 'KFGQPC Colored';
+            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
+            font-display: block;
+        }
+        .media-illu { margin: 0.15rem 0 1.85rem; padding: 0; }
+        .media-illu .demo-stage {
+            border-radius: 22px;
+            background: #fff;
+            padding: 1.85rem 1.05rem 1.25rem;
+            box-shadow: 0 18px 50px rgba(28, 22, 16, 0.045);
+        }
+        .media-illu .demo-verse {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1.05rem 0.45rem;
+            direction: rtl;
+        }
+        .media-illu .word-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1 1 38%;
+            max-width: 11rem;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @media (min-width: 540px) {
+            .media-illu .demo-verse {
+                flex-wrap: nowrap;
+                gap: 0.45rem 1.65rem;
+            }
+            .media-illu .word-box {
+                flex: 0 1 auto;
+                max-width: none;
+                min-width: 3.6rem;
+            }
+        }
+        .media-illu .marks {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 18px;
+            margin-bottom: 0.2rem;
+            direction: ltr;
+        }
+        .media-illu .pips {
+            display: flex;
+            gap: 5px;
+            pointer-events: none;
+        }
+        .media-illu .pips i {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #d97706;
+            display: block;
+            opacity: 0;
+            transform: scale(0.35);
+        }
+        .media-illu .pips-mute i { background: #c5c0b8; }
+        .media-illu .ok {
+            position: relative;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: #059669;
+            box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.4);
+        }
+        .media-illu .ok::after {
+            content: '';
+            position: absolute;
+            left: 4.5px; top: 2.6px;
+            width: 3.2px; height: 6.2px;
+            border: solid #fff;
+            border-width: 0 1.6px 1.6px 0;
+            transform: rotate(45deg);
+        }
+        .media-illu .arabic-word {
+            font-family: 'KFGQPC Colored';
+            font-weight: 700;
+            font-size: clamp(1.55rem, 6.6vw, 2.55rem);
+            line-height: 1.65;
+            direction: rtl;
+            white-space: nowrap;
+            font-feature-settings: "liga" 1, "rlig" 1, "calt" 1;
+        }
+        .media-illu .word-box.correct .arabic-word {
+            font-family: 'KFGQPC Colored';
+        }
+        .media-illu .translit {
+            margin-top: 0.28rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.045em;
+            color: #9a958c;
+            direction: ltr;
+            unicode-bidi: isolate;
+            text-align: center;
+        }
+        .media-illu .demo-hint {
+            margin: 1.15rem 0 0;
+            text-align: center;
+            font-size: 0.78rem;
+            color: #8a857c;
+            letter-spacing: 0.02em;
+            opacity: 0;
+        }
+        .media-illu figcaption {
+            margin: 0.75rem 0 0;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+        .media-illu.is-alive .word-box {
+            animation: demo-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: calc(var(--i, 0) * 95ms);
+        }
+        .media-illu.is-alive .pips i {
+            animation: pip-in 0.38s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+            animation-delay: calc(0.42s + var(--i, 0) * 95ms + var(--p, 0) * 140ms);
+        }
+        .media-illu.is-alive .ok {
+            opacity: 1; transform: scale(1);
+            transition: opacity 0.28s ease 0.95s, transform 0.4s cubic-bezier(0.2,0.9,0.2,1) 0.95s;
+        }
+        .media-illu.is-alive .demo-hint {
+            opacity: 1;
+            transition: opacity 0.45s ease 0.7s;
+        }
+        @keyframes demo-in {
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes pip-in {
+            to { opacity: 1; transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .media-illu .word-box,
+            .media-illu .demo-hint,
+            .media-illu .pips i,
+            .media-illu .ok { opacity: 1; transform: none; animation: none; }
+        }
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .media-video { display: none; }
     </style>
 </head>
 <body>
-    <header><a href="/">Tilmidh تلميذ</a> · <a href="/id">ID</a> · <a href="/en">EN</a> · <a href="/">FR</a></header>
+    <header><a href="/ms/">Tilmidh تلميذ</a></header>
     <main>
-        <h1>Tilmidh — aplikasi terbaik belajar baca Al-Quran untuk pemula</h1>
+    <ol class="page-root copy-sidebar" role="presentation">
+      <li>
+        <h1>Latih bacaanmu, kata demi kata</h1>
         <figure class="hero-img">
-            <img src="/img/page/ms/tilmidh.webp" alt="Tilmidh — belajar baca Quran perkata demi perkataan" width="960" height="540" loading="lazy" decoding="async">
+            <img src="/img/page/ms/tilmidh.webp" alt="Tilmidh — belajar baca Quran perkata demi perkataan" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
-        <p><strong>Belajar baca Al-Quran</strong> untuk pemula: Tilmidh (تلميذ, « pelajar ») ialah aplikasi web percuma. Baca perkata demi perkata dengan fonetik dan warna tajwid. Mikrofon semak setiap perkataan Arab — kotak hijau, teruskan. Untuk pemula yang bermula dengan surah solat. Bukan kursus huruf, bukan ijazah.</p>
-        <p class="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-        <p>Urutan boot: Al-Ikhlas, Al-Falaq, An-Nas, kemudian Al-Fatihah. Mod Duo: imam dan pelajar dalam baris sama (PeerJS), tanpa akaun.</p>
-        <a class="cta" href="/?ref=1">Buka mikrofon di Al-Fatihah</a>
+        <figure class="media-illu" data-illu="mark">
+            <div class="demo-stage">
+                <div class="demo-verse" dir="rtl" lang="ar">
+                <span class="word-box correct" style="--i:0"><span class="marks"><span class="pips pips-mute" aria-hidden="true"><i style="--p:0"></i></span><span class="ok" aria-hidden="true"></span></span><span class="arabic-word">بِسۡمِ</span><span class="translit">bis'mi</span></span>
+                <span class="word-box" style="--i:1"><span class="marks"><span class="pips" aria-hidden="true"></span></span><span class="arabic-word">ٱللَّهِ</span><span class="translit">l-lāhi</span></span>
+                <span class="word-box" style="--i:2"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i></span></span><span class="arabic-word">ٱلرَّحۡمَٰنِ</span><span class="translit">l-raḥmāni</span></span>
+                <span class="word-box" style="--i:3"><span class="marks"><span class="pips" aria-hidden="true"><i style="--p:0"></i><i style="--p:1"></i><i style="--p:2"></i><i style="--p:3"></i></span></span><span class="arabic-word">ٱلرَّحِيمِ</span><span class="translit">l-raḥīmi</span></span>
+                </div>
+                <p class="demo-hint">Perkataan demi perkataan, seperti dalam app</p>
+            </div>
+            <figcaption>Arab, fonetik, tajwid — perkataan demi perkataan.</figcaption>
+        </figure>
+        <!-- .media-video reserved for later -->
+
+
+
+
+
+
+
+        <p>Tilmidh (تلميذ, «murid») ialah alat web percuma untuk mereka yang sudah bersolat dan mahu bacaannya disemak. Kamu membaca satu perkataan, mikrofon mendengar, kotak bertukar hijau, dan kamu meneruskan. Tiada apa-apa yang perlu dipasang, tiada suara dihantar ke mana-mana pelayan, dan akaun tidak diperlukan.</p>
+        <h2>Untuk siapa</h2>
+        <p>Alat ini dibina untuk orang yang sudah bersolat dan mengenal huruf Arab, tetapi bacaannya tidak pernah dibetulkan secara lisan. Itulah keadaan kebanyakan orang dewasa yang belajar solat sewaktu kecil lalu berhenti di situ. Jika kamu belum boleh membaca huruf Arab, alat ini belum sesuai: habiskan muqaddam dahulu, kemudian kembali.</p>
+        <h2>Apa yang sebenarnya dilakukan</h2>
+        <p>Skrin memaparkan teks Uthmani dengan warna tajwid daripada Quran.com, dipecahkan kata demi kata. Pengecaman suara berjalan di dalam pelayarmu sendiri, dan alat ini hanya bergerak apabila rangka konsonan yang kamu sebut sepadan dengan perkataan di skrin. Jika sesuatu perkataan kekal kelabu, ulang perkataan itu sahaja, bukan seluruh ayat. Batasan inilah tujuan sebenar alat ini: ia tidak membenarkan kamu melepasi perkataan yang sentiasa kamu salah baca.</p>
+        <h2>Apa yang tidak dilakukan</h2>
+        <p>Ia tidak mengukur panjang maddmu, dan tidak menilai sama ada huruf tebalmu cukup tebal. Kedua-duanya memerlukan telinga manusia. Ia tidak memberikan ijazah, bukan sijil keilmuan, dan bukan pengganti guru. Sesiapa yang menjanjikan lebih daripada itu sedang membesar-besarkan kemampuan pengecaman suara hari ini.</p>
+        <h2>Mula dari mana</h2>
+        <p>Mulakan dengan <a href="/sourate/1">surah al-Fatihah</a>, kerana kamu membacanya dalam setiap rakaat dan kesilapan di situ terbawa ke seluruh solatmu. Kemudian beralih kepada surah-surah pendek yang sudah kamu hafal. Membaca daripada hafalan sambil melihat teks memang janggal pada mulanya, dan di situlah manfaatnya: tabiat menyembunyikan kesilapan yang diulang bertahun-tahun.</p>
+        <p>Apabila surah pendek sudah mantap, yang panjang menjadi medan latihan sebenar: <a href="/ayat-kursi">Ayat Kursi</a> untuk mengawal nafas dalam satu ayat yang panjang, dan <a href="/sourate/67">surah al-Mulk</a> untuk mengekalkan rentak sepanjang tiga puluh ayat.</p>
+        <h2>Hukum tajwid, satu persatu</h2>
+        <p>Setiap hukum mempunyai halamannya sendiri, lengkap dengan contoh daripada surah yang kamu kenal dan pautan terus ke alat: <a href="/regle/qalqalah">qalqalah</a>, <a href="/regle/ghunnah">ghunnah</a>, <a href="/regle/idgham">idgham</a>, <a href="/regle/ikhfa">ikhfa</a> dan <a href="/regle/madd">madd</a>. Melatih satu hukum dalam beberapa surah jauh lebih berguna daripada membaca semua hukum sekali gus lalu tidak mengamalkan satu pun.</p>
+        <a class="cta" href="/ms/?ref=1">Buka mikrofon pada al-Fatihah</a>
+        <p>Pengecaman suara berfungsi paling baik dalam Chrome pada Android dan komputer. Ia memerlukan bilik yang senyap dan suara bacaan yang biasa — bukan bisikan. Jika sesuatu perkataan tetap tidak dikesan selepas beberapa percubaan yang bersungguh, masalahnya biasanya pada mikrofon atau bunyi sekeliling, bukan pada bacaanmu.</p>
         <nav>
             <a href="/ms/sourate/1">Al-Fatihah</a>
             <a href="/ms/ayat-kursi">Ayat Kursi</a>
             <a href="/ms/sourate/67">Al-Mulk</a>
-            <a href="/id/sourate/1">ID Fatihah</a>
-            <a href="/privacy">Privasi</a>
+            <a href="/ms/regle/qalqalah">Qalqalah</a>
+            <a href="/ms/regle/madd">Madd</a>
+            <a href="/ms/privacy">Privasi</a>
         </nav>
         <footer>
-            <p>Tilmidh alat latihan tilawah. Teks Quran.com. Bukan ijazah, bukan pengganti guru.</p>
+            <p>Tilmidh (تلميذ, «murid») ialah alat latihan tilawah. Teks yang dipaparkan berasal daripada Quran.com (Uthmani, warna tajwid), riwayat Hafs daripada Asim. Ini bukan ijazah, bukan sijil keilmuan, dan bukan pengganti guru. Semak bacaanmu sentiasa dengan seorang muqri.</p>
         </footer>
+    </li>
+    </ol>
     </main>
+
+    <script defer src="/js/illu-motion.js"></script>
 </body>
 </html>

@@ -1,0 +1,1866 @@
+[
+  {
+    "slug": "",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "en": {
+        "title": "Tilmidh — practise Quran recitation word by word with your mic",
+        "description": "Free web trainer: recite the Quran word by word, your microphone checks each Arabic word, tajwid colours from Quran.com. Works in the browser, no account. A practice tool — not an ijazah.",
+        "h1": "Practise your recitation, word by word",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «student») is a free web trainer for people who already pray and want their recitation checked. You read a word aloud, the microphone listens, the box turns green, and you move on. Nothing is installed, nothing is uploaded, and no account is needed."
+          },
+          {
+            "t": "h2",
+            "html": "Who this is for"
+          },
+          {
+            "t": "p",
+            "html": "It is built for someone who already prays and already knows the Arabic letters, but has never had their recitation corrected out loud. That describes most adults who learned to pray as children and never went further. If you cannot yet read the Arabic alphabet, this is the wrong tool for now: start with a proper alphabet course, then come back."
+          },
+          {
+            "t": "h2",
+            "html": "What it actually does"
+          },
+          {
+            "t": "p",
+            "html": "The screen shows the Uthmani text with tajwid colouring from Quran.com, cut word by word. Speech recognition runs in your browser, and the trainer only advances when the consonantal skeleton of what you said matches the word on screen. If a word stays grey, you repeat that word alone — not the whole verse. That single constraint is the point of the tool: it stops you from gliding past the word you always get wrong."
+          },
+          {
+            "t": "h2",
+            "html": "What it does not do"
+          },
+          {
+            "t": "p",
+            "html": "It does not measure the length of your madd, and it does not judge whether your emphatic letters are properly heavy. Those need a human ear. It does not grant an ijazah, it is not a scholarly certification, and it does not replace a teacher. Anyone selling you an app that claims otherwise is overselling what speech recognition can do today."
+          },
+          {
+            "t": "h2",
+            "html": "Where to start"
+          },
+          {
+            "t": "p",
+            "html": "Begin with <a href=\"/sourate/1\">Al-Fātiḥah</a>, since you recite it in every rakʿa and any mistake there follows you through every prayer. Then move to the short suras you already know by heart — <a href=\"/sourate/112\">Al-Ikhlāṣ</a>, Al-Falaq, An-Nās. Reciting from memory with the text in front of you is uncomfortable at first, and that discomfort is exactly where the value is: habit hides errors that have been repeated for years."
+          },
+          {
+            "t": "p",
+            "html": "Once the short suras are steady, longer ones become the real training ground: <a href=\"/ayat-kursi\">Ayat al-Kursi</a> for breath control on a single long verse, and <a href=\"/sourate/67\">Al-Mulk</a> for holding a constant pace across thirty verses."
+          },
+          {
+            "t": "h2",
+            "html": "The rules, one at a time"
+          },
+          {
+            "t": "p",
+            "html": "Each tajwid rule has its own page with an example from a sura you already know and a direct link into the trainer: <a href=\"/regle/qalqalah\">qalqalah</a>, <a href=\"/regle/ghunnah\">ghunnah</a>, <a href=\"/regle/idgham\">idghām</a>, <a href=\"/regle/ikhfa\">ikhfāʾ</a> and <a href=\"/regle/madd\">madd</a>. Working one rule across several suras beats reading all the rules at once and applying none."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Open the microphone on Al-Fātiḥah"
+          },
+          {
+            "t": "p",
+            "html": "Speech recognition works best in Chrome on Android and on desktop. It needs a quiet room and a normal reciting voice — not a whisper. If a word refuses to register after several honest attempts, the problem is usually the microphone or the noise around you, not your recitation."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/best-tajwid-app-for-beginners",
+            "label": "Best tajwid app for beginners"
+          },
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiḥah"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Ayat al-Kursi"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqalah"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/privacy",
+            "label": "Privacy"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/en"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "id": {
+        "title": "Tilmidh — latihan mengaji kata demi kata dengan mikrofon",
+        "description": "Pelatih web gratis: baca Quran kata demi kata, mikrofon memeriksa setiap kata Arab, warna tajwid dari Quran.com. Jalan di browser, tanpa akun. Alat latihan — bukan ijazah.",
+        "h1": "Latih bacaanmu, kata demi kata",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «murid») adalah pelatih web gratis untuk orang yang sudah salat dan ingin bacaannya diperiksa. Kamu membaca satu kata, mikrofon mendengarkan, kotaknya menjadi hijau, lalu kamu lanjut. Tidak ada yang dipasang, tidak ada suara yang dikirim ke mana-mana, dan tidak perlu membuat akun."
+          },
+          {
+            "t": "h2",
+            "html": "Untuk siapa alat ini"
+          },
+          {
+            "t": "p",
+            "html": "Alat ini dibuat untuk orang yang sudah salat dan sudah mengenal huruf Arab, tetapi bacaannya belum pernah dikoreksi secara lisan. Itulah keadaan sebagian besar orang dewasa yang belajar salat sewaktu kecil lalu berhenti di situ. Kalau kamu belum bisa membaca huruf hijaiyah, alat ini belum tepat untukmu: pelajari dulu iqro atau alifbata, baru kembali ke sini."
+          },
+          {
+            "t": "h2",
+            "html": "Apa yang sebenarnya dikerjakan"
+          },
+          {
+            "t": "p",
+            "html": "Layar menampilkan teks Uthmani dengan warna tajwid dari Quran.com, dipotong kata demi kata. Pengenalan suara berjalan di dalam browsermu, dan pelatih ini hanya berpindah bila kerangka konsonan yang terdengar sudah cocok dengan kata di layar. Kalau sebuah kata tetap abu-abu, ulangi kata itu saja — bukan seluruh ayat. Justru batasan inilah inti alatnya: ia menahanmu agar tidak melewati kata yang selalu salah kamu baca."
+          },
+          {
+            "t": "h2",
+            "html": "Apa yang tidak dikerjakan"
+          },
+          {
+            "t": "p",
+            "html": "Alat ini tidak mengukur panjang maddmu, dan tidak menilai apakah huruf tebalmu sudah benar-benar tebal. Keduanya memerlukan telinga manusia. Ia tidak memberi ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Siapa pun yang menjanjikan lebih dari itu sedang melebih-lebihkan kemampuan pengenalan suara hari ini."
+          },
+          {
+            "t": "h2",
+            "html": "Mulai dari mana"
+          },
+          {
+            "t": "p",
+            "html": "Mulailah dari <a href=\"/sourate/1\">Al-Fatihah</a>, karena kamu membacanya di setiap rakaat dan kesalahan di situ terbawa ke seluruh salatmu. Sesudah itu pindah ke surat-surat pendek yang sudah kamu hafal. Membaca dari hafalan sambil melihat teks memang terasa janggal pada awalnya, dan justru di situlah manfaatnya: kebiasaan menyembunyikan kesalahan yang sudah bertahun-tahun diulang."
+          },
+          {
+            "t": "p",
+            "html": "Kalau surat-surat pendek sudah mantap, yang panjang menjadi lahan latihan yang sebenarnya: <a href=\"/ayat-kursi\">Ayat Kursi</a> untuk mengatur napas dalam satu ayat panjang, dan <a href=\"/sourate/67\">Al-Mulk</a> untuk menjaga tempo sepanjang tiga puluh ayat."
+          },
+          {
+            "t": "h2",
+            "html": "Hukum tajwid, satu per satu"
+          },
+          {
+            "t": "p",
+            "html": "Setiap hukum punya halamannya sendiri, lengkap dengan contoh dari surat yang sudah kamu kenal dan tautan langsung ke pelatih: <a href=\"/regle/qalqalah\">qalqalah</a>, <a href=\"/regle/ghunnah\">ghunnah</a>, <a href=\"/regle/idgham\">idgham</a>, <a href=\"/regle/ikhfa\">ikhfa</a> dan <a href=\"/regle/madd\">madd</a>. Melatih satu hukum di beberapa surat jauh lebih berguna daripada membaca semua hukum sekaligus lalu tidak menerapkan satu pun."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Buka mikrofon di Al-Fatihah"
+          },
+          {
+            "t": "p",
+            "html": "Pengenalan suara paling baik berjalan di Chrome pada Android dan di komputer. Ia memerlukan ruangan yang tenang dan suara baca yang wajar — bukan bisikan. Kalau sebuah kata tetap tidak terbaca setelah beberapa kali percobaan yang sungguh-sungguh, biasanya masalahnya ada pada mikrofon atau kebisingan sekitar, bukan pada bacaanmu."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/best-tajwid-app-for-beginners",
+            "label": "Aplikasi tajwid pemula"
+          },
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fatihah"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Ayat Kursi"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqalah"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/privacy",
+            "label": "Privasi"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/id"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed), riwayat Hafs dari Asim. Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "ar": {
+        "title": "تلميذ — تمرين على التلاوة كلمةً بكلمة بالميكروفون",
+        "description": "أداة ويب مجانية: ترتّل كلمةً بكلمة، والميكروفون يتحقّق من كل كلمة، بألوان التجويد من Quran.com. تعمل في المتصفّح بلا حساب. أداة تمرين وليست إجازة.",
+        "h1": "تمرّن على تلاوتك كلمةً بكلمة",
+        "body": [
+          {
+            "t": "p",
+            "html": "تلميذ أداة ويب مجانية لمن يصلّي ويريد أن يُراجَع أداؤه. تقرأ الكلمة، فيسمع الميكروفون، فيخضرّ المربّع، ثمّ تنتقل. لا شيء يُثبَّت على جهازك، ولا يُرفَع صوتك إلى أيّ خادم، ولا حاجة إلى حساب."
+          },
+          {
+            "t": "h2",
+            "html": "لمن هذه الأداة"
+          },
+          {
+            "t": "p",
+            "html": "هي لمن يصلّي ويعرف الحروف العربيّة، ولكن لم يُصحَّح له أداؤه مشافهةً قطّ. وهذا حال أكثر من تعلّم الصلاة صغيرًا ثمّ وقف عند ذلك. أمّا من لم يقرأ الحروف بعد فليبدأ بمعلّم يقرّره له، ثمّ يعود."
+          },
+          {
+            "t": "h2",
+            "html": "ما تصنعه الأداة"
+          },
+          {
+            "t": "p",
+            "html": "تعرض الشاشة النصّ العثمانيّ بألوان التجويد من Quran.com، مقطّعًا كلمةً كلمة. ويجري التعرّف على الصوت داخل متصفّحك، فلا تنتقل الأداة إلى الكلمة التالية إلا إذا وافق الهيكل الحرفيّ لما نطقتَه ما هو معروضٌ أمامك. فإن بقيت الكلمة رماديّةً فأعِدها وحدها، لا الآية كلّها. وهذا القيد بعينه هو المقصود من الأداة: أن يمنعك من تجاوز الكلمة التي تخطئ فيها دائمًا."
+          },
+          {
+            "t": "h2",
+            "html": "وما لا تصنعه"
+          },
+          {
+            "t": "p",
+            "html": "لا تقيس مقدار مدّك، ولا تحكم على تفخيم حروفك أمستوفًى هو أم لا. وهذان ممّا يُرجَع فيه إلى أذن المعلّم. وهي لا تمنح إجازةً، وليست شهادةً علميّة، ولا تقوم مقام المقرئ. ومن وعدك بأكثر من هذا فقد بالغ فيما يبلغه التعرّف على الصوت اليوم."
+          },
+          {
+            "t": "h2",
+            "html": "من أين تبدأ"
+          },
+          {
+            "t": "p",
+            "html": "ابدأ بـ<a href=\"/sourate/1\">الفاتحة</a>، فإنّك تقرؤها في كلّ ركعة، والخطأ فيها يتبعك في صلاتك كلّها. ثمّ انتقل إلى قصار السور ممّا تحفظه. والقراءة من الحفظ مع النظر في المصحف تُشعِرك بشيءٍ من الثِّقَل في أوّل الأمر، وفي ذلك الثقل نفسه تكمن الفائدة: فإنّ العادة تُخفي أخطاءً تُكرَّر منذ سنين."
+          },
+          {
+            "t": "p",
+            "html": "فإذا استقامت لك القصار صارت الطوال ميدان التمرين الحقيقيّ: <a href=\"/ayat-kursi\">آية الكرسي</a> لضبط النَّفَس في آيةٍ واحدةٍ طويلة، و<a href=\"/sourate/67\">سورة الملك</a> لحفظ التؤدة على مدى ثلاثين آية."
+          },
+          {
+            "t": "h2",
+            "html": "الأحكام واحدًا واحدًا"
+          },
+          {
+            "t": "p",
+            "html": "لكلّ حكمٍ صفحته، وفيها مثالٌ من سورةٍ تعرفها ورابطٌ مباشر إلى التمرين: <a href=\"/regle/qalqalah\">القلقلة</a> و<a href=\"/regle/ghunnah\">الغنّة</a> و<a href=\"/regle/idgham\">الإدغام</a> و<a href=\"/regle/ikhfa\">الإخفاء</a> و<a href=\"/regle/madd\">المدّ</a>. وتمرينُ حكمٍ واحدٍ في سورٍ عدّة أنفع من قراءة الأحكام جملةً ثمّ لا تعمل بشيءٍ منها."
+          },
+          {
+            "t": "h2",
+            "html": "وضعٌ ثنائيّ للإمام والطالب"
+          },
+          {
+            "t": "p",
+            "html": "وفي الأداة وضعٌ ثنائيّ يجتمع فيه اثنان على النصّ نفسه: يقرأ الطالب ويسمع المعلّم، من غير حسابٍ ولا تسجيل. وهو أقرب ما تبلغه الأداة من حلقة التلقين، وإن كان لا يغني عنها. فالتصحيح المشافه يبقى أصلاً، وإنّما تنفع الأداة في تكرارٍ بين الجلستين."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "افتح الميكروفون على الفاتحة"
+          },
+          {
+            "t": "p",
+            "html": "ويعمل التعرّف على الصوت على أحسن وجهٍ في متصفّح كروم على أندرويد وعلى الحاسوب. ويحتاج إلى مكانٍ هادئ وصوتِ تلاوةٍ معتاد، لا همسٍ. فإن تعذّرت كلمةٌ بعد محاولاتٍ صادقة فالغالب أنّ العلّة في الميكروفون أو في الضجيج حولك، لا في تلاوتك."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "الفاتحة"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "آية الكرسي"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "الملك"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "القلقلة"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "المدّ"
+          },
+          {
+            "href": "/regle/ghunnah",
+            "label": "الغنّة"
+          },
+          {
+            "href": "/privacy",
+            "label": "الخصوصيّة"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "تلميذ",
+            "item": "/ar"
+          }
+        ],
+        "footer": "تلميذ أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      },
+      "ur": {
+        "title": "تلمیذ — مائیکروفون کے ساتھ لفظ بہ لفظ تلاوت کی مشق",
+        "description": "مفت ویب ٹرینر: قرآن لفظ بہ لفظ پڑھیں، مائیکروفون ہر عربی لفظ کی جانچ کرتا ہے، تجوید کے رنگ Quran.com سے۔ براؤزر میں چلتا ہے، اکاؤنٹ کی ضرورت نہیں۔ مشق کا آلہ — اجازہ نہیں۔",
+        "h1": "اپنی تلاوت کی مشق کریں، لفظ بہ لفظ",
+        "body": [
+          {
+            "t": "p",
+            "html": "تلمیذ (تلميذ، یعنی «شاگرد») ان لوگوں کے لیے ایک مفت ویب ٹرینر ہے جو نماز پڑھتے ہیں اور چاہتے ہیں کہ ان کی تلاوت کی جانچ ہو۔ آپ ایک لفظ بلند آواز میں پڑھتے ہیں، مائیکروفون سنتا ہے، خانہ سبز ہو جاتا ہے، اور آپ آگے بڑھتے ہیں۔ کچھ انسٹال نہیں ہوتا، کوئی آواز کسی سرور کو نہیں بھیجی جاتی، اور اکاؤنٹ بنانے کی ضرورت نہیں۔"
+          },
+          {
+            "t": "h2",
+            "html": "یہ کس کے لیے ہے"
+          },
+          {
+            "t": "p",
+            "html": "یہ اس شخص کے لیے بنایا گیا ہے جو پہلے سے نماز پڑھتا ہے اور عربی حروف پہچانتا ہے، لیکن جس کی تلاوت کبھی زبانی طور پر درست نہیں کرائی گئی۔ یہ ان بیشتر بالغ افراد کا حال ہے جنہوں نے بچپن میں نماز سیکھی اور پھر وہیں رک گئے۔ اگر آپ ابھی تک عربی حروف نہیں پڑھ سکتے تو فی الحال یہ آلہ آپ کے لیے نہیں: پہلے قاعدہ مکمل کریں، پھر واپس آئیں۔"
+          },
+          {
+            "t": "h2",
+            "html": "یہ اصل میں کرتا کیا ہے"
+          },
+          {
+            "t": "p",
+            "html": "اسکرین پر عثمانی رسم الخط میں متن دکھایا جاتا ہے، Quran.com کے تجویدی رنگوں کے ساتھ، لفظ بہ لفظ تقسیم شدہ۔ آواز کی شناخت آپ کے براؤزر ہی میں چلتی ہے، اور ٹرینر اسی وقت آگے بڑھتا ہے جب آپ کے پڑھے ہوئے لفظ کا حرفی ڈھانچہ اسکرین پر موجود لفظ سے مل جائے۔ اگر کوئی لفظ سرمئی رہے تو صرف وہی لفظ دہرائیں، پوری آیت نہیں۔ یہی پابندی اس آلے کا اصل مقصد ہے: یہ آپ کو اس لفظ سے پھسل کر گزرنے نہیں دیتی جو آپ ہمیشہ غلط پڑھتے ہیں۔"
+          },
+          {
+            "t": "h2",
+            "html": "یہ کیا نہیں کرتا"
+          },
+          {
+            "t": "p",
+            "html": "یہ آپ کے مدّ کی مقدار نہیں ناپتا، اور یہ فیصلہ نہیں کرتا کہ آپ کے حروفِ مفخّمہ صحیح طور پر بھاری ہیں یا نہیں۔ ان دونوں کے لیے انسانی کان چاہیے۔ یہ اجازہ نہیں دیتا، یہ کوئی علمی سند نہیں، اور یہ استاد کا بدل نہیں۔ جو کوئی اس سے زیادہ کا وعدہ کرے، وہ آج کی آواز شناسی کی صلاحیت کو بڑھا چڑھا کر پیش کر رہا ہے۔"
+          },
+          {
+            "t": "h2",
+            "html": "کہاں سے شروع کریں"
+          },
+          {
+            "t": "p",
+            "html": "<a href=\"/sourate/1\">سورہ فاتحہ</a> سے شروع کریں، کیونکہ آپ اسے ہر رکعت میں پڑھتے ہیں اور وہاں کی غلطی آپ کی پوری نماز کے ساتھ چلتی ہے۔ اس کے بعد وہ چھوٹی سورتیں لیں جو آپ کو پہلے سے یاد ہیں۔ متن سامنے رکھ کر حفظ سے پڑھنا شروع میں عجیب لگتا ہے، اور فائدہ بھی وہیں ہے: عادت ان غلطیوں کو چھپا دیتی ہے جو برسوں سے دہرائی جا رہی ہوں۔"
+          },
+          {
+            "t": "p",
+            "html": "جب چھوٹی سورتیں مضبوط ہو جائیں تو لمبی سورتیں اصل میدانِ مشق بنتی ہیں: ایک لمبی آیت میں سانس سنبھالنے کے لیے <a href=\"/ayat-kursi\">آیت الکرسی</a>، اور تیس آیات تک رفتار برقرار رکھنے کے لیے <a href=\"/sourate/67\">سورہ ملک</a>۔"
+          },
+          {
+            "t": "h2",
+            "html": "قواعد، ایک ایک کر کے"
+          },
+          {
+            "t": "p",
+            "html": "ہر تجویدی قاعدے کا اپنا صفحہ ہے، جس میں کسی جانی پہچانی سورت سے مثال اور ٹرینر کا براہِ راست لنک موجود ہے: <a href=\"/regle/qalqalah\">قلقلہ</a>، <a href=\"/regle/ghunnah\">غنّہ</a>، <a href=\"/regle/idgham\">ادغام</a>، <a href=\"/regle/ikhfa\">اخفا</a> اور <a href=\"/regle/madd\">مدّ</a>۔ ایک قاعدے کو کئی سورتوں میں مشق کرنا اس سے کہیں بہتر ہے کہ سارے قواعد ایک ساتھ پڑھ لیے جائیں اور کسی پر عمل نہ ہو۔"
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "سورہ فاتحہ پر مائیکروفون کھولیں"
+          },
+          {
+            "t": "p",
+            "html": "آواز کی شناخت اینڈرائیڈ اور کمپیوٹر پر کروم میں بہترین کام کرتی ہے۔ اسے پرسکون جگہ اور عام تلاوت کی آواز درکار ہے — سرگوشی نہیں۔ اگر کئی سنجیدہ کوششوں کے بعد بھی کوئی لفظ درج نہ ہو تو عموماً مسئلہ مائیکروفون یا اردگرد کے شور کا ہوتا ہے، آپ کی تلاوت کا نہیں۔"
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "سورہ فاتحہ"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "آیت الکرسی"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "سورہ ملک"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "قلقلہ"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "مدّ"
+          },
+          {
+            "href": "/privacy",
+            "label": "پرائیویسی"
+          }
+        ],
+        "footer": "تلمیذ تلاوت کی مشق کا ایک آلہ ہے۔ دکھایا گیا متن Quran.com سے لیا گیا ہے (عثمانی، تجویدی رنگوں کے ساتھ)، روایتِ حفص عن عاصم۔ یہ اجازہ نہیں، کوئی علمی سند نہیں، اور استاد کا بدل نہیں۔ اپنی تلاوت ہمیشہ کسی مقری کو سنائیں۔",
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/ur"
+          }
+        ]
+      },
+      "bn": {
+        "title": "তিলমিয — মাইক্রোফোন দিয়ে শব্দে শব্দে তিলাওয়াতের অনুশীলন",
+        "description": "বিনামূল্যের ওয়েব ট্রেইনার: কুরআন শব্দে শব্দে পড়ুন, মাইক্রোফোন প্রতিটি আরবি শব্দ যাচাই করে, Quran.com-এর তাজবিদ রঙসহ। ব্রাউজারেই চলে, অ্যাকাউন্ট লাগে না। অনুশীলনের যন্ত্র — ইজাজত নয়।",
+        "h1": "শব্দে শব্দে আপনার তিলাওয়াত অনুশীলন করুন",
+        "body": [
+          {
+            "t": "p",
+            "html": "তিলমিয (تلميذ, অর্থ «ছাত্র») একটি বিনামূল্যের ওয়েব ট্রেইনার, তাঁদের জন্য যাঁরা ইতিমধ্যেই নামাজ পড়েন এবং চান যে তাঁদের তিলাওয়াত যাচাই করা হোক। আপনি একটি শব্দ উচ্চারণ করেন, মাইক্রোফোন শোনে, ঘরটি সবুজ হয়ে যায়, আপনি পরেরটিতে যান। কিছুই ইনস্টল করতে হয় না, কোনো শব্দ কোনো সার্ভারে পাঠানো হয় না, অ্যাকাউন্টও লাগে না।"
+          },
+          {
+            "t": "h2",
+            "html": "এটি কার জন্য"
+          },
+          {
+            "t": "p",
+            "html": "এটি তাঁর জন্য তৈরি যিনি নামাজ পড়েন এবং আরবি হরফ চেনেন, কিন্তু যাঁর তিলাওয়াত কখনো মুখে মুখে শুধরে দেওয়া হয়নি। শৈশবে নামাজ শিখে সেখানেই থেমে যাওয়া অধিকাংশ প্রাপ্তবয়স্কের অবস্থা এটাই। আপনি যদি এখনো আরবি হরফ পড়তে না পারেন, তবে আপাতত এই যন্ত্র আপনার জন্য নয়: আগে কায়দা শেষ করুন, তারপর ফিরে আসুন।"
+          },
+          {
+            "t": "h2",
+            "html": "এটি আসলে কী করে"
+          },
+          {
+            "t": "p",
+            "html": "পর্দায় উসমানি লিপিতে পাঠ দেখানো হয়, Quran.com-এর তাজবিদ রঙসহ, শব্দে শব্দে ভাগ করা। কণ্ঠ শনাক্তকরণ আপনার ব্রাউজারেই চলে, এবং আপনি যা পড়েছেন তার ব্যঞ্জনকাঠামো পর্দার শব্দের সঙ্গে মিললেই কেবল ট্রেইনার এগোয়। কোনো শব্দ ধূসর থেকে গেলে কেবল সেই শব্দটিই আবার পড়ুন, পুরো আয়াত নয়। এই বাধ্যবাধকতাই যন্ত্রটির মূল উদ্দেশ্য: যে শব্দটি আপনি সবসময় ভুল পড়েন, সেটি পেরিয়ে যেতে দেয় না।"
+          },
+          {
+            "t": "h2",
+            "html": "এটি যা করে না"
+          },
+          {
+            "t": "p",
+            "html": "এটি আপনার মাদের পরিমাণ মাপে না, এবং আপনার ভারী হরফগুলো যথাযথভাবে ভারী কিনা তা বিচার করে না। এই দুটির জন্য মানুষের কান প্রয়োজন। এটি ইজাজত দেয় না, কোনো ইলমি সনদ নয়, এবং উস্তাদের বিকল্প নয়। কেউ এর চেয়ে বেশি প্রতিশ্রুতি দিলে সে আজকের কণ্ঠ শনাক্তকরণের সামর্থ্যকে বাড়িয়ে বলছে।"
+          },
+          {
+            "t": "h2",
+            "html": "কোথা থেকে শুরু করবেন"
+          },
+          {
+            "t": "p",
+            "html": "<a href=\"/sourate/1\">সূরা ফাতিহা</a> দিয়ে শুরু করুন, কারণ প্রতি রাকাতে আপনি এটি পড়েন এবং সেখানকার ভুল আপনার পুরো নামাজের সঙ্গে চলতে থাকে। এরপর যে ছোট সূরাগুলো আপনার মুখস্থ আছে সেগুলোতে যান। পাঠ সামনে রেখে মুখস্থ থেকে পড়া প্রথমে অস্বস্তিকর লাগে, আর উপকারটাও সেখানেই: অভ্যাস বছরের পর বছর ধরে চলা ভুলগুলো ঢেকে রাখে।"
+          },
+          {
+            "t": "p",
+            "html": "ছোট সূরাগুলো দৃঢ় হলে বড়গুলোই আসল অনুশীলনের ক্ষেত্র হয়ে ওঠে: এক দীর্ঘ আয়াতে নিঃশ্বাস সামলাতে <a href=\"/ayat-kursi\">আয়াতুল কুরসি</a>, আর ত্রিশ আয়াত জুড়ে গতি ধরে রাখতে <a href=\"/sourate/67\">সূরা মুলক</a>।"
+          },
+          {
+            "t": "h2",
+            "html": "নিয়মগুলো, একটি একটি করে"
+          },
+          {
+            "t": "p",
+            "html": "প্রতিটি তাজবিদের নিয়মের নিজস্ব পৃষ্ঠা আছে, পরিচিত সূরা থেকে উদাহরণ এবং ট্রেইনারের সরাসরি লিংকসহ: <a href=\"/regle/qalqalah\">কালকালা</a>, <a href=\"/regle/ghunnah\">গুন্নাহ</a>, <a href=\"/regle/idgham\">ইদগাম</a>, <a href=\"/regle/ikhfa\">ইখফা</a> এবং <a href=\"/regle/madd\">মাদ</a>। একটি নিয়ম কয়েকটি সূরায় অনুশীলন করা সব নিয়ম একসঙ্গে পড়ে কোনোটিই প্রয়োগ না করার চেয়ে অনেক ভালো।"
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "সূরা ফাতিহায় মাইক্রোফোন খুলুন"
+          },
+          {
+            "t": "p",
+            "html": "কণ্ঠ শনাক্তকরণ অ্যান্ড্রয়েড ও কম্পিউটারে ক্রোমে সবচেয়ে ভালো কাজ করে। এর জন্য শান্ত জায়গা এবং স্বাভাবিক তিলাওয়াতের স্বর দরকার — ফিসফিসানি নয়। কয়েকবার আন্তরিক চেষ্টার পরও কোনো শব্দ ধরা না পড়লে সাধারণত সমস্যা মাইক্রোফোনে বা আশপাশের শব্দে, আপনার তিলাওয়াতে নয়।"
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "সূরা ফাতিহা"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "আয়াতুল কুরসি"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "সূরা মুলক"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "কালকালা"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "মাদ"
+          },
+          {
+            "href": "/privacy",
+            "label": "গোপনীয়তা"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/bn"
+          }
+        ],
+        "footer": "তিলমিয একটি তিলাওয়াত অনুশীলনের যন্ত্র। প্রদর্শিত পাঠ Quran.com থেকে নেওয়া (উসমানি, তাজবিদ রঙসহ), রেওয়ায়াত হাফস আন আসিম। এটি ইজাজত নয়, কোনো ইলমি সনদ নয়, এবং উস্তাদের বিকল্প নয়। আপনার তিলাওয়াত সর্বদা একজন মুক্‌রির কাছে যাচাই করান।"
+      },
+      "ru": {
+        "title": "Tilmidh — тренажёр таджвида: читай слово за словом с микрофоном",
+        "description": "Бесплатный веб-тренажёр: читай Коран слово за словом, микрофон проверяет каждое арабское слово, цвета таджвида с Quran.com. Работает в браузере, без аккаунта. Тренажёр — не иджаза.",
+        "h1": "Тренируй своё чтение, слово за словом",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «ученик») — бесплатный веб-тренажёр для тех, кто уже совершает намаз и хочет, чтобы его чтение проверяли. Ты читаешь слово вслух, микрофон слушает, клетка становится зелёной, и ты идёшь дальше. Ничего не устанавливается, звук никуда не отправляется, аккаунт не нужен."
+          },
+          {
+            "t": "h2",
+            "html": "Для кого это"
+          },
+          {
+            "t": "p",
+            "html": "Тренажёр сделан для того, кто уже читает намаз и знает арабские буквы, но чьё чтение никогда не поправляли вслух. Так обстоит дело у большинства взрослых, которые выучили намаз в детстве и на этом остановились. Если ты пока не читаешь арабские буквы, этот инструмент тебе рано: сначала пройди алифбу, потом возвращайся."
+          },
+          {
+            "t": "h2",
+            "html": "Что он делает на самом деле"
+          },
+          {
+            "t": "p",
+            "html": "На экране — текст в написании усмани с цветами таджвида от Quran.com, разбитый по словам. Распознавание речи работает внутри твоего браузера, и тренажёр переходит дальше только тогда, когда согласный костяк произнесённого совпадает со словом на экране. Если слово осталось серым — повтори именно его, а не весь аят. Это ограничение и есть смысл инструмента: оно не даёт проскользнуть мимо слова, которое ты всегда читаешь неверно."
+          },
+          {
+            "t": "h2",
+            "html": "Чего он не делает"
+          },
+          {
+            "t": "p",
+            "html": "Он не измеряет длительность твоего мадда и не судит, достаточно ли тяжело звучат твои эмфатические буквы. Для этого нужно человеческое ухо. Он не даёт иджазу, не является научным свидетельством и не заменяет учителя. Тот, кто обещает больше, преувеличивает возможности сегодняшнего распознавания речи."
+          },
+          {
+            "t": "h2",
+            "html": "С чего начать"
+          },
+          {
+            "t": "p",
+            "html": "Начни с <a href=\"/sourate/1\">суры Аль-Фатиха</a>: ты читаешь её в каждом ракаате, и ошибка в ней тянется через весь намаз. Затем перейди к коротким сурам, которые уже знаешь наизусть. Читать по памяти, глядя в текст, поначалу непривычно — и польза именно в этом: привычка прячет ошибки, которые повторяются годами."
+          },
+          {
+            "t": "p",
+            "html": "Когда короткие суры пойдут ровно, настоящей площадкой станут длинные: <a href=\"/ayat-kursi\">аятуль-Курси</a> — чтобы держать дыхание в одном длинном аяте, и <a href=\"/sourate/67\">сура Аль-Мульк</a> — чтобы держать темп на протяжении тридцати аятов."
+          },
+          {
+            "t": "h2",
+            "html": "Правила, по одному"
+          },
+          {
+            "t": "p",
+            "html": "У каждого правила своя страница с примером из знакомой суры и прямой ссылкой в тренажёр: <a href=\"/regle/qalqalah\">калькаля</a>, <a href=\"/regle/ghunnah\">гунна</a>, <a href=\"/regle/idgham\">идгам</a>, <a href=\"/regle/ikhfa\">ихфа</a> и <a href=\"/regle/madd\">мадд</a>. Отрабатывать одно правило в нескольких сурах полезнее, чем прочитать все правила разом и не применить ни одного."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Открыть микрофон на Аль-Фатихе"
+          },
+          {
+            "t": "p",
+            "html": "Распознавание речи лучше всего работает в Chrome на Android и на компьютере. Нужна тихая комната и обычный голос чтения — не шёпот. Если слово не распознаётся после нескольких честных попыток, дело обычно в микрофоне или в шуме вокруг, а не в твоём чтении."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Аль-Фатиха"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Аятуль-Курси"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Аль-Мульк"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Калькаля"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Мадд"
+          },
+          {
+            "href": "/privacy",
+            "label": "Конфиденциальность"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/ru"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «ученик») — тренажёр чтения Корана. Текст берётся с Quran.com (усмани, цвета таджвида), риваят Хафса от Асима. Это не иджаза, не научное свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри."
+      },
+      "tr": {
+        "title": "Tilmidh — mikrofonla kelime kelime tilavet alıştırması",
+        "description": "Ücretsiz web aracı: Kuran'ı kelime kelime okuyun, mikrofon her Arapça kelimeyi denetler, tecvid renkleri Quran.com'dan. Tarayıcıda çalışır, hesap gerekmez. Alıştırma aracı — icazet değil.",
+        "h1": "Tilavetini kelime kelime çalış",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «öğrenci») namaz kılan ve okuyuşunun denetlenmesini isteyen kişiler için ücretsiz bir web aracıdır. Bir kelimeyi sesli okursun, mikrofon dinler, kutu yeşile döner, sonrakine geçersin. Hiçbir şey kurulmaz, ses hiçbir sunucuya gönderilmez, hesap açmak gerekmez."
+          },
+          {
+            "t": "h2",
+            "html": "Kimin için"
+          },
+          {
+            "t": "p",
+            "html": "Bu araç, namaz kılan ve Arap harflerini tanıyan, ama okuyuşu hiç yüz yüze düzeltilmemiş kişi için yapıldı. Namazı çocukken öğrenip orada kalan yetişkinlerin çoğunun durumu budur. Arap harflerini henüz okuyamıyorsan bu araç şimdilik sana göre değil: önce elifbayı bitir, sonra dön."
+          },
+          {
+            "t": "h2",
+            "html": "Gerçekte ne yapar"
+          },
+          {
+            "t": "p",
+            "html": "Ekranda Osmanî hatla metin, Quran.com'un tecvid renkleriyle ve kelime kelime bölünmüş olarak görünür. Ses tanıma tarayıcının içinde çalışır ve araç ancak söylediğinin ünsüz iskeleti ekrandaki kelimeyle örtüştüğünde ilerler. Bir kelime gri kalırsa yalnızca o kelimeyi tekrarla, bütün ayeti değil. Aracın asıl anlamı bu kısıttır: her zaman yanlış okuduğun kelimeyi geçip gitmene izin vermez."
+          },
+          {
+            "t": "h2",
+            "html": "Ne yapmaz"
+          },
+          {
+            "t": "p",
+            "html": "Meddinin uzunluğunu ölçmez ve kalın harflerinin yeterince kalın olup olmadığına hükmetmez. Bu ikisi için insan kulağı gerekir. İcazet vermez, ilmî bir belge değildir ve hocanın yerini tutmaz. Daha fazlasını vadeden, bugünkü ses tanımanın yapabildiklerini abartıyor demektir."
+          },
+          {
+            "t": "h2",
+            "html": "Nereden başlamalı"
+          },
+          {
+            "t": "p",
+            "html": "<a href=\"/sourate/1\">Fatiha suresi</a> ile başla; onu her rekâtta okuyorsun ve oradaki bir hata bütün namazına taşınıyor. Sonra ezbere bildiğin kısa surelere geç. Metne bakarak ezberden okumak başta tuhaf gelir, fayda da tam oradadır: alışkanlık, yıllardır tekrarlanan hataları örter."
+          },
+          {
+            "t": "p",
+            "html": "Kısa sureler oturduğunda asıl çalışma alanı uzunlar olur: tek uzun bir ayette nefesi yönetmek için <a href=\"/ayat-kursi\">Ayetel Kürsi</a>, otuz ayet boyunca tempoyu korumak için <a href=\"/sourate/67\">Mülk suresi</a>."
+          },
+          {
+            "t": "h2",
+            "html": "Kurallar, teker teker"
+          },
+          {
+            "t": "p",
+            "html": "Her tecvid kuralının kendi sayfası var; bildiğin bir sureden örnek ve doğrudan araca bağlantı içeriyor: <a href=\"/regle/qalqalah\">kalkale</a>, <a href=\"/regle/ghunnah\">gunne</a>, <a href=\"/regle/idgham\">idgam</a>, <a href=\"/regle/ikhfa\">ihfa</a> ve <a href=\"/regle/madd\">med</a>. Tek bir kuralı birkaç surede çalışmak, bütün kuralları bir kerede okuyup hiçbirini uygulamamaktan çok daha yararlıdır."
+          },
+          {
+            "t": "h2",
+            "html": "Ezberden okuyanlar için"
+          },
+          {
+            "t": "p",
+            "html": "Bu sureleri zaten ezbere biliyorsan, alıştırmanın amacı ezberi tazelemek değildir. Ezberden okurken kulak alışkanlığı devreye girer ve yıllardır tekrarlanan küçük hatalar fark edilmez hâle gelir. Metne bakarak ve kelime kelime doğrulatarak okumak bu alışkanlığı bir süreliğine kırar; çoğu kişi ilk denemede en az iki yerde takılır."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Fatiha'da mikrofonu aç"
+          },
+          {
+            "t": "p",
+            "html": "Ses tanıma en iyi Android'de ve bilgisayarda Chrome'da çalışır. Sessiz bir oda ve olağan bir tilavet sesi ister — fısıltı değil. Birkaç içten denemeden sonra bir kelime hâlâ algılanmıyorsa sorun genellikle mikrofonda ya da çevredeki gürültüdedir, okuyuşunda değil."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Fatiha"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Ayetel Kürsi"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Mülk"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Kalkale"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Med"
+          },
+          {
+            "href": "/privacy",
+            "label": "Gizlilik"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/tr"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «öğrenci») bir tilavet alıştırma aracıdır. Gösterilen metin Quran.com'dan alınmıştır (Osmanî, tecvid renkleriyle), Âsım'dan Hafs rivayeti. Bu bir icazet, ilmî bir belge veya hoca yerine geçen bir şey değildir. Okuyuşunu daima bir mukriye kontrol ettir."
+      },
+      "ms": {
+        "title": "Tilmidh — latihan tilawah kata demi kata dengan mikrofon",
+        "description": "Alat web percuma: baca al-Quran kata demi kata, mikrofon menyemak setiap perkataan Arab, warna tajwid daripada Quran.com. Berjalan dalam pelayar, tanpa akaun. Alat latihan — bukan ijazah.",
+        "h1": "Latih bacaanmu, kata demi kata",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «murid») ialah alat web percuma untuk mereka yang sudah bersolat dan mahu bacaannya disemak. Kamu membaca satu perkataan, mikrofon mendengar, kotak bertukar hijau, dan kamu meneruskan. Tiada apa-apa yang perlu dipasang, tiada suara dihantar ke mana-mana pelayan, dan akaun tidak diperlukan."
+          },
+          {
+            "t": "h2",
+            "html": "Untuk siapa"
+          },
+          {
+            "t": "p",
+            "html": "Alat ini dibina untuk orang yang sudah bersolat dan mengenal huruf Arab, tetapi bacaannya tidak pernah dibetulkan secara lisan. Itulah keadaan kebanyakan orang dewasa yang belajar solat sewaktu kecil lalu berhenti di situ. Jika kamu belum boleh membaca huruf Arab, alat ini belum sesuai: habiskan muqaddam dahulu, kemudian kembali."
+          },
+          {
+            "t": "h2",
+            "html": "Apa yang sebenarnya dilakukan"
+          },
+          {
+            "t": "p",
+            "html": "Skrin memaparkan teks Uthmani dengan warna tajwid daripada Quran.com, dipecahkan kata demi kata. Pengecaman suara berjalan di dalam pelayarmu sendiri, dan alat ini hanya bergerak apabila rangka konsonan yang kamu sebut sepadan dengan perkataan di skrin. Jika sesuatu perkataan kekal kelabu, ulang perkataan itu sahaja, bukan seluruh ayat. Batasan inilah tujuan sebenar alat ini: ia tidak membenarkan kamu melepasi perkataan yang sentiasa kamu salah baca."
+          },
+          {
+            "t": "h2",
+            "html": "Apa yang tidak dilakukan"
+          },
+          {
+            "t": "p",
+            "html": "Ia tidak mengukur panjang maddmu, dan tidak menilai sama ada huruf tebalmu cukup tebal. Kedua-duanya memerlukan telinga manusia. Ia tidak memberikan ijazah, bukan sijil keilmuan, dan bukan pengganti guru. Sesiapa yang menjanjikan lebih daripada itu sedang membesar-besarkan kemampuan pengecaman suara hari ini."
+          },
+          {
+            "t": "h2",
+            "html": "Mula dari mana"
+          },
+          {
+            "t": "p",
+            "html": "Mulakan dengan <a href=\"/sourate/1\">surah al-Fatihah</a>, kerana kamu membacanya dalam setiap rakaat dan kesilapan di situ terbawa ke seluruh solatmu. Kemudian beralih kepada surah-surah pendek yang sudah kamu hafal. Membaca daripada hafalan sambil melihat teks memang janggal pada mulanya, dan di situlah manfaatnya: tabiat menyembunyikan kesilapan yang diulang bertahun-tahun."
+          },
+          {
+            "t": "p",
+            "html": "Apabila surah pendek sudah mantap, yang panjang menjadi medan latihan sebenar: <a href=\"/ayat-kursi\">Ayat Kursi</a> untuk mengawal nafas dalam satu ayat yang panjang, dan <a href=\"/sourate/67\">surah al-Mulk</a> untuk mengekalkan rentak sepanjang tiga puluh ayat."
+          },
+          {
+            "t": "h2",
+            "html": "Hukum tajwid, satu persatu"
+          },
+          {
+            "t": "p",
+            "html": "Setiap hukum mempunyai halamannya sendiri, lengkap dengan contoh daripada surah yang kamu kenal dan pautan terus ke alat: <a href=\"/regle/qalqalah\">qalqalah</a>, <a href=\"/regle/ghunnah\">ghunnah</a>, <a href=\"/regle/idgham\">idgham</a>, <a href=\"/regle/ikhfa\">ikhfa</a> dan <a href=\"/regle/madd\">madd</a>. Melatih satu hukum dalam beberapa surah jauh lebih berguna daripada membaca semua hukum sekali gus lalu tidak mengamalkan satu pun."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Buka mikrofon pada al-Fatihah"
+          },
+          {
+            "t": "p",
+            "html": "Pengecaman suara berfungsi paling baik dalam Chrome pada Android dan komputer. Ia memerlukan bilik yang senyap dan suara bacaan yang biasa — bukan bisikan. Jika sesuatu perkataan tetap tidak dikesan selepas beberapa percubaan yang bersungguh, masalahnya biasanya pada mikrofon atau bunyi sekeliling, bukan pada bacaanmu."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fatihah"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Ayat Kursi"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqalah"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/privacy",
+            "label": "Privasi"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») ialah alat latihan tilawah. Teks yang dipaparkan berasal daripada Quran.com (Uthmani, warna tajwid), riwayat Hafs daripada Asim. Ini bukan ijazah, bukan sijil keilmuan, dan bukan pengganti guru. Semak bacaanmu sentiasa dengan seorang muqri.",
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/ms"
+          }
+        ]
+      },
+      "de": {
+        "title": "Tilmidh — Koranrezitation Wort für Wort mit dem Mikrofon üben",
+        "description": "Kostenloser Web-Trainer: rezitiere den Koran Wort für Wort, das Mikrofon prüft jedes arabische Wort, Tadschwid-Farben von Quran.com. Läuft im Browser, ohne Konto. Ein Übungswerkzeug — keine Idschāza.",
+        "h1": "Übe deine Rezitation, Wort für Wort",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «Schüler») ist ein kostenloser Web-Trainer für Menschen, die bereits beten und ihre Rezitation überprüft haben möchten. Du liest ein Wort laut, das Mikrofon hört zu, das Feld wird grün, und du gehst weiter. Nichts wird installiert, keine Aufnahme verlässt dein Gerät, ein Konto ist nicht nötig."
+          },
+          {
+            "t": "h2",
+            "html": "Für wen das gedacht ist"
+          },
+          {
+            "t": "p",
+            "html": "Dieses Werkzeug richtet sich an jemanden, der bereits betet und die arabischen Buchstaben kennt, dessen Rezitation aber nie mündlich korrigiert wurde. So geht es den meisten Erwachsenen, die das Gebet als Kind gelernt und dann nicht weitergemacht haben. Wer die arabischen Buchstaben noch nicht lesen kann, ist hier vorerst falsch: erst den Alphabetkurs abschließen, dann wiederkommen."
+          },
+          {
+            "t": "h2",
+            "html": "Was es tatsächlich tut"
+          },
+          {
+            "t": "p",
+            "html": "Auf dem Bildschirm steht der Text in der Uthmani-Schrift mit den Tadschwid-Farben von Quran.com, Wort für Wort aufgeteilt. Die Spracherkennung läuft in deinem Browser, und der Trainer geht erst weiter, wenn das Konsonantengerüst des Gesprochenen zum Wort auf dem Bildschirm passt. Bleibt ein Wort grau, wiederhole nur dieses Wort, nicht den ganzen Vers. Genau diese Einschränkung ist der Sinn der Sache: sie lässt dich nicht über das Wort hinweggleiten, das du immer falsch liest."
+          },
+          {
+            "t": "h2",
+            "html": "Was es nicht tut"
+          },
+          {
+            "t": "p",
+            "html": "Es misst nicht die Länge deiner Madd-Dehnungen und beurteilt nicht, ob deine emphatischen Buchstaben schwer genug klingen. Beides braucht ein menschliches Ohr. Es erteilt keine Idschāza, ist kein Gelehrtenzeugnis und ersetzt keinen Lehrer. Wer mehr verspricht, überschätzt, was Spracherkennung heute leisten kann."
+          },
+          {
+            "t": "h2",
+            "html": "Womit anfangen"
+          },
+          {
+            "t": "p",
+            "html": "Beginne mit <a href=\"/sourate/1\">Sure al-Fātiha</a>, denn du rezitierst sie in jeder Rakʿa, und ein Fehler dort begleitet dein ganzes Gebet. Geh dann zu den kurzen Suren über, die du bereits auswendig kannst. Auswendig zu lesen und dabei auf den Text zu schauen, fühlt sich anfangs ungewohnt an — und genau darin liegt der Nutzen: Gewohnheit verdeckt Fehler, die man seit Jahren wiederholt."
+          },
+          {
+            "t": "p",
+            "html": "Sitzen die kurzen Suren, werden die längeren zum eigentlichen Übungsfeld: <a href=\"/ayat-kursi\">Āyat al-Kursī</a> für die Atemführung in einem einzigen langen Vers, und <a href=\"/sourate/67\">Sure al-Mulk</a>, um über dreißig Verse hinweg das Tempo zu halten."
+          },
+          {
+            "t": "h2",
+            "html": "Die Regeln, eine nach der anderen"
+          },
+          {
+            "t": "p",
+            "html": "Jede Tadschwid-Regel hat ihre eigene Seite, mit einem Beispiel aus einer Sure, die du kennst, und einem direkten Link in den Trainer: <a href=\"/regle/qalqalah\">Qalqala</a>, <a href=\"/regle/ghunnah\">Ghunna</a>, <a href=\"/regle/idgham\">Idghām</a>, <a href=\"/regle/ikhfa\">Ikhfāʾ</a> und <a href=\"/regle/madd\">Madd</a>. Eine einzige Regel über mehrere Suren zu üben bringt weit mehr, als alle Regeln auf einmal zu lesen und keine davon anzuwenden."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Mikrofon bei al-Fātiha öffnen"
+          },
+          {
+            "t": "p",
+            "html": "Die Spracherkennung arbeitet am besten in Chrome auf Android und am Rechner. Sie braucht einen ruhigen Raum und eine normale Rezitationsstimme — kein Flüstern. Wird ein Wort nach mehreren ernsthaften Versuchen nicht erkannt, liegt es meist am Mikrofon oder am Lärm ringsum, nicht an deiner Rezitation."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiha"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Āyat al-Kursī"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqala"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/privacy",
+            "label": "Datenschutz"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/de"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «Schüler») ist ein Übungswerkzeug für die Rezitation. Der angezeigte Text stammt von Quran.com (Uthmani, Tadschwid-Farben), Riwāya Ḥafṣ ʿan ʿĀṣim. Es ist keine Idschāza, kein Gelehrtenzeugnis und kein Ersatz für einen Lehrer. Lass deine Rezitation immer von einem Muqriʾ prüfen."
+      },
+      "es": {
+        "title": "Tilmidh — practica la recitación del Corán palabra por palabra con el micrófono",
+        "description": "Entrenador web gratuito: recita el Corán palabra por palabra, el micrófono comprueba cada palabra árabe, colores de taywid de Quran.com. Funciona en el navegador, sin cuenta. Herramienta de práctica — no una iyaza.",
+        "h1": "Practica tu recitación, palabra por palabra",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh (تلميذ, «alumno») es un entrenador web gratuito para quienes ya rezan y quieren que se les compruebe la recitación. Lees una palabra en voz alta, el micrófono escucha, la casilla se pone verde y pasas a la siguiente. No se instala nada, ninguna grabación sale de tu dispositivo y no hace falta crear una cuenta."
+          },
+          {
+            "t": "h2",
+            "html": "Para quién es"
+          },
+          {
+            "t": "p",
+            "html": "Está pensado para quien ya reza y conoce las letras árabes, pero a quien nunca le han corregido la recitación en voz alta. Es la situación de la mayoría de los adultos que aprendieron a rezar de niños y ahí se quedaron. Si todavía no lees las letras árabes, esta herramienta no es para ti por ahora: termina primero un curso de alfabeto y vuelve después."
+          },
+          {
+            "t": "h2",
+            "html": "Qué hace realmente"
+          },
+          {
+            "t": "p",
+            "html": "La pantalla muestra el texto en grafía uzmaní con los colores de taywid de Quran.com, dividido palabra por palabra. El reconocimiento de voz se ejecuta dentro de tu navegador, y el entrenador solo avanza cuando el esqueleto consonántico de lo que has dicho coincide con la palabra en pantalla. Si una palabra sigue en gris, repite solo esa palabra, no la aleya entera. Esa restricción es precisamente el sentido de la herramienta: no te deja pasar por encima de la palabra que siempre lees mal."
+          },
+          {
+            "t": "h2",
+            "html": "Qué no hace"
+          },
+          {
+            "t": "p",
+            "html": "No mide la duración de tus alargamientos ni juzga si tus letras enfáticas suenan lo bastante pesadas. Ambas cosas requieren un oído humano. No otorga iyaza, no es un certificado de conocimiento y no sustituye a un maestro. Quien prometa más está exagerando lo que el reconocimiento de voz puede hacer hoy."
+          },
+          {
+            "t": "h2",
+            "html": "Por dónde empezar"
+          },
+          {
+            "t": "p",
+            "html": "Empieza por la <a href=\"/sourate/1\">sura al-Fātiha</a>: la recitas en cada rakʿa, y un error ahí te acompaña durante toda la oración. Después pasa a las suras cortas que ya sabes de memoria. Recitar de memoria mirando el texto resulta incómodo al principio, y ahí está justamente el provecho: la costumbre esconde errores repetidos durante años."
+          },
+          {
+            "t": "p",
+            "html": "Cuando las suras cortas salgan firmes, las largas se convierten en el verdadero terreno de práctica: <a href=\"/ayat-kursi\">Āyat al-Kursī</a> para controlar la respiración en una sola aleya larga, y <a href=\"/sourate/67\">la sura al-Mulk</a> para mantener el ritmo a lo largo de treinta aleyas."
+          },
+          {
+            "t": "h2",
+            "html": "Las reglas, de una en una"
+          },
+          {
+            "t": "p",
+            "html": "Cada regla de taywid tiene su propia página, con un ejemplo de una sura que ya conoces y un enlace directo al entrenador: <a href=\"/regle/qalqalah\">qalqala</a>, <a href=\"/regle/ghunnah\">gunna</a>, <a href=\"/regle/idgham\">idgam</a>, <a href=\"/regle/ikhfa\">ijfá</a> y <a href=\"/regle/madd\">madd</a>. Trabajar una sola regla en varias suras rinde mucho más que leer todas las reglas de golpe y no aplicar ninguna."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Abrir el micrófono en al-Fātiha"
+          },
+          {
+            "t": "p",
+            "html": "El reconocimiento de voz funciona mejor en Chrome sobre Android y en ordenador. Necesita una habitación tranquila y una voz de recitación normal, no un susurro. Si una palabra no se reconoce tras varios intentos honestos, el problema suele estar en el micrófono o en el ruido de alrededor, no en tu recitación."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiha"
+          },
+          {
+            "href": "/ayat-kursi",
+            "label": "Āyat al-Kursī"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqala"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/privacy",
+            "label": "Privacidad"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/es"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «alumno») es una herramienta de práctica de recitación. El texto mostrado procede de Quran.com (uzmaní, colores de taywid), riwāya Ḥafṣ ʿan ʿĀṣim. No es una iyaza, ni un certificado de conocimiento, ni un sustituto de un maestro. Comprueba siempre tu recitación con un muqriʾ."
+      }
+    }
+  },
+  {
+    "slug": "a-propos",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "fr": {
+        "title": "À propos de Tilmidh — méthode, sources et limites | Tilmidh تلميذ",
+        "description": "Qui écrit le contenu de Tilmidh, sur quelles sources, selon quelle riwāya, et ce que l’outil ne prétend pas faire. Signaler une erreur de tajwid.",
+        "h1": "À propos de Tilmidh",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh est un entraîneur de récitation gratuit. Cette page dit d’où vient ce que tu lis sur ce site, comment c’est vérifié, et où sont les limites. Sur un sujet religieux, ces trois questions passent avant la présentation du produit."
+          },
+          {
+            "t": "h2",
+            "html": "La riwāya de référence"
+          },
+          {
+            "t": "p",
+            "html": "Tout le contenu suit la <strong>riwāya de Ḥafṣ ʿan ʿĀṣim</strong>, celle de la grande majorité des mushafs imprimés et celle qu’apprennent la plupart des gens hors du Maghreb. Les durées de madd données sur ce site — deux temps pour le naturel, quatre à cinq pour le muttaṣil et le munfaṣil, six pour le lāzim — sont celles de cette riwāya. Elles diffèrent dans d’autres, notamment chez Warsh. Si tu apprends selon une autre riwāya, les explications de règles restent valables mais les durées ne le sont pas."
+          },
+          {
+            "t": "h2",
+            "html": "D’où vient le texte coranique"
+          },
+          {
+            "t": "p",
+            "html": "Le texte affiché dans l’entraîneur et sur les pages de sourates provient de l’<strong>API de Quran.com</strong>, en script Uthmani avec les annotations de tajwid. Il n’est ni ressaisi ni retouché : le colorier autrement serait introduire une erreur là où il n’y en avait pas. C’est aussi pour cela que les couleurs de l’app correspondent à celles que tu vois sur Quran.com et non à une convention maison."
+          },
+          {
+            "t": "h2",
+            "html": "Comment les pages de règles sont écrites"
+          },
+          {
+            "t": "p",
+            "html": "Chaque règle est rédigée à partir des catégories classiques du tajwid : makhārij et ṣifāt pour l’articulation, les quatre cas de la nūn sākina et du tanwīn, les trois de la mīm sākina, les types de madd, les cinq lettres de qalqalah. Les exemples sont pris dans des sourates courtes que la plupart des gens connaissent déjà par cœur, pour que la vérification soit immédiate. Aucune page n’avance une position sur laquelle les écoles divergent sans le signaler."
+          },
+          {
+            "t": "h2",
+            "html": "Ce que cet outil n’est pas"
+          },
+          {
+            "t": "p",
+            "html": "Ce n’est pas une ijazah. Ce n’est pas une certification savante. Ce n’est pas un substitut à un professeur. La reconnaissance vocale vérifie le squelette consonantique d’un mot ; elle ne mesure ni la durée de tes allongements, ni le degré d’emphase de tes lettres lourdes, ni la qualité de ta ghunnah. Ces trois points demandent une oreille humaine, et aucun logiciel disponible aujourd’hui ne les remplace. Un service qui te promet le contraire survend ce que la technologie sait faire."
+          },
+          {
+            "t": "h2",
+            "html": "Signaler une erreur"
+          },
+          {
+            "t": "p",
+            "html": "Si tu relèves une erreur de tajwid sur une page, elle doit être corrigée — c’est plus important que n’importe quelle considération de référencement. Le canal de contact est celui indiqué sur la <a href=\"/privacy\">page de confidentialité</a>. Précise l’adresse de la page et le passage concerné : une correction vérifiable est traitée en priorité."
+          },
+          {
+            "t": "h2",
+            "html": "Vie privée, en une phrase"
+          },
+          {
+            "t": "p",
+            "html": "La reconnaissance vocale s’exécute dans ton navigateur, aucun enregistrement audio n’est envoyé ni conservé sur un serveur, et le site ne demande pas de compte. Le détail est sur la <a href=\"/privacy\">page de confidentialité</a>."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Ouvrir l’entraîneur sur Al-Fātiḥah"
+          }
+        ],
+        "nav": [
+          {
+            "href": "/regles-de-tajwid",
+            "label": "Toutes les règles"
+          },
+          {
+            "href": "/coran-phonetique",
+            "label": "Coran phonétique"
+          },
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiḥah"
+          },
+          {
+            "href": "/privacy",
+            "label": "Confidentialité"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/"
+          },
+          {
+            "name": "À propos",
+            "item": "/a-propos"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "About Tilmidh — method, sources and limits | Tilmidh تلميذ",
+        "description": "Where Tilmidh’s content comes from, which riwāya it follows, how the rules pages are written, and what the tool does not claim to do. Report a tajwid error.",
+        "h1": "About Tilmidh",
+        "body": [
+          {
+            "t": "p",
+            "html": "Tilmidh is a free recitation trainer. This page explains where the content on this site comes from, how it is grounded, and where the limits are. On a religious subject those three questions come before any product description."
+          },
+          {
+            "t": "h2",
+            "html": "The riwāya used"
+          },
+          {
+            "t": "p",
+            "html": "All content follows <strong>riwāya Ḥafṣ ʿan ʿĀṣim</strong>, the reading of the vast majority of printed mushafs and the one most people learn outside the Maghreb. The madd durations given on this site — two counts for the natural madd, four to five for muttaṣil and munfaṣil, six for lāzim — belong to that riwāya. They differ in others, notably Warsh. If you learn by a different reading, the explanations still hold but the durations do not."
+          },
+          {
+            "t": "h2",
+            "html": "Where the Quranic text comes from"
+          },
+          {
+            "t": "p",
+            "html": "The text shown in the trainer and on the sura pages comes from the <strong>Quran.com API</strong>, in Uthmani script with tajwid annotations. It is neither retyped nor edited: recolouring it by hand would introduce errors where there were none. That is also why the colours in the app match what you see on Quran.com rather than some in-house convention."
+          },
+          {
+            "t": "h2",
+            "html": "How the rules pages are written"
+          },
+          {
+            "t": "p",
+            "html": "Each rule is written from the classical categories of tajwid: makhārij and ṣifāt for articulation, the four cases of nūn sākina and tanwīn, the three of mīm sākina, the types of madd, the five letters of qalqalah. Examples are taken from short suras most people already know by heart, so that you can verify them immediately. No page asserts a position on which the schools differ without saying so."
+          },
+          {
+            "t": "h2",
+            "html": "What this tool is not"
+          },
+          {
+            "t": "p",
+            "html": "It is not an ijazah. It is not a scholarly certification. It is not a substitute for a teacher. Speech recognition checks the consonantal skeleton of a word; it does not measure the length of your madd, the heaviness of your emphatic letters, or the quality of your ghunnah. Those three need a human ear, and no software available today replaces one. A service promising otherwise is overselling what the technology can do."
+          },
+          {
+            "t": "h2",
+            "html": "Reporting an error"
+          },
+          {
+            "t": "p",
+            "html": "If you find a tajwid error on any page, it should be corrected — that matters more than any ranking consideration. The contact channel is the one listed on the <a href=\"/privacy\">privacy page</a>. Include the page address and the passage concerned: a verifiable correction is handled first."
+          },
+          {
+            "t": "h2",
+            "html": "Privacy, in one sentence"
+          },
+          {
+            "t": "p",
+            "html": "Speech recognition runs in your browser, no audio recording is sent to or kept on a server, and the site asks for no account. Details are on the <a href=\"/privacy\">privacy page</a>."
+          },
+          {
+            "t": "cta",
+            "ref": "1",
+            "label": "Open the trainer on Al-Fātiḥah"
+          }
+        ],
+        "nav": [
+          {
+            "href": "/regles-de-tajwid",
+            "label": "All tajwid rules"
+          },
+          {
+            "href": "/best-tajwid-app-for-beginners",
+            "label": "Best tajwid app for beginners"
+          },
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiḥah"
+          },
+          {
+            "href": "/privacy",
+            "label": "Privacy"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/en"
+          },
+          {
+            "name": "About",
+            "item": "/en/a-propos"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      }
+    }
+  },
+  {
+    "slug": "ayat-kursi",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "fr": {
+        "title": "Ayat al-Kursi en phonétique — réciter avec tajwid | Tilmidh تلميذ",
+        "description": "Ayat al-Kursi (2:255) mot à mot : texte arabe, phonétique, les règles de tajwid du verset, et micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
+        "h1": "Réciter Ayat al-Kursi mot à mot",
+        "body": [
+          {
+            "t": "p",
+            "html": "Ayat al-Kursi est le verset 255 de la sourate Al-Baqara. C’est l’un des versets les plus récités au monde, souvent appris juste après Al-Fātiḥah et les sourates courtes. Il est long pour un seul verset — c’est précisément ce qui en fait un bon exercice : il faut tenir le souffle, gérer les pauses, et ne pas accélérer sur la fin."
+          },
+          {
+            "t": "ar",
+            "html": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ"
+          },
+          {
+            "t": "p",
+            "html": "<em>Allāhu lā ilāha illā huwa l-ḥayyu l-qayyūm.</em> Le verset s’ouvre sur cette affirmation, puis se déroule en une longue phrase. La difficulté n’est pas dans le vocabulaire, elle est dans la longueur : il faut savoir où reprendre son souffle sans couper le sens."
+          },
+          {
+            "t": "h2",
+            "html": "Où respirer"
+          },
+          {
+            "t": "p",
+            "html": "Les endroits de pause du mushaf ne sont pas décoratifs : ils marquent où l’on peut s’arrêter sans altérer le sens. Sur ce verset, les points d’arrêt naturels tombent après <em>al-qayyūm</em>, après <em>wa-lā fī l-arḍ</em>, et après <em>illā bi-idhnih</em>. Si tu dois reprendre ton souffle ailleurs parce que la phrase est trop longue pour toi, reviens en arrière de quelques mots au lieu de repartir au milieu d’un groupe."
+          },
+          {
+            "t": "h2",
+            "html": "Les règles présentes dans ce verset"
+          },
+          {
+            "t": "p",
+            "html": "Le verset concentre plusieurs familles. Le <a href=\"/regle/madd\">madd</a> apparaît dès <em>lā ilāha</em> et revient constamment. La <a href=\"/regle/ghunnah\">ghunnah</a> se trouve sur les nūn doublés, notamment dans <em>man dhā lladhī</em>. L’<a href=\"/regle/ikhfa\">ikhfāʾ</a> se rencontre sur <em>min ʿilmihi</em>. Et la <a href=\"/regle/qalqalah\">qalqalah</a> intervient sur le <strong>ط</strong> si tu marques un arrêt."
+          },
+          {
+            "t": "h2",
+            "html": "Le passage le plus délicat"
+          },
+          {
+            "t": "ar",
+            "html": "وَلَا يَـُٔودُهُۥ حِفْظُهُمَا"
+          },
+          {
+            "t": "p",
+            "html": "<em>Wa-lā yaʾūduhu ḥifẓuhumā.</em> Ce passage réunit une hamza suivie d’une lettre de prolongation et un <strong>ظ</strong> emphatique — deux points où l’erreur est fréquente. Le <em>ẓ</em> n’est ni un <em>z</em> ni un <em>d</em> : la langue vient entre les dents, et le son est lourd. Travaille ces trois mots isolément avant de reprendre le verset entier."
+          },
+          {
+            "t": "h2",
+            "html": "Comment le travailler"
+          },
+          {
+            "t": "p",
+            "html": "Découpe le verset en quatre segments et valide-les un par un, puis enchaîne-les deux par deux, puis en entier. C’est la méthode qui fonctionne sur les versets longs : la mémoire ne lâche presque jamais au milieu d’un segment, elle lâche aux jonctions. En travaillant les jonctions explicitement, tu supprimes la seule vraie difficulté."
+          },
+          {
+            "t": "p",
+            "html": "Tilmidh découpe ce verset aux pauses du mushaf, comme les autres versets du carrousel, et valide chaque mot au micro avant de passer au suivant. Sur un verset de cette longueur, l’intérêt principal est de t’empêcher d’accélérer : la validation mot à mot impose un rythme constant du début à la fin."
+          },
+          {
+            "t": "cta",
+            "ref": "2:255",
+            "label": "Ouvrir le micro sur Ayat al-Kursi"
+          },
+          {
+            "t": "p",
+            "html": "Comme partout ailleurs, l’outil vérifie la reconnaissance du mot, pas la durée de tes allongements ni la justesse de tes emphatiques. Ces deux points relèvent de l’oreille d’un muqriʾ, et aucun logiciel ne les remplace."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiḥah"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/regle/ghunnah",
+            "label": "Ghunnah"
+          },
+          {
+            "href": "/regles-de-tajwid",
+            "label": "Toutes les règles"
+          },
+          {
+            "href": "/coran-phonetique",
+            "label": "Coran phonétique"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/"
+          },
+          {
+            "name": "Ayat al-Kursi",
+            "item": "/ayat-kursi"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "id": {
+        "title": "Belajar Ayat Kursi kata demi kata — dengan tajwid | Tilmidh تلميذ",
+        "description": "Ayat Kursi (2:255) kata demi kata: teks Arab, transliterasi, hukum tajwid dalam ayat, dan mikrofon yang memeriksa setiap kata. Alat latihan — bukan ijazah.",
+        "h1": "Belajar Ayat Kursi kata demi kata",
+        "body": [
+          {
+            "t": "p",
+            "html": "Ayat Kursi adalah ayat ke-255 dari surat Al-Baqarah. Ia termasuk ayat yang paling banyak dibaca dan dihafal, dan biasanya dipelajari sesudah Al-Fatihah dan surat-surat pendek. Panjangnya tidak biasa untuk satu ayat, dan justru itulah yang menjadikannya latihan yang baik: kamu harus mengatur napas, memilih tempat berhenti, dan menjaga agar bacaan tidak makin cepat menjelang akhir."
+          },
+          {
+            "t": "ar",
+            "html": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ"
+          },
+          {
+            "t": "p",
+            "html": "<em>Allāhu lā ilāha illā huwa l-ḥayyu l-qayyūm.</em> Artinya secara ringkas: «Allah, tidak ada tuhan selain Dia, Yang Mahahidup, Yang terus-menerus mengurus makhluk-Nya.» Ayat ini dibuka dengan kalimat itu, lalu berlanjut dalam satu rangkaian yang panjang. Kesulitannya bukan pada kosakata, melainkan pada panjangnya."
+          },
+          {
+            "t": "h2",
+            "html": "Di mana mengambil napas"
+          },
+          {
+            "t": "p",
+            "html": "Tanda waqaf dalam mushaf bukan hiasan: ia menunjukkan tempat berhenti yang tidak merusak makna. Pada ayat ini, tempat berhenti yang wajar jatuh sesudah <em>al-qayyūm</em>, sesudah <em>wa lā fī l-arḍ</em>, dan sesudah <em>illā bi-idhnih</em>. Kalau napasmu habis di tempat lain, jangan melanjutkan dari tengah rangkaian: mundurlah beberapa kata, lalu sambung dari sana."
+          },
+          {
+            "t": "h2",
+            "html": "Hukum tajwid dalam ayat ini"
+          },
+          {
+            "t": "p",
+            "html": "Ayat ini mengumpulkan beberapa hukum sekaligus. <a href=\"/regle/madd\">Madd</a> muncul sejak <em>lā ilāha</em> dan berulang terus. <a href=\"/regle/ghunnah\">Ghunnah</a> terdapat pada nun bertasydid, antara lain pada <em>man dhā lladhī</em>. <a href=\"/regle/ikhfa\">Ikhfa</a> ditemukan pada <em>min ʿilmihi</em>. Dan <a href=\"/regle/qalqalah\">qalqalah</a> muncul pada huruf ṭa apabila kamu berhenti padanya."
+          },
+          {
+            "t": "h2",
+            "html": "Bagian yang paling sering salah"
+          },
+          {
+            "t": "ar",
+            "html": "وَلَا يَـُٔودُهُۥ حِفْظُهُمَا"
+          },
+          {
+            "t": "p",
+            "html": "<em>Wa lā yaʾūduhu ḥifẓuhumā.</em> Di sini bertemu hamzah yang diikuti huruf mad, dan huruf <strong>ظ</strong> yang tebal. Huruf itu bukan z biasa dan bukan pula d: ujung lidah keluar sedikit di antara gigi, dan bunyinya berat. Latih tiga kata ini secara terpisah lebih dahulu, baru ulangi ayatnya dari awal."
+          },
+          {
+            "t": "h2",
+            "html": "Cara melatihnya"
+          },
+          {
+            "t": "p",
+            "html": "Potong ayat menjadi empat bagian, lalu latih satu per satu sampai lancar. Sesudah itu sambung dua-dua, dan terakhir seluruhnya. Cara ini berhasil pada ayat-ayat panjang karena hafalan jarang putus di tengah bagian; ia hampir selalu putus di sambungan. Dengan melatih sambungan secara sengaja, kesulitan yang sebenarnya sudah hilang."
+          },
+          {
+            "t": "p",
+            "html": "Tilmidh memotong ayat ini pada tanda waqaf mushaf, sebagaimana ayat-ayat lain, dan memeriksa setiap kata lewat mikrofon sebelum berpindah. Pada ayat sepanjang ini, manfaat terbesarnya bukan pada pemeriksaannya, melainkan pada terjaganya tempo: kamu tidak bisa mempercepat bacaan tanpa disadari."
+          },
+          {
+            "t": "cta",
+            "ref": "2:255",
+            "label": "Buka mikrofon pada Ayat Kursi"
+          },
+          {
+            "t": "p",
+            "html": "Perlu diketahui secara jujur: alat ini memeriksa dikenalinya kata, bukan panjang maddmu dan bukan pula ketepatan huruf-huruf tebalmu. Kedua hal itu memerlukan telinga seorang guru, dan tidak ada perangkat lunak yang menggantikannya."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fatihah"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Al-Mulk"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/regle/ghunnah",
+            "label": "Ghunnah"
+          },
+          {
+            "href": "/regle/ikhfa",
+            "label": "Ikhfa"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/id"
+          },
+          {
+            "name": "Ayat Kursi",
+            "item": "/id/ayat-kursi"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed), riwayat Hafs dari Asim. Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      },
+      "tr": {
+        "title": "Ayetel Kürsi’yi kelime kelime öğren — tecvidle | Tilmidh تلميذ",
+        "description": "Ayetel Kürsi (2:255) kelime kelime: Arapça metin, okunuş, ayetteki tecvid kuralları ve her kelimeyi doğrulayan mikrofon. Alıştırma aracı — icazet değil.",
+        "h1": "Ayetel Kürsi’yi kelime kelime oku",
+        "body": [
+          {
+            "t": "p",
+            "html": "Ayetel Kürsi, Bakara suresinin 255. ayetidir. En çok okunan ve ezberlenen ayetlerden biridir; genellikle Fatiha ve kısa surelerden hemen sonra öğrenilir. Tek bir ayet için alışılmadık derecede uzundur, ve onu iyi bir alıştırma hâline getiren de tam olarak budur: nefesini ayarlaman, durakları seçmen ve sona doğru hızlanmaman gerekir."
+          },
+          {
+            "t": "ar",
+            "html": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ"
+          },
+          {
+            "t": "p",
+            "html": "<em>Allāhu lā ilāhe illā hüve’l-hayyü’l-kayyūm.</em> Kısaca anlamı: «Allah, kendisinden başka ilah olmayan, diri ve her şeyi ayakta tutandır.» Ayet bu cümleyle açılır, sonra uzun tek bir akış hâlinde devam eder. Zorluk kelimelerde değil, uzunluktadır."
+          },
+          {
+            "t": "h2",
+            "html": "Nerede nefes alınır"
+          },
+          {
+            "t": "p",
+            "html": "Mushaftaki durak işaretleri süs değildir: anlamı bozmadan durulabilecek yerleri gösterir. Bu ayette doğal duraklar <em>el-kayyūm</em>’dan sonra, <em>ve lā fi’l-ard</em>’dan sonra ve <em>illā bi-iznih</em>’den sonra düşer. Nefesin başka bir yerde biterse, cümlenin ortasından devam etme: birkaç kelime geri dön ve oradan bağla."
+          },
+          {
+            "t": "h2",
+            "html": "Bu ayetteki tecvid kuralları"
+          },
+          {
+            "t": "p",
+            "html": "Ayet birkaç kuralı bir arada barındırır. <a href=\"/regle/madd\">Med</a> daha <em>lā ilāhe</em>’de başlar ve sürekli tekrarlanır. <a href=\"/regle/ghunnah\">Gunne</a> şeddeli nunlarda, özellikle <em>men ze’llezī</em> ifadesinde bulunur. <a href=\"/regle/ikhfa\">İhfa</a> <em>min ilmihi</em>’de karşımıza çıkar. <a href=\"/regle/qalqalah\">Kalkale</a> ise üzerinde durursan tı harfinde belirir."
+          },
+          {
+            "t": "h2",
+            "html": "En çok hata yapılan yer"
+          },
+          {
+            "t": "ar",
+            "html": "وَلَا يَـُٔودُهُۥ حِفْظُهُمَا"
+          },
+          {
+            "t": "p",
+            "html": "<em>Ve lā yeūduhu hıfzuhumā.</em> Burada hemzeden sonra med harfi gelir ve kalın okunan <strong>ظ</strong> harfi bulunur. Bu harf ne sıradan bir z ne de bir d’dir: dilin ucu dişlerin arasından biraz çıkar ve ses kalındır. Bu üç kelimeyi önce ayrı ayrı çalış, sonra ayeti baştan tekrar et."
+          },
+          {
+            "t": "h2",
+            "html": "Nasıl çalışılır"
+          },
+          {
+            "t": "p",
+            "html": "Ayeti dört parçaya böl ve her parçayı tek tek doğrulat. Sonra ikişerli birleştir, en son hepsini arka arkaya oku. Bu yöntem uzun ayetlerde işe yarar, çünkü ezber neredeyse hiçbir zaman parçanın ortasında değil, ekleme yerlerinde kopar. Ekleme yerlerini bilerek çalıştığında asıl zorluk ortadan kalkmış olur."
+          },
+          {
+            "t": "p",
+            "html": "Tilmidh bu ayeti mushafın durak yerlerinden böler ve bir sonraki kelimeye geçmeden önce mikrofonla her kelimeyi doğrular. Bu uzunlukta bir ayette en büyük faydası doğrulamanın kendisi değil, temponun sabit kalmasıdır: farkına varmadan hızlanamazsın."
+          },
+          {
+            "t": "h2",
+            "html": "Ezberden okuyanlar için"
+          },
+          {
+            "t": "p",
+            "html": "Bu ayeti zaten ezbere biliyorsan, alıştırmanın amacı ezberi tazelemek değildir. Ezberden okurken kulak alışkanlığı devreye girer ve yıllardır tekrarlanan küçük hatalar fark edilmez hâle gelir. Metne bakarak ve kelime kelime doğrulatarak okumak, bu alışkanlığı bir süreliğine kırar. Çoğu kişi ilk denemede en az iki yerde takılır, ve genellikle bunlar yıllardır aynı şekilde okunan yerlerdir."
+          },
+          {
+            "t": "cta",
+            "ref": "2:255",
+            "label": "Ayetel Kürsi’de mikrofonu aç"
+          },
+          {
+            "t": "p",
+            "html": "Açıkça belirtmek gerekir: bu araç kelimenin tanınmasını denetler, medlerinin uzunluğunu ya da kalın harflerinin doğruluğunu değil. Bu iki konu bir hocanın kulağını gerektirir ve hiçbir yazılım onun yerini tutmaz."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Fatiha"
+          },
+          {
+            "href": "/sourate/67",
+            "label": "Mülk"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Med"
+          },
+          {
+            "href": "/regle/ghunnah",
+            "label": "Gunne"
+          },
+          {
+            "href": "/regle/ikhfa",
+            "label": "İhfa"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/tr"
+          },
+          {
+            "name": "Ayetel Kürsi",
+            "item": "/tr/ayat-kursi"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, «öğrenci») bir tilavet alıştırma aracıdır. Gösterilen metin Quran.com’dan alınmıştır (Uthmani tecvid), Âsım’dan Hafs rivayeti. Bu bir icazet, ilmî bir belge veya hoca yerine geçen bir şey değildir. Okuyuşunu daima bir mukriye kontrol ettir."
+      }
+    }
+  },
+  {
+    "slug": "regles-de-tajwid",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "fr": {
+        "title": "Toutes les règles de tajwid — guide complet | Tilmidh تلميذ",
+        "description": "Les règles de tajwid rassemblées : nūn sākina et tanwīn, mīm sākina, madd, qalqalah, lettres solaires et lunaires. Chaque règle avec son exemple et son entraînement au micro.",
+        "h1": "Toutes les règles de tajwid",
+        "body": [
+          {
+            "t": "p",
+            "html": "Cette page rassemble les règles de tajwid en un seul endroit, dans l’ordre où on les rencontre quand on apprend. Chaque famille renvoie vers sa page détaillée, avec un exemple coranique et un entraînement au micro. La riwāya de référence ici est <strong>Ḥafṣ ʿan ʿĀṣim</strong>, celle des mushafs les plus répandus."
+          },
+          {
+            "t": "p",
+            "html": "Une remarque avant de commencer. Connaître le nom des règles n’est pas ce qui rend la récitation correcte : beaucoup de gens récitent juste sans savoir nommer ce qu’ils font. Les noms servent à corriger vite, parce qu’ils permettent de désigner l’erreur. C’est le seul usage qu’on en fait ici."
+          },
+          {
+            "t": "h2",
+            "html": "Nūn sākina et tanwīn — quatre règles"
+          },
+          {
+            "t": "p",
+            "html": "Quand un <strong>نْ</strong> sans voyelle, ou un tanwīn, rencontre la lettre suivante, quatre traitements sont possibles selon cette lettre. C’est la famille la plus fréquente du Coran, et celle où se concentrent la plupart des erreurs des débutants."
+          },
+          {
+            "t": "table",
+            "head": [
+              "Règle",
+              "Lettres suivantes",
+              "Effet"
+            ],
+            "rows": [
+              [
+                "Iẓhār",
+                "ء ه ع ح غ خ",
+                "le nūn se prononce clairement, sans nasalisation"
+              ],
+              [
+                "<a href=\"/regle/idgham\">Idghām</a> avec ghunnah",
+                "ي ن م و",
+                "fusion, avec nasalisation de deux temps"
+              ],
+              [
+                "<a href=\"/regle/idgham\">Idghām</a> sans ghunnah",
+                "ل ر",
+                "fusion complète, aucune nasalisation"
+              ],
+              [
+                "Iqlāb",
+                "ب",
+                "le nūn devient un mīm imparfait, avec ghunnah"
+              ],
+              [
+                "<a href=\"/regle/ikhfa\">Ikhfāʾ</a>",
+                "les quinze autres",
+                "le nūn est dissimulé, avec ghunnah"
+              ]
+            ]
+          },
+          {
+            "t": "p",
+            "html": "Deux pièges reviennent sans cesse. Le premier : l’idghām ne s’applique qu’<strong>entre deux mots</strong>. Dans <em>dunyā</em> ou <em>bunyān</em>, le nūn se prononce clairement malgré la lettre qui suit. Le second : lām et rāʾ fusionnent <strong>sans</strong> nasalisation, alors que l’oreille a tendance à en ajouter une par imitation des quatre autres."
+          },
+          {
+            "t": "h2",
+            "html": "Mīm sākina — trois règles"
+          },
+          {
+            "t": "p",
+            "html": "Le même raisonnement s’applique au <strong>مْ</strong> sans voyelle. Devant un autre mīm, les deux se fondent avec nasalisation. Devant un bāʾ, les lèvres ne se ferment pas complètement et la nasalisation reste. Devant toute autre lettre, le mīm se prononce nettement. Cette famille est plus courte et pose moins de problèmes."
+          },
+          {
+            "t": "h2",
+            "html": "La ghunnah, deux temps de nasalisation"
+          },
+          {
+            "t": "p",
+            "html": "La <a href=\"/regle/ghunnah\">ghunnah</a> est la nasalisation qui dure environ deux temps. Elle est la plus nette sur نّ et مّ portant une shadda, et elle accompagne aussi l’idghām des quatre lettres, l’iqlāb et l’ikhfāʾ. Ce qui se juge n’est pas la durée exacte mais sa constance : une nasalisation qui change de longueur d’un mot à l’autre s’entend immédiatement."
+          },
+          {
+            "t": "h2",
+            "html": "Le madd, ou les longueurs"
+          },
+          {
+            "t": "p",
+            "html": "Le <a href=\"/regle/madd\">madd</a> est l’allongement d’une voyelle suivie de sa lettre de prolongation. La base est de deux temps. Une hamza dans le même mot ou dans le mot suivant porte l’allongement à quatre ou cinq temps. Un sukūn d’origine ou une shadda après la lettre de prolongation impose six temps — c’est le cas de <em>aḍ-ḍāllīn</em> à la fin d’Al-Fātiḥah."
+          },
+          {
+            "t": "ar",
+            "html": "وَلَا ٱلضَّآلِّينَ"
+          },
+          {
+            "t": "h2",
+            "html": "La qalqalah, le rebond"
+          },
+          {
+            "t": "p",
+            "html": "Cinq lettres seulement rebondissent quand elles sont sans voyelle : <strong>ق ط ب ج د</strong>. La <a href=\"/regle/qalqalah\">qalqalah</a> est plus discrète au milieu d’un mot, plus audible quand on s’arrête sur la lettre. Le rebond ne doit jamais devenir une voyelle : <em>qul</em> ne se transforme pas en <em>qulu</em>."
+          },
+          {
+            "t": "h2",
+            "html": "Lettres solaires et lunaires"
+          },
+          {
+            "t": "p",
+            "html": "Devant les quatorze lettres solaires, le lām de l’article <em>al-</em> ne se prononce pas et la lettre suivante double : <em>ar-raḥmān</em>, et non <em>al-raḥmān</em>. Devant les quatorze lettres lunaires, le lām se prononce normalement : <em>al-ḥamd</em>. Cette règle se vérifie dès le premier verset d’Al-Fātiḥah, ce qui en fait un bon point de départ."
+          },
+          {
+            "t": "h2",
+            "html": "Lourd et léger"
+          },
+          {
+            "t": "p",
+            "html": "Sept lettres sont toujours lourdes : خ ص ض ط ظ غ ق. Le rāʾ change selon sa voyelle. Le lām de <em>Allāh</em> est lourd après une fatḥa ou une ḍamma, et léger après une kasra — c’est pourquoi il est léger dans <em>bismi-Llāh</em> et lourd dans <em>qāla-Llāhu</em>. C’est une des rares règles où une erreur s’entend même d’une oreille non exercée."
+          },
+          {
+            "t": "cta",
+            "ref": "1:1",
+            "label": "S’entraîner sur Al-Fātiḥah"
+          },
+          {
+            "t": "p",
+            "html": "Le plus efficace n’est pas d’apprendre ces règles dans l’ordre, mais d’ouvrir une sourate courte que tu connais déjà et d’y chercher chaque règle une par une. Tilmidh vérifie chaque mot au micro et s’arrête sur celui qui n’est pas reconnu. L’outil ne mesure ni la durée de tes madd ni la qualité de ta nasalisation — pour cela il faut l’oreille d’un professeur."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/regle/qalqalah",
+            "label": "Qalqalah"
+          },
+          {
+            "href": "/regle/ghunnah",
+            "label": "Ghunnah"
+          },
+          {
+            "href": "/regle/idgham",
+            "label": "Idgham"
+          },
+          {
+            "href": "/regle/ikhfa",
+            "label": "Ikhfa"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/coran-phonetique",
+            "label": "Coran phonétique"
+          },
+          {
+            "href": "/apprendre-tajwid",
+            "label": "Apprendre le tajwid"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/"
+          },
+          {
+            "name": "Règles de tajwid",
+            "item": "/regles-de-tajwid"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      }
+    }
+  },
+  {
+    "slug": "coran-phonetique",
+    "dateModified": "2026-08-14",
+    "langs": {
+      "fr": {
+        "title": "Coran en phonétique — lire quand on ne lit pas l’arabe | Tilmidh تلميذ",
+        "description": "Le Coran en phonétique française : système de translittération, tableau lettre par lettre, limites réelles, et entraînement au micro mot à mot avec Tilmidh.",
+        "h1": "Le Coran en phonétique",
+        "body": [
+          {
+            "t": "p",
+            "html": "Beaucoup de gens prient déjà sans savoir lire l’alphabet arabe. Ils ont appris Al-Fātiḥah à l’oreille, et cherchent une transcription en lettres latines pour vérifier ce qu’ils récitent. Cette page explique le système de transcription utilisé dans Tilmidh, ce qu’il permet réellement, et ce qu’il ne permet pas."
+          },
+          {
+            "t": "h2",
+            "html": "Une question qui vient avant"
+          },
+          {
+            "t": "p",
+            "html": "Est-il permis de lire le Coran en phonétique ? Les avis rapportés convergent sur un point : la transcription est tolérée comme <strong>étape provisoire</strong> pour celui qui ne lit pas encore l’arabe, à condition qu’elle ne devienne pas un état définitif. Ce n’est pas une position que cette page tranche à ta place, et elle ne remplace pas l’avis d’une personne qualifiée. Ce qui est certain techniquement, en revanche, c’est que la transcription latine ne peut pas noter tout ce que note l’écriture arabe."
+          },
+          {
+            "t": "h2",
+            "html": "Ce que la phonétique ne peut pas rendre"
+          },
+          {
+            "t": "p",
+            "html": "Trois choses se perdent. D’abord les lettres emphatiques : ص س ث se transcrivent souvent toutes par un <em>s</em>, alors qu’il s’agit de trois articulations distinctes. Ensuite les longueurs : rien dans l’alphabet latin ne distingue deux temps de six temps. Enfin les règles de liaison — idghām, ikhfāʾ, ghunnah — qui modifient la prononciation d’un mot en fonction du mot suivant. Une transcription les fige, alors qu’elles dépendent du contexte."
+          },
+          {
+            "t": "p",
+            "html": "C’est pour cette raison que Tilmidh affiche <strong>toujours l’arabe au-dessus de la transcription</strong>, et jamais la transcription seule. La ligne latine est une béquille, pas un texte de remplacement."
+          },
+          {
+            "t": "h2",
+            "html": "Le système de transcription utilisé"
+          },
+          {
+            "t": "table",
+            "head": [
+              "Arabe",
+              "Transcription",
+              "Repère de prononciation"
+            ],
+            "rows": [
+              [
+                "ا",
+                "ā",
+                "a long, deux temps"
+              ],
+              [
+                "ث",
+                "th",
+                "comme le <em>th</em> anglais de <em>think</em>"
+              ],
+              [
+                "ح",
+                "ḥ",
+                "h fortement soufflé, dans la gorge"
+              ],
+              [
+                "خ",
+                "kh",
+                "comme la jota espagnole"
+              ],
+              [
+                "ذ",
+                "dh",
+                "comme le <em>th</em> anglais de <em>this</em>"
+              ],
+              [
+                "ص",
+                "ṣ",
+                "s emphatique, langue creusée"
+              ],
+              [
+                "ض",
+                "ḍ",
+                "d emphatique"
+              ],
+              [
+                "ط",
+                "ṭ",
+                "t emphatique"
+              ],
+              [
+                "ظ",
+                "ẓ",
+                "dh emphatique"
+              ],
+              [
+                "ع",
+                "ʿ",
+                "resserrement de la gorge, sans équivalent français"
+              ],
+              [
+                "غ",
+                "gh",
+                "r grasseyé, proche du r parisien"
+              ],
+              [
+                "ق",
+                "q",
+                "k articulé au fond, sur la luette"
+              ]
+            ]
+          },
+          {
+            "t": "p",
+            "html": "Les points sous les lettres ne sont pas décoratifs : ils marquent l’emphase. <em>ṣ</em> et <em>s</em> sont deux lettres différentes, pas deux façons d’écrire la même. Si tu les prononces de la même manière, le mot change, et parfois son sens avec."
+          },
+          {
+            "t": "h2",
+            "html": "Exemple, mot à mot"
+          },
+          {
+            "t": "ar",
+            "html": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ"
+          },
+          {
+            "t": "p",
+            "html": "<em>bis’mi — l-lāhi — r-raḥmāni — r-raḥīmi</em>. Trois choses se voient déjà dans cette seule ligne. Le lām de l’article disparaît devant le rāʾ, qui double : on lit <em>r-raḥmān</em> et non <em>al-raḥmān</em>. Le <em>ḥ</em> de <em>raḥmān</em> n’est pas le h français, il est soufflé dans la gorge. Et le lām de <em>Allāh</em> est ici léger, parce qu’il suit la kasra de <em>bismi</em>."
+          },
+          {
+            "t": "h2",
+            "html": "Comment s’en servir pour progresser"
+          },
+          {
+            "t": "p",
+            "html": "Lis la ligne latine une fois, puis cache-la et regarde uniquement l’arabe. Au début tu ne reconnaîtras que la forme générale du mot, et c’est suffisant. En quelques semaines, la transcription devient un filet de sécurité auquel tu recours de moins en moins. C’est le seul usage qui fait progresser : celui qui s’organise pour disparaître."
+          },
+          {
+            "t": "cta",
+            "ref": "1:1",
+            "label": "Ouvrir le micro sur Al-Fātiḥah"
+          },
+          {
+            "t": "p",
+            "html": "Tilmidh écoute chaque mot et n’avance que lorsqu’il le reconnaît. L’outil ne juge ni la longueur de tes voyelles ni la qualité de tes emphatiques — il te force simplement à ralentir et à reprendre le mot qui n’est pas passé. Pour tout le reste, il faut un professeur."
+          }
+        ],
+        "nav": [
+          {
+            "href": "/sourate/1",
+            "label": "Al-Fātiḥah"
+          },
+          {
+            "href": "/sourate/112",
+            "label": "Al-Ikhlāṣ"
+          },
+          {
+            "href": "/regles-de-tajwid",
+            "label": "Toutes les règles"
+          },
+          {
+            "href": "/regle/madd",
+            "label": "Madd"
+          },
+          {
+            "href": "/apprendre-tajwid",
+            "label": "Apprendre le tajwid"
+          }
+        ],
+        "breadcrumb": [
+          {
+            "name": "Tilmidh",
+            "item": "/"
+          },
+          {
+            "name": "Coran phonétique",
+            "item": "/coran-phonetique"
+          }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      }
+    }
+  }
+]
