@@ -504,7 +504,7 @@
         }
         .ayah-words {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
             align-items: flex-end;
             gap: 8px 6px;
@@ -2614,7 +2614,7 @@
                 visibility: hidden !important;
             }
             .ayah-words {
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
                 overflow: visible;
                 justify-content: center;
                 gap: 8px 6px;
@@ -2783,6 +2783,7 @@
 
         /* Ayah long (Kursi, Kahf…) : densité mushaf, pas les cartes Fātiḥah. */
         .ayah-line.ayah-compact .ayah-words {
+            flex-wrap: wrap;
             gap: 2px 8px;
             padding: 2px 6px;
             max-width: min(1100px, 100%);
@@ -5923,37 +5924,13 @@
 
     function splitOverflowingAyahLines(container) {
         if (!container) return;
-        const availW = Math.max(240, container.clientWidth - 48);
-        Array.from(container.querySelectorAll('.ayah-line')).forEach(line => {
-            const wordsEl = line.querySelector('.ayah-words');
-            if (!wordsEl) return;
-            const boxes = Array.from(wordsEl.querySelectorAll('.word-box'));
-            if (boxes.length < 4) return;
-            const prevWrap = wordsEl.style.flexWrap;
-            wordsEl.style.flexWrap = 'nowrap';
-            const totalW = wordsEl.scrollWidth;
-            wordsEl.style.flexWrap = prevWrap;
-            if (totalW <= availW + 8) return;
+        const WORDS_PER_SLIDE = 4;
+        const COMPACT_MIN = 13;
+        const isMobile = window.matchMedia('(max-width: 600px)').matches;
+        const availW = Math.max(240, container.clientWidth - 24);
 
-            const gapX = parseFloat(getComputedStyle(wordsEl).columnGap) || 12;
-            const chunks = [];
-            let cur = [];
-            let curW = 0;
-            boxes.forEach(box => {
-                const w = Math.max(box.offsetWidth, 72);
-                const next = cur.length ? curW + gapX + w : w;
-                if (cur.length && next > availW) {
-                    chunks.push(cur);
-                    cur = [box];
-                    curW = w;
-                } else {
-                    cur.push(box);
-                    curW = next;
-                }
-            });
-            if (cur.length) chunks.push(cur);
+        function appendChunks(line, chunks) {
             if (chunks.length < 2) return;
-
             let insertAfter = line;
             chunks.slice(1).forEach(chunk => {
                 const nl = document.createElement('div');
@@ -5965,6 +5942,55 @@
                 insertAfter.after(nl);
                 insertAfter = nl;
             });
+        }
+
+        function eachShortLine(fn) {
+            Array.from(container.querySelectorAll('.ayah-line')).forEach(line => {
+                const wordsEl = line.querySelector('.ayah-words');
+                if (!wordsEl) return;
+                const boxes = Array.from(wordsEl.querySelectorAll('.word-box'));
+                if (boxes.length >= COMPACT_MIN) return;
+                fn(line, wordsEl, boxes);
+            });
+        }
+
+        eachShortLine((line, wordsEl, boxes) => {
+            if (boxes.length <= WORDS_PER_SLIDE) return;
+            const chunks = [];
+            for (let i = 0; i < boxes.length; i += WORDS_PER_SLIDE) {
+                chunks.push(boxes.slice(i, i + WORDS_PER_SLIDE));
+            }
+            appendChunks(line, chunks);
+        });
+
+        if (!isMobile) return;
+
+        eachShortLine((line, wordsEl, boxes) => {
+            if (boxes.length < 2) return;
+            const prevWrap = wordsEl.style.flexWrap;
+            wordsEl.style.flexWrap = 'nowrap';
+            const totalW = wordsEl.scrollWidth;
+            wordsEl.style.flexWrap = prevWrap;
+            if (totalW <= availW + 8) return;
+
+            const gapX = parseFloat(getComputedStyle(wordsEl).columnGap) || 12;
+            const chunks = [];
+            let cur = [];
+            let curW = 0;
+            boxes.forEach(box => {
+                const w = Math.max(box.offsetWidth, 48);
+                const next = cur.length ? curW + gapX + w : w;
+                if (cur.length && next > availW) {
+                    chunks.push(cur);
+                    cur = [box];
+                    curW = w;
+                } else {
+                    cur.push(box);
+                    curW = next;
+                }
+            });
+            if (cur.length) chunks.push(cur);
+            appendChunks(line, chunks);
         });
     }
 
