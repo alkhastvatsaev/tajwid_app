@@ -35,7 +35,7 @@
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/bn#page","url":"https://tilmidh.app/bn","name":"তিলমিয — মাইক্রোফোন দিয়ে শব্দে শব্দে তিলাওয়াতের অনুশীলন","description":"বিনামূল্যের ওয়েব ট্রেইনার: কুরআন শব্দে শব্দে পড়ুন, মাইক্রোফোন প্রতিটি আরবি শব্দ যাচাই করে, Quran.com-এর তাজবিদ রঙসহ। ব্রাউজারেই চলে, অ্যাকাউন্ট লাগে না। অনুশীলনের যন্ত্র — ইজাজত নয়।","inLanguage":"bn","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/bn"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[],"founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/bn#page","url":"https://tilmidh.app/bn","name":"তিলমিয — মাইক্রোফোন দিয়ে শব্দে শব্দে তিলাওয়াতের অনুশীলন","description":"বিনামূল্যের ওয়েব ট্রেইনার: কুরআন শব্দে শব্দে পড়ুন, মাইক্রোফোন প্রতিটি আরবি শব্দ যাচাই করে, Quran.com-এর তাজবিদ রঙসহ। ব্রাউজারেই চলে, অ্যাকাউন্ট লাগে না। অনুশীলনের যন্ত্র — ইজাজত নয়।","inLanguage":"bn","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14","author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — উসমানি তাজবিদ পাঠ, হাফস আন আসিম রেওয়ায়েত","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — KFGQPC HAFS ফন্ট","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — ডিভাইসে ar-SA কণ্ঠস্বর শনাক্তকরণ","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/bn"}]}]}</script>
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
         body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
@@ -49,50 +49,20 @@
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
-
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
         table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
         th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
         th { color: var(--muted); font-weight: 600; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
 
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
-        .hero-img img { display: block; width: 100%; height: auto; }
-    
         @font-face {
             font-family: 'KFGQPC Colored';
             src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
@@ -250,8 +220,9 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>শব্দে শব্দে আপনার তিলাওয়াত অনুশীলন করুন</h1>
+        <p class="byline">লিখেছেন <span class="byline-name">Alkhast Vatsaev</span> · হালনাগাদ 2026-08-14</p>
         <figure class="hero-img">
-            <img src="/img/page/bn/tilmidh.webp" alt="Tilmidh — কুরআন শব্দে শব্দে পড়া শেখুন" width="960" height="540" fetchpriority="high" decoding="async">
+            <img src="/img/page/bn/tilmidh.webp" alt="তিলমিয — মাইক্রোফোন দিয়ে শব্দে শব্দে তিলাওয়াতের অনুশীলন" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
         <figure class="media-illu" data-illu="mark">
             <div class="demo-stage">
@@ -266,18 +237,11 @@
             <figcaption>আরবি, ধ্বনি, তাজউইদ — শব্দে শব্দে।</figcaption>
         </figure>
         <!-- .media-video reserved for later -->
-
-
-
-
-
-
-
-        <p>তিলমিয (تلميذ, অর্থ «ছাত্র») একটি বিনামূল্যের ওয়েব ট্রেইনার, তাঁদের জন্য যাঁরা ইতিমধ্যেই নামাজ পড়েন এবং চান যে তাঁদের তিলাওয়াত যাচাই করা হোক। আপনি একটি শব্দ উচ্চারণ করেন, মাইক্রোফোন শোনে, ঘরটি সবুজ হয়ে যায়, আপনি পরেরটিতে যান। কিছুই ইনস্টল করতে হয় না, কোনো শব্দ কোনো সার্ভারে পাঠানো হয় না, অ্যাকাউন্টও লাগে না।</p>
+        <p>তিলমিয (تلميذ, অর্থ «ছাত্র») একটি বিনামূল্যের ওয়েব ট্রেইনার, তাঁদের জন্য যাঁরা ইতিমধ্যেই নামাজ পড়েন এবং চান যে তাঁদের তিলাওয়াত যাচাই করা হোক। আপনি একটি শব্দ উচ্চারণ করেন, মাইক্রোফোন শোনে, আয়াতে ট্যাপ করেন, পড়েন, মাইক্রোফোন শব্দে শব্দে যাচাই করে। কিছুই ইনস্টল করতে হয় না, কোনো শব্দ কোনো সার্ভারে পাঠানো হয় না, অ্যাকাউন্টও লাগে না।</p>
         <h2>এটি কার জন্য</h2>
         <p>এটি তাঁর জন্য তৈরি যিনি নামাজ পড়েন এবং আরবি হরফ চেনেন, কিন্তু যাঁর তিলাওয়াত কখনো মুখে মুখে শুধরে দেওয়া হয়নি। শৈশবে নামাজ শিখে সেখানেই থেমে যাওয়া অধিকাংশ প্রাপ্তবয়স্কের অবস্থা এটাই। আপনি যদি এখনো আরবি হরফ পড়তে না পারেন, তবে আপাতত এই যন্ত্র আপনার জন্য নয়: আগে কায়দা শেষ করুন, তারপর ফিরে আসুন।</p>
         <h2>এটি আসলে কী করে</h2>
-        <p>পর্দায় উসমানি লিপিতে পাঠ দেখানো হয়, Quran.com-এর তাজবিদ রঙসহ, শব্দে শব্দে ভাগ করা। কণ্ঠ শনাক্তকরণ আপনার ব্রাউজারেই চলে, এবং আপনি যা পড়েছেন তার ব্যঞ্জনকাঠামো পর্দার শব্দের সঙ্গে মিললেই কেবল ট্রেইনার এগোয়। কোনো শব্দ ধূসর থেকে গেলে কেবল সেই শব্দটিই আবার পড়ুন, পুরো আয়াত নয়। এই বাধ্যবাধকতাই যন্ত্রটির মূল উদ্দেশ্য: যে শব্দটি আপনি সবসময় ভুল পড়েন, সেটি পেরিয়ে যেতে দেয় না।</p>
+        <p>পর্দায় উসমানি লিপিতে পাঠ দেখানো হয়, Quran.com-এর তাজবিদ রঙসহ, শব্দে শব্দে ভাগ করা। কণ্ঠ শনাক্তকরণ আপনার ব্রাউজারেই চলে, এবং আপনি যা পড়েছেন তার ব্যঞ্জনকাঠামো পর্দার শব্দের সঙ্গে মিললেই কেবল ট্রেইনার এগোয়। কোনো শব্দ গৃহীত না হলে কেবল সেই শব্দটিই আবার পড়ুন, পুরো আয়াত নয়। এই বাধ্যবাধকতাই যন্ত্রটির মূল উদ্দেশ্য: যে শব্দটি আপনি সবসময় ভুল পড়েন, সেটি পেরিয়ে যেতে দেয় না।</p>
         <h2>এটি যা করে না</h2>
         <p>এটি আপনার মাদের পরিমাণ মাপে না, এবং আপনার ভারী হরফগুলো যথাযথভাবে ভারী কিনা তা বিচার করে না। এই দুটির জন্য মানুষের কান প্রয়োজন। এটি ইজাজত দেয় না, কোনো ইলমি সনদ নয়, এবং উস্তাদের বিকল্প নয়। কেউ এর চেয়ে বেশি প্রতিশ্রুতি দিলে সে আজকের কণ্ঠ শনাক্তকরণের সামর্থ্যকে বাড়িয়ে বলছে।</p>
         <h2>কোথা থেকে শুরু করবেন</h2>
@@ -287,6 +251,7 @@
         <p>প্রতিটি তাজবিদের নিয়মের নিজস্ব পৃষ্ঠা আছে, পরিচিত সূরা থেকে উদাহরণ এবং ট্রেইনারের সরাসরি লিংকসহ: <a href="/regle/qalqalah">কালকালা</a>, <a href="/regle/ghunnah">গুন্নাহ</a>, <a href="/regle/idgham">ইদগাম</a>, <a href="/regle/ikhfa">ইখফা</a> এবং <a href="/regle/madd">মাদ</a>। একটি নিয়ম কয়েকটি সূরায় অনুশীলন করা সব নিয়ম একসঙ্গে পড়ে কোনোটিই প্রয়োগ না করার চেয়ে অনেক ভালো।</p>
         <a class="cta" href="/bn/?ref=1">সূরা ফাতিহায় মাইক্রোফোন খুলুন</a>
         <p>কণ্ঠ শনাক্তকরণ অ্যান্ড্রয়েড ও কম্পিউটারে ক্রোমে সবচেয়ে ভালো কাজ করে। এর জন্য শান্ত জায়গা এবং স্বাভাবিক তিলাওয়াতের স্বর দরকার — ফিসফিসানি নয়। কয়েকবার আন্তরিক চেষ্টার পরও কোনো শব্দ ধরা না পড়লে সাধারণত সমস্যা মাইক্রোফোনে বা আশপাশের শব্দে, আপনার তিলাওয়াতে নয়।</p>
+
         <nav>
             <a href="/bn/sourate/1">সূরা ফাতিহা</a>
             <a href="/bn/ayat-kursi">আয়াতুল কুরসি</a>
@@ -295,10 +260,24 @@
             <a href="/bn/regle/madd">মাদ</a>
             <a href="/bn/privacy">গোপনীয়তা</a>
         </nav>
+        <section class="page-meta">
+            <h2>সূত্র</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — উসমানি তাজবিদ পাঠ, হাফস আন আসিম রেওয়ায়েত</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — KFGQPC HAFS ফন্ট</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — ডিভাইসে ar-SA কণ্ঠস্বর শনাক্তকরণ</a></li>
+            </ul>
+            <h2>যোগাযোগ</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>তিলমিয একটি তিলাওয়াত অনুশীলনের যন্ত্র। প্রদর্শিত পাঠ Quran.com থেকে নেওয়া (উসমানি, তাজবিদ রঙসহ), রেওয়ায়াত হাফস আন আসিম। এটি ইজাজত নয়, কোনো ইলমি সনদ নয়, এবং উস্তাদের বিকল্প নয়। আপনার তিলাওয়াত সর্বদা একজন মুক্‌রির কাছে যাচাই করান।</p>
         </footer>
-    </li>
+      </li>
     </ol>
     </main>
 

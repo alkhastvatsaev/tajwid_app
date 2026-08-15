@@ -5,34 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="robots" content="noindex">
     <title>Tilmidh — capture 1</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        html, body { margin: 0; height: 100%; background: #030303; color: #f5f5f7; font-family: Outfit, sans-serif; }
+        html, body { margin: 0; height: 100%; background: #f4f7fb; color: #0f172a; font-family: Outfit, sans-serif; }
         .phone { min-height: 100%; display: flex; flex-direction: column; padding: 48px 28px 40px; box-sizing: border-box; }
-        .brand { color: #059669; font-weight: 600; letter-spacing: 0.04em; font-size: 0.85rem; }
+        .brand { color: #2563eb; font-weight: 600; letter-spacing: 0.04em; font-size: 0.85rem; }
         h1 { font-size: 1.55rem; line-height: 1.25; margin: 12px 0 28px; font-weight: 600; }
-        .ayah { font-family: Amiri, serif; direction: rtl; text-align: right; font-size: 2.1rem; line-height: 2.2; }
-        .ayah span { display: inline-block; margin: 6px 4px; padding: 4px 8px; border-radius: 10px; }
-        .ok { background: #059669; color: #fff; }
-        .now { outline: 2px solid #34d399; background: rgba(5,150,105,0.25); }
-        .wait { color: #86868b; }
-        .caption { margin-top: auto; padding-top: 36px; font-size: 1.05rem; color: #d1d5db; }
-        .caption strong { color: #34d399; }
+        .ayah { direction: rtl; text-align: right; font-size: 1.85rem; line-height: 1.15; }
+        .word { display: inline-block; margin: 8px 6px; text-align: center; }
+        .ar { font-family: "KFGQPC Colored", serif; color: #0f172a; }
+        .ph { display: block; font-size: 0.72rem; color: #64748b; font-family: Outfit, sans-serif; margin-top: 4px; direction: ltr; }
+        .ok .ar { position: relative; }
+        .ok .ar::after { content: "✓"; position: absolute; top: -0.55em; left: -0.15em; font-size: 0.55em; color: #16a34a; }
+        .caption { margin-top: auto; padding-top: 36px; font-size: 1.05rem; color: #334155; }
+        .caption strong { color: #2563eb; }
     </style>
 </head>
 <body>
     <div class="phone">
         <div class="brand">Tilmidh تلميذ</div>
-        <h1>Chaque mot. Une case verte.</h1>
+        <h1>Tu récites. Tu vois si c’est juste.</h1>
         <p class="ayah">
-            <span class="ok">بِسْمِ</span>
-            <span class="ok">ٱللَّهِ</span>
-            <span class="ok">ٱلرَّحْمَٰنِ</span>
-            <span class="now">ٱلرَّحِيمِ</span>
-            <span class="wait">ٱلْحَمْدُ</span>
-            <span class="wait">لِلَّهِ</span>
+            <span class="word ok"><span class="ar">بِسْمِ</span><span class="ph">bismi</span></span>
+            <span class="word ok"><span class="ar">ٱللَّهِ</span><span class="ph">llāhi</span></span>
+            <span class="word"><span class="ar">ٱلرَّحْمَٰنِ</span><span class="ph">r-raḥmāni</span></span>
+            <span class="word"><span class="ar">ٱلرَّحِيمِ</span><span class="ph">r-raḥīmi</span></span>
         </p>
-        <p class="caption">Tu récites. Le micro vérifie. <strong>Le mot passe au vert.</strong></p>
+        <p class="caption">Comme à la prière. <strong>Chaque mot juste, tu le vois.</strong></p>
     </div>
 </body>
 </html>

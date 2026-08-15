@@ -71,6 +71,90 @@ export function renderHeroBlock(lang, route, altOverride) {
 // inexistant est un signal mort, pas un signal neutre. La fiche Play viendra ici.
 export const EXTERNAL_PROFILES = [];
 
+// Auteur des pages. Une personne nommée, pas une marque anonyme : c'est le
+// signal que cherchent les moteurs de réponse avant de citer une page.
+export const AUTHOR = {
+  name: 'Alkhast Vatsaev',
+  id: `${SITE}/#author`,
+};
+
+// Coordonnées publiques, à UN seul endroit : en retirer une = supprimer une
+// ligne ici, puis relancer `npm run build:seo`. Un numéro publié sur 60 pages
+// indexées est scrapé et ne se retire plus des caches — d'où le point unique.
+export const CONTACT = [
+  { kind: 'email', value: 'alkhastvatsaev@gmail.com', href: 'mailto:alkhastvatsaev@gmail.com' },
+  { kind: 'whatsapp', value: '+33 7 67 69 38 04', href: 'https://wa.me/33767693804' },
+  { kind: 'telegram', value: '@alkhastvatsaev', href: 'https://t.me/alkhastvatsaev' },
+];
+
+// Sources réellement utilisées par le produit. Rien d'autre n'entre ici :
+// une source déclarée mais non utilisée est une fausse citation, et une
+// fausse citation est exactement ce que les moteurs de réponse filtrent.
+// Le nom reste un nom propre dans toutes les langues ; seule la précision
+// qui le suit est traduite. Un libellé français sur une page russe est un
+// signal de négligence, pas une citation.
+export const SOURCES = [
+  { key: 'quran', name: 'Quran.com', url: 'https://quran.com' },
+  {
+    key: 'font',
+    name: 'King Fahd Glorious Quran Printing Complex',
+    url: 'https://fonts.qurancomplex.gov.sa',
+  },
+  {
+    key: 'speech',
+    name: 'W3C Web Speech API',
+    url: 'https://developer.mozilla.org/docs/Web/API/Web_Speech_API',
+  },
+];
+
+const SOURCE_NOTES = {
+  fr: { quran: 'texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim', font: 'police KFGQPC HAFS', speech: 'reconnaissance vocale ar-SA, exécutée sur l’appareil' },
+  en: { quran: 'Uthmani tajweed text, riwāya Ḥafṣ ʿan ʿĀṣim', font: 'KFGQPC HAFS typeface', speech: 'on-device ar-SA speech recognition' },
+  id: { quran: 'teks Uthmani tajwid, riwayat Hafs dari Asim', font: 'font KFGQPC HAFS', speech: 'pengenalan suara ar-SA, berjalan di perangkat' },
+  ar: { quran: 'النصّ العثماني الملوّن، برواية حفص عن عاصم', font: 'خطّ KFGQPC HAFS', speech: 'التعرّف على الصوت ar-SA، يعمل على الجهاز' },
+  ru: { quran: 'текст усмани с таджвидом, риваят Хафса от Асима', font: 'шрифт KFGQPC HAFS', speech: 'распознавание речи ar-SA, на устройстве' },
+  tr: { quran: 'Osmanî tecvid metni, Hafs an Âsım rivayeti', font: 'KFGQPC HAFS yazı tipi', speech: 'cihaz üzerinde ar-SA ses tanıma' },
+  ur: { quran: 'عثمانی تجوید متن، روایت حفص عن عاصم', font: 'KFGQPC HAFS فونٹ', speech: 'ar-SA آواز کی شناخت، آلے پر' },
+  bn: { quran: 'উসমানি তাজবিদ পাঠ, হাফস আন আসিম রেওয়ায়েত', font: 'KFGQPC HAFS ফন্ট', speech: 'ডিভাইসে ar-SA কণ্ঠস্বর শনাক্তকরণ' },
+  ms: { quran: 'teks Uthmani tajwid, riwayat Hafs daripada Asim', font: 'fon KFGQPC HAFS', speech: 'pengecaman suara ar-SA, pada peranti' },
+  de: { quran: 'Uthmani-Tadschwid-Text, Riwāya Ḥafṣ ʿan ʿĀṣim', font: 'Schriftart KFGQPC HAFS', speech: 'Spracherkennung ar-SA, auf dem Gerät' },
+  es: { quran: 'texto uthmani con tajwid, riwāya Ḥafṣ ʿan ʿĀṣim', font: 'tipografía KFGQPC HAFS', speech: 'reconocimiento de voz ar-SA, en el dispositivo' },
+};
+
+/** Sources localisées : nom propre + précision traduite. */
+export const sourcesFor = (lang) => {
+  const notes = SOURCE_NOTES[lang] || SOURCE_NOTES.en;
+  return SOURCES.map((s) => ({ ...s, label: `${s.name} — ${notes[s.key]}` }));
+};
+
+// Libellés traduits des blocs d'attribution. Anglais en repli.
+const META_LABELS = {
+  fr: { by: 'Écrit par', sources: 'Sources', contact: 'Contact', faq: 'Questions fréquentes', updated: 'Mis à jour le' },
+  en: { by: 'Written by', sources: 'Sources', contact: 'Contact', faq: 'Frequently asked questions', updated: 'Updated' },
+  id: { by: 'Ditulis oleh', sources: 'Sumber', contact: 'Kontak', faq: 'Pertanyaan yang sering diajukan', updated: 'Diperbarui' },
+  ar: { by: 'بقلم', sources: 'المصادر', contact: 'التواصل', faq: 'أسئلة شائعة', updated: 'آخر تحديث' },
+  ru: { by: 'Автор', sources: 'Источники', contact: 'Контакты', faq: 'Частые вопросы', updated: 'Обновлено' },
+  tr: { by: 'Yazan', sources: 'Kaynaklar', contact: 'İletişim', faq: 'Sıkça sorulan sorular', updated: 'Güncellendi' },
+  ur: { by: 'تحریر', sources: 'مآخذ', contact: 'رابطہ', faq: 'عام سوالات', updated: 'تازہ کاری' },
+  bn: { by: 'লিখেছেন', sources: 'সূত্র', contact: 'যোগাযোগ', faq: 'সাধারণ প্রশ্ন', updated: 'হালনাগাদ' },
+  ms: { by: 'Ditulis oleh', sources: 'Sumber', contact: 'Hubungi', faq: 'Soalan lazim', updated: 'Dikemas kini' },
+  de: { by: 'Geschrieben von', sources: 'Quellen', contact: 'Kontakt', faq: 'Häufige Fragen', updated: 'Aktualisiert' },
+  es: { by: 'Escrito por', sources: 'Fuentes', contact: 'Contacto', faq: 'Preguntas frecuentes', updated: 'Actualizado' },
+};
+
+export const metaLabels = (lang) => META_LABELS[lang] || META_LABELS.en;
+
+// Styles de la signature, de la FAQ et du bloc sources/contact. Exporté pour
+// que patch-static.mjs pose exactement les mêmes règles sur les pages
+// écrites à la main : un seul endroit, deux familles de pages.
+export const META_CSS = `        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }`;
+
 const esc = (s) =>
   String(s).replace(/&(?!#?\w+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -86,8 +170,16 @@ function hreflangBlock(path, availableLangs) {
   return rows.join('\n');
 }
 
-function jsonLd({ lang, path, title, description, dateModified, breadcrumb }) {
+function jsonLd({ lang, path, title, description, dateModified, breadcrumb, faq }) {
   const graph = [
+    // L'auteur nommé. Une page non attribuée n'est presque jamais citée par un
+    // moteur de réponse : il n'a personne à créditer.
+    {
+      '@type': 'Person',
+      '@id': AUTHOR.id,
+      name: AUTHOR.name,
+      url: `${SITE}/`,
+    },
     // Graphe d'entité : posé sur CHAQUE page, c'est ce qui permet à un moteur
     // de rattacher toutes les pages à une même marque. Le sameAs doit pointer
     // vers des profils EXTERNES — auto-référencé, il n'apporte rien.
@@ -99,6 +191,13 @@ function jsonLd({ lang, path, title, description, dateModified, breadcrumb }) {
       url: `${SITE}/`,
       logo: `${SITE}/icons/icon.svg`,
       sameAs: EXTERNAL_PROFILES,
+      founder: { '@id': AUTHOR.id },
+      contactPoint: CONTACT.map((c) => ({
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        ...(c.kind === 'email' ? { email: c.value } : { url: c.href, name: c.kind }),
+        availableLanguage: LANGS,
+      })),
     },
     {
       '@type': 'WebSite',
@@ -118,6 +217,16 @@ function jsonLd({ lang, path, title, description, dateModified, breadcrumb }) {
       inLanguage: lang,
       isPartOf: { '@id': `${SITE}/#website` },
       dateModified,
+      author: { '@id': AUTHOR.id },
+      publisher: { '@id': `${SITE}/#organization` },
+      // Les sources déclarées ici sont celles réellement utilisées par le
+      // produit, et elles sont visibles sur la page. Un `citation` que le
+      // lecteur ne peut pas vérifier dans le corps est du schema-spam.
+      citation: sourcesFor(lang).map((s) => ({
+        '@type': 'CreativeWork',
+        name: s.label,
+        url: s.url,
+      })),
     },
   ];
   if (breadcrumb?.length) {
@@ -131,7 +240,66 @@ function jsonLd({ lang, path, title, description, dateModified, breadcrumb }) {
       })),
     });
   }
+  // FAQPage : uniquement si les questions sont RÉELLEMENT rendues dans le
+  // corps de la page. Un FAQPage sans FAQ visible se fait filtrer.
+  if (faq?.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      '@id': `${urlFor(lang, path)}#faq`,
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: stripTags(f.a) },
+      })),
+    });
+  }
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+}
+
+const stripTags = (s) => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+
+/** Signature visible, sous le H1. Le pendant lisible du `author` du JSON-LD. */
+export function renderByline(lang, dateModified) {
+  const t = metaLabels(lang);
+  const date = dateModified ? ` · ${esc(t.updated)} ${esc(dateModified)}` : '';
+  return `        <p class="byline">${esc(t.by)} <span class="byline-name">${esc(AUTHOR.name)}</span>${date}</p>`;
+}
+
+/**
+ * Bloc FAQ visible. Chaque question est un H3 : c'est le format que les
+ * moteurs de réponse extraient le plus fiablement.
+ */
+export function renderFaq(lang, faq) {
+  if (!faq?.length) return '';
+  const t = metaLabels(lang);
+  const items = faq
+    .map((f) => `            <h3>${f.q}</h3>\n            <p>${f.a}</p>`)
+    .join('\n');
+  return `        <section class="faq">
+            <h2>${esc(t.faq)}</h2>
+${items}
+        </section>`;
+}
+
+/** Sources + contact, juste avant la mention légale. */
+export function renderPageMeta(lang) {
+  const t = metaLabels(lang);
+  const sources = sourcesFor(lang).map(
+    (s) => `                <li><a href="${s.url}" rel="nofollow noopener">${esc(s.label)}</a></li>`
+  ).join('\n');
+  const contact = CONTACT.map(
+    (c) => `                <li><a href="${c.href}" rel="nofollow noopener">${esc(c.value)}</a></li>`
+  ).join('\n');
+  return `        <section class="page-meta">
+            <h2>${esc(t.sources)}</h2>
+            <ul>
+${sources}
+            </ul>
+            <h2>${esc(t.contact)}</h2>
+            <ul>
+${contact}
+            </ul>
+        </section>`;
 }
 
 /**
@@ -213,6 +381,7 @@ ${hreflangBlock(p.path, p.available)}
         table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
         th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
         th { color: var(--muted); font-weight: 600; }
+${META_CSS}
 ${ILLU_CSS}
     </style>
 </head>
@@ -222,12 +391,15 @@ ${ILLU_CSS}
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>${esc(p.h1)}</h1>
+${renderByline(p.lang, p.dateModified)}
 ${heroHtml}
 ${illuHtml}
 ${p.body}
+${renderFaq(p.lang, p.faq)}
         <nav>
 ${navHtml}
         </nav>
+${renderPageMeta(p.lang)}
         <footer>
             <p>${p.footer}</p>
         </footer>
@@ -240,11 +412,18 @@ ${ILLU_SCRIPTS}
 `;
 }
 
-/** Compte les mots réellement lisibles : hors balises, hors arabe décoratif. */
+/**
+ * Compte les mots réellement lisibles : hors balises, hors arabe décoratif.
+ * La signature et le bloc sources/contact sont identiques sur toutes les pages :
+ * les compter relâcherait le seuil anti-page-mince d'une quarantaine de mots
+ * gratuits. Ils sont donc retirés avant comptage.
+ */
 export function usefulWordCount(html) {
   const text = html
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<section class="page-meta">[\s\S]*?<\/section>/gi, ' ')
+    .replace(/<p class="byline">[\s\S]*?<\/p>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&[a-z]+;/gi, ' ');
   return text.split(/\s+/).filter((w) => w.length > 1).length;

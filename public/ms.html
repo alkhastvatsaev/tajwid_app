@@ -35,7 +35,7 @@
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/ms#page","url":"https://tilmidh.app/ms","name":"Tilmidh — latihan tilawah kata demi kata dengan mikrofon","description":"Alat web percuma: baca al-Quran kata demi kata, mikrofon menyemak setiap perkataan Arab, warna tajwid daripada Quran.com. Berjalan dalam pelayar, tanpa akaun. Alat latihan — bukan ijazah.","inLanguage":"ms","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/ms"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[],"founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/ms#page","url":"https://tilmidh.app/ms","name":"Tilmidh — latihan tilawah kata demi kata dengan mikrofon","description":"Alat web percuma: baca al-Quran kata demi kata, mikrofon menyemak setiap perkataan Arab, warna tajwid daripada Quran.com. Berjalan dalam pelayar, tanpa akaun. Alat latihan — bukan ijazah.","inLanguage":"ms","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14","author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — teks Uthmani tajwid, riwayat Hafs daripada Asim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — fon KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — pengecaman suara ar-SA, pada peranti","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/ms"}]}]}</script>
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
         body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
@@ -49,50 +49,20 @@
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
-
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
         table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
         th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
         th { color: var(--muted); font-weight: 600; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
 
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
-        .hero-img img { display: block; width: 100%; height: auto; }
-    
         @font-face {
             font-family: 'KFGQPC Colored';
             src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
@@ -250,8 +220,9 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>Latih bacaanmu, kata demi kata</h1>
+        <p class="byline">Ditulis oleh <span class="byline-name">Alkhast Vatsaev</span> · Dikemas kini 2026-08-14</p>
         <figure class="hero-img">
-            <img src="/img/page/ms/tilmidh.webp" alt="Tilmidh — belajar baca Quran perkata demi perkataan" width="960" height="540" fetchpriority="high" decoding="async">
+            <img src="/img/page/ms/tilmidh.webp" alt="Tilmidh — latihan tilawah kata demi kata dengan mikrofon" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
         <figure class="media-illu" data-illu="mark">
             <div class="demo-stage">
@@ -266,18 +237,11 @@
             <figcaption>Arab, fonetik, tajwid — perkataan demi perkataan.</figcaption>
         </figure>
         <!-- .media-video reserved for later -->
-
-
-
-
-
-
-
-        <p>Tilmidh (تلميذ, «murid») ialah alat web percuma untuk mereka yang sudah bersolat dan mahu bacaannya disemak. Kamu membaca satu perkataan, mikrofon mendengar, kotak bertukar hijau, dan kamu meneruskan. Tiada apa-apa yang perlu dipasang, tiada suara dihantar ke mana-mana pelayan, dan akaun tidak diperlukan.</p>
+        <p>Tilmidh (تلميذ, «murid») ialah alat web percuma untuk mereka yang sudah bersolat dan mahu bacaannya disemak. Skrin ialah mushaf berwarna dengan fonetik di bawah setiap perkataan. Ketuk ayat, baca, mikrofon semak kata demi kata. Tiada apa-apa yang perlu dipasang, tiada suara dihantar ke mana-mana pelayan, dan akaun tidak diperlukan.</p>
         <h2>Untuk siapa</h2>
         <p>Alat ini dibina untuk orang yang sudah bersolat dan mengenal huruf Arab, tetapi bacaannya tidak pernah dibetulkan secara lisan. Itulah keadaan kebanyakan orang dewasa yang belajar solat sewaktu kecil lalu berhenti di situ. Jika kamu belum boleh membaca huruf Arab, alat ini belum sesuai: habiskan muqaddam dahulu, kemudian kembali.</p>
         <h2>Apa yang sebenarnya dilakukan</h2>
-        <p>Skrin memaparkan teks Uthmani dengan warna tajwid daripada Quran.com, dipecahkan kata demi kata. Pengecaman suara berjalan di dalam pelayarmu sendiri, dan alat ini hanya bergerak apabila rangka konsonan yang kamu sebut sepadan dengan perkataan di skrin. Jika sesuatu perkataan kekal kelabu, ulang perkataan itu sahaja, bukan seluruh ayat. Batasan inilah tujuan sebenar alat ini: ia tidak membenarkan kamu melepasi perkataan yang sentiasa kamu salah baca.</p>
+        <p>Skrin memaparkan teks Uthmani dengan warna tajwid daripada Quran.com, dipecahkan kata demi kata, dengan fonetik di bawahnya. Pengecaman suara berjalan di dalam pelayarmu sendiri, dan alat ini hanya bergerak apabila rangka konsonan yang kamu sebut sepadan dengan perkataan di skrin. Jika sesuatu perkataan tidak diterima, ulang perkataan itu sahaja, bukan seluruh ayat. Batasan inilah tujuan sebenar alat ini: ia tidak membenarkan kamu melepasi perkataan yang sentiasa kamu salah baca.</p>
         <h2>Apa yang tidak dilakukan</h2>
         <p>Ia tidak mengukur panjang maddmu, dan tidak menilai sama ada huruf tebalmu cukup tebal. Kedua-duanya memerlukan telinga manusia. Ia tidak memberikan ijazah, bukan sijil keilmuan, dan bukan pengganti guru. Sesiapa yang menjanjikan lebih daripada itu sedang membesar-besarkan kemampuan pengecaman suara hari ini.</p>
         <h2>Mula dari mana</h2>
@@ -287,6 +251,7 @@
         <p>Setiap hukum mempunyai halamannya sendiri, lengkap dengan contoh daripada surah yang kamu kenal dan pautan terus ke alat: <a href="/regle/qalqalah">qalqalah</a>, <a href="/regle/ghunnah">ghunnah</a>, <a href="/regle/idgham">idgham</a>, <a href="/regle/ikhfa">ikhfa</a> dan <a href="/regle/madd">madd</a>. Melatih satu hukum dalam beberapa surah jauh lebih berguna daripada membaca semua hukum sekali gus lalu tidak mengamalkan satu pun.</p>
         <a class="cta" href="/ms/?ref=1">Buka mikrofon pada al-Fatihah</a>
         <p>Pengecaman suara berfungsi paling baik dalam Chrome pada Android dan komputer. Ia memerlukan bilik yang senyap dan suara bacaan yang biasa — bukan bisikan. Jika sesuatu perkataan tetap tidak dikesan selepas beberapa percubaan yang bersungguh, masalahnya biasanya pada mikrofon atau bunyi sekeliling, bukan pada bacaanmu.</p>
+
         <nav>
             <a href="/ms/sourate/1">Al-Fatihah</a>
             <a href="/ms/ayat-kursi">Ayat Kursi</a>
@@ -295,10 +260,24 @@
             <a href="/ms/regle/madd">Madd</a>
             <a href="/ms/privacy">Privasi</a>
         </nav>
+        <section class="page-meta">
+            <h2>Sumber</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — teks Uthmani tajwid, riwayat Hafs daripada Asim</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — fon KFGQPC HAFS</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — pengecaman suara ar-SA, pada peranti</a></li>
+            </ul>
+            <h2>Hubungi</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh (تلميذ, «murid») ialah alat latihan tilawah. Teks yang dipaparkan berasal daripada Quran.com (Uthmani, warna tajwid), riwayat Hafs daripada Asim. Ini bukan ijazah, bukan sijil keilmuan, dan bukan pengganti guru. Semak bacaanmu sentiasa dengan seorang muqri.</p>
         </footer>
-    </li>
+      </li>
     </ol>
     </main>
 

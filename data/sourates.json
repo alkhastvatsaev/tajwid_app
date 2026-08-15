@@ -1,5 +1,122 @@
 [
   {
+    "slug": "1",
+    "dateModified": "2026-08-15",
+    "langs": {
+      "fr": {
+        "title": "Réciter Al-Fātiḥah avec tajwid — mot à mot | Tilmidh تلميذ",
+        "description": "Al-Fātiḥah mot à mot : basmala, lām muraqqaq, ikhfa de ṣirāṭ, madd lāzim de الضالين. Micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
+        "h1": "Réciter Al-Fātiḥah avec tajwid",
+        "body": [
+          { "t": "p", "html": "Al-Fātiḥah est la sourate que tu récites à chaque rakʿa. Si un mot glisse, toute la prière en pâtit. Tilmidh charge les sept versets, affiche le texte Uthmani tajweed (Quran.com), et n’avance que lorsque le micro a reconnu le mot. Ce n’est pas une ijazah : c’est la répétition de l’élève." },
+          { "t": "h2", "html": "Le basmala, et le lām d’Allah" },
+          { "t": "ar", "html": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" },
+          { "t": "p", "html": "Dans <em>bismi-Llāh</em>, le lām de <em>Allāh</em> est <strong>muraqqaq</strong> (léger), parce qu’il suit la kasra de <em>bismi</em>. Il n’est lourd (<em>mufakhkham</em>) qu’après une fatḥa ou une ḍamma — par exemple <em>qāla-Llāhu</em>. <em>Ar-raḥmān ar-raḥīm</em> : idgham shamsi du lām de l’article dans le rāʾ, madd ṭabīʿī, ghunnah du nūn mushaddad de <em>raḥmān</em> selon l’écriture. Ne te précipite pas vers <em>al-ḥamd</em>." },
+          { "t": "h2", "html": "Les versets 5 à 7, là où ça casse" },
+          { "t": "p", "html": "Les versets 5–7 sont le piège. <em>Iyyāka</em> (shadda + madd), <em>naʿbudu</em>, <em>nastaʿīn</em>. Puis <em>ihdina ṣ-ṣirāṭ al-mustaqīm</em> : qalqalah du ṭāʾ si tu t’arrêtes, ikhfa ou idhhar selon les liaisons. Le verset 7, <em>anʿamta ʿalayhim ghayri l-maghḍūbi ʿalayhim wa-lā ḍ-ḍāllīn</em>, concentre ghunnah, idgham et madd lāzim dans une seule respiration." },
+          { "t": "h2", "html": "Les règles que tu croises, verset par verset" },
+          { "t": "table", "head": ["Verset", "Ce que tu travailles"], "rows": [["1 — basmala", "lām muraqqaq, idgham shamsi, madd ṭabīʿī"], ["2 — al-ḥamdu", "lām de l’article, rāʾ mufakhkham"], ["5 — iyyāka", "shadda du yāʾ, madd"], ["6 — ihdinā ṣ-ṣirāṭ", "ikhfa, qalqalah du ṭāʾ en waqf"], ["7 — aḍ-ḍāllīn", "ghunnah, idgham, madd lāzim (6 harakāt)"]] },
+          { "t": "h2", "html": "Comment travailler la sourate" },
+          { "t": "p", "html": "Ouvre le trainer sur la sourate entière. Touche le verset, récite mot à mot. Si un mot n’est pas validé, relis uniquement ce mot. Quand le verset est validé, passe au suivant. L’app s’ouvre sur Fātiḥah ; tu peux aussi enchaîner Ikhlāṣ, Falaq et Nās pour réchauffer la bouche avant de revenir dessus." },
+          { "t": "cta", "ref": "1", "label": "Ouvrir le micro sur ce verset" },
+          { "t": "h2", "html": "Les règles isolées" },
+          { "t": "p", "html": "Pour travailler une règle à part : <a href=\"/regle/madd\">madd</a>, <a href=\"/regle/ghunnah\">ghunnah</a>, <a href=\"/regle/idgham\">idgham</a>, <a href=\"/regle/qalqalah\">qalqalah</a>. Reviens ensuite sur la sourate entière : une règle apprise isolément ne tient que si tu la retrouves dans un verset que tu récites tous les jours." }
+        ],
+        "faq": [
+          { "q": "Pourquoi le lām d’Allah est-il léger dans le basmala ?", "a": "Parce qu’il suit une kasra, celle de <em>bismi</em>. Le lām de <em>Allāh</em> est lourd (mufakhkham) après une fatḥa ou une ḍamma, et léger (muraqqaq) après une kasra. C’est la voyelle précédente qui décide, pas le mot lui-même." },
+          { "q": "Quelle est la règle sur الضالين à la fin de la sourate ?", "a": "C’est un madd lāzim, tenu six harakāt, suivi d’un lām avec shadda. C’est le mot que les débutants raccourcissent le plus, parce qu’il arrive juste avant la fin de la sourate." },
+          { "q": "Tilmidh vérifie-t-il ma prière ?", "a": "Non. Tilmidh est un outil d’entraînement : le micro confirme que le mot prononcé est le bon. Ce n’est ni une ijazah, ni une certification, ni un substitut à un professeur. Fais toujours vérifier ta récitation par un muqriʾ." }
+        ],
+        "nav": [
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/sourate/113", "label": "Al-Falaq" },
+          { "href": "/sourate/114", "label": "An-Nās" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" },
+          { "href": "/sourates", "label": "Sourates" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "Al-Fātiḥah", "item": "/sourate/1" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice Al-Fātiḥah word by word — with tajwid | Tilmidh تلميذ",
+        "description": "Al-Fātiḥah word by word: basmala, light lām, ikhfāʾ near ṣirāṭ, the six-ḥarakāt madd of aḍ-ḍāllīn. The mic checks each word. Practice tool — not an ijazah.",
+        "h1": "Practice Al-Fātiḥah word by word",
+        "body": [
+          { "t": "p", "html": "Al-Fātiḥah is the surah every praying beginner already knows by heart — and still mixes under stress. Tilmidh opens on it. You tap the verse, recite one word; the mic checks it; you continue. That loop is why people searching <em>best tajwid app for beginners</em> land here when they already read Arabic slowly." },
+          { "t": "h2", "html": "The basmala, and the lām of Allāh" },
+          { "t": "ar", "html": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" },
+          { "t": "p", "html": "In <em>bismi-Llāh</em> the lām of <em>Allāh</em> is light (muraqqaq), because it follows the kasra of <em>bismi</em>. It is heavy (mufakhkham) only after a fatḥa or a ḍamma, as in <em>qāla-Llāhu</em>. In <em>ar-raḥmān ar-raḥīm</em> the lām of the article merges into the rāʾ (idghām shamsī), and the nūn with shaddah in <em>raḥmān</em> carries a full ghunnah." },
+          { "t": "h2", "html": "Verses 5 to 7, where it breaks" },
+          { "t": "p", "html": "Watch for ikhfāʾ near <em>ṣirāṭ</em>, the careful <em>anʿamta</em> — nūn before ʿayn, so iẓhār, no heavy nasal — and <em>aḍ-ḍāllīn</em> at the end, a six-ḥarakāt madd lāzim followed by a lām with shaddah. Colors are Quran.com Uthmani tajweed, with phonetics under each word. Madd length still needs a teacher. Deep link <code>?ref=1</code> loads Fātiḥah." },
+          { "t": "h2", "html": "What each verse trains" },
+          { "t": "table", "head": ["Verse", "What you train"], "rows": [["1 — basmala", "light lām, idghām shamsī, natural madd"], ["2 — al-ḥamdu", "lām of the article, heavy rāʾ"], ["5 — iyyāka", "shaddah on the yāʾ, madd"], ["6 — ihdinā ṣ-ṣirāṭ", "ikhfāʾ, qalqalah on ṭāʾ in waqf"], ["7 — aḍ-ḍāllīn", "ghunnah, idghām, madd lāzim (6 ḥarakāt)"]] },
+          { "t": "h2", "html": "How to work the surah" },
+          { "t": "p", "html": "Open the trainer on the whole surah. Tap the verse, recite word by word. If a word is not accepted, repeat that word only, then continue. When the verse is accepted, move to the next one. Short daily passes work better than one long weekly session — this is muscle memory for the mouth, not theory to memorise." },
+          { "t": "cta", "ref": "1", "label": "Open the mic on Al-Fātiḥah" },
+          { "t": "h2", "html": "Before you start" },
+          { "t": "p", "html": "If you cannot read letters yet, finish a qaʿidah or Learn Quran Tajwid first. If you want word-by-word mic practice today, open the CTA above. For the honest comparison with other apps: <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a>. Single rules: <a href=\"/en/regle/madd\">madd</a>, <a href=\"/en/regle/ghunnah\">ghunnah</a>, <a href=\"/en/regle/ikhfa\">ikhfa</a>." }
+        ],
+        "faq": [
+          { "q": "Why is the lām of Allāh light in the basmala?", "a": "Because it follows a kasra, the one in <em>bismi</em>. The lām of <em>Allāh</em> is heavy after a fatḥa or a ḍamma and light after a kasra. The preceding vowel decides, not the word itself." },
+          { "q": "What is the rule on aḍ-ḍāllīn at the end?", "a": "It is a madd lāzim held for six ḥarakāt, followed by a lām with shaddah. It is the word beginners shorten most, because it arrives just before the end of the surah." },
+          { "q": "Does Tilmidh check my prayer?", "a": "No. Tilmidh is a practice tool: the mic confirms that the word you said is the right one. It is not an ijazah, not a certification and not a substitute for a teacher. Always have your recitation checked by a muqriʾ." }
+        ],
+        "nav": [
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/sourate/113", "label": "Al-Falaq" },
+          { "href": "/sourate/114", "label": "An-Nās" },
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "Al-Fātiḥah", "item": "/en/sourate/1" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "ru": {
+        "title": "Читать Фатиху слово за словом — с таджвидом | Tilmidh تلميذ",
+        "description": "Сура Фатиха слово за словом: басмала, лёгкий лям, ихфа около сырат, мадд лязим в ад-даллин. Микрофон проверяет каждое слово. Не иджаза.",
+        "h1": "Читать Фатиху слово за словом",
+        "body": [
+          { "t": "p", "html": "Фатиха — сура, которую каждый молящийся знает наизусть и всё равно путает под стрессом. Tilmidh открывается на ней. Одно слово → микрофон проверяет → дальше. Поэтому запрос «приложение таджвида для начинающих» в СНГ попадает сюда, если буквы уже читаешь." },
+          { "t": "h2", "html": "Басмала и лям в слове Аллах" },
+          { "t": "ar", "html": "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" },
+          { "t": "p", "html": "В <em>бисми-Ллях</em> лям в слове <em>Аллах</em> лёгкий (мураккак), потому что перед ним кясра в слове <em>бисми</em>. Тяжёлым (муфаххам) он становится только после фатхи или даммы — например, в <em>каля-Ллаху</em>. В <em>ар-рахман ар-рахим</em> лям артикля сливается с ра (идгам шамси), а нун с шаддой в <em>рахман</em> держит полную гунну." },
+          { "t": "h2", "html": "Аяты 5–7, где чаще всего срывается" },
+          { "t": "p", "html": "Следи за ихфа около <em>сырат</em>, за <em>анʿамта</em> — там нун перед ʿайн, то есть изхар, и тяжёлую гунну тянуть не надо, — и за <em>ад-даллин</em> в конце: это мадд лязим на шесть харакат, а следом лям с шаддой. Цвета берутся из текста Quran.com. Длину мадда всё равно проверяет учитель. Ссылка <code>?ref=1</code> открывает Фатиху." },
+          { "t": "h2", "html": "Что тренирует каждый аят" },
+          { "t": "table", "head": ["Аят", "Что тренируешь"], "rows": [["1 — басмала", "лёгкий лям, идгам шамси, естественный мадд"], ["2 — аль-хамду", "лям артикля, тяжёлый ра"], ["5 — ийяка", "шадда на йа, мадд"], ["6 — ихдина с-сырат", "ихфа, калькаля на та при вакфе"], ["7 — ад-даллин", "гунна, идгам, мадд лязим (6 харакат)"]] },
+          { "t": "h2", "html": "Как работать с сурой" },
+          { "t": "p", "html": "Открой тренажёр на всей суре. Коснись аята и читай слово за словом. Если слово не принято, повтори только его и иди дальше. Когда аят принят, переходи к следующему. Короткие ежедневные подходы работают лучше одного долгого раза в неделю: это память рта, а не теория для заучивания." },
+          { "t": "cta", "ref": "1", "label": "Открыть микрофон на Фатихе" },
+          { "t": "h2", "html": "Отдельные правила" },
+          { "t": "p", "html": "Чтобы отработать правило отдельно: <a href=\"/ru/regle/qalqalah\">калькаля</a>, <a href=\"/ru/regle/ghunnah\">гунна</a>, <a href=\"/ru/regle/madd\">мадд</a>. Потом обязательно возвращайся к целой суре: правило, выученное отдельно, держится только тогда, когда ты встречаешь его в аяте, который читаешь каждый день. Для начинающих: <a href=\"/ru/prilozhenie-tadzhvida-dlya-nachinayushchikh\">приложение таджвида для начинающих</a>." }
+        ],
+        "faq": [
+          { "q": "Почему лям в слове «Аллах» в басмале лёгкий?", "a": "Потому что перед ним кясра — в слове <em>бисми</em>. Лям в слове <em>Аллах</em> тяжёлый после фатхи и даммы и лёгкий после кясры. Решает предыдущая огласовка, а не само слово." },
+          { "q": "Какое правило в слове ад-даллин в конце суры?", "a": "Это мадд лязим на шесть харакат, за которым идёт лям с шаддой. Именно это слово новички сокращают чаще всего, потому что оно стоит перед самым концом суры." },
+          { "q": "Проверяет ли Tilmidh мой намаз?", "a": "Нет. Tilmidh — тренажёр: микрофон подтверждает, что произнесено правильное слово. Это не иджаза, не свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Калькаля" },
+          { "href": "/regle/ghunnah", "label": "Гунна" },
+          { "href": "/regle/madd", "label": "Мадд" },
+          { "href": "/prilozhenie-tadzhvida-dlya-nachinayushchikh", "label": "Для начинающих" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/ru" },
+          { "name": "Фатиха", "item": "/ru/sourate/1" }
+        ],
+        "footer": "Tilmidh (تلميذ, «ученик») — тренажёр чтения Корана. Текст берётся с Quran.com (усмани, цвета таджвида), риваят Хафса от Асима. Это не иджаза, не научное свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри."
+      }
+    }
+  },
+  {
     "slug": "67",
     "dateModified": "2026-08-14",
     "langs": {
@@ -8,103 +125,33 @@
         "description": "Al-Mulk (67) mot à mot : texte arabe, phonétique, règles de tajwid propres à la sourate, et micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
         "h1": "Réciter Al-Mulk mot à mot",
         "body": [
-          {
-            "t": "p",
-            "html": "Al-Mulk est la soixante-septième sourate, trente versets, révélée à La Mecque. Beaucoup la lisent le soir, et c’est souvent la première sourate longue qu’on apprend après les courtes de la fin du mushaf. Trente versets, c’est le bon format pour passer du par cœur mécanique à la récitation contrôlée : assez long pour que la fatigue se sente, assez court pour être repris en entier dans une séance."
-          },
-          {
-            "t": "ar",
-            "html": "تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ"
-          },
-          {
-            "t": "p",
-            "html": "<em>Tabāraka lladhī biyadihi l-mulku wa huwa ʿalā kulli shayʾin qadīr.</em> « Béni soit Celui dans la main de qui est la royauté, et qui est puissant sur toute chose. » Le premier verset donne déjà le ton de la sourate : elle parle de la souveraineté, de la création, et de ce que l’homme ne maîtrise pas."
-          },
-          {
-            "t": "h2",
-            "html": "Les règles qui reviennent le plus dans cette sourate"
-          },
-          {
-            "t": "p",
-            "html": "Trois familles dominent, et c’est ce qui fait d’Al-Mulk un bon terrain d’entraînement. D’abord le <a href=\"/regle/madd\">madd</a> : les fins de versets en <em>-īr</em>, <em>-ūr</em>, <em>-īn</em> imposent un allongement de pause, à tenir de la même façon d’un verset à l’autre. C’est là que la plupart des lecteurs se trahissent : ils allongent beaucoup au début, puis raccourcissent à mesure qu’ils fatiguent."
-          },
-          {
-            "t": "p",
-            "html": "Ensuite la <a href=\"/regle/ghunnah\">ghunnah</a>, très présente à cause des nombreux <em>inna</em> et <em>man</em>. Enfin la <a href=\"/regle/qalqalah\">qalqalah</a>, notamment sur le <strong>ق</strong> de <em>qadīr</em> si tu t’arrêtes dessus, et sur les dāl en fin de verset."
-          },
-          {
-            "t": "h2",
-            "html": "Le verset qui pose le plus de problèmes"
-          },
-          {
-            "t": "ar",
-            "html": "تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ"
-          },
-          {
-            "t": "p",
-            "html": "Au verset 8, <em>takādu tamayyazu mina l-ghayẓ</em> réunit plusieurs difficultés en peu de mots : le <strong>ظ</strong> emphatique que beaucoup prononcent comme un <em>z</em> ordinaire, le <strong>غ</strong> qui n’est pas un <em>g</em>, et un <em>tamayyazu</em> dont la shadda doit s’entendre. Prends ce verset seul, répète-le dix fois, puis reprends la sourate depuis le début."
-          },
-          {
-            "t": "h2",
-            "html": "Comment travailler trente versets sans s’épuiser"
-          },
-          {
-            "t": "p",
-            "html": "Ne récite pas la sourate entière à chaque séance. Coupe-la en trois blocs de dix versets et travaille un bloc par jour, en reprenant toujours les deux derniers versets du bloc précédent pour souder les jonctions. C’est aux jonctions que la mémoire lâche, pas au milieu des blocs. En trois jours tu as fait le tour, et la quatrième séance sert à enchaîner le tout."
-          },
-          {
-            "t": "p",
-            "html": "Tilmidh affiche le texte Uthmani avec les couleurs tajwid de Quran.com et n’avance au mot suivant que lorsque le micro a reconnu celui en cours. Sur une sourate de cette longueur, l’effet le plus utile n’est pas la validation en elle-même : c’est qu’elle t’empêche d’accélérer sans t’en rendre compte."
-          },
-          {
-            "t": "cta",
-            "ref": "67:1",
-            "label": "Ouvrir le micro sur Al-Mulk"
-          },
-          {
-            "t": "p",
-            "html": "Une remarque honnête sur les limites : l’outil vérifie le squelette consonantique de chaque mot, pas la durée de tes madd ni la qualité de tes emphatiques. Pour ces deux points, il faut l’oreille d’un muqriʾ. Ce que la machine fait bien, c’est te forcer à ralentir et à reprendre le mot qui n’est pas passé."
-          }
+          { "t": "p", "html": "Al-Mulk est la soixante-septième sourate, trente versets, révélée à La Mecque. Beaucoup la lisent le soir, et c’est souvent la première sourate longue qu’on apprend après les courtes de la fin du mushaf. Trente versets, c’est le bon format pour passer du par cœur mécanique à la récitation contrôlée : assez long pour que la fatigue se sente, assez court pour être repris en entier dans une séance." },
+          { "t": "ar", "html": "تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ" },
+          { "t": "p", "html": "<em>Tabāraka lladhī biyadihi l-mulku wa huwa ʿalā kulli shayʾin qadīr.</em> « Béni soit Celui dans la main de qui est la royauté, et qui est puissant sur toute chose. » Le premier verset donne déjà le ton de la sourate : elle parle de la souveraineté, de la création, et de ce que l’homme ne maîtrise pas." },
+          { "t": "h2", "html": "Les règles qui reviennent le plus dans cette sourate" },
+          { "t": "p", "html": "Trois familles dominent, et c’est ce qui fait d’Al-Mulk un bon terrain d’entraînement. D’abord le <a href=\"/regle/madd\">madd</a> : les fins de versets en <em>-īr</em>, <em>-ūr</em>, <em>-īn</em> imposent un allongement de pause, à tenir de la même façon d’un verset à l’autre. C’est là que la plupart des lecteurs se trahissent : ils allongent beaucoup au début, puis raccourcissent à mesure qu’ils fatiguent." },
+          { "t": "p", "html": "Ensuite la <a href=\"/regle/ghunnah\">ghunnah</a>, très présente à cause des nombreux <em>inna</em> et <em>man</em>. Enfin la <a href=\"/regle/qalqalah\">qalqalah</a>, notamment sur le <strong>ق</strong> de <em>qadīr</em> si tu t’arrêtes dessus, et sur les dāl en fin de verset." },
+          { "t": "h2", "html": "Le verset qui pose le plus de problèmes" },
+          { "t": "ar", "html": "تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ" },
+          { "t": "p", "html": "Au verset 8, <em>takādu tamayyazu mina l-ghayẓ</em> réunit plusieurs difficultés en peu de mots : le <strong>ظ</strong> emphatique que beaucoup prononcent comme un <em>z</em> ordinaire, le <strong>غ</strong> qui n’est pas un <em>g</em>, et un <em>tamayyazu</em> dont la shadda doit s’entendre. Prends ce verset seul, répète-le dix fois, puis reprends la sourate depuis le début." },
+          { "t": "h2", "html": "Comment travailler trente versets sans s’épuiser" },
+          { "t": "p", "html": "Ne récite pas la sourate entière à chaque séance. Coupe-la en trois blocs de dix versets et travaille un bloc par jour, en reprenant toujours les deux derniers versets du bloc précédent pour souder les jonctions. C’est aux jonctions que la mémoire lâche, pas au milieu des blocs. En trois jours tu as fait le tour, et la quatrième séance sert à enchaîner le tout." },
+          { "t": "p", "html": "Tilmidh affiche le texte Uthmani avec les couleurs tajwid de Quran.com et n’avance au mot suivant que lorsque le micro a reconnu celui en cours. Sur une sourate de cette longueur, l’effet le plus utile n’est pas la validation en elle-même : c’est qu’elle t’empêche d’accélérer sans t’en rendre compte." },
+          { "t": "cta", "ref": "67:1", "label": "Ouvrir le micro sur Al-Mulk" },
+          { "t": "p", "html": "Une remarque honnête sur les limites : l’outil vérifie le squelette consonantique de chaque mot, pas la durée de tes madd ni la qualité de tes emphatiques. Pour ces deux points, il faut l’oreille d’un muqriʾ. Ce que la machine fait bien, c’est te forcer à ralentir et à reprendre le mot qui n’est pas passé." }
         ],
         "nav": [
-          {
-            "href": "/sourate/1",
-            "label": "Al-Fātiḥah"
-          },
-          {
-            "href": "/ayat-kursi",
-            "label": "Ayat al-Kursi"
-          },
-          {
-            "href": "/sourate/112",
-            "label": "Al-Ikhlāṣ"
-          },
-          {
-            "href": "/regle/madd",
-            "label": "Madd"
-          },
-          {
-            "href": "/regles-de-tajwid",
-            "label": "Toutes les règles"
-          },
-          {
-            "href": "/coran-phonetique",
-            "label": "Coran phonétique"
-          }
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/ayat-kursi", "label": "Ayat al-Kursi" },
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" },
+          { "href": "/coran-phonetique", "label": "Coran phonétique" }
         ],
         "breadcrumb": [
-          {
-            "name": "Tilmidh",
-            "item": "/"
-          },
-          {
-            "name": "Sourates",
-            "item": "/sourates"
-          },
-          {
-            "name": "Al-Mulk",
-            "item": "/sourate/67"
-          }
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "Al-Mulk", "item": "/sourate/67" }
         ],
         "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
       },
@@ -113,93 +160,263 @@
         "description": "Al-Mulk (67) kata demi kata: teks Arab, transliterasi, hukum tajwid yang menonjol dalam surat ini, dan mikrofon yang memeriksa setiap kata. Alat latihan — bukan ijazah.",
         "h1": "Membaca Al-Mulk kata demi kata",
         "body": [
-          {
-            "t": "p",
-            "html": "Al-Mulk adalah surat ke-67, terdiri dari tiga puluh ayat, diturunkan di Mekah. Banyak orang membacanya pada malam hari, dan surat inilah yang biasanya menjadi surat panjang pertama yang dihafal sesudah surat-surat pendek di akhir mushaf. Tiga puluh ayat adalah ukuran yang pas untuk berpindah dari hafalan yang sekadar lancar menuju bacaan yang terkendali: cukup panjang untuk membuat lelah, cukup pendek untuk diulang seluruhnya dalam satu sesi."
-          },
-          {
-            "t": "ar",
-            "html": "تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ"
-          },
-          {
-            "t": "p",
-            "html": "<em>Tabāraka lladhī biyadihi l-mulku wa huwa ʿalā kulli shayʾin qadīr.</em> «Mahasuci Allah yang di tangan-Nya segala kerajaan, dan Dia Mahakuasa atas segala sesuatu.» Ayat pertama sudah menentukan nada seluruh surat: ia berbicara tentang kekuasaan, penciptaan, dan hal-hal yang tidak berada dalam genggaman manusia."
-          },
-          {
-            "t": "h2",
-            "html": "Hukum yang paling sering muncul di surat ini"
-          },
-          {
-            "t": "p",
-            "html": "Ada tiga kelompok yang mendominasi, dan itulah yang menjadikan Al-Mulk lahan latihan yang baik. Pertama <a href=\"/regle/madd\">madd</a>: akhir-akhir ayat yang berbunyi <em>-īr</em>, <em>-ūr</em>, <em>-īn</em> menuntut panjang ketika berhenti, dan panjang itu harus sama dari satu ayat ke ayat berikutnya. Di sinilah kebanyakan pembaca ketahuan: panjang di awal, lalu memendek seiring datangnya lelah."
-          },
-          {
-            "t": "p",
-            "html": "Kedua <a href=\"/regle/ghunnah\">ghunnah</a>, yang banyak muncul karena seringnya kata <em>inna</em> dan <em>man</em>. Ketiga <a href=\"/regle/qalqalah\">qalqalah</a>, terutama pada huruf <strong>ق</strong> dalam <em>qadīr</em> bila kamu berhenti padanya, dan pada huruf dal di akhir ayat."
-          },
-          {
-            "t": "h2",
-            "html": "Ayat yang paling menyulitkan"
-          },
-          {
-            "t": "ar",
-            "html": "تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ"
-          },
-          {
-            "t": "p",
-            "html": "Pada ayat 8, <em>takādu tamayyazu mina l-ghayẓ</em> mengumpulkan beberapa kesulitan dalam kata yang sedikit: huruf <strong>ظ</strong> yang tebal dan sering dibaca seperti z biasa, huruf <strong>غ</strong> yang bukan g, dan <em>tamayyazu</em> yang tasydidnya harus terdengar. Ambil ayat ini sendiri, ulangi sepuluh kali, baru kembali ke awal surat."
-          },
-          {
-            "t": "h2",
-            "html": "Cara melatih tiga puluh ayat tanpa kelelahan"
-          },
-          {
-            "t": "p",
-            "html": "Jangan membaca seluruh surat pada setiap sesi. Bagilah menjadi tiga bagian, masing-masing sepuluh ayat, dan latih satu bagian setiap hari sambil selalu mengulang dua ayat terakhir dari bagian sebelumnya untuk menyambungkannya. Hafalan hampir selalu putus di sambungan, bukan di tengah bagian. Dalam tiga hari seluruh surat sudah dilalui, dan sesi keempat dipakai untuk menyambung semuanya."
-          },
-          {
-            "t": "cta",
-            "ref": "67:1",
-            "label": "Buka mikrofon pada Al-Mulk"
-          },
-          {
-            "t": "p",
-            "html": "Tilmidh menampilkan teks Uthmani dengan warna tajwid dari Quran.com dan tidak berpindah ke kata berikutnya sebelum mikrofon mengenali kata yang sedang dibaca. Pada surat sepanjang ini, manfaat terbesarnya adalah terjaganya tempo. Perlu ditegaskan bahwa alat ini tidak mengukur panjang maddmu maupun ketepatan huruf tebalmu; keduanya memerlukan telinga seorang muqri."
-          }
+          { "t": "p", "html": "Al-Mulk adalah surat ke-67, terdiri dari tiga puluh ayat, diturunkan di Mekah. Banyak orang membacanya pada malam hari, dan surat inilah yang biasanya menjadi surat panjang pertama yang dihafal sesudah surat-surat pendek di akhir mushaf. Tiga puluh ayat adalah ukuran yang pas untuk berpindah dari hafalan yang sekadar lancar menuju bacaan yang terkendali: cukup panjang untuk membuat lelah, cukup pendek untuk diulang seluruhnya dalam satu sesi." },
+          { "t": "ar", "html": "تَبَٰرَكَ ٱلَّذِى بِيَدِهِ ٱلْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ" },
+          { "t": "p", "html": "<em>Tabāraka lladhī biyadihi l-mulku wa huwa ʿalā kulli shayʾin qadīr.</em> «Mahasuci Allah yang di tangan-Nya segala kerajaan, dan Dia Mahakuasa atas segala sesuatu.» Ayat pertama sudah menentukan nada seluruh surat: ia berbicara tentang kekuasaan, penciptaan, dan hal-hal yang tidak berada dalam genggaman manusia." },
+          { "t": "h2", "html": "Hukum yang paling sering muncul di surat ini" },
+          { "t": "p", "html": "Ada tiga kelompok yang mendominasi, dan itulah yang menjadikan Al-Mulk lahan latihan yang baik. Pertama <a href=\"/regle/madd\">madd</a>: akhir-akhir ayat yang berbunyi <em>-īr</em>, <em>-ūr</em>, <em>-īn</em> menuntut panjang ketika berhenti, dan panjang itu harus sama dari satu ayat ke ayat berikutnya. Di sinilah kebanyakan pembaca ketahuan: panjang di awal, lalu memendek seiring datangnya lelah." },
+          { "t": "p", "html": "Kedua <a href=\"/regle/ghunnah\">ghunnah</a>, yang banyak muncul karena seringnya kata <em>inna</em> dan <em>man</em>. Ketiga <a href=\"/regle/qalqalah\">qalqalah</a>, terutama pada huruf <strong>ق</strong> dalam <em>qadīr</em> bila kamu berhenti padanya, dan pada huruf dal di akhir ayat." },
+          { "t": "h2", "html": "Ayat yang paling menyulitkan" },
+          { "t": "ar", "html": "تَكَادُ تَمَيَّزُ مِنَ ٱلْغَيْظِ" },
+          { "t": "p", "html": "Pada ayat 8, <em>takādu tamayyazu mina l-ghayẓ</em> mengumpulkan beberapa kesulitan dalam kata yang sedikit: huruf <strong>ظ</strong> yang tebal dan sering dibaca seperti z biasa, huruf <strong>غ</strong> yang bukan g, dan <em>tamayyazu</em> yang tasydidnya harus terdengar. Ambil ayat ini sendiri, ulangi sepuluh kali, baru kembali ke awal surat." },
+          { "t": "h2", "html": "Cara melatih tiga puluh ayat tanpa kelelahan" },
+          { "t": "p", "html": "Jangan membaca seluruh surat pada setiap sesi. Bagilah menjadi tiga bagian, masing-masing sepuluh ayat, dan latih satu bagian setiap hari sambil selalu mengulang dua ayat terakhir dari bagian sebelumnya untuk menyambungkannya. Hafalan hampir selalu putus di sambungan, bukan di tengah bagian. Dalam tiga hari seluruh surat sudah dilalui, dan sesi keempat dipakai untuk menyambung semuanya." },
+          { "t": "cta", "ref": "67:1", "label": "Buka mikrofon pada Al-Mulk" },
+          { "t": "p", "html": "Tilmidh menampilkan teks Uthmani dengan warna tajwid dari Quran.com dan tidak berpindah ke kata berikutnya sebelum mikrofon mengenali kata yang sedang dibaca. Pada surat sepanjang ini, manfaat terbesarnya adalah terjaganya tempo. Perlu ditegaskan bahwa alat ini tidak mengukur panjang maddmu maupun ketepatan huruf tebalmu; keduanya memerlukan telinga seorang muqri." }
         ],
         "nav": [
-          {
-            "href": "/sourate/1",
-            "label": "Al-Fatihah"
-          },
-          {
-            "href": "/ayat-kursi",
-            "label": "Ayat Kursi"
-          },
-          {
-            "href": "/regle/madd",
-            "label": "Madd"
-          },
-          {
-            "href": "/regle/ghunnah",
-            "label": "Ghunnah"
-          },
-          {
-            "href": "/regle/qalqalah",
-            "label": "Qalqalah"
-          }
+          { "href": "/sourate/1", "label": "Al-Fatihah" },
+          { "href": "/ayat-kursi", "label": "Ayat Kursi" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/qalqalah", "label": "Qalqalah" }
         ],
         "breadcrumb": [
-          {
-            "name": "Tilmidh",
-            "item": "/id"
-          },
-          {
-            "name": "Al-Mulk",
-            "item": "/id/sourate/67"
-          }
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Al-Mulk", "item": "/id/sourate/67" }
         ],
         "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed), riwayat Hafs dari Asim. Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      }
+    }
+  },
+  {
+    "slug": "112",
+    "dateModified": "2026-08-15",
+    "langs": {
+      "fr": {
+        "title": "Réciter Al-Ikhlāṣ avec tajwid — qalqalah | Tilmidh تلميذ",
+        "description": "Sourate Al-Ikhlāṣ (112) mot à mot : qalqalah de ق et د, tafkhīm du lām d’Allah, waqf. Micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
+        "h1": "Al-Ikhlāṣ — réciter avec tajwid",
+        "body": [
+          { "t": "p", "html": "Al-Ikhlāṣ (112) est courte, donc on la bâcle. Quatre versets, qalqalah, tafkhīm du lām d’Allah, madd. Ouvre-la depuis le trainer : c’est un terrain d’entraînement dense avant ou après Fātiḥah. Texte Uthmani tajweed via Quran.com. Pas une ijazah — un élève qui répète <em>qul</em> jusqu’à ce que le qāf rebondisse juste." },
+          { "t": "h2", "html": "Verset par verset" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "Verset 1 : <a href=\"/regle/qalqalah\">qalqalah</a> sughra sur le qāf de <em>qul</em>. <em>Huwa</em> ne s’avale pas. <em>Allāhu</em> : lām mufakhkham après ḍamma. <em>Aḥad</em> : ḥāʾ léger, dāl avec qalqalah si tu t’arrêtes. Verset 2 <em>Allāhu ṣ-ṣamad</em> : encore Allah, puis ṣād mufakhkham, dāl en waqf. Verset 3 <em>lam yalid wa-lam yūlad</em> : idhhar des nūn, qalqalah du dāl à l’arrêt. Verset 4 <em>wa-lam yakun lahu kufuwan aḥad</em> : ikhfa ou idhhar selon les liaisons, dernier dāl en qalqalah kubra si waqf." },
+          { "t": "h2", "html": "Les points de vigilance" },
+          { "t": "table", "head": ["Verset", "Ce que tu travailles"], "rows": [["1 — qul huwa Allāhu aḥad", "qalqalah sughra du qāf, lām lourd"], ["2 — Allāhu ṣ-ṣamad", "ṣād emphatique, dāl en waqf"], ["3 — lam yalid wa-lam yūlad", "idhhar, qalqalah du dāl"], ["4 — kufuwan aḥad", "liaison, qalqalah kubra finale"]] },
+          { "t": "h2", "html": "L’erreur qu’on entend le plus" },
+          { "t": "p", "html": "Erreur fréquente : dire <em>kul</em> au lieu de <em>qul</em>, ou allonger <em>aḥad</em> comme une mélodie. Le micro de Tilmidh attend le mot, pas le chant. Récite lentement, mot validé, mot suivant. La sourate est assez courte pour que tu puisses la reprendre trois fois de suite sans fatigue — c’est exactement ce qu’il faut pour installer le rebond du qāf." },
+          { "t": "cta", "ref": "112", "label": "Ouvrir le micro sur ce verset" },
+          { "t": "h2", "html": "Ensuite" },
+          { "t": "p", "html": "Quand les quatre versets sont validés, enchaîne <a href=\"/sourate/113\">Falaq</a> — même <em>qul</em>, autre sourate — puis <a href=\"/sourate/114\">An-Nās</a>. Les trois courtes plus <a href=\"/sourate/1\">Al-Fātiḥah</a> forment le circuit quotidien." }
+        ],
+        "faq": [
+          { "q": "Quelle qalqalah y a-t-il dans Al-Ikhlāṣ ?", "a": "Une qalqalah sughra sur le qāf de <em>qul</em> au verset 1, et des qalqalah kubra sur les dāl finaux de <em>aḥad</em>, <em>ṣamad</em> et <em>yūlad</em> quand tu t’arrêtes dessus." },
+          { "q": "Le lām d’Allah est-il lourd dans cette sourate ?", "a": "Oui, dans <em>Allāhu aḥad</em> et <em>Allāhu ṣ-ṣamad</em>, parce qu’il suit une ḍamma. Il serait léger après une kasra, comme dans le basmala." },
+          { "q": "Pourquoi commencer par Al-Ikhlāṣ ?", "a": "Parce qu’elle est courte et dense : quatre versets suffisent pour croiser qalqalah, tafkhīm et waqf. Tu peux la reprendre plusieurs fois de suite, ce qui installe le geste plus vite qu’une longue sourate." }
+        ],
+        "nav": [
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/sourate/113", "label": "Al-Falaq" },
+          { "href": "/sourate/114", "label": "An-Nās" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" },
+          { "href": "/sourates", "label": "Sourates" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "Al-Ikhlāṣ", "item": "/sourate/112" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice Sūrat al-Ikhlāṣ — qalqalah drill | Tilmidh تلميذ",
+        "description": "Ikhlāṣ (112) word by word: qalqalah on qul and aḥad, heavy lām of Allāh, waqf bounce. The mic checks each word. Practice tool — not an ijazah.",
+        "h1": "Practice Sūrat al-Ikhlāṣ",
+        "body": [
+          { "t": "p", "html": "Ikhlāṣ is short and dense with qalqalah — a good drill after Fātiḥah. Recite <em>qul</em>, wait until the word is accepted, continue through <em>aḥad</em>, <em>Allāh</em>, <em>aṣ-ṣamad</em>. Four verses are short enough to repeat three times in a row without fatigue, which is exactly what installs the bounce of the qāf." },
+          { "t": "h2", "html": "Verse by verse" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "Verse 1: qalqalah ṣughrā on the qāf of <em>qul</em>; do not swallow <em>huwa</em>; the lām of <em>Allāhu</em> is heavy after a ḍamma; the dāl of <em>aḥad</em> bounces if you stop. Verse 2, <em>Allāhu ṣ-ṣamad</em>: an emphatic ṣād, then a dāl in waqf. Verse 3, <em>lam yalid wa-lam yūlad</em>: clear nūn (iẓhār) and a bouncing dāl at the stop. Verse 4, <em>wa-lam yakun lahu kufuwan aḥad</em>: ikhfāʾ or iẓhār depending on the link, then a final qalqalah kubrā if you stop." },
+          { "t": "h2", "html": "What each verse trains" },
+          { "t": "table", "head": ["Verse", "What you train"], "rows": [["1 — qul huwa Allāhu aḥad", "qalqalah ṣughrā on qāf, heavy lām"], ["2 — Allāhu ṣ-ṣamad", "emphatic ṣād, dāl in waqf"], ["3 — lam yalid wa-lam yūlad", "iẓhār, bouncing dāl"], ["4 — kufuwan aḥad", "linking, final qalqalah kubrā"]] },
+          { "t": "h2", "html": "The most common mistake" },
+          { "t": "p", "html": "Saying <em>kul</em> instead of <em>qul</em>, or stretching <em>aḥad</em> into a melody. The mic waits for the word, not for singing. Recite slowly: word accepted, next word. Pair this with the <a href=\"/en/regle/qalqalah\">qalqalah</a> guide when the bounce still feels uncertain." },
+          { "t": "cta", "ref": "112:1", "label": "Open the mic on Ikhlāṣ" },
+          { "t": "h2", "html": "Where to go next" },
+          { "t": "p", "html": "Beginners who already pray often start here, then move to Fātiḥah — see <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a>. After Ikhlāṣ, chain <a href=\"/en/sourate/113\">Al-Falaq</a> and <a href=\"/en/sourate/114\">An-Nās</a>, then return to <a href=\"/en/sourate/1\">Al-Fātiḥah</a>." }
+        ],
+        "faq": [
+          { "q": "Which qalqalah appears in Al-Ikhlāṣ?", "a": "A qalqalah ṣughrā on the qāf of <em>qul</em> in verse 1, and qalqalah kubrā on the final dāl of <em>aḥad</em>, <em>ṣamad</em> and <em>yūlad</em> whenever you stop on them." },
+          { "q": "Is the lām of Allāh heavy in this surah?", "a": "Yes, in <em>Allāhu aḥad</em> and <em>Allāhu ṣ-ṣamad</em>, because it follows a ḍamma. It would be light after a kasra, as in the basmala." },
+          { "q": "Why start with Al-Ikhlāṣ?", "a": "Because it is short and dense: four verses are enough to meet qalqalah, tafkhīm and waqf. You can repeat it several times in a row, which builds the gesture faster than a long surah." }
+        ],
+        "nav": [
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/sourate/113", "label": "Al-Falaq" },
+          { "href": "/sourate/114", "label": "An-Nās" },
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "Al-Ikhlāṣ", "item": "/en/sourate/112" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      }
+    }
+  },
+  {
+    "slug": "113",
+    "dateModified": "2026-08-15",
+    "langs": {
+      "fr": {
+        "title": "Réciter Al-Falaq avec tajwid — ikhfa et qalqalah | Tilmidh تلميذ",
+        "description": "Sourate Al-Falaq (113) mot à mot : qul, qalqalah du qāf, ikhfa de min sharri, waqf. Micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
+        "h1": "Al-Falaq — réciter avec tajwid",
+        "body": [
+          { "t": "p", "html": "Al-Falaq (113) suit Al-Ikhlāṣ dans le muṣḥaf. Même ouverture <em>qul</em>, puis une sourate de protection. Cinq versets. Tu y travailles la qalqalah, l’ikhfa de <em>min sharri</em>, et les waqf. Texte Quran.com, couleurs tajwid. Outil d’entraînement, pas une ijazah." },
+          { "t": "h2", "html": "Le premier verset, mot à mot" },
+          { "t": "ar", "html": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ" },
+          { "t": "p", "html": "Verset 1 : qalqalah du qāf de <em>qul</em>, madd ṭabīʿī dans <em>aʿūdhu</em>, rāʾ mufakhkham de <em>rabbi</em> (après fatḥa), qalqalah du qāf de <em>al-falaq</em> si tu t’arrêtes. Quatre règles différentes dans un seul verset : c’est ce qui en fait un bon terrain." },
+          { "t": "h2", "html": "Le motif qui revient : min sharri" },
+          { "t": "p", "html": "Versets 2–5 : répétition de <em>min sharri</em> — nūn sakinah + shīn = <a href=\"/regle/ikhfa\">ikhfa</a>. Ne prononce pas un nūn clair. Ne l’efface pas. Nasale préparée vers le shīn. La sourate te donne le même enchaînement quatre fois de suite, ce qui est rare et précieux : tu peux corriger le geste et le revérifier immédiatement." },
+          { "t": "h2", "html": "La fin des versets" },
+          { "t": "p", "html": "<em>Ghāsiqin idhā waqab</em>, <em>an-naffāthāti fī l-ʿuqad</em>, <em>ḥāsidin idhā ḥasad</em> : qalqalah des qāf et dāl en fin de verset, shadda de <em>naffāthāt</em>, ḥāʾ léger. Le micro avance mot à mot. Si tu fusionnes deux mots trop tôt, le mot n’est pas validé — c’est voulu." },
+          { "t": "cta", "ref": "113", "label": "Ouvrir le micro sur ce verset" },
+          { "t": "h2", "html": "Le circuit quotidien" },
+          { "t": "p", "html": "Enchaîne avec <a href=\"/sourate/114\">An-Nās</a> (même <em>qul aʿūdhu</em>) puis <a href=\"/sourate/1\">Al-Fātiḥah</a>. Les sourates courtes plus Fātiḥah, c’est le circuit quotidien de l’élève : assez court pour être tenu tous les jours, assez dense pour couvrir la plupart des règles." }
+        ],
+        "faq": [
+          { "q": "Pourquoi min sharri est-il un ikhfa ?", "a": "Parce que le nūn est sakinah et que la lettre suivante est le shīn, qui fait partie des quinze lettres d’ikhfa. Le nūn n’est ni prononcé clairement ni fondu : il devient une nasale tenue deux harakāt, la bouche déjà placée pour le shīn." },
+          { "q": "Combien de fois min sharri revient-il dans la sourate ?", "a": "Le motif revient dans les versets 2 à 5, ce qui te donne quatre occurrences du même enchaînement. C’est ce qui fait d’Al-Falaq un bon terrain pour corriger l’ikhfa et le revérifier tout de suite." },
+          { "q": "Faut-il s’arrêter à la fin de chaque verset ?", "a": "Tu peux. Si tu t’arrêtes, les qāf et dāl finaux prennent une qalqalah kubra. Si tu enchaînes, ils gardent leur voyelle. Les deux façons se travaillent — Tilmidh valide le mot dans les deux cas." }
+        ],
+        "nav": [
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/sourate/114", "label": "An-Nās" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" },
+          { "href": "/sourates", "label": "Sourates" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "Al-Falaq", "item": "/sourate/113" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice Sūrat al-Falaq — ikhfa and qalqalah | Tilmidh تلميذ",
+        "description": "Falaq (113) word by word: qalqalah on qāf, the ikhfāʾ of min sharri repeated four times, waqf. The mic checks each word. Practice tool — not an ijazah.",
+        "h1": "Practice Sūrat al-Falaq",
+        "body": [
+          { "t": "p", "html": "Falaq follows Ikhlāṣ in the muṣḥaf. Another <em>qul</em>, then refuge vocabulary that many rush. Tilmidh forces word-by-word so <em>aʿūdhu</em>, <em>bi-rabbi</em>, <em>al-falaq</em> each get accepted before you move on." },
+          { "t": "h2", "html": "The first verse, word by word" },
+          { "t": "ar", "html": "قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ" },
+          { "t": "p", "html": "Verse 1 packs four different rules: qalqalah on the qāf of <em>qul</em>, natural madd in <em>aʿūdhu</em>, a heavy rāʾ in <em>rabbi</em> after a fatḥa, and a qalqalah on the qāf of <em>al-falaq</em> if you stop there. That density is what makes it good practice ground." },
+          { "t": "h2", "html": "The pattern that repeats: min sharri" },
+          { "t": "p", "html": "Verses 2 to 5 repeat <em>min sharri</em> — nūn sakinah followed by shīn, so <a href=\"/en/regle/ikhfa\">ikhfāʾ</a>. Do not say a clear nūn, and do not erase it either: a nasal held two ḥarakāt with the mouth already moving toward the shīn. Four occurrences of the same sequence is rare and useful — you can fix the gesture and check it again immediately." },
+          { "t": "h2", "html": "Verse endings" },
+          { "t": "p", "html": "<em>Ghāsiqin idhā waqab</em>, <em>an-naffāthāti fī l-ʿuqad</em>, <em>ḥāsidin idhā ḥasad</em>: bouncing qāf and dāl at each verse end, a shaddah in <em>naffāthāt</em>, a light ḥāʾ. The mic advances word by word; if you blend two words too early, the word is not accepted — that is deliberate." },
+          { "t": "cta", "ref": "113:1", "label": "Open the mic on Falaq" },
+          { "t": "h2", "html": "The daily circuit" },
+          { "t": "p", "html": "Use this surah to stabilize qalqalah after Ikhlāṣ and before <a href=\"/en/sourate/114\">An-Nās</a>, then return to <a href=\"/en/sourate/1\">Al-Fātiḥah</a>. Rules: <a href=\"/en/regle/qalqalah\">qalqalah</a>, <a href=\"/en/regle/madd\">madd</a>. Positioning for beginners who pray: <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a>." }
+        ],
+        "faq": [
+          { "q": "Why is min sharri an ikhfa?", "a": "Because the nūn is sakinah and the next letter is shīn, one of the fifteen ikhfāʾ letters. The nūn is neither pronounced clearly nor merged: it becomes a nasal held two ḥarakāt, with the mouth already shaped for the shīn." },
+          { "q": "How often does min sharri appear in this surah?", "a": "The pattern appears in verses 2 to 5, giving four occurrences of the same sequence. That is what makes Al-Falaq good ground for fixing ikhfāʾ and checking it again right away." },
+          { "q": "Should I stop at the end of every verse?", "a": "You can. If you stop, the final qāf and dāl take a qalqalah kubrā. If you continue, they keep their vowel. Both are worth practising — the mic accepts the word either way." }
+        ],
+        "nav": [
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/sourate/114", "label": "An-Nās" },
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "Al-Falaq", "item": "/en/sourate/113" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      }
+    }
+  },
+  {
+    "slug": "114",
+    "dateModified": "2026-08-15",
+    "langs": {
+      "fr": {
+        "title": "Réciter An-Nās avec tajwid — ikhfa et ghunnah | Tilmidh تلميذ",
+        "description": "Sourate An-Nās (114) mot à mot : ikhfa de min sharri, ghunnah du nūn mushaddad de الخناس, idgham shamsi. Micro mot par mot — pas une ijazah.",
+        "h1": "An-Nās — réciter avec tajwid",
+        "body": [
+          { "t": "p", "html": "An-Nās (114) clôt le muṣḥaf, après Ikhlāṣ et Falaq. Six versets courts. Tu y croises ikhfa, ghunnah, idgham shamsi. Le texte vient de Quran.com. Tilmidh vérifie chaque mot au micro. Ce n’est pas une certification savante." },
+          { "t": "h2", "html": "Le nūn mushaddad, trois fois de suite" },
+          { "t": "ar", "html": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ" },
+          { "t": "p", "html": "Verset 1 : même <em>qul aʿūdhu bi-rabbi</em> que Falaq, puis <em>an-nās</em> — idgham shamsi, nūn mushaddad = <a href=\"/regle/ghunnah\">ghunnah</a> deux harakāt. Ne réduis pas <em>an-nās</em> à un <em>en-nas</em> avalé. Versets 2–3 : <em>maliki n-nās</em>, <em>ilāhi n-nās</em> — même nūn, même ghunnah. C’est volontairement répétitif : l’élève fixe le geste." },
+          { "t": "h2", "html": "Le verset 4, deux règles côte à côte" },
+          { "t": "p", "html": "Verset 4 <em>min sharri l-waswāsi l-khannās</em> : <a href=\"/regle/ikhfa\">ikhfa</a> sur <em>min sharri</em>, puis nūn mushaddad de <em>al-khannās</em>. Les deux règles se suivent à deux mots d’intervalle, ce qui en fait le meilleur endroit de la sourate pour entendre la différence entre une nasale dissimulée et une nasale pleine." },
+          { "t": "h2", "html": "La fin de la sourate" },
+          { "t": "p", "html": "Versets 5–6 : <em>alladhī yuwaswisu fī ṣudūri n-nās</em>, <em>mina l-jinnati wa-n-nās</em>. Qalqalah si tu t’arrêtes sur une lettre qalqala. Madd ṭabīʿī dans <em>ṣudūri</em>. La rime en <em>-nās</em> pousse à accélérer : c’est exactement ce qu’il faut éviter, parce que chaque occurrence porte une ghunnah complète." },
+          { "t": "cta", "ref": "114", "label": "Ouvrir le micro sur ce verset" },
+          { "t": "h2", "html": "Ensuite" },
+          { "t": "p", "html": "Quand Nās est validée, ouvre <a href=\"/sourate/1\">Al-Fātiḥah</a> — l’app s’ouvre déjà dessus. Un lien <code>?ref=</code> peut charger n’importe quel verset, ce qui permet de reprendre exactement là où tu bloquais la veille." }
+        ],
+        "faq": [
+          { "q": "Combien de fois la ghunnah revient-elle dans An-Nās ?", "a": "Le mot <em>an-nās</em> revient à chaque fin de verset, et son nūn mushaddad porte à chaque fois une ghunnah complète de deux harakāt. C’est la sourate idéale pour fixer ce geste." },
+          { "q": "Quelle est la différence entre le nūn de min sharri et celui de al-khannās ?", "a": "Dans <em>min sharri</em> le nūn est sakinah devant shīn : c’est un ikhfa, nasale dissimulée. Dans <em>al-khannās</em> le nūn porte une shadda : c’est une ghunnah complète. Les deux sont à deux mots d’intervalle au verset 4." },
+          { "q": "Pourquoi la rime fait-elle accélérer ?", "a": "Parce que la terminaison <em>-nās</em> revient à chaque verset et donne un élan naturel. Or chaque occurrence porte une ghunnah complète : si tu accélères, la nasale se réduit et le mot n’est plus le bon." }
+        ],
+        "nav": [
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/sourate/113", "label": "Al-Falaq" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" },
+          { "href": "/sourates", "label": "Sourates" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "An-Nās", "item": "/sourate/114" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice Sūrat an-Nās — ghunnah and ikhfa | Tilmidh تلميذ",
+        "description": "Nās (114) word by word: full ghunnah on the repeated an-nās, ikhfāʾ of min sharri, idghām shamsī. The mic checks each word. Practice tool — not an ijazah.",
+        "h1": "Practice Sūrat an-Nās",
+        "body": [
+          { "t": "p", "html": "Nās closes the three short surahs before Al-Fātiḥah. Same mic discipline: one word, accepted, next. The repeated <em>an-nās</em> trains clarity without racing the rhyme." },
+          { "t": "h2", "html": "The doubled nūn, verse after verse" },
+          { "t": "ar", "html": "قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ" },
+          { "t": "p", "html": "Verse 1 repeats the <em>qul aʿūdhu bi-rabbi</em> of Falaq, then <em>an-nās</em>: idghām shamsī, and a nūn with shaddah carrying a full <a href=\"/en/regle/ghunnah\">ghunnah</a> of two ḥarakāt. Verses 2 and 3, <em>maliki n-nās</em> and <em>ilāhi n-nās</em>, repeat exactly the same shape. The repetition is the point: it fixes the gesture." },
+          { "t": "h2", "html": "Verse 4, two rules side by side" },
+          { "t": "p", "html": "Verse 4, <em>min sharri l-waswāsi l-khannās</em>, puts <a href=\"/en/regle/ikhfa\">ikhfāʾ</a> on <em>min sharri</em> and a doubled nūn on <em>al-khannās</em> two words later. It is the best place in the surah to hear the difference between a hidden nasal and a full one." },
+          { "t": "h2", "html": "The end of the surah" },
+          { "t": "p", "html": "Verses 5 and 6, <em>alladhī yuwaswisu fī ṣudūri n-nās</em> and <em>mina l-jinnati wa-n-nās</em>: a natural madd in <em>ṣudūri</em>, and a bounce if you stop on a qalqalah letter. The rhyme in <em>-nās</em> pushes you to speed up, which is exactly what to avoid: every occurrence carries a full ghunnah." },
+          { "t": "cta", "ref": "114:1", "label": "Open the mic on Nās" },
+          { "t": "h2", "html": "Where to go next" },
+          { "t": "p", "html": "After Nās, open <a href=\"/en/sourate/1\">Fātiḥah</a>. Read <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a> if you want the honest comparison with Learn Quran Tajwid and Tarteel. A <code>?ref=</code> link loads any verse, so you can resume exactly where you stalled yesterday." }
+        ],
+        "faq": [
+          { "q": "How often does ghunnah appear in An-Nās?", "a": "The word <em>an-nās</em> closes every verse, and its doubled nūn carries a full two-ḥarakāt ghunnah each time. That makes this the ideal surah for fixing the gesture." },
+          { "q": "What is the difference between the nūn of min sharri and that of al-khannās?", "a": "In <em>min sharri</em> the nūn is sakinah before shīn: that is ikhfāʾ, a hidden nasal. In <em>al-khannās</em> the nūn carries a shaddah: that is a full ghunnah. Both sit two words apart in verse 4." },
+          { "q": "Why does the rhyme make people rush?", "a": "Because the <em>-nās</em> ending returns every verse and creates natural momentum. But each occurrence carries a full ghunnah, so speeding up shortens the nasal and the word is no longer the right one." }
+        ],
+        "nav": [
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/sourate/112", "label": "Al-Ikhlāṣ" },
+          { "href": "/sourate/113", "label": "Al-Falaq" },
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "An-Nās", "item": "/en/sourate/114" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
       }
     }
   }

@@ -26,7 +26,7 @@
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/en/a-propos#page","url":"https://tilmidh.app/en/a-propos","name":"About Tilmidh — method, sources and limits | Tilmidh تلميذ","description":"Where Tilmidh’s content comes from, which riwāya it follows, how the rules pages are written, and what the tool does not claim to do. Report a tajwid error.","inLanguage":"en","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/en"},{"@type":"ListItem","position":2,"name":"About","item":"https://tilmidh.app/en/a-propos"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[],"founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/en/a-propos#page","url":"https://tilmidh.app/en/a-propos","name":"About Tilmidh — method, sources and limits | Tilmidh تلميذ","description":"Where Tilmidh’s content comes from, which riwāya it follows, how the rules pages are written, and what the tool does not claim to do. Report a tajwid error.","inLanguage":"en","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14","author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — Uthmani tajweed text, riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — KFGQPC HAFS typeface","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — on-device ar-SA speech recognition","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/en"},{"@type":"ListItem","position":2,"name":"About","item":"https://tilmidh.app/en/a-propos"}]}]}</script>
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
         body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
@@ -40,50 +40,20 @@
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
-
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
         table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
         th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
         th { color: var(--muted); font-weight: 600; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
 
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
-        .hero-img img { display: block; width: 100%; height: auto; }
-    
         @font-face {
             font-family: 'KFGQPC Colored';
             src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
@@ -241,8 +211,9 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>About Tilmidh</h1>
+        <p class="byline">Written by <span class="byline-name">Alkhast Vatsaev</span> · Updated 2026-08-14</p>
         <figure class="hero-img">
-            <img src="/img/page/en/tilmidh.webp" alt="Tilmidh — learn to read the Quran word by word" width="960" height="540" fetchpriority="high" decoding="async">
+            <img src="/img/page/en/tilmidh.webp" alt="About Tilmidh — method, sources and limits | Tilmidh تلميذ" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
         <figure class="media-illu" data-illu="mark">
             <div class="demo-stage">
@@ -257,13 +228,6 @@
             <figcaption>Arabic, phonetics, tajweed — word by word.</figcaption>
         </figure>
         <!-- .media-video reserved for later -->
-
-
-
-
-
-
-
         <p>Tilmidh is a free recitation trainer. This page explains where the content on this site comes from, how it is grounded, and where the limits are. On a religious subject those three questions come before any product description.</p>
         <h2>The riwāya used</h2>
         <p>All content follows <strong>riwāya Ḥafṣ ʿan ʿĀṣim</strong>, the reading of the vast majority of printed mushafs and the one most people learn outside the Maghreb. The madd durations given on this site — two counts for the natural madd, four to five for muttaṣil and munfaṣil, six for lāzim — belong to that riwāya. They differ in others, notably Warsh. If you learn by a different reading, the explanations still hold but the durations do not.</p>
@@ -278,16 +242,31 @@
         <h2>Privacy, in one sentence</h2>
         <p>Speech recognition runs in your browser, no audio recording is sent to or kept on a server, and the site asks for no account. Details are on the <a href="/privacy">privacy page</a>.</p>
         <a class="cta" href="/en/?ref=1">Open the trainer on Al-Fātiḥah</a>
+
         <nav>
             <a href="/en/regles-de-tajwid">All tajwid rules</a>
             <a href="/en/best-tajwid-app-for-beginners">Best tajwid app for beginners</a>
             <a href="/en/sourate/1">Al-Fātiḥah</a>
             <a href="/en/privacy">Privacy</a>
         </nav>
+        <section class="page-meta">
+            <h2>Sources</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — Uthmani tajweed text, riwāya Ḥafṣ ʿan ʿĀṣim</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — KFGQPC HAFS typeface</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — on-device ar-SA speech recognition</a></li>
+            </ul>
+            <h2>Contact</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ.</p>
         </footer>
-    </li>
+      </li>
     </ol>
     </main>
 

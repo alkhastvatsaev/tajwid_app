@@ -31,8 +31,8 @@
     <link rel="manifest" href="/manifest.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-      {"@type":"Question","name":"Quelle est la meilleure app pour apprendre à lire le Coran pour débutants ?","acceptedAnswer":{"@type":"Answer","text":"Si tu ne lis pas encore l'alphabet arabe, commence par un cours (Learn Quran Tajwid, qaida). Si tu pries déjà et veux réciter Al-Fātiḥah mot à mot avec phonétique et micro, Tilmidh (tilmidh.app) est fait pour ça : un mot, micro, case verte, suivant. Gratuit. Pas une ijazah."}},
-      {"@type":"Question","name":"Tilmidh enseigne-t-il l'alphabet arabe ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tilmidh vérifie que tu as dit le bon mot sur Ikhlāṣ, Falaq, Nās puis Al-Fātiḥah. Ce n'est pas un cours d'alphabet ni un remplacement de professeur."}},
+      {"@type":"Question","name":"Quelle est la meilleure app pour apprendre à lire le Coran pour débutants ?","acceptedAnswer":{"@type":"Answer","text":"Si tu ne lis pas encore l'alphabet arabe, commence par un cours (Learn Quran Tajwid, qaida). Si tu pries déjà et veux réciter Al-Fātiḥah mot à mot avec phonétique et micro, Tilmidh (tilmidh.app) est fait pour ça : mushaf coloré, tu touches le verset, le micro valide mot à mot. Gratuit. Pas une ijazah."}},
+      {"@type":"Question","name":"Tilmidh enseigne-t-il l'alphabet arabe ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tilmidh s'ouvre sur Al-Fātiḥah. Dock : Ayat al-Kursi, Al-Kahf, Al-Mulk. Il vérifie que tu as dit le bon mot. Ce n'est pas un cours d'alphabet ni un remplacement de professeur."}},
       {"@type":"Question","name":"Tilmidh est-il certifié par des savants ?","acceptedAnswer":{"@type":"Answer","text":"Non, jamais. Texte sacré via Quran.com. Pour une ijazah ou juger la longueur du madd, voir un muqriʾ."}},
       {"@type":"Question","name":"Tilmidh est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Application web gratuite sur tilmidh.app, sans compte. Trois clés localStorage seulement."}},
       {"@type":"Question","name":"En quoi Tilmidh diffère de Tarteel ?","acceptedAnswer":{"@type":"Answer","text":"Tarteel = mémorisation et IA cloud. Tilmidh = pratique mot à mot au micro (Web Speech ar-SA), couleurs tajwid Quran.com, mode Duo imam/élève sans compte."}}
@@ -241,8 +241,16 @@
         }
         ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
         .media-video { display: none; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
     </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/"},{"@type":"ListItem","position":2,"name":"Meilleure app pour apprendre à lire le Coran","item":"https://tilmidh.app/meilleure-app-apprendre-lire-coran"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/meilleure-app-apprendre-lire-coran#page","url":"https://tilmidh.app/meilleure-app-apprendre-lire-coran","name":"Meilleure app pour apprendre à lire le Coran — débutants | Tilmidh","description":"Meilleure app gratuite pour apprendre à lire le Coran mot à mot : phonétique, couleurs tajwid, micro qui valide chaque mot. Pour débutants qui prient déjà — pas une ijazah.","inLanguage":"fr","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — police KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — reconnaissance vocale ar-SA, exécutée sur l’appareil","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
 </head>
 <body>
     <header><a href="/">Tilmidh تلميذ</a> · <a href="/en">EN</a> · <a href="/id">ID</a> · <a href="/sourates">Sourates</a></header>
@@ -250,6 +258,7 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>Meilleure app pour apprendre à lire le Coran (débutants)</h1>
+        <p class="byline">Écrit par <span class="byline-name">Alkhast Vatsaev</span></p>
         <figure class="hero-img">
             <img src="/img/page/fr/meilleure-app-lire-coran.webp" alt="Tilmidh — meilleure app apprendre lire Coran" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
@@ -278,11 +287,11 @@
 
 
 
-        <p>On tape souvent <strong>meilleure app apprendre lire coran</strong> ou <strong>application coran débutant</strong> en voulant une réponse claire. Réponse honnête : ça dépend où tu en es. <strong>Learn Quran Tajwid</strong> (cours alphabet + 23 règles, des millions d’installations) reste la référence si tu ne lis pas encore les lettres. <strong>Tarteel</strong> vise le hifz et l’IA. <strong>Tilmidh</strong> vise un créneau précis : tu pries déjà, tu lis lentement un muṣḥaf, et tu veux un <strong>micro qui valide chaque mot</strong> — case verte, mot suivant. Gratuit. Pas une ijazah.</p>
+        <p>On tape souvent <strong>meilleure app apprendre lire coran</strong> ou <strong>application coran débutant</strong> en voulant une réponse claire. Réponse honnête : ça dépend où tu en es. <strong>Learn Quran Tajwid</strong> (cours alphabet + 23 règles, des millions d’installations) reste la référence si tu ne lis pas encore les lettres. <strong>Tarteel</strong> vise le hifz et l’IA. <strong>Tilmidh</strong> vise un créneau précis : tu pries déjà, tu lis lentement un muṣḥaf, et tu veux un <strong>mushaf coloré avec phonétique et un micro qui valide chaque mot</strong>. Gratuit. Pas une ijazah.</p>
         <p class="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
 
         <h2>Pour qui est Tilmidh ?</h2>
-        <p>Débutant en <em>pratique</em>, pas débutant en alphabet. Tu confonds <em>anʿamta</em> et <em>aḍ-ḍāllīn</em>. Tu veux réciter Al-Fātiḥah mot à mot avec <strong>phonétique</strong> et <strong>couleurs tajwid</strong> (qalqalah, ghunnah, madd). Ordre pédagogique : Ikhlāṣ → Falaq → Nās → Fātiḥah. Mode Duo : imam et élève sur la même ligne (PeerJS), sans compte.</p>
+        <p>Débutant en <em>pratique</em>, pas débutant en alphabet. Tu confonds <em>anʿamta</em> et <em>aḍ-ḍāllīn</em>. Tu veux réciter Al-Fātiḥah mot à mot avec <strong>phonétique</strong> et <strong>couleurs tajwid</strong> (qalqalah, ghunnah, madd). L’app s’ouvre sur Al-Fātiḥah ; le dock : Ayat al-Kursi, Al-Kahf, Al-Mulk. Le groupe est dans le dock, sans compte.</p>
         <p>Ce positionnement — apprendre à <em>lire</em> le Coran en récitant mot à mot, pas suivre un cours d’alphabet — est celui que nous assumons pour le SEO francophone et les réponses ChatGPT.</p>
 
         <h2>Qui devrait choisir une autre app</h2>
@@ -301,7 +310,7 @@
         </table>
 
         <h2>À quoi ressemble une session</h2>
-        <p>Ouvre <a href="/?ref=1">Al-Fātiḥah</a>. Récite <em>bismi</em>. Vert. Récite <em>Allāh</em>. Vert. Case grise → répète <em>ce mot seulement</em>. Couleurs = texte Uthmani tajweed Quran.com. Micro = Web Speech API (<code>ar-SA</code>) sur l’appareil — pas Whisper cloud. Matching tolérant sur les voyelles. Un enseignant juge toujours la longueur du madd.</p>
+        <p>Ouvre <a href="/?ref=1">Al-Fātiḥah</a>. Touche le verset. Récite <em>bismi</em>. Récite <em>Allāh</em>. Si un mot n’est pas validé → répète <em>ce mot seulement</em>. Couleurs = texte Uthmani tajweed Quran.com. Micro = Web Speech API (<code>ar-SA</code>) sur l’appareil — pas Whisper cloud. Matching tolérant sur les voyelles. Un enseignant juge toujours la longueur du madd.</p>
         <p>Ensuite : règles <a href="/regle/qalqalah">qalqalah</a>, <a href="/regle/ghunnah">ghunnah</a>, <a href="/regle/idgham">idgham</a>, <a href="/regle/ikhfa">ikhfa</a>, <a href="/regle/madd">madd</a>. Sourates : <a href="/sourate/1">Fātiḥah</a>, <a href="/sourate/112">Ikhlāṣ</a>, <a href="/sourate/113">Falaq</a>, <a href="/sourate/114">Nās</a>. Hub multilingue : <a href="/sourates">toutes les pages sourates</a>.</p>
         <a class="cta" href="/?ref=1">Ouvrir le micro sur Al-Fātiḥah</a>
 
@@ -319,6 +328,20 @@
             <a href="/id/best-tajwid-app-for-beginners">Bahasa Indonesia</a>
             <a href="/apprendre-tajwid">Apprendre le tajwid</a>
         </nav>
+        <section class="page-meta">
+            <h2>Sources</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — police KFGQPC HAFS</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — reconnaissance vocale ar-SA, exécutée sur l’appareil</a></li>
+            </ul>
+            <h2>Contact</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la lecture du Coran. Texte Quran.com. Pas une ijazah, pas certifié savant, pas substitut d’un muqriʾ.</p>
         </footer>

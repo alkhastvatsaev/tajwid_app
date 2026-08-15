@@ -18,8 +18,14 @@ const CLAUDE_SEO = path.join(process.env.HOME, '.claude/skills/seo/bin/claude-se
 
 const steps = [
   {
-    name: 'Contenu mince (seuil 400 mots)',
+    name: 'Contenu mince — pages générées (seuil 400 mots)',
     run: () => exec('node', ['scripts/gen-pages.mjs', '--audit'], { cwd: ROOT }),
+  },
+  {
+    // gen-pages ne mesure que ce qu'il génère : sans ce second contrôle, une
+    // page écrite à la main peut rester à 250 mots sans que rien ne le dise.
+    name: 'Contenu mince — pages publiées (seuil 400 mots)',
+    run: () => exec('node', ['scripts/check-thin.mjs'], { cwd: ROOT }),
   },
   {
     name: 'Réciprocité hreflang',

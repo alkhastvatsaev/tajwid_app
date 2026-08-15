@@ -18,7 +18,7 @@
           { "t": "p", "html": "Qalqalah sugra terjadi di tengah kata, seperti qaf pada <em>qul</em> tadi. Qalqalah wustha terjadi ketika kita berhenti pada huruf di akhir kata tanpa tasydid. Qalqalah kubra terjadi ketika kita berhenti pada huruf berharakat tasydid, dan pantulannya terdengar paling jelas. Contohnya huruf <strong>د</strong> pada <em>ahad</em> bila kita waqaf di situ. Perbedaannya bukan pada jenis bunyi, melainkan pada kadar jelasnya pantulan." },
           { "t": "h2", "html": "Kesalahan yang paling sering" },
           { "t": "p", "html": "Kesalahan pertama adalah menelan qaf sehingga terdengar seperti <em>kul</em>. Kesalahan kedua adalah mengubah qaf menjadi bunyi g, yang lazim terjadi pada penutur bahasa sehari-hari. Kesalahan ketiga adalah menambahkan vokal penuh, sehingga <em>qul</em> terdengar seperti <em>qulu</em>. Ketiganya berasal dari satu sebab yang sama: tergesa-gesa berpindah ke kata berikutnya." },
-          { "t": "p", "html": "Tilmidh menampilkan warna tajwid dari teks Uthmani Quran.com dan hanya berpindah ke kata berikutnya bila kerangka konsonan yang terdengar sudah cocok. Bacalah pelan. Kalau satu kata tetap berwarna abu-abu, ulangi kata itu saja — di situlah letak gunanya alat ini." },
+          { "t": "p", "html": "Tilmidh menampilkan warna tajwid dari teks Uthmani Quran.com dan hanya berpindah ke kata berikutnya bila kerangka konsonan yang terdengar sudah cocok. Bacalah pelan. Kalau satu kata tidak diterima, ulangi kata itu saja — di situlah letak gunanya alat ini." },
           { "t": "h2", "html": "Bedanya dengan huruf mati yang lain" },
           { "t": "p", "html": "Huruf mati selain kelima huruf ini dibaca tanpa pantulan sama sekali. Sin yang mati pada <em>waswās</em>, misalnya, hanya ditahan sejenak lalu dilepas tanpa ketukan. Kalau kamu memberi pantulan pada huruf yang bukan huruf qalqalah, bacaanmu terdengar dibuat-buat dan justru menyalahi kaidah. Karena itu menghafal kelima huruf itu lebih penting daripada menghafal penjelasannya." },
           { "t": "h2", "html": "Urutan latihan yang disarankan" },
@@ -61,7 +61,7 @@
           { "t": "h2", "html": "لماذا سورة الإخلاص" },
           { "t": "p", "html": "اختيرت سورة الإخلاص لأنّ أكثر الناس يحفظونها، ولأنّها تجمع القلقلة في موضعين متقاربين: قاف <em>قُل</em> في أوّلها ودال <em>أَحَد</em> في آخرها. فتكون التمرين على نوعين من القلقلة في آيةٍ واحدةٍ قصيرة، وهذا أنفع من تفريق التمرين على سورٍ متباعدة. ثمّ انتقل إلى سورة الفلق، ففيها <em>قُل</em> مرّةً أخرى، وقاف <em>الفَلَق</em> عند الوقف." },
           { "t": "cta", "ref": "112:1", "label": "افتح الميكروفون على هذه الآية" },
-          { "t": "p", "html": "يعرض تلميذ نصّ المصحف بألوان التجويد من Quran.com، ولا ينتقل إلى الكلمة التالية إلا إذا وافق الهيكل الحرفي لما نطقتَه. اقرأ على مهل، فإن بقيت الكلمة رماديّةً فأعِدها وحدها. على أنّ الأداة لا تحكم على مقدار قلقلتك ولا على صفتها، وإنما يُرجَع في ذلك إلى سماع المقرئ." }
+          { "t": "p", "html": "يعرض تلميذ نصّ المصحف بألوان التجويد من Quran.com، ولا ينتقل إلى الكلمة التالية إلا إذا وافق الهيكل الحرفي لما نطقتَه. اقرأ على مهل، فإن لم تُقبل الكلمة فأعِدها وحدها. على أنّ الأداة لا تحكم على مقدار قلقلتك ولا على صفتها، وإنما يُرجَع في ذلك إلى سماع المقرئ." }
         ],
         "nav": [
           { "href": "/regle/ghunnah", "label": "الغنّة" },
@@ -75,6 +75,120 @@
           { "name": "القلقلة", "item": "/ar/regle/qalqalah" }
         ],
         "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      },
+      "fr": {
+        "title": "Pratiquer la qalqalah — les 5 lettres et le micro | Tilmidh تلميذ",
+        "description": "Qalqalah : le rebond de ق ط ب ج د quand la lettre est sakina. Sughra, kubra, makhraj, exemples dans Al-Ikhlāṣ, entraînement au micro mot par mot. Pas une ijazah.",
+        "h1": "Pratiquer la qalqalah",
+        "body": [
+          { "t": "p", "html": "La qalqalah est le léger rebond d’une lettre quand elle est sakina (sans voyelle) ou quand on s’arrête dessus. Cinq lettres : <strong>ق ط ب ج د</strong>. Sans ce rebond, le mot s’écrase ; avec un rebond trop fort, on invente une voyelle. Tilmidh te fait répéter le mot jusqu’à ce que le micro le reconnaisse — pas pour te décerner un diplôme, pour t’entraîner." },
+          { "t": "h2", "html": "Les cinq lettres et leur point d’articulation" },
+          { "t": "p", "html": "On les retient avec la formule <em>quṭb jad</em> (قطب جد). Chacune rebondit au même endroit que là où elle se prononce : le rebond n’est pas un son ajouté, c’est le relâchement de l’articulation." },
+          { "t": "table", "head": ["Lettre", "Point d’articulation (makhraj)"], "rows": [["ق", "arrière de la langue contre le voile du palais"], ["ط", "pointe de la langue à la base des incisives supérieures"], ["ب", "les deux lèvres"], ["ج", "milieu de la langue contre le palais"], ["د", "pointe de la langue à la base des incisives supérieures"]] },
+          { "t": "h2", "html": "Qalqalah sughra : au milieu du mot" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "Dans <em>Qul huwa Allāhu aḥad</em> (Ikhlāṣ 112:1), le <strong>ق</strong> de <em>qul</em> porte une qalqalah sughra : la lettre est sakina au milieu du mot. Tu n’allonges pas, tu ne « votes » pas un <em>u</em> après le qāf. Tu relâches l’articulation, un claquement bref, puis tu enchaînes <em>huwa</em>." },
+          { "t": "h2", "html": "Qalqalah kubra : quand tu t’arrêtes dessus" },
+          { "t": "p", "html": "La qalqalah kubra apparaît quand tu t’arrêtes sur la lettre, par exemple le <strong>د</strong> de <em>aḥad</em> si tu fais waqf. Le rebond est un peu plus audible, toujours sans voyelle inventée. Les cinq points d’articulation restent ceux du qāf (luette), ṭāʾ (bout de la langue), bāʾ (lèvres), jīm (milieu de la langue) et dāl (dentales)." },
+          { "t": "h2", "html": "L’erreur qu’on entend le plus au micro" },
+          { "t": "p", "html": "Erreur fréquente au micro : avaler le qāf (ça part en <em>kul</em>) ou le transformer en g. Tilmidh colore le tajwid (texte Uthmani Quran.com) et n’avance au mot suivant que si le squelette consonantique colle. Récite lentement. Si le mot n’est pas validé, recommence uniquement ce mot — c’est le point de l’outil." },
+          { "t": "cta", "ref": "112:1", "label": "Ouvrir le micro sur ce verset" },
+          { "t": "h2", "html": "Où continuer ensuite" },
+          { "t": "p", "html": "Ensuite, ouvre Falaq (<a href=\"/sourate/113\">sourate 113</a>) : encore un <em>qul</em>, puis le qāf de <em>al-falaq</em> si tu t’arrêtes. Alterne Ikhlāṣ et Falaq jusqu’à ce que le rebond soit le même geste, pas un effet de voix. Trois passages par jour sur deux sourates courtes valent mieux qu’une longue séance une fois par semaine : c’est un geste articulatoire, il s’installe par répétition brève et régulière." }
+        ],
+        "faq": [
+          { "q": "Quelles sont les cinq lettres de la qalqalah ?", "a": "ق, ط, ب, ج et د. On les retient avec la formule <em>quṭb jad</em> (قطب جد). Le rebond ne se produit que si la lettre est sakina, ou si tu t’arrêtes dessus en fin de mot." },
+          { "q": "Quelle est la différence entre qalqalah sughra et kubra ?", "a": "La sughra concerne une lettre sakina au milieu du mot, comme le ق de <em>qul</em> : le rebond est bref. La kubra concerne une lettre sur laquelle tu t’arrêtes, comme le د de <em>aḥad</em> en waqf : le rebond est un peu plus audible. Dans les deux cas, aucune voyelle n’est ajoutée." },
+          { "q": "Est-ce que la qalqalah ajoute une voyelle après la lettre ?", "a": "Non. C’est l’erreur la plus courante. Le rebond est le relâchement de l’articulation au même point de la bouche, pas un <em>u</em> ou un <em>e</em> collé derrière la lettre. Si tu entends une voyelle nette, le rebond est trop appuyé." }
+        ],
+        "nav": [
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Règles de tajwid", "item": "/regles-de-tajwid" },
+          { "name": "Pratiquer la qalqalah", "item": "/regle/qalqalah" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice qalqalah — the 5 letters and the mic | Tilmidh تلميذ",
+        "description": "Qalqalah: the bounce of ق ط ب ج د when the letter is sakinah. Ṣughrā, kubrā, articulation points, examples from Al-Ikhlāṣ, word-by-word mic practice. Not an ijazah.",
+        "h1": "Practice qalqalah",
+        "body": [
+          { "t": "p", "html": "Qalqalah is the slight bounce of a letter when it is sakinah (no vowel) or when you stop on it. Five letters: <strong>ق ط ب ج د</strong>. Without the bounce the word collapses; with too much bounce you invent a vowel. Tilmidh makes you repeat the word until the mic recognizes it — practice, not a diploma." },
+          { "t": "h2", "html": "The five letters and where they are articulated" },
+          { "t": "p", "html": "They are remembered with the phrase <em>quṭb jad</em> (قطب جد). Each one bounces at the exact place where it is pronounced: the bounce is not an added sound, it is the release of the articulation." },
+          { "t": "table", "head": ["Letter", "Articulation point (makhraj)"], "rows": [["ق", "back of the tongue against the soft palate"], ["ط", "tip of the tongue at the base of the upper front teeth"], ["ب", "both lips"], ["ج", "middle of the tongue against the palate"], ["د", "tip of the tongue at the base of the upper front teeth"]] },
+          { "t": "h2", "html": "Qalqalah ṣughrā: in the middle of the word" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "In <em>Qul huwa Allāhu aḥad</em> (Ikhlāṣ 112:1), the <strong>ق</strong> of <em>qul</em> carries qalqalah ṣughrā: the letter is sakinah in the middle of the word. You do not lengthen. You do not vote an extra <em>u</em> after the qāf. You release the articulation, a short click, then continue <em>huwa</em>." },
+          { "t": "h2", "html": "Qalqalah kubrā: when you stop on the letter" },
+          { "t": "p", "html": "Qalqalah kubrā appears when you stop on the letter, for example the <strong>د</strong> of <em>aḥad</em> in waqf. The bounce is a little more audible, still without an invented vowel. Articulation points stay qāf (uvula), ṭāʾ (tongue tip), bāʾ (lips), jīm (mid-tongue), dāl (dentals)." },
+          { "t": "h2", "html": "The mistake the mic catches most" },
+          { "t": "p", "html": "Common mic mistake: swallowing the qāf (it becomes <em>kul</em>) or turning it into a hard g. Tilmidh colors tajwid from Quran.com and only advances when the consonant skeleton matches. Recite slowly. If the word is not accepted, repeat that word only." },
+          { "t": "cta", "ref": "112:1", "label": "Open the mic on this verse" },
+          { "t": "h2", "html": "Where to go next" },
+          { "t": "p", "html": "Next, open Falaq (<a href=\"/en/sourate/113\">surah 113</a>): another <em>qul</em>, then the qāf of <em>al-falaq</em> if you stop. Alternate Ikhlāṣ and Falaq until the bounce is the same gesture, not a vocal effect. Three short passes a day beat one long weekly session: this is an articulation habit, and habits settle through brief, regular repetition. Beginners who already pray: see <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a>." }
+        ],
+        "faq": [
+          { "q": "What are the five qalqalah letters?", "a": "ق, ط, ب, ج and د. They are remembered with the phrase <em>quṭb jad</em> (قطب جد). The bounce only happens when the letter is sakinah, or when you stop on it at the end of a word." },
+          { "q": "What is the difference between qalqalah ṣughrā and kubrā?", "a": "Ṣughrā applies to a sakinah letter in the middle of a word, like the ق of <em>qul</em>: the bounce is brief. Kubrā applies to a letter you stop on, like the د of <em>aḥad</em> in waqf: the bounce is slightly more audible. Neither adds a vowel." },
+          { "q": "Does qalqalah add a vowel after the letter?", "a": "No. That is the most common error. The bounce is the release of the articulation at the same point in the mouth, not a <em>u</em> or <em>e</em> stuck behind the letter. If you hear a clear vowel, the bounce is too strong." }
+        ],
+        "nav": [
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "qalqalah", "item": "/en/regle/qalqalah" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "ru": {
+        "title": "Практика калькаля — пять букв и микрофон | Tilmidh تلميذ",
+        "description": "Калькаля: отскок букв ق ط ب ج د, когда буква с сукуном. Сугра, кубра, махрадж, примеры из Ихляса, тренировка с микрофоном слово за словом. Не иджаза.",
+        "h1": "Практика калькаля (qalqalah)",
+        "body": [
+          { "t": "p", "html": "Калькаля — лёгкий «отскок» буквы, когда она с сукуном или когда на ней останавливаются. Пять букв: <strong>ق ط ب ج د</strong>. Без отскока слово «схлопывается»; слишком сильный отскок — лишняя гласная. Tilmidh заставляет повторять слово, пока микрофон не узнает его." },
+          { "t": "h2", "html": "Пять букв и их места выхода" },
+          { "t": "p", "html": "Их запоминают формулой <em>кутб джад</em> (قطب جد). Каждая отскакивает ровно там, где произносится: отскок — это не добавленный звук, а размыкание артикуляции." },
+          { "t": "table", "head": ["Буква", "Место выхода (махрадж)"], "rows": [["ق", "задняя часть языка у мягкого нёба"], ["ط", "кончик языка у основания верхних резцов"], ["ب", "обе губы"], ["ج", "середина языка у нёба"], ["د", "кончик языка у основания верхних резцов"]] },
+          { "t": "h2", "html": "Калькаля сугра: в середине слова" },
+          { "t": "ar", "html": "قُلْ هُوَ ٱللَّهُ أَحَدٌ" },
+          { "t": "p", "html": "В <em>Куль хува Аллаху ахад</em> (Ихляс 112:1) ق в слове <em>куль</em> — это калькаля сугра: буква с сукуном в середине слова. Не тяни и не добавляй «у» после кафа. Короткий щелчок — и сразу дальше, <em>хува</em>." },
+          { "t": "h2", "html": "Калькаля кубра: когда останавливаешься" },
+          { "t": "p", "html": "Калькаля кубра появляется, когда ты останавливаешься на самой букве — например, на د в слове <em>ахад</em>, если делаешь вакф. Отскок слышен чуть отчётливее, но гласная всё равно не добавляется. Разница между сугра и кубра — не в природе звука, а в том, насколько ясно слышен отскок." },
+          { "t": "h2", "html": "Ошибка, которую чаще всего ловит микрофон" },
+          { "t": "p", "html": "Частая ошибка: проглотить каф, и вместо <em>куль</em> получается что-то ближе к русскому «куль», или заменить каф на «к»/«г». Tilmidh показывает цвета таджвида из текста Quran.com и переходит к следующему слову только тогда, когда согласный скелет совпал. Читай медленно. Слово не принято — повтори только это слово, в этом и смысл инструмента." },
+          { "t": "cta", "ref": "112:1", "label": "Микрофон на этом аяте" },
+          { "t": "h2", "html": "Куда двигаться дальше" },
+          { "t": "p", "html": "Дальше открой Фаляк: там снова <em>куль</em>, а если остановишься — каф в <em>аль-фаляк</em>. Чередуй Ихляс и Фаляк, пока отскок не станет одним и тем же движением, а не голосовым эффектом. Три коротких подхода в день работают лучше одного длинного раза в неделю. Смотри также <a href=\"/ru/regle/madd\">мадд</a> и <a href=\"/ru/prilozhenie-tadzhvida-dlya-nachinayushchikh\">приложение для начинающих</a>." }
+        ],
+        "faq": [
+          { "q": "Какие пять букв относятся к калькаля?", "a": "ق, ط, ب, ج и د. Их запоминают формулой <em>кутб джад</em> (قطب جد). Отскок возникает только тогда, когда буква стоит с сукуном или когда на ней делают остановку в конце слова." },
+          { "q": "Чем отличается калькаля сугра от кубра?", "a": "Сугра — это буква с сукуном в середине слова, как ق в <em>куль</em>: отскок короткий. Кубра — это буква, на которой ты останавливаешься, как د в <em>ахад</em> при вакфе: отскок слышен отчётливее. Ни в том, ни в другом случае гласная не добавляется." },
+          { "q": "Добавляет ли калькаля гласную после буквы?", "a": "Нет. Это самая частая ошибка. Отскок — это размыкание артикуляции в той же точке рта, а не «у» или «э», приклеенное к букве. Если слышна отчётливая гласная, отскок сделан слишком сильно." }
+        ],
+        "nav": [
+          { "href": "/regle/ghunnah", "label": "Гунна" },
+          { "href": "/regle/madd", "label": "Мадд" },
+          { "href": "/sourate/1", "label": "Фатиха" },
+          { "href": "/prilozhenie-tadzhvida-dlya-nachinayushchikh", "label": "Для начинающих" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/ru" },
+          { "name": "Практика калькаля", "item": "/ru/regle/qalqalah" }
+        ],
+        "footer": "Tilmidh (تلميذ, «ученик») — тренажёр чтения Корана. Текст берётся с Quran.com (усмани, цвета таджвида), риваят Хафса от Асима. Это не иджаза, не научное свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри."
       }
     }
   },
@@ -152,6 +266,118 @@
           { "name": "الغنّة", "item": "/ar/regle/ghunnah" }
         ],
         "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      },
+      "fr": {
+        "title": "Pratiquer la ghunnah — nūn et mīm mushaddad | Tilmidh تلميذ",
+        "description": "Ghunnah : la nasalisation du nūn et du mīm mushaddad, tenue deux harakāt. Tableau des six cas, exemple dans Al-Fātiḥah, entraînement au micro. Pas une ijazah.",
+        "h1": "Pratiquer la ghunnah",
+        "body": [
+          { "t": "p", "html": "La ghunnah est le son nasal qui passe par le nez. Elle est obligatoire (akmal) sur le <strong>nūn mushaddad</strong> et le <strong>mīm mushaddad</strong>, tenue deux harakāt — ni un souffle, ni un bourdon de trois secondes. Tilmidh ne mesure pas la durée au chronomètre : il t’oblige à articuler le mot entier, ce qui force déjà à ne pas avaler la nasale." },
+          { "t": "h2", "html": "Quand la ghunnah apparaît, et à quel degré" },
+          { "t": "p", "html": "La nasale n’est pas tout ou rien : elle est pleine sur une shadda, présente mais fondue dans l’idgham et l’ikhfa, et absente en idhhar. Ce tableau couvre les cas que tu croiseras dès les sourates courtes." },
+          { "t": "table", "head": ["Cas", "Ghunnah ?"], "rows": [["نّ ou مّ (shadda)", "complète, deux harakāt"], ["nūn sakinah / tanwin devant ي ن م و", "idgham avec ghunnah"], ["nūn sakinah / tanwin devant ل ر", "idgham sans ghunnah"], ["nūn sakinah / tanwin devant ب", "iqlab : mīm nasalisé"], ["nūn sakinah / tanwin devant les 15 lettres", "ikhfa, nasale dissimulée"], ["nūn sakinah / tanwin devant ء ه ع ح غ خ", "idhhar, pas de ghunnah"]] },
+          { "t": "h2", "html": "L’exemple dans Al-Fātiḥah" },
+          { "t": "ar", "html": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ" },
+          { "t": "p", "html": "Dans Al-Fātiḥah 1:7, plusieurs nasales s’enchaînent. <em>Alladhīna</em> porte un nūn, <em>anʿamta</em> un nūn sakinah suivi d’ʿayn (idhhar, pas de ghunnah d’idgham), <em>ʿalayhim</em> un mīm. Le mot que beaucoup bâclent est <em>aḍ-ḍāllīn</em> : lām shadda + madd, et autour des nūn de la sourate tu entends déjà la ghunnah d’idgham ou d’ikhfa selon le contexte." },
+          { "t": "h2", "html": "La règle courte à garder en tête" },
+          { "t": "p", "html": "Règle simple à mémoriser : nūn ou mīm avec shadda = ghunnah complète. Nūn sakinah ou tanwin devant ي ن م و = idgham avec ghunnah. Devant ل ر = idgham sans ghunnah. Le reste se répartit entre idhhar, iqlab et ikhfa — vois les pages <a href=\"/regle/idgham\">idgham</a> et <a href=\"/regle/ikhfa\">ikhfa</a>." },
+          { "t": "h2", "html": "Ce que le micro entend" },
+          { "t": "p", "html": "Au micro, la ghunnah trop courte fait disparaître le nūn (le moteur STT entend autre chose). Trop longue, tu casses le rythme et le mot suivant n’arrive pas. Entraîne-toi verset par verset sur Fātiḥah : dès qu’un mot est validé, tu as au moins prononcé un mot reconnaissable. Pour la durée exacte des deux harakāt, un professeur reste le juge — Tilmidh est l’élève qui répète." },
+          { "t": "cta", "ref": "1:7", "label": "Ouvrir le micro sur ce verset" }
+        ],
+        "faq": [
+          { "q": "Combien de temps dure une ghunnah ?", "a": "Deux harakāt, soit la durée de deux temps courts — à peu près le temps de dire deux voyelles brèves. Tilmidh ne chronomètre pas cette durée : le micro vérifie que le mot est prononcé, la longueur se règle à l’oreille et se fait valider par un muqriʾ." },
+          { "q": "Sur quelles lettres la ghunnah est-elle obligatoire ?", "a": "Sur le nūn et le mīm portant une shadda (نّ et مّ), dans tous les cas et quelle que soit la position dans le mot. C’est le degré le plus complet, appelé akmal." },
+          { "q": "Ghunnah et idgham, est-ce la même chose ?", "a": "Non. La ghunnah est le son nasal lui-même. L’idgham est la fusion d’un nūn sakinah dans la lettre suivante — fusion qui s’accompagne d’une ghunnah devant ي ن م و, mais qui s’en passe devant ل ر." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Règles de tajwid", "item": "/regles-de-tajwid" },
+          { "name": "Pratiquer la ghunnah", "item": "/regle/ghunnah" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice ghunnah — nasal hum on ن and م | Tilmidh تلميذ",
+        "description": "Ghunnah: the nasal hum held about two ḥarakāt on nūn and mīm. Table of the six cases, example from Al-Fātiḥah, word-by-word mic practice. Not an ijazah.",
+        "h1": "Practice ghunnah",
+        "body": [
+          { "t": "p", "html": "Ghunnah is the nasal sound that lives in ن and م when the rule calls for it — idghām with ghunnah, ikhfāʾ, iqlāb, or a shaddah on nūn/mīm. You hold the hum in the nose for about two ḥarakāt while the tongue (or lips) stays in place. Too short and the rule disappears; too long and you invent a melody." },
+          { "t": "h2", "html": "When ghunnah appears, and how full it is" },
+          { "t": "p", "html": "The hum is not all-or-nothing: it is complete on a shaddah, present but merged in idghām and ikhfāʾ, and absent in iẓhār. This table covers every case you will meet in the short surahs." },
+          { "t": "table", "head": ["Case", "Ghunnah?"], "rows": [["نّ or مّ (shaddah)", "complete, two ḥarakāt"], ["nūn sakinah / tanwīn before ي ن م و", "idghām with ghunnah"], ["nūn sakinah / tanwīn before ل ر", "idghām without ghunnah"], ["nūn sakinah / tanwīn before ب", "iqlāb: a nasalised mīm"], ["nūn sakinah / tanwīn before the 15 letters", "ikhfāʾ, hidden nasal"], ["nūn sakinah / tanwīn before ء ه ع ح غ خ", "iẓhār, no ghunnah"]] },
+          { "t": "h2", "html": "The example in Al-Fātiḥah" },
+          { "t": "ar", "html": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" },
+          { "t": "p", "html": "In Al-Fātiḥah, <em>ar-raḥmān</em> and <em>ar-raḥīm</em> carry shaddah on the rāʾ after the definite article — not ghunnah on rāʾ, but nearby you will meet nūn/mīm that do. In <em>anʿamta</em> (1:7) the nūn sits before ʿayn: that is iẓhār, so you do <em>not</em> hide with a heavy ghunnah. Tilmidh’s job is to confirm you said the right word; a teacher still judges the length of the hum." },
+          { "t": "h2", "html": "The short rule to keep in mind" },
+          { "t": "p", "html": "When idghām with ghunnah applies (nūn sakinah or tanwīn before ي ن م و), merge and keep the nasal. Before ل ر the merge is without ghunnah. Ikhfāʾ before the fifteen letters is a light nasal with the tongue near — not full contact like iẓhār, not full merge like idghām." },
+          { "t": "h2", "html": "What the mic hears" },
+          { "t": "p", "html": "On the mic, rushing kills ghunnah: the engine hears a clipped consonant and the word is not accepted. Slow down on the nasal. Colors on screen mark tajwid from Quran.com so you see where a hum is expected before you speak. Pair this with <a href=\"/en/regle/ikhfa\">ikhfa</a> and <a href=\"/en/regle/idgham\">idgham</a>." },
+          { "t": "cta", "ref": "1:1", "label": "Open the mic on Al-Fātiḥah" }
+        ],
+        "faq": [
+          { "q": "How long is a ghunnah held?", "a": "About two ḥarakāt — roughly the time of two short vowels. Tilmidh does not time this: the mic checks that the word was said, while the length is trained by ear and confirmed by a muqriʾ." },
+          { "q": "On which letters is ghunnah obligatory?", "a": "On nūn and mīm carrying a shaddah (نّ and مّ), in every position and every case. This is the fullest degree, called akmal." },
+          { "q": "Are ghunnah and idgham the same thing?", "a": "No. Ghunnah is the nasal sound itself. Idghām is the merging of a nūn sakinah into the following letter — a merge that carries ghunnah before ي ن م و, but none before ل ر." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "ghunnah", "item": "/en/regle/ghunnah" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "ru": {
+        "title": "Практика гунны — носовой звук на ن и م | Tilmidh تلميذ",
+        "description": "Гунна: носовой звук примерно на две харакаты на нуне и миме. Таблица шести случаев, пример из Фатихи, тренировка с микрофоном. Не иджаза.",
+        "h1": "Практика гунны (ghunnah)",
+        "body": [
+          { "t": "p", "html": "Гунна — носовой звук на ن и م, когда правило этого требует: идгам с гунной, ихфа, икляб или шадда на нуне и миме. Держи его примерно две харакаты, пока язык (или губы) остаются на месте. Слишком коротко — правило пропало; слишком долго — появляется лишняя мелодия." },
+          { "t": "h2", "html": "Когда гунна появляется и насколько она полная" },
+          { "t": "p", "html": "Носовой звук — не «есть или нет»: он полный на шадде, присутствует, но слит в идгаме и ихфа, и отсутствует в изхаре. В таблице собраны все случаи, которые встретятся уже в коротких сурах." },
+          { "t": "table", "head": ["Случай", "Гунна?"], "rows": [["نّ или مّ (шадда)", "полная, две харакаты"], ["нун сакин / танвин перед ي ن م و", "идгам с гунной"], ["нун сакин / танвин перед ل ر", "идгам без гунны"], ["нун сакин / танвин перед ب", "икляб: носовой мим"], ["нун сакин / танвин перед 15 буквами", "ихфа, скрытый носовой"], ["нун сакин / танвин перед ء ه ع ح غ خ", "изхар, гунны нет"]] },
+          { "t": "h2", "html": "Пример в Фатихе" },
+          { "t": "ar", "html": "ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" },
+          { "t": "p", "html": "В Фатихе рядом с шаддой на ра встречаются нуны и мимы. В слове <em>анʿамта</em> нун стоит перед ʿайн — это изхар, и тяжёлую гунну туда тянуть не нужно. Tilmidh подтверждает, что слово произнесено верно; длину гунны судит учитель." },
+          { "t": "h2", "html": "Короткое правило" },
+          { "t": "p", "html": "Нун или мим с шаддой — полная гунна. Нун сакин или танвин перед ي ن م و — идгам с гунной. Перед ل ر — идгам без гунны. Остальное распределяется между изхаром, иклябом и ихфа. Ихфа перед пятнадцатью буквами — это лёгкий носовой звук с языком уже наготове: не полное смыкание, как в изхаре, и не полное слияние, как в идгаме." },
+          { "t": "h2", "html": "Что слышит микрофон" },
+          { "t": "p", "html": "Не торопись: при спешке распознавание речи обрезает носовой звук, и слово не принимается. Замедлись именно на носовом. Цвета таджвида из текста Quran.com показывают, где ожидается гунна, ещё до того как ты начал читать. Для начинающих, кто уже читает намаз: <a href=\"/ru/prilozhenie-tadzhvida-dlya-nachinayushchikh\">лучшее приложение таджвида</a>." },
+          { "t": "h2", "html": "Три ошибки, которые слышно сразу" },
+          { "t": "p", "html": "Первая: гунна слишком короткая — носовой звук исчезает, и нун пропадает вместе с правилом. Вторая: гунна слишком длинная — чтение превращается в пение, а следующее слово опаздывает. Третья, самая частая у начинающих: гунна ставится там, где нужен изхар, то есть перед горловыми буквами ء ه ع ح غ خ. Все три идут от одной причины — от попытки читать быстрее, чем позволяет артикуляция." },
+          { "t": "h2", "html": "Как тренировать" },
+          { "t": "p", "html": "Возьми одну суру и читай её несколько дней подряд, а не пять разных сур за один вечер. Гунна — это привычка носового резонанса, она ставится короткими повторениями. Начни с Фатихи по одному аяту, потом добавь Ихляс. Если слово не принимается, повтори только его: именно так и работает Tilmidh." },
+          { "t": "cta", "ref": "1:1", "label": "Микрофон на Фатихе" }
+        ],
+        "faq": [
+          { "q": "Сколько длится гунна?", "a": "Примерно две харакаты — время двух коротких гласных. Tilmidh эту длительность не измеряет: микрофон проверяет, что слово произнесено, а длину ставят на слух и подтверждают у мукри." },
+          { "q": "На каких буквах гунна обязательна?", "a": "На нуне и миме с шаддой (نّ и مّ) — во всех положениях и во всех случаях. Это самая полная степень, её называют акмаль." },
+          { "q": "Гунна и идгам — это одно и то же?", "a": "Нет. Гунна — это сам носовой звук. Идгам — это слияние нун сакин со следующей буквой, и такое слияние сопровождается гунной перед ي ن م و, но обходится без неё перед ل ر." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Калькаля" },
+          { "href": "/regle/madd", "label": "Мадд" },
+          { "href": "/sourate/1", "label": "Фатиха" },
+          { "href": "/prilozhenie-tadzhvida-dlya-nachinayushchikh", "label": "Для начинающих" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/ru" },
+          { "name": "Практика гунны", "item": "/ru/regle/ghunnah" }
+        ],
+        "footer": "Tilmidh (تلميذ, «ученик») — тренажёр чтения Корана. Текст берётся с Quran.com (усмани, цвета таджвида), риваят Хафса от Асима. Это не иджаза, не научное свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри."
       }
     }
   },
@@ -234,6 +460,77 @@
           { "name": "الإدغام", "item": "/ar/regle/idgham" }
         ],
         "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      },
+      "fr": {
+        "title": "Idgham avec ou sans ghunnah — yanmū, lām, rāʾ | Tilmidh تلميذ",
+        "description": "Idgham : fusion du nūn sakinah ou du tanwin dans ي ن م و (avec ghunnah) ou dans ل ر (sans). Tableau, exemples Fātiḥah, micro mot par mot. Pas une ijazah.",
+        "h1": "Idgham avec ou sans ghunnah",
+        "body": [
+          { "t": "p", "html": "L’idgham, c’est fondre le nūn sakinah ou le tanwin dans la lettre suivante. Deux familles. <strong>Avec ghunnah</strong> (lettres ي ن م و — mnémotechnique « yanmū ») : tu assimiles et tu nasales deux harakāt. <strong>Sans ghunnah</strong> (ل ر) : tu assimiles complètement, sans nasale, comme si le nūn n’avait jamais été là." },
+          { "t": "h2", "html": "Les deux familles en un tableau" },
+          { "t": "table", "head": ["Lettre suivante", "Ce que tu fais"], "rows": [["ي", "fusion + ghunnah, deux harakāt"], ["ن", "fusion + ghunnah, deux harakāt"], ["م", "fusion + ghunnah, deux harakāt"], ["و", "fusion + ghunnah, deux harakāt"], ["ل", "fusion complète, aucune nasale"], ["ر", "fusion complète, aucune nasale"]] },
+          { "t": "h2", "html": "Repérer l’idgham dans un verset" },
+          { "t": "ar", "html": "غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ" },
+          { "t": "p", "html": "Dans Al-Fātiḥah, tu croises surtout des liaisons de mots. Un cas classique ailleurs dans le muṣḥaf : tanwin + wāw (<em>ghafūrun raḥīm</em> n’est pas idgham avec ghunnah — rāʾ est sans ghunnah ; <em>qawmun yuʾminūn</em> est idgham avec ghunnah). Sur Fātiḥah 1:7, concentre-toi sur la continuité : <em>ʿalayhim wa-lā</em> ne doit pas laisser un nūn orphelin au bord du mīm, et <em>aḍ-ḍāllīn</em> absorbe l’article par idgham shamsi." },
+          { "t": "h2", "html": "Les deux erreurs classiques" },
+          { "t": "p", "html": "Erreur typique : garder un nūn audible devant rāʾ ou lām (ce n’est plus un idgham, c’est un idhhar inventé). Autre erreur : nasaler devant rāʾ. Le micro de Tilmidh entend un mot « trop complet » ou un mot cassé ; le mot n’est pas validé. Ralentis, fusionne, puis relâche." },
+          { "t": "h2", "html": "Lire la couleur, faire le geste" },
+          { "t": "p", "html": "Pour la ghunnah d’idgham, vois aussi la page <a href=\"/regle/ghunnah\">pratiquer la ghunnah</a>. Pour le nūn qui ne fusionne pas tout à fait, c’est <a href=\"/regle/ikhfa\">l’ikhfa</a>. Les couleurs du texte Uthmani tajweed (Quran.com) marquent déjà ces règles à l’écran : tu lis la couleur, tu fais le geste, le micro confirme le mot." },
+          { "t": "cta", "ref": "1:7", "label": "Ouvrir le micro sur ce verset" }
+        ],
+        "faq": [
+          { "q": "Quelles sont les lettres de l’idgham ?", "a": "Six en tout : ي ن م و (retenues par « yanmū »), où la fusion s’accompagne d’une ghunnah, et ل ر, où la fusion se fait sans aucune nasale." },
+          { "q": "Pourquoi l’idgham ne s’applique-t-il pas dans un même mot ?", "a": "Parce que la règle concerne le nūn sakinah ou le tanwin suivi d’une des six lettres au mot suivant. À l’intérieur d’un même mot, la séquence se lit en idhhar — c’est le cas de mots comme <em>dunyā</em> ou <em>bunyān</em>, où le nūn reste clair." },
+          { "q": "Comment savoir s’il faut nasaler ou non ?", "a": "Regarde la lettre qui suit. Si c’est ي, ن, م ou و : fusion avec ghunnah de deux harakāt. Si c’est ل ou ر : fusion sèche, aucune nasale. Il n’y a pas de cas intermédiaire." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Règles de tajwid", "item": "/regles-de-tajwid" },
+          { "name": "Idgham avec ou sans ghunnah", "item": "/regle/idgham" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice idgham — yanmū, lām and rāʾ | Tilmidh تلميذ",
+        "description": "Idghām: merging nūn sakinah or tanwīn into ي ن م و (with ghunnah) or ل ر (without). Table, examples, word-by-word mic practice. Not an ijazah.",
+        "h1": "Practice idgham",
+        "body": [
+          { "t": "p", "html": "Idghām means merging. When a nūn sakinah or tanwīn meets one of <strong>ي ن م و</strong>, you merge with ghunnah. When it meets <strong>ل ر</strong>, you merge without ghunnah. The first letter disappears into the second; you do not pronounce a clear nūn then a separate next letter." },
+          { "t": "h2", "html": "The two families at a glance" },
+          { "t": "table", "head": ["Following letter", "What you do"], "rows": [["ي", "merge + ghunnah, two ḥarakāt"], ["ن", "merge + ghunnah, two ḥarakāt"], ["م", "merge + ghunnah, two ḥarakāt"], ["و", "merge + ghunnah, two ḥarakāt"], ["ل", "full merge, no nasal at all"], ["ر", "full merge, no nasal at all"]] },
+          { "t": "h2", "html": "Spotting idgham in a verse" },
+          { "t": "ar", "html": "مِن يَّشَاءُ" },
+          { "t": "p", "html": "Classic classroom example: <em>min yashāʾ</em> — the nūn merges into yāʾ with nasal. In prayer you meet this pattern across words. Tilmidh shows Uthmani tajweed colors so the merge is visible before you open the mic. The mic then checks that you produced the resulting word shape, not that your ghunnah lasted exactly two ḥarakāt." },
+          { "t": "h2", "html": "The three traps" },
+          { "t": "p", "html": "Mistakes: saying a full nūn then jumping (iẓhār by accident), or swallowing so hard that the next letter vanishes. Another trap: applying idghām where iẓhār is required (throat letters ء ه ع ح غ خ). Read the colored text; if in doubt, stop and ask a muqriʾ." },
+          { "t": "h2", "html": "A practice path that works" },
+          { "t": "p", "html": "Practice slowly on short surahs first — Ikhlāṣ and Fātiḥah — then longer āyāt. A grey box means repeat that token only. This is how beginners who already pray improve without a 40-minute theory video. See also <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a> and the <a href=\"/en/regle/ghunnah\">ghunnah page</a> for the nasal itself." },
+          { "t": "cta", "ref": "1", "label": "Open the mic on Al-Fātiḥah" }
+        ],
+        "faq": [
+          { "q": "Which letters trigger idgham?", "a": "Six in total: ي ن م و (remembered as “yanmū”), where the merge carries a ghunnah, and ل ر, where the merge has no nasal at all." },
+          { "q": "Why does idgham not apply inside a single word?", "a": "Because the rule concerns a nūn sakinah or tanwīn followed by one of the six letters in the next word. Inside one word the sequence is read as iẓhār — as in <em>dunyā</em> or <em>bunyān</em>, where the nūn stays clear." },
+          { "q": "How do I know whether to nasalise?", "a": "Look at the following letter. If it is ي, ن, م or و: merge with a two-ḥarakāt ghunnah. If it is ل or ر: dry merge, no nasal. There is no middle case." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "idgham", "item": "/en/regle/idgham" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
       }
     }
   },
@@ -312,6 +609,77 @@
           { "name": "الإخفاء", "item": "/ar/regle/ikhfa" }
         ],
         "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      },
+      "fr": {
+        "title": "Ikhfa — les 15 lettres et des exemples | Tilmidh تلميذ",
+        "description": "Ikhfa ḥaqīqī : nūn sakinah ou tanwin devant 15 lettres, nasale dissimulée sur deux harakāt. Liste complète, exemple dans An-Nās, micro mot par mot. Pas une ijazah.",
+        "h1": "Ikhfa — exemples",
+        "body": [
+          { "t": "p", "html": "L’ikhfa ḥaqīqī, c’est cacher le nūn sakinah ou le tanwin devant quinze lettres (celles qui ne sont ni idhhar, ni idgham, ni iqlab). Tu ne colles pas un nūn clair, tu ne l’effaces pas non plus : une nasale préparée sur le point d’articulation de la lettre suivante, deux harakāt." },
+          { "t": "h2", "html": "Les quinze lettres, par famille de son" },
+          { "t": "table", "head": ["Famille", "Lettres"], "rows": [["Dentales et sifflantes", "ت ث د ذ ز س ص ط ظ"], ["Chuintantes et palatales", "ج ش"], ["Labiale et vélaires", "ف ق ك"], ["Emphatique", "ض"]] },
+          { "t": "h2", "html": "L’exemple dans An-Nās" },
+          { "t": "ar", "html": "مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ" },
+          { "t": "p", "html": "Dans An-Nās 114:4, <em>min sharri</em> : nūn sakinah + shīn. C’est un ikhfa. Le nūn ne « dit » pas <em>n</em> comme dans <em>min Allāh</em> (idhhar, car ʾalif). Il se prépare vers le shīn, nez ouvert, langue déjà en route. Juste après, <em>al-khannās</em> porte un nūn mushaddad : là ce n’est plus ikhfa, c’est <a href=\"/regle/ghunnah\">ghunnah complète</a>." },
+          { "t": "h2", "html": "La question à se poser, verset par verset" },
+          { "t": "p", "html": "Les quinze lettres d’ikhfa se retrouvent partout dans le muṣḥaf. Inutile de les réciter comme une liste magique le premier jour : prends un verset, identifie le nūn sakinah, demande « la lettre d’après est-elle dans yanmū, lām/rā, bā, ou les six d’idhhar ? ». Sinon, ikhfa. Tilmidh affiche le tajwid coloré (Quran.com) : tu vois la zone, tu fais le geste, le micro valide le mot." },
+          { "t": "h2", "html": "Ce qui casse le mot au micro" },
+          { "t": "p", "html": "Erreur fréquente : transformer l’ikhfa en idgham (nūn disparu) ou en idhhar (nūn trop clair, coup de langue). Sur téléphone, le STT ar-SA entend alors un autre mot. Reste sur 114:4 jusqu’à ce que <em>min</em> et <em>sharri</em> s’enchaînent sans choc. Puis ouvre Falaq pour d’autres <em>min sharri</em>." },
+          { "t": "cta", "ref": "114:4", "label": "Ouvrir le micro sur ce verset" }
+        ],
+        "faq": [
+          { "q": "Combien de lettres déclenchent l’ikhfa ?", "a": "Quinze : ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك. Ce sont celles qui restent une fois retirées les six d’idhhar, les six d’idgham et le bāʾ de l’iqlab." },
+          { "q": "Quelle est la différence entre ikhfa et idgham ?", "a": "Dans l’idgham, le nūn disparaît dans la lettre suivante. Dans l’ikhfa, il ne disparaît pas et ne s’entend pas clairement non plus : il reste une nasale tenue deux harakāt, la bouche déjà placée pour la lettre qui vient." },
+          { "q": "Où trouver un ikhfa dans une sourate courte ?", "a": "An-Nās 114:4, dans <em>min sharri</em> : nūn sakinah suivi de shīn. Al-Falaq 113:2 offre le même enchaînement, ce qui en fait un bon couple d’entraînement." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Règles de tajwid", "item": "/regles-de-tajwid" },
+          { "name": "Ikhfa", "item": "/regle/ikhfa" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice ikhfa — the 15 letters with examples | Tilmidh تلميذ",
+        "description": "Ikhfāʾ ḥaqīqī: hiding nūn sakinah or tanwīn before fifteen letters with a light two-ḥarakāt nasal. Full list, examples, mic practice. Not an ijazah.",
+        "h1": "Practice ikhfa",
+        "body": [
+          { "t": "p", "html": "Ikhfāʾ is the “hiding” of nūn sakinah or tanwīn before fifteen letters (the ones that are neither iẓhār throat letters nor idghām letters). The tongue approaches the next letter without full contact; a light ghunnah stays in the nose. Clear nūn = wrong. Full merge = wrong. Soft nasal near the next makhraj = right direction." },
+          { "t": "h2", "html": "The fifteen letters, grouped by sound" },
+          { "t": "table", "head": ["Family", "Letters"], "rows": [["Dentals and sibilants", "ت ث د ذ ز س ص ط ظ"], ["Palatals", "ج ش"], ["Labial and velars", "ف ق ك"], ["Emphatic", "ض"]] },
+          { "t": "h2", "html": "The example in Al-Fātiḥah" },
+          { "t": "ar", "html": "عَن صِرَاطٍ" },
+          { "t": "p", "html": "Patterns like <em>ʿan ṣirāṭ</em> in Al-Fātiḥah are where beginners feel ikhfāʾ in real prayer. Tilmidh will not grade your ikhfāʾ quality like a teacher; it will confirm you recited the right words in order. Use the colors as a map, then refine with a human ear." },
+          { "t": "h2", "html": "The question to ask, verse by verse" },
+          { "t": "p", "html": "The fifteen letters appear everywhere in the muṣḥaf, and reciting them as a magic list on day one helps nobody. Take one verse, find the nūn sakinah, then ask: is the next letter in yanmū, in lām/rāʾ, is it bāʾ, or one of the six throat letters? If none of those, it is ikhfāʾ. That single question resolves every case you will meet." },
+          { "t": "h2", "html": "What breaks the word on the mic" },
+          { "t": "p", "html": "Common errors: turning ikhfāʾ into iẓhār (hard nūn), or into idghām (dropping into the next letter too far). Another: holding ghunnah so long you break the rhythm of the āyah. Start word by word on Fātiḥah, then Falaq and Nās. If you cannot read Arabic letters yet, use a qaʿidah first; if you already pray and want mic practice, <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a> explains why Tilmidh fits that niche." },
+          { "t": "cta", "ref": "1:6", "label": "Open the mic near ṣirāṭ" }
+        ],
+        "faq": [
+          { "q": "How many letters trigger ikhfa?", "a": "Fifteen: ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك. They are what remains once you remove the six iẓhār letters, the six idghām letters and the bāʾ of iqlāb." },
+          { "q": "What is the difference between ikhfa and idgham?", "a": "In idghām the nūn disappears into the following letter. In ikhfāʾ it neither disappears nor sounds clearly: a nasal is held for two ḥarakāt with the mouth already shaped for the letter that follows." },
+          { "q": "Where can I find an ikhfa in a short surah?", "a": "An-Nās 114:4, in <em>min sharri</em>: nūn sakinah followed by shīn. Al-Falaq 113:2 has the same sequence, which makes the two a good practice pair." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "ikhfa", "item": "/en/regle/ikhfa" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
       }
     }
   },
@@ -388,6 +756,118 @@
           { "name": "المدّ", "item": "/ar/regle/madd" }
         ],
         "footer": "تلميذ (تلميذ) أداة تمرين على التلاوة. النصّ المعروض من Quran.com برواية حفص عن عاصم. وليست إجازةً ولا شهادةً علميّة ولا بديلاً عن المعلّم. راجع تلاوتك دائمًا عند مقرئ."
+      },
+      "fr": {
+        "title": "Madd ṭabīʿī, munfaṣil, muttaṣil — durées | Tilmidh تلميذ",
+        "description": "Madd : allongement ṭabīʿī (2 harakāt), muttaṣil et munfaṣil (4–5), lāzim (6). Tableau des durées, exemple الضالين dans Al-Fātiḥah. Pas une ijazah.",
+        "h1": "Madd ṭabīʿī / munfaṣil / muttaṣil",
+        "body": [
+          { "t": "p", "html": "Le madd, c’est allonger une lettre de prolongation (alif, wāw, yāʾ). Le <strong>madd ṭabīʿī</strong> (naturel) dure deux harakāt : <em>qāla</em>, <em>yaqūlu</em>, <em>fī</em>. Dès qu’un hamza suit, ça devient un madd farʿī : <strong>muttaṣil</strong> si hamza dans le même mot (souvent 4–5 harakāt), <strong>munfaṣil</strong> si hamza au mot suivant (4–5 aussi, selon la riwāya)." },
+          { "t": "h2", "html": "Les durées, en un coup d’œil" },
+          { "t": "p", "html": "Les durées ci-dessous sont celles de la riwāya Ḥafṣ ʿan ʿĀṣim par la voie de Shāṭibiyya, la plus répandue. D’autres voies retiennent d’autres longueurs : c’est une des raisons pour lesquelles un professeur reste indispensable." },
+          { "t": "table", "head": ["Type de madd", "Durée"], "rows": [["ṭabīʿī (naturel)", "2 harakāt"], ["muttaṣil (hamza dans le même mot)", "4 à 5 harakāt"], ["munfaṣil (hamza au mot suivant)", "4 à 5 harakāt"], ["lāzim (sukūn permanent)", "6 harakāt"], ["ʿāriḍ li-s-sukūn (arrêt en fin de mot)", "2, 4 ou 6 harakāt"]] },
+          { "t": "h2", "html": "Le mot où tout le monde accélère" },
+          { "t": "ar", "html": "وَلَا ٱلضَّآلِّينَ" },
+          { "t": "p", "html": "Dans Al-Fātiḥah 1:7, <em>aḍ-ḍāllīn</em> n’est pas un simple ṭabīʿī : c’est un madd lāzim, six harakāt, que tout le monde entend trop court ou trop théâtral. Tu tiens, tu ne chantes pas. Le lām shadda reste appuyé. C’est le verset où les débutants accélèrent pour « finir la sourate » — et c’est exactement là qu’il faut s’arrêter." },
+          { "t": "h2", "html": "Où entendre un ṭabīʿī propre" },
+          { "t": "p", "html": "Ikhlāṣ t’offre un ṭabīʿī clair dans <em>Allāhu</em> (lām + alif, attention au tafkhīm du lām de Allah après ḍamma/fatḥa) et un arrêt sur <em>aḥad</em>. Falaq et Nās ont des <em>qul aʿūdhu</em> : madd ṭabīʿī dans <em>aʿūdhu</em> (wāw), puis ikhfa ou idhhar selon la suite. Enchaîne les quatre sourates du boot Tilmidh (112 → 113 → 114 → 1) pour sentir la même longueur de ṭabīʿī partout." },
+          { "t": "h2", "html": "Ce que Tilmidh ne fait pas" },
+          { "t": "p", "html": "Tilmidh ne chronomètre pas les harakāt. Le micro vérifie que tu as dit le bon mot. La longueur, tu la travailles à l’oreille — puis tu la fais valider par un muqriʾ. L’app est l’élève qui répète, pas le certificateur." },
+          { "t": "cta", "ref": "1:7", "label": "Ouvrir le micro sur ce verset" }
+        ],
+        "faq": [
+          { "q": "Combien de temps dure un madd ṭabīʿī ?", "a": "Deux harakāt. C’est l’unité de référence : toutes les autres durées se comptent en multiples de celle-là, jusqu’à six harakāt pour le madd lāzim." },
+          { "q": "Quelle différence entre madd muttaṣil et munfaṣil ?", "a": "Les deux durent 4 à 5 harakāt en Ḥafṣ, mais le muttaṣil a son hamza dans le même mot que la lettre de prolongation, tandis que le munfaṣil a son hamza au début du mot suivant." },
+          { "q": "Est-ce que Tilmidh vérifie la durée de mes madd ?", "a": "Non. Le micro vérifie que le mot prononcé est le bon, pas la longueur exacte de l’allongement. Pour la durée, entraîne l’oreille puis fais valider ta récitation par un muqriʾ — Tilmidh est un outil de répétition, pas une certification." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/regles-de-tajwid", "label": "Toutes les règles" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Règles de tajwid", "item": "/regles-de-tajwid" },
+          { "name": "Madd ṭabīʿī", "item": "/regle/madd" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed). Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Practice madd — ṭabīʿī, muttaṣil, munfaṣil | Tilmidh تلميذ",
+        "description": "Madd: lengthening ا و ي. Natural madd is two ḥarakāt, muttaṣil and munfaṣil 4–5, lāzim 6. Duration table, examples, mic practice. Not an ijazah.",
+        "h1": "Practice madd",
+        "body": [
+          { "t": "p", "html": "Madd is lengthening a letter of madd (ا و ي) when the conditions are met. Natural madd (aṣlī, also called ṭabīʿī) is about two ḥarakāt. Connected or separate madd, madd lāzim, and others stretch longer — your muqriʾ decides the school and the count. Tilmidh shows where madd appears in the Uthmani tajweed text; the mic checks the word identity, not a stopwatch on six ḥarakāt." },
+          { "t": "h2", "html": "The durations at a glance" },
+          { "t": "p", "html": "The durations below follow riwāya Ḥafṣ ʿan ʿĀṣim by the Shāṭibiyya route, the most widespread. Other routes hold other lengths — one of several reasons a teacher remains necessary." },
+          { "t": "table", "head": ["Type of madd", "Duration"], "rows": [["ṭabīʿī (natural)", "2 ḥarakāt"], ["muttaṣil (hamza in the same word)", "4 to 5 ḥarakāt"], ["munfaṣil (hamza in the next word)", "4 to 5 ḥarakāt"], ["lāzim (permanent sukūn)", "6 ḥarakāt"], ["ʿāriḍ li-s-sukūn (stopping at a word end)", "2, 4 or 6 ḥarakāt"]] },
+          { "t": "h2", "html": "The word beginners clip" },
+          { "t": "ar", "html": "ٱلرَّحْمَٰنِ" },
+          { "t": "p", "html": "In <em>ar-raḥmān</em> you meet a madd shape that beginners often clip. In Ikhlāṣ, <em>Allāh</em> and <em>aḥad</em> teach you not to invent extra length where there is none, and not to starve length where the text marks it. Recite one word, wait until it is accepted, continue." },
+          { "t": "h2", "html": "The honest limit of the app" },
+          { "t": "p", "html": "No app replaces a teacher for madd timing. Tarteel and similar tools try cloud scoring; Tilmidh stays on-device Web Speech and word matching. Use us for fluency and order; use a muqriʾ for ijazah-level length." },
+          { "t": "h2", "html": "A practice path that works" },
+          { "t": "p", "html": "Practice path: <a href=\"/en/sourate/112\">Ikhlāṣ</a> → <a href=\"/en/sourate/1\">Fātiḥah</a> → the rule pages for <a href=\"/en/regle/qalqalah\">qalqalah</a> and <a href=\"/en/regle/ghunnah\">ghunnah</a>. Beginners who pray: <a href=\"/best-tajwid-app-for-beginners\">best tajwid app for beginners</a>." },
+          { "t": "cta", "ref": "1:1", "label": "Open the mic on Al-Fātiḥah" }
+        ],
+        "faq": [
+          { "q": "How long is a natural madd?", "a": "Two ḥarakāt. It is the reference unit: every other duration is counted in multiples of it, up to six ḥarakāt for madd lāzim." },
+          { "q": "What is the difference between muttaṣil and munfaṣil?", "a": "Both last 4 to 5 ḥarakāt in Ḥafṣ, but muttaṣil has its hamza in the same word as the letter of madd, while munfaṣil has its hamza at the start of the next word." },
+          { "q": "Does Tilmidh check the length of my madd?", "a": "No. The mic checks that the word you said is the right one, not the exact length of the lengthening. Train the length by ear, then have your recitation confirmed by a muqriʾ — Tilmidh is a repetition tool, not a certification." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Qalqalah" },
+          { "href": "/regle/ghunnah", "label": "Ghunnah" },
+          { "href": "/regle/idgham", "label": "Idgham" },
+          { "href": "/regle/ikhfa", "label": "Ikhfa" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "madd", "item": "/en/regle/madd" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "ru": {
+        "title": "Практика мадда — табиʿи, муттасыль, мунфасыль | Tilmidh تلميذ",
+        "description": "Мадд: удлинение ا و ي. Естественный мадд — две харакаты, муттасыль и мунфасыль 4–5, лязим 6. Таблица длительностей, примеры, микрофон. Не иджаза.",
+        "h1": "Практика мадда (madd)",
+        "body": [
+          { "t": "p", "html": "Мадд — удлинение букв мадда (ا و ي), когда для этого есть условие. Естественный мадд (табиʿи) — примерно две харакаты; остальные виды длиннее, а мазхаб и счёт определяет мукриʼ. Tilmidh показывает, где в тексте есть мадд; микрофон проверяет слово, а не секундомер на шесть харакат." },
+          { "t": "h2", "html": "Длительности одним взглядом" },
+          { "t": "p", "html": "Приведённые ниже длительности соответствуют риваяту Хафса от Асима по пути Шатыбийи — самому распространённому. В других путях длительности иные: это одна из причин, по которым учитель остаётся необходим." },
+          { "t": "table", "head": ["Вид мадда", "Длительность"], "rows": [["табиʿи (естественный)", "2 харакаты"], ["муттасыль (хамза в том же слове)", "4–5 харакат"], ["мунфасыль (хамза в следующем слове)", "4–5 харакат"], ["лязим (постоянный сукун)", "6 харакат"], ["ʿарид ли-с-сукун (остановка в конце слова)", "2, 4 или 6 харакат"]] },
+          { "t": "h2", "html": "Слово, которое чаще всего обрезают" },
+          { "t": "ar", "html": "ٱلرَّحْمَٰنِ" },
+          { "t": "p", "html": "В слове <em>ар-рахман</em> новички часто обрезают мадд. На Ихлясе учись не добавлять длину там, где её нет, и не отнимать её там, где текст её отмечает. Читай по одному слову: произнёс, дождался, что слово принято, идёшь дальше." },
+          { "t": "h2", "html": "Честный предел приложения" },
+          { "t": "p", "html": "Никакое приложение не заменяет учителя в том, что касается длительности мадда. Tarteel и похожие инструменты пытаются оценивать чтение в облаке; Tilmidh остаётся на устройстве, на Web Speech, и сверяет слово. Пользуйся приложением для беглости и порядка слов, а к мукриʼ иди за длиной на уровне иджазы." },
+          { "t": "h2", "html": "Порядок работы" },
+          { "t": "p", "html": "Путь: <a href=\"/ru/sourate/1\">Фатиха</a> → <a href=\"/ru/regle/qalqalah\">калькаля</a> → <a href=\"/ru/regle/ghunnah\">гунна</a> → <a href=\"/ru/prilozhenie-tadzhvida-dlya-nachinayushchikh\">для начинающих</a>. Возвращайся к одной и той же суре несколько дней подряд: длина мадда ставится повторением, а не объяснением." },
+          { "t": "h2", "html": "Три ошибки, которые слышно сразу" },
+          { "t": "p", "html": "Первая: обрезать естественный мадд до одной харакаты, из-за чего слово теряет форму. Вторая: тянуть там, где буквы мадда нет вовсе, — обычно это происходит в конце аята, когда голос сам просит остановки. Третья: превращать длину в мелодию, то есть менять высоту голоса вместо того, чтобы просто держать звук. Длина мадда — это счёт, а не интонация." },
+          { "t": "h2", "html": "Как тренировать" },
+          { "t": "p", "html": "Возьми короткую суру и прочитай её три раза подряд, следя только за длиной. На первом чтении отметь для себя, где стоит мадд; на втором держи счёт; на третьем читай как обычно и проверь, сохранилась ли длина. Микрофон Tilmidh подтвердит слова, а ровность длительности ты услышишь сам — потом покажи чтение мукриʼ." },
+          { "t": "cta", "ref": "1:1", "label": "Микрофон на Фатихе" }
+        ],
+        "faq": [
+          { "q": "Сколько длится естественный мадд?", "a": "Две харакаты. Это единица отсчёта: все остальные длительности считаются кратными ей, вплоть до шести харакат для мадда лязим." },
+          { "q": "Чем отличается муттасыль от мунфасыль?", "a": "Оба длятся 4–5 харакат в риваяте Хафса, но у муттасыля хамза стоит в том же слове, что и буква мадда, а у мунфасыля — в начале следующего слова." },
+          { "q": "Проверяет ли Tilmidh длину моего мадда?", "a": "Нет. Микрофон проверяет, что произнесено правильное слово, а не точную длину удлинения. Длину ставь на слух, а затем проверь чтение у мукриʼ — Tilmidh это тренажёр повторения, а не свидетельство." }
+        ],
+        "nav": [
+          { "href": "/regle/qalqalah", "label": "Калькаля" },
+          { "href": "/regle/ghunnah", "label": "Гунна" },
+          { "href": "/sourate/1", "label": "Фатиха" },
+          { "href": "/prilozhenie-tadzhvida-dlya-nachinayushchikh", "label": "Для начинающих" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/ru" },
+          { "name": "Практика мадда", "item": "/ru/regle/madd" }
+        ],
+        "footer": "Tilmidh (تلميذ, «ученик») — тренажёр чтения Корана. Текст берётся с Quran.com (усмани, цвета таджвида), риваят Хафса от Асима. Это не иджаза, не научное свидетельство и не замена учителю. Всегда проверяй своё чтение у мукри."
       }
     }
   }

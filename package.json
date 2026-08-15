@@ -12,9 +12,10 @@
     "sitemap": "node scripts/gen-sitemap.mjs",
     "hreflang": "node scripts/fix-hreflang.mjs",
     "seo:check": "node scripts/seo-check.mjs",
+    "thin": "node scripts/check-thin.mjs",
     "seo:ping": "node scripts/seo-ping.mjs",
     "og": "node scripts/gen-og.mjs",
-    "build:seo": "node scripts/gen-pages.mjs && node scripts/fix-hreflang.mjs && node scripts/gen-og.mjs && node scripts/gen-sitemap.mjs && node scripts/seo-check.mjs"
+    "build:seo": "node scripts/gen-pages.mjs && node scripts/patch-static.mjs && node scripts/fix-hreflang.mjs && node scripts/gen-og.mjs && node scripts/gen-sitemap.mjs && node scripts/seo-check.mjs"
   },
   "dependencies": {
     "@serwist/next": "^9.5.12",

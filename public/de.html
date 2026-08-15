@@ -35,7 +35,7 @@
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/KFGQPCHAFSColored-Mono.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;600&display=swap" rel="stylesheet">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/de#page","url":"https://tilmidh.app/de","name":"Tilmidh — Koranrezitation Wort für Wort mit dem Mikrofon üben","description":"Kostenloser Web-Trainer: rezitiere den Koran Wort für Wort, das Mikrofon prüft jedes arabische Wort, Tadschwid-Farben von Quran.com. Läuft im Browser, ohne Konto. Ein Übungswerkzeug — keine Idschāza.","inLanguage":"de","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/de"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":[],"founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/de#page","url":"https://tilmidh.app/de","name":"Tilmidh — Koranrezitation Wort für Wort mit dem Mikrofon üben","description":"Kostenloser Web-Trainer: rezitiere den Koran Wort für Wort, das Mikrofon prüft jedes arabische Wort, Tadschwid-Farben von Quran.com. Läuft im Browser, ohne Konto. Ein Übungswerkzeug — keine Idschāza.","inLanguage":"de","isPartOf":{"@id":"https://tilmidh.app/#website"},"dateModified":"2026-08-14","author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — Uthmani-Tadschwid-Text, Riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — Schriftart KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — Spracherkennung ar-SA, auf dem Gerät","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/de"}]}]}</script>
     <style>
         :root { --accent: #059669; --bg: #f7f7f5; --text: #111; --muted: #555; }
         body { margin: 0; font-family: Outfit, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
@@ -49,50 +49,20 @@
         nav { display: flex; flex-wrap: wrap; gap: 0.7rem 1rem; margin: 2rem 0; }
         nav a { color: var(--accent); }
         footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid #ddd; padding-top: 1.4rem; margin-top: 2.5rem; }
-
+        ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
+        .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
+        .hero-img img { display: block; width: 100%; height: auto; }
         table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
         th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
         th { color: var(--muted); font-weight: 600; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
 
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-    
-        @font-face {
-            font-family: 'KFGQPC Colored';
-            src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
-            font-display: block;
-        }
-
-            .hero-img { margin: 0 0 1.4rem; border-radius: 12px; overflow: hidden; background: #51A26A; }
-        .hero-img img { display: block; width: 100%; height: auto; }
-    
         @font-face {
             font-family: 'KFGQPC Colored';
             src: url('/fonts/KFGQPCHAFSColored-Bold.woff2?v=chromatic-2') format('woff2');
@@ -250,8 +220,9 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>Übe deine Rezitation, Wort für Wort</h1>
+        <p class="byline">Geschrieben von <span class="byline-name">Alkhast Vatsaev</span> · Aktualisiert 2026-08-14</p>
         <figure class="hero-img">
-            <img src="/img/page/de/tilmidh.webp" alt="Tilmidh — Koran Wort für Wort lesen lernen" width="960" height="540" fetchpriority="high" decoding="async">
+            <img src="/img/page/de/tilmidh.webp" alt="Tilmidh — Koranrezitation Wort für Wort mit dem Mikrofon üben" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
         <figure class="media-illu" data-illu="mark">
             <div class="demo-stage">
@@ -266,18 +237,11 @@
             <figcaption>Arabisch, Phonetik, Tadschwid — Wort für Wort.</figcaption>
         </figure>
         <!-- .media-video reserved for later -->
-
-
-
-
-
-
-
-        <p>Tilmidh (تلميذ, «Schüler») ist ein kostenloser Web-Trainer für Menschen, die bereits beten und ihre Rezitation überprüft haben möchten. Du liest ein Wort laut, das Mikrofon hört zu, das Feld wird grün, und du gehst weiter. Nichts wird installiert, keine Aufnahme verlässt dein Gerät, ein Konto ist nicht nötig.</p>
+        <p>Tilmidh (تلميذ, «Schüler») ist ein kostenloser Web-Trainer für Menschen, die bereits beten und ihre Rezitation überprüft haben möchten. Du liest ein Wort laut, das Mikrofon hört zu, du tippst den Vers an, liest, das Mikrofon prüft Wort für Wort. Nichts wird installiert, keine Aufnahme verlässt dein Gerät, ein Konto ist nicht nötig.</p>
         <h2>Für wen das gedacht ist</h2>
         <p>Dieses Werkzeug richtet sich an jemanden, der bereits betet und die arabischen Buchstaben kennt, dessen Rezitation aber nie mündlich korrigiert wurde. So geht es den meisten Erwachsenen, die das Gebet als Kind gelernt und dann nicht weitergemacht haben. Wer die arabischen Buchstaben noch nicht lesen kann, ist hier vorerst falsch: erst den Alphabetkurs abschließen, dann wiederkommen.</p>
         <h2>Was es tatsächlich tut</h2>
-        <p>Auf dem Bildschirm steht der Text in der Uthmani-Schrift mit den Tadschwid-Farben von Quran.com, Wort für Wort aufgeteilt. Die Spracherkennung läuft in deinem Browser, und der Trainer geht erst weiter, wenn das Konsonantengerüst des Gesprochenen zum Wort auf dem Bildschirm passt. Bleibt ein Wort grau, wiederhole nur dieses Wort, nicht den ganzen Vers. Genau diese Einschränkung ist der Sinn der Sache: sie lässt dich nicht über das Wort hinweggleiten, das du immer falsch liest.</p>
+        <p>Auf dem Bildschirm steht der Text in der Uthmani-Schrift mit den Tadschwid-Farben von Quran.com, Wort für Wort aufgeteilt. Die Spracherkennung läuft in deinem Browser, und der Trainer geht erst weiter, wenn das Konsonantengerüst des Gesprochenen zum Wort auf dem Bildschirm passt. Wird ein Wort nicht akzeptiert, wiederhole nur dieses Wort, nicht den ganzen Vers. Genau diese Einschränkung ist der Sinn der Sache: sie lässt dich nicht über das Wort hinweggleiten, das du immer falsch liest.</p>
         <h2>Was es nicht tut</h2>
         <p>Es misst nicht die Länge deiner Madd-Dehnungen und beurteilt nicht, ob deine emphatischen Buchstaben schwer genug klingen. Beides braucht ein menschliches Ohr. Es erteilt keine Idschāza, ist kein Gelehrtenzeugnis und ersetzt keinen Lehrer. Wer mehr verspricht, überschätzt, was Spracherkennung heute leisten kann.</p>
         <h2>Womit anfangen</h2>
@@ -287,6 +251,7 @@
         <p>Jede Tadschwid-Regel hat ihre eigene Seite, mit einem Beispiel aus einer Sure, die du kennst, und einem direkten Link in den Trainer: <a href="/regle/qalqalah">Qalqala</a>, <a href="/regle/ghunnah">Ghunna</a>, <a href="/regle/idgham">Idghām</a>, <a href="/regle/ikhfa">Ikhfāʾ</a> und <a href="/regle/madd">Madd</a>. Eine einzige Regel über mehrere Suren zu üben bringt weit mehr, als alle Regeln auf einmal zu lesen und keine davon anzuwenden.</p>
         <a class="cta" href="/de/?ref=1">Mikrofon bei al-Fātiha öffnen</a>
         <p>Die Spracherkennung arbeitet am besten in Chrome auf Android und am Rechner. Sie braucht einen ruhigen Raum und eine normale Rezitationsstimme — kein Flüstern. Wird ein Wort nach mehreren ernsthaften Versuchen nicht erkannt, liegt es meist am Mikrofon oder am Lärm ringsum, nicht an deiner Rezitation.</p>
+
         <nav>
             <a href="/de/sourate/1">Al-Fātiha</a>
             <a href="/de/ayat-kursi">Āyat al-Kursī</a>
@@ -295,10 +260,24 @@
             <a href="/de/regle/madd">Madd</a>
             <a href="/de/privacy">Datenschutz</a>
         </nav>
+        <section class="page-meta">
+            <h2>Quellen</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — Uthmani-Tadschwid-Text, Riwāya Ḥafṣ ʿan ʿĀṣim</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — Schriftart KFGQPC HAFS</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — Spracherkennung ar-SA, auf dem Gerät</a></li>
+            </ul>
+            <h2>Kontakt</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh (تلميذ, «Schüler») ist ein Übungswerkzeug für die Rezitation. Der angezeigte Text stammt von Quran.com (Uthmani, Tadschwid-Farben), Riwāya Ḥafṣ ʿan ʿĀṣim. Es ist keine Idschāza, kein Gelehrtenzeugnis und kein Ersatz für einen Lehrer. Lass deine Rezitation immer von einem Muqriʾ prüfen.</p>
         </footer>
-    </li>
+      </li>
     </ol>
     </main>
 

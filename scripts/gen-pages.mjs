@@ -82,6 +82,7 @@ async function buildEntry(entry, kind) {
       description: L.description,
       h1: L.h1,
       body: bodyHtml,
+      faq: L.faq,
       nav: (L.nav ?? []).map((n) => ({ ...n, href: `${prefix(lang)}${n.href}` })),
       footer: L.footer,
       dateModified: entry.dateModified ?? new Date().toISOString().slice(0, 10),

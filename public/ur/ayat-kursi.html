@@ -237,8 +237,19 @@
         }
         ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
         .media-video { display: none; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
+        th { color: var(--muted); font-weight: 600; }
     </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/ur"},{"@type":"ListItem","position":2,"name":"آیت الکرسی سیکھیں","item":"https://tilmidh.app/ur/ayat-kursi"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/ur/ayat-kursi#page","url":"https://tilmidh.app/ur/ayat-kursi","name":"آیت الکرسی سیکھیں — قرآن لفظ بہ لفظ | Tilmidh","description":"آیت الکرسی (البقرہ 2:255) سیکھیں: عربی، تلفظ، مائیکروفون سے لفظ بہ لفظ tilawat۔ Tilmidh مفت — اجازت نہیں۔","inLanguage":"ur","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — عثمانی تجوید متن، روایت حفص عن عاصم","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — KFGQPC HAFS فونٹ","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — ar-SA آواز کی شناخت، آلے پر","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
 </head>
 <body>
     <header><a href="/ur">Tilmidh تلميذ</a> · <a href="/ur/sourate/1">فاتحہ</a> · <a href="/id/ayat-kursi">ID</a></header>
@@ -246,6 +257,7 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>آیت الکرسی سیکھیں — لفظ بہ لفظ tilawat</h1>
+        <p class="byline">تحریر <span class="byline-name">Alkhast Vatsaev</span></p>
         <figure class="hero-img">
             <img src="/img/page/ur/ayat-kursi.webp" alt="آیت الکرسی — تلميذ" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
@@ -295,7 +307,7 @@
 
         <h2>Tilmidh سے سیکھیں</h2>
         <ol>
-            <li>پہلے <a href="/ur/sourate/1">فاتحہ</a> لفظ بہ لفظ — مائیکروفون، سبز خانہ، تجوید رنگ۔</li>
+            <li>پہلے <a href="/ur/sourate/1">فاتحہ</a> لفظ بہ لفظ — مائیکروفون، مائیکروفون چیک، تجوید رنگ۔</li>
             <li>« ایک لفظ → چیک → آگے » کی عادت۔</li>
             <li>پھر آیت الکرسی کو جملوں میں تقسیم؛ ملانے سے پہلے روانی۔</li>
         </ol>
@@ -304,9 +316,27 @@
         <h2>فضیلت</h2>
         <p>روایتوں میں برکت اور حفاظت کے لیے۔ معنی سیکھیں، خشوع سے پڑھیں — Tilmidh <em>تلفظ</em> کے لیے؛ معنی tafsir اور استاد سے۔</p>
         <a class="cta" href="/?ref=1">شروع — فاتحہ Tilmidh</a>
+        <h2>آیت کو حصوں میں تقسیم کریں</h2>
+        <p>آیت الکرسی اتنی طویل ہے کہ ایک ہی بار میں مشق نہیں ہو سکتی۔ اسے چار حصوں میں بانٹیں اور جوڑنے سے پہلے ہر حصے کی الگ الگ تکرار کریں۔ اس طرح سانس کم پڑنے پر بھی تلفظ درست رہتا ہے۔</p>
+        <table><thead><tr><th>حصہ</th><th>کس چیز کی مشق</th></tr></thead><tbody><tr><td><span class="ar-inline">ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ</span></td><td>لَآ میں مدّ، سکون سے کھینچیں</td></tr><tr><td><span class="ar-inline">ٱلْحَىُّ ٱلْقَيُّومُ</span></td><td>شدّہ اور طویل مدّ</td></tr><tr><td><span class="ar-inline">لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ</span></td><td>تنوین، پھر اخفا</td></tr><tr><td><span class="ar-inline">لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ</span></td><td>الف لام میں ادغام شمسی</td></tr></tbody></table>
+        <p>ہر حصے کی مشق اُس وقت تک کریں جب تک مائیکروفون اُس کے سارے الفاظ قبول نہ کر لے، اور تب ہی دو حصے جوڑیں۔ جو پوری آیت ایک ساتھ دہراتا ہے، وہ دراصل اپنی غلطیاں ہی دہراتا رہتا ہے۔ روزانہ پانچ سے دس منٹ کافی ہیں؛ اصل بات یہ ہے کہ جہاں اٹکتے ہیں وہیں رکیں، آخر تک بھاگتے نہ چلے جائیں۔</p>
         <nav>
             <a href="/ur/sourate/1">فاتحہ</a><a href="/ur/sourate/67">سورہ المulk</a><a href="/id/ayat-kursi">ID</a>
         </nav>
+        <section class="page-meta">
+            <h2>مآخذ</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — عثمانی تجوید متن، روایت حفص عن عاصم</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — KFGQPC HAFS فونٹ</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — ar-SA آواز کی شناخت، آلے پر</a></li>
+            </ul>
+            <h2>رابطہ</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh — tilawat مشق۔ اجازت نہیں۔ مقری سے تصدیق۔</p>
         </footer>

@@ -17,7 +17,17 @@ import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, LANGS, prefix } from './lib/template.mjs';
+import {
+  SITE,
+  LANGS,
+  prefix,
+  AUTHOR,
+  CONTACT,
+  sourcesFor,
+  renderByline,
+  renderPageMeta,
+  META_CSS,
+} from './lib/template.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -98,11 +108,31 @@ function breadcrumbFor(lang, route, title) {
   };
 }
 
-function entityGraph({ lang, route, title, description }) {
-  const crumb = breadcrumbFor(lang, route, title);
+/** Les mêmes nœuds d'attribution que le générateur, à l'identique. */
+const authorNode = () => ({
+  '@type': 'Person',
+  '@id': AUTHOR.id,
+  name: AUTHOR.name,
+  url: `${SITE}/`,
+});
+
+const contactPoints = () =>
+  CONTACT.map((c) => ({
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    ...(c.kind === 'email' ? { email: c.value } : { url: c.href, name: c.kind }),
+    availableLanguage: LANGS,
+  }));
+
+const citations = (lang) =>
+  sourcesFor(lang).map((s) => ({ '@type': 'CreativeWork', name: s.label, url: s.url }));
+
+function entityGraph({ lang, route, title, description, withCrumb = true }) {
+  const crumb = withCrumb ? breadcrumbFor(lang, route, title) : null;
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
+      authorNode(),
       {
         '@type': 'Organization',
         '@id': `${SITE}/#organization`,
@@ -110,6 +140,8 @@ function entityGraph({ lang, route, title, description }) {
         alternateName: 'تلميذ',
         url: `${SITE}/`,
         logo: `${SITE}/icons/icon.svg`,
+        founder: { '@id': AUTHOR.id },
+        contactPoint: contactPoints(),
       },
       {
         '@type': 'WebSite',
@@ -128,6 +160,9 @@ function entityGraph({ lang, route, title, description }) {
         description,
         inLanguage: lang,
         isPartOf: { '@id': `${SITE}/#website` },
+        author: { '@id': AUTHOR.id },
+        publisher: { '@id': `${SITE}/#organization` },
+        citation: citations(lang),
       },
       ...(crumb ? [crumb] : []),
     ],
@@ -135,7 +170,16 @@ function entityGraph({ lang, route, title, description }) {
 }
 
 const files = await walk(PUBLIC);
-const stats = { graph: 0, crumb: 0, canonical: 0, robots: 0, untouched: 0 };
+const stats = {
+  graph: 0,
+  crumb: 0,
+  canonical: 0,
+  robots: 0,
+  author: 0,
+  byline: 0,
+  meta: 0,
+  untouched: 0,
+};
 
 for (const rel of files) {
   const file = path.join(PUBLIC, rel);
@@ -178,6 +222,30 @@ for (const rel of files) {
       changes.push('graphe Organization+WebSite+WebPage+BreadcrumbList');
       stats.graph++;
     }
+  } else if (!html.includes(`${SITE}/#organization`)) {
+    // La page a un JSON-LD à elle (index.html a son WebApplication) mais aucun
+    // rattachement à la marque. On n'y touche pas : on POSE le graphe d'entité
+    // dans un second bloc. Plusieurs blocs ld+json sur une page sont valides et
+    // fusionnés par @id — c'est la façon non destructive d'ajouter l'auteur.
+    // Si un fil d'Ariane a déjà été posé lors d'un passage précédent, le
+    // graphe ajouté ici NE doit pas en remettre un : deux BreadcrumbList sur
+    // une même page, c'est un balisage contradictoire, pas un balisage double.
+    const graph = entityGraph({
+      lang,
+      route,
+      title: titleOf(html),
+      description: descOf(html),
+      withCrumb: !/BreadcrumbList/.test(html),
+    });
+    const anchor = html.match(/[ \t]*<\/head>/);
+    if (anchor) {
+      html = html.replace(
+        anchor[0],
+        `    <script type="application/ld+json">${graph}</script>\n${anchor[0]}`
+      );
+      changes.push('graphe d’entité en second bloc (JSON-LD existant préservé)');
+      stats.graph++;
+    }
   } else if (!/BreadcrumbList/.test(html)) {
     // La page a déjà un graphe mais pas de fil d'Ariane : on l'ajoute à part.
     const crumb = breadcrumbFor(lang, route, titleOf(html));
@@ -193,6 +261,78 @@ for (const rel of files) {
     }
   }
 
+  // 4. attribution dans un graphe DÉJÀ posé par ce script.
+  // On ne réécrit que nos propres graphes — reconnaissables à l'@id
+  // #organization — et seulement s'ils n'ont pas encore d'auteur. Un JSON-LD
+  // écrit à la main ailleurs (FAQPage, HowTo) n'est jamais touché.
+  if (!html.includes(AUTHOR.id)) {
+    const own = html.match(
+      new RegExp(`<script type="application/ld\\+json">(\\{[^<]*?${SITE.replace(/[.\\/]/g, '\\$&')}/#organization[^<]*?\\})</script>`)
+    );
+    if (own) {
+      try {
+        const data = JSON.parse(own[1]);
+        const graph = data['@graph'] || [];
+        const org = graph.find((n) => n['@type'] === 'Organization');
+        const page = graph.find((n) => n['@type'] === 'WebPage');
+        if (org && page) {
+          graph.unshift(authorNode());
+          org.founder = { '@id': AUTHOR.id };
+          org.contactPoint = contactPoints();
+          page.author = { '@id': AUTHOR.id };
+          page.publisher = { '@id': `${SITE}/#organization` };
+          page.citation = citations(lang);
+          html = html.replace(
+            own[0],
+            `<script type="application/ld+json">${JSON.stringify(data)}</script>`
+          );
+          changes.push('author + contactPoint + citation');
+          stats.author++;
+        }
+      } catch {
+        // JSON illisible : on laisse la page intacte plutôt que de la casser.
+      }
+    }
+  }
+
+  // 5. signature visible sous le H1
+  if (!/<p class="byline">/.test(html)) {
+    const anchor = html.match(/[ \t]*<h1[^>]*>[\s\S]*?<\/h1>\n/);
+    if (anchor) {
+      html = html.replace(anchor[0], `${anchor[0]}${renderByline(lang, null)}\n`);
+      changes.push('signature');
+      stats.byline++;
+    }
+  }
+
+  // 6. bloc sources + contact avant la mention légale.
+  // Les pages de contenu ont un <footer> nu qui porte la mention légale : le
+  // bloc se pose juste avant. index.html n'a pas cette forme — son footer SEO
+  // est balisé et contient déjà le H1 ; là, le bloc se pose à la FIN du footer,
+  // sinon il atterrirait au milieu de l'interface de l'app.
+  if (!/<section class="page-meta">/.test(html)) {
+    const plain = html.match(/[ \t]*<footer>\n/);
+    const closing = html.match(/[ \t]*<\/footer>/);
+    if (plain) {
+      html = html.replace(plain[0], `${renderPageMeta(lang)}\n${plain[0]}`);
+      changes.push('sources + contact');
+      stats.meta++;
+    } else if (closing) {
+      html = html.replace(closing[0], `${renderPageMeta(lang)}\n${closing[0]}`);
+      changes.push('sources + contact (fin de footer)');
+      stats.meta++;
+    }
+  }
+
+  // 7. styles des blocs ajoutés, si la feuille de la page ne les a pas
+  if (/<section class="page-meta">/.test(html) && !/\.page-meta \{/.test(html)) {
+    const anchor = html.match(/[ \t]*<\/style>/);
+    if (anchor) {
+      html = html.replace(anchor[0], `${META_CSS}\n${anchor[0]}`);
+      changes.push('styles');
+    }
+  }
+
   if (html === before) {
     stats.untouched++;
     continue;
@@ -203,5 +343,5 @@ for (const rel of files) {
 }
 
 console.log(
-  `\n${DRY ? '[simulation] ' : ''}graphe : ${stats.graph} · fil d'Ariane : ${stats.crumb} · canonical aligné : ${stats.canonical} · meta robots : ${stats.robots} · inchangées : ${stats.untouched}`
+  `\n${DRY ? '[simulation] ' : ''}graphe : ${stats.graph} · fil d'Ariane : ${stats.crumb} · canonical aligné : ${stats.canonical} · meta robots : ${stats.robots} · attribution : ${stats.author} · signature : ${stats.byline} · sources+contact : ${stats.meta} · inchangées : ${stats.untouched}`
 );

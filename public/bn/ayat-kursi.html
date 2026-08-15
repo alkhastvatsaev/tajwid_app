@@ -237,8 +237,19 @@
         }
         ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
         .media-video { display: none; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
+        th { color: var(--muted); font-weight: 600; }
     </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/bn"},{"@type":"ListItem","position":2,"name":"আয়াতুল কুরসি শেখা","item":"https://tilmidh.app/bn/ayat-kursi"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/bn/ayat-kursi#page","url":"https://tilmidh.app/bn/ayat-kursi","name":"আয়াতুল কুরসি শেখা — শব্দে শব্দে কুরআন | Tilmidh","description":"আয়াতুল কুরসি (বাকারা ২:২৫৫) শেখা: আরবি, উচ্চারণ, মাইক্রোফোন দিয়ে শব্দে শব্দে তিলাওয়াত। Tilmidh বিনামূল্যে — ইজাজত নয়।","inLanguage":"bn","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — উসমানি তাজবিদ পাঠ, হাফস আন আসিম রেওয়ায়েত","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — KFGQPC HAFS ফন্ট","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — ডিভাইসে ar-SA কণ্ঠস্বর শনাক্তকরণ","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
 </head>
 <body>
     <header><a href="/bn">Tilmidh تلميذ</a> · <a href="/bn/sourate/1">আল-ফাতিহা</a></header>
@@ -246,6 +257,7 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>আয়াতুল কুরসি শেখা — শব্দে শব্দে তিলাওয়াত</h1>
+        <p class="byline">লিখেছেন <span class="byline-name">Alkhast Vatsaev</span></p>
         <figure class="hero-img">
             <img src="/img/page/bn/ayat-kursi.webp" alt="Ayat al-Kursi — Tilmidh practice" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
@@ -291,18 +303,43 @@
 </ul>
 <h2>Tilmidh দিয়ে শেখা</h2>
 <ol>
-<li>প্রথমে <a href="/bn/sourate/1">আল-ফাতিহা</a> শব্দে শব্দে — মাইক্রোফোন, সবুজ বাক্স, তাজউইদ রং।</li>
+<li>প্রথমে <a href="/bn/sourate/1">আল-ফাতিহা</a> শব্দে শব্দে — মাইক্রোফোন, তাজউইদ রং, ফোনেটিক।</li>
 <li>« এক শব্দ → যাচাই → এগিয়ে » রিটমে মুখ ও কান অভ্যস্ত করুন।</li>
 <li>তারপর আয়াতুল কুরসি অংশে ভাগ করুন; মিলিয়ে পড়ার আগে প্রতিটি অংশ মসৃণ করুন।</li>
 </ol>
 <a class="cta" href="/?ref=1">শুরু করুন — Tilmidh-এ আল-ফাতিহা</a>
 <h2>ফজিলত (সংক্ষেপে)</h2>
 <p>হাদিসে বরকত ও সুরক্ষার জন্য পড়া হয়। অর্থ শিখুন, খুশু' দিয়ে পড়ুন — Tilmidh <em>উচ্চারণ</em> সাহায্য করে; তাফসির ও শিক্ষকের সাথে।</p>
+        <h2>আয়াতটিকে অংশে ভাগ করা</h2>
+        <p>আয়াতুল কুরসি একবারে অনুশীলন করার জন্য অনেক লম্বা। চারটি অংশে ভাগ করে প্রতিটি আলাদাভাবে পুনরাবৃত্তি করুন, তারপর জোড়া লাগান। এতে শ্বাস ফুরিয়ে গেলেও উচ্চারণ ঠিক থাকে।</p>
+        <table><thead><tr><th>অংশ</th><th>যা অনুশীলন করবেন</th></tr></thead><tbody><tr><td><span class="ar-inline">ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ</span></td><td>লَآ-তে মাদ্দ, স্থিরভাবে ধরুন</td></tr><tr><td><span class="ar-inline">ٱلْحَىُّ ٱلْقَيُّومُ</span></td><td>শাদ্দা ও দীর্ঘ মাদ্দ</td></tr><tr><td><span class="ar-inline">لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ</span></td><td>তানভিন, তারপর ইখফা</td></tr><tr><td><span class="ar-inline">لَّهُۥ مَا فِى ٱلسَّمَٰوَٰتِ وَمَا فِى ٱلْأَرْضِ</span></td><td>আলিফ-লামে ইদগাম শামসি</td></tr></tbody></table>
+        <p>প্রতিটি অংশ ততক্ষণ অনুশীলন করুন যতক্ষণ না মাইক্রোফোন প্রতিটি শব্দ গ্রহণ করে, তারপরই দুটি অংশ জোড়া দিন। যিনি পুরো আয়াত একসাথে পড়েন, তিনি মূলত নিজের ভুলগুলোই বারবার করেন। দিনে পাঁচ থেকে দশ মিনিটই যথেষ্ট; আসল কথা হলো যেখানে আটকায় সেখানেই থামা, শেষ পর্যন্ত দৌড়ে না যাওয়া।</p>
+        <h2>তিনটি সাধারণ ভুল</h2>
+        <ul>
+            <li>পুরো আয়াত এক নিঃশ্বাসে পড়ার চেষ্টা করা, ফলে শেষ দিকে উচ্চারণ ভেঙে যায়।</li>
+            <li>لَآ-এর মাদ্দ ছোট করে ফেলা, কারণ শুরুতে তাড়াহুড়ো থাকে।</li>
+            <li>দুটি অংশ জোড়া দেওয়া তখনই, যখন প্রথমটিই এখনও পাকা হয়নি।</li>
+        </ul>
+        <p>তিনটি ভুলেরই মূল কারণ এক: গতি। আয়াতুল কুরসি লম্বা, তাই ধীরে পড়লে মনে হয় সময় নষ্ট হচ্ছে — অথচ ধীরে পড়াই একমাত্র উপায় যাতে শেষ অংশ শুরুর মতোই পরিষ্কার থাকে। মাইক্রোফোন এখানে সহায়ক, কারণ এটি ঠিক সেই শব্দে থামায় যেখানে আপনি নিজে খেয়াল করতেন না।</p>
         <nav>
             <a href="/bn/sourate/1">ফাতিহা শেখা</a>
             <a href="/bn/sourate/67">সূরা আল-মুলক</a>
             <a href="/id/ayat-kursi">ID Ayat Kursi</a>
         </nav>
+        <section class="page-meta">
+            <h2>সূত্র</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — উসমানি তাজবিদ পাঠ, হাফস আন আসিম রেওয়ায়েত</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — KFGQPC HAFS ফন্ট</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — ডিভাইসে ar-SA কণ্ঠস্বর শনাক্তকরণ</a></li>
+            </ul>
+            <h2>যোগাযোগ</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh — তিলাওয়াত অনুশীলন। ইজাজত নয়। Muqri' দিয়ে যাচাই করুন।</p>
         </footer>

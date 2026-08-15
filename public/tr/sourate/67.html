@@ -237,8 +237,19 @@
         }
         ol.page-root, ol.page-root > li { list-style: none; margin: 0; padding: 0; }
         .media-video { display: none; }
+        h3 { font-size: 1rem; line-height: 1.35; margin: 1.4rem 0 0.4rem; }
+        .byline { font-size: 0.85rem; color: var(--muted); margin: -0.4rem 0 1.2rem; }
+        .byline-name { color: var(--text); font-weight: 600; }
+        .page-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2.5rem; }
+        .page-meta h2 { font-size: 0.9rem; margin: 1.4rem 0 0.4rem; }
+        .page-meta ul { margin: 0; padding-inline-start: 1.1rem; }
+        .page-meta a { color: var(--muted); }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { text-align: start; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
+        th { color: var(--muted); font-weight: 600; }
     </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tilmidh","item":"https://tilmidh.app/tr"},{"@type":"ListItem","position":2,"name":"Mülk suresi öğren","item":"https://tilmidh.app/tr/sourate/67"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/tr/sourate/67#page","url":"https://tilmidh.app/tr/sourate/67","name":"Mülk suresi öğren — Kuran kelime kelime | Tilmidh","description":"Mülk suresi (67) öğren: fazilet, Arapça okuma, Tilmidh ile kelime kelime tilavet. Yeni başlayanlar için ücretsiz.","inLanguage":"tr","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — Osmanî tecvid metni, Hafs an Âsım rivayeti","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — KFGQPC HAFS yazı tipi","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — cihaz üzerinde ar-SA ses tanıma","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
 </head>
 <body>
     <header><a href="/tr">Tilmidh تلميذ</a> · <a href="/tr/sourate/1">Fatiha</a> · <a href="/id/sourate/67">ID</a></header>
@@ -246,6 +257,7 @@
     <ol class="page-root copy-sidebar" role="presentation">
       <li>
         <h1>Mülk suresi öğren — kelime kelime tilavet</h1>
+        <p class="byline">Yazan <span class="byline-name">Alkhast Vatsaev</span></p>
         <figure class="hero-img">
             <img src="/img/page/tr/sure-mulk.webp" alt="Sure Mulk — Tilmidh" width="960" height="540" fetchpriority="high" decoding="async">
         </figure>
@@ -289,19 +301,40 @@
         <ol>
             <li>Tecvid renkli bir Arapça kelime görürsün.</li>
             <li>Okursun — mikrofon kontrol eder.</li>
-            <li>Yeşil kutu → devam. Gri → sadece o kelimeyi tekrarla.</li>
+            <li>Kelime kabul → devam. Değilse sadece o kelimeyi tekrarla.</li>
         </ol>
         <p>Çekirdek antrenman <a href="/tr/sourate/1">Fatiha</a> üzerinde — namaz temeli. Önce Fatiha'yı bu yöntemle öğren; « parça parça, tekrar, birleştir » Mülk için de aynı.</p>
 
         <h2>Çocuklar için</h2>
-        <p>Çocuk anında geri bildirimle daha hızlı öğrenir. Tilmidh'de yeşil kutu = görsel övgü. 10 dakika Magrib sonrası, 30 ayeti bir seferde zorlamaktan iyidir.</p>
+        <p>Çocuk anında geri bildirimle daha hızlı öğrenir. Tilmidh'de kabul edilen kelime = görsel övgü. 10 dakika Magrib sonrası, 30 ayeti bir seferde zorlamaktan iyidir.</p>
 
         <h2>Icazet değil</h2>
         <p>Tilmidh <em>telaffuz alıştırması</em>. Sahih okuma ve sertifika için muqriʾ. Tilmidh hoca yerine geçmez — evde günlük araç.</p>
         <a class="cta" href="/?ref=1">Başla — Fatiha Tilmidh</a>
+        <h2>30 âyet için gerçekçi bir plan</h2>
+        <p>Mülk sûresi neredeyse hiçbir zaman zorluğundan değil, uzunluğundan dolayı yarım kalır. Bu planla bir haftadan biraz fazlasına ihtiyacın olur ve kelime kelime yöntemini de bırakmazsın.</p>
+        <table><thead><tr><th>Gün</th><th>Âyetler</th></tr></thead><tbody><tr><td>1–2</td><td>1–5</td></tr><tr><td>3–4</td><td>6–11</td></tr><tr><td>5–6</td><td>12–19</td></tr><tr><td>7–8</td><td>20–30</td></tr></tbody></table>
+        <p>Her oturuma yeni bölüm eklemeden önce bir önceki günün âyetleriyle başla — iki dakika sürer ve baştaki kısmın dağılmasını önler. Bir günü kaçırırsan iki yeni bölüm almak yerine eskisini tekrar et. Fâtiha ise günlük temel olarak kalsın, çünkü onu her namazda okuyorsun.</p>
+        <h2>Çoğu kişi neden yarıda bırakıyor</h2>
+        <p>Mülk sûresini yarıda bırakanlar neredeyse her zaman aynı üç noktada tökezler. Birincisi baştan başlamak: her gün yeniden birinci âyete dönmek, son âyetlere hiç sıra gelmemesine yol açar. İkincisi telafi etmeye çalışmak — kaçırılan bir günün ardından iki bölümü birden almak hiçbir şeyi kapatmaz, ikisini de yarım bırakır. Üçüncüsü erken hırs: telaffuz henüz oturmamışken otuz âyeti ezberlemek istemek.</p>
+        <p>Bir pratik tavsiye daha: yeni bölümü önce mikrofonsuz, yalnızca tecvid renkleriyle yavaşça oku; mikrofonu ikinci turda aç. Böylece aynı anda hem doğru kelimeyi hem doğru telaffuzu aramak zorunda kalmazsın. Bu adımı atlayanlar genellikle aynı üç dört kelimede takılır ve bunu yanlışlıkla sûrenin tamamına ait bir sorun sanır.</p>
         <nav>
             <a href="/tr/sourate/1">Fatiha</a><a href="/tr/ayat-kursi">Ayetel Kürsi</a><a href="/id/sourate/67">ID Al-Mulk</a>
         </nav>
+        <section class="page-meta">
+            <h2>Kaynaklar</h2>
+            <ul>
+                <li><a href="https://quran.com" rel="nofollow noopener">Quran.com — Osmanî tecvid metni, Hafs an Âsım rivayeti</a></li>
+                <li><a href="https://fonts.qurancomplex.gov.sa" rel="nofollow noopener">King Fahd Glorious Quran Printing Complex — KFGQPC HAFS yazı tipi</a></li>
+                <li><a href="https://developer.mozilla.org/docs/Web/API/Web_Speech_API" rel="nofollow noopener">W3C Web Speech API — cihaz üzerinde ar-SA ses tanıma</a></li>
+            </ul>
+            <h2>İletişim</h2>
+            <ul>
+                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
+                <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
+            </ul>
+        </section>
         <footer>
             <p>Tilmidh — tilavet alıştırması. Metin Quran.com. Icazet değil.</p>
         </footer>
