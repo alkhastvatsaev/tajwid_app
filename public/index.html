@@ -1420,18 +1420,21 @@
                 max-width: 0;
                 opacity: 0;
             }
-            #contact-bar .contact-course {
+            #contact-bar.contact-open .contact-course {
                 padding: 0 12px 0 10px;
                 gap: 6px;
             }
-            #contact-bar .contact-course-label {
+            #contact-bar.contact-open .contact-course-label {
                 max-width: 240px;
                 opacity: 1;
             }
         }
         @media (max-width: 600px) {
             #contact-bar {
-                right: max(4px, env(safe-area-inset-right));
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                justify-content: center;
                 bottom: env(safe-area-inset-bottom, 0px);
                 gap: 7px;
                 padding: 5px;
@@ -1448,11 +1451,21 @@
                 width: 17px;
                 height: 17px;
             }
-            #contact-bar .contact-course {
+            #contact-bar.contact-open .contact-mail,
+            #contact-bar.contact-open .contact-wa {
+                padding: 0;
+                gap: 0;
+            }
+            #contact-bar.contact-open .contact-mail-label,
+            #contact-bar.contact-open .contact-wa span {
+                max-width: 0;
+                opacity: 0;
+            }
+            #contact-bar.contact-open .contact-course {
                 padding: 0 12px 0 10px;
                 gap: 6px;
             }
-            #contact-bar .contact-course-label {
+            #contact-bar.contact-open .contact-course-label {
                 max-width: 240px;
                 opacity: 1;
             }
@@ -8481,12 +8494,7 @@
     window.addEventListener('DOMContentLoaded', async () => {
         console.log("DOMContentLoaded");
         const contactBar = document.getElementById('contact-bar');
-        const desktopContact = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-        if (desktopContact) {
-            setTimeout(() => { contactBar?.classList.remove('contact-open'); }, 10000);
-        } else {
-            contactBar?.classList.remove('contact-open');
-        }
+        setTimeout(() => { contactBar?.classList.remove('contact-open'); }, 10000);
         try {
             bindIpadGestures();
             applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
