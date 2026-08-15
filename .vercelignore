@@ -1,0 +1,25 @@
+# Ce qui ne doit pas partir en production.
+#
+# Sans ce fichier, `vercel --prod` envoie tout le répertoire : les brouillons
+# préfixés par « _ » se retrouvaient servis sur tilmidh.app en 200, alors que
+# gen-sitemap, fix-hreflang, gen-og et enrich-illu les excluent tous déjà.
+# Vercel était le seul endroit où la convention ne s'appliquait pas.
+#
+# Ne JAMAIS exclure api/ : les fonctions serverless y vivent et sont déployées.
+
+# Brouillons de travail
+public/_preview-illu
+public/_preview-mushaf.html
+
+# Sources et notes : rien de tout cela n'est servi (outputDirectory = public)
+docs
+_archive
+video
+recordings
+fonts/scripts
+.cursor
+.playwright-mcp
+
+# Traces locales
+IMG_7940.jpg
+.tmp-og.svg
