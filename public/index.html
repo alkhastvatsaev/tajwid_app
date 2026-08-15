@@ -1411,16 +1411,22 @@
         }
         @media (hover: none), (pointer: coarse) {
             #contact-bar.contact-open .contact-mail,
-            #contact-bar.contact-open .contact-wa,
-            #contact-bar.contact-open .contact-course {
+            #contact-bar.contact-open .contact-wa {
                 padding: 0;
                 gap: 0;
             }
             #contact-bar.contact-open .contact-mail-label,
-            #contact-bar.contact-open .contact-wa span,
-            #contact-bar.contact-open .contact-course-label {
+            #contact-bar.contact-open .contact-wa span {
                 max-width: 0;
                 opacity: 0;
+            }
+            #contact-bar .contact-course {
+                padding: 0 12px 0 10px;
+                gap: 6px;
+            }
+            #contact-bar .contact-course-label {
+                max-width: 240px;
+                opacity: 1;
             }
         }
         @media (max-width: 600px) {
@@ -1441,6 +1447,14 @@
             #contact-bar .contact-course svg {
                 width: 17px;
                 height: 17px;
+            }
+            #contact-bar .contact-course {
+                padding: 0 12px 0 10px;
+                gap: 6px;
+            }
+            #contact-bar .contact-course-label {
+                max-width: 240px;
+                opacity: 1;
             }
         }
         body:has(#restart-btn.visible) #contact-bar,
@@ -3430,10 +3444,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.1"/><path d="M4 18.4c.5-2.6 2.4-4 5-4s4.5 1.4 5 4"/><circle cx="16.6" cy="8.6" r="2.5"/><path d="M15.2 14.3c2 .5 3.5 1.9 3.9 4.1"/></svg>
             </button>
         </div>
-
-        <button type="button" class="lang-menu-btn dock-glass-bubble" id="header-ipad-btn" onclick="openIpadCalendar(event)" title="Rendez-vous professeurs" aria-label="Rendez-vous professeurs">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="3.2"/><path d="M8 3.5v3"/><path d="M16 3.5v3"/><path d="M3.5 9.5h17"/></svg>
-        </button>
 
         <div class="settings-dock-wrap">
             <button type="button" class="lang-menu-btn dock-glass-bubble" id="header-settings-btn" onclick="toggleSettingsMenu(event)" title="Réglages" aria-label="Réglages">
