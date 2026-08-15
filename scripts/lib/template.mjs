@@ -82,7 +82,7 @@ export const AUTHOR = {
 // ligne ici, puis relancer `npm run build:seo`. Un numéro publié sur 60 pages
 // indexées est scrapé et ne se retire plus des caches — d'où le point unique.
 export const CONTACT = [
-  { kind: 'email', value: 'alkhastvatsaev@gmail.com', href: 'mailto:alkhastvatsaev@gmail.com' },
+  { kind: 'email', value: 'alkhastvatsaev@icloud.com', href: 'mailto:alkhastvatsaev@icloud.com' },
   { kind: 'whatsapp', value: '+33 7 67 69 38 04', href: 'https://wa.me/33767693804' },
   { kind: 'telegram', value: '@alkhastvatsaev', href: 'https://t.me/alkhastvatsaev' },
 ];

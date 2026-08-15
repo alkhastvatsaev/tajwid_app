@@ -263,9 +263,14 @@ for (const rel of files) {
 
   // 4. attribution dans un graphe DÉJÀ posé par ce script.
   // On ne réécrit que nos propres graphes — reconnaissables à l'@id
-  // #organization — et seulement s'ils n'ont pas encore d'auteur. Un JSON-LD
-  // écrit à la main ailleurs (FAQPage, HowTo) n'est jamais touché.
-  if (!html.includes(AUTHOR.id)) {
+  // #organization. Un JSON-LD écrit à la main ailleurs (FAQPage, HowTo) n'est
+  // jamais touché.
+  //
+  // Ce bloc s'exécute même si l'auteur est déjà là : c'est ce qui permet à un
+  // changement de CONTACT ou de SOURCES de se propager. Sans cela, modifier
+  // une adresse dans template.mjs ne corrigeait que les pages générées et
+  // laissait les 51 pages écrites à la main sur l'ancienne valeur.
+  {
     const own = html.match(
       new RegExp(`<script type="application/ld\\+json">(\\{[^<]*?${SITE.replace(/[.\\/]/g, '\\$&')}/#organization[^<]*?\\})</script>`)
     );
@@ -276,18 +281,18 @@ for (const rel of files) {
         const org = graph.find((n) => n['@type'] === 'Organization');
         const page = graph.find((n) => n['@type'] === 'WebPage');
         if (org && page) {
-          graph.unshift(authorNode());
+          if (!graph.some((n) => n['@id'] === AUTHOR.id)) graph.unshift(authorNode());
           org.founder = { '@id': AUTHOR.id };
           org.contactPoint = contactPoints();
           page.author = { '@id': AUTHOR.id };
           page.publisher = { '@id': `${SITE}/#organization` };
           page.citation = citations(lang);
-          html = html.replace(
-            own[0],
-            `<script type="application/ld+json">${JSON.stringify(data)}</script>`
-          );
-          changes.push('author + contactPoint + citation');
-          stats.author++;
+          const rebuilt = `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+          if (rebuilt !== own[0]) {
+            html = html.replace(own[0], rebuilt);
+            changes.push('author + contactPoint + citation');
+            stats.author++;
+          }
         }
       } catch {
         // JSON illisible : on laisse la page intacte plutôt que de la casser.
@@ -310,15 +315,26 @@ for (const rel of files) {
   // bloc se pose juste avant. index.html n'a pas cette forme — son footer SEO
   // est balisé et contient déjà le H1 ; là, le bloc se pose à la FIN du footer,
   // sinon il atterrirait au milieu de l'interface de l'app.
-  if (!/<section class="page-meta">/.test(html)) {
+  const wantMeta = renderPageMeta(lang);
+  const haveMeta = html.match(/[ \t]*<section class="page-meta">[\s\S]*?<\/section>/);
+  if (haveMeta) {
+    // Le bloc existe : on le REMPLACE par la version courante. C'est ce qui
+    // fait qu'une adresse changée dans template.mjs atteint réellement les
+    // pages, au lieu de rester une bonne intention dans une constante.
+    if (haveMeta[0] !== wantMeta) {
+      html = html.replace(haveMeta[0], wantMeta);
+      changes.push('sources + contact rafraîchis');
+      stats.meta++;
+    }
+  } else {
     const plain = html.match(/[ \t]*<footer>\n/);
     const closing = html.match(/[ \t]*<\/footer>/);
     if (plain) {
-      html = html.replace(plain[0], `${renderPageMeta(lang)}\n${plain[0]}`);
+      html = html.replace(plain[0], `${wantMeta}\n${plain[0]}`);
       changes.push('sources + contact');
       stats.meta++;
     } else if (closing) {
-      html = html.replace(closing[0], `${renderPageMeta(lang)}\n${closing[0]}`);
+      html = html.replace(closing[0], `${wantMeta}\n${closing[0]}`);
       changes.push('sources + contact (fin de footer)');
       stats.meta++;
     }

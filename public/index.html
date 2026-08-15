@@ -1291,9 +1291,74 @@
         .smart-progress-bar {
             transition: opacity 0.4s ease;
         }
-        .verse-selector.dock-hidden ~ .smart-progress-bar {
+        .verse-selector.dock-hidden ~ .smart-progress-bar,
+        .verse-selector.dock-hidden ~ #contact-bar {
             opacity: 0;
             pointer-events: none;
+        }
+        #contact-bar {
+            position: fixed;
+            left: max(12px, env(safe-area-inset-left));
+            bottom: calc(max(16px, env(safe-area-inset-bottom)) + 8px);
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 6px 6px 14px;
+            border-radius: 100px;
+            max-width: calc(100vw - 24px);
+            font-family: var(--font-main);
+            transition: opacity 0.4s ease;
+        }
+        #contact-bar .contact-mail {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: min(46vw, 220px);
+        }
+        #contact-bar .contact-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 100px;
+            flex-shrink: 0;
+        }
+        #contact-bar .contact-wa svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        body:has(#restart-btn.visible) #contact-bar,
+        body:has(#install-pwa-banner.visible) #contact-bar {
+            bottom: calc(max(24px, env(safe-area-inset-bottom)) + 88px);
+        }
+        @media (max-width: 480px) {
+            #contact-bar {
+                padding: 5px 5px 5px 10px;
+                gap: 6px;
+            }
+            #contact-bar .contact-mail {
+                font-size: 0.62rem;
+                max-width: 38vw;
+            }
+            #contact-bar .contact-wa span { display: none; }
+            #contact-bar .contact-wa {
+                padding: 8px;
+                width: 36px;
+                height: 36px;
+                justify-content: center;
+            }
         }
         .v-btn {
             color: var(--text);
@@ -3233,7 +3298,7 @@
             } catch (e) {}
         })();
     </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@gmail.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/#page","url":"https://tilmidh.app/","name":"Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran (débutant)","description":"Tu récites comme à la prière. Mot par mot, tu vois si c’est juste. Gratuit — Al-Fātiḥah, Ayat al-Kursi, Al-Kahf, Al-Mulk. Pas une ijazah.","inLanguage":"fr","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — police KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — reconnaissance vocale ar-SA, exécutée sur l’appareil","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@icloud.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/#page","url":"https://tilmidh.app/","name":"Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran (débutant)","description":"Tu récites comme à la prière. Mot par mot, tu vois si c’est juste. Gratuit — Al-Fātiḥah, Ayat al-Kursi, Al-Kahf, Al-Mulk. Pas une ijazah.","inLanguage":"fr","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — police KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — reconnaissance vocale ar-SA, exécutée sur l’appareil","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
 </head>
 <body>
 
@@ -3345,6 +3410,13 @@
             </div>
             <p id="gc-dock-error" class="gc-dock-error"></p>
         </div>
+    </div>
+    <div id="contact-bar" class="glass-panel" onclick="event.stopPropagation()">
+        <a class="contact-mail" href="mailto:alkhastvatsaev@icloud.com" title="alkhastvatsaev@icloud.com">alkhastvatsaev@icloud.com</a>
+        <a class="contact-wa" href="https://wa.me/33767693804" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +33 7 67 69 38 04">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.04 2C6.5 2 2.004 6.486 2.004 12.02c0 1.77.463 3.45 1.258 4.897L2 22l5.204-1.241A10.01 10.01 0 0 0 12.04 22C17.56 22 22 17.522 22 12.02 22 6.486 17.56 2 12.04 2zm0 18.13c-1.64 0-3.21-.48-4.55-1.37l-.326-.2-3.087.737.72-3.01-.212-.334A8.07 8.07 0 0 1 3.87 12.02c0-4.5 3.67-8.15 8.17-8.15 4.49 0 8.16 3.65 8.16 8.15 0 4.49-3.67 8.11-8.16 8.11z"/></svg>
+            <span>WhatsApp</span>
+        </a>
     </div>
     <div class="smart-progress-bar">
         <div id="session-progress" class="smart-progress-fill"></div>
@@ -3477,7 +3549,7 @@
             </ul>
             <h2>Contact</h2>
             <ul>
-                <li><a href="mailto:alkhastvatsaev@gmail.com" rel="nofollow noopener">alkhastvatsaev@gmail.com</a></li>
+                <li><a href="mailto:alkhastvatsaev@icloud.com" rel="nofollow noopener">alkhastvatsaev@icloud.com</a></li>
                 <li><a href="https://wa.me/33767693804" rel="nofollow noopener">+33 7 67 69 38 04</a></li>
                 <li><a href="https://t.me/alkhastvatsaev" rel="nofollow noopener">@alkhastvatsaev</a></li>
             </ul>
@@ -3946,6 +4018,7 @@
         if (el.closest('#modal-overlay.visible, #modal-overlay[style*="flex"]')) return true;
         if (el.closest('.verse-selector')) return true;
         if (el.closest('.bottom-controls')) return true;
+        if (el.closest('#contact-bar')) return true;
         // Sur l’iPad ouvert : laisser le swipe (sauf boutons nav précis au tap)
         return false;
     }

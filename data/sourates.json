@@ -419,5 +419,241 @@
         "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
       }
     }
+  },
+  {
+    "slug": "18",
+    "dateModified": "2026-08-15",
+    "illuId": "kahf",
+    "langs": {
+      "fr": {
+        "title": "Sourate Al-Kahf en phonétique — réciter avec tajwid | Tilmidh تلميذ",
+        "description": "Al-Kahf (18) mot à mot : 110 versets, phonétique, tajwid des quatre récits, micro qui valide chaque mot. Lecture du vendredi. Outil d’entraînement — pas une ijazah.",
+        "h1": "Réciter Al-Kahf mot à mot",
+        "body": [
+          { "t": "p", "html": "Al-Kahf est la dix-huitième sourate, cent dix versets, révélée à La Mecque. C’est la sourate que beaucoup lisent le vendredi. Cent dix versets, ce n’est plus une sourate courte qu’on récite d’un trait : c’est un terrain d’endurance. Si tu accélères dès le premier récit, tu arrives aux suivants avec une bouche fatiguée et des madd qui se raccourcissent sans que tu t’en rendes compte." },
+          { "t": "ar", "html": "ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِيٓ أَنزَلَ عَلَىٰ عَبۡدِهِ ٱلۡكِتَٰبَ وَلَمۡ يَجۡعَل لَّهُۥ عِوَجَاۜ" },
+          { "t": "p", "html": "<em>Al-ḥamdu li-Llāhi lladhī anzala ʿalā ʿabdihi l-kitāba wa lam yajʿal lahu ʿiwajā.</em> « Louange à Allah qui a fait descendre sur Son serviteur le Livre, et n’y a mis aucune tortuosité. » Le premier verset pose déjà deux pièges : le madd de <em>alladhī</em> (yāʾ + kasra, deux harakāt, pas plus), et le ʿayn de <em>ʿabdihi</em> / <em>ʿiwajā</em>, que beaucoup avalent ou transforment en hamza." },
+          { "t": "h2", "html": "Quatre récits, quatre séances" },
+          { "t": "p", "html": "La sourate n’est pas un bloc. Elle est construite en quatre récits : les gens de la Caverne, les deux jardins, Mūsā et al-Khiḍr, Dhū l-Qarnayn. Travaille un récit par séance, pas les cent dix versets. Reprends toujours les deux derniers versets du récit précédent pour souder la jonction — c’est là que la mémoire lâche, pas au milieu d’une histoire." },
+          { "t": "table", "head": ["Récit", "Versets", "Ce que tu travailles"], "rows": [["Les gens de la Caverne", "9–26", "hamza de <em>aḥsibta</em>, ikhfa, ghunnah des <em>inna</em>"], ["Les deux jardins", "32–44", "madd en fin de verset, qalqalah du qāf"], ["Mūsā et al-Khiḍr", "60–82", "idgham, rythme narratif, ne pas avaler les noms"], ["Dhū l-Qarnayn", "83–98", "qalqalah, emphatiques, tenir le souffle sur les listes"]] },
+          { "t": "h2", "html": "Le verset où ça casse le plus tôt" },
+          { "t": "ar", "html": "أَمۡ حَسِبۡتَ أَنَّ أَصۡحَٰبَ ٱلۡكَهۡفِ وَٱلرَّقِيمِ كَانُواْ مِنۡ ءَايَٰتِنَا عَجَبًا" },
+          { "t": "p", "html": "Verste 9, <em>am ḥasibta anna aṣḥāba l-kahfi wa r-raqīmi kānū min āyātinā ʿajabā</em>. Trois choses en une ligne. Le ḥāʾ de <em>ḥasibta</em> n’est pas un h français. L’idgham shamsi du lām dans <em>ar-raqīm</em> : on lit <em>r-raqīm</em>, pas <em>al-raqīm</em>. Et <em>āyātinā</em> porte un madd : deux harakāt, tenus, pas un à-peu-près. Prends ce verset seul dix fois avant de continuer le récit." },
+          { "t": "h2", "html": "Les règles qui reviennent sur cent dix versets" },
+          { "t": "p", "html": "Le <a href=\"/regle/madd\">madd</a> d’abord : les fins de verset de Kahf sont longues, et c’est là que le vendredi se trahit — on allonge au début, on raccourcit à partir du verset 40. Ensuite la <a href=\"/regle/ghunnah\">ghunnah</a> des nombreux <em>inna</em> et <em>anna</em>. Enfin l’<a href=\"/regle/ikhfa\">ikhfa</a> devant les sīn, shīn et kāf qui ponctuent le récit de la Caverne. La <a href=\"/regle/qalqalah\">qalqalah</a> revient sur le qāf de <em>kahf</em> si tu t’arrêtes, et sur les dāl en waqf." },
+          { "t": "p", "html": "Tilmidh charge le texte Uthmani tajweed (Quran.com) et n’avance que lorsque le micro a reconnu le mot. Sur une sourate de cette longueur, l’outil ne mesure pas tes six harakāt : il t’empêche de glisser. C’est déjà beaucoup. Le reste — durée des madd, qualité des emphatiques — se vérifie avec un muqriʾ." },
+          { "t": "cta", "ref": "18:1", "label": "Ouvrir le micro sur Al-Kahf" },
+          { "t": "p", "html": "Si Kahf est trop long pour aujourd’hui, reviens d’abord sur <a href=\"/sourate/67\">Al-Mulk</a> (trente versets, même logique d’endurance) ou sur <a href=\"/ayat-kursi\">Ayat al-Kursi</a> (un seul verset long, pour le souffle). Le vendredi, un récit bien tenu vaut mieux que cent dix versets avalés." }
+        ],
+        "faq": [
+          { "q": "Faut-il réciter toute Al-Kahf le vendredi ?", "a": "Beaucoup le font. Pour l’entraînement, non : un récit par séance, le même jour de la semaine, construit une sourate stable. Avaler les 110 versets en accélérant n’entraîne que l’habitude de raccourcir les madd." },
+          { "q": "Par quel récit commencer ?", "a": "Les gens de la Caverne (versets 9–26). C’est le plus connu, et le verset 9 concentre déjà ḥāʾ, idgham shamsi et madd. Une fois ce bloc solide, les trois autres récits se posent dessus." },
+          { "q": "Tilmidh vérifie-t-il la longueur des madd de Kahf ?", "a": "Non. Le micro confirme le squelette du mot, pas les deux ou six harakāt. Sur une sourate longue, ça sert à t’arrêter sur le mot raté. La durée, c’est l’oreille d’un professeur." }
+        ],
+        "nav": [
+          { "href": "/sourate/36", "label": "Yā-Sīn" },
+          { "href": "/sourate/67", "label": "Al-Mulk" },
+          { "href": "/ayat-kursi", "label": "Ayat al-Kursi" },
+          { "href": "/regle/madd", "label": "Madd" },
+          { "href": "/coran-phonetique", "label": "Coran phonétique" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "Al-Kahf", "item": "/sourate/18" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Surah Al-Kahf phonetic — recite word by word with tajwid | Tilmidh تلميذ",
+        "description": "Al-Kahf (18) word by word: 110 verses, phonetics, tajwid of the four stories, mic that checks each word. Friday recitation. Practice tool — not an ijazah.",
+        "h1": "Recite Al-Kahf word by word",
+        "body": [
+          { "t": "p", "html": "Al-Kahf is the eighteenth surah, one hundred and ten verses, revealed in Makkah. Many people read it on Friday. A hundred and ten verses is no longer a short surah you recite in one breath: it is endurance. If you speed up in the first story, you reach the later ones with a tired mouth and madd that quietly shrink." },
+          { "t": "ar", "html": "ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِيٓ أَنزَلَ عَلَىٰ عَبۡدِهِ ٱلۡكِتَٰبَ وَلَمۡ يَجۡعَل لَّهُۥ عِوَجَاۜ" },
+          { "t": "p", "html": "<em>Al-ḥamdu li-Llāhi lladhī anzala ʿalā ʿabdihi l-kitāba wa lam yajʿal lahu ʿiwajā.</em> “Praise be to Allah, Who sent down the Book upon His servant and placed no crookedness in it.” Two traps already: the madd of <em>alladhī</em> (two ḥarakāt, not more), and the ʿayn in <em>ʿabdihi</em> / <em>ʿiwajā</em>, which many swallow or turn into a hamza." },
+          { "t": "h2", "html": "Four stories, four sessions" },
+          { "t": "p", "html": "The surah is not one block. It is four stories: the People of the Cave, the two gardens, Mūsā and al-Khiḍr, Dhū l-Qarnayn. Work one story per session. Always repeat the last two verses of the previous story to weld the join — that is where memory fails, not in the middle of a narrative." },
+          { "t": "table", "head": ["Story", "Verses", "What you train"], "rows": [["People of the Cave", "9–26", "hamza of <em>aḥsibta</em>, ikhfāʾ, ghunnah of <em>inna</em>"], ["The two gardens", "32–44", "madd at verse ends, qalqalah on qāf"], ["Mūsā and al-Khiḍr", "60–82", "idghām, narrative pace, do not swallow names"], ["Dhū l-Qarnayn", "83–98", "qalqalah, emphatics, breath on the lists"]] },
+          { "t": "h2", "html": "The verse that breaks first" },
+          { "t": "ar", "html": "أَمۡ حَسِبۡتَ أَنَّ أَصۡحَٰبَ ٱلۡكَهۡفِ وَٱلرَّقِيمِ كَانُواْ مِنۡ ءَايَٰتِنَا عَجَبًا" },
+          { "t": "p", "html": "Verse 9, <em>am ḥasibta anna aṣḥāba l-kahfi wa r-raqīmi kānū min āyātinā ʿajabā</em>. Three things in one line. The ḥāʾ of <em>ḥasibta</em> is not an English h. The lām of the article merges into <em>ar-raqīm</em>: you read <em>r-raqīm</em>, not <em>al-raqīm</em>. And <em>āyātinā</em> carries a madd of two ḥarakāt, held, not approximated. Take this verse alone ten times before you continue the story." },
+          { "t": "h2", "html": "The rules that keep returning" },
+          { "t": "p", "html": "<a href=\"/en/regle/madd\">Madd</a> first: Kahf’s verse endings are long, and Friday recitation is where people get caught — long at the start, short after verse 40. Then <a href=\"/en/regle/ghunnah\">ghunnah</a> on the many <em>inna</em> and <em>anna</em>. Then <a href=\"/en/regle/ikhfa\">ikhfāʾ</a> before sīn, shīn and kāf in the Cave narrative. <a href=\"/en/regle/qalqalah\">Qalqalah</a> returns on the qāf of <em>kahf</em> if you stop, and on dāl in waqf." },
+          { "t": "p", "html": "Tilmidh loads Quran.com Uthmani tajweed and only advances when the mic has recognised the word. On a surah this long, the tool does not measure your six ḥarakāt: it stops you gliding. That is already a lot. Length and emphatics still need a muqriʾ." },
+          { "t": "cta", "ref": "18:1", "label": "Open the mic on Al-Kahf" },
+          { "t": "p", "html": "If Kahf is too long today, go back to <a href=\"/sourate/67\">Al-Mulk</a> (thirty verses, same endurance logic) or <a href=\"/ayat-kursi\">Ayat al-Kursi</a> (one long verse, for breath). On Friday, one story held well beats a hundred and ten verses swallowed." }
+        ],
+        "faq": [
+          { "q": "Must I recite all of Al-Kahf on Friday?", "a": "Many people do. For practice, no: one story per session, on the same weekday, builds a stable surah. Swallowing 110 verses at speed only trains you to shorten madd." },
+          { "q": "Which story should I start with?", "a": "The People of the Cave (verses 9–26). It is the best known, and verse 9 already concentrates ḥāʾ, idghām shamsī and madd. Once that block is solid, the other three stories sit on top of it." },
+          { "q": "Does Tilmidh check madd length in Kahf?", "a": "No. The mic confirms the skeleton of the word, not two or six ḥarakāt. On a long surah, that is enough to stop you on the missed word. Duration is a teacher’s ear." }
+        ],
+        "nav": [
+          { "href": "/sourate/36", "label": "Yā-Sīn" },
+          { "href": "/sourate/67", "label": "Al-Mulk" },
+          { "href": "/ayat-kursi", "label": "Ayat al-Kursi" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "Al-Kahf", "item": "/en/sourate/18" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "id": {
+        "title": "Surat Al-Kahfi fonetik — baca kata demi kata dengan tajwid | Tilmidh تلميذ",
+        "description": "Al-Kahfi (18) kata demi kata: 110 ayat, fonetik, tajwid empat kisah, mikrofon yang memeriksa setiap kata. Bacaan Jumat. Alat latihan — bukan ijazah.",
+        "h1": "Membaca Al-Kahfi kata demi kata",
+        "body": [
+          { "t": "p", "html": "Al-Kahfi adalah surat ke-18, seratus sepuluh ayat, diturunkan di Mekah. Banyak orang membacanya pada hari Jumat. Seratus sepuluh ayat bukan lagi surat pendek yang dibaca dalam satu napas: ini latihan daya tahan. Kalau kamu mempercepat di kisah pertama, kamu sampai ke kisah berikutnya dengan mulut yang lelah dan madd yang memendek tanpa kamu sadari." },
+          { "t": "ar", "html": "ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِيٓ أَنزَلَ عَلَىٰ عَبۡدِهِ ٱلۡكِتَٰبَ وَلَمۡ يَجۡعَل لَّهُۥ عِوَجَاۜ" },
+          { "t": "p", "html": "<em>Al-ḥamdu li-Llāhi lladhī anzala ʿalā ʿabdihi l-kitāba wa lam yajʿal lahu ʿiwajā.</em> «Segala puji bagi Allah yang telah menurunkan Kitab kepada hamba-Nya dan tidak menjadikan padanya suatu kebengkokan.» Dua jebakan sudah ada di ayat pertama: madd pada <em>alladhī</em> (dua harakat, tidak lebih), dan huruf ʿain pada <em>ʿabdihi</em> / <em>ʿiwajā</em>, yang sering ditelan atau diubah menjadi hamzah." },
+          { "t": "h2", "html": "Empat kisah, empat sesi" },
+          { "t": "p", "html": "Surat ini bukan satu blok. Ia dibangun dari empat kisah: Ashabul Kahfi, dua kebun, Musa dan Khidir, Zulqarnain. Latih satu kisah per sesi, bukan seratus sepuluh ayat sekaligus. Selalu ulangi dua ayat terakhir dari kisah sebelumnya untuk menyambung — hafalan putus di sambungan, bukan di tengah cerita." },
+          { "t": "table", "head": ["Kisah", "Ayat", "Yang dilatih"], "rows": [["Ashabul Kahfi", "9–26", "hamzah <em>aḥsibta</em>, ikhfa, ghunnah pada <em>inna</em>"], ["Dua kebun", "32–44", "madd di akhir ayat, qalqalah pada qaf"], ["Musa dan Khidir", "60–82", "idgham, tempo narasi, jangan menelan nama"], ["Zulqarnain", "83–98", "qalqalah, huruf tebal, napas pada daftar"]] },
+          { "t": "h2", "html": "Ayat yang paling cepat rusak" },
+          { "t": "ar", "html": "أَمۡ حَسِبۡتَ أَنَّ أَصۡحَٰبَ ٱلۡكَهۡفِ وَٱلرَّقِيمِ كَانُواْ مِنۡ ءَايَٰتِنَا عَجَبًا" },
+          { "t": "p", "html": "Ayat 9, <em>am ḥasibta anna aṣḥāba l-kahfi wa r-raqīmi kānū min āyātinā ʿajabā</em>. Tiga hal dalam satu baris. Huruf ḥa pada <em>ḥasibta</em> bukan h biasa. Idgham syamsi pada <em>ar-raqīm</em>: dibaca <em>r-raqīm</em>, bukan <em>al-raqīm</em>. Dan <em>āyātinā</em> membawa madd dua harakat yang harus ditahan. Ambil ayat ini sendiri sepuluh kali sebelum lanjut." },
+          { "t": "h2", "html": "Hukum yang terus kembali" },
+          { "t": "p", "html": "<a href=\"/id/regle/madd\">Madd</a> lebih dulu: akhir ayat Al-Kahfi panjang, dan bacaan Jumat adalah tempat orang ketahuan — panjang di awal, pendek setelah ayat 40. Lalu <a href=\"/id/regle/ghunnah\">ghunnah</a> pada banyak <em>inna</em> dan <em>anna</em>. Lalu <a href=\"/id/regle/ikhfa\">ikhfa</a> di depan sin, syin, dan kaf dalam kisah Gua. <a href=\"/id/regle/qalqalah\">Qalqalah</a> kembali pada qaf <em>kahf</em> bila kamu berhenti, dan pada dal saat waqaf." },
+          { "t": "p", "html": "Tilmidh memuat teks Uthmani tajwid (Quran.com) dan tidak maju sebelum mikrofon mengenali kata itu. Pada surat sepanjang ini, alat tidak mengukur enam harakatmu: ia menahanmu agar tidak meluncur. Itu sudah banyak. Panjang madd dan huruf tebal tetap perlu telinga seorang muqri." },
+          { "t": "cta", "ref": "18:1", "label": "Buka mikrofon pada Al-Kahfi" },
+          { "t": "p", "html": "Kalau Al-Kahfi terlalu panjang hari ini, kembali dulu ke <a href=\"/id/sourate/67\">Al-Mulk</a> (tiga puluh ayat, logika daya tahan yang sama) atau <a href=\"/id/ayat-kursi\">Ayat Kursi</a> (satu ayat panjang, untuk napas). Pada hari Jumat, satu kisah yang tertahan lebih baik daripada seratus sepuluh ayat yang ditelan." }
+        ],
+        "faq": [
+          { "q": "Haruskah seluruh Al-Kahfi dibaca pada hari Jumat?", "a": "Banyak orang melakukannya. Untuk latihan, tidak: satu kisah per sesi, pada hari yang sama setiap minggu, membangun surat yang stabil. Menelan 110 ayat dengan cepat hanya melatih kebiasaan memendekkan madd." },
+          { "q": "Kisah mana yang harus dimulai?", "a": "Ashabul Kahfi (ayat 9–26). Paling dikenal, dan ayat 9 sudah memusatkan ḥa, idgham syamsi, dan madd. Setelah blok itu kokoh, tiga kisah lain duduk di atasnya." },
+          { "q": "Apakah Tilmidh memeriksa panjang madd di Al-Kahfi?", "a": "Tidak. Mikrofon memastikan kerangka kata, bukan dua atau enam harakat. Pada surat panjang, itu cukup untuk menahanmu di kata yang miss. Durasi adalah telinga guru." }
+        ],
+        "nav": [
+          { "href": "/sourate/36", "label": "Yasin" },
+          { "href": "/sourate/67", "label": "Al-Mulk" },
+          { "href": "/ayat-kursi", "label": "Ayat Kursi" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Al-Kahfi", "item": "/id/sourate/18" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed), riwayat Hafs dari Asim. Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      }
+    }
+  },
+  {
+    "slug": "36",
+    "dateModified": "2026-08-15",
+    "illuId": "yasin",
+    "langs": {
+      "fr": {
+        "title": "Sourate Yasin en phonétique — réciter avec tajwid | Tilmidh تلميذ",
+        "description": "Yā-Sīn (36) mot à mot : 83 versets, phonétique, madd lāzim de يس, micro qui valide chaque mot. Outil d’entraînement — pas une ijazah.",
+        "h1": "Réciter Yā-Sīn mot à mot",
+        "body": [
+          { "t": "p", "html": "Yā-Sīn est la trente-sixième sourate, quatre-vingt-trois versets, révélée à La Mecque. C’est l’une des sourates les plus lues — pour un malade, pour un mort, ou simplement parce qu’on l’a apprise jeune. Quatre-vingt-trois versets, c’est plus long que Mulk, plus court que Kahf : assez pour que la fatigue arrive, assez compact pour tenir en une séance si tu coupes en trois." },
+          { "t": "ar", "html": "يسٓ" },
+          { "t": "p", "html": "Les lettres isolées. <em>Yā-Sīn</em> n’est pas un mot qu’on avale. C’est un <strong>madd lāzim ḥarfī</strong> : six harakāt sur le sīn, pas deux, pas « à peu près long ». C’est le premier test de la sourate, et c’est celui que presque tout le monde rate en accélérant vers <em>wa l-qurʾāni l-ḥakīm</em>. Tiens les six temps. Puis seulement passe au verset 2." },
+          { "t": "ar", "html": "وَٱلۡقُرۡءَانِ ٱلۡحَكِيمِ" },
+          { "t": "p", "html": "<em>Wa l-qurʾāni l-ḥakīm.</em> Qalqalah du qāf si tu t’arrêtes sur <em>qurʾān</em> en isolation ; ici tu enchaînes. Le hamza de <em>qurʾān</em> doit s’entendre, ce n’est pas <em>qurān</em>. Le ḥāʾ de <em>ḥakīm</em> n’est pas un h français." },
+          { "t": "h2", "html": "Trois blocs, pas quatre-vingt-trois versets d’un trait" },
+          { "t": "table", "head": ["Bloc", "Versets", "Ce que tu travailles"], "rows": [["Ouverture", "1–12", "madd lāzim de يس, qalqalah, hamza de <em>qurʾān</em>"], ["Les envoyés", "13–32", "idgham, ghunnah, ne pas fondre les noms"], ["Signes et fin", "33–83", "madd de pause, ikhfa, tenir le même tempo jusqu’au bout"]] },
+          { "t": "p", "html": "Le piège de Yā-Sīn, ce n’est pas un verset unique : c’est le rythme. La rime en <em>-ūn</em> / <em>-īn</em> / <em>-īm</em> pousse à accélérer, et chaque accélération raccourcit un madd de pause. Au verset 40 tu n’as plus la même longueur qu’au verset 2. C’est exactement ce que le micro rend visible : tu butes sur un mot que tu croyais connaître, parce que tu l’as avalé." },
+          { "t": "h2", "html": "Les règles qui portent la sourate" },
+          { "t": "p", "html": "Le <a href=\"/regle/madd\">madd</a> est le sujet de Yā-Sīn, du premier glyphe aux fins de verset. La <a href=\"/regle/qalqalah\">qalqalah</a> revient sur qāf et dāl. La <a href=\"/regle/ghunnah\">ghunnah</a> sur les nūn mushaddad de la rime. L’<a href=\"/regle/idgham\">idgham</a> dans les liaisons narratives. Travaille d’abord يس dix fois seul, comme tu travaillerais الضالين à la fin de Fātiḥah : c’est le même geste, six harakāt, avant le reste du texte." },
+          { "t": "p", "html": "Tilmidh affiche l’Uthmani tajweed Quran.com, phonétique sous chaque mot, et n’avance que si le micro a reconnu le mot. Il ne chronomètre pas tes six harakāt de يس. Il t’empêche de les sauter en courant vers le verset 2. Pour la durée exacte, un muqriʾ." },
+          { "t": "cta", "ref": "36:1", "label": "Ouvrir le micro sur Yā-Sīn" },
+          { "t": "p", "html": "Après Yā-Sīn, <a href=\"/sourate/18\">Al-Kahf</a> (plus long, même logique de blocs) ou <a href=\"/sourate/67\">Al-Mulk</a> (plus court, lecture du soir). Ne mélange pas les trois dans la même séance." }
+        ],
+        "faq": [
+          { "q": "Combien de temps tient-on يس ?", "a": "Six harakāt, madd lāzim ḥarfī. Pas deux. C’est la même famille que الضالين à la fin d’Al-Fātiḥah. Si tu les tiens trop courts, le mot n’est plus le mot." },
+          { "q": "Pourquoi bute-t-on au milieu de Yā-Sīn ?", "a": "Parce que la rime donne de l’élan, et l’élan raccourcit les madd de pause. Coupe en trois blocs. Reprends les deux derniers versets du bloc précédent à chaque séance." },
+          { "q": "Tilmidh remplace-t-il une lecture de Yā-Sīn auprès d’un mort ?", "a": "Non. C’est un outil d’entraînement à la prononciation. Les usages dévotionnels de la sourate ne sont pas le sujet de cette page, et l’app n’est pas une ijazah." }
+        ],
+        "nav": [
+          { "href": "/sourate/18", "label": "Al-Kahf" },
+          { "href": "/sourate/67", "label": "Al-Mulk" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/" },
+          { "name": "Sourates", "item": "/sourates" },
+          { "name": "Yā-Sīn", "item": "/sourate/36" }
+        ],
+        "footer": "Tilmidh (تلميذ, « élève ») est un outil d’entraînement à la récitation. Le texte affiché vient de Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. Ce n’est pas une ijazah, ni une certification savante, ni un substitut à un professeur. Vérifie toujours auprès d’un muqriʾ."
+      },
+      "en": {
+        "title": "Surah Yasin phonetic — recite word by word with tajwid | Tilmidh تلميذ",
+        "description": "Yā-Sīn (36) word by word: 83 verses, phonetics, madd lāzim of يس, mic that checks each word. Practice tool — not an ijazah.",
+        "h1": "Recite Yā-Sīn word by word",
+        "body": [
+          { "t": "p", "html": "Yā-Sīn is the thirty-sixth surah, eighty-three verses, revealed in Makkah. It is one of the most-read surahs — for the sick, for the dead, or simply because people learned it young. Eighty-three verses is longer than Mulk, shorter than Kahf: long enough for fatigue, compact enough for one session if you split it in three." },
+          { "t": "ar", "html": "يسٓ" },
+          { "t": "p", "html": "The isolated letters. <em>Yā-Sīn</em> is not a word you swallow. It is a <strong>madd lāzim ḥarfī</strong>: six ḥarakāt on the sīn, not two, not “fairly long”. That is the first test of the surah, and the one almost everyone fails by rushing into <em>wa l-qurʾāni l-ḥakīm</em>. Hold the six counts. Only then go to verse 2." },
+          { "t": "ar", "html": "وَٱلۡقُرۡءَانِ ٱلۡحَكِيمِ" },
+          { "t": "p", "html": "<em>Wa l-qurʾāni l-ḥakīm.</em> Qalqalah on qāf if you stop on <em>qurʾān</em> in isolation; here you continue. The hamza in <em>qurʾān</em> must be heard — it is not <em>qurān</em>. The ḥāʾ of <em>ḥakīm</em> is not an English h." },
+          { "t": "h2", "html": "Three blocks, not eighty-three verses in one run" },
+          { "t": "table", "head": ["Block", "Verses", "What you train"], "rows": [["Opening", "1–12", "madd lāzim of يس, qalqalah, hamza of <em>qurʾān</em>"], ["The messengers", "13–32", "idghām, ghunnah, do not melt the names"], ["Signs and ending", "33–83", "pause madd, ikhfāʾ, same tempo to the end"]] },
+          { "t": "p", "html": "The trap in Yā-Sīn is not one verse: it is the rhythm. The rhyme in <em>-ūn</em> / <em>-īn</em> / <em>-īm</em> pushes you to speed up, and every speed-up shortens a pause madd. By verse 40 you no longer have the length you had at verse 2. That is what the mic makes visible: you stall on a word you thought you knew, because you swallowed it." },
+          { "t": "h2", "html": "The rules that carry the surah" },
+          { "t": "p", "html": "<a href=\"/en/regle/madd\">Madd</a> is the subject of Yā-Sīn, from the first glyph to the verse endings. <a href=\"/en/regle/qalqalah\">Qalqalah</a> returns on qāf and dāl. <a href=\"/en/regle/ghunnah\">Ghunnah</a> on the doubled nūn of the rhyme. <a href=\"/en/regle/idgham\">Idghām</a> in the narrative joins. First work يس ten times alone, the way you would work aḍ-ḍāllīn at the end of Fātiḥah: same gesture, six ḥarakāt, before the rest of the text." },
+          { "t": "p", "html": "Tilmidh shows Quran.com Uthmani tajweed, phonetics under each word, and only advances if the mic recognised the word. It does not time your six ḥarakāt on يس. It stops you skipping them on the way to verse 2. Exact duration: a muqriʾ." },
+          { "t": "cta", "ref": "36:1", "label": "Open the mic on Yā-Sīn" },
+          { "t": "p", "html": "After Yā-Sīn, <a href=\"/en/sourate/18\">Al-Kahf</a> (longer, same block logic) or <a href=\"/sourate/67\">Al-Mulk</a> (shorter, evening recitation). Do not mix the three in one session." }
+        ],
+        "faq": [
+          { "q": "How long is يس held?", "a": "Six ḥarakāt, madd lāzim ḥarfī. Not two. Same family as aḍ-ḍāllīn at the end of Al-Fātiḥah. If you hold them too short, the word is no longer the word." },
+          { "q": "Why do people stall in the middle of Yā-Sīn?", "a": "Because the rhyme gives momentum, and momentum shortens pause madd. Split into three blocks. Repeat the last two verses of the previous block each session." },
+          { "q": "Does Tilmidh replace reciting Yā-Sīn for the dead?", "a": "No. It is a pronunciation trainer. Devotional uses of the surah are not the subject of this page, and the app is not an ijazah." }
+        ],
+        "nav": [
+          { "href": "/sourate/18", "label": "Al-Kahf" },
+          { "href": "/sourate/67", "label": "Al-Mulk" },
+          { "href": "/sourate/1", "label": "Al-Fātiḥah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/en" },
+          { "name": "Yā-Sīn", "item": "/en/sourate/36" }
+        ],
+        "footer": "Tilmidh (تلميذ, «student») is a recitation practice tool. The displayed text comes from Quran.com (Uthmani tajweed), riwāya Ḥafṣ ʿan ʿĀṣim. It is not an ijazah, not a scholarly certification, and not a substitute for a teacher. Always have your recitation checked by a muqriʾ."
+      },
+      "id": {
+        "title": "Surat Yasin fonetik — baca kata demi kata dengan tajwid | Tilmidh تلميذ",
+        "description": "Yasin (36) kata demi kata: 83 ayat, fonetik, madd lazim pada يس, mikrofon yang memeriksa setiap kata. Alat latihan — bukan ijazah.",
+        "h1": "Membaca Yasin kata demi kata",
+        "body": [
+          { "t": "p", "html": "Yasin adalah surat ke-36, delapan puluh tiga ayat, diturunkan di Mekah. Termasuk surat yang paling sering dibaca — untuk orang sakit, untuk jenazah, atau karena sudah dihafal sejak kecil. Delapan puluh tiga ayat lebih panjang dari Mulk, lebih pendek dari Kahfi: cukup untuk membuat lelah, cukup ringkas untuk satu sesi jika kamu membaginya menjadi tiga." },
+          { "t": "ar", "html": "يسٓ" },
+          { "t": "p", "html": "Huruf-huruf terpisah. <em>Yā-Sīn</em> bukan kata yang ditelan. Ini <strong>madd lazim harfi</strong>: enam harakat pada sin, bukan dua, bukan «agak panjang». Itu ujian pertama surat ini, dan hampir semua orang gagal karena buru-buru ke <em>wa l-qurʾāni l-ḥakīm</em>. Tahan enam hitungan. Baru pindah ke ayat 2." },
+          { "t": "ar", "html": "وَٱلۡقُرۡءَانِ ٱلۡحَكِيمِ" },
+          { "t": "p", "html": "<em>Wa l-qurʾāni l-ḥakīm.</em> Qalqalah pada qaf bila kamu berhenti pada <em>qurʾān</em> secara terpisah; di sini kamu menyambung. Hamzah pada <em>qurʾān</em> harus terdengar — bukan <em>qurān</em>. Huruf ḥa pada <em>ḥakīm</em> bukan h biasa." },
+          { "t": "h2", "html": "Tiga blok, bukan delapan puluh tiga ayat sekaligus" },
+          { "t": "table", "head": ["Blok", "Ayat", "Yang dilatih"], "rows": [["Pembuka", "1–12", "madd lazim يس, qalqalah, hamzah <em>qurʾān</em>"], ["Para utusan", "13–32", "idgham, ghunnah, jangan melelehkan nama"], ["Tanda dan penutup", "33–83", "madd waqaf, ikhfa, tempo yang sama sampai akhir"]] },
+          { "t": "p", "html": "Jebakan Yasin bukan satu ayat: itu irama. Rima <em>-ūn</em> / <em>-īn</em> / <em>-īm</em> mendorongmu mempercepat, dan setiap percepatan memendekkan madd waqaf. Di ayat 40 kamu sudah tidak punya panjang yang sama dengan ayat 2. Itulah yang dibuat terlihat oleh mikrofon: kamu tersangkut pada kata yang kamu kira hafal, karena kamu menelannya." },
+          { "t": "h2", "html": "Hukum yang menopang surat ini" },
+          { "t": "p", "html": "<a href=\"/id/regle/madd\">Madd</a> adalah pokok Yasin, dari glif pertama sampai akhir ayat. <a href=\"/id/regle/qalqalah\">Qalqalah</a> kembali pada qaf dan dal. <a href=\"/id/regle/ghunnah\">Ghunnah</a> pada nun bertasydid di rima. <a href=\"/id/regle/idgham\">Idgham</a> pada sambungan narasi. Latih يس sepuluh kali sendiri dulu, seperti kamu melatih الضالين di akhir Fatihah: gerakan yang sama, enam harakat, sebelum sisa teks." },
+          { "t": "p", "html": "Tilmidh menampilkan Uthmani tajwid Quran.com, fonetik di bawah setiap kata, dan hanya maju jika mikrofon mengenali kata itu. Ia tidak mengukur enam harakat pada يس. Ia menahanmu agar tidak meloncat ke ayat 2. Durasi yang tepat: seorang muqri." },
+          { "t": "cta", "ref": "36:1", "label": "Buka mikrofon pada Yasin" },
+          { "t": "p", "html": "Sesudah Yasin, <a href=\"/id/sourate/18\">Al-Kahfi</a> (lebih panjang, logika blok yang sama) atau <a href=\"/id/sourate/67\">Al-Mulk</a> (lebih pendek, bacaan malam). Jangan mencampur ketiganya dalam satu sesi." }
+        ],
+        "faq": [
+          { "q": "Berapa lama يس ditahan?", "a": "Enam harakat, madd lazim harfi. Bukan dua. Keluarga yang sama dengan الضالين di akhir Al-Fatihah. Kalau terlalu pendek, katanya bukan lagi kata itu." },
+          { "q": "Mengapa orang tersangkut di tengah Yasin?", "a": "Karena rima memberi dorongan, dan dorongan itu memendekkan madd waqaf. Bagi menjadi tiga blok. Ulangi dua ayat terakhir dari blok sebelumnya setiap sesi." },
+          { "q": "Apakah Tilmidh menggantikan bacaan Yasin untuk jenazah?", "a": "Tidak. Ini alat latihan pengucapan. Penggunaan ibadah surat ini bukan topik halaman ini, dan aplikasinya bukan ijazah." }
+        ],
+        "nav": [
+          { "href": "/sourate/18", "label": "Al-Kahfi" },
+          { "href": "/sourate/67", "label": "Al-Mulk" },
+          { "href": "/sourate/1", "label": "Al-Fatihah" },
+          { "href": "/regle/madd", "label": "Madd" }
+        ],
+        "breadcrumb": [
+          { "name": "Tilmidh", "item": "/id" },
+          { "name": "Yasin", "item": "/id/sourate/36" }
+        ],
+        "footer": "Tilmidh (تلميذ, «murid») adalah alat latihan membaca Al-Quran. Teks yang ditampilkan berasal dari Quran.com (Uthmani tajweed), riwayat Hafs dari Asim. Ini bukan ijazah, bukan sertifikasi keilmuan, dan bukan pengganti guru. Periksakan selalu bacaanmu kepada seorang muqri."
+      }
+    }
   }
 ]
