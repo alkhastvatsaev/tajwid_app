@@ -5924,74 +5924,7 @@
 
     function splitOverflowingAyahLines(container) {
         if (!container) return;
-        const WORDS_PER_SLIDE = 4;
-        const COMPACT_MIN = 13;
-        const isMobile = window.matchMedia('(max-width: 600px)').matches;
-        const availW = Math.max(240, container.clientWidth - 24);
-
-        function appendChunks(line, chunks) {
-            if (chunks.length < 2) return;
-            let insertAfter = line;
-            chunks.slice(1).forEach(chunk => {
-                const nl = document.createElement('div');
-                nl.className = 'ayah-line';
-                const nw = document.createElement('div');
-                nw.className = 'ayah-words';
-                nl.appendChild(nw);
-                chunk.forEach(b => nw.appendChild(b));
-                insertAfter.after(nl);
-                insertAfter = nl;
-            });
-        }
-
-        function eachShortLine(fn) {
-            Array.from(container.querySelectorAll('.ayah-line')).forEach(line => {
-                const wordsEl = line.querySelector('.ayah-words');
-                if (!wordsEl) return;
-                const boxes = Array.from(wordsEl.querySelectorAll('.word-box'));
-                if (boxes.length >= COMPACT_MIN) return;
-                fn(line, wordsEl, boxes);
-            });
-        }
-
-        eachShortLine((line, wordsEl, boxes) => {
-            if (boxes.length <= WORDS_PER_SLIDE) return;
-            const chunks = [];
-            for (let i = 0; i < boxes.length; i += WORDS_PER_SLIDE) {
-                chunks.push(boxes.slice(i, i + WORDS_PER_SLIDE));
-            }
-            appendChunks(line, chunks);
-        });
-
-        if (!isMobile) return;
-
-        eachShortLine((line, wordsEl, boxes) => {
-            if (boxes.length < 2) return;
-            const prevWrap = wordsEl.style.flexWrap;
-            wordsEl.style.flexWrap = 'nowrap';
-            const totalW = wordsEl.scrollWidth;
-            wordsEl.style.flexWrap = prevWrap;
-            if (totalW <= availW + 8) return;
-
-            const gapX = parseFloat(getComputedStyle(wordsEl).columnGap) || 12;
-            const chunks = [];
-            let cur = [];
-            let curW = 0;
-            boxes.forEach(box => {
-                const w = Math.max(box.offsetWidth, 48);
-                const next = cur.length ? curW + gapX + w : w;
-                if (cur.length && next > availW) {
-                    chunks.push(cur);
-                    cur = [box];
-                    curW = w;
-                } else {
-                    cur.push(box);
-                    curW = next;
-                }
-            });
-            if (cur.length) chunks.push(cur);
-            appendChunks(line, chunks);
-        });
+        // Une ayah = les mêmes mots partout. Le mobile scale, il ne recoupe pas.
     }
 
     function fitActiveAyah() {
@@ -6031,12 +5964,11 @@
         const availW = Math.max(140, box.clientWidth - 8);
         const h = line.offsetHeight || 1;
         const words = line.querySelector('.ayah-words');
-        const scrollMode = !!(words && getComputedStyle(words).flexWrap === 'nowrap');
-        let s = scrollMode
-            ? Math.min(availH / h, 1)
-            : Math.min(availH / h, availW / (line.scrollWidth || 1), 1);
+        const w = Math.max(line.scrollWidth || 1, words?.scrollWidth || 1);
+        let s = Math.min(availH / h, availW / w, 1);
         if (!isFinite(s) || s <= 0) s = 1;
-        s = Math.min(1, Math.max(scrollMode ? 0.85 : 0.58, s * 0.96));
+        const minS = window.matchMedia('(max-width: 600px)').matches ? 0.38 : 0.58;
+        s = Math.min(1, Math.max(minS, s * 0.96));
         line.style.setProperty('--ayah-fit', String(s));
     }
     window.addEventListener('resize', () => { fitActiveAyah(); });
