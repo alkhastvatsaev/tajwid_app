@@ -1390,6 +1390,36 @@
                 opacity: 1;
             }
         }
+        @media (hover: none), (pointer: coarse) {
+            #contact-bar.contact-open .contact-mail,
+            #contact-bar.contact-open .contact-wa {
+                padding: 0;
+                gap: 0;
+            }
+            #contact-bar.contact-open .contact-mail-label,
+            #contact-bar.contact-open .contact-wa span {
+                max-width: 0;
+                opacity: 0;
+            }
+        }
+        @media (max-width: 600px) {
+            #contact-bar {
+                right: max(4px, env(safe-area-inset-right));
+                bottom: env(safe-area-inset-bottom, 0px);
+                gap: 6px;
+                padding: 4px;
+            }
+            #contact-bar .contact-mail,
+            #contact-bar .contact-wa {
+                min-width: 30px;
+                height: 30px;
+            }
+            #contact-bar .contact-mail svg,
+            #contact-bar .contact-wa svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
         body:has(#restart-btn.visible) #contact-bar,
         body:has(#install-pwa-banner.visible) #contact-bar {
             bottom: calc(max(24px, env(safe-area-inset-bottom)) + 88px);
@@ -2562,7 +2592,7 @@
                 max-height: none;
             }
             .arabic-word {
-                font-size: clamp(2.34rem, 10.56vw, 2.94rem) !important;
+                font-size: clamp(3.04rem, 13.73vw, 3.82rem) !important;
                 line-height: 1.5;
             }
             .word-box {
@@ -2601,7 +2631,7 @@
         @media (max-width: 480px) {
             .container { padding-top: calc(88px + env(safe-area-inset-top)); }
             .arabic-word {
-                font-size: clamp(2.22rem, 10.08vw, 2.76rem) !important;
+                font-size: clamp(3.04rem, 13.73vw, 3.82rem) !important;
             }
             .ayah-line {
                 gap: 10px;
@@ -8413,9 +8443,13 @@
     // === Initialisation ===
     window.addEventListener('DOMContentLoaded', async () => {
         console.log("DOMContentLoaded");
-        setTimeout(() => {
-            document.getElementById('contact-bar')?.classList.remove('contact-open');
-        }, 10000);
+        const contactBar = document.getElementById('contact-bar');
+        const desktopContact = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (desktopContact) {
+            setTimeout(() => { contactBar?.classList.remove('contact-open'); }, 10000);
+        } else {
+            contactBar?.classList.remove('contact-open');
+        }
         try {
             bindIpadGestures();
             applyTheme(localStorage.getItem('tajwid_theme') || 'blue');
