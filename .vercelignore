@@ -11,6 +11,12 @@
 public/_preview-illu
 public/_preview-mushaf.html
 
+# Sortie locale de build-illustrations.mjs. Les SVG sont inlinés dans le HTML
+# par illustrations.mjs : rien de servi ne pointe vers ce dossier, et Vercel ne
+# lance aucun build (buildCommand = echo legacy-static). Les .html qui s'y
+# trouvent sont des planches de fabrication, pas des pages.
+public/img/illustrations
+
 # Sources et notes : rien de tout cela n'est servi (outputDirectory = public)
 docs
 _archive
