@@ -1305,7 +1305,7 @@
             align-items: center;
             justify-content: flex-end;
             gap: 8px;
-            padding: 6px;
+            padding: 8px 10px;
             border-radius: 100px;
             overflow: visible;
             font-family: var(--font-main);
@@ -1318,6 +1318,8 @@
             align-items: center;
             justify-content: center;
             isolation: isolate;
+            appearance: none;
+            -webkit-appearance: none;
             width: auto;
             min-width: 42px;
             height: 42px;
@@ -1325,21 +1327,33 @@
             gap: 0;
             border-radius: 100px;
             text-decoration: none;
-            font-size: 0.72rem;
+            font-size: 0.78rem;
             font-weight: 700;
-            font-family: inherit;
+            font-family: var(--font-main);
+            line-height: 1;
             cursor: pointer;
             flex-shrink: 0;
             color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: padding 0.28s ease, gap 0.28s ease;
-        }
-        #contact-bar .contact-mail {
-            background: var(--brand-gradient);
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.42),
                 inset 2px 2px 0.5px -2px rgba(0, 0, 0, 0.25),
                 0 2px 10px var(--brand-shadow);
+            transition: padding 0.28s ease, gap 0.28s ease, filter 0.2s;
+        }
+        #contact-bar .contact-mail:hover,
+        #contact-bar .contact-wa:hover,
+        #contact-bar .contact-course:hover {
+            filter: brightness(1.06);
+        }
+        #contact-bar .contact-mail {
+            color: #374151;
+            background: linear-gradient(180deg, #F3F4F6, #D1D5DB);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                inset 2px 2px 0.5px -2px rgba(0, 0, 0, 0.18),
+                0 2px 10px rgba(15, 23, 42, 0.12);
         }
         #contact-bar .contact-wa {
             background: linear-gradient(180deg, rgba(37, 211, 102, 0.92), rgba(18, 140, 126, 0.88));
@@ -1349,11 +1363,7 @@
                 0 2px 10px rgba(18, 140, 126, 0.28);
         }
         #contact-bar .contact-course {
-            background: linear-gradient(180deg, rgba(245, 158, 11, 0.92), rgba(180, 83, 9, 0.88));
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.42),
-                inset 2px 2px 0.5px -2px rgba(0, 0, 0, 0.25),
-                0 2px 10px rgba(180, 83, 9, 0.28);
+            background: var(--brand-gradient);
         }
         #contact-bar .contact-mail svg,
         #contact-bar .contact-wa svg,
@@ -1374,7 +1384,7 @@
             overflow: hidden;
             white-space: nowrap;
             pointer-events: none;
-            color: #fff;
+            color: inherit;
             transition: max-width 0.28s ease, opacity 0.2s ease;
         }
         #contact-bar.contact-open .contact-mail,
@@ -1436,20 +1446,14 @@
                 transform: translateX(-50%);
                 justify-content: center;
                 bottom: env(safe-area-inset-bottom, 0px);
-                gap: 7px;
-                padding: 5px;
+                gap: 8px;
+                padding: 8px 10px;
             }
             #contact-bar .contact-mail,
             #contact-bar .contact-wa,
             #contact-bar .contact-course {
-                min-width: 36px;
-                height: 36px;
-            }
-            #contact-bar .contact-mail svg,
-            #contact-bar .contact-wa svg,
-            #contact-bar .contact-course svg {
-                width: 17px;
-                height: 17px;
+                min-width: 42px;
+                height: 42px;
             }
             #contact-bar.contact-open .contact-mail,
             #contact-bar.contact-open .contact-wa {
