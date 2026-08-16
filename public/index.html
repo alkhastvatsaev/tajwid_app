@@ -2691,6 +2691,22 @@
                 font-size: clamp(3.04rem, 13.73vw, 3.82rem) !important;
                 line-height: 1.5;
             }
+            .ayah-line.ayah-rows-3 .ayah-words {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                justify-items: center;
+                align-items: end;
+                column-gap: 6px;
+                row-gap: 8px;
+            }
+            .ayah-line.ayah-rows-3 .word-box {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+            }
+            .ayah-line.ayah-rows-3 .arabic-word {
+                font-size: clamp(1.85rem, 8.2vw, 2.45rem) !important;
+            }
             .word-box {
                 min-width: min-content;
                 padding: 8px 2px 4px;
@@ -6013,6 +6029,17 @@
                 insertAfter = nl;
             });
         });
+        tagAyahRows(container);
+    }
+
+    function tagAyahRows(container) {
+        if (!container) return;
+        const isMobile = window.matchMedia('(max-width: 600px)').matches;
+        Array.from(container.querySelectorAll('.ayah-line')).forEach(line => {
+            const n = line.querySelectorAll('.word-box').length;
+            const compact = line.classList.contains('ayah-compact');
+            line.classList.toggle('ayah-rows-3', isMobile && !compact && n >= 8 && n <= 10);
+        });
     }
 
     function fitActiveAyah() {
@@ -6028,6 +6055,7 @@
         const n = line.querySelectorAll('.word-box').length;
         const compact = n > 12;
         line.classList.toggle('ayah-compact', compact);
+        tagAyahRows(box);
         line.style.setProperty('--ayah-fit', '1');
         if (compact) {
             const availH = Math.max(160, box.clientHeight - 12);
