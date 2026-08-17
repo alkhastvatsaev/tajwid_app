@@ -52,10 +52,10 @@
     <meta property="og:image:alt" content="Tilmidh — apprendre à lire le Coran mot à mot">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://tilmidh.app/img/og/fr/tilmidh.png">
-                                                                                                                                            <meta property="og:title" content="Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran">
-    <meta property="og:description" content="Apprenez à lire le Coran mot à mot — phonétique, tajwid, micro arabe. Gratuit pour débutants.">
-                        <meta name="twitter:title" content="Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran">
-    <meta name="twitter:description" content="Apprenez à lire le Coran mot à mot — phonétique, tajwid, micro arabe. Gratuit pour débutants.">
+    <meta property="og:title" content="Tilmidh تلميذ — Tu récites. Tu vois si c’est juste.">
+    <meta property="og:description" content="Tu dis déjà la Fātiḥah. Mot par mot, tu vois si c’est juste. Gratuit. Pas une ijazah.">
+    <meta name="twitter:title" content="Tilmidh تلميذ — Tu récites. Tu vois si c’est juste.">
+    <meta name="twitter:description" content="Tu dis déjà la Fātiḥah. Mot par mot, tu vois si c’est juste. Gratuit. Pas une ijazah.">
         <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -63,7 +63,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.webmanifest">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebApplication","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Meilleure app gratuite pour apprendre à lire le Coran mot à mot : phonétique, couleurs tajwid, micro. Pour débutants. Pas une ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["en","fr","id","ar","ru","tr","ur","bn","ms","de","es"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://tilmidh.app/en","https://tilmidh.app/best-tajwid-app-for-beginners"]}
+    {"@context":"https://schema.org","@type":"WebApplication","@id":"https://tilmidh.app/#app","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","description":"Tu récites comme à la prière. Mot par mot, tu vois si c’est juste. Gratuit. Pas une ijazah.","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":["en","fr","id","ar","ru","tr","ur","bn","ms","de","es"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"sameAs":["https://www.youtube.com/@Tilmidh","https://github.com/alkhastvatsaev/tilmidh","https://t.me/alkhastvatsaev"]}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1997,135 +1997,88 @@
             overflow: hidden;
             gap: 2px;
         }
-        .ipad-cal-header {
+        .ipad-list-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 2px 2px 2px;
-            gap: 6px;
+            padding: 2px 4px 6px;
             flex-shrink: 0;
         }
-        .ipad-cal-title {
+        .ipad-list-title {
             font-size: 0.95rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            flex: 1;
             line-height: 1.15;
         }
-        .ipad-cal-sub {
-            display: none;
-        }
-        .ipad-nav {
+        .ipad-ustadh-list {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            touch-action: pan-y;
             display: flex;
-            gap: 4px;
-            flex-shrink: 0;
+            flex-direction: column;
+            gap: 6px;
+            padding: 0 2px 8px;
         }
-        .ipad-nav button,
-        .ipad-close {
-            width: 28px;
-            height: 28px;
-            border: none;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.06);
-            color: #111827;
-            cursor: pointer;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .ipad-nav button:hover,
-        .ipad-close:hover { background: rgba(0, 0, 0, 0.12); }
-        .ipad-week {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            padding: 0 2px;
-            font-size: 0.58rem;
-            font-weight: 700;
-            color: #9ca3af;
-            text-align: center;
-            letter-spacing: 0.04em;
-            flex-shrink: 0;
-            line-height: 1.2;
-        }
-        .ipad-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(6, minmax(0, 1fr));
-            gap: 2px;
-            padding: 2px 2px 4px;
-            flex: 1 1 0;
-            min-height: 0;
-            overflow: hidden;
-        }
-        .ipad-day {
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            min-height: 0;
-            height: 100%;
-            cursor: pointer;
-            font-size: clamp(0.68rem, 2.4vw, 0.78rem);
-            font-weight: 600;
-            color: #111827;
-            font-family: inherit;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-        .ipad-day.empty { cursor: default; pointer-events: none; }
-        .ipad-day.today { box-shadow: inset 0 0 0 1.5px #2563eb; color: #2563eb; }
-        .ipad-day.selected {
-            background: #2563eb;
-            color: #fff;
-            box-shadow: none;
-        }
-        .ipad-day.muted { color: #d1d5db; }
-        .ipad-slots {
-            background: #fff;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 12px 12px 0 0;
-            padding: 6px 6px 4px;
-            flex: 0 0 auto;
-            overflow: hidden;
-        }
-        .ipad-slots-label {
-            font-size: 0.58rem;
+        .ipad-ustadh-cat {
+            font-size: 0.62rem;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: #6b7280;
-            margin-bottom: 4px;
+            padding: 8px 4px 2px;
         }
-        .ipad-slot-list {
+        .ipad-ustadh-cat:first-child { padding-top: 0; }
+        .ipad-ustadh-row {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            padding: 8px 8px 8px 12px;
         }
-        .ipad-slot {
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            background: #f9fafb;
-            border-radius: 10px;
-            padding: 7px 10px;
-            text-align: left;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 0.74rem;
+        .ipad-ustadh-name {
+            flex: 1;
+            min-width: 0;
+            font-size: 0.78rem;
             font-weight: 600;
             color: #111827;
+            line-height: 1.25;
+        }
+        .ipad-ustadh-right {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            line-height: 1.15;
+            gap: 8px;
+            flex-shrink: 0;
         }
-        .ipad-slot:hover { background: #eef2ff; }
-        .ipad-slot.booked {
-            background: #2563eb;
+        .ipad-ustadh-phone {
+            font-size: 0.64rem;
+            font-weight: 500;
+            color: #6b7280;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+        .ipad-ustadh-wa {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #25D366;
             color: #fff;
-            border-color: #2563eb;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
-        .ipad-slot span { font-weight: 500; opacity: 0.72; font-size: 0.68rem; }
+        .ipad-ustadh-wa:hover { background: #1ebe57; }
+        .ipad-ustadh-wa svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
         .ipad-home-bar {
             width: 96px;
             height: 4px;
@@ -2181,7 +2134,7 @@
         @media (max-width: 640px) {
             .ipad-device { height: min(76dvh, 580px); border-radius: 28px; }
             .ipad-screen { border-radius: 20px; }
-            .ipad-day { font-size: 0.7rem; }
+            .ipad-ustadh-phone { font-size: 0.58rem; }
         }
         @media (prefers-reduced-motion: reduce) {
             .ipad-scroll-header { transform: none !important; }
@@ -3475,7 +3428,7 @@
             } catch (e) {}
         })();
     </script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@icloud.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/#page","url":"https://tilmidh.app/","name":"Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran (débutant)","description":"Tu récites comme à la prière. Mot par mot, tu vois si c’est juste. Gratuit — Al-Fātiḥah, Ayat al-Kursi, Al-Kahf, Al-Mulk. Pas une ijazah.","inLanguage":"fr","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — police KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — reconnaissance vocale ar-SA, exécutée sur l’appareil","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://tilmidh.app/#author","name":"Alkhast Vatsaev","url":"https://tilmidh.app/"},{"@type":"Organization","@id":"https://tilmidh.app/#organization","name":"Tilmidh","alternateName":"تلميذ","url":"https://tilmidh.app/","logo":"https://tilmidh.app/icons/icon.svg","sameAs":["https://www.youtube.com/@Tilmidh","https://github.com/alkhastvatsaev/tilmidh","https://t.me/alkhastvatsaev"],"founder":{"@id":"https://tilmidh.app/#author"},"contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"alkhastvatsaev@icloud.com","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://wa.me/33767693804","name":"whatsapp","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]},{"@type":"ContactPoint","contactType":"customer support","url":"https://t.me/alkhastvatsaev","name":"telegram","availableLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"]}]},{"@type":"WebSite","@id":"https://tilmidh.app/#website","url":"https://tilmidh.app/","name":"Tilmidh","alternateName":"تلميذ","inLanguage":["fr","en","id","ar","ru","tr","ur","bn","ms","de","es"],"publisher":{"@id":"https://tilmidh.app/#organization"}},{"@type":"WebPage","@id":"https://tilmidh.app/#page","url":"https://tilmidh.app/","name":"Tilmidh تلميذ — Meilleure app pour apprendre à lire le Coran (débutant)","description":"Tu récites comme à la prière. Mot par mot, tu vois si c’est juste. Gratuit — Al-Fātiḥah, Ayat al-Kursi, Al-Kahf, Al-Mulk. Pas une ijazah.","inLanguage":"fr","isPartOf":{"@id":"https://tilmidh.app/#website"},"author":{"@id":"https://tilmidh.app/#author"},"publisher":{"@id":"https://tilmidh.app/#organization"},"citation":[{"@type":"CreativeWork","name":"Quran.com — texte Uthmani tajweed, riwāya Ḥafṣ ʿan ʿĀṣim","url":"https://quran.com"},{"@type":"CreativeWork","name":"King Fahd Glorious Quran Printing Complex — police KFGQPC HAFS","url":"https://fonts.qurancomplex.gov.sa"},{"@type":"CreativeWork","name":"W3C Web Speech API — reconnaissance vocale ar-SA, exécutée sur l’appareil","url":"https://developer.mozilla.org/docs/Web/API/Web_Speech_API"}]}]}</script>
 </head>
 <body>
 
@@ -3770,29 +3723,15 @@
     <div id="ipad-panel" aria-hidden="true" onclick="onIpadPanelClick(event)">
         <div class="ipad-inline-stage">
             <div class="ipad-scroll-header" id="ipad-scroll-header">
-                <h2 id="ipad-scroll-title">Rendez-vous professeurs</h2>
+                <h2 id="ipad-scroll-title">Ustadhs</h2>
             </div>
             <div class="ipad-device" id="ipad-scroll-card" onclick="event.stopPropagation()">
                 <div class="ipad-screen">
                     <div class="ipad-screen-body">
-                        <div class="ipad-cal-header">
-                            <div>
-                                <div class="ipad-cal-sub">Calendrier</div>
-                                <div class="ipad-cal-title" id="ipad-cal-month">Août 2026</div>
-                            </div>
-                            <div class="ipad-nav">
-                                <button type="button" onclick="shiftIpadMonth(-1)" aria-label="Mois précédent">‹</button>
-                                <button type="button" onclick="shiftIpadMonth(1)" aria-label="Mois suivant">›</button>
-                            </div>
+                        <div class="ipad-list-header">
+                            <div class="ipad-list-title">Ustadhs</div>
                         </div>
-                        <div class="ipad-week" aria-hidden="true">
-                            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
-                        </div>
-                        <div class="ipad-grid" id="ipad-cal-grid"></div>
-                        <div class="ipad-slots">
-                            <div class="ipad-slots-label" id="ipad-slots-label">Créneaux</div>
-                            <div class="ipad-slot-list" id="ipad-slot-list"></div>
-                        </div>
+                        <div class="ipad-ustadh-list" id="ipad-ustadh-list"></div>
                     </div>
                     <div class="ipad-home-bar" aria-hidden="true"></div>
                 </div>
@@ -4006,11 +3945,7 @@
         }
     }
 
-    /* ── iPad calendrier — entrée/sortie animées + scroll down / clic dehors ── */
-    var ipadCalYear = null;
-    var ipadCalMonth = null;
-    var ipadCalSelected = null;
-    var ipadBookedSlot = null;
+    /* ── iPad ustadhs — entrée/sortie animées + scroll down / clic dehors ── */
     var ipadPanelActive = false;
     var ipadClosing = false;
     var ipadProgress = 0;
@@ -4023,14 +3958,35 @@
     var ipadDragStartX = 0;
     var ipadDragFromOpen = false;
     var ipadDragStartProgress = 0;
-    var IPAD_MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-    var IPAD_SLOTS = [
-        { time: '10:00', name: 'Ustadh Karim' },
-        { time: '14:30', name: 'Ustadha Amina' },
-        { time: '18:00', name: 'Sheikh Yusuf' }
+    var IPAD_WA_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.04 2C6.5 2 2.004 6.486 2.004 12.02c0 1.77.463 3.45 1.258 4.897L2 22l5.204-1.241A10.01 10.01 0 0 0 12.04 22C17.56 22 22 17.522 22 12.02 22 6.486 17.56 2 12.04 2zm0 18.13c-1.64 0-3.21-.48-4.55-1.37l-.326-.2-3.087.737.72-3.01-.212-.334A8.07 8.07 0 0 1 3.87 12.02c0-4.5 3.67-8.15 8.17-8.15 4.49 0 8.16 3.65 8.16 8.15 0 4.49-3.67 8.11-8.16 8.11z"/></svg>';
+    var IPAD_USTADHS = [
+        { cat: 'Femmes', people: [
+            { name: 'Esraa Farrag', phone: '+201060529206' },
+            { name: 'Salma Mohamed', phone: '+201505235953' },
+            { name: 'Hasnaa Ahmed', phone: '+201113446859' },
+            { name: 'Zunaira Riaz', phone: '+923088787446' },
+            { name: 'Umm Habibah', phone: '+923486363183' },
+            { name: 'Zunaira', phone: '+923182209159' },
+            { name: 'Khadija Nadeem', phone: '+923249898040' },
+            { name: 'Bakhtawar Naz', phone: '+923335621975' },
+            { name: 'Urooj Fatima', phone: '+923457911579' },
+            { name: 'Fatima', phone: '+923215083475' }
+        ]},
+        { cat: 'Hommes', people: [
+            { name: 'Mohammad Badr', phone: '+201030168579' },
+            { name: 'Youssef Mohamed El-Abd', phone: '+201064518019' },
+            { name: 'Muhammad Nasir', phone: '+923456338357' },
+            { name: 'Imran Gilgiti', phone: '+923345185823' },
+            { name: 'Abdul Shakoor', phone: '+923445189852' },
+            { name: 'Abdul Hadi', phone: '+923127017267' },
+            { name: 'Gul Naseer Ahmed', phone: '+923457970004' },
+            { name: 'Muhammad Usman', phone: '+923045972737' },
+            { name: 'Noman', phone: '+923181666114' },
+            { name: 'Fazal urrehman', phone: '+923102699211' }
+        ]}
     ];
-    function ipadDateKey(y, m, d) {
-        return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+    function ipadWaDigits(phone) {
+        return String(phone || '').replace(/\D/g, '');
     }
     function ipadEaseOutExpo(t) {
         return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
@@ -4199,6 +4155,7 @@
         if (el.closest('.verse-selector')) return true;
         if (el.closest('.bottom-controls')) return true;
         if (el.closest('#contact-bar')) return true;
+        if (el.closest('.ipad-ustadh-list')) return true;
         // Sur l’iPad ouvert : laisser le swipe (sauf boutons nav précis au tap)
         return false;
     }
@@ -4206,13 +4163,7 @@
         closeLangMenu();
         closeGcDockMenu();
         closeSurahMenu();
-        var now = new Date();
-        if (ipadCalYear == null) {
-            ipadCalYear = now.getFullYear();
-            ipadCalMonth = now.getMonth();
-            ipadCalSelected = now.getDate();
-        }
-        renderIpadCalendar();
+        renderIpadUstadhs();
         var panel = document.getElementById('ipad-panel');
         var btn = document.getElementById('header-ipad-btn');
         if (!ipadPanelActive) {
@@ -4263,6 +4214,7 @@
     }
     function onIpadWheel(e) {
         if (ipadClosing || ipadDragActive) return;
+        if (e.target && e.target.closest && e.target.closest('.ipad-ustadh-list')) return;
         // Desktop trackpad / molette : swipe down ouvre, swipe up ferme
         // (mobile tactile reste swipe up = ouvrir, swipe down = ranger)
         if (!ipadPanelActive) {
@@ -4364,57 +4316,26 @@
         if (!ipadPanelActive || ipadClosing) return;
         animateIpadExit();
     }
-    function shiftIpadMonth(delta) {
-        ipadCalMonth += delta;
-        if (ipadCalMonth < 0) { ipadCalMonth = 11; ipadCalYear -= 1; }
-        if (ipadCalMonth > 11) { ipadCalMonth = 0; ipadCalYear += 1; }
-        ipadCalSelected = 1;
-        ipadBookedSlot = null;
-        renderIpadCalendar();
-    }
-    function selectIpadDay(day) {
-        ipadCalSelected = day;
-        ipadBookedSlot = null;
-        renderIpadCalendar();
-    }
-    function bookIpadSlot(time) {
-        ipadBookedSlot = time;
-        renderIpadCalendar();
-    }
-    function renderIpadCalendar() {
-        var title = document.getElementById('ipad-cal-month');
-        var grid = document.getElementById('ipad-cal-grid');
-        var slots = document.getElementById('ipad-slot-list');
-        var slotsLabel = document.getElementById('ipad-slots-label');
-        if (!title || !grid || !slots) return;
-        title.textContent = IPAD_MONTHS_FR[ipadCalMonth] + ' ' + ipadCalYear;
-        var first = new Date(ipadCalYear, ipadCalMonth, 1);
-        var startWeekday = (first.getDay() + 6) % 7;
-        var daysInMonth = new Date(ipadCalYear, ipadCalMonth + 1, 0).getDate();
-        var now = new Date();
+    function renderIpadUstadhs() {
+        var list = document.getElementById('ipad-ustadh-list');
+        if (!list) return;
         var html = '';
-        var i;
-        for (i = 0; i < startWeekday; i++) html += '<button type="button" class="ipad-day empty" tabindex="-1"></button>';
-        for (i = 1; i <= daysInMonth; i++) {
-            var cls = 'ipad-day';
-            if (i === ipadCalSelected) cls += ' selected';
-            if (now.getFullYear() === ipadCalYear && now.getMonth() === ipadCalMonth && now.getDate() === i) cls += ' today';
-            html += '<button type="button" class="' + cls + '" onclick="selectIpadDay(' + i + ')">' + i + '</button>';
+        var c, p, person, digits;
+        for (c = 0; c < IPAD_USTADHS.length; c++) {
+            html += '<div class="ipad-ustadh-cat">' + IPAD_USTADHS[c].cat + '</div>';
+            for (p = 0; p < IPAD_USTADHS[c].people.length; p++) {
+                person = IPAD_USTADHS[c].people[p];
+                digits = ipadWaDigits(person.phone);
+                html += '<div class="ipad-ustadh-row">' +
+                    '<div class="ipad-ustadh-name">' + person.name + '</div>' +
+                    '<div class="ipad-ustadh-right">' +
+                    '<div class="ipad-ustadh-phone">' + person.phone + '</div>' +
+                    '<a class="ipad-ustadh-wa" href="https://wa.me/' + digits + '" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ' + person.name + '">' +
+                    IPAD_WA_ICON + '</a></div></div>';
+            }
         }
-        var cells = startWeekday + daysInMonth;
-        while (cells < 42) {
-            html += '<button type="button" class="ipad-day empty" tabindex="-1"></button>';
-            cells++;
-        }
-        grid.innerHTML = html;
-        var key = ipadDateKey(ipadCalYear, ipadCalMonth, ipadCalSelected);
-        slotsLabel.textContent = 'Créneaux · ' + ipadCalSelected + ' ' + IPAD_MONTHS_FR[ipadCalMonth];
-        slots.innerHTML = IPAD_SLOTS.map(function (s) {
-            var booked = ipadBookedSlot === s.time;
-            return '<button type="button" class="ipad-slot' + (booked ? ' booked' : '') + '" onclick="bookIpadSlot(\'' + s.time + '\')">' +
-                s.name + '<span>' + (booked ? 'Demandé · ' : '') + s.time + '</span></button>';
-        }).join('');
-        console.log('iPad calendar', key, ipadBookedSlot);
+        list.innerHTML = html;
+        console.log('iPad ustadhs', list.querySelectorAll('.ipad-ustadh-row').length);
     }
     window.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && ipadPanelActive) closeIpadCalendar();
