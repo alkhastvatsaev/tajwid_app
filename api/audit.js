@@ -213,7 +213,6 @@ module.exports = async function handler(req, res) {
     if (!audioBase64) return res.status(400).json({ error: 'audioBase64 required' });
     if (audioBase64.length > 10_000_000) return res.status(413).json({ error: 'audio too large' });
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: 'email required' });
-    if (!gender) return res.status(400).json({ error: 'gender required' });
     if (![1, 112, 113, 114].includes(surah)) return res.status(400).json({ error: 'short surah only' });
 
     const buf = Buffer.from(audioBase64, 'base64');

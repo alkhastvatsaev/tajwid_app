@@ -3576,7 +3576,6 @@
         </div>
         <div id="audit-sheet" class="glass-panel" aria-hidden="true">
             <div id="audit-step-listen">
-                <p class="audit-copy">Listen before you send. A teacher of the same gender will mark mistakes on the words.</p>
                 <audio id="audit-player" playsinline preload="metadata"></audio>
                 <div class="audit-player" id="audit-player-ui">
                     <button type="button" class="audit-play" id="audit-play-btn" onclick="auditTogglePlay()" aria-label="Play">
@@ -3594,25 +3593,20 @@
                     </div>
                 </div>
                 <div class="audit-row">
-                    <button type="button" class="audit-btn ghost" onclick="auditDelete()">Delete</button>
-                    <button type="button" class="audit-btn primary" onclick="auditGoGender()">Send for review</button>
-                </div>
-            </div>
-            <div id="audit-step-gender" hidden>
-                <p class="audit-copy">So we can match you with a teacher of the same gender.</p>
-                <div class="audit-row">
-                    <button type="button" class="audit-btn primary" onclick="auditPickGender('woman')">I am a woman</button>
-                    <button type="button" class="audit-btn primary" onclick="auditPickGender('man')">I am a man</button>
-                </div>
-                <div class="audit-row" style="margin-top:8px">
-                    <button type="button" class="audit-btn ghost" onclick="auditGoListen()">Back</button>
+                    <button type="button" class="audit-play danger" onclick="auditDelete()" aria-label="Delete">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 12h10l1-12"/><path d="M10 11v5"/><path d="M14 11v5"/></svg>
+                    </button>
+                    <button type="button" class="audit-play" onclick="auditRestart()" aria-label="Restart">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+                    </button>
+                    <button type="button" class="audit-btn primary" onclick="auditGoEmail()">Send for review</button>
                 </div>
             </div>
             <div id="audit-step-email" hidden>
                 <p class="audit-copy">We send the correction to this email. No account.</p>
                 <input id="audit-email" type="email" inputmode="email" autocomplete="email" placeholder="Email">
                 <div class="audit-row">
-                    <button type="button" class="audit-btn ghost" onclick="auditGoGender()">Back</button>
+                    <button type="button" class="audit-btn ghost" onclick="auditGoListen()">Back</button>
                     <button type="button" class="audit-btn primary" id="audit-submit-btn" onclick="auditSubmit()">Send</button>
                 </div>
                 <p id="audit-status"></p>
@@ -3850,6 +3844,15 @@
         .audit-play.playing .audit-icon-play { display: none; }
         .audit-play.playing .audit-icon-pause { display: block; }
         .audit-play .audit-icon-pause { display: none; }
+        .audit-play.danger {
+            background: linear-gradient(180deg, #f43f5e 0%, #e11d48 100%);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.38);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                0 2px 10px rgba(225, 29, 72, 0.35);
+        }
+        .audit-row .audit-play { flex: 0 0 44px; }
         .audit-player-meta {
             flex: 1;
             min-width: 0;
@@ -3887,6 +3890,7 @@
         .audit-row {
             display: flex;
             gap: 8px;
+            align-items: center;
         }
         .audit-btn {
             flex: 1;
@@ -5042,7 +5046,6 @@
     let audioChunks = [];
     let auditBlob = null;
     let auditUrl = null;
-    let auditGender = '';
     let auditInfo = null;
     let datasetOptIn = false;
     let mistakeTestMode = false;
@@ -8389,7 +8392,6 @@
         try { if (auditUrl) URL.revokeObjectURL(auditUrl); } catch (e) {}
         auditUrl = null;
         auditBlob = null;
-        auditGender = '';
         auditInfo = null;
         auditSyncPlayerUi();
     }
@@ -8475,7 +8477,7 @@
     }
     function auditShowStep(id) {
         if (id !== 'listen') auditPausePlayer();
-        ['listen', 'gender', 'email', 'done'].forEach(function (s) {
+        ['listen', 'email', 'done'].forEach(function (s) {
             const el = document.getElementById('audit-step-' + s);
             if (el) el.hidden = s !== id;
         });
@@ -8509,16 +8511,19 @@
         return true;
     }
     function auditGoListen() { auditShowStep('listen'); }
-    function auditGoGender() { auditShowStep('gender'); }
-    function auditPickGender(g) {
-        auditGender = g === 'woman' ? 'woman' : 'man';
-        auditShowStep('email');
-    }
-    function auditDelete() {
-        auditClearBlob();
+    function auditGoEmail() { auditShowStep('email'); }
+    function auditHideSheet() {
         document.body.classList.remove('audit-review');
         const sheet = document.getElementById('audit-sheet');
         if (sheet) sheet.setAttribute('aria-hidden', 'true');
+        auditClearBlob();
+    }
+    function auditDelete() {
+        auditHideSheet();
+        loadVerse(activeVerseIdx);
+    }
+    function auditRestart() {
+        auditHideSheet();
         restartRecitation();
     }
     function auditCloseDone() {
@@ -8536,7 +8541,7 @@
             if (status) status.textContent = 'Enter a valid email.';
             return;
         }
-        if (!auditBlob || !auditInfo || !auditGender) {
+        if (!auditBlob || !auditInfo) {
             if (status) status.textContent = 'Missing recitation.';
             return;
         }
@@ -8551,7 +8556,7 @@
                     audioBase64,
                     mimeType: auditBlob.type || datasetMimeType || 'audio/webm',
                     email,
-                    gender: auditGender,
+                    gender: '',
                     surah: auditInfo.surah,
                     surahName: auditInfo.name,
                     ref: VERSES_LIBRARY[activeVerseIdx]?.ref || ''

@@ -94,8 +94,6 @@ def _save_audit_job(body):
         return 400, {"error": "audioBase64 required"}
     if not re.match(r"^[^\s@]+@[^\s@]+\.[^\s@]+$", email):
         return 400, {"error": "email required"}
-    if not gender:
-        return 400, {"error": "gender required"}
     if surah not in (1, 112, 113, 114):
         return 400, {"error": "short surah only"}
     try:
