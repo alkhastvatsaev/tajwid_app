@@ -17,9 +17,15 @@ const ALLOWED_ORIGINS = new Set([
 
 const INDEX_PATH = 'audits/index.json';
 
+function originAllowed(origin) {
+  if (!origin) return true;
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  return /^https:\/\/tilmidh(-[a-z0-9]+)?-alkhastvatsaevs-projects\.vercel\.app$/.test(origin);
+}
+
 function setCors(req, res) {
   const origin = req.headers.origin || '';
-  if (ALLOWED_ORIGINS.has(origin)) {
+  if (originAllowed(origin) && origin) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
   }
@@ -156,7 +162,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   const origin = req.headers.origin || '';
-  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+  if (origin && !originAllowed(origin)) {
     return res.status(403).json({ error: 'origin_not_allowed' });
   }
 
