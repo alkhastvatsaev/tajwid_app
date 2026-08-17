@@ -3453,6 +3453,15 @@
             <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="1" onclick="selectPracticeSurah('1', event)">
                 <span class="settings-dock-row-label">الفاتحة</span>
             </button>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="112" onclick="selectPracticeSurah('112', event)">
+                <span class="settings-dock-row-label">الإخلاص</span>
+            </button>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="113" onclick="selectPracticeSurah('113', event)">
+                <span class="settings-dock-row-label">الفلق</span>
+            </button>
+            <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="114" onclick="selectPracticeSurah('114', event)">
+                <span class="settings-dock-row-label">الناس</span>
+            </button>
             <button type="button" class="settings-dock-row surah-pick-btn" data-practice-ref="2:255" onclick="selectPracticeSurah('2:255', event)">
                 <span class="settings-dock-row-label">الكرسي</span>
             </button>
@@ -3564,6 +3573,39 @@
     <div class="voice-aura" id="voice-aura"></div>
         <div class="bottom-controls">
             <div id="install-pwa-banner"></div>
+        </div>
+        <div id="audit-sheet" class="glass-panel" aria-hidden="true">
+            <div id="audit-step-listen">
+                <p class="audit-copy">Listen before you send. A teacher of the same gender will mark mistakes on the words.</p>
+                <audio id="audit-player" controls playsinline></audio>
+                <div class="audit-row">
+                    <button type="button" class="audit-btn ghost" onclick="auditDelete()">Delete</button>
+                    <button type="button" class="audit-btn primary" onclick="auditGoGender()">Send for review</button>
+                </div>
+            </div>
+            <div id="audit-step-gender" hidden>
+                <p class="audit-copy">So we can match you with a teacher of the same gender.</p>
+                <div class="audit-row">
+                    <button type="button" class="audit-btn primary" onclick="auditPickGender('woman')">I am a woman</button>
+                    <button type="button" class="audit-btn primary" onclick="auditPickGender('man')">I am a man</button>
+                </div>
+                <div class="audit-row" style="margin-top:8px">
+                    <button type="button" class="audit-btn ghost" onclick="auditGoListen()">Back</button>
+                </div>
+            </div>
+            <div id="audit-step-email" hidden>
+                <p class="audit-copy">We send the correction to this email. No account.</p>
+                <input id="audit-email" type="email" inputmode="email" autocomplete="email" placeholder="Email">
+                <div class="audit-row">
+                    <button type="button" class="audit-btn ghost" onclick="auditGoGender()">Back</button>
+                    <button type="button" class="audit-btn primary" id="audit-submit-btn" onclick="auditSubmit()">Send</button>
+                </div>
+                <p id="audit-status"></p>
+            </div>
+            <div id="audit-step-done" hidden>
+                <p class="audit-copy">Sent to Tilmidh. A teacher will review it within 24 hours.</p>
+                <button type="button" class="audit-btn ghost" onclick="auditCloseDone()">Continue</button>
+            </div>
         </div>
 
         <footer id="seo-footer" aria-label="Tilmidh">
@@ -3717,6 +3759,117 @@
             font-size: 0.95rem;
             box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
         }
+        body.audit-review #contact-bar { display: none; }
+        body.audit-dispatch .verse-selector,
+        body.audit-dispatch #contact-bar,
+        body.audit-dispatch .container,
+        body.audit-dispatch .smart-progress-bar,
+        body.audit-dispatch .voice-aura,
+        body.audit-dispatch #ghost-word-container,
+        body.audit-dispatch #ipad-panel { display: none !important; }
+        #audit-sheet {
+            display: none;
+            position: fixed;
+            left: 50%;
+            bottom: calc(max(16px, env(safe-area-inset-bottom)) + 8px);
+            transform: translateX(-50%);
+            width: min(92vw, 420px);
+            z-index: 2600;
+            border-radius: 22px;
+            padding: 14px 14px 16px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            overflow: visible;
+        }
+        body.audit-review #install-pwa-banner { display: none !important; }
+        body.audit-review #audit-sheet { display: block; }
+        #audit-sheet .audit-copy {
+            margin: 0 0 10px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            line-height: 1.35;
+            color: var(--subtext);
+        }
+        #audit-sheet audio {
+            width: 100%;
+            height: 36px;
+            margin: 0 0 10px;
+        }
+        .audit-row {
+            display: flex;
+            gap: 8px;
+        }
+        .audit-btn {
+            flex: 1;
+            border: none;
+            border-radius: 100px;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .audit-btn.primary {
+            background: var(--brand-gradient-solid);
+            color: #fff;
+        }
+        .audit-btn.ghost {
+            background: rgba(255,255,255,0.12);
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+        }
+        .audit-btn:disabled { opacity: 0.45; cursor: default; }
+        #audit-email {
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.1);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+        }
+        #audit-status {
+            margin: 8px 0 0;
+            font-size: 0.72rem;
+            color: var(--subtext);
+            min-height: 1em;
+        }
+        #dispatch-page {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            overflow: auto;
+            padding: calc(20px + env(safe-area-inset-top)) 16px 24px;
+            background: #0b1020;
+            color: #f8fafc;
+            font-family: 'Outfit', sans-serif;
+        }
+        body.audit-dispatch #dispatch-page { display: block; }
+        #dispatch-page h1 { font-size: 1.15rem; margin: 0 0 12px; }
+        #dispatch-key, #dispatch-status { margin-bottom: 10px; }
+        #dispatch-key {
+            width: min(100%, 320px);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+            font: inherit;
+        }
+        .dispatch-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 12px;
+            margin: 0 0 10px;
+        }
+        .dispatch-card strong { display: block; margin-bottom: 4px; }
+        .dispatch-card p { margin: 0 0 8px; font-size: 0.78rem; opacity: 0.8; }
+        .dispatch-card audio { width: 100%; }
     </style>
 
     <!-- iPad rendez-vous — même écran, scroll pour monter -->
@@ -3741,6 +3894,16 @@
                 <span>Ranger</span>
             </button>
         </div>
+    </div>
+
+    <div id="dispatch-page" aria-hidden="true">
+        <h1>Tilmidh dispatch</h1>
+        <input id="dispatch-key" type="password" placeholder="Dispatch key" autocomplete="off">
+        <div class="audit-row" style="max-width:320px;margin-bottom:14px">
+            <button type="button" class="audit-btn primary" onclick="dispatchLoad()">Open queue</button>
+        </div>
+        <p id="dispatch-status"></p>
+        <div id="dispatch-list"></div>
     </div>
 
     <!-- Tajwid Rule Modal -->
@@ -4155,6 +4318,8 @@
         if (el.closest('.verse-selector')) return true;
         if (el.closest('.bottom-controls')) return true;
         if (el.closest('#contact-bar')) return true;
+        if (el.closest('#audit-sheet')) return true;
+        if (el.closest('#dispatch-page')) return true;
         if (el.closest('.ipad-ustadh-list')) return true;
         // Sur l’iPad ouvert : laisser le swipe (sauf boutons nav précis au tap)
         return false;
@@ -4778,6 +4943,10 @@
     let recognition = null;
     let mediaRec = null;
     let audioChunks = [];
+    let auditBlob = null;
+    let auditUrl = null;
+    let auditGender = '';
+    let auditInfo = null;
     let datasetOptIn = false;
     let mistakeTestMode = false;
     let datasetMimeType = 'audio/webm';
@@ -5381,7 +5550,10 @@
         1: { count: 7 },
         2: { ayahs: [255] },
         18: { count: 110 },
-        67: { count: 30 }
+        67: { count: 30 },
+        112: { count: 4 },
+        113: { count: 5 },
+        114: { count: 6 }
     };
     function practiceSpec(surah) {
         return PRACTICE_SURAHS[surah] || null;
@@ -5448,7 +5620,7 @@
         const p = practiceSpec(n);
         if (!p) {
             console.warn('PRACTICE: sourate hors liste', ref);
-            alert('Pour l’instant : Al-Fātiḥah, Ayat al-Kursi (2:255), Al-Kahf (18), Al-Mulk (67).');
+            alert('Pour l’instant : Al-Fātiḥah, Al-Ikhlāṣ, Al-Falaq, An-Nās, Ayat al-Kursi (2:255), Al-Kahf (18), Al-Mulk (67).');
             return false;
         }
         const s = String(ref).trim();
@@ -8011,13 +8183,6 @@
         stopWhisperAutoLoop();
         recognition?.stop();
 
-        stopRecPromise.then(() => {
-            cleanupMic();
-            if (shouldSaveDataset) {
-                saveDatasetRecording().catch((err) => console.error('dataset save', err));
-            }
-        });
-
         document.getElementById('live-assistant')?.classList.remove('visible');
         markAsCompleted(VERSES_LIBRARY[activeVerseIdx].ref);
         const isMobile = window.innerWidth <= 600;
@@ -8027,13 +8192,20 @@
         } else if (!isIos) {
             offerPwaInstall();
         }
-        if (autoRestartTimer) clearTimeout(autoRestartTimer);
-        autoRestartTimer = setTimeout(() => {
-            autoRestartTimer = null;
-            restartRecitation();
-        }, 5000);
-    }
 
+        stopRecPromise.then(() => {
+            cleanupMic();
+            if (shouldSaveDataset) {
+                saveDatasetRecording().catch((err) => console.error('dataset save', err));
+            }
+            if (offerAuditReview()) return;
+            if (autoRestartTimer) clearTimeout(autoRestartTimer);
+            autoRestartTimer = setTimeout(() => {
+                autoRestartTimer = null;
+                restartRecitation();
+            }, 5000);
+        });
+    }
     let deferredInstallPrompt = null;
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -8089,6 +8261,172 @@
     function getSaveRecitationUrl() {
         // Toujours l’API prod : preview / tunnel n’ont pas /api, et CORS est ouvert sur cet endpoint.
         return 'https://tilmidh.app/api/save-recitation';
+    }
+
+    const AUDIT_SHORT = {
+        1: { ayahs: 7, name: 'Al-Fatihah' },
+        112: { ayahs: 4, name: 'Al-Ikhlas' },
+        113: { ayahs: 5, name: 'Al-Falaq' },
+        114: { ayahs: 6, name: 'An-Nas' }
+    };
+    function auditInfoFromRef(ref) {
+        if (!ref) return null;
+        const range = String(ref).match(/\[1-(\d+)\]/);
+        if (!range) return null;
+        const ayahs = parseInt(range[1], 10);
+        const lower = String(ref).toLowerCase();
+        if ((/fatihah|fātiḥah|fatiha/.test(lower) || /\[1-7\]/.test(ref)) && ayahs === 7) return { surah: 1, ayahs: 7, name: 'Al-Fatihah' };
+        if ((/ikhlas|ikhlāṣ/.test(lower) || /\[112/.test(ref)) && ayahs === 4) return { surah: 112, ayahs: 4, name: 'Al-Ikhlas' };
+        if ((/falaq/.test(lower) || /\[113/.test(ref)) && ayahs === 5) return { surah: 113, ayahs: 5, name: 'Al-Falaq' };
+        if ((/\bnas\b|nās|naas/.test(lower) || /\[114/.test(ref)) && ayahs === 6) return { surah: 114, ayahs: 6, name: 'An-Nas' };
+        const spec = AUDIT_SHORT[1];
+        if (ayahs === spec.ayahs && /fatihah|fatiha/.test(lower)) return { surah: 1, ayahs: 7, name: spec.name };
+        return null;
+    }
+    function auditClearBlob() {
+        try { if (auditUrl) URL.revokeObjectURL(auditUrl); } catch (e) {}
+        auditUrl = null;
+        auditBlob = null;
+        auditGender = '';
+        auditInfo = null;
+    }
+    function auditShowStep(id) {
+        ['listen', 'gender', 'email', 'done'].forEach(function (s) {
+            const el = document.getElementById('audit-step-' + s);
+            if (el) el.hidden = s !== id;
+        });
+    }
+    function offerAuditReview() {
+        const ref = VERSES_LIBRARY[activeVerseIdx]?.ref || '';
+        const info = auditInfoFromRef(ref);
+        if (!info) return false;
+        if (!audioChunks.length) {
+            console.warn('audit: no audio chunks');
+            return false;
+        }
+        if (autoRestartTimer) { clearTimeout(autoRestartTimer); autoRestartTimer = null; }
+        auditClearBlob();
+        const mime = datasetMimeType || 'audio/webm';
+        auditBlob = new Blob(audioChunks, { type: mime });
+        auditUrl = URL.createObjectURL(auditBlob);
+        auditInfo = info;
+        const player = document.getElementById('audit-player');
+        if (player) {
+            player.src = auditUrl;
+            try { player.load(); } catch (e) {}
+        }
+        const sheet = document.getElementById('audit-sheet');
+        if (sheet) sheet.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('audit-review');
+        auditShowStep('listen');
+        console.log('audit review', info, auditBlob.size);
+        return true;
+    }
+    function auditGoListen() { auditShowStep('listen'); }
+    function auditGoGender() { auditShowStep('gender'); }
+    function auditPickGender(g) {
+        auditGender = g === 'woman' ? 'woman' : 'man';
+        auditShowStep('email');
+    }
+    function auditDelete() {
+        auditClearBlob();
+        document.body.classList.remove('audit-review');
+        const sheet = document.getElementById('audit-sheet');
+        if (sheet) sheet.setAttribute('aria-hidden', 'true');
+        restartRecitation();
+    }
+    function auditCloseDone() {
+        document.body.classList.remove('audit-review');
+        const sheet = document.getElementById('audit-sheet');
+        if (sheet) sheet.setAttribute('aria-hidden', 'true');
+        auditClearBlob();
+        loadVerse(activeVerseIdx);
+    }
+    async function auditSubmit() {
+        const status = document.getElementById('audit-status');
+        const btn = document.getElementById('audit-submit-btn');
+        const email = (document.getElementById('audit-email')?.value || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            if (status) status.textContent = 'Enter a valid email.';
+            return;
+        }
+        if (!auditBlob || !auditInfo || !auditGender) {
+            if (status) status.textContent = 'Missing recitation.';
+            return;
+        }
+        if (btn) btn.disabled = true;
+        if (status) status.textContent = 'Sending…';
+        try {
+            const audioBase64 = await blobToBase64Raw(auditBlob);
+            const res = await fetch('/api/audit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    audioBase64,
+                    mimeType: auditBlob.type || datasetMimeType || 'audio/webm',
+                    email,
+                    gender: auditGender,
+                    surah: auditInfo.surah,
+                    surahName: auditInfo.name,
+                    ref: VERSES_LIBRARY[activeVerseIdx]?.ref || ''
+                })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || !data.ok) {
+                throw new Error(data.error || ('HTTP ' + res.status));
+            }
+            console.log('audit sent', data.id);
+            auditShowStep('done');
+        } catch (e) {
+            console.warn('audit submit', e);
+            if (status) status.textContent = 'Send failed. Try again.';
+        } finally {
+            if (btn) btn.disabled = false;
+        }
+    }
+    function dispatchKey() {
+        try { return sessionStorage.getItem('tilmidh_audit_key') || ''; } catch (e) { return ''; }
+    }
+    async function dispatchLoad() {
+        const input = document.getElementById('dispatch-key');
+        const status = document.getElementById('dispatch-status');
+        const list = document.getElementById('dispatch-list');
+        const key = (input?.value || dispatchKey() || '').trim();
+        if (!key) {
+            if (status) status.textContent = 'Enter the dispatch key.';
+            return;
+        }
+        try { sessionStorage.setItem('tilmidh_audit_key', key); } catch (e) {}
+        if (status) status.textContent = 'Loading…';
+        try {
+            const res = await fetch('/api/audit?key=' + encodeURIComponent(key));
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+            const jobs = data.jobs || [];
+            if (status) status.textContent = jobs.length ? (jobs.length + ' recitation(s)') : 'Queue empty.';
+            if (!list) return;
+            list.innerHTML = jobs.map(function (j) {
+                const when = j.createdAt ? String(j.createdAt).replace('T', ' ').slice(0, 16) : '';
+                const src = '/api/audit?key=' + encodeURIComponent(key) + '&id=' + encodeURIComponent(j.id) + '&file=audio';
+                return '<div class="dispatch-card"><strong>' + (j.surahName || ('Surah ' + j.surah)) + ' · ' + j.gender + '</strong>' +
+                    '<p>' + (j.email || '') + '<br>' + when + ' · ' + (j.status || 'incoming') + '</p>' +
+                    '<audio controls preload="none" src="' + src + '"></audio></div>';
+            }).join('');
+        } catch (e) {
+            console.warn('dispatch', e);
+            if (status) status.textContent = 'Cannot open queue. Check the key.';
+        }
+    }
+    function bootAuditDispatch() {
+        if (!/^\/d\/?$/.test(location.pathname)) return;
+        document.body.classList.add('audit-dispatch');
+        const page = document.getElementById('dispatch-page');
+        if (page) page.setAttribute('aria-hidden', 'false');
+        const input = document.getElementById('dispatch-key');
+        const saved = dispatchKey();
+        if (input && saved) input.value = saved;
+        if (saved) dispatchLoad();
+        console.log('audit dispatch');
     }
 
     async function blobToBase64Raw(blob) {
@@ -8413,13 +8751,17 @@
         const isKursi = ref.includes('[2:255]');
         const isKahf = /Kahf/i.test(ref) || /\[18[:\-]/.test(ref);
         const isMulk = /Mulk/i.test(ref) || /\[67[:\-]/.test(ref);
-        const isFatiha = !isKursi && !isKahf && !isMulk;
+        const isIkhlas = /Ikhlas|Ikhlāṣ/i.test(ref) || /\[112[:\-]/.test(ref);
+        const isFalaq = /Falaq/i.test(ref) || /\[113[:\-]/.test(ref);
+        const isNas = /\bNas\b|Nās/i.test(ref) || /\[114[:\-]/.test(ref);
+        const isFatiha = !isKursi && !isKahf && !isMulk && !isIkhlas && !isFalaq && !isNas;
+        const label = isKursi ? 'الكرسي' : isKahf ? 'الكهف' : isMulk ? 'الملك' : isIkhlas ? 'الإخلاص' : isFalaq ? 'الفلق' : isNas ? 'الناس' : 'الفاتحة';
         container.innerHTML = `
-                <button type="button" class="v-btn surah-btn${isFatiha ? ' active' : ''}" id="header-surah-btn" onclick="toggleSurahMenu(event)" title="Sourates" aria-label="Sourates" aria-expanded="false">الفاتحة</button>
+                <button type="button" class="v-btn surah-btn${isFatiha || isIkhlas || isFalaq || isNas ? ' active' : ''}" id="header-surah-btn" onclick="toggleSurahMenu(event)" title="Sourates" aria-label="Sourates" aria-expanded="false">${label}</button>
             `;
         document.querySelectorAll('.surah-pick-btn').forEach(btn => {
             const r = btn.dataset.practiceRef;
-            const on = (r === '1' && isFatiha) || (r === '2:255' && isKursi) || (r === '18' && isKahf) || (r === '67' && isMulk);
+            const on = (r === '1' && isFatiha) || (r === '112' && isIkhlas) || (r === '113' && isFalaq) || (r === '114' && isNas) || (r === '2:255' && isKursi) || (r === '18' && isKahf) || (r === '67' && isMulk);
             btn.classList.toggle('active', on);
         });
     }
@@ -8508,6 +8850,7 @@
         if (verseBox) {
             verseBox.addEventListener('pointerdown', () => {
                 if (isRecording) return;
+                if (document.body.classList.contains('audit-review')) return;
                 try { startRecognition(); } catch (e) { console.warn('mic tap', e); }
             }, { passive: true });
         }
@@ -8557,6 +8900,7 @@
 
         document.getElementById('verse-selector')?.classList.remove('dock-hidden');
         initDockGlassTilt();
+        try { bootAuditDispatch(); } catch (e) { console.warn('audit dispatch boot', e); }
         tryAutoStartMic();
     });
 
