@@ -3577,7 +3577,22 @@
         <div id="audit-sheet" class="glass-panel" aria-hidden="true">
             <div id="audit-step-listen">
                 <p class="audit-copy">Listen before you send. A teacher of the same gender will mark mistakes on the words.</p>
-                <audio id="audit-player" controls playsinline></audio>
+                <audio id="audit-player" playsinline preload="metadata"></audio>
+                <div class="audit-player" id="audit-player-ui">
+                    <button type="button" class="audit-play" id="audit-play-btn" onclick="auditTogglePlay()" aria-label="Play">
+                        <svg class="audit-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+                        <svg class="audit-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7z"/><path d="M13.5 5H17v14h-3.5z"/></svg>
+                    </button>
+                    <div class="audit-player-meta">
+                        <div class="audit-scrub" id="audit-scrub" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Seek">
+                            <div class="audit-scrub-fill" id="audit-scrub-fill"></div>
+                        </div>
+                        <div class="audit-times">
+                            <span id="audit-time-now">0:00</span>
+                            <span id="audit-time-end">0:00</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="audit-row">
                     <button type="button" class="audit-btn ghost" onclick="auditDelete()">Delete</button>
                     <button type="button" class="audit-btn primary" onclick="auditGoGender()">Send for review</button>
@@ -3784,16 +3799,90 @@
         body.audit-review #install-pwa-banner { display: none !important; }
         body.audit-review #audit-sheet { display: block; }
         #audit-sheet .audit-copy {
-            margin: 0 0 10px;
+            margin: 0 0 12px;
             font-size: 0.78rem;
             font-weight: 500;
             line-height: 1.35;
             color: var(--subtext);
         }
-        #audit-sheet audio {
-            width: 100%;
-            height: 36px;
-            margin: 0 0 10px;
+        #audit-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .audit-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 12px;
+        }
+        .audit-play {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-fill-strong);
+            color: var(--text);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                inset 2px 2px 0.5px -2px rgba(0, 0, 0, 0.55),
+                inset -2px -2px 0.5px -2px rgba(0, 0, 0, 0.4),
+                inset 0 0 4px 3px rgba(0, 0, 0, 0.07),
+                0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+        .audit-play svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.55;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .audit-play .audit-icon-play { fill: currentColor; stroke: none; margin-left: 2px; }
+        .audit-play.playing .audit-icon-play { display: none; }
+        .audit-play.playing .audit-icon-pause { display: block; }
+        .audit-play .audit-icon-pause { display: none; }
+        .audit-player-meta {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .audit-scrub {
+            position: relative;
+            height: 10px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid var(--glass-border);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .audit-scrub-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: var(--brand-gradient);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            pointer-events: none;
+        }
+        .audit-times {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--subtext);
+            font-variant-numeric: tabular-nums;
         }
         .audit-row {
             display: flex;
@@ -3801,22 +3890,30 @@
         }
         .audit-btn {
             flex: 1;
-            border: none;
+            border: 1px solid var(--glass-border);
             border-radius: 100px;
             padding: 12px 14px;
             font-family: inherit;
             font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
+            background: var(--glass-fill-strong);
+            color: var(--text);
+            box-shadow:
+                inset 2px 2px 0.5px -2px rgba(0, 0, 0, 0.45),
+                inset -2px -2px 0.5px -2px rgba(0, 0, 0, 0.32);
         }
         .audit-btn.primary {
-            background: var(--brand-gradient-solid);
+            background: var(--brand-gradient);
             color: #fff;
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.42),
+                0 2px 10px var(--brand-shadow);
         }
         .audit-btn.ghost {
-            background: rgba(255,255,255,0.12);
+            background: var(--glass-fill-strong);
             color: var(--text);
-            border: 1px solid var(--glass-border);
         }
         .audit-btn:disabled { opacity: 0.45; cursor: default; }
         #audit-email {
@@ -8284,13 +8381,100 @@
         return null;
     }
     function auditClearBlob() {
+        auditPausePlayer();
+        const player = document.getElementById('audit-player');
+        if (player) {
+            try { player.removeAttribute('src'); player.load(); } catch (e) {}
+        }
         try { if (auditUrl) URL.revokeObjectURL(auditUrl); } catch (e) {}
         auditUrl = null;
         auditBlob = null;
         auditGender = '';
         auditInfo = null;
+        auditSyncPlayerUi();
+    }
+    function auditFmtTime(sec) {
+        if (!isFinite(sec) || sec < 0) return '0:00';
+        const s = Math.floor(sec);
+        const m = Math.floor(s / 60);
+        const r = s % 60;
+        return m + ':' + String(r).padStart(2, '0');
+    }
+    function auditSyncPlayerUi() {
+        const player = document.getElementById('audit-player');
+        const fill = document.getElementById('audit-scrub-fill');
+        const nowEl = document.getElementById('audit-time-now');
+        const endEl = document.getElementById('audit-time-end');
+        const btn = document.getElementById('audit-play-btn');
+        const scrub = document.getElementById('audit-scrub');
+        if (!player) return;
+        const dur = player.duration;
+        const cur = player.currentTime || 0;
+        const pct = (isFinite(dur) && dur > 0) ? Math.min(100, (cur / dur) * 100) : 0;
+        if (fill) fill.style.width = pct.toFixed(2) + '%';
+        if (nowEl) nowEl.textContent = auditFmtTime(cur);
+        if (endEl) endEl.textContent = auditFmtTime(isFinite(dur) ? dur : 0);
+        if (scrub) scrub.setAttribute('aria-valuenow', String(Math.round(pct)));
+        if (btn) {
+            const playing = !player.paused && !player.ended;
+            btn.classList.toggle('playing', playing);
+            btn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+        }
+    }
+    function auditBindPlayer() {
+        const player = document.getElementById('audit-player');
+        const scrub = document.getElementById('audit-scrub');
+        if (!player || player.dataset.bound === '1') return;
+        player.dataset.bound = '1';
+        player.addEventListener('timeupdate', auditSyncPlayerUi);
+        player.addEventListener('loadedmetadata', auditSyncPlayerUi);
+        player.addEventListener('ended', function () {
+            try { player.currentTime = 0; } catch (e) {}
+            auditSyncPlayerUi();
+        });
+        player.addEventListener('play', auditSyncPlayerUi);
+        player.addEventListener('pause', auditSyncPlayerUi);
+        if (scrub) {
+            const seek = function (clientX) {
+                const rect = scrub.getBoundingClientRect();
+                const t = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+                if (isFinite(player.duration) && player.duration > 0) {
+                    player.currentTime = t * player.duration;
+                    auditSyncPlayerUi();
+                }
+            };
+            scrub.addEventListener('pointerdown', function (e) {
+                seek(e.clientX);
+                const move = function (ev) { seek(ev.clientX); };
+                const up = function () {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                };
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+            });
+        }
+    }
+    function auditTogglePlay() {
+        const player = document.getElementById('audit-player');
+        if (!player || !player.src) return;
+        if (player.paused) {
+            const p = player.play();
+            if (p && p.catch) p.catch(function (e) { console.warn('audit play', e); });
+        } else {
+            player.pause();
+        }
+        auditSyncPlayerUi();
+    }
+    function auditPausePlayer() {
+        const player = document.getElementById('audit-player');
+        if (player && !player.paused) {
+            try { player.pause(); } catch (e) {}
+        }
+        auditSyncPlayerUi();
     }
     function auditShowStep(id) {
+        if (id !== 'listen') auditPausePlayer();
         ['listen', 'gender', 'email', 'done'].forEach(function (s) {
             const el = document.getElementById('audit-step-' + s);
             if (el) el.hidden = s !== id;
@@ -8315,6 +8499,8 @@
             player.src = auditUrl;
             try { player.load(); } catch (e) {}
         }
+        auditBindPlayer();
+        auditSyncPlayerUi();
         const sheet = document.getElementById('audit-sheet');
         if (sheet) sheet.setAttribute('aria-hidden', 'false');
         document.body.classList.add('audit-review');
